@@ -21,7 +21,7 @@
         <a class="nav-item nav-link" routerLink="login">Login</a>
       </ng-container>
       <ng-container *ngIf="isLoggedIn">
-        <a class="nav-item nav-link" routerLink="logout">Logout</a>
+        <a class="nav-item nav-link" routerLink="logout" (click)="logout()">Logout</a>
       </ng-container>
     </div>
   </div>
