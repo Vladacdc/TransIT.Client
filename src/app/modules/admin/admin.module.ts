@@ -6,8 +6,9 @@ import { AdminComponent } from './component/admin/admin.component';
 import { UsersComponent } from './component/users/users.component';
 import { CreateUserComponent } from './component/create-user/create-user.component';
 import {RouterModule, Routes} from '@angular/router';
+import {UsersService} from './services/users.service';
+import {FormsModule} from '@angular/forms';
 
-// @ts-ignore
 const routes: Routes = [
   {
     path: 'admin', children: [
@@ -27,7 +28,11 @@ const routes: Routes = [
     CommonModule,
     AdminRoutingModule,
 
-    RouterModule.forRoot(routes)
+    RouterModule.forRoot(routes),
+    FormsModule
+  ],
+  providers: [
+    UsersService
   ]
 })
 export class AdminModule { }

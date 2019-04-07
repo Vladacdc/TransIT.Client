@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {UsersService} from '../../services/users.service';
+import {NgForm} from '@angular/forms';
 
 @Component({
   selector: 'app-create-user',
@@ -7,9 +9,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CreateUserComponent implements OnInit {
 
-  constructor() { }
-
-  ngOnInit() {
+  constructor(private  service: UsersService) {
   }
 
+  ngOnInit() {
+    this.resetForm();
+  }
+
+  resetForm(form?: NgForm) {
+
+    this.service.formData = {
+      id: 0,
+      firstName: '',
+      lastName: '',
+      email: '',
+      phoneNumber: 0,
+      login: '',
+      role: ''
+    };
+  }
 }
