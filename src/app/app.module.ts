@@ -6,6 +6,7 @@ import {AdminModule} from './modules/admin/admin.module';
 import { AppRoutingModule } from './app-routing.module';
 import {RouterModule} from '@angular/router';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import {CreateUserComponent} from './modules/admin/component/create-user/create-user.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     RouterModule,
     BrowserAnimationsModule
   ],
+  entryComponents: [CreateUserComponent],
   providers: [],
   bootstrap: [AppComponent]
 })

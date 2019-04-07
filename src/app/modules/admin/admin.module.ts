@@ -9,7 +9,7 @@ import {RouterModule, Routes} from '@angular/router';
 import {UsersService} from './services/users.service';
 import {FormsModule} from '@angular/forms';
 import {DataTablesModule} from 'angular-datatables';
-import {MatDialogModule} from '@angular/material/dialog';
+import {MAT_DIALOG_DEFAULT_OPTIONS, MatDialogModule} from '@angular/material/dialog';
 const routes: Routes = [
   {
     path: 'admin', children: [
@@ -22,7 +22,8 @@ const routes: Routes = [
 @NgModule({
   declarations: [AdminComponent, UsersComponent, CreateUserComponent],
   exports: [
-    AdminComponent
+    AdminComponent,
+    MatDialogModule
   ],
   imports: [
     CommonModule,
@@ -34,7 +35,8 @@ const routes: Routes = [
   ],
   entryComponents: [CreateUserComponent],
   providers: [
-    UsersService
+    UsersService,
+    {provide: MAT_DIALOG_DEFAULT_OPTIONS, useValue: {hasBackdrop: false}}
   ]
 })
 export class AdminModule { }
