@@ -27,5 +27,6 @@ export class CreateUserComponent implements OnInit {
       login: '',
       role: ''
     };
+    this.service.userItems = [];
   }
 }

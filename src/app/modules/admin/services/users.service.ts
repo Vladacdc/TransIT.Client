@@ -6,5 +6,6 @@ import {User} from '../models/user/user';
 })
 export class UsersService {
   formData: User;
+  userItems: User[];
   constructor() { }
 }

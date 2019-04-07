@@ -8,7 +8,8 @@ import { CreateUserComponent } from './component/create-user/create-user.compone
 import {RouterModule, Routes} from '@angular/router';
 import {UsersService} from './services/users.service';
 import {FormsModule} from '@angular/forms';
-
+import {DataTablesModule} from 'angular-datatables';
+import {MatDialogModule} from '@angular/material/dialog';
 const routes: Routes = [
   {
     path: 'admin', children: [
@@ -17,7 +18,6 @@ const routes: Routes = [
       {path: 'user', component:  CreateUserComponent}
       ]
   }
-
 ];
 @NgModule({
   declarations: [AdminComponent, UsersComponent, CreateUserComponent],
@@ -27,10 +27,12 @@ const routes: Routes = [
   imports: [
     CommonModule,
     AdminRoutingModule,
-
     RouterModule.forRoot(routes),
-    FormsModule
+    FormsModule,
+    DataTablesModule,
+    MatDialogModule
   ],
+  entryComponents: [CreateUserComponent],
   providers: [
     UsersService
   ]

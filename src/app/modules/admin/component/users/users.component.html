@@ -1,3 +1,38 @@
 <div class="filter">
-  <button><i class="fas fa-plus-square"></i>Створити</button>
+  <a class="btn btn-sm text-white btn-success btn-info" (click)="AddUser()"><i class="fa fa-lus"></i> Create</a>
 </div>
+<p>vcs</p>
+<p></p>
+<table datatable class="row-border hover">
+  <thead>
+  <tr>
+    <th>FirstName</th>
+    <th>LastName</th>
+    <th>Email</th>
+    <th>Login</th>
+    <th>Phone</th>
+    <th>Role</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr>
+    <td>FirstName</td>
+    <td>LastName</td>
+    <td>Email</td>
+    <td>Login</td>
+    <td>Phone</td>
+    <td>Role</td>
+  </tr>
+  <tr *ngFor="let item of service.userItems">
+    <td>{{item.firstName}}</td>
+    <td>{{item.lastName}}</td>
+    <td>{{item.login}}</td>
+    <td>{{item.email}}</td>
+    <td>{{item.phoneNumber}}</td>
+    <td>{{item.role}}</td>
+  </tr>
+  </tbody>
+</table>
+
+
+
