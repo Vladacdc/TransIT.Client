@@ -1,37 +1,35 @@
-<div class="filter" >
-  <a class="btn btn-sm text-white btn-success btn-info" (click)="openDialog()">Create</a>
-</div>
-<p></p>
-<table datatable class="row-border hover">
-  <thead>
-  <tr>
-    <th>FirstName</th>
-    <th>LastName</th>
-    <th>Email</th>
-    <th>Login</th>
-    <th>Phone</th>
-    <th>Role</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr>
-    <td>FirstName</td>
-    <td>LastName</td>
-    <td>Email</td>
-    <td>Login</td>
-    <td>Phone</td>
-    <td>Role</td>
-  </tr>
- <!-- <tr *ngFor="let item of service.userItems">
-    <td>{{item.firstName}}</td>
-    <td>{{item.lastName}}</td>
-    <td>{{item.login}}</td>
-    <td>{{item.email}}</td>
-    <td>{{item.phoneNumber}}</td>
-    <td>{{item.role}}</td>
-  </tr>-->
-  </tbody>
-</table>
+    <div class="filter" >
+      <a class="btn btn-sm text-white btn-success btn-info" (click)="openDialog()">Create</a>
+      <mat-form-field>
+        <input #box matInput (keyup)="applyFilter(box.value)" placeholder="Filter">
+      </mat-form-field>
+
+    </div>
+
+    <p></p>
+    <p></p>
+
+
+    <table mat-table [dataSource]="dataSource">
+
+      <ng-container matColumnDef="firstName">
+        <th mat-header-cell *matHeaderCellDef> Ім'я </th>
+        <td mat-cell *matCellDef="let element"> {{element.firstName}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="lastName">
+        <th mat-header-cell *matHeaderCellDef> Прізвище </th>
+        <td mat-cell *matCellDef="let element"> {{element.lastName}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="login">
+        <th mat-header-cell *matHeaderCellDef> Логін </th>
+        <td mat-cell *matCellDef="let element"> {{element.login}} </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
 
 
 

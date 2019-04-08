@@ -10,13 +10,13 @@ import {MatDialogRef} from '@angular/material';
 })
 export class CreateUserComponent implements OnInit {
 
-  constructor(private  service: UsersService,    public dialogRef: MatDialogRef<CreateUserComponent>) {}
+  constructor(private  service: UsersService,
+              public dialogRef: MatDialogRef<CreateUserComponent>) {}
 
   ngOnInit() {
     this.resetForm();
   }
   resetForm(form?: NgForm) {
-
     this.service.formData = {
       id: 0,
       firstName: '',
@@ -28,6 +28,7 @@ export class CreateUserComponent implements OnInit {
     };
     this.service.userItems = [];
   }
+  // close  DialogComponent CreateUser
   onNoClick(): void {
     this.dialogRef.close();
   }

@@ -1,12 +1,13 @@
-<nav>
-  <div class="nav nav-tabs" id="nav-tab" role="tablist">
-    <a class="nav-item nav-link active"  routerLink="/admin/users" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true"><i class="fas fa-users"></i> Користувачі</a>
-    <a class="nav-item nav-link" id="nav-profile-tab" routerLink="/admin/vehicles" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-profile" aria-selected="false"><i class="fas fa-bus"></i> Транспорт</a>
-
-  </div>
-</nav>
-<div class="tab-content" id="nav-tabContent">
-  <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
-    <router-outlet></router-outlet>
+<div class="container">
+  <nav>
+    <div class="nav nav-tabs" id="nav-tab" role="tablist">
+      <a class="nav-item nav-link active"  routerLink="/admin/users"  data-toggle="tab" href="#nav-home" role="tab" aria-selected="true"><i class="fas fa-users"></i> Користувачі</a>
+      <a class="nav-item nav-link" routerLink="/admin/vehicles" data-toggle="tab" href="#nav-home" role="tab" aria-selected="false"><i class="fas fa-bus"></i> Транспорт</a>
+    </div>
+  </nav>
+  <div class="tab-content retreat">
+    <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+      <router-outlet></router-outlet>
+    </div>
   </div>
 </div>

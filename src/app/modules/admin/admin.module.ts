@@ -11,6 +11,8 @@ import {FormsModule} from '@angular/forms';
 import {DataTablesModule} from 'angular-datatables';
 import {MAT_DIALOG_DEFAULT_OPTIONS, MatDialogModule} from '@angular/material/dialog';
 import { VehiclesComponent } from './component/vehicles/vehicles.component';
+import {MatFormFieldModule, MatTableModule} from '@angular/material';
+import {MatInputModule} from '@angular/material';
 const routes: Routes = [
   {
     path: 'admin', children: [
@@ -33,7 +35,10 @@ const routes: Routes = [
     RouterModule.forRoot(routes),
     FormsModule,
     DataTablesModule,
-    MatDialogModule
+    MatDialogModule,
+    MatTableModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   entryComponents: [CreateUserComponent],
   providers: [
