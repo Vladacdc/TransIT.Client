@@ -1,8 +1,7 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {UsersService} from '../../services/users.service';
 import {NgForm} from '@angular/forms';
-import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
-import {User} from '../../models/user/user';
+import {MatDialogRef} from '@angular/material';
 
 @Component({
   selector: 'app-create-user',

@@ -10,17 +10,19 @@ import {UsersService} from './services/users.service';
 import {FormsModule} from '@angular/forms';
 import {DataTablesModule} from 'angular-datatables';
 import {MAT_DIALOG_DEFAULT_OPTIONS, MatDialogModule} from '@angular/material/dialog';
+import { VehiclesComponent } from './component/vehicles/vehicles.component';
 const routes: Routes = [
   {
     path: 'admin', children: [
       {path: '', component: UsersComponent},
       {path: 'users', component: UsersComponent},
-      {path: 'user', component:  CreateUserComponent}
+      {path: 'user', component:  CreateUserComponent},
+      {path: 'vehicles', component: VehiclesComponent}
       ]
   }
 ];
 @NgModule({
-  declarations: [AdminComponent, UsersComponent, CreateUserComponent],
+  declarations: [AdminComponent, UsersComponent, CreateUserComponent, VehiclesComponent],
   exports: [
     AdminComponent,
     MatDialogModule
