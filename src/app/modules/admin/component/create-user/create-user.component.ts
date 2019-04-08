@@ -2,7 +2,6 @@ import {Component, Inject, OnInit} from '@angular/core';
 import {UsersService} from '../../services/users.service';
 import {NgForm} from '@angular/forms';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
-import {UsersComponent} from '../users/users.component';
 import {User} from '../../models/user/user';
 
 @Component({
@@ -12,15 +11,11 @@ import {User} from '../../models/user/user';
 })
 export class CreateUserComponent implements OnInit {
 
-  constructor(private  service: UsersService,
-              public dialogRef: MatDialogRef<CreateUserComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: User) {
-  }
+  constructor(private  service: UsersService,    public dialogRef: MatDialogRef<CreateUserComponent>) {}
 
   ngOnInit() {
     this.resetForm();
   }
-
   resetForm(form?: NgForm) {
 
     this.service.formData = {
