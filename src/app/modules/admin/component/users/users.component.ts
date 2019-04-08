@@ -24,4 +24,15 @@ export class UsersComponent implements OnInit {
     dialogConfig.width = '50%';
     this.dialog.open(CreateUserComponent, dialogConfig);
   }
+  openDialog(): void {
+    const dialogConfig = new  MatDialogConfig();
+    dialogConfig.autoFocus = true;
+    dialogConfig.disableClose = true;
+    dialogConfig.width = '50%';
+    const dialogRef = this.dialog.open(CreateUserComponent, dialogConfig);
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
 }

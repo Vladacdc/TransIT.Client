@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Inject, OnInit} from '@angular/core';
 import {UsersService} from '../../services/users.service';
 import {NgForm} from '@angular/forms';
+import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
+import {UsersComponent} from '../users/users.component';
+import {User} from '../../models/user/user';
 
 @Component({
   selector: 'app-create-user',
@@ -9,7 +12,9 @@ import {NgForm} from '@angular/forms';
 })
 export class CreateUserComponent implements OnInit {
 
-  constructor(private  service: UsersService) {
+  constructor(private  service: UsersService,
+              public dialogRef: MatDialogRef<CreateUserComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: User) {
   }
 
   ngOnInit() {
@@ -29,4 +34,8 @@ export class CreateUserComponent implements OnInit {
     };
     this.service.userItems = [];
   }
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
 }
