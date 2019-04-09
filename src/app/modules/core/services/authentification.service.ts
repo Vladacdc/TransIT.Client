@@ -73,7 +73,7 @@ export class AuthentificationService {
   refreshAccessToken(): Observable<Token> {
     const { refreshToken, accessToken } = this.getToken();
     return this.http
-      .post<Token>(`${environment.apiUrl}/refreshToken`, {
+      .post<Token>(`${environment.apiUrl}/authentication/refreshtoken`, {
         accessToken,
         refreshToken
       })

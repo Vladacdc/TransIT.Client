@@ -19,8 +19,7 @@ export class HttpAuthInterceptor implements HttpInterceptor {
         }
         this.refreshTokenInProgress = true;
         return this.auth.refreshAccessToken().pipe(
-          tap(_ => this.handleSuccess(request, next)),
-          switchMap(_ => EMPTY),
+          switchMap(_ => this.handleSuccess(request, next)),
           catchError(_ => this.handleError(error))
         );
       })
@@ -39,11 +38,11 @@ export class HttpAuthInterceptor implements HttpInterceptor {
     return request;
   }
 
-  private handleSuccess(request: HttpRequest<any>, next: HttpHandler): void {
+  private handleSuccess(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     console.log('Accessed token refreshed');
     this.refreshTokenInProgress = false;
     request = this.addAuthentificationToken(request);
-    next.handle(request);
+    return next.handle(request);
   }
 
   private handleError(error: HttpErrorResponse): ObservableInput<never> {
