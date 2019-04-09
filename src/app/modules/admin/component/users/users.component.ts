@@ -1,6 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {UsersService} from '../../services/users.service';
-import {MatDialog, MatDialogConfig, MatSort, MatTableDataSource, MatPaginator, MatButton} from '@angular/material';
+import {MatDialog, MatDialogConfig, MatSort, MatTableDataSource, MatPaginator} from '@angular/material';
 import {CreateUserComponent} from '../create-user/create-user.component';
 import {ELEMENT_DATA} from '../../models/user/user';
 import {DialogComponent} from '../dialog/dialog.component';
@@ -40,7 +40,7 @@ import {DialogComponent} from '../dialog/dialog.component';
     dialogConfig.autoFocus = true;
     dialogConfig.disableClose = true;
     dialogConfig.width = '35%';
-    dialogConfig.height = '15%';
+    dialogConfig.height = '25%';
     this.dialog.open(DialogComponent, dialogConfig);
   }
 

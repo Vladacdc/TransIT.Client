@@ -22,16 +22,6 @@ import {
 } from '@angular/material';
 import {MatInputModule} from '@angular/material';
 import { DialogComponent } from './component/dialog/dialog.component';
-const routes: Routes = [
-  {
-    path: 'admin', children: [
-      {path: '', component: UsersComponent},
-      {path: 'users', component: UsersComponent},
-      {path: 'user', component:  CreateUserComponent},
-      {path: 'vehicles', component: VehiclesComponent}
-      ]
-  }
-];
 @NgModule({
   declarations: [AdminComponent, UsersComponent, CreateUserComponent, VehiclesComponent, DialogComponent],
   exports: [
@@ -41,7 +31,7 @@ const routes: Routes = [
   imports: [
     CommonModule,
     AdminRoutingModule,
-    RouterModule.forRoot(routes),
+  //  RouterModule.forRoot(),
     FormsModule,
     DataTablesModule,
     MatDialogModule,

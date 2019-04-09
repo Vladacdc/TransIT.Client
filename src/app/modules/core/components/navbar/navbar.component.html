@@ -1,0 +1,29 @@
+<nav class="navbar navbar-expand-md navbar-light bg-light">
+  <a class="navbar-brand" routerLink="/admin/users">
+    <img src="assets/img/logo.png" width="30" height="30" alt="" />
+    TransIT
+  </a>
+  <button
+    class="navbar-toggler"
+    type="button"
+    data-toggle="collapse"
+    data-target="#navbarNavAltMarkup"
+    aria-controls="navbarNavAltMarkup"
+    aria-expanded="false"
+    aria-label="Toggle navigation"
+    (click)="toggleCollapsed()"
+  >
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavAltMarkup" [ngbCollapse]="isCollapsed">
+    <div class="navbar-nav mr-auto"></div>
+    <div class="navbar-nav">
+      <ng-container *ngIf="isLoggedOut">
+        <a class="nav-item nav-link active" routerLink="login">Вхід</a>
+      </ng-container>
+      <ng-container *ngIf="isLoggedIn">
+        <a class="nav-item nav-link" routerLink="logout" (click)="logout()">Вихід</a>
+      </ng-container>
+    </div>
+  </div>
+</nav>
