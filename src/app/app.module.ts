@@ -7,6 +7,8 @@ import { AppRoutingModule } from './app-routing.module';
 import {RouterModule} from '@angular/router';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {CreateUserComponent} from './modules/admin/component/create-user/create-user.component';
+import {MatButtonModule} from '@angular/material';
+import {DialogComponent} from './modules/admin/component/dialog/dialog.component';
 
 @NgModule({
   declarations: [
@@ -17,9 +19,10 @@ import {CreateUserComponent} from './modules/admin/component/create-user/create-
     AdminModule,
     AppRoutingModule,
     RouterModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatButtonModule
   ],
-  entryComponents: [CreateUserComponent],
+  entryComponents: [CreateUserComponent, DialogComponent],
   providers: [],
   bootstrap: [AppComponent]
 })

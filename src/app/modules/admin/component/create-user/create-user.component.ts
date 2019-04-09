@@ -1,7 +1,8 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {UsersService} from '../../services/users.service';
-import {NgForm} from '@angular/forms';
 import {MatDialogRef} from '@angular/material';
+import {User} from '../../models/user/user';
+import {Role} from '../../models/role/role';
 
 @Component({
   selector: 'app-create-user',
@@ -9,15 +10,14 @@ import {MatDialogRef} from '@angular/material';
   styleUrls: ['./create-user.component.scss']
 })
 export class CreateUserComponent implements OnInit {
-
+ formData: User;
+ roleList: Role[];
   constructor(private  service: UsersService,
-              public dialogRef: MatDialogRef<CreateUserComponent>) {}
+              public dialogRef: MatDialogRef<CreateUserComponent> ) {}
 
   ngOnInit() {
-    this.resetForm();
-  }
-  resetForm(form?: NgForm) {
-    this.service.formData = {
+    this.service.getRoleList().then(res => this.roleList = res as Role[])
+    this.formData = {
       id: 0,
       firstName: '',
       lastName: '',
@@ -26,11 +26,14 @@ export class CreateUserComponent implements OnInit {
       login: '',
       role: ''
     };
-    this.service.userItems = [];
   }
+
   // close  DialogComponent CreateUser
   onNoClick(): void {
     this.dialogRef.close();
   }
 
+  submit(formData: User) {
+
+  }
 }
