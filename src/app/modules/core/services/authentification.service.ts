@@ -121,16 +121,15 @@ export class AuthentificationService {
 
   private handleError(httpResponse: HttpErrorResponse): Observable<any> {
     console.error('Error on login:', httpResponse);
-    this.toast.error('Неправильно введений логін або пароль', 'Помилка логування');
-    const { errors, message } = httpResponse.error;
-    if (message) {
-      this.toast.error(message, 'Sign in');
-    }
-    for (const field in errors) {
-      if (field in errors) {
-        for (const error of errors[field]) {
-          this.toast.error(error, field);
-          console.error(field, error);
+    if (httpResponse.status !== 0) {
+      this.toast.error('Неправильно введений логін або пароль', 'Помилка логування');
+      const { errors } = httpResponse.error;
+      for (const field in errors) {
+        if (field in errors) {
+          for (const error of errors[field]) {
+            this.toast.error(error, field);
+            console.error(field, error);
+          }
         }
       }
     }
