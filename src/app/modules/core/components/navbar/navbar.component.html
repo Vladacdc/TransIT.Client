@@ -1,5 +1,8 @@
-<nav class="navbar navbar-expand-md navbar-dark bg-dark">
-  <a class="navbar-brand" routerLink="/">TransIT</a>
+<nav class="navbar navbar-expand-md navbar-light bg-light">
+  <a class="navbar-brand" routerLink="/">
+    <img src="assets/img/logo.png" width="30" height="30" alt="" />
+    TransIT
+  </a>
   <button
     class="navbar-toggler"
     type="button"
@@ -13,15 +16,13 @@
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNavAltMarkup" [ngbCollapse]="isCollapsed">
-    <div class="navbar-nav mr-auto">
-      <a class="nav-item nav-link" routerLink="/">Page 1 <span class="sr-only">(current)</span></a>
-    </div>
+    <div class="navbar-nav mr-auto"></div>
     <div class="navbar-nav">
       <ng-container *ngIf="isLoggedOut">
-        <a class="nav-item nav-link" routerLink="login">Login</a>
+        <a class="nav-item nav-link active" routerLink="login">Вхід</a>
       </ng-container>
       <ng-container *ngIf="isLoggedIn">
-        <a class="nav-item nav-link" routerLink="logout" (click)="logout()">Logout</a>
+        <a class="nav-item nav-link" routerLink="logout" (click)="logout()">Вихід</a>
       </ng-container>
     </div>
   </div>

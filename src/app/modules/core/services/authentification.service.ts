@@ -5,10 +5,10 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { map, tap, catchError, finalize, switchMap } from 'rxjs/operators';
 import { Observable, throwError, empty } from 'rxjs';
-import { User } from '../models/user/user';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { Role } from '../models/role/role';
 
 const userToken = 'userToken';
 
@@ -34,24 +34,32 @@ export class AuthentificationService {
     return this.token;
   }
 
+  getRole(): Role {
+    const decoded: any = jwt_decode(this.getToken().accessToken);
+    if (decoded.role) {
+      return decoded.role;
+    }
+
+    return null;
+  }
+
   isTokenExpired(): boolean {
     if (!this.token) {
       return true;
     }
-    const date = this.getTokenExpirationDate(this.token.accessToken);
+    const date = this.getTokenExpirationDate();
     return !date || date.valueOf() <= new Date().valueOf();
   }
 
-  login(login: string, password: string): Observable<User> {
+  login(login: string, password: string): Observable<Token> {
     const timer = setTimeout(() => this.spinner.show(), 50);
     return this.http
-      .post<Token>(`${environment.apiUrl}/login`, {
+      .post<Token>(`${environment.apiUrl}/authentication/signin`, {
         login,
         password
       })
       .pipe(
         tap(token => this.handleSuccess(token)),
-        map(token => token.user),
         catchError(error => this.handleError(error)),
         finalize(() => this.hideSpinner(timer))
       );
@@ -59,11 +67,10 @@ export class AuthentificationService {
 
   logout(): void {
     this.removeToken();
-    this.toast.success('Successfully logged out', 'Logout');
     this.router.navigate(['login']);
   }
 
-  refreshAccessToken(): Observable<User> {
+  refreshAccessToken(): Observable<Token> {
     const { refreshToken, accessToken } = this.getToken();
     return this.http
       .post<Token>(`${environment.apiUrl}/refreshToken`, {
@@ -75,7 +82,6 @@ export class AuthentificationService {
           console.log('Fetched refresh token', token);
           this.setToken(token);
         }),
-        map(token => token.user),
         catchError((error: HttpErrorResponse) => {
           this.setToken(null);
           return throwError(error);
@@ -93,17 +99,13 @@ export class AuthentificationService {
     clearTimeout(timer);
   }
 
-  private getTokenExpirationDate(token: string): Date {
-    try {
-      const decoded: any = jwt_decode(token);
-      if (decoded.exp == null) {
-        return null;
-      }
-      const date = new Date(decoded.exp * 1000);
-      return date;
-    } catch (Error) {
+  private getTokenExpirationDate(): Date {
+    const decoded: any = jwt_decode(this.getToken().refreshToken);
+    if (decoded.exp == null) {
       return null;
     }
+    const date = new Date(decoded.exp * 1000);
+    return date;
   }
 
   private removeToken(): void {
@@ -113,13 +115,13 @@ export class AuthentificationService {
 
   private handleSuccess(token: Token): void {
     console.log('Fetched token: ', token);
-    this.toast.success('Successfully signed in', 'Sign In');
     this.setToken(token);
     this.router.navigate(['']);
   }
 
   private handleError(httpResponse: HttpErrorResponse): Observable<any> {
     console.error('Error on login:', httpResponse);
+    this.toast.error('Неправильно введений логін або пароль', 'Помилка логування');
     const { errors, message } = httpResponse.error;
     if (message) {
       this.toast.error(message, 'Sign in');

@@ -12,7 +12,7 @@ export class HttpErrorInterceptor implements HttpInterceptor {
     return next.handle(request).pipe(
       catchError((error: HttpErrorResponse) => {
         if (error.status === 0) {
-          this.toast.error('Can not connect to the server', 'Connection error');
+          this.toast.error("Неможливо з'єднатися з сервером", "Помилка з'єднання");
         }
         return throwError(error);
       })
