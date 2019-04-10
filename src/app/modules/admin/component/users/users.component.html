@@ -3,7 +3,7 @@
       <mat-form-field >
         <input #box matInput (keyup)="applyFilter(box.value)" placeholder="Пошук">
       </mat-form-field>
-      <mat-paginator [pageSizeOptions]="[5, 10, 20, 50]" showFirstLastButtons></mat-paginator>
+      <mat-paginator [disabled]="false" [pageSizeOptions]="[5, 10, 20, 50]"></mat-paginator>
     </div>
 
     <p></p>

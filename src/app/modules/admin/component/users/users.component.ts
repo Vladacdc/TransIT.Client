@@ -31,16 +31,16 @@ import {DialogComponent} from '../dialog/dialog.component';
     const dialogConfig = new  MatDialogConfig();
     dialogConfig.autoFocus = true;
     dialogConfig.disableClose = true;
-    dialogConfig.width = '50%';
-    dialogConfig.height = '80%';
+    dialogConfig.width = 'auto';
+    dialogConfig.height = '75%';
     this.dialog.open(CreateUserComponent, dialogConfig);
   }
   openDialog(): void {
     const dialogConfig = new  MatDialogConfig();
     dialogConfig.autoFocus = true;
     dialogConfig.disableClose = true;
-    dialogConfig.width = '35%';
-    dialogConfig.height = '25%';
+    dialogConfig.width = 'auto';
+    dialogConfig.height = 'auto';
     this.dialog.open(DialogComponent, dialogConfig);
   }
 
