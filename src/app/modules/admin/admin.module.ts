@@ -6,7 +6,6 @@ import { AdminRoutingModule } from './admin-routing.module';
 import { AdminComponent } from './component/admin/admin.component';
 import { UsersComponent } from './component/users/users.component';
 import { CreateUserComponent } from './component/create-user/create-user.component';
-import {RouterModule, Routes} from '@angular/router';
 import {UsersService} from './services/users.service';
 
 import {FormsModule} from '@angular/forms';
@@ -18,7 +17,7 @@ import {
   MatFormFieldModule,
   MatPaginatorModule,
   MatSortModule,
-  MatTableModule
+  MatTableModule, MatTabsModule
 } from '@angular/material';
 import {MatInputModule} from '@angular/material';
 import { DialogComponent } from './component/dialog/dialog.component';
@@ -49,7 +48,8 @@ import { ActionComponent } from './component/action/action.component';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    HttpClientModule
+    HttpClientModule,
+    MatTabsModule
   ],
   entryComponents: [CreateUserComponent],
   providers: [
