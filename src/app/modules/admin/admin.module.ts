@@ -22,8 +22,17 @@ import {
 } from '@angular/material';
 import {MatInputModule} from '@angular/material';
 import { DialogComponent } from './component/dialog/dialog.component';
+import { MalfunctionsComponent } from './component/malfunctions/malfunctions.component';
+import { ActionComponent } from './component/action/action.component';
 @NgModule({
-  declarations: [AdminComponent, UsersComponent, CreateUserComponent, VehiclesComponent, DialogComponent],
+  declarations: [
+    AdminComponent,
+    UsersComponent,
+    CreateUserComponent,
+    VehiclesComponent,
+    DialogComponent,
+    MalfunctionsComponent,
+    ActionComponent],
   exports: [
     AdminComponent,
     MatDialogModule
@@ -31,7 +40,6 @@ import { DialogComponent } from './component/dialog/dialog.component';
   imports: [
     CommonModule,
     AdminRoutingModule,
-  //  RouterModule.forRoot(),
     FormsModule,
     DataTablesModule,
     MatDialogModule,

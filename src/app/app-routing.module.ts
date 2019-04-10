@@ -5,11 +5,15 @@ import {AdminComponent} from './modules/admin/component/admin/admin.component';
 import {UsersComponent} from './modules/admin/component/users/users.component';
 import {CreateUserComponent} from './modules/admin/component/create-user/create-user.component';
 import {VehiclesComponent} from './modules/admin/component/vehicles/vehicles.component';
+import {MalfunctionsComponent} from './modules/admin/component/malfunctions/malfunctions.component';
+import {ActionComponent} from './modules/admin/component/action/action.component';
 
 const rout: Routes = [
       {path: 'users', component: UsersComponent},
       {path: 'user', component:  CreateUserComponent},
-      {path: 'vehicles', component: VehiclesComponent}
+      {path: 'vehicles', component: VehiclesComponent},
+      {path: 'malfunction', component: MalfunctionsComponent},
+      {path: 'action', component: ActionComponent}
 ];
 
 const routes: Routes = [
@@ -24,7 +28,12 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent
-  }
+  },
+  {path: 'users', component: UsersComponent},
+  {path: 'user', component:  CreateUserComponent},
+  {path: 'vehicles', component: VehiclesComponent},
+  {path: 'malfunction', component: MalfunctionsComponent},
+  {path: 'action', component: ActionComponent}
 ];
 
 @NgModule({
