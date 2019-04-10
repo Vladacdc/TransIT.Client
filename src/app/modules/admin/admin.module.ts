@@ -23,6 +23,9 @@ import {MatInputModule} from '@angular/material';
 import { DialogComponent } from './component/dialog/dialog.component';
 import { MalfunctionsComponent } from './component/malfunctions/malfunctions.component';
 import { ActionComponent } from './component/action/action.component';
+import { MalfuncComponent } from './component/malfunctions/malfunc/malfunc.component';
+import { MalfuncGroupComponent } from './component/malfunctions/malfunc-group/malfunc-group.component';
+import { MalfunSubgroupComponent } from './component/malfunctions/malfun-subgroup/malfun-subgroup.component';
 @NgModule({
   declarations: [
     AdminComponent,
@@ -31,7 +34,10 @@ import { ActionComponent } from './component/action/action.component';
     VehiclesComponent,
     DialogComponent,
     MalfunctionsComponent,
-    ActionComponent],
+    ActionComponent,
+    MalfuncComponent,
+    MalfuncGroupComponent,
+    MalfunSubgroupComponent],
   exports: [
     AdminComponent,
     MatDialogModule

@@ -11,28 +11,34 @@ import {DialogComponent} from '../dialog/dialog.component';
   styleUrls: ['./users.component.scss']
 })
   export class UsersComponent implements OnInit {
+  constructor(private  service: UsersService, private dialog: MatDialog) {
+  }
   displayedColumns: string[] = ['firstName', 'lastName', 'login', 'email' , 'phoneNumber', 'actions'];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  public  title: string;
+  public  button: string;
 
   applyFilter(filterValue: string) {
     this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
-  constructor(private  service: UsersService, private dialog: MatDialog) {
   }
   ngOnInit() {
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
 
   }
-
   openCreateUserDialog(): void {
     const dialogConfig = new  MatDialogConfig();
     dialogConfig.autoFocus = true;
     dialogConfig.disableClose = true;
     dialogConfig.width = 'auto';
     dialogConfig.height = '75%';
+    dialogConfig.data = {
+      name: this.dataSource.data,
+      title: this.title,
+      button: this.button
+    }
     this.dialog.open(CreateUserComponent, dialogConfig);
   }
   openDialog(): void {
@@ -49,5 +55,6 @@ import {DialogComponent} from '../dialog/dialog.component';
   }
 
   editItem(row: any) {
+    this.openCreateUserDialog();
   }
 }

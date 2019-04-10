@@ -1,11 +1,10 @@
-  <h3 class="text d-none d-md-block">Створити користувача  <i class="fas fa-user-plus"></i></h3>
+<!--close create_user component-->
+<a class="btn btn-sm text-white btn-success btn-info right" (click)="onNoClick()"><i class="far fa-window-close"></i></a>
+
+<h3 class="text d-none d-md-block">Створити користувача  <i class="fas fa-user-plus"></i></h3>
 <h5 class="text d-md-none"><i class="fas fa-user-plus"></i> <br>Створити користувача  </h5>
 
 <div>
-      <!--close create_user component-->
-    <div class="modal-footer" >
-      <a class="btn btn-sm text-white btn-success btn-info" (click)="onNoClick()"><i class="far fa-window-close"></i></a>
-    </div>
       <!--CreateUserForm-->
     <form class="form" #form= "ngForm" *ngIf="formData">
       <div class="col-md-auto">
