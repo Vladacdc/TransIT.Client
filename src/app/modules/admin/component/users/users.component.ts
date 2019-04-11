@@ -25,7 +25,6 @@ export class UsersComponent implements OnInit {
     this.service.getEntities().subscribe(users => {
       this.users = users;
 
-      this.spinner.hide();
       this.chRef.detectChanges();
 
       const table: any = $('table');

@@ -71,7 +71,11 @@ export class AuthentificationService {
   }
 
   refreshAccessToken(): Observable<Token> {
-    const { refreshToken, accessToken } = this.getToken();
+    const token = this.getToken();
+    if (!token) {
+      return throwError('No token');
+    }
+    const { refreshToken, accessToken } = token;
     return this.http
       .post<Token>(`${environment.apiUrl}/refreshToken`, {
         accessToken,
