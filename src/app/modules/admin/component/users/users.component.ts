@@ -58,7 +58,13 @@ export class UsersComponent implements OnInit {
     dialogConfig.disableClose = true;
     dialogConfig.width = 'auto';
     dialogConfig.height = 'auto';
-    this.dialog.open(DialogComponent, dialogConfig);
+    const dialogRef = this.dialog.open(DialogComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(result => {
+    if (result)
+   {
+     
+   }
+    });
   }
 
   createItem() {
