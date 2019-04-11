@@ -1,14 +1,11 @@
     <div class="filter" >
-      <a class="btn text-white btn-success btn-info" (click)="openCreateUserDialog()"><i class="fas fa-plus"></i> Створити користувача</a>
+      <a class="btn text-white btn-success btn-info" (click)="createItem()"><i class="fas fa-plus"></i> Створити користувача</a>
       <mat-form-field >
         <input #box matInput (keyup)="applyFilter(box.value)" placeholder="Пошук">
       </mat-form-field>
       <mat-paginator [disabled]="false" [pageSizeOptions]="[5, 10, 20, 50]"></mat-paginator>
     </div>
-
-    <p></p>
-    <p></p>
-
+ <br><br>
 <div class="table">
     <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
 
@@ -39,7 +36,7 @@
         <mat-header-cell *matHeaderCellDef></mat-header-cell>
         <mat-cell *matCellDef="let row">
           <button mat-button (click)="editItem(row)"><i class="fas fa-edit"></i></button>
-          <button mat-button (click)="deleteItem(row)"><i class="fas fa-trash-alt"></i></button>
+          <button mat-button (click)="openDialog(row)"><i class="fas fa-trash-alt"></i></button>
         </mat-cell>
       </ng-container>
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

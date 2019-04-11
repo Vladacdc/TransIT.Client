@@ -1,18 +1,43 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDialogRef } from '@angular/material';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { User } from '../../models/user/user';
 import { Role } from '../../models/role/role';
 import { RoleService } from '../../services/role.service';
+
+export interface DialogData {
+  user: User;
+  title: string;
+  buttonName: string;
+  createBool: boolean;
+}
 
 @Component({
   selector: 'app-create-user',
   templateUrl: './create-user.component.html',
   styleUrls: ['./create-user.component.scss']
 })
+
 export class CreateUserComponent implements OnInit {
   formData: User;
   roleList: Role[];
-  constructor(private service: RoleService, public dialogRef: MatDialogRef<CreateUserComponent>) {}
+  createBool: boolean;
+  constructor(private service: RoleService,
+              public dialogRef: MatDialogRef<CreateUserComponent>,
+              @Inject(MAT_DIALOG_DATA) public data: DialogData) {
+    if (data.user == null) {
+      data.user = new User();
+      data.user.id =  0;
+      data.user.firstName = '';
+      data.user.lastName = '';
+      data.user.email = '';
+      data.user.login = '';
+      data.user.role = '';
+      data.user.phoneNumber = 0;
+      this.createBool = false;
+    } else {
+      this.createBool = true;
+    }
+  }
 
   ngOnInit() {
     this.service.getEntities().subscribe(data => (this.roleList = data));
@@ -31,6 +56,4 @@ export class CreateUserComponent implements OnInit {
   onNoClick(): void {
     this.dialogRef.close();
   }
-
-  submit(formData: User) {}
 }

@@ -1,8 +1,8 @@
 <!--close create_user component-->
 <a class="btn btn-sm text-white btn-success btn-info right" (click)="onNoClick()"><i class="far fa-window-close"></i></a>
 
-<h3 class="text d-none d-md-block">Створити користувача  <i class="fas fa-user-plus"></i></h3>
-<h5 class="text d-md-none"><i class="fas fa-user-plus"></i> <br>Створити користувача  </h5>
+<h3 class="text d-none d-md-block">{{data.title}} <i class="fas fa-user-plus"></i></h3>
+<h5 class="text d-md-none"><i class="fas fa-user-plus"></i> <br>{{data.title}} </h5>
 
 <div>
       <!--CreateUserForm-->
@@ -10,38 +10,38 @@
       <div class="col-md-auto">
           <div class="form-group">
             <label>Name</label>
-            <input name="firstName" #firstName='ngModel' [(ngModel)]="formData.firstName" class="form-control">
+            <input name="firstName" #firstName='ngModel' [(ngModel)]="data.user.firstName" class="form-control">
           </div>
 
           <div class="form-group">
             <label>LastName</label>
-            <input name="lastName" #lastName='ngModel' [(ngModel)]="formData.lastName" class="form-control">
+            <input name="lastName" #lastName='ngModel' [(ngModel)]="data.user.lastName" class="form-control">
           </div>
           <div class="form-group">
              <label>login</label>
-            <input name="login" #login='ngModel' [(ngModel)]="formData.login" class="form-control">
+            <input name="login" #login='ngModel' [(ngModel)]="data.user.login" class="form-control">
           </div>
 
           <div class="form-group">
             <label>Email</label>
-            <input name="email" #email='ngModel' [(ngModel)]="formData.email" class="form-control">
+            <input name="email" #email='ngModel' [(ngModel)]="data.user.email" class="form-control">
           </div>
 
           <div class="form-group">
             <label>Phone</label>
-            <input name="phoneNumber" #phoneNumber='ngModel' [(ngModel)]="formData.phoneNumber" class="form-control">
+            <input name="phoneNumber" #phoneNumber='ngModel' [(ngModel)]="data.user.phoneNumber" class="form-control">
           </div>
 
           <div class="form-group">
             <label>Role</label>
-            <select name="role" #role='ngModel' [(ngModel)]="formData.role" class="form-control">
+            <select name="role" #role='ngModel' [(ngModel)]="data.user.role" class="form-control">
               <option value="0">--Select--</option>
               <option *ngFor = 'let item of roleList' value="{{item.id}}">{{item.name}}</option>
             </select>
           </div>
       </div>
       <div class="form-group text">
-        <a class="btn text-white btn-success btn-info" (click)="submit(formData)"><i class="fas fa-plus"></i> Створити</a>
+        <a mat-dialog-close class="btn text-white btn-success btn-info"><i class="fas fa-plus"></i> {{data.buttonName}}</a>
       </div>
     </form>
 </div>
