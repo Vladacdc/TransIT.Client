@@ -1,8 +1,8 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatDialog, MatDialogConfig, MatSort, MatTableDataSource, MatPaginator } from '@angular/material';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { MatDialogConfig, MatDialog } from '@angular/material';
 import { CreateUserComponent } from '../create-user/create-user.component';
-import { ELEMENT_DATA } from '../../models/user/user';
-import { DialogComponent } from '../dialog/dialog.component';
+import { User } from '../../models/user/user';
+import { NgxSpinnerService } from 'ngx-spinner';
 import { UserService } from '../../services/user.service';
 
 @Component({
@@ -11,48 +11,34 @@ import { UserService } from '../../services/user.service';
   styleUrls: ['./users.component.scss']
 })
 export class UsersComponent implements OnInit {
-  constructor(private dialog: MatDialog) {}
-  displayedColumns: string[] = ['firstName', 'lastName', 'login', 'email', 'phoneNumber', 'actions'];
-  dataSource = new MatTableDataSource(ELEMENT_DATA);
-  @ViewChild(MatSort) sort: MatSort;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  public title: string;
-  public button: string;
+  users: User[];
+  dataTable: any;
 
-  applyFilter(filterValue: string) {
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
+  constructor(
+    private service: UserService,
+    private chRef: ChangeDetectorRef,
+    private dialog: MatDialog,
+    private spinner: NgxSpinnerService
+  ) {}
+
   ngOnInit() {
-    this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
+    this.service.getEntities().subscribe(users => {
+      this.users = users;
+
+      this.spinner.hide();
+      this.chRef.detectChanges();
+
+      const table: any = $('table');
+      this.dataTable = table.DataTable();
+    });
   }
+
   openCreateUserDialog(): void {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
     dialogConfig.disableClose = true;
     dialogConfig.width = 'auto';
     dialogConfig.height = '75%';
-    dialogConfig.data = {
-      name: this.dataSource.data,
-      title: this.title,
-      button: this.button
-    };
     this.dialog.open(CreateUserComponent, dialogConfig);
-  }
-  openDialog(): void {
-    const dialogConfig = new MatDialogConfig();
-    dialogConfig.autoFocus = true;
-    dialogConfig.disableClose = true;
-    dialogConfig.width = 'auto';
-    dialogConfig.height = 'auto';
-    this.dialog.open(DialogComponent, dialogConfig);
-  }
-
-  deleteItem(row: any) {
-    this.openDialog();
-  }
-
-  editItem(row: any) {
-    this.openCreateUserDialog();
   }
 }

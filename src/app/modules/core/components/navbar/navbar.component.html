@@ -4,18 +4,18 @@
     TransIT
   </a>
   <button
-    class="navbar-toggler"
+    #navbarToggler
+    class="navbar-toggler navbar-toggler-right"
     type="button"
     data-toggle="collapse"
-    data-target="#navbarNavAltMarkup"
-    aria-controls="navbarNavAltMarkup"
+    data-target="#navbarCollapse"
+    aria-controls="navbarCollapse"
     aria-expanded="false"
     aria-label="Toggle navigation"
-    (click)="toggleCollapsed()"
   >
     <span class="navbar-toggler-icon"></span>
   </button>
-  <div class="collapse navbar-collapse" id="navbarNavAltMarkup" [ngbCollapse]="isCollapsed">
+  <div class="collapse navbar-collapse" id="navbarCollapse">
     <div class="navbar-nav mr-auto"></div>
     <div class="navbar-nav">
       <ng-container *ngIf="isLoggedOut">
@@ -25,7 +25,7 @@
         <a class="nav-item nav-link" routerLink="logout" (click)="logout()">Вихід</a>
       </ng-container>
       <ng-content></ng-content>
-      <app-adminnavbar  class="d-md-none"></app-adminnavbar>
+      <app-adminnavbar class="d-md-none"></app-adminnavbar>
     </div>
   </div>
 </nav>

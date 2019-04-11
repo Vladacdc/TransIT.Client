@@ -13,6 +13,7 @@ import { HttpErrorInterceptor } from './interceptors/http-error.interceptor';
 import { HttpAuthInterceptor } from './interceptors/http-auth.interceptor';
 import { AdminnavbarComponent } from './components/navbar/adminnavbar/adminnavbar.component';
 import { CrudService } from './services/crud.service';
+import { SpinnerService } from './services/spinner.service';
 
 @NgModule({
   declarations: [HomeComponent, NavbarComponent, LoginComponent, AdminnavbarComponent],
@@ -21,7 +22,8 @@ import { CrudService } from './services/crud.service';
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: HttpAuthInterceptor, multi: true },
-    CrudService
+    CrudService,
+    SpinnerService
   ]
 })
 export class CoreModule {}
