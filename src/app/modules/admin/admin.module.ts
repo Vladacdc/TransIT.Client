@@ -53,7 +53,6 @@ import { UserService } from './services/user.service';
     HttpClientModule,
     MatTabsModule
   ],
-  entryComponents: [CreateUserComponent],
   providers: [RoleService, UserService]
 })
 export class AdminModule {}
