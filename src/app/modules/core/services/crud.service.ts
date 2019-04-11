@@ -45,7 +45,7 @@ export class CrudService<T extends TEntity> {
     );
   }
 
-  private handleError() {
+  protected handleError() {
     return (error: any): Observable<never> => {
       console.warn(error);
       return throwError(error);
