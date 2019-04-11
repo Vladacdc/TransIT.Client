@@ -1,7 +1,7 @@
 <!--close create_user component-->
 <a class="btn btn-sm text-white btn-success btn-info right" (click)="onNoClick()"><i class="far fa-window-close"></i></a>
 
-<h3 class="text d-none d-md-block">{{data.title}} <i class="fas fa-user-plus"></i></h3>
+<h3 class="text d-none d-md-block"><i class="fas fa-user-plus"></i><br>{{data.title}} </h3>
 <h5 class="text d-md-none"><i class="fas fa-user-plus"></i> <br>{{data.title}} </h5>
 
 <div>
@@ -41,7 +41,7 @@
           </div>
       </div>
       <div class="form-group text">
-        <a mat-dialog-close class="btn text-white btn-success btn-info"><i class="fas fa-plus"></i> {{data.buttonName}}</a>
-      </div>
-    </form>
+        <a (click)="CreateEdit()" class="btn text-white btn-success btn-info"><i class="fas fa-plus"></i> {{data.buttonName}}</a>
+    </div>
+  </form>
 </div>

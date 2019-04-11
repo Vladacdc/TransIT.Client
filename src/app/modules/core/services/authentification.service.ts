@@ -3,12 +3,12 @@ import * as jwt_decode from 'jwt-decode';
 import { Token } from '../models/token/token';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { map, tap, catchError, finalize, switchMap } from 'rxjs/operators';
-import { Observable, throwError, empty } from 'rxjs';
+import { tap, catchError, finalize } from 'rxjs/operators';
+import { Observable, throwError } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
-import { NgxSpinnerService } from 'ngx-spinner';
 import { Role } from '../models/role/role';
+import { SpinnerService } from './spinner.service';
 
 const userToken = 'userToken';
 
@@ -18,7 +18,7 @@ const userToken = 'userToken';
 export class AuthentificationService {
   private token: Token;
 
-  constructor(private http: HttpClient, private toast: ToastrService, private router: Router, private spinner: NgxSpinnerService) {
+  constructor(private http: HttpClient, private toast: ToastrService, private router: Router, private spinner: SpinnerService) {
     const tokenString = localStorage.getItem(userToken);
     if (tokenString) {
       this.token = JSON.parse(tokenString);
@@ -71,7 +71,11 @@ export class AuthentificationService {
   }
 
   refreshAccessToken(): Observable<Token> {
-    const { refreshToken, accessToken } = this.getToken();
+    const token = this.getToken();
+    if (!token) {
+      return throwError('No token');
+    }
+    const { refreshToken, accessToken } = token;
     return this.http
       .post<Token>(`${environment.apiUrl}/refreshToken`, {
         accessToken,

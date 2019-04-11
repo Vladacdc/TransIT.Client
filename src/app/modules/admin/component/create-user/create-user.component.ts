@@ -25,14 +25,8 @@ export class CreateUserComponent implements OnInit {
               public dialogRef: MatDialogRef<CreateUserComponent>,
               @Inject(MAT_DIALOG_DATA) public data: DialogData) {
     if (data.user == null) {
-      data.user = new User();
-      data.user.id =  0;
-      data.user.firstName = '';
-      data.user.lastName = '';
-      data.user.email = '';
-      data.user.login = '';
-      data.user.role = '';
-      data.user.phoneNumber = 0;
+      this.data.user = {
+        email: '', firstName: '', lastName: '', login: '', phoneNumber: 0, role: '',  id: 0 };
       this.createBool = false;
     } else {
       this.createBool = true;
@@ -55,5 +49,13 @@ export class CreateUserComponent implements OnInit {
   // close  DialogComponent CreateUser
   onNoClick(): void {
     this.dialogRef.close();
+  }
+
+  CreateEdit() {
+    if (this.createBool) {
+      // create user
+    } else {
+      // create user
+    }
   }
 }

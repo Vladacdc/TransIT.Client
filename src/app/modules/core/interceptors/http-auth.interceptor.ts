@@ -3,12 +3,13 @@ import { Observable, throwError, EMPTY, ObservableInput } from 'rxjs';
 import { AuthentificationService } from '../services/authentification.service';
 import { Injectable } from '@angular/core';
 import { catchError, tap, switchMap } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class HttpAuthInterceptor implements HttpInterceptor {
   private refreshTokenInProgress = false;
 
-  constructor(private auth: AuthentificationService) {}
+  constructor(private auth: AuthentificationService, private router: Router) {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     request = this.addAuthentificationToken(request);
@@ -49,6 +50,7 @@ export class HttpAuthInterceptor implements HttpInterceptor {
   private handleError(error: HttpErrorResponse): ObservableInput<never> {
     console.error('Error on refreshing token');
     this.refreshTokenInProgress = false;
+    this.router.navigate(['/login']);
     return throwError(error);
   }
 }

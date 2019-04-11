@@ -1,8 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatDialog, MatDialogConfig, MatSort, MatTableDataSource, MatPaginator } from '@angular/material';
+import { Component, OnInit, ChangeDetectorRef, ViewChild } from '@angular/core';
+import { MatDialogConfig, MatDialog, MatTableDataSource, MatSort, MatPaginator } from '@angular/material';
 import { CreateUserComponent } from '../create-user/create-user.component';
-import { ELEMENT_DATA, User } from '../../models/user/user';
+import { User } from '../../models/user/user';
 import { DialogComponent } from '../dialog/dialog.component';
+import { NgxSpinnerService } from 'ngx-spinner';
+import { UserService } from '../../services/user.service';
 
 @Component({
   selector: 'app-users',
@@ -10,25 +12,29 @@ import { DialogComponent } from '../dialog/dialog.component';
   styleUrls: ['./users.component.scss']
 })
 
-
 export class UsersComponent implements OnInit {
-  constructor(private dialog: MatDialog) {}
-  displayedColumns: string[] = ['firstName', 'lastName', 'login', 'email', 'phoneNumber', 'actions'];
-  dataSource = new MatTableDataSource(ELEMENT_DATA);
-  @ViewChild(MatSort) sort: MatSort;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+  users: User[];
+  dataTable: any;
   public title: string;
   public button: string;
-  public  createBool: boolean;
-  applyFilter(filterValue: string) {
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-  }
+  public createBool: boolean;
+  constructor(
+    private service: UserService,
+    private chRef: ChangeDetectorRef,
+    private dialog: MatDialog,
+    private spinner: NgxSpinnerService
+  ) {}
   ngOnInit() {
-    this.dataSource.sort = this.sort;
-    this.dataSource.paginator = this.paginator;
+    this.service.getEntities().subscribe(users => {
+      this.users = users;
+
+      this.chRef.detectChanges();
+      const table: any = $('table');
+      this.dataTable = table.DataTable();
+    });
   }
-  // CreateEdit
-  openCreateUserDialog(row?): void {
+
+  openCreateUserDialog(row): void {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
     dialogConfig.disableClose = true;
@@ -39,26 +45,28 @@ export class UsersComponent implements OnInit {
       title: this.title,
       button: this.button
     };
-    this.dialog.open(CreateUserComponent, dialogConfig);
+    const  dialogRef = this.dialog.open(CreateUserComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+      }
+    });
   }
+
   openDialog(row: any): void {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.autoFocus = true;
     dialogConfig.disableClose = true;
     dialogConfig.width = 'auto';
     dialogConfig.height = 'auto';
-    const dialogRef = this.dialog.open(DialogComponent, dialogConfig);
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        // delete row, row is data not number
-      }
-    });
+    this.dialog.open(DialogComponent, dialogConfig);
   }
- createItem() {
+
+  createItem() {
     this.title = 'Створити користувача';
     this.button = 'Створити';
     this.openCreateUserDialog(null);
   }
+
   editItem(row: any) {
     this.title = 'Редагувати користувача';
     this.button = 'Редагувати';
