@@ -35,6 +35,9 @@ export class AuthentificationService {
   }
 
   getRole(): Role {
+    if (!this.getToken()) {
+      return 'GUEST';
+    }
     const decoded: any = jwt_decode(this.getToken().accessToken);
     if (decoded.role) {
       return decoded.role;
@@ -120,7 +123,7 @@ export class AuthentificationService {
   private handleSuccess(token: Token): void {
     console.log('Fetched token: ', token);
     this.setToken(token);
-    this.router.navigate(['']);
+    this.router.navigate([`/${this.getRole().toLowerCase()}`]);
   }
 
   private handleError(httpResponse: HttpErrorResponse): Observable<any> {
