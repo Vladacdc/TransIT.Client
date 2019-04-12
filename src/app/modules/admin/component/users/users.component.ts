@@ -11,26 +11,28 @@ import { UserService } from '../../services/user.service';
   templateUrl: './users.component.html',
   styleUrls: ['./users.component.scss']
 })
-
 export class UsersComponent implements OnInit {
   users: User[];
   dataTable: any;
   public title: string;
   public button: string;
   public createBool: boolean;
-  constructor(
-    private service: UserService,
-    private chRef: ChangeDetectorRef,
-    private dialog: MatDialog,
-    private spinner: NgxSpinnerService
-  ) {}
+  private readonly tableParams = {
+    columnDefs: [
+      {
+        targets: [5, 6],
+        orderable: false
+      }
+    ]
+  };
+  constructor(private service: UserService, private chRef: ChangeDetectorRef, private dialog: MatDialog) {}
   ngOnInit() {
     this.service.getEntities().subscribe(users => {
       this.users = users;
 
       this.chRef.detectChanges();
       const table: any = $('table');
-      this.dataTable = table.DataTable();
+      this.dataTable = table.DataTable(this.tableParams);
     });
   }
 
@@ -45,7 +47,7 @@ export class UsersComponent implements OnInit {
       title: this.title,
       button: this.button
     };
-    const  dialogRef = this.dialog.open(CreateUserComponent, dialogConfig);
+    const dialogRef = this.dialog.open(CreateUserComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
       }
@@ -60,10 +62,8 @@ export class UsersComponent implements OnInit {
     dialogConfig.height = 'auto';
     const dialogRef = this.dialog.open(DialogComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(result => {
-    if (result)
-   {
-     
-   }
+      if (result) {
+      }
     });
   }
 

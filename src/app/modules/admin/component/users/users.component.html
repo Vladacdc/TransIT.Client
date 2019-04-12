@@ -1,4 +1,4 @@
-<a class="btn text-white btn-success btn-info" (click)="createItem()"><i class="fas fa-plus"></i> Створити користувача</a>
+<button class="btn text-white btn-success btn-info" (click)="createItem()"><i class="fas fa-plus"></i> Створити користувача</button>
 
 <table class="table table-hover" cellspacing="0">
   <thead>
@@ -8,6 +8,8 @@
       <th>Логін</th>
       <th>Електронна пошта</th>
       <th>Номер</th>
+      <th>Редагувати</th>
+      <th>Видалити</th>
     </tr>
   </thead>
   <tbody>
@@ -19,9 +21,10 @@
       <td>{{ user.phoneNumber }}</td>
       <td>
         <button mat-button (click)="editItem(user.id)"><i class="fas fa-edit"></i></button>
+      </td>
+      <td>
         <button mat-button (click)="openDialog(user.id)"><i class="fas fa-trash-alt"></i></button>
       </td>
     </tr>
   </tbody>
 </table>
-

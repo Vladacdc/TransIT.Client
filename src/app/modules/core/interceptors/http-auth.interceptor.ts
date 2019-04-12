@@ -1,29 +1,50 @@
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpErrorResponse } from '@angular/common/http';
-import { Observable, throwError, EMPTY, ObservableInput } from 'rxjs';
+import { Observable, throwError, EMPTY, ObservableInput, Subject } from 'rxjs';
 import { Injectable } from '@angular/core';
-import { catchError, tap, switchMap } from 'rxjs/operators';
+import { catchError, tap, switchMap, first } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../services/authentication.service';
+import { Token } from '../models/token/token';
 
 @Injectable()
 export class HttpAuthInterceptor implements HttpInterceptor {
   private refreshTokenInProgress = false;
 
+  private refreshTokenSource = new Subject<Token>();
+  private refreshToken$ = this.refreshTokenSource.asObservable();
+
   constructor(private auth: AuthenticationService, private router: Router) {}
+
+  refreshToken(): Observable<Token> {
+    if (this.refreshTokenInProgress) {
+      return this.refreshToken$.pipe(first());
+    } else {
+      this.refreshTokenInProgress = true;
+      return this.auth.refreshAccessToken().pipe(
+        tap(token => {
+          this.handleSuccess();
+          this.refreshTokenInProgress = false;
+          this.refreshTokenSource.next(token);
+        })
+      );
+    }
+  }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     request = this.addAuthentificationToken(request);
     return next.handle(request).pipe(
       catchError((error: HttpErrorResponse) => {
-        if (error.status !== 401 || this.refreshTokenInProgress) {
-          return throwError(error);
+        if (error.status === 401) {
+          return this.refreshToken().pipe(
+            switchMap(_ => {
+              request = this.addAuthentificationToken(request);
+              return next.handle(request);
+            }),
+            catchError(_ => this.handleError(error))
+          );
         }
-        this.refreshTokenInProgress = true;
-        return this.auth.refreshAccessToken().pipe(
-          tap(_ => this.handleSuccess(request, next)),
-          switchMap(_ => EMPTY),
-          catchError(_ => this.handleError(error))
-        );
+
+        return throwError(error);
       })
     );
   }
@@ -40,11 +61,8 @@ export class HttpAuthInterceptor implements HttpInterceptor {
     return request;
   }
 
-  private handleSuccess(request: HttpRequest<any>, next: HttpHandler): void {
+  private handleSuccess(): void {
     console.log('Accessed token refreshed');
-    this.refreshTokenInProgress = false;
-    request = this.addAuthentificationToken(request);
-    next.handle(request);
   }
 
   private handleError(error: HttpErrorResponse): ObservableInput<never> {
