@@ -15,7 +15,7 @@ const userToken = 'userToken';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthentificationService {
+export class AuthenticationService {
   private token: Token;
 
   constructor(private http: HttpClient, private toast: ToastrService, private router: Router, private spinner: SpinnerService) {
@@ -80,7 +80,7 @@ export class AuthentificationService {
     }
     const { refreshToken, accessToken } = token;
     return this.http
-      .post<Token>(`${environment.apiUrl}/refreshToken`, {
+      .post<Token>(`${environment.apiUrl}/authentication/refreshToken`, {
         accessToken,
         refreshToken
       })

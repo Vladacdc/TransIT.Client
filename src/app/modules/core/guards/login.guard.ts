@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { AuthentificationService } from '../services/authentification.service';
 import { CanActivate, Router } from '@angular/router';
+import { AuthenticationService } from '../services/authentication.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class LoginGuard implements CanActivate {
-  constructor(private service: AuthentificationService, private router: Router) {}
+  constructor(private service: AuthenticationService, private router: Router) {}
 
   canActivate(): boolean {
     if (this.service.getRole() === 'GUEST') {

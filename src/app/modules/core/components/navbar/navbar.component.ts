@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AuthentificationService } from '../../services/authentification.service';
+import { AuthenticationService } from '../../services/authentication.service';
 
 @Component({
   selector: 'app-navbar',
@@ -7,7 +7,7 @@ import { AuthentificationService } from '../../services/authentification.service
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent {
-  constructor(private authService: AuthentificationService) {}
+  constructor(private authService: AuthenticationService) {}
 
   get isLoggedIn() {
     return !this.authService.isTokenExpired();

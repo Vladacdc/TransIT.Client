@@ -1,15 +1,15 @@
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError, EMPTY, ObservableInput } from 'rxjs';
-import { AuthentificationService } from '../services/authentification.service';
 import { Injectable } from '@angular/core';
 import { catchError, tap, switchMap } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { AuthenticationService } from '../services/authentication.service';
 
 @Injectable()
 export class HttpAuthInterceptor implements HttpInterceptor {
   private refreshTokenInProgress = false;
 
-  constructor(private auth: AuthentificationService, private router: Router) {}
+  constructor(private auth: AuthenticationService, private router: Router) {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     request = this.addAuthentificationToken(request);
