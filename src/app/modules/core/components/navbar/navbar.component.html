@@ -18,14 +18,16 @@
   <div class="collapse navbar-collapse" id="navbarCollapse">
     <div class="navbar-nav mr-auto"></div>
     <div class="navbar-nav">
+      <div class="d-md-none">
+        <ng-content class="d-md-none"></ng-content>
+      </div>
       <ng-container *ngIf="isLoggedOut">
         <a class="nav-item nav-link active" routerLink="login">Вхід</a>
       </ng-container>
       <ng-container *ngIf="isLoggedIn">
         <a class="nav-item nav-link" routerLink="logout" (click)="logout()">Вихід</a>
       </ng-container>
-      <ng-content></ng-content>
-      <app-adminnavbar class="d-md-none"></app-adminnavbar>
     </div>
   </div>
 </nav>
+<div class="prepend"></div>
