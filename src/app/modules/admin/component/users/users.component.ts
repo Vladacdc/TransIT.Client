@@ -48,12 +48,11 @@ export class UsersComponent implements OnInit {
     });
   }
   createItem() {
-    this.service.addEntity(this.user);
-    this.user = Object.assign({}, DEFAULT_USER);
-
+    this.service.addEntity(this.user).subscribe(user =>  Object.assign({}, DEFAULT_USER)
+    );
   }
   editItem() {
-    this.service.updateEntity(this.user);
+    this.service.updateEntity(this.user).subscribe(user => user = this.user);
   }
 
   deleteItem(id: number) {
