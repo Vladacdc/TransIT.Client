@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { AuthentificationService } from '../../services/authentification.service';
+import { AuthenticationService } from '../../services/authentication.service';
 
 @Component({
   selector: 'app-navbar',
@@ -7,9 +7,7 @@ import { AuthentificationService } from '../../services/authentification.service
   styleUrls: ['./navbar.component.scss']
 })
 export class NavbarComponent {
-  collapsed = true;
-
-  constructor(private authService: AuthentificationService) {}
+  constructor(private authService: AuthenticationService) {}
 
   get isLoggedIn() {
     return !this.authService.isTokenExpired();
@@ -17,14 +15,6 @@ export class NavbarComponent {
 
   get isLoggedOut() {
     return this.authService.isTokenExpired();
-  }
-
-  get isCollapsed() {
-    return this.collapsed;
-  }
-
-  toggleCollapsed() {
-    this.collapsed = !this.collapsed;
   }
 
   logout() {

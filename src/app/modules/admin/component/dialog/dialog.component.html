@@ -1,0 +1,11 @@
+<a class="btn btn-sm text-white btn-success btn-info right" (click)="onNoClick()"><i class="far fa-window-close"></i></a>
+<h6>
+  <i class="fas fa-question-circle"></i>
+    Ви дійсно хочите видалити?
+</h6>
+<br><br>
+
+<div class="container text">
+    <button mat-dialog-close="true" class="btn btn-sm text-white btn-success btn-info right btnDialog">Так</button>
+    <button (click)="onNoClick()" class="btn btn-sm text-white btn-success btn-info left btnDialog">Ні</button>
+</div>

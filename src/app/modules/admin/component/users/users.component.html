@@ -1,0 +1,98 @@
+ <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#CreateModal"><i class="fas fa-plus"></i> Створити користувача </button>
+
+<div class="modal fade" id="CreateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Створити користувача</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="lastname" class="col-form-label">Прізвище:</label>
+            <input type="text" class="form-control" id="lastname" placeholder="Введіть прізвище"   [(ngModel)]="user.lastName"[ngModelOptions]="{standalone:true}" #nameRequired="ngModel" >
+          </div>
+          <div class="form-group">
+            <label for="name" class="col-form-label">Ім'я:</label>
+            <input type="text" class="form-control" id="name"  placeholder="Введіть ім'я "   [(ngModel)]="user.firstName"[ngModelOptions]="{standalone:true}" #nameRequired="ngModel">
+          </div>
+          <div class="form-group">
+            <label for="login" class="col-form-label">Логін:</label>
+            <input type="text" class="form-control" id="login" placeholder="Введіть логін "   [(ngModel)]="user.login"[ngModelOptions]="{standalone:true}" #nameRequired="ngModel">
+          </div>
+          <div class="form-group">
+            <label for="email" class="col-form-label">Пошта:</label>
+            <input type="email" class="form-control" id="email" placeholder="Введіть пошту"  [(ngModel)]="user.email"[ngModelOptions]="{standalone:true}" #nameRequired="ngModel" >
+          </div>
+          <div class="form-group">
+            <label for="phone" class="col-form-label">Номер телефону:</label>
+            <input type="text" class="form-control" id="phone" placeholder="Введіть номер телефону" [(ngModel)]="user.phoneNumber"[ngModelOptions]="{standalone:true}" #nameRequired="ngModel">
+          </div>
+          <div class="form-group">
+            <label for="phone" class="col-form-label">Роль:</label>
+            <select name="role" #role='ngModel' [(ngModel)]="user.role"[ngModelOptions]="{standalone:true}" #nameRequired="ngModel" class="form-control">
+              <option value="0">--Select--</option>
+              <option *ngFor = 'let item of roleList' value="{{item.id}}">{{item.name}}</option>
+            </select>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрити</button>
+        <button type="button" class="btn btn-primary" (click)="createItem()">Створити</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<table class="table table-hover" cellspacing="0">
+  <thead>
+    <tr>
+      <th>Ім'я</th>
+      <th>Прізвище</th>
+      <th>Логін</th>
+      <th>Електронна пошта</th>
+      <th>Номер</th>
+      <th>Редагувати</th>
+      <th>Видалити</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let userItem of users">
+      <td>{{ userItem.firstName }}</td>
+      <td>{{ userItem.lastName }}</td>
+      <td>{{ userItem.login }}</td>
+      <td>{{ userItem.email }}</td>
+      <td>{{ userItem.phoneNumber }}</td>
+      <td>
+        <button mat-button  data-toggle="modal" data-target="#editModal"><i class="fas fa-edit"></i></button>
+      <td>
+        <button mat-button  data-toggle="modal" data-target="#editModal"><i class="fas fa-edit"></i></button>
+    </td>
+      <td>
+        <button mat-button  data-toggle="modal" data-target="#deleteModal" ><i class="fas fa-trash-alt"></i></button>
+      </td>
+    </tr>
+  </tbody>
+  <button mat-button  data-toggle="modal" data-target="#deleteModal" ><i class="fas fa-trash-alt"></i></button>
+</table>
+
+ <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Ви дійсно хочите видалити?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрити</button>
+        <button type="button" class="btn btn-primary" (click)="deleteItem(user.id)">Видалити</button>
+      </div>
+    </div>
+  </div>
+</div>

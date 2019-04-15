@@ -1,16 +1,23 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { HomeComponent } from './modules/core/components/home/home.component';
 import { LoginComponent } from './modules/core/components/login/login.component';
+import { LoginGuard } from './modules/core/guards/login.guard';
+import { AdminGuard } from './modules/core/guards/admin.guard';
 
 const routes: Routes = [
   {
-    path: '',
-    component: HomeComponent
+    path: 'login',
+    component: LoginComponent,
+    canActivate: [LoginGuard]
   },
   {
-    path: 'login',
-    component: LoginComponent
+    path: 'admin',
+    loadChildren: './modules/admin/admin.module#AdminModule'
+   // canActivate: [AdminGuard]
+  },
+  {
+    path: '**',
+    redirectTo: '/login'
   }
 ];
 
