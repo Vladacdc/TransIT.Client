@@ -1,4 +1,4 @@
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#CreateModal"><i class="fas fa-plus"></i> Створити користувача </button>
+<!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#CreateModal"><i class="fas fa-plus"></i> Створити користувача </button>
 
 <div class="modal fade" id="CreateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -46,9 +46,7 @@
       </div>
     </div>
   </div>
-</div>
-
-
+</div> -->
 
 <table class="table table-hover" cellspacing="0">
   <thead>
@@ -69,25 +67,21 @@
       <td>{{ userItem.login }}</td>
       <td>{{ userItem.email }}</td>
       <td>{{ userItem.phoneNumber }}</td>
-      <td>
+      <!-- <td>
         <button mat-button  data-toggle="modal" data-target="#editModal" data-whatever="{{userItem}}"><i class="fas fa-edit"></i></button>
         <button mat-button  data-toggle="modal" data-target="#deleteModal" ><i class="fas fa-trash-alt"></i></button>
-      </td>
+      </td> -->
+      <td><button></button></td>
+      <td><button></button></td>
     </tr>
   </tbody>
-
+  <!--
   <button mat-button  data-toggle="modal" data-target="#editModal"><i class="fas fa-edit"></i></button>
 
-  <button mat-button  data-toggle="modal" data-target="#deleteModal" ><i class="fas fa-trash-alt"></i></button>
-
+  <button mat-button  data-toggle="modal" data-target="#deleteModal" ><i class="fas fa-trash-alt"></i></button> -->
 </table>
 
-
-
-
-
-
-<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<!-- <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -167,4 +161,4 @@
     modal.find('.modal-body').val(user);
   })
 
-</script>
+</script> -->
