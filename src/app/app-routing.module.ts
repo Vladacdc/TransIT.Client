@@ -12,7 +12,8 @@ const routes: Routes = [
   },
   {
     path: 'admin',
-    loadChildren: './modules/admin/admin.module#AdminModule'
+    loadChildren: './modules/admin/admin.module#AdminModule',
+    canActivate: [AdminGuard]
   },
   {
     path: '**',
