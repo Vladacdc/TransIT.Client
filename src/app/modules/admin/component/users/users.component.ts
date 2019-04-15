@@ -25,7 +25,6 @@ export class UsersComponent implements OnInit {
   users: User[];
   roleList: Role[];
   user: User = Object.assign({}, DEFAULT_USER);
-
   dataTable: any;
 
   private readonly tableParams = {
@@ -53,7 +52,11 @@ export class UsersComponent implements OnInit {
     this.user = Object.assign({}, DEFAULT_USER);
 
   }
+  editItem() {
+    this.service.updateEntity(this.user);
+  }
 
-  editItem(row: any) {
+  deleteItem(id: number) {
+    this.service.deleteEntity(id);
   }
 }
