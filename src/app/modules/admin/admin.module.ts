@@ -22,6 +22,7 @@ import { MalfunSubgroupComponent } from './component/malfunctions/malfun-subgrou
 import { CoreModule } from '../core/core.module';
 import { RoleService } from './services/role.service';
 import { UserService } from './services/user.service';
+import { AdminNavbarComponent } from './component/admin-navbar/admin-navbar.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import { UserService } from './services/user.service';
     ActionComponent,
     MalfuncComponent,
     MalfuncGroupComponent,
-    MalfunSubgroupComponent
+    MalfunSubgroupComponent,
+    AdminNavbarComponent
   ],
   exports: [AdminComponent, MatDialogModule],
   imports: [

@@ -11,12 +11,11 @@ import { NavbarComponent } from './components/navbar/navbar.component';
 import { LoginComponent } from './components/login/login.component';
 import { HttpErrorInterceptor } from './interceptors/http-error.interceptor';
 import { HttpAuthInterceptor } from './interceptors/http-auth.interceptor';
-import { AdminnavbarComponent } from './components/navbar/adminnavbar/adminnavbar.component';
 import { CrudService } from './services/crud.service';
 import { SpinnerService } from './services/spinner.service';
 
 @NgModule({
-  declarations: [HomeComponent, NavbarComponent, LoginComponent, AdminnavbarComponent],
+  declarations: [HomeComponent, NavbarComponent, LoginComponent],
   imports: [CommonModule, NgbModule, ReactiveFormsModule, RouterModule, NgBootstrapFormValidationModule, HttpClientModule],
   exports: [HomeComponent, NavbarComponent, LoginComponent],
   providers: [
