@@ -17,7 +17,7 @@ export class UsersComponent implements OnInit {
   private readonly tableParams = {
     columnDefs: [
       {
-        targets: [5, 6],
+        targets: [5, 5],
         orderable: false
       }
     ]
@@ -26,12 +26,6 @@ export class UsersComponent implements OnInit {
               private serviceRole: RoleService,
               private chRef: ChangeDetectorRef) {}
   ngOnInit() {
-    $('#tableUkr').DataTable({
-      language: {
-        url: '//cdn.datatables.net/plug-ins/1.10.19/i18n/Ukrainian.json'
-      }
-    });
-
     this.serviceRole.getEntities().subscribe(role => (this.roleList = role));
     this.service.getEntities().subscribe(users => {
       this.users = users;

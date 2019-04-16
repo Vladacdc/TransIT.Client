@@ -27,11 +27,11 @@
           </div>
           <div class="form-group">
             <label>Пошта</label>
-            <input type="text" class="form-control" formControlName="email" placeholder="Введіть пошту">
+            <input type= "email" class="form-control" formControlName="email" placeholder="Введіть пошту">
           </div>
           <div class="form-group">
             <label>Номер телефону</label>
-            <input type="text" class="form-control" formControlName="phoneNumber" placeholder="Введіть номер телефону">
+            <input type="number" class="form-control" formControlName="phoneNumber" placeholder="Введіть номер телефону">
           </div>
           <div class="form-group">
             <label>Пароль</label>
@@ -42,7 +42,7 @@
 
             <select class="form-control" formControlName="role">
               <option hidden value="" disabled selected>-</option>
-              <option *ngFor="let role of roleList" [value]="">{{role}}</option>
+              <option *ngFor="let role of roleList" [value]="">{{role.name}}</option>
             </select>
           </div>
           <button hidden type="submit" #submit></button>

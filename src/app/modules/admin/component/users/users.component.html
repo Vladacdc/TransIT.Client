@@ -1,5 +1,5 @@
 <app-create-user></app-create-user>
-<table id="tableUkr" class="table table-hover" cellspacing="0">
+<table id="example" class="display">
   <thead>
     <tr>
       <th>Ім'я</th>
@@ -8,7 +8,6 @@
       <th>Електронна пошта</th>
       <th>Номер</th>
       <th>Редагувати</th>
-      <th>Видалити</th>
     </tr>
   </thead>
   <tbody>
@@ -21,26 +20,6 @@
       <td>
         <button mat-button  data-toggle="modal" data-target="#editModal"><i class="fas fa-edit"></i></button>
       </td>
-      <td>
-        <button mat-button  data-toggle="modal" data-target="#deleteModal" ><i class="fas fa-trash-alt"></i></button>
-      </td>
     </tr>
   </tbody>
 </table>
-
- <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Ви дійсно хочите видалити?</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрити</button>
-        <button type="button" class="btn btn-primary" (click)="deleteItem(user.id)">Видалити</button>
-      </div>
-    </div>
-  </div>
-</div>

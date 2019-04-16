@@ -57,6 +57,6 @@ export class CreateUserComponent implements OnInit {
     return this.roleList.map(r => r.name);
   }
   clickSubmit(submit: HTMLButtonElement) {
-    submit.click();
+
   }
 }
