@@ -7,7 +7,7 @@ import { AdminComponent } from './component/admin/admin.component';
 import { UsersComponent } from './component/users/users.component';
 import { CreateUserComponent } from './component/create-user/create-user.component';
 
-import { FormsModule } from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { DataTablesModule } from 'angular-datatables';
 import { MatDialogModule } from '@angular/material/dialog';
 import { VehiclesComponent } from './component/vehicles/vehicles.component';
@@ -53,7 +53,8 @@ import { AdminNavbarComponent } from './component/admin-navbar/admin-navbar.comp
     MatInputModule,
     MatButtonModule,
     HttpClientModule,
-    MatTabsModule
+    MatTabsModule,
+    ReactiveFormsModule
   ],
   providers: [RoleService, UserService]
 })
