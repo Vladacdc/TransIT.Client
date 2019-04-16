@@ -1,10 +1,10 @@
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#CreateModal"><i class="fas fa-plus"></i> Створити користувача </button>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#CreateModal"><i class="fas fa-plus"></i> Створити транспорт </button>
 
 <div class="modal fade" id="CreateModal" tabindex="-1" vehicleType="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" vehicleType="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Створити користувача</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Створити транспорт</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -74,15 +74,12 @@
       <td>{{ vehicleItem.model}}</td>
       <td>
         <button mat-button  data-toggle="modal" data-target="#editModal"><i class="fas fa-edit"></i></button>
-      <td>
-        <button mat-button  data-toggle="modal" data-target="#editModal"><i class="fas fa-edit"></i></button>
-    </td>
+      </td>
       <td>
         <button mat-button  data-toggle="modal" data-target="#deleteModal" ><i class="fas fa-trash-alt"></i></button>
       </td>
     </tr>
   </tbody>
-  <button mat-button  data-toggle="modal" data-target="#deleteModal" ><i class="fas fa-trash-alt"></i></button>
 </table>
 
  <div class="modal fade" id="deleteModal" tabindex="-1" vehicleType="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
