@@ -6,8 +6,8 @@ import { AdminRoutingModule } from './admin-routing.module';
 import { AdminComponent } from './component/admin/admin.component';
 import { UsersComponent } from './component/users/users.component';
 import { CreateUserComponent } from './component/create-user/create-user.component';
-
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+
 import { DataTablesModule } from 'angular-datatables';
 import { MatDialogModule } from '@angular/material/dialog';
 import { VehiclesComponent } from './component/vehicles/vehicles.component';
@@ -38,7 +38,7 @@ import { AdminNavbarComponent } from './component/admin-navbar/admin-navbar.comp
     MalfunSubgroupComponent,
     AdminNavbarComponent
   ],
-  exports: [AdminComponent, MatDialogModule],
+  exports: [AdminComponent],
   imports: [
     CommonModule,
     CoreModule,
@@ -53,8 +53,8 @@ import { AdminNavbarComponent } from './component/admin-navbar/admin-navbar.comp
     MatInputModule,
     MatButtonModule,
     HttpClientModule,
-    MatTabsModule,
     ReactiveFormsModule
+
   ],
   providers: [RoleService, UserService]
 })
