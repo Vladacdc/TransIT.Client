@@ -14,6 +14,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 export class CreateUserComponent implements OnInit {
   roleList: Role[] = [];
+  user: User;
   private userForm: FormGroup;
 
   constructor(
@@ -52,11 +53,12 @@ export class CreateUserComponent implements OnInit {
         password: form.password as string,
         role: { id: this.roleList[this.roleName.findIndex(value => value === form.role)].id, name: form.role as string}
       };
+    this.user = user;
   }
   get roleName(): string[] {
     return this.roleList.map(r => r.name);
   }
-  clickSubmit(submit: HTMLButtonElement) {
-
+  clickSubmit() {
+    this.serviceUser.addEntity(this.user).subscribe();
   }
 }
