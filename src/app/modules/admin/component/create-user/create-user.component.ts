@@ -45,20 +45,21 @@ export class CreateUserComponent implements OnInit {
     const form = this.userForm.value;
     const user: User = {
         id: 0,
-        firstName: form.firstName as string,
-        lastName: form.lastName as string,
-        phoneNumber: form.phoneNumber as number,
+        firstName:  form.firstName as string,
+        lastName:  form.lastName as string,
+        phoneNumber:  form.phoneNumber as number,
         login: form.login as string,
-        email: form.email as string,
-        password: form.password as string,
-        role: { id: this.roleList[this.roleName.findIndex(value => value === form.role)].id, name: form.role as string}
+        email:  form.email as string,
+        password:  form.password as string,
+        role: this.roleList[1]
       };
-    this.user = user;
+    this.serviceUser.addEntity(user).subscribe();
   }
   get roleName(): string[] {
     return this.roleList.map(r => r.name);
   }
-  clickSubmit() {
-    this.serviceUser.addEntity(this.user).subscribe();
+  clickSubmit(button: HTMLButtonElement) {
+    button.click();
+    this.onSubmit();
   }
 }
