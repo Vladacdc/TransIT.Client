@@ -17,7 +17,7 @@ export class UsersComponent implements OnInit {
   private readonly tableParams = {
     columnDefs: [
       {
-        targets: [5, 5],
+        targets: [6, 7],
         orderable: false
       }
     ]

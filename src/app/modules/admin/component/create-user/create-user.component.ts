@@ -3,7 +3,7 @@ import { User } from '../../models/user/user';
 import { Role } from '../../models/role/role';
 import { RoleService } from '../../services/role.service';
 import { UserService } from '../../services/user.service';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-create-user',
@@ -28,7 +28,7 @@ export class CreateUserComponent implements OnInit {
       {
         lastName: '',
         firstName: '',
-        phoneNumber: [0],
+        phoneNumber: 0,
         login: ['', Validators.required],
         password: ['', Validators.required],
         email: ['', Validators.email],
@@ -37,29 +37,24 @@ export class CreateUserComponent implements OnInit {
     );
     this.serviceRole.getEntities().subscribe(data => (this.roleList = data));
   }
-
-  onSubmit() {
+  get roleName(): string[] {
+    return this.roleList.map(r => r.name);
+  }
+  clickSubmit() {
     if (this.userForm.invalid) {
       return;
     }
     const form = this.userForm.value;
     const user: User = {
-        id: 0,
-        firstName:  form.firstName as string,
-        lastName:  form.lastName as string,
-        phoneNumber:  form.phoneNumber as number,
-        login: form.login as string,
-        email:  form.email as string,
-        password:  form.password as string,
-        role: this.roleList[1]
-      };
+      id: 0,
+      firstName:  form.firstName as string,
+      lastName:  form.lastName as string,
+      phoneNumber:  form.phoneNumber as number,
+      login: form.login as string,
+      email:  form.email as string,
+      password:  form.password as string,
+      role: this.roleList[this.roleName.findIndex(r => r === form.role)]
+    };
     this.serviceUser.addEntity(user).subscribe();
-  }
-  get roleName(): string[] {
-    return this.roleList.map(r => r.name);
-  }
-  clickSubmit(button: HTMLButtonElement) {
-    button.click();
-    this.onSubmit();
   }
 }

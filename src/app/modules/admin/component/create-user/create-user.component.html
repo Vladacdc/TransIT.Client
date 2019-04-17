@@ -12,7 +12,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <form [formGroup]="userForm" (validSubmit)="onSubmit()">
+        <form [formGroup]="userForm">
           <div class="form-group">
             <label>Прізвище</label>
             <input type="text" class="form-control" formControlName="lastName" placeholder="Введіть прізвище">
@@ -27,15 +27,16 @@
           </div>
           <div class="form-group">
             <label>Пошта</label>
-            <input type= "email" class="form-control" formControlName="email" placeholder="Введіть пошту">
+            <input type="email" class="form-control" formControlName="email" placeholder="Введіть пошту">
           </div>
           <div class="form-group">
             <label>Номер телефону</label>
-            <input type="number" class="form-control" formControlName="phoneNumber" placeholder="Введіть номер телефону">
+            <input type="tel" class="form-control" formControlName="phoneNumber"
+                   placeholder="Введіть номер телефону">
           </div>
           <div class="form-group">
             <label>Пароль</label>
-            <input type="text" class="form-control" formControlName="password" placeholder="Введіть пароль">
+            <input type= "password" class="form-control" formControlName="password" placeholder="Введіть пароль">
           </div>
           <div class="form-group">
             <label>Несправність</label>
@@ -50,7 +51,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрити</button>
-        <button type="button" class="btn btn-primary" (click)="clickSubmit(submit)" form="userForm" [disabled]="userForm.invalid">
+        <button type="button" class="btn btn-primary" (click)="clickSubmit()" [disabled]="userForm.invalid">
           Створити
         </button>
       </div>
