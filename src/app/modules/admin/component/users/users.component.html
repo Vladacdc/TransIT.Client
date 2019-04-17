@@ -1,4 +1,4 @@
-<app-create-user></app-create-user>
+<app-create-user [users]="users"></app-create-user>
 <table id="example" class="display">
   <thead>
     <tr>
@@ -21,10 +21,11 @@
       <td>{{ userItem.phoneNumber }}</td>
       <td>{{ userItem.role.name }}</td>
       <td>
-        <button mat-button  data-toggle="modal" data-target="#editModal"><i class="fas fa-edit"></i></button>
+        <button mat-button  data-toggle="modal" data-target="#editModal"><i class="fas fa-edit" (click)="adduser(userItem)"></i></button>
       </td>
       <td>
-        <app-dialog></app-dialog>
+        <button mat-button  data-toggle="modal" data-target="#deleteModal"  (click)="adduser(userItem)"><i class="fas fa-trash-alt"></i></button>
+        <app-dialog [user]="user" [users]="users"></app-dialog>
       </td>
     </tr>
   </tbody>

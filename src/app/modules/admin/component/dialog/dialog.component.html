@@ -1,6 +1,3 @@
-<!-- Button trigger modal -->
-<button mat-button  data-toggle="modal" data-target="#deleteModal"><i class="fas fa-trash-alt"></i></button>
-
 <!-- Modal -->
 <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" role="document">
@@ -15,8 +12,8 @@
         Видалені дані не підлягають відновленню!
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">НІ</button>
-        <button type="button" class="btn btn-primary">Видалити</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" #close>НІ</button>
+        <button type="button" class="btn btn-primary" (click)="delete()">Видалити</button>
       </div>
     </div>
   </div>

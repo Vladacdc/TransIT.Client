@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import { User } from '../../models/user/user';
 import { Role } from '../../models/role/role';
 import { RoleService } from '../../services/role.service';
@@ -14,8 +14,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 export class CreateUserComponent implements OnInit {
   roleList: Role[] = [];
-  user: User;
+  @Input() users: User[];
   private userForm: FormGroup;
+  @ViewChild('close') closeDiv: ElementRef;
 
   constructor(
     private serviceRole: RoleService,
@@ -56,5 +57,7 @@ export class CreateUserComponent implements OnInit {
       role: this.roleList[this.roleName.findIndex(r => r === form.role)]
     };
     this.serviceUser.addEntity(user).subscribe();
+    this.users.push(user);
+    this.closeDiv.nativeElement.click();
   }
 }

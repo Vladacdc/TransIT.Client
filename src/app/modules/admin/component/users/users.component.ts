@@ -13,6 +13,7 @@ export class UsersComponent implements OnInit {
   users: User[];
   roleList: Role[];
   dataTable: any;
+  user: User;
 
   private readonly tableParams = {
     columnDefs: [
@@ -35,4 +36,7 @@ export class UsersComponent implements OnInit {
     });
   }
 
+  adduser(userItem: User) {
+    this.user = userItem;
+  }
 }

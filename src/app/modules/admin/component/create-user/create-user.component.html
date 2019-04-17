@@ -1,5 +1,5 @@
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createUser">
-  Створити заявку
+  Додати користувача
 </button>
 
 <div class="modal fade" id="createUser" tabindex="-1" role="dialog" aria-labelledby="CreateUser" aria-hidden="true">
@@ -39,7 +39,7 @@
             <input type= "password" class="form-control" formControlName="password" placeholder="Введіть пароль">
           </div>
           <div class="form-group">
-            <label>Несправність</label>
+            <label>Роль</label>
 
             <select class="form-control" formControlName="role">
               <option hidden value="" disabled selected>-</option>
@@ -50,7 +50,7 @@
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрити</button>
+        <button #close type="button" class="btn btn-secondary" data-dismiss="modal">Закрити</button>
         <button type="button" class="btn btn-primary" (click)="clickSubmit()" [disabled]="userForm.invalid">
           Створити
         </button>
