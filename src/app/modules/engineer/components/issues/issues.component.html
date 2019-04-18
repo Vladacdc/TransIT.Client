@@ -1,0 +1,28 @@
+<table id="issue-table" class="table table-striped table-bordered" >
+  <thead>
+  <tr>
+    <th>Стан</th>
+    <th>Поломка</th>
+    <th>Гарантія</th>
+    <th>Транспорт</th>
+    <th>Відповідальний</th>
+    <th>Опис</th>
+    <th>Створено</th>
+    <th>Редаговано</th>
+    <th>Вибрати</th>
+  </tr>
+  </thead>
+  <tbody *ngFor="let item of issues" >
+  <tr (click)="issue = item">
+    <td>{{ item.state.name }}</td>
+    <td>{{ item.malfunction.name }}</td>
+    <td>{{ item.warranty }}</td>
+    <td>{{ item.vehicle.inventoryId }}</td>
+    <td>{{ item.assignedTo.login }}</td>
+    <td>{{ item.summary }}</td>
+    <td>{{ item.createDate }}</td>
+    <td>{{ item.modDate }}</td>
+    <td class="btn btn-primary" (click)="selectItem(item)">Вибрати</td>
+  </tr>
+  </tbody>
+</table>
