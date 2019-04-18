@@ -1,14 +1,18 @@
-.caption{
+.caption {
   caption-side: bottom;
   align-items: center;
   color: black;
   font-size: 2rem;
 }
-.captBox{
+.captBox {
   width: 100%;
 }
-.color
-{
+.color {
   color: darkred;
 }
 
+.center-cells {
+  td {
+    text-align: center;
+  }
+}

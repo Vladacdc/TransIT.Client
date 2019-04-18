@@ -1,76 +1,58 @@
-import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {RoleService} from '../../services/role.service';
-import {UserService} from '../../services/user.service';
-import {Role} from '../../models/role/role';
-import {User} from '../../models/user/user';
+import { Component, ElementRef, Input, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { RoleService } from '../../services/role.service';
+import { UserService } from '../../services/user.service';
+import { Role } from '../../models/role/role';
+import { User } from '../../models/user/user';
 
 @Component({
   selector: 'app-edit-user',
   templateUrl: './edit-user.component.html',
   styleUrls: ['./edit-user.component.scss']
 })
-
 export class EditUserComponent implements OnInit {
   @ViewChild('close') closeDiv: ElementRef;
-  @Input() user: User;
-  @Input() users: User[];
+  @Input()
+  set user(user: User) {
+    if (!user) {
+      return;
+    }
+    this.userForm.patchValue({ ...user, role: user.role.transName });
+  }
+  @Output() updateUser = new EventEmitter<User>();
 
   userForm: FormGroup;
-  roleList: Role[] = [];
+  roles: Role[] = [];
 
-  constructor(private formBuilder: FormBuilder,
-              private serviceRole: RoleService,
-              private serviceUser: UserService) {}
+  constructor(private formBuilder: FormBuilder, private serviceRole: RoleService, private serviceUser: UserService) {}
 
   ngOnInit() {
-    this.userForm = this.formBuilder.group(
-      {
-        lastName: '',
-        firstName: '',
-        phoneNumber: 0,
-        login: ['', Validators.required],
-        email: ['', Validators.email],
-        role: ['', Validators.required]
-      }
-    );
-    this.serviceRole.getEntities().subscribe(data => (this.roleList = data));
+    this.userForm = this.formBuilder.group({
+      id: '',
+      lastName: '',
+      firstName: '',
+      phoneNumber: 0,
+      login: ['', Validators.required],
+      email: ['', Validators.email],
+      role: ['', Validators.required]
+    });
+    this.serviceRole.getEntities().subscribe(data => (this.roles = data));
   }
-getData() {
-  this.userForm = this.formBuilder.group(
-    {
-      lastName: this.user.lastName,
-      firstName: this.user.firstName,
-      phoneNumber: this.user.phoneNumber,
-      login: this.user.login,
-      email: this.user.email,
-      role: this.user.role
-    }
-  );
-}
-  UpdateData() {
+  updateData() {
     if (this.userForm.invalid) {
       return;
     }
     this.closeDiv.nativeElement.click();
     const form = this.userForm.value;
     const user: User = {
-      id: this.user.id as number,
-      firstName:  form.firstName as string,
-      lastName:  form.lastName as string,
-      phoneNumber:  form.phoneNumber as number,
+      id: form.id as number,
+      firstName: form.firstName as string,
+      lastName: form.lastName as string,
+      phoneNumber: form.phoneNumber as number,
       login: form.login as string,
-      email:  form.email as string,
-      password:  '',
-      role: this.roleList[this.roleName.findIndex(r => r === form.role)]
+      email: form.email as string,
+      role: this.roles.find(r => r.transName === form.role)
     };
-    this.serviceUser.updateEntity(user).subscribe();
-    this.users.push(user);
-    for (let i = 0; i < this.users.length; i++) {
-      if (this.users[i].id === this.user.id) {
-        this.users.splice(i, 1);
-      }
-    }
+    this.serviceUser.updateEntity(user).subscribe(_ => this.updateUser.next(user));
   }
-  get roleName(): string[] {return this.roleList.map(r => r.name); }
 }

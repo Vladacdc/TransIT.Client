@@ -1,9 +1,13 @@
-<app-create-user [users]="users"></app-create-user>
-<br>
+<app-create-user (createUser)="addUser($event)"></app-create-user>
+<app-edit-user [user]="user" (updateUser)="updateUser($event)"></app-edit-user>
+<app-dialog [user]="user" (deleteUser)="deleteUser($event)"></app-dialog>
+<br />
 <div class="captBox col-md-4 offset-5">
-  <caption class="caption"> Користувачі </caption>
+  <caption class="caption">
+    Користувачі
+  </caption>
 </div>
-<table id="userTable" class="display table-striped table-responsive-lg table-bordered" >
+<table id="userTable" class="display table-striped table-responsive-lg table-bordered">
   <thead>
     <tr>
       <th>Ім'я</th>
@@ -17,22 +21,22 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let userItem of users">
+    <tr class="center-cells" *ngFor="let userItem of users">
       <td>{{ userItem.firstName }}</td>
       <td>{{ userItem.lastName }}</td>
       <td>{{ userItem.login }}</td>
       <td>{{ userItem.email }}</td>
       <td>{{ userItem.phoneNumber }}</td>
-      <td>{{ userItem.role.name }}</td>
+      <td>{{ userItem.role.transName }}</td>
       <td>
-        <button mat-button data-toggle="modal" data-target="#editUser" dataclass="btn btn-primary"  (click)="adduser(userItem)">
+        <button data-toggle="modal" data-target="#editUser" class="btn" (click)="selectUser(userItem)">
           <i class="fas fa-edit"></i>
         </button>
-        <app-edit-user [user]="user" [users]="users"></app-edit-user>
       </td>
       <td>
-        <button mat-button data-toggle="modal" data-target="#deleteModal"(click)="adduser(userItem)"><i class="fas fa-trash-alt color"></i></button>
-        <app-dialog [user]="user" [users]="users" ></app-dialog>
+        <button data-toggle="modal" data-target="#deleteModal" class="btn" (click)="selectUser(userItem)">
+          <i class="fas fa-trash-alt color"></i>
+        </button>
       </td>
     </tr>
   </tbody>

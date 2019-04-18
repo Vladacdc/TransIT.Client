@@ -6,20 +6,10 @@ import { AdminRoutingModule } from './admin-routing.module';
 import { AdminComponent } from './component/admin/admin.component';
 import { UsersComponent } from './component/users/users.component';
 import { CreateUserComponent } from './component/create-user/create-user.component';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { DataTablesModule } from 'angular-datatables';
-import { MatDialogModule } from '@angular/material/dialog';
 import { VehiclesComponent } from './component/vehicles/vehicles.component';
-import {
-  MatButtonModule,
-  MatCardModule,
-  MatFormFieldModule,
-  MatPaginatorModule,
-  MatSortModule,
-  MatTableModule
-} from '@angular/material';
-import { MatInputModule } from '@angular/material';
 import { DialogComponent } from './component/dialog/dialog.component';
 import { MalfunctionsComponent } from './component/malfunctions/malfunctions.component';
 import { ActionComponent } from './component/action/action.component';
@@ -48,24 +38,7 @@ import { EditUserComponent } from './component/edit-user/edit-user.component';
     EditUserComponent
   ],
   exports: [AdminComponent],
-  imports: [
-    CommonModule,
-    CoreModule,
-    AdminRoutingModule,
-    FormsModule,
-    DataTablesModule,
-    MatDialogModule,
-    MatTableModule,
-    MatSortModule,
-    MatPaginatorModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatButtonModule,
-    HttpClientModule,
-    ReactiveFormsModule,
-    MatCardModule
-
-  ],
+  imports: [CommonModule, CoreModule, AdminRoutingModule, FormsModule, DataTablesModule, HttpClientModule, ReactiveFormsModule],
   providers: [RoleService, UserService]
 })
 export class AdminModule {}
