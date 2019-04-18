@@ -1,9 +1,10 @@
 import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from '../../models/user/user';
 import { Role } from '../../models/role/role';
 import { RoleService } from '../../services/role.service';
 import { UserService } from '../../services/user.service';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 
 @Component({
   selector: 'app-create-user',
@@ -13,10 +14,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 
 export class CreateUserComponent implements OnInit {
-  roleList: Role[] = [];
-  @Input() users: User[];
-  private userForm: FormGroup;
   @ViewChild('close') closeDiv: ElementRef;
+  @Input() users: User[];
+  userForm: FormGroup;
+  roleList: Role[] = [];
 
   constructor(
     private serviceRole: RoleService,
@@ -38,9 +39,6 @@ export class CreateUserComponent implements OnInit {
     );
     this.serviceRole.getEntities().subscribe(data => (this.roleList = data));
   }
-  get roleName(): string[] {
-    return this.roleList.map(r => r.name);
-  }
   clickSubmit() {
     if (this.userForm.invalid) {
       return;
@@ -59,5 +57,9 @@ export class CreateUserComponent implements OnInit {
     this.serviceUser.addEntity(user).subscribe();
     this.users.push(user);
     this.closeDiv.nativeElement.click();
+  }
+
+  get roleName(): string[] {
+    return this.roleList.map(r => r.name);
   }
 }

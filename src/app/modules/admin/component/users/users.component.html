@@ -3,7 +3,7 @@
 <div class="captBox col-md-4 offset-5">
   <caption class="caption"> Користувачі </caption>
 </div>
-<table id="userTable" class="display table-striped table-responsive-lg" >
+<table id="userTable" class="display table-striped table-responsive-lg table-bordered" >
   <thead>
     <tr>
       <th>Ім'я</th>
@@ -25,13 +25,13 @@
       <td>{{ userItem.phoneNumber }}</td>
       <td>{{ userItem.role.name }}</td>
       <td>
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editUser" (click)="adduser(userItem)">
+        <button mat-button data-toggle="modal" data-target="#editUser"   class="btn btn-primary"  (click)="adduser(userItem)">
           <i class="fas fa-edit"></i>
         </button>
         <app-edit-user [user]="user" [users]="users"></app-edit-user>
       </td>
       <td>
-        <button mat-button  data-toggle="modal" data-target="#deleteModal"  (click)="adduser(userItem)"><i class="fas fa-trash-alt"></i></button>
+        <button mat-button  data-toggle="modal" data-target="#deleteModal"(click)="adduser(userItem)"><i class="fas fa-trash-alt"></i></button>
         <app-dialog [user]="user" [users]="users"></app-dialog>
       </td>
     </tr>

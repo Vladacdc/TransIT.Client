@@ -1,19 +1,20 @@
 import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
 import {UserService} from '../../services/user.service';
 import {User} from '../../models/user/user';
+
 @Component({
   selector: 'app-dialog',
   templateUrl: './dialog.component.html',
   styleUrls: ['./dialog.component.scss']
 })
+
 export class DialogComponent implements OnInit {
   @ViewChild('close') closeDiv: ElementRef;
   @Input() user: User;
   @Input() users: User[];
   constructor(private service: UserService, ) { }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   delete() {
     console.log(this.user);

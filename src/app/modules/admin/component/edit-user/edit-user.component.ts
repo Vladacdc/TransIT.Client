@@ -10,18 +10,18 @@ import {User} from '../../models/user/user';
   templateUrl: './edit-user.component.html',
   styleUrls: ['./edit-user.component.scss']
 })
+
 export class EditUserComponent implements OnInit {
-  private userForm: FormGroup;
-  roleList: Role[] = [];
+  @ViewChild('close') closeDiv: ElementRef;
   @Input() user: User;
   @Input() users: User[];
-  @ViewChild('close') closeDiv: ElementRef;
 
-  lastName: string;
+  userForm: FormGroup;
+  roleList: Role[] = [];
+
   constructor(private formBuilder: FormBuilder,
               private serviceRole: RoleService,
-              private serviceUser: UserService) {
-  }
+              private serviceUser: UserService) {}
 
   ngOnInit() {
     this.userForm = this.formBuilder.group(
@@ -36,11 +36,20 @@ export class EditUserComponent implements OnInit {
       }
     );
     this.serviceRole.getEntities().subscribe(data => (this.roleList = data));
-
   }
-  get roleName(): string[] {
-    return this.roleList.map(r => r.name);
-  }
+getData() {
+  this.userForm = this.formBuilder.group(
+    {
+      lastName: this.user.lastName,
+      firstName: this.user.firstName,
+      phoneNumber: this.user.phoneNumber,
+      login: this.user.phoneNumber,
+      password: this.user.password,
+      email: this.user.email,
+      role: this.user.role
+    }
+  );
+}
   UpdateData() {
     if (this.userForm.invalid) {
       return;
@@ -56,13 +65,14 @@ export class EditUserComponent implements OnInit {
       password:  form.password as string,
       role: this.roleList[this.roleName.findIndex(r => r === form.role)]
     };
-    this.serviceUser.updateEntity(user).subscribe();
+    this.serviceUser.updateEntity(user).subscribe(data => {
     this.users.push(user);
     for (let i = 0; i < this.users.length; i++) {
       if (this.users[i].id === this.user.id) {
         this.users.splice(i, 1);
       }
-    }
+    }});
     this.closeDiv.nativeElement.click();
   }
+  get roleName(): string[] {return this.roleList.map(r => r.name); }
 }
