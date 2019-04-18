@@ -31,8 +31,7 @@ export class IssuesComponent implements OnInit {
     private issueService: IssueService,
     private issueLogService: IssuelogService,
     private actionTypeService: ActionTypeService,
-    private stateService: StateService,
-    private router: Router
+    private stateService: StateService
   ) {
     this.issue = new Issue();
   }
@@ -74,11 +73,6 @@ export class IssuesComponent implements OnInit {
       //   datatype: 'application/json'
       // }
     });
-  }
-
-  public selectItem(item: Issue): void {
-    this.issue = item;
-    this.router.navigate(['issue-logs']);
   }
 
   public createItem(): void {

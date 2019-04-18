@@ -10,7 +10,7 @@ import { SpinnerService } from './spinner.service';
 export class CrudService<T extends TEntity> {
   protected readonly serviceUrl: string;
 
-  constructor(protected http: HttpClient, private spinner: SpinnerService) {}
+  constructor(protected http: HttpClient, protected spinner: SpinnerService) {}
 
   getEntities(): Observable<T[]> {
     this.spinner.show();

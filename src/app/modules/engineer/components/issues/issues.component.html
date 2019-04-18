@@ -12,7 +12,7 @@
     <th>Вибрати</th>
   </tr>
   </thead>
-  <tbody *ngFor="let item of issues" >
+  <tbody *ngFor="let item of issues; let idx = index" >
   <tr (click)="issue = item">
     <td>{{ item.state.name }}</td>
     <td>{{ item.malfunction.name }}</td>
@@ -22,7 +22,7 @@
     <td>{{ item.summary }}</td>
     <td>{{ item.createDate }}</td>
     <td>{{ item.modDate }}</td>
-    <td class="btn btn-primary" (click)="selectItem(item)">Вибрати</td>
+    <td class="btn btn-primary" [routerLink]="['issue-logs', idx]">Вибрати</td>
   </tr>
   </tbody>
 </table>

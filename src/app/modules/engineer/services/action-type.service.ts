@@ -7,7 +7,7 @@ import {ActionType} from '../../core/models/actionType';
 
 @Injectable()
 export class ActionTypeService extends CrudService<ActionType> {
-  protected readonly serviceUrl = `${environment.apiUrl}/issue`;
+  protected readonly serviceUrl = `${environment.apiUrl}/actiontype`;
 
   constructor(
     http: HttpClient,
