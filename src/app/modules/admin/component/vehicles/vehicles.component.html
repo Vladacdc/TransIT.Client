@@ -1,4 +1,6 @@
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#CreateModal"><i class="fas fa-plus"></i> Додати транспорт </button>
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#CreateModal">
+  <i class="fas fa-plus"></i> Додати транспорт
+</button>
 
 <div class="modal fade" id="CreateModal" tabindex="-1" vehicleType="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog" vehicleType="document">
@@ -13,33 +15,80 @@
         <form>
           <div class="form-group">
             <label for="vehicleType" class="col-form-label">Тип транспорту:</label>
-            <select name="vehicleType" #vehicleType='ngModel' [(ngModel)]="vehicle.vehicleType"[ngModelOptions]="{standalone:true}" #nameRequired="ngModel" class="form-control">
+            <select
+              name="vehicleType"
+              #vehicleType="ngModel"
+              [(ngModel)]="vehicle.vehicleType"
+              [ngModelOptions]="{ standalone: true }"
+              #nameRequired="ngModel"
+              class="form-control"
+            >
               <option value="0">--Select--</option>
-              <option *ngFor = 'let item of vehicleTypeList' value="{{item.id}}">{{item.name}}</option>
+              <option *ngFor="let item of vehicleTypeList" value="{{ item.id }}">{{ item.name }}</option>
             </select>
           </div>
 
           <div class="form-group">
             <label for="vincode" class="col-form-label">Він-код:</label>
-            <input type="text" class="form-control" id="vincode"  placeholder="Введіть він-код "   [(ngModel)]="vehicle.vincode"[ngModelOptions]="{standalone:true}" #nameRequired="ngModel">
+            <input
+              type="text"
+              class="form-control"
+              id="vincode"
+              placeholder="Введіть він-код "
+              [(ngModel)]="vehicle.vincode"
+              [ngModelOptions]="{ standalone: true }"
+              #nameRequired="ngModel"
+            />
           </div>
           <div class="form-group">
             <label for="inventoryId" class="col-form-label">Інвентарний номер:</label>
-            <input type="text" class="form-control" id="inventoryId" placeholder="Введіть інвентарний номер "   [(ngModel)]="vehicle.inventoryId"[ngModelOptions]="{standalone:true}" #nameRequired="ngModel">
+            <input
+              type="text"
+              class="form-control"
+              id="inventoryId"
+              placeholder="Введіть інвентарний номер "
+              [(ngModel)]="vehicle.inventoryId"
+              [ngModelOptions]="{ standalone: true }"
+              #nameRequired="ngModel"
+            />
           </div>
           <div class="form-group">
             <label for="regNum" class="col-form-label">Реєстраційний номер:</label>
-            <input type="text" class="form-control" id="regNum" placeholder="Введіть реєстраційний номер"  [(ngModel)]="vehicle.regNum"[ngModelOptions]="{standalone:true}" #nameRequired="ngModel" >
+            <input
+              type="text"
+              class="form-control"
+              id="regNum"
+              placeholder="Введіть реєстраційний номер"
+              [(ngModel)]="vehicle.regNum"
+              [ngModelOptions]="{ standalone: true }"
+              #nameRequired="ngModel"
+            />
           </div>
 
           <div class="form-group">
             <label for="brand" class="col-form-label">Бренд:</label>
-            <input type="text" class="form-control" id="brand" placeholder="Введіть бренд" [(ngModel)]="vehicle.brand"[ngModelOptions]="{standalone:true}" #nameRequired="ngModel">
+            <input
+              type="text"
+              class="form-control"
+              id="brand"
+              placeholder="Введіть бренд"
+              [(ngModel)]="vehicle.brand"
+              [ngModelOptions]="{ standalone: true }"
+              #nameRequired="ngModel"
+            />
           </div>
 
           <div class="form-group">
             <label for="model" class="col-form-label">Модель:</label>
-            <input type="text" class="form-control" id="model" placeholder="Введіть модель" [(ngModel)]="vehicle.model"[ngModelOptions]="{standalone:true}" #nameRequired="ngModel">
+            <input
+              type="text"
+              class="form-control"
+              id="model"
+              placeholder="Введіть модель"
+              [(ngModel)]="vehicle.model"
+              [ngModelOptions]="{ standalone: true }"
+              #nameRequired="ngModel"
+            />
           </div>
         </form>
       </div>
@@ -51,7 +100,7 @@
   </div>
 </div>
 
-<table id="example" class="table table-hover" cellspacing="0">
+<table id="vehicles" class="table table-hover" cellspacing="0">
   <thead>
     <tr>
       <th>Тип транспорту</th>
@@ -71,18 +120,18 @@
       <td>{{ vehicleItem.inventoryId }}</td>
       <td>{{ vehicleItem.regNum }}</td>
       <td>{{ vehicleItem.brand }}</td>
-      <td>{{ vehicleItem.model}}</td>
+      <td>{{ vehicleItem.model }}</td>
       <td>
-        <button mat-button  data-toggle="modal" data-target="#editModal"><i class="fas fa-edit"></i></button>
+        <button mat-button data-toggle="modal" data-target="#editModal"><i class="fas fa-edit"></i></button>
       </td>
       <td>
-        <button mat-button  data-toggle="modal" data-target="#deleteModal" ><i class="fas fa-trash-alt"></i></button>
+        <button mat-button data-toggle="modal" data-target="#deleteModal"><i class="fas fa-trash-alt"></i></button>
       </td>
     </tr>
   </tbody>
 </table>
 
- <div class="modal fade" id="deleteModal" tabindex="-1" vehicleType="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal fade" id="deleteModal" tabindex="-1" vehicleType="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" vehicleType="document">
     <div class="modal-content">
       <div class="modal-header">

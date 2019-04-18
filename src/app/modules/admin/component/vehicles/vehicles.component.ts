@@ -12,15 +12,21 @@ import { VehicleTypeService } from '../../services/vehicle-type.service';
 export class VehiclesComponent implements OnInit {
   vehicles: Vehicle[] = [];
   vehicleTypeList: VehicleType[] = [];
-  constructor(private serviceVehicle:VehicleService,
-              private serviceBehicleType: VehicleTypeService) { }
+  vehicle: Vehicle = {
+    brand: '',
+    inventoryId: '',
+    model: '',
+    regNum: '',
+    vehicleType: undefined,
+    vincode: ''
+  };
+  constructor(private serviceVehicle: VehicleService, private serviceVehicleType: VehicleTypeService) {}
 
   ngOnInit() {
-    $('#example').DataTable({
+    $('#vehicles').DataTable({
       language: {
         url: '//cdn.datatables.net/plug-ins/1.10.19/i18n/Ukrainian.json'
       }
     });
   }
-
 }
