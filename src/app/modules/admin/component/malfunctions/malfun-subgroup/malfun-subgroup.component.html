@@ -1,3 +1,19 @@
-<p>
-  malfun-subgroup works!
-</p>
+<table id="subgroup" class="display">
+  <thead>
+    <tr>
+      <th>Підгрупа</th>
+      <th>Редагувати</th>
+      <th>Видалити</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let userItem of users">
+      <td>{{ userItem.firstName }}</td>
+      <td>{{ userItem.lastName }}</td>
+      <td>{{ userItem.login }}</td>
+      <td>
+        <button mat-button  data-toggle="modal" data-target="#editModal"><i class="fas fa-edit"></i></button>
+      </td>
+    </tr>
+  </tbody>
+</table>
