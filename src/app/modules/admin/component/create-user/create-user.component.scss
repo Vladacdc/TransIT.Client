@@ -1,9 +1,4 @@
-.form {
-  width: 100%;
-}
-.text {
-  text-align: center;
-}
-.right {
-  float: right;
+select.is-valid,
+select.is-invalid {
+  background-position: center right 1rem;
 }
