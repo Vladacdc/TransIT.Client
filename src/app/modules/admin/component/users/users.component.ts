@@ -14,6 +14,13 @@ export class UsersComponent implements OnInit {
   roleList: Role[];
   dataTable: any;
   user: User;
+  title: 'Користувачі';
+
+  private readonly table: DataTables.Settings = {
+    language: {
+      url: 'cdn.datatables.net/plug-ins/1.10.19/i18n/Ukrainian.json'
+    }
+  };
 
   private readonly tableParams = {
     columnDefs: [
@@ -27,6 +34,7 @@ export class UsersComponent implements OnInit {
               private serviceRole: RoleService,
               private chRef: ChangeDetectorRef) {}
   ngOnInit() {
+   // $('#userTable').DataTable(this.table);
     this.serviceRole.getEntities().subscribe(role => (this.roleList = role));
     this.service.getEntities().subscribe(users => {
       this.users = users;

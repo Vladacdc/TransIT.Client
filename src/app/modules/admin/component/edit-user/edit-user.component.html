@@ -1,12 +1,8 @@
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createUser">
-  Додати користувача
-</button>
-
-<div class="modal fade" id="createUser" tabindex="-1" role="dialog" aria-labelledby="CreateUser" aria-hidden="true">
+<div class="modal fade" id="editUser" tabindex="-1" role="dialog" aria-labelledby="CreateUser" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Створити користувача</h5>
+        <h5 class="modal-title" id="exampleModalLongTitle">Редагувати користувача</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -15,28 +11,27 @@
         <form [formGroup]="userForm">
           <div class="form-group">
             <label>Прізвище</label>
-            <input type="text" class="form-control" formControlName="lastName" >
+            <input type="text" class="form-control" autocomplete="off">
           </div>
           <div class="form-group">
             <label>Ім'я</label>
-            <input type="text" class="form-control" formControlName="firstName" placeholder="Введіть Ім'я">
+            <input type="text" class="form-control" formControlName="firstName"autocomplete="off">
           </div>
           <div class="form-group">
             <label>Логін</label>
-            <input type="text" class="form-control" formControlName="login" placeholder="Введіть логін">
+            <input type="text" class="form-control" formControlName="login" autocomplete="off">
           </div>
           <div class="form-group">
             <label>Пошта</label>
-            <input type="email" class="form-control" formControlName="email" placeholder="Введіть пошту">
+            <input type="email" class="form-control" formControlName="email" autocomplete="off">
           </div>
           <div class="form-group">
             <label>Номер телефону</label>
-            <input type="tel" class="form-control" formControlName="phoneNumber"
-                   placeholder="Введіть номер телефону">
+            <input type="tel" class="form-control" formControlName="phoneNumber" autocomplete="off">
           </div>
           <div class="form-group">
             <label>Пароль</label>
-            <input type= "password" class="form-control" formControlName="password" placeholder="Введіть пароль" autocomplete="off">
+            <input type= "password" class="form-control" formControlName="password" autocomplete="off">
           </div>
           <div class="form-group">
             <label>Роль</label>
@@ -51,8 +46,8 @@
       </div>
       <div class="modal-footer">
         <button #close type="button" class="btn btn-secondary" data-dismiss="modal">Закрити</button>
-        <button type="button" class="btn btn-primary" (click)="clickSubmit()" [disabled]="userForm.invalid">
-          Створити
+        <button type="button" class="btn btn-primary" [disabled]="userForm.invalid" (click)="UpdateData()">
+         Зберегти
         </button>
       </div>
     </div>

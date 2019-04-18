@@ -16,11 +16,12 @@ export class DialogComponent implements OnInit {
   }
 
   delete() {
+    console.log(this.user);
     this.closeDiv.nativeElement.click();
     this.service.deleteEntity(this.user.id).subscribe(data => {
-        for (var i = 0; i < this.users.length; i++) {
+        for (let i = 0; i < this.users.length; i++) {
           if (this.users[i].id === this.user.id) {
-            this.users.splice(i,1);
+            this.users.splice(i, 1);
           }
         }
       }

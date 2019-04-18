@@ -1,5 +1,9 @@
 <app-create-user [users]="users"></app-create-user>
-<table id="example" class="display">
+<br>
+<div class="captBox col-md-4 offset-5">
+  <caption class="caption"> Користувачі </caption>
+</div>
+<table id="userTable" class="display table-striped table-responsive-lg" >
   <thead>
     <tr>
       <th>Ім'я</th>
@@ -21,7 +25,10 @@
       <td>{{ userItem.phoneNumber }}</td>
       <td>{{ userItem.role.name }}</td>
       <td>
-        <button mat-button  data-toggle="modal" data-target="#editModal"><i class="fas fa-edit" (click)="adduser(userItem)"></i></button>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editUser" (click)="adduser(userItem)">
+          <i class="fas fa-edit"></i>
+        </button>
+        <app-edit-user [user]="user" [users]="users"></app-edit-user>
       </td>
       <td>
         <button mat-button  data-toggle="modal" data-target="#deleteModal"  (click)="adduser(userItem)"><i class="fas fa-trash-alt"></i></button>

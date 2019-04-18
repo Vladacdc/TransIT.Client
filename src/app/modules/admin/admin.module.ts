@@ -11,7 +11,14 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { DataTablesModule } from 'angular-datatables';
 import { MatDialogModule } from '@angular/material/dialog';
 import { VehiclesComponent } from './component/vehicles/vehicles.component';
-import { MatButtonModule, MatFormFieldModule, MatPaginatorModule, MatSortModule, MatTableModule, MatTabsModule } from '@angular/material';
+import {
+  MatButtonModule,
+  MatCardModule,
+  MatFormFieldModule,
+  MatPaginatorModule,
+  MatSortModule,
+  MatTableModule
+} from '@angular/material';
 import { MatInputModule } from '@angular/material';
 import { DialogComponent } from './component/dialog/dialog.component';
 import { MalfunctionsComponent } from './component/malfunctions/malfunctions.component';
@@ -23,6 +30,7 @@ import { CoreModule } from '../core/core.module';
 import { RoleService } from './services/role.service';
 import { UserService } from './services/user.service';
 import { AdminNavbarComponent } from './component/admin-navbar/admin-navbar.component';
+import { EditUserComponent } from './component/edit-user/edit-user.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +44,8 @@ import { AdminNavbarComponent } from './component/admin-navbar/admin-navbar.comp
     MalfuncComponent,
     MalfuncGroupComponent,
     MalfunSubgroupComponent,
-    AdminNavbarComponent
+    AdminNavbarComponent,
+    EditUserComponent
   ],
   exports: [AdminComponent],
   imports: [
@@ -53,7 +62,8 @@ import { AdminNavbarComponent } from './component/admin-navbar/admin-navbar.comp
     MatInputModule,
     MatButtonModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatCardModule
 
   ],
   providers: [RoleService, UserService]
