@@ -25,14 +25,14 @@
       <td>{{ userItem.phoneNumber }}</td>
       <td>{{ userItem.role.name }}</td>
       <td>
-        <button mat-button data-toggle="modal" data-target="#editUser"   class="btn btn-primary"  (click)="adduser(userItem)">
+        <button mat-button data-toggle="modal" data-target="#editUser" dataclass="btn btn-primary"  (click)="adduser(userItem)">
           <i class="fas fa-edit"></i>
         </button>
         <app-edit-user [user]="user" [users]="users"></app-edit-user>
       </td>
       <td>
-        <button mat-button  data-toggle="modal" data-target="#deleteModal"(click)="adduser(userItem)"><i class="fas fa-trash-alt"></i></button>
-        <app-dialog [user]="user" [users]="users"></app-dialog>
+        <button mat-button data-toggle="modal" data-target="#deleteModal"(click)="adduser(userItem)"><i class="fas fa-trash-alt color"></i></button>
+        <app-dialog [user]="user" [users]="users" ></app-dialog>
       </td>
     </tr>
   </tbody>

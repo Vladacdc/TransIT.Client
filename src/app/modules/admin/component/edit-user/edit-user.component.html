@@ -11,11 +11,11 @@
         <form [formGroup]="userForm">
           <div class="form-group">
             <label>Прізвище</label>
-            <input type="text" class="form-control" autocomplete="off" >
+            <input type="text" class="form-control" formControlName="lastName"  autocomplete="off">
           </div>
           <div class="form-group">
             <label>Ім'я</label>
-            <input type="text" class="form-control" formControlName="firstName"autocomplete="off">
+            <input type="text" class="form-control" formControlName="firstName" autocomplete="off">
           </div>
           <div class="form-group">
             <label>Логін</label>
@@ -30,22 +30,18 @@
             <input type="tel" class="form-control" formControlName="phoneNumber" autocomplete="off">
           </div>
           <div class="form-group">
-            <label>Пароль</label>
-            <input type= "password" class="form-control" formControlName="password" autocomplete="off">
-          </div>
-          <div class="form-group">
             <label>Роль</label>
 
             <select class="form-control" formControlName="role">
-              <option hidden value="" disabled selected>mbgdj</option>
-              <option *ngFor="let role of roleList" [value]="">{{role.name}}</option>
+              <option hidden value="" disabled selected></option>
+              <option *ngFor="let role of roleList">{{role.name}}</option>
             </select>
           </div>
           <button hidden type="submit" #submit></button>
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" (click)="getData()" #close>Закрити</button>
+        <button type="button" class="btn btn-secondary"  data-dismiss="modal"  #close>Закрити</button>
         <button type="button" class="btn btn-primary" [disabled]="userForm.invalid" (click) = "UpdateData()">
               Зберегти
         </button>

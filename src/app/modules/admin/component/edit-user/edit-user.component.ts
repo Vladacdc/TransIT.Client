@@ -30,7 +30,6 @@ export class EditUserComponent implements OnInit {
         firstName: '',
         phoneNumber: 0,
         login: ['', Validators.required],
-        password: ['', Validators.required],
         email: ['', Validators.email],
         role: ['', Validators.required]
       }
@@ -43,8 +42,7 @@ getData() {
       lastName: this.user.lastName,
       firstName: this.user.firstName,
       phoneNumber: this.user.phoneNumber,
-      login: this.user.phoneNumber,
-      password: this.user.password,
+      login: this.user.login,
       email: this.user.email,
       role: this.user.role
     }
@@ -54,6 +52,7 @@ getData() {
     if (this.userForm.invalid) {
       return;
     }
+    this.closeDiv.nativeElement.click();
     const form = this.userForm.value;
     const user: User = {
       id: this.user.id as number,
@@ -62,17 +61,16 @@ getData() {
       phoneNumber:  form.phoneNumber as number,
       login: form.login as string,
       email:  form.email as string,
-      password:  form.password as string,
+      password:  '',
       role: this.roleList[this.roleName.findIndex(r => r === form.role)]
     };
-    this.serviceUser.updateEntity(user).subscribe(data => {
+    this.serviceUser.updateEntity(user).subscribe();
     this.users.push(user);
     for (let i = 0; i < this.users.length; i++) {
       if (this.users[i].id === this.user.id) {
         this.users.splice(i, 1);
       }
-    }});
-    this.closeDiv.nativeElement.click();
+    }
   }
   get roleName(): string[] {return this.roleList.map(r => r.name); }
 }

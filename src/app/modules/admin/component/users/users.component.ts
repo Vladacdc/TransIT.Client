@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef} from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, Output, ViewChild, ElementRef } from '@angular/core';
 import { User } from '../../models/user/user';
 import { UserService } from '../../services/user.service';
 import { RoleService } from '../../services/role.service';
@@ -13,9 +13,8 @@ export class UsersComponent implements OnInit {
   users: User[];
   roleList: Role[];
   dataTable: any;
-  user: User;
-  title: 'Користувачі';
-
+  @Output() user: User;
+  @ViewChild('dataGet') dataGet: ElementRef;
   private readonly table: DataTables.Settings = {
     language: {
       url: 'cdn.datatables.net/plug-ins/1.10.19/i18n/Ukrainian.json'
@@ -46,5 +45,6 @@ export class UsersComponent implements OnInit {
 
   adduser(userItem: User) {
     this.user = userItem;
+//    this.dataGet.nativeElement.click();
   }
 }
