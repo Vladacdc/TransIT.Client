@@ -7,6 +7,6 @@ import { environment } from 'src/environments/environment';
     providedIn: 'root'
   })
   export class ActionTypeService extends CrudService<ActionType> {
-    protected readonly serviceUrl = `${environment.apiUrl}/action`;
+    protected readonly serviceUrl = `${environment.apiUrl}/actiontype`;
   }
   

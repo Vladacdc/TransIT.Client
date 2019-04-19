@@ -38,6 +38,7 @@ export class ActionComponent implements OnInit {
       }
     });
   }
+  }
 
   createItem() {}
 
