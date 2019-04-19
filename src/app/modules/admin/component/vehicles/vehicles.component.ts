@@ -33,4 +33,8 @@ export class VehiclesComponent implements OnInit {
       this.datatable = table.DataTable();
     });
   }
+
+  createItem() {}
+
+  deleteItem(id: number) {}
 }

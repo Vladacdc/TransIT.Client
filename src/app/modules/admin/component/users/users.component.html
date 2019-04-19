@@ -7,11 +7,11 @@
     Користувачі
   </caption>
 </div>
-<table id="userTable" class="display table-striped table-responsive-lg table-bordered">
+<table id="userTable" class="table table-striped table-bordered" cellspacing="0">
   <thead>
     <tr>
-      <th>Ім'я</th>
       <th>Прізвище</th>
+      <th>Ім'я</th>
       <th>По батькові</th>
       <th>Логін</th>
       <th>Електронна пошта</th>
@@ -23,8 +23,8 @@
   </thead>
   <tbody>
     <tr class="center-cells" *ngFor="let userItem of users">
-      <td>{{ userItem.firstName }}</td>
       <td>{{ userItem.lastName }}</td>
+      <td>{{ userItem.firstName }}</td>
       <td>{{ userItem.middleName }}</td>
       <td>{{ userItem.login }}</td>
       <td>{{ userItem.email }}</td>
