@@ -7,5 +7,5 @@ import { CrudService } from '../../core/services/crud.service';
   providedIn: 'root'
 })
 export class VehicleTypeService extends CrudService<VehicleType> {
-  protected readonly serviceUrl = `${environment.apiUrl}/vehicle`;
+  protected readonly serviceUrl = `${environment.apiUrl}/vehicleType`;
 }
