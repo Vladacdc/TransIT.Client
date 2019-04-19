@@ -69,6 +69,7 @@ export class HttpAuthInterceptor implements HttpInterceptor {
     console.error('Error on refreshing token');
     this.refreshTokenInProgress = false;
     this.router.navigate(['/login']);
+    this.refreshTokenSource.error(error);
     return throwError(error);
   }
 }
