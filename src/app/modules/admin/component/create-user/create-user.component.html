@@ -15,28 +15,36 @@
         <form [formGroup]="userForm">
           <div class="form-group">
             <label>Прізвище</label>
-            <input type="text" class="form-control" formControlName="lastName" placeholder="Введіть Прізвище" >
+            <input type="text" class="form-control" formControlName="lastName" autocomplete="off"
+                   placeholder="Введіть Прізвище" >
           </div>
-
 
           <div class="form-group">
             <label>Ім'я</label>
-            <input type="text" class="form-control" formControlName="firstName"
-                   placeholder="Введіть Ім'я" autocomplete="off">
+            <input type="text" class="form-control" formControlName="firstName" autocomplete="off"
+                   placeholder="Введіть Ім'я">
           </div>
+
+          <div class="form-group">
+            <label>По батькові</label>
+            <input type="text" class="form-control" formControlName="middleName" autocomplete="off"
+                   placeholder="Введіть По батькові">
+          </div>
+
           <div class="form-group">
             <label>Логін</label>
-            <input type="text" class="form-control" formControlName="login"
-                   placeholder="Введіть логін" autocomplete="off">
+            <input type="text" class="form-control" formControlName="login" autocomplete="off"
+                   placeholder="Введіть логін">
           </div>
+
           <div class="form-group">
             <label>Пошта</label>
-            <input type="email" class="form-control" formControlName="email"
-                   placeholder="Введіть пошту" autocomplete="of">
+            <input type="email" class="form-control" formControlName="email" autocomplete="off"
+                   placeholder="Введіть пошту">
           </div>
           <div class="form-group">
             <label>Номер телефону</label>
-            <input type="tel" class="form-control" formControlName="phoneNumber"
+            <input type="number" class="form-control" formControlName="phoneNumber"
                    placeholder="Введіть номер телефону" autocomplete="off">
           </div>
           <div class="form-group">

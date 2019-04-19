@@ -5,6 +5,7 @@ export class User extends TEntity {
   id: number;
   firstName: string;
   lastName: string;
+  middleName: string;
   email: string;
   phoneNumber: number;
   login: string;
