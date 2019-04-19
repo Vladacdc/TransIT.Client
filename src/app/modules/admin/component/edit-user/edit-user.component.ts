@@ -31,6 +31,7 @@ export class EditUserComponent implements OnInit {
       id: '',
       lastName: '',
       firstName: '',
+      middleName: '',
       phoneNumber: 0,
       login: ['', Validators.required],
       email: ['', Validators.email],
@@ -42,17 +43,21 @@ export class EditUserComponent implements OnInit {
     if (this.userForm.invalid) {
       return;
     }
+    console.log(this.userForm.value);
     this.closeDiv.nativeElement.click();
     const form = this.userForm.value;
     const user: User = {
       id: form.id as number,
       firstName: form.firstName as string,
       lastName: form.lastName as string,
+      middleName: form.middleName as string,
       phoneNumber: form.phoneNumber as number,
       login: form.login as string,
       email: form.email as string,
+      password: '' as string,
       role: this.roles.find(r => r.transName === form.role)
     };
+    console.log(user);
     this.serviceUser.updateEntity(user).subscribe(_ => this.updateUser.next(user));
   }
 }

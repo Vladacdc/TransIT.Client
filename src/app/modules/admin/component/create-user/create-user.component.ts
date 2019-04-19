@@ -19,9 +19,13 @@ export class CreateUserComponent implements OnInit {
   constructor(private serviceRole: RoleService, private serviceUser: UserService, private formBuilder: FormBuilder) {}
 
   ngOnInit() {
+    $('#createUser').on('hidden.bs.modal', function() {
+      $(this).find('form').trigger('reset');
+    });
     this.userForm = this.formBuilder.group({
       lastName: '',
       firstName: '',
+      middleName: '',
       phoneNumber: '',
       login: ['', Validators.required],
       password: ['', Validators.required],
@@ -39,6 +43,7 @@ export class CreateUserComponent implements OnInit {
       id: 0,
       firstName: form.firstName as string,
       lastName: form.lastName as string,
+      middleName : form.middleName as string,
       phoneNumber: form.phoneNumber as number,
       login: form.login as string,
       email: form.email as string,

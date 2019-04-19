@@ -12,6 +12,7 @@
     <tr>
       <th>Ім'я</th>
       <th>Прізвище</th>
+      <th>По батькові</th>
       <th>Логін</th>
       <th>Електронна пошта</th>
       <th>Номер</th>
@@ -24,6 +25,7 @@
     <tr class="center-cells" *ngFor="let userItem of users">
       <td>{{ userItem.firstName }}</td>
       <td>{{ userItem.lastName }}</td>
+      <td>{{ userItem.middleName }}</td>
       <td>{{ userItem.login }}</td>
       <td>{{ userItem.email }}</td>
       <td>{{ userItem.phoneNumber }}</td>
