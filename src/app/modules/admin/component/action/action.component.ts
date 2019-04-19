@@ -38,9 +38,4 @@ export class ActionComponent implements OnInit {
       }
     });
   }
-  }
-
-  createItem() {}
-
-  deleteItem(id: number) {}
 }
