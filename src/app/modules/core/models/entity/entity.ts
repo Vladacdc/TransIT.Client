@@ -1,3 +1,3 @@
 export class TEntity {
-  id: number;
+  id?: number;
 }
