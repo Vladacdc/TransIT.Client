@@ -1,9 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {IssuelogService} from '../../services/issuelog.service';
-import {IssueLog} from '../../../core/models/issuelog';
-import {ActionType} from '../../../core/models/actionType';
-import {State} from '../../../core/models/state';
+import {IssueLog} from '../../models/issuelog';
+import {ActionType} from '../../models/actionType';
+import {State} from '../../models/state';
 import {ActivatedRoute} from '@angular/router';
 
 declare const $;
@@ -47,7 +47,6 @@ export class IssueLogsComponent implements OnInit {
       }
     });
     $('#issue-logs-table').DataTable({
-      data: this.issueLogs,
       columnDefs: [
         {
           targets: [9, 10],
@@ -69,6 +68,6 @@ export class IssueLogsComponent implements OnInit {
   }
 
   public deleteItem(id: number): void {
-    this.issueLogService.deleteEntity(id);
+    this.issueLogService.deleteEntity(id).subscribe();
   }
 }

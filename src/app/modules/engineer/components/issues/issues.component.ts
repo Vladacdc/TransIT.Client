@@ -1,12 +1,12 @@
-import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {IssueService} from '../../services/issue.service';
-import {Issue} from '../../../core/models/issue';
-import {State} from '../../../core/models/state';
+import {Issue} from '../../models/issue';
+import {State} from '../../models/state';
 import {StateService} from '../../services/state.service';
 import {IssuelogService} from '../../services/issuelog.service';
-import {IssueLog} from '../../../core/models/issuelog';
+import {IssueLog} from '../../models/issuelog';
 import {ActionTypeService} from '../../services/action-type.service';
-import {ActionType} from '../../../core/models/actionType';
+import {ActionType} from '../../models/actionType';
 import {Router} from '@angular/router';
 
 declare const $;
@@ -18,70 +18,50 @@ declare const $;
 })
 export class IssuesComponent implements OnInit {
 
-  public issue: Issue;
-  public issueLog: IssueLog;
-  public stateList: Array<State>;
   public issues: Array<Issue>;
-  public issueLogs: Array<IssueLog>;
-  public actionTypes: Array<ActionType>;
 
   private table: any;
-  private readonly dataTableSettings: any = {
-    columnDefs: [
-      {
-        targets: [8, 9],
-        orderable: false
-      }
-    ],
-    // data: this.issues,
-    url: '//cdn.datatables.net/plug-ins/1.10.19/i18n/Ukrainian.json'
-  };
 
   constructor(
     private issueService: IssueService,
-    private issueLogService: IssuelogService,
-    private actionTypeService: ActionTypeService,
-    private stateService: StateService,
-    private chRef: ChangeDetectorRef
-  ) {
-    this.issue = new Issue();
-  }
+    private router: Router
+  ) {}
 
   ngOnInit() {
-    this.issueService.getEntities().subscribe(issues => {
-      this.issues = issues;
-      // console.log(issues);
-      this.chRef.detectChanges();
-    });
-    this.actionTypeService.getEntities().subscribe(actions => {
-      this.actionTypes = actions;
-      this.chRef.detectChanges();
-    });
-    this.stateService.getEntities().subscribe(states => {
-      this.stateList = states;
-      this.chRef.detectChanges();
-    });
     this.table = $('#issue-table').DataTable({
+      responsive: true,
+      select: {
+        style: 'single'
+      },
+      columns: [
+        { data: 'id', bVisible: false },
+        { title: 'Статус', data: 'state.transName' },
+        { title: 'Поломка', data: 'malfunction.name' },
+        { title: 'Гарантія', data: 'warranty' },
+        { title: 'Транспорт', data: 'vehicle.inventoryId' },
+        { title: 'Відповідальний', data: 'assignedTo.login' },
+        { title: 'Виконати до', data: 'deadLine' },
+        { title: 'Опис', data: 'summary' },
+        { title: 'Створено', data: 'createDate' },
+        { title: 'Редаговано', data: 'modDate' },
+      ],
+      paging: true,
       columnDefs: [
         {
           targets: [8, 9],
           orderable: false
         }
       ],
-      // data: this.issues,
       url: '//cdn.datatables.net/plug-ins/1.10.19/i18n/Ukrainian.json'
     });
-  }
-
-  public createItem(): void {
-    this.issueService.addEntity(this.issue).subscribe();
-  }
-
-  public editItem(): void {
-    this.issueService.updateEntity(this.issue).subscribe();
-  }
-
-  public deleteItem(id: number): void {
-    this.issueService.deleteEntity(id).subscribe();
+    this.issueService.getEntities().subscribe(issues => {
+      this.issues = issues;
+      this.table.rows.add(this.issues);
+      this.table.draw();
+    });
+    this.table.on('select', (e, dt, type, indexes) => {
+      const item = this.table.rows( indexes ).data()[0];
+      this.router.navigate(['/engineer/issue-logs', item]);
+    });
   }
 }
