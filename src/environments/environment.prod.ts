@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  apiUrl: 'http://transistr.azurewebsites.net/api/v1'
 };
