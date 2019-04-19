@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './modules/core/components/login/login.component';
 import { LoginGuard } from './modules/core/guards/login.guard';
 import { AdminGuard } from './modules/core/guards/admin.guard';
+import {EngineerGuard} from './modules/core/guards/engineer.guard';
 import { CustomerGuard } from './modules/core/guards/customer.guard';
 
 const routes: Routes = [
@@ -15,6 +16,11 @@ const routes: Routes = [
     path: 'admin',
     loadChildren: './modules/admin/admin.module#AdminModule',
     canActivate: [AdminGuard]
+  },
+  {
+    path: 'engineer',
+    loadChildren: './modules/engineer/engineer.module#EngineerModule',
+    canActivate: [EngineerGuard]
   },
   {
     path: 'customer',

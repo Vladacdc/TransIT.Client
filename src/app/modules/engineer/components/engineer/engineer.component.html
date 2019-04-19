@@ -1,0 +1,18 @@
+<app-navbar>
+
+</app-navbar>
+<div class="container page">
+  <nav class="nav nav-tabs d-none d-md-flex" id="nav-tab" role="tablist">
+    <a class="nav-item nav-link active" routerLink="/engineer/issues" data-toggle="tab" role="tab" aria-selected="true"
+    ><i class="fas fa-warning"></i> Заявки</a
+    >
+    <a class="nav-item nav-link" routerLink="/engineer/issue-logs" data-toggle="tab" role="tab" aria-selected="false"
+    ><i class="fas fa-book"></i> Історія</a
+    >
+  </nav>
+  <div class="tab-content">
+    <div class="tab-pane fade show active" role="tabpanel" aria-labelledby="nav-home-tab">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
