@@ -1,0 +1,19 @@
+{
+    "data": [
+      {
+        "id": "1",
+        "name": "Tiger Nixon",
+        "position": "System Architect"
+      },
+      {
+        "id": "2",
+        "name": "Garrett Winters",
+        "position": "Accountant"
+      },
+      {
+        "id": "3",
+        "name": "Ashton Cox",
+        "position": "JuniorTechnical"
+      }
+    ]
+}
