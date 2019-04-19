@@ -48,7 +48,7 @@ export class IssuesComponent implements OnInit {
     });
   }
 
-  private addTableData(newIssues: Issue[]) {
+  addTableData(newIssues: Issue[]) {
     this.issues = [...this.issues, ...newIssues];
     const view = newIssues.map(i => [
       this.vehicleName(i.vehicle),

@@ -16,7 +16,7 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./create-issue.component.scss']
 })
 export class CreateIssueComponent implements OnInit {
-  private issueForm: FormGroup;
+  issueForm: FormGroup;
 
   @Output() createdIssue = new EventEmitter<Issue>();
 

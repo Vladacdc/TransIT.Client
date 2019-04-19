@@ -29,4 +29,8 @@ export class VehiclesComponent implements OnInit {
       }
     });
   }
+
+  createItem() {}
+
+  deleteItem(id: number) {}
 }
