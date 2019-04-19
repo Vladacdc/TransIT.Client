@@ -72,7 +72,7 @@ export class CreateIssueComponent implements OnInit {
     this.issueService
       .addEntity(issue)
       .subscribe(
-        data => this.createdIssue.next({ ...data, summary, vehicle, malfunction }),
+        newIssue => this.createdIssue.next(newIssue),
         _ => this.toast.error('Не вдалось створити заявку', 'Помилка створення заявки')
       );
 
@@ -83,10 +83,6 @@ export class CreateIssueComponent implements OnInit {
 
   clickSubmit(button: HTMLButtonElement) {
     button.click();
-  }
-
-  vehicleName(vehicle: Vehicle): string {
-    return `${vehicle.brand} ${vehicle.model} ${vehicle.vincode || ''} ${vehicle.inventoryId || ''} ${vehicle.regNum || ''}`;
   }
 
   get vehiclesNames(): string[] {
@@ -129,5 +125,9 @@ export class CreateIssueComponent implements OnInit {
       this.issueForm.patchValue({ malfunction: '' });
     }
     return malfunctions;
+  }
+
+  private vehicleName(vehicle: Vehicle): string {
+    return `${vehicle.brand} ${vehicle.model} ${vehicle.vincode || ''} ${vehicle.inventoryId || ''} ${vehicle.regNum || ''}`;
   }
 }
