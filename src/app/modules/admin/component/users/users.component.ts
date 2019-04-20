@@ -3,7 +3,6 @@ import { User } from '../../models/user/user';
 import { UserService } from '../../services/user.service';
 import { RoleService } from '../../services/role.service';
 import { Role } from '../../models/role/role';
-import { DataTablesModule } from 'angular-datatables';
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
