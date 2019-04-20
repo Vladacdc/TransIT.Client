@@ -1,7 +1,5 @@
 <h1 style="text-align:center">Група</h1>
-<p></p>
-<app-create-group-malfunc></app-create-group-malfunc>
-<p></p>
+<tr></tr>
 <table id="group" class="display">
   <thead>
     <tr>
@@ -11,15 +9,14 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let malfuncgroup of malfuncGroups">
-      <td><a>{{ malfuncgroup.name }} </a></td>
+    
+    <tr *ngFor="let hero of heroes">
+      <td>{{ hero.id }}</td>
+      <td>{{ hero.name }}</td>
+      <td>{{ hero.surname }}</td>
       <td>
         <button mat-button  data-toggle="modal" data-target="#editModal"><i class="fas fa-edit"></i></button>
-      </td>
-      <td>
-        <button mat-button  data-toggle="modal" data-target="#deleteModal"><i class="fas fa-trash-alt"></i></button>
       </td>
     </tr>
   </tbody>
 </table>
-

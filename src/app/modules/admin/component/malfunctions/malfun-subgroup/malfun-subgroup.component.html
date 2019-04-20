@@ -1,23 +1,20 @@
-<h1 style="text-align:center">Група</h1>
-<p></p>
-<app-create-group-malfunc></app-create-group-malfunc>
-<p></p>
-<table id="group" class="display">
+<h1 style="text-align:center">Підгрупа</h1>
+<tr></tr>
+<table id="subgroup" class="display" >
   <thead>
     <tr>
-      <th>Група</th>
+      <th>Підгрупа</th>
       <th>Редагувати</th>
       <th>Видалити</th>
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let malfuncgroup of malfuncGroups">
-      <td><a>{{ malfuncgroup.name }} </a></td>
+    <tr *ngFor="let userItem of users">
+      <td>{{ userItem.firstName }}</td>
+      <td>{{ userItem.lastName }}</td>
+      <td>{{ userItem.login }}</td>
       <td>
         <button mat-button  data-toggle="modal" data-target="#editModal"><i class="fas fa-edit"></i></button>
-      </td>
-      <td>
-        <button mat-button  data-toggle="modal" data-target="#deleteModal"><i class="fas fa-trash-alt"></i></button>
       </td>
     </tr>
   </tbody>

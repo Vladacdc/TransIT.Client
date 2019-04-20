@@ -20,10 +20,7 @@ import { CoreModule } from '../core/core.module';
 import { RoleService } from './services/role.service';
 import { UserService } from './services/user.service';
 import { AdminNavbarComponent } from './component/admin-navbar/admin-navbar.component';
-import { CreateGroupMalfuncComponent } from './component/create-group-malfunc/create-group-malfunc.component';
-import { CreateSubgroupMalfuncComponent } from './component/create-subgroup-malfunc/create-subgroup-malfunc.component';
-import { CreateMalfuncComponent } from './component/create-malfunc/create-malfunc.component';
-import { EditUserComponent } from './component/edit-user/edit-user';
+import { EditUserComponent } from './component/edit-user/edit-user.component';
 
 @NgModule({
   declarations: [
@@ -38,9 +35,6 @@ import { EditUserComponent } from './component/edit-user/edit-user';
     MalfuncGroupComponent,
     MalfunSubgroupComponent,
     AdminNavbarComponent,
-    CreateGroupMalfuncComponent,
-    CreateSubgroupMalfuncComponent,
-    CreateMalfuncComponent
     EditUserComponent
   ],
   exports: [AdminComponent],
