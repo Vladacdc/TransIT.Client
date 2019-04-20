@@ -1,3 +1,69 @@
-<p>
-  edit-issue works!
-</p>
+<div class="container">
+  <div class="row">
+    <div class="form-group col-sm-12 col-md-4">
+      <label for="stateDisInput">Статус</label>
+      <div class="form-control" id="stateDisInput">
+        {{ issue?.state?.transName }}
+      </div>
+    </div>
+    <div class="form-group col-sm-12 col-md-4">
+      <label for="malfunctionDisInput">Поломка</label>
+      <div class="form-control" id="malfunctionDisInput">
+        {{ issue?.malfunction?.name }}
+      </div>
+    </div>
+    <div class="form-group col-sm-12 col-md-4">
+      <label for="warrantyDisInput">Гарантія</label>
+      <div class="form-control" id="warrantyDisInput">
+        {{ issue?.warranty }}
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group col-sm-6 col-md-6">
+        <label for="vehicleDisInput">Транспорт</label>
+        <div class="form-control" id="vehicleDisInput">
+          {{ issue?.vehicle?.inventoryId + ' ' + issue?.vehicle?.vincode }}
+        </div>
+    </div>
+    <div class="form-group col-sm-6 col-md-6">
+      <label for="assigneeDisInput">Відповідальний</label>
+      <div class="form-control" id="assigneeDisInput">
+        {{ issue?.assignedTo?.login }}
+      </div>
+    </div>
+  </div>
+  <div class="row">
+  <div class="form-group col-sm-12 col-md-4">
+      <label for="deadlineDisInput">Виконати до</label>
+      <div class="form-control" id="deadlineDisInput">
+        {{ issue?.deadLine?.toDateString() }}
+      </div>
+    </div>
+    <div class="form-group col-sm-12 col-md-4">
+      <label for="createdDisInput">Створено</label>
+      <div class="form-control" id="createdDisInput">
+        {{ issue?.createDate?.toDateString() }}
+      </div>
+    </div>
+    <div class="form-group col-sm-12 col-md-4">
+      <label for="modDisInput">Редаговано</label>
+      <div class="form-control" id="modDisInput">
+        {{ issue?.modDate?.toDateString() }}
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group col-sm-12 col-md-12">
+        <label for="summaryDisInput">Опис</label>
+        <div class="form-control" id="summaryDisInput">
+          {{ issue.summary }}
+        </div>
+`    </div>
+  </div>
+<!--  <div class="row">-->
+<!--    <div class="col-sm-12 col-md-12">-->
+      <app-nested-issue-logs [issue]="issue"></app-nested-issue-logs>
+<!--    </div>-->
+<!--  </div>-->
+</div>

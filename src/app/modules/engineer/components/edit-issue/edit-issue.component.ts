@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {Issue} from '../../models/issue';
+import {ActivatedRoute} from '@angular/router';
+import {IssueService} from '../../services/issue.service';
 
 @Component({
   selector: 'app-edit-issue',
@@ -7,7 +10,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EditIssueComponent implements OnInit {
 
-  constructor() { }
+  public issue: Issue;
+
+  constructor(
+    private issueService: IssueService,
+    private activatedRoute: ActivatedRoute
+  ) {
+    this.activatedRoute.params.subscribe(data => {
+      this.issueService.getEntity(data.id).subscribe(res => {
+        this.issue = res;
+      });
+    });
+  }
 
   ngOnInit() {
   }

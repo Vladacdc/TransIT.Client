@@ -14,6 +14,7 @@ import {IssuelogService} from './services/issuelog.service';
 import {IssueService} from './services/issue.service';
 import { EditIssueComponent } from './components/edit-issue/edit-issue.component';
 import { EditIssueLogComponent } from './components/edit-issue-log/edit-issue-log.component';
+import { NestedIssueLogsComponent } from './components/nested-issue-logs/nested-issue-logs.component';
 
 const routes: Routes = [
   {
@@ -32,12 +33,20 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
-  declarations: [EditIssueComponent, EditIssueLogComponent]
+  declarations: [
+    EditIssueComponent,
+    EditIssueLogComponent,
+    NestedIssueLogsComponent
+  ]
 })
 export class EngineerRoutingModule {}
 
 @NgModule({
-  declarations: [EngineerComponent, IssuesComponent, IssueLogsComponent],
+  declarations: [
+    EngineerComponent,
+    IssuesComponent,
+    IssueLogsComponent
+  ],
   imports: [
     CommonModule,
     CoreModule,
@@ -45,6 +54,9 @@ export class EngineerRoutingModule {}
     FormsModule,
     DataTablesModule,
     HttpClientModule
+  ],
+  exports: [
+    IssueLogsComponent
   ],
   providers: [
     IssueService,

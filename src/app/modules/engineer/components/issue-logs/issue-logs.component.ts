@@ -1,9 +1,7 @@
-import {Component, OnInit, Input, ElementRef} from '@angular/core';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import {Component, OnInit} from '@angular/core';
 import {IssuelogService} from '../../services/issuelog.service';
 import {IssueLog} from '../../models/issuelog';
-import {ActionType} from '../../models/actionType';
-import {ActivatedRoute, Router} from '@angular/router';
+import {Router} from '@angular/router';
 
 declare const $;
 
@@ -15,14 +13,19 @@ declare const $;
 export class IssueLogsComponent implements OnInit {
 
   public issueLogs: Array<IssueLog>;
-  private table: any;
+  protected table: any;
 
   constructor(
-    private issueLogService: IssuelogService,
-    private router: Router
+    protected issueLogService: IssuelogService,
+    protected router: Router
   ) {}
 
-  ngOnInit() {
+  public ngOnInit() {
+    this.initTable();
+    this.issueLogService.getEntities().subscribe(this.loadLogs);
+  }
+
+  protected initTable(): void {
     this.table = $('#issue-logs-table').DataTable({
       responsive: true,
       select: {
@@ -47,23 +50,17 @@ export class IssueLogsComponent implements OnInit {
         url: '//cdn.datatables.net/plug-ins/1.10.19/i18n/Ukrainian.json'
       }
     });
-    this.table.on('select', (e, dt, type, indexes) => {
-      const item = this.table.rows( indexes ).data()[0];
-      this.router.navigate(['/engineer/issue-logs/edit', item]);
-    });
-    // this.activatedRoute.params.subscribe(params => {
-    this.issueLogService.getEntities().subscribe(logs => {
-      this.issueLogs = logs;
-      this.table.rows.add(this.issueLogs);
-      this.table.draw();
-      // const issueId = params.id;
-      // if (issueId) {
-      //   this.issueLogService.getEntitiesByIssueId(issueId).subscribe(logs => {
-      //     this.issueLogs = logs;
-      //   });
-      // } else {
-      //   });
-      // }
-    });
+    this.table.on('select', this.selectRow);
+  }
+
+  protected loadLogs(logs: Array<IssueLog>): void {
+    this.issueLogs = logs;
+    this.table.rows.add(this.issueLogs);
+    this.table.draw();
+  }
+
+  protected selectRow(e: any, dt: any, type: any, indexes: any): void {
+    const item = this.table.rows( indexes ).data()[0];
+    this.router.navigate(['/engineer/issue-logs/edit', item]);
   }
 }
