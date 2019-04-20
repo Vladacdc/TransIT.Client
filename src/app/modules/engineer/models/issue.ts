@@ -5,15 +5,15 @@ import {User} from './user';
 
 export class Issue {
   constructor(
-    public id: number = null,
-    public state: State = null,
-    public malfunction: Malfunction = null,
-    public warranty: number = null,
-    public vehicle: Vehicle = null,
-    public assignedTo: User = null,
-    public deadLine: Date = null,
-    public summary: string = null,
-    public createDate: Date = null,
-    public modDate: Date = null
+    public id?: number,
+    public state?: State,
+    public malfunction?: Malfunction,
+    public warranty?: number,
+    public vehicle?: Vehicle,
+    public assignedTo?: User,
+    public deadLine?: Date,
+    public summary?: string,
+    public createDate?: Date,
+    public modDate?: Date
   ) {}
 }

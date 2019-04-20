@@ -2,11 +2,11 @@ import {User} from '../../admin/models/user/user';
 
 export class Supplier {
   constructor(
-    public id: number = null,
-    public name: string = null,
-    public createDate: Date = null,
-    public modDate: Date = null,
-    public create: User = null,
-    public mod: User = null
+    public id?: number,
+    public name?: string,
+    public createDate?: Date,
+    public modDate?: Date,
+    public create?: User,
+    public mod?: User
   ) {}
 }

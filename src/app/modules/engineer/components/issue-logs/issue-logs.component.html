@@ -105,41 +105,41 @@
 </div>
 
 <table id="issue-logs-table" class="display table-striped table-responsive-lg table-bordered">
-  <thead>
-  <tr>
-    <th>Заявка</th>
-    <th>Створив</th>
-    <th>Витрати</th>
-    <th>Опис</th>
-    <th>Старий стан</th>
-    <th>Новий стан</th>
-    <th>Постачальник</th>
-    <th>Дата створення</th>
-    <th>Дата редагування</th>
-    <th>Редагувати</th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr class="center-cells" *ngFor="let item of issueLogs">
-    <td>{{ item.issue?.state?.transName }}</td>
-    <td>{{ item.create?.login }}</td>
-    <td>{{ item.expenses }}</td>
-    <td>{{ item.description }}</td>
-    <td>{{ item.oldState }}</td>
-    <td>{{ item.newState }}</td>
-    <td>{{ item.supplier?.name }}</td>
-    <td>{{ item.createDate }}</td>
-    <td>{{ item.modDate }}</td>
-    <td>
-      <button data-toggle="modal" data-target="#CreateModal" (click)="this.issueLog = item">
-        <i class="fas fa-edit"></i>
-      </button>
-    </td>
+<!--  <thead>-->
+<!--  <tr>-->
+<!--    <th>Заявка</th>-->
+<!--    <th>Створив</th>-->
+<!--    <th>Витрати</th>-->
+<!--    <th>Опис</th>-->
+<!--    <th>Старий стан</th>-->
+<!--    <th>Новий стан</th>-->
+<!--    <th>Постачальник</th>-->
+<!--    <th>Дата створення</th>-->
+<!--    <th>Дата редагування</th>-->
+<!--    <th>Редагувати</th>-->
+<!--  </tr>-->
+<!--  </thead>-->
+<!--  <tbody>-->
+<!--  <tr class="center-cells" *ngFor="let item of issueLogs">-->
+<!--    <td>{{ item.issue?.state?.transName }}</td>-->
+<!--    <td>{{ item.create?.login }}</td>-->
+<!--    <td>{{ item.expenses }}</td>-->
+<!--    <td>{{ item.description }}</td>-->
+<!--    <td>{{ item.oldState }}</td>-->
+<!--    <td>{{ item.newState }}</td>-->
+<!--    <td>{{ item.supplier?.name }}</td>-->
+<!--    <td>{{ item.createDate }}</td>-->
+<!--    <td>{{ item.modDate }}</td>-->
+<!--    <td>-->
+<!--      <button data-toggle="modal" data-target="#CreateModal" (click)="this.issueLog = item">-->
+<!--        <i class="fas fa-edit"></i>-->
+<!--      </button>-->
+<!--    </td>-->
 <!--    <td>-->
 <!--      <button mat-button data-toggle="modal" data-target="#deleteModal"><i class="fas fa-trash-alt"></i></button>-->
 <!--    </td>-->
-  </tr>
-  </tbody>
+<!--  </tr>-->
+<!--  </tbody>-->
 </table>
 
 <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">

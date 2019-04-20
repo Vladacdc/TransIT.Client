@@ -1,22 +1,22 @@
-import {User} from '../../admin/models/user/user';
 import {Issue} from './issue';
 import {State} from './state';
 import {ActionType} from './actionType';
 import {Supplier} from './supplier';
+import {User} from './user';
 
 export class IssueLog {
   constructor(
-    public id: number = null,
-    public description: string = null,
-    public expenses: number = null,
-    public createDate: Date = null,
-    public modDate: Date = null,
-    public actionType: ActionType = null,
-    public create: User = null,
-    public issue: Issue = null,
-    public mod: User = null,
-    public newState: State = null,
-    public oldState: State = null,
-    public supplier: Supplier = null
+    public id?: number,
+    public description?: string,
+    public expenses?: number,
+    public createDate?: Date,
+    public modDate?: Date,
+    public actionType?: ActionType,
+    public create?: User,
+    public issue?: Issue,
+    public mod?: User,
+    public newState?: State,
+    public oldState?: State,
+    public supplier?: Supplier
   ) {}
 }

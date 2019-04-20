@@ -12,6 +12,8 @@ import {ActionTypeService} from './services/action-type.service';
 import {StateService} from './services/state.service';
 import {IssuelogService} from './services/issuelog.service';
 import {IssueService} from './services/issue.service';
+import { EditIssueComponent } from './components/edit-issue/edit-issue.component';
+import { EditIssueLogComponent } from './components/edit-issue-log/edit-issue-log.component';
 
 const routes: Routes = [
   {
@@ -19,7 +21,9 @@ const routes: Routes = [
     component: EngineerComponent,
     children: [
       { path: 'issues', component: IssuesComponent },
+      { path: 'issues/edit', component: EditIssueComponent },
       { path: 'issue-logs', component: IssueLogsComponent },
+      { path: 'issue-logs/edit', component: EditIssueLogComponent },
       { path: '**', redirectTo: 'issues' }
     ]
   }
@@ -27,7 +31,8 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  declarations: [EditIssueComponent, EditIssueLogComponent]
 })
 export class EngineerRoutingModule {}
 

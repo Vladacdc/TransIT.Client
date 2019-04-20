@@ -1,12 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {IssueService} from '../../services/issue.service';
 import {Issue} from '../../models/issue';
-import {State} from '../../models/state';
-import {StateService} from '../../services/state.service';
-import {IssuelogService} from '../../services/issuelog.service';
-import {IssueLog} from '../../models/issuelog';
-import {ActionTypeService} from '../../services/action-type.service';
-import {ActionType} from '../../models/actionType';
 import {Router} from '@angular/router';
 
 declare const $;
@@ -19,7 +13,6 @@ declare const $;
 export class IssuesComponent implements OnInit {
 
   public issues: Array<Issue>;
-
   private table: any;
 
   constructor(
@@ -54,14 +47,14 @@ export class IssuesComponent implements OnInit {
       ],
       url: '//cdn.datatables.net/plug-ins/1.10.19/i18n/Ukrainian.json'
     });
+    this.table.on('select', (e, dt, type, indexes) => {
+      const item = this.table.rows( indexes ).data()[0];
+      this.router.navigate(['/engineer/issues/edit', item]);
+    });
     this.issueService.getEntities().subscribe(issues => {
       this.issues = issues;
       this.table.rows.add(this.issues);
       this.table.draw();
-    });
-    this.table.on('select', (e, dt, type, indexes) => {
-      const item = this.table.rows( indexes ).data()[0];
-      this.router.navigate(['/engineer/issue-logs', item]);
     });
   }
 }

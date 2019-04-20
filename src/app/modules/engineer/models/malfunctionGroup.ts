@@ -1,6 +1,6 @@
 export class MalfunctionGroup {
   constructor(
-    public id: number = null,
-    public name: string = null
+    public id?: number,
+    public name?: string
   ) {}
 }
