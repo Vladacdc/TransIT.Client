@@ -21,6 +21,7 @@ import { RoleService } from './services/role.service';
 import { UserService } from './services/user.service';
 import { AdminNavbarComponent } from './component/admin-navbar/admin-navbar.component';
 import { EditUserComponent } from './component/edit-user/edit-user.component';
+import { NgxMaskModule } from 'ngx-mask';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,15 @@ import { EditUserComponent } from './component/edit-user/edit-user.component';
     EditUserComponent
   ],
   exports: [AdminComponent],
-  imports: [CommonModule, CoreModule, AdminRoutingModule, FormsModule, DataTablesModule, HttpClientModule, ReactiveFormsModule],
-  providers: [RoleService, UserService]
+  imports: [CommonModule,
+            CoreModule,
+            AdminRoutingModule,
+            FormsModule,
+            DataTablesModule,
+            HttpClientModule,
+            ReactiveFormsModule,
+            NgxMaskModule.forRoot()],
+  providers: [RoleService,
+              UserService]
 })
 export class AdminModule {}

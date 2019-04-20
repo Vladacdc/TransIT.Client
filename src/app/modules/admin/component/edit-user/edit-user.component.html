@@ -1,8 +1,8 @@
 <div class="modal fade" id="editUser" tabindex="-1" role="dialog" aria-labelledby="CreateUser" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Редагувати користувача</h5>
+      <div class="modal-header color">
+        <h5 class="modal-title"><i class="fas fa-user-edit"></i> Редагувати користувача</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -11,27 +11,28 @@
         <form [formGroup]="userForm">
           <div class="form-group">
             <label>Прізвище</label>
-            <input type="text" class="form-control" formControlName="lastName" autocomplete="off" />
+            <input type="text" class="form-control" formControlName="lastName" />
           </div>
           <div class="form-group">
             <label>Ім'я</label>
-            <input type="text" class="form-control" formControlName="firstName" autocomplete="off" />
+            <input type="text" class="form-control" formControlName="firstName"/>
           </div>
           <div class="form-group">
             <label>По батькові</label>
-            <input type="text" class="form-control" formControlName="middleName" autocomplete="off" />
+            <input type="text" class="form-control" formControlName="middleName"/>
           </div>
           <div class="form-group">
             <label>Логін</label>
-            <input type="text" class="form-control" formControlName="login" autocomplete="off" />
+            <input type="text" class="form-control" formControlName="login"/>
           </div>
           <div class="form-group">
             <label>Пошта</label>
-            <input type="email" class="form-control" formControlName="email" autocomplete="off" />
+            <input type="email" class="form-control" formControlName="email"/>
           </div>
           <div class="form-group">
             <label>Номер телефону</label>
-            <input type="tel" class="form-control" formControlName="phoneNumber" autocomplete="off" />
+            <input type="tel" class="form-control" formControlName="phoneNumber"
+                   mask="+(000)00-00-00-000"/>
           </div>
           <div class="form-group">
             <label>Роль</label>
@@ -45,7 +46,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal" #close>Закрити</button>
-        <button type="button" class="btn btn-primary" [disabled]="userForm.invalid" (click)="updateData()">
+        <button type="button" class="btn btn-info" [disabled]="userForm.invalid" (click)="updateData()">
           Зберегти
         </button>
       </div>
