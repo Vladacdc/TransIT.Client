@@ -18,7 +18,7 @@ export class UsersComponent implements OnInit {
   private readonly tableParams: DataTables.Settings = {
     columnDefs: [
       {
-        targets: [7],
+        targets: [5, 7, 8],
         orderable: false
       },
     ],
