@@ -21,6 +21,11 @@ import { RoleService } from './services/role.service';
 import { UserService } from './services/user.service';
 import { AdminNavbarComponent } from './component/admin-navbar/admin-navbar.component';
 import { EditUserComponent } from './component/edit-user/edit-user.component';
+import { CreateMalfuncGroupComponent } from './component/create-malfunc-group/create-malfunc-group.component';
+import { CreateMalfuncComponent } from './component/create-malfunc/create-malfunc.component';
+import { CreateMalfuncSubgroupComponent } from './component/create-malfunc-subgroup/create-malfunc-subgroup.component';
+import { NgxMaskModule } from 'ngx-mask';
+
 
 @NgModule({
   declarations: [
@@ -35,10 +40,21 @@ import { EditUserComponent } from './component/edit-user/edit-user.component';
     MalfuncGroupComponent,
     MalfunSubgroupComponent,
     AdminNavbarComponent,
-    EditUserComponent
+    EditUserComponent,
+    CreateMalfuncGroupComponent,
+    CreateMalfuncComponent,
+    CreateMalfuncSubgroupComponent
   ],
   exports: [AdminComponent],
-  imports: [CommonModule, CoreModule, AdminRoutingModule, FormsModule, DataTablesModule, HttpClientModule, ReactiveFormsModule],
-  providers: [RoleService, UserService]
+  imports: [CommonModule,
+            CoreModule,
+            AdminRoutingModule,
+            FormsModule,
+            DataTablesModule,
+            HttpClientModule,
+            ReactiveFormsModule,
+            NgxMaskModule.forRoot()],
+  providers: [RoleService,
+              UserService]
 })
 export class AdminModule {}

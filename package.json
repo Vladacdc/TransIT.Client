@@ -28,6 +28,7 @@
     "core-js": "^2.5.4",
     "jwt-decode": "^2.2.0",
     "ng-bootstrap-form-validation": "^3.0.3",
+    "ngx-mask": "^7.9.2",
     "ngx-spinner": "^7.0.0",
     "ngx-toastr": "^10.0.2",
     "rxjs": "~6.3.3",

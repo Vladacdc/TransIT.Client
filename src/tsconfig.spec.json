@@ -9,7 +9,8 @@
   },
   "files": [
     "test.ts",
-    "polyfills.ts"
+    "polyfills.ts",
+    "../node_modules/@types/jquery/misc.d.ts"
   ],
   "include": [
     "**/*.spec.ts",
