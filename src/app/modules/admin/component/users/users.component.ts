@@ -3,7 +3,6 @@ import { User } from '../../models/user/user';
 import { UserService } from '../../services/user.service';
 import { RoleService } from '../../services/role.service';
 import { Role } from '../../models/role/role';
-
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
@@ -18,10 +17,11 @@ export class UsersComponent implements OnInit {
   private readonly tableParams: DataTables.Settings = {
     columnDefs: [
       {
-        targets: [7, 8],
+        targets: [5, 7, 8],
         orderable: false
-      }
+      },
     ],
+    scrollX: true,
     language: {
       url: '//cdn.datatables.net/plug-ins/1.10.19/i18n/Ukrainian.json'
     }
