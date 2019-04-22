@@ -1,21 +1,28 @@
 <h1 style="text-align:center">Група</h1>
-<app-create-malfunc-group></app-create-malfunc-group>
+<app-create-malfunc-group (refresh_add)="addMalfunctionGroup($event)"></app-create-malfunc-group>
+<app-edit-malfunc-group [malfuncGroup]="malfuncGroup" (refresh_edit)="updateMalfunctionGroup($event)"></app-edit-malfunc-group>
+<app-delete-malfunc-group [malfuncGroup]="malfuncGroup" (refresh-delete)="deleteMalfunctionGroup($event)"></app-delete-malfunc-group >
 <p></p>
 <table id="group" class="table table-striped table-bordered" width="100%">
   <thead>
     <tr>
-      <th>Групаааа</th>
+      <th>Група</th>
       <th>Редагувати</th>
       <th>Видалити</th>
-      
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let userItem of users">
-      <td>{{ userItem.firstName }}</td>
-      <td>{{ userItem.lastName }}</td>
+    <tr *ngFor="let malfuncgroup of malfuncGroups">
+      <td><a>{{ malfuncgroup.name }} </a></td>
       <td>
-        <button mat-button  data-toggle="modal" data-target="#editModal"><i class="fas fa-edit"></i></button>
+        <button data-toggle="modal" data-target="#editMalfuncGroup" class="btn" (click)="selectMalfunctionGroup(malfuncgroup)">
+          <i class="fas fa-edit"></i>
+        </button>
+      </td>
+      <td>
+        <button data-toggle="modal" data-target="#deleteMalfuncGroup" class="btn" (click)="selectMalfunctionGroup(malfuncgroup)">
+          <i class="fas fa-trash-alt color"></i>
+        </button>
       </td>
     </tr>
   </tbody>

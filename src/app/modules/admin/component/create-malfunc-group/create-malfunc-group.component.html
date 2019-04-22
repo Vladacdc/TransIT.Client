@@ -2,7 +2,7 @@
   <i class="fas fa-user-plus"></i> Додати групу
 </button>
 
-<div class="modal fade" id="createGroup" tabindex="-1" role="dialog" aria-labelledby="createGroup" aria-hidden="true">
+<div class="modal fade" id="createGroup" tabindex="-1" role="dialog" aria-labelledby="CreateGroup" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -12,10 +12,10 @@
         </button>
       </div>
       <div class="modal-body">
-        <form [formGroup]="userForm">
+        <form [formGroup]="malfuncGroupForm">
           <div class="form-group">
             <label>Група</label>
-            <input type="text" class="form-control" formControlName="lastName" autocomplete="off"
+            <input type="text" class="form-control" formControlName="name" autocomplete="off"
                    placeholder="Введіть групу" >
           </div>
           <button hidden type="submit" #submit></button>
@@ -23,7 +23,7 @@
       </div>
       <div class="modal-footer">
         <button #close type="button" class="btn btn-secondary" data-dismiss="modal">Закрити</button>
-        <button type="button" class="btn btn-primary" (click)="clickSubmit()" [disabled]="userForm.invalid">
+        <button type="button" class="btn btn-primary" (click)="clickSubmit();refreshClick()" [disabled]="malfuncGroupForm.invalid">
           Створити
         </button>
       </div>
