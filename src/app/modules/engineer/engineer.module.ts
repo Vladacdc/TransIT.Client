@@ -16,6 +16,9 @@ import { EditIssueComponent } from './components/edit-issue/edit-issue.component
 import { EditIssueLogComponent } from './components/edit-issue-log/edit-issue-log.component';
 import { NestedIssueLogsComponent } from './components/nested-issue-logs/nested-issue-logs.component';
 import {SupplierService} from './services/supplier.service';
+import {DocumentService} from './services/document.service';
+import { CreateDocumentComponent } from './components/create-document/create-document.component';
+import { IssueLogAssigneesComponent } from './components/issue-log-assignees/issue-log-assignees.component';
 
 const routes: Routes = [
   {
@@ -42,7 +45,9 @@ const routes: Routes = [
   declarations: [
     EditIssueComponent,
     EditIssueLogComponent,
-    NestedIssueLogsComponent
+    NestedIssueLogsComponent,
+    CreateDocumentComponent,
+    IssueLogAssigneesComponent
   ]
 })
 export class EngineerRoutingModule {}
@@ -67,7 +72,8 @@ export class EngineerRoutingModule {}
     IssuelogService,
     StateService,
     ActionTypeService,
-    SupplierService
+    SupplierService,
+    DocumentService
   ]
 })
 export class EngineerModule { }
