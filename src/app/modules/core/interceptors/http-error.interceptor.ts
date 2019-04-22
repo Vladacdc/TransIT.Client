@@ -14,6 +14,9 @@ export class HttpErrorInterceptor implements HttpInterceptor {
         if (error.status === 0) {
           this.toast.error("Неможливо з'єднатися з сервером", "Помилка з'єднання");
         }
+        if (error.status === 500) {
+          this.toast.error('Неможливо обробити запит. Сталася помилка на сервері', 'Помилка сервера');
+        }
         return throwError(error);
       })
     );

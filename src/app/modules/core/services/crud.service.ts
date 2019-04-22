@@ -3,7 +3,6 @@ import { Observable, throwError } from 'rxjs';
 import { TEntity } from '../models/entity/entity';
 import { tap, catchError } from 'rxjs/operators';
 import { Injectable } from '@angular/core';
-import { NgxSpinnerService } from 'ngx-spinner';
 import { SpinnerService } from './spinner.service';
 
 @Injectable()

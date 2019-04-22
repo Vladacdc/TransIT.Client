@@ -9,18 +9,11 @@ export class LoginGuard implements CanActivate {
   constructor(private service: AuthenticationService, private router: Router) {}
 
   canActivate(): boolean {
-    if (this.service.getRole() === 'GUEST') {
+    const role = this.service.getRole();
+    if (role === 'GUEST') {
       return true;
     }
-
-    if (this.service.getRole() === 'ADMIN') {
-      this.router.navigate(['admin']);
-      return false;
-    }
-
-    if (this.service.getRole() === 'CUSTOMER') {
-      this.router.navigate(['customer']);
-      return false;
-    }
+    this.router.navigate([role.toLowerCase()]);
+    return false;
   }
 }

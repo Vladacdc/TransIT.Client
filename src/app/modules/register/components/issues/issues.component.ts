@@ -55,7 +55,9 @@ export class IssuesComponent implements OnInit {
       i.state.transName,
       i.malfunction.name,
       i.summary,
-      `<button id="details-issue-${i.id}" class="btn" data-toggle="modal" data-target="#editModal"><i class="fas fa-edit"></i></button>`
+      `<button id="details-issue-${
+        i.id
+      }" class="btn" data-toggle="modal" data-target="#editModal"><i class="fas fa-edit"></i></button>`
     ]);
 
     $('#issues')
@@ -117,6 +119,7 @@ export class IssuesComponent implements OnInit {
   }
 
   private vehicleName(vehicle: Vehicle): string {
-    return `${vehicle.brand} ${vehicle.model} ${vehicle.vincode || ''} ${vehicle.inventoryId || ''} ${vehicle.regNum || ''}`;
+    return `${vehicle.brand} ${vehicle.model} ${vehicle.vincode || ''} ${vehicle.inventoryId || ''} ${vehicle.regNum ||
+      ''}`;
   }
 }

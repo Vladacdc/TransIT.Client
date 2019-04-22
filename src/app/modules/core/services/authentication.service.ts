@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import * as jwt_decode from 'jwt-decode';
 import { Token } from '../models/token/token';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
@@ -7,55 +6,24 @@ import { tap, catchError, finalize } from 'rxjs/operators';
 import { Observable, throwError } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
-import { Role } from '../models/role/role';
 import { SpinnerService } from './spinner.service';
-
-const userToken = 'userToken';
+import { TokenStore } from '../helpers/TokenStore';
+import { Role } from '../models/role/role';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
-  private token: Token;
-
-  constructor(private http: HttpClient, private toast: ToastrService, private router: Router, private spinner: SpinnerService) {
-    const tokenString = localStorage.getItem(userToken);
-    if (tokenString) {
-      this.token = JSON.parse(tokenString);
-      console.log(this.token);
-      if (this.isTokenExpired()) {
-        this.token = null;
-        localStorage.removeItem(userToken);
-      }
-    }
-  }
-
-  getToken(): Token {
-    return this.token;
-  }
-
-  getRole(): Role {
-    if (!this.getToken()) {
-      return 'GUEST';
-    }
-    const decoded: any = jwt_decode(this.getToken().accessToken);
-    if (decoded.role) {
-      return decoded.role;
-    }
-
-    return null;
-  }
-
-  isTokenExpired(): boolean {
-    if (!this.token) {
-      return true;
-    }
-    const date = this.getTokenExpirationDate();
-    return !date || date.valueOf() <= new Date().valueOf();
-  }
+  constructor(
+    private router: Router,
+    private http: HttpClient,
+    private toast: ToastrService,
+    private tokenStore: TokenStore,
+    private spinner: SpinnerService
+  ) {}
 
   login(login: string, password: string): Observable<Token> {
-    const timer = setTimeout(() => this.spinner.show(), 50);
+    this.spinner.show();
     return this.http
       .post<Token>(`${environment.apiUrl}/authentication/signin`, {
         login,
@@ -64,82 +32,59 @@ export class AuthenticationService {
       .pipe(
         tap(token => this.handleSuccess(token)),
         catchError(error => this.handleError(error)),
-        finalize(() => this.hideSpinner(timer))
+        finalize(() => this.spinner.hide())
       );
   }
 
+  private handleSuccess(token: Token): void {
+    this.tokenStore.setToken(token);
+    this.router.navigate([`/${this.tokenStore.getRole().toLowerCase()}`]);
+  }
+
+  private handleError(httpResponse: HttpErrorResponse): Observable<any> {
+    if (httpResponse.status !== 0) {
+      this.toast.error('Неправильно введений логін або пароль', 'Помилка логування');
+    }
+    return throwError(httpResponse);
+  }
+
   logout(): void {
-    this.removeToken();
+    this.tokenStore.removeToken();
     this.router.navigate(['login']);
   }
 
   refreshAccessToken(): Observable<Token> {
-    const token = this.getToken();
-    if (!token) {
+    const currentToken = this.tokenStore.getToken();
+    if (!currentToken) {
       return throwError('No token');
     }
-    const { refreshToken, accessToken } = token;
+
+    const { refreshToken, accessToken } = currentToken;
     return this.http
       .post<Token>(`${environment.apiUrl}/authentication/refreshToken`, {
         accessToken,
         refreshToken
       })
       .pipe(
-        tap(token => {
-          console.log('Fetched refresh token', token);
-          this.setToken(token);
-        }),
-        catchError((error: HttpErrorResponse) => {
-          this.setToken(null);
-          return throwError(error);
-        })
+        tap(newToken => this.handleRefreshTokenSuccess(newToken)),
+        catchError(error => this.handleRefreshTokenError(error))
       );
   }
 
-  private setToken(token: Token): void {
-    localStorage.setItem(userToken, JSON.stringify(token));
-    this.token = token;
+  private handleRefreshTokenSuccess(newToken: Token) {
+    this.tokenStore.setToken(newToken);
   }
 
-  private hideSpinner(timer) {
-    this.spinner.hide();
-    clearTimeout(timer);
+  private handleRefreshTokenError(error: HttpErrorResponse): Observable<never> {
+    this.tokenStore.removeToken();
+    return throwError(error);
   }
 
-  private getTokenExpirationDate(): Date {
-    const decoded: any = jwt_decode(this.getToken().refreshToken);
-    if (decoded.exp == null) {
-      return null;
-    }
-    const date = new Date(decoded.exp * 1000);
-    return date;
+  isLoggedIn(): boolean {
+    return this.tokenStore.isTokenExpired() === false;
   }
 
-  private removeToken(): void {
-    localStorage.removeItem(userToken);
-    this.token = null;
-  }
-
-  private handleSuccess(token: Token): void {
-    console.log('Fetched token: ', token);
-    this.setToken(token);
-    this.router.navigate([`/${this.getRole().toLowerCase()}`]);
-  }
-
-  private handleError(httpResponse: HttpErrorResponse): Observable<any> {
-    console.error('Error on login:', httpResponse);
-    if (httpResponse.status !== 0) {
-      this.toast.error('Неправильно введений логін або пароль', 'Помилка логування');
-      const { errors } = httpResponse.error;
-      for (const field in errors) {
-        if (field in errors) {
-          for (const error of errors[field]) {
-            this.toast.error(error, field);
-            console.error(field, error);
-          }
-        }
-      }
-    }
-    return throwError(httpResponse);
+  getRole(): Role {
+    return this.tokenStore.getRole();
   }
 }

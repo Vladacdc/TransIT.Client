@@ -9,15 +9,15 @@ import { AuthenticationService } from '../../services/authentication.service';
 export class NavbarComponent {
   constructor(private authService: AuthenticationService) {}
 
+  logout() {
+    this.authService.logout();
+  }
+
   get isLoggedIn() {
-    return !this.authService.isTokenExpired();
+    return this.authService.isLoggedIn();
   }
 
   get isLoggedOut() {
-    return this.authService.isTokenExpired();
-  }
-
-  logout() {
-    this.authService.logout();
+    return !this.isLoggedIn;
   }
 }

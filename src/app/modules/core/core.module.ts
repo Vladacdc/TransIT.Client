@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { NgBootstrapFormValidationModule } from 'ng-bootstrap-form-validation';
@@ -15,7 +14,7 @@ import { SpinnerService } from './services/spinner.service';
 
 @NgModule({
   declarations: [NavbarComponent, LoginComponent],
-  imports: [CommonModule, NgbModule, ReactiveFormsModule, RouterModule, NgBootstrapFormValidationModule, HttpClientModule],
+  imports: [CommonModule, ReactiveFormsModule, RouterModule, NgBootstrapFormValidationModule, HttpClientModule],
   exports: [NavbarComponent, LoginComponent],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
