@@ -49,7 +49,7 @@ export class IssuesComponent implements OnInit {
     });
     this.table.on('select', (e, dt, type, indexes) => {
       const item = this.table.rows( indexes ).data()[0];
-      this.router.navigate(['/engineer/issues/edit', item]);
+      this.router.navigate(['/engineer/users/edit', item]);
     });
     this.issueService.getEntities().subscribe(issues => {
       this.issues = issues;

@@ -12,6 +12,7 @@ import {SupplierService} from '../../services/supplier.service';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Issue} from '../../models/issue';
 import {DocumentService} from '../../services/document.service';
+import {User} from '../../models/user';
 
 @Component({
   selector: 'app-edit-issue-log',
@@ -23,6 +24,7 @@ export class EditIssueLogComponent implements OnInit {
   @Output() public addDocument: EventEmitter<void>;
 
   public issueLog: IssueLog;
+  public assigneeUser: User;
   public actionTypes: Array<ActionType>;
   public states: Array<State>;
   public suppliers: Array<Supplier>;
@@ -66,10 +68,10 @@ export class EditIssueLogComponent implements OnInit {
     this.activatedRoute.params.subscribe(params => {
       const issue = params;
       if (issue) {
-        this.issueLog.issue = { id: issue.id };
+        this.issueLog.issue = issue;
         this.issueLog.oldState = { id: issue.state.id };
       } else {
-        this.router.navigate(['/engineer/issues']);
+        this.router.navigate(['/engineer/users']);
       }
     });
     this.actionTypeService.getEntities().subscribe(actions => {
@@ -87,6 +89,10 @@ export class EditIssueLogComponent implements OnInit {
     this.documents.push(entity);
   }
 
+  public assignAssignee(entity: User): void {
+    this.assigneeUser = entity;
+  }
+
   public deleteDocument(entity: Document): void {
     this.documents = this.documents.filter(x => x.id === entity.id);
   }
@@ -99,6 +105,7 @@ export class EditIssueLogComponent implements OnInit {
     this.issueLog.supplier = this.issueLog.supplier.id == null
       ? null
       : this.issueLog.supplier;
+    this.issueLog.issue.assignedTo = this.assigneeUser;
     this.issueLogService.addEntity(this.issueLog).subscribe(() => {
       if (this.documents.length) {
         this.documents.map(d => {

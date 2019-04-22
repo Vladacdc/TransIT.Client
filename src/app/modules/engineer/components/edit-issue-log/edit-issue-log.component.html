@@ -10,6 +10,10 @@
       </li>
     </ul>
   </div>
+  <div class="form-group">
+    <app-issue-log-assignees (selectUser)="assignAssignee($event)"></app-issue-log-assignees>
+    <label>{{ assigneeUser?.login || '' + ' ' + assigneeUser?.lastName || '' + ' ' + assigneeUser?.firstName || '' + ' ' + assigneeUser?.middleName || '' }}</label>
+  </div>
     <div class="form-group">
       <label class="col-form-label">Новий стан:</label>
       <select

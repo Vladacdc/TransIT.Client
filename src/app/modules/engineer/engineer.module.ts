@@ -25,11 +25,11 @@ const routes: Routes = [
     path: '',
     component: EngineerComponent,
     children: [
-      { path: 'issues', component: IssuesComponent },
-      { path: 'issues/edit', component: EditIssueComponent },
+      { path: 'users', component: IssuesComponent },
+      { path: 'users/edit', component: EditIssueComponent },
       { path: 'issue-logs', component: IssueLogsComponent },
       { path: 'issue-logs/edit', component: EditIssueLogComponent },
-      { path: '**', redirectTo: 'issues' }
+      { path: '**', redirectTo: 'users' }
     ]
   }
 ];
