@@ -11,7 +11,7 @@ export class IssuelogService extends CrudService<IssueLog> {
 
   public getEntitiesByIssueId(id: number): Observable<IssueLog[]> {
     this.spinner.show();
-    return this.http.get<Array<IssueLog>>(`${this.serviceUrl}/filter/issueId=${id}`).pipe(
+    return this.http.get<Array<IssueLog>>(`${environment.apiUrl}/issue/${id}/issuelog`).pipe(
       tap(data => this.handleSuccess('fetched data', data)),
       catchError(this.handleError())
     );

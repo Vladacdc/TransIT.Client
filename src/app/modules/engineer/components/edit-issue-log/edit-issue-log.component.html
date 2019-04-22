@@ -1,96 +1,56 @@
-<!--<div class="modal fade" id="CreateModal" tabindex="-1" role="dialog" aria-hidden="true">-->
-<!--  <div class="modal-dialog" role="document">-->
-<!--    <div class="modal-content">-->
-<!--      <div class="modal-header">-->
-<!--        <h5 class="modal-title" id="exampleModalLabel">Редагувати поломку</h5>-->
-<!--        <button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
-<!--          <span aria-hidden="true">&times;</span>-->
-<!--        </button>-->
-<!--      </div>-->
-<!--      <div class="modal-body">-->
-<!--        <form>-->
-<!--          <div class="form-group">-->
-<!--            <label for="oldstate" class="col-form-label">Старий стан</label>-->
-<!--            <input-->
-<!--              type="number"-->
-<!--              class="form-control"-->
-<!--              id="oldstate"-->
-<!--              [(ngModel)]="issueLog.oldState"-->
-<!--              [ngModelOptions]="{ standalone: true }"-->
-<!--              #nameRequired="ngModel"-->
-<!--              disabled-->
-<!--            />-->
-<!--          </div>-->
-<!--          <div class="form-group">-->
-<!--            <label class="col-form-label">Новий стан:</label>-->
-<!--            <select-->
-<!--              name="role"-->
-<!--              #state="ngModel"-->
-<!--              [(ngModel)]="issueLog.newState"-->
-<!--              [ngModelOptions]="{ standalone: true }"-->
-<!--              #nameRequired="ngModel"-->
-<!--              class="form-control"-->
-<!--            >-->
-<!--              <option value="0">&#45;&#45;Select&#45;&#45;</option>-->
-<!--              <option *ngFor="let item of states" value="{{ item.id }}">{{ item.name }}</option>-->
-<!--            </select>-->
-<!--          </div>-->
-<!--          <div class="form-group">-->
-<!--            <label for="summary" class="col-form-label">Опис:</label>-->
-<!--            <textarea-->
-<!--              class="form-control"-->
-<!--              id="summary"-->
-<!--              placeholder="Введіть опис"-->
-<!--              [(ngModel)]="issueLog.description"-->
-<!--              [ngModelOptions]="{ standalone: true }"-->
-<!--              #nameRequired="ngModel"-->
-<!--            ></textarea>-->
-<!--          </div>-->
-<!--          <div class="form-group">-->
-<!--            <label class="col-form-label">Тип дії:</label>-->
-<!--            <select-->
-<!--              name="role"-->
-<!--              #state="ngModel"-->
-<!--              [(ngModel)]="issueLog.actionType"-->
-<!--              [ngModelOptions]="{ standalone: true }"-->
-<!--              #nameRequired="ngModel"-->
-<!--              class="form-control"-->
-<!--            >-->
-<!--              <option value="0">&#45;&#45;Select&#45;&#45;</option>-->
-<!--              <option *ngFor="let item of actionTypes" value="{{ item.id }}">{{ item.name }}</option>-->
-<!--            </select>-->
-<!--          </div>-->
-<!--          <div class="form-group">-->
-<!--            <label for="createdate" class="col-form-label">Дата створення</label>-->
-<!--            <input-->
-<!--              type="date"-->
-<!--              id="createdate"-->
-<!--              class="form-control"-->
-<!--              [(ngModel)]="issueLog.createDate"-->
-<!--              [ngModelOptions]="{ standalone: true }"-->
-<!--              #nameRequired="ngModel"-->
-<!--              disabled-->
-<!--            />-->
-<!--          </div>-->
-<!--          <div class="form-group">-->
-<!--            <label for="moddate" class="col-form-label">Дата редагування</label>-->
-<!--            <input-->
-<!--              type="date"-->
-<!--              id="moddate"-->
-<!--              class="form-control"-->
-<!--              [(ngModel)]="issueLog.modDate"-->
-<!--              [ngModelOptions]="{ standalone: true }"-->
-<!--              #nameRequired="ngModel"-->
-<!--              disabled-->
-<!--            />-->
-<!--          </div>-->
-<!--        </form>-->
-<!--      </div>-->
-
-<!--      <div class="modal-footer">-->
-<!--        <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрити</button>-->
-<!--        <button type="button" class="btn btn-primary" (click)="editItem()">Зберегти</button>-->
-<!--      </div>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</div>-->
+<form class="container" [formGroup]="issueLogForm" (submit)="onSubmit()">
+    <div class="form-group">
+      <label class="col-form-label">Новий стан:</label>
+      <select
+        formControlName="state"
+        name="state"
+        [(ngModel)]="issueLog.newState.id"
+        class="form-control">
+        <option *ngFor="let item of states" [value]="item.id">{{ item.transName }}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label class="col-form-label">Тип дії:</label>
+      <select
+        formControlName="actionType"
+        name="actionType"
+        [(ngModel)]="issueLog.actionType.id"
+        class="form-control">
+        <option *ngFor="let item of actionTypes" [value]="item.id">{{ item.name }}</option>
+      </select>
+    </div>
+  <div class="form-group">
+    <label class="col-form-label">Витрати:</label>
+    <input
+      type="number"
+      formControlName="expenses"
+      name="expenses"
+      [(ngModel)]="issueLog.expenses"
+      class="form-control">
+  </div>
+  <div class="form-group">
+    <label class="col-form-label">Постачальники:</label>
+    <select
+      formControlName="supplier"
+      name="supplier"
+      [(ngModel)]="issueLog.supplier.id"
+      class="form-control">
+      <option *ngFor="let item of suppliers" [value]="item.id">{{ item.name }}</option>
+    </select>
+  </div>
+  <div class="form-group">
+      <label for="summary" class="col-form-label">Опис:</label>
+      <textarea
+        class="form-control"
+        formControlName="summary"
+        id="summary"
+        placeholder="Введіть опис"
+        [(ngModel)]="issueLog.description">
+      </textarea>
+  </div>
+  <div class="form-group">
+    <button type="submit" id="submit" class="btn btn-primary">
+      Підтвердити
+    </button>
+  </div>
+</form>

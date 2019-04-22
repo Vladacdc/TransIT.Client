@@ -9,14 +9,14 @@ export class IssueLog {
     public id?: number,
     public description?: string,
     public expenses?: number,
-    public createDate?: Date,
-    public modDate?: Date,
     public actionType?: ActionType,
-    public create?: User,
     public issue?: Issue,
-    public mod?: User,
     public newState?: State,
     public oldState?: State,
-    public supplier?: Supplier
+    public supplier?: Supplier,
+    public create?: User,
+    public mod?: User,
+    public createDate?: Date,
+    public modDate?: Date
   ) {}
 }

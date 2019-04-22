@@ -6,7 +6,7 @@ import { IssueLogsComponent } from './components/issue-logs/issue-logs.component
 import {RouterModule, Routes} from '@angular/router';
 import {HttpClientModule} from '@angular/common/http';
 import {CoreModule} from '../core/core.module';
-import {FormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {DataTablesModule} from 'angular-datatables';
 import {ActionTypeService} from './services/action-type.service';
 import {StateService} from './services/state.service';
@@ -15,6 +15,7 @@ import {IssueService} from './services/issue.service';
 import { EditIssueComponent } from './components/edit-issue/edit-issue.component';
 import { EditIssueLogComponent } from './components/edit-issue-log/edit-issue-log.component';
 import { NestedIssueLogsComponent } from './components/nested-issue-logs/nested-issue-logs.component';
+import {SupplierService} from './services/supplier.service';
 
 const routes: Routes = [
   {
@@ -31,7 +32,12 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
+  imports: [
+    RouterModule.forChild(routes),
+    FormsModule,
+    CommonModule,
+    ReactiveFormsModule
+  ],
   exports: [RouterModule],
   declarations: [
     EditIssueComponent,
@@ -49,20 +55,19 @@ export class EngineerRoutingModule {}
   ],
   imports: [
     CommonModule,
-    CoreModule,
-    EngineerRoutingModule,
     FormsModule,
     DataTablesModule,
-    HttpClientModule
-  ],
-  exports: [
-    IssueLogsComponent
+    CoreModule,
+    EngineerRoutingModule,
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [
     IssueService,
     IssuelogService,
     StateService,
-    ActionTypeService
+    ActionTypeService,
+    SupplierService
   ]
 })
 export class EngineerModule { }

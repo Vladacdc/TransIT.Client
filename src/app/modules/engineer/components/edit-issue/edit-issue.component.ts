@@ -16,14 +16,13 @@ export class EditIssueComponent implements OnInit {
     private issueService: IssueService,
     private activatedRoute: ActivatedRoute
   ) {
-    this.activatedRoute.params.subscribe(data => {
-      this.issueService.getEntity(data.id).subscribe(res => {
-        this.issue = res;
-      });
-    });
   }
 
   ngOnInit() {
+    this.activatedRoute.params.subscribe(data => {
+    this.issue = data;
+      // this.issueService.getEntity(data.id).subscribe(res => {
+      // });
+    });
   }
-
 }

@@ -12,7 +12,10 @@ export class NestedIssueLogsComponent extends IssueLogsComponent implements OnIn
   @Input() public issue: Issue = null;
 
   public ngOnInit() {
-    this.initTable();
-    this.issueLogService.getEntitiesByIssueId(this.issue.id).subscribe(this.loadLogs);
+    this.issueLogService.getEntitiesByIssueId(this.issue.id).subscribe(logs => {
+      this.issueLogs = logs;
+      this.initTable();
+      this.loadLogs();
+    });
   }
 }

@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {IssuelogService} from '../../services/issuelog.service';
 import {IssueLog} from '../../models/issuelog';
 import {Router} from '@angular/router';
+import {Observable} from 'rxjs';
 
 declare const $;
 
@@ -21,8 +22,11 @@ export class IssueLogsComponent implements OnInit {
   ) {}
 
   public ngOnInit() {
-    this.initTable();
-    this.issueLogService.getEntities().subscribe(this.loadLogs);
+    this.issueLogService.getEntities().subscribe(logs => {
+      this.issueLogs = logs;
+      this.initTable();
+      this.loadLogs();
+    });
   }
 
   protected initTable(): void {
@@ -53,8 +57,7 @@ export class IssueLogsComponent implements OnInit {
     this.table.on('select', this.selectRow);
   }
 
-  protected loadLogs(logs: Array<IssueLog>): void {
-    this.issueLogs = logs;
+  protected loadLogs(): void {
     this.table.rows.add(this.issueLogs);
     this.table.draw();
   }
