@@ -3,19 +3,19 @@
     <div class="form-group col-sm-12 col-md-4">
       <label for="stateDisInput">Статус</label>
       <div class="form-control" id="stateDisInput">
-        {{ issue?.state?.transName }}
+        {{ issue?.state?.transName || '' }}
       </div>
     </div>
     <div class="form-group col-sm-12 col-md-4">
       <label for="malfunctionDisInput">Поломка</label>
       <div class="form-control" id="malfunctionDisInput">
-        {{ issue?.malfunction?.name }}
+        {{ issue?.malfunction?.name || '' }}
       </div>
     </div>
     <div class="form-group col-sm-12 col-md-4">
       <label for="warrantyDisInput">Гарантія</label>
       <div class="form-control" id="warrantyDisInput">
-        {{ issue?.warranty }}
+        {{ issue?.warranty || '' }}
       </div>
     </div>
   </div>
@@ -23,13 +23,13 @@
     <div class="form-group col-sm-6 col-md-6">
         <label for="vehicleDisInput">Транспорт</label>
         <div class="form-control" id="vehicleDisInput">
-          {{ issue?.vehicle?.inventoryId + ' ' + issue?.vehicle?.vincode }}
+          {{ issue?.vehicle?.inventoryId || '' + ' ' + issue?.vehicle?.vincode || '' + ' ' + issue?.vehicle?.regNum || '' }}
         </div>
     </div>
     <div class="form-group col-sm-6 col-md-6">
       <label for="assigneeDisInput">Відповідальний</label>
       <div class="form-control" id="assigneeDisInput">
-        {{ issue?.assignedTo?.login }}
+        {{ issue?.assignedTo?.login || '' }}
       </div>
     </div>
   </div>
@@ -37,19 +37,19 @@
   <div class="form-group col-sm-12 col-md-4">
       <label for="deadlineDisInput">Виконати до</label>
       <div class="form-control" id="deadlineDisInput">
-        {{ issue?.deadLine }}
+        {{ issue?.deadLine || '' }}
       </div>
     </div>
     <div class="form-group col-sm-12 col-md-4">
       <label for="createdDisInput">Створено</label>
       <div class="form-control" id="createdDisInput">
-        {{ issue?.createDate }}
+        {{ issue?.createDate || '' }}
       </div>
     </div>
     <div class="form-group col-sm-12 col-md-4">
       <label for="modDisInput">Редаговано</label>
       <div class="form-control" id="modDisInput">
-        {{ issue?.modDate }}
+        {{ issue?.modDate || '' }}
       </div>
     </div>
   </div>

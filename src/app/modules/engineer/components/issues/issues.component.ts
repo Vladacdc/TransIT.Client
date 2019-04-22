@@ -28,15 +28,15 @@ export class IssuesComponent implements OnInit {
       },
       columns: [
         { data: 'id', bVisible: false },
-        { title: 'Статус', data: 'state.transName' },
-        { title: 'Поломка', data: 'malfunction.name' },
-        { title: 'Гарантія', data: 'warranty' },
-        { title: 'Транспорт', data: 'vehicle.inventoryId' },
-        { title: 'Відповідальний', data: 'assignedTo.login' },
-        { title: 'Виконати до', data: 'deadLine' },
-        { title: 'Опис', data: 'summary' },
-        { title: 'Створено', data: 'createDate' },
-        { title: 'Редаговано', data: 'modDate' },
+        { title: 'Статус', data: 'state.transName', defaultContent: '' },
+        { title: 'Поломка', data: 'malfunction.name', defaultContent: '' },
+        { title: 'Гарантія', data: 'warranty', defaultContent: '' },
+        { title: 'Транспорт', data: 'vehicle.inventoryId', defaultContent: '' },
+        { title: 'Відповідальний', data: 'assignedTo.login', defaultContent: '' },
+        { title: 'Виконати до', data: 'deadLine', defaultContent: '' },
+        { title: 'Опис', data: 'summary', defaultContent: '' },
+        { title: 'Створено', data: 'createDate', defaultContent: '' },
+        { title: 'Редаговано', data: 'modDate', defaultContent: '' },
       ],
       paging: true,
       columnDefs: [
@@ -49,7 +49,7 @@ export class IssuesComponent implements OnInit {
     });
     this.table.on('select', (e, dt, type, indexes) => {
       const item = this.table.rows( indexes ).data()[0];
-      this.router.navigate(['/engineer/users/edit', item]);
+      this.router.navigate(['/engineer/issues/edit', item]);
     });
     this.issueService.getEntities().subscribe(issues => {
       this.issues = issues;

@@ -27,13 +27,13 @@ export class IssueLogAssigneesComponent implements OnInit {
       },
       columns: [
         { data: 'id', bVisible: false },
-        { title: 'Прізвище', data: 'lastName' },
-        { title: 'Ім\'я', data: 'firstName' },
-        { title: 'По-батькові', data: 'middleName' },
-        { title: 'Логін', data: 'login' },
-        { title: 'Електронна пошта', data: 'email' },
-        { title: 'Номер', data: 'phoneNumber' },
-        { title: 'Роль', data: 'role.transName' }
+        { title: 'Прізвище', data: 'lastName', defaultContent: '' },
+        { title: 'Ім\'я', data: 'firstName', defaultContent: '' },
+        { title: 'По-батькові', data: 'middleName', defaultContent: '' },
+        { title: 'Логін', data: 'login', defaultContent: '' },
+        { title: 'Електронна пошта', data: 'email', defaultContent: '' },
+        { title: 'Номер', data: 'phoneNumber', defaultContent: '' },
+        { title: 'Роль', data: 'role.transName', defaultContent: '' }
       ],
       paging: true,
       url: '//cdn.datatables.net/plug-ins/1.10.19/i18n/Ukrainian.json'
