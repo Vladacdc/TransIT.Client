@@ -42,9 +42,7 @@ export class CreateDocumentComponent implements OnInit {
   ngOnInit() {
     this.document = this.newDocument();
     this.activatedRoute.params.subscribe(res => {
-      this.document = res;
-      // this.documentForm.setValue(['name', doc.name]);
-      // this.documentForm.setValue(['description', doc.description]);
+      this.document = res as Document;
     });
     $('#createDoc').on('hidden.bs.modal', () => {
       $(this).find('form').trigger('reset');
@@ -63,5 +61,8 @@ export class CreateDocumentComponent implements OnInit {
       this.documentForm.value.description,
       this.issueLog
     ));
+    $('#close-btn').trigger('click');
+    this.documentForm.reset();
+    this.document = this.newDocument();
   }
 }

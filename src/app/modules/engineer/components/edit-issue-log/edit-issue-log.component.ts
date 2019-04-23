@@ -13,6 +13,7 @@ import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {Issue} from '../../models/issue';
 import {DocumentService} from '../../services/document.service';
 import {User} from '../../models/user';
+import {IssueService} from '../../services/issue.service';
 
 @Component({
   selector: 'app-edit-issue-log',
@@ -32,6 +33,7 @@ export class EditIssueLogComponent implements OnInit {
   constructor(
     private activatedRoute: ActivatedRoute,
     private router: Router,
+    private issueService: IssueService,
     private issueLogService: IssuelogService,
     private actionTypeService: ActionTypeService,
     private stateService: StateService,
@@ -39,7 +41,6 @@ export class EditIssueLogComponent implements OnInit {
     private documentService: DocumentService
   ) {
     this.documents = new Array<Document>();
-    this.issueLog = this.createIssueLog();
     this.issueLogForm = new FormGroup({
       state: new FormControl('', Validators.compose([Validators.required, Validators.nullValidator])),
       actionType: new FormControl('', Validators.compose([Validators.required, Validators.nullValidator])),
@@ -55,20 +56,21 @@ export class EditIssueLogComponent implements OnInit {
       '',
       0,
       new ActionType(),
-      new Issue(),
+      null,
       new State(),
       new State(),
       new Supplier());
   }
 
   ngOnInit() {
+    this.issueLog = this.createIssueLog();
     this.activatedRoute.params.subscribe(params => {
       const issue = params;
       if (issue) {
-        this.issueLog.issue = issue;
-        this.issueLog.oldState = { id: issue.state.id };
-      // } else if (issue instanceof IssueLog) {
-      //   this.issueLog = issue;
+        this.issueService.getEntity(issue.id).subscribe((res: Issue) => {
+          this.issueLog.issue = res;
+          this.issueLog.oldState = this.issueLog.newState = res.state;
+        });
       } else {
         this.router.navigate(['/engineer/issues']);
       }
@@ -98,25 +100,25 @@ export class EditIssueLogComponent implements OnInit {
 
   public onSubmit(): void {
     if (this.issueLogForm.invalid) {
-      alert('Invalid info!');
+      alert('Не правильно введені дані!');
       return;
     }
-
-    this.issueLog.supplier = this.issueLog.supplier.id == null
+    this.issueLog.id = 0;
+    this.issueLog.newState = new State(
+      this.issueLogForm.value.state || this.issueLog.issue.state.id);
+    this.issueLog.supplier = !this.issueLog.supplier.id
       ? null
       : this.issueLog.supplier;
-    alert(this.issueLog.description);
-    this.issueLog.issue.assignedTo = this.assigneeUser;
-    if (this.documents.length > 0) {
-      alert(this.documents[0]);
-      this.documents.map(d => {
-        d.issueLog = this.issueLog;
-        this.documentService.addEntity(d).subscribe(res => {
-          this.documents = this.documents.filter(x => x.id !== res.id);
-        });
-      });
+    if (this.assigneeUser) {
+      this.issueLog.issue.assignedTo = this.assigneeUser;
     }
-    this.issueLogService.addEntity(this.issueLog).subscribe(() => {
+    this.issueLogService.addEntity(this.issueLog).subscribe(res => {
+      if (this.documents.length) {
+        this.documents.forEach(d => {
+          d.issueLog = { id: res.id };
+          this.documentService.addEntity(d).subscribe();
+        });
+      }
       this.router.navigate(['/engineer/issue-logs']).then();
     });
   }

@@ -48,9 +48,8 @@
     <select
       formControlName="supplier"
       name="supplier"
-      [(ngModel)]="issueLog.supplier.id"
       class="form-control">
-      <option *ngFor="let item of suppliers" [value]="item.id">{{ item.name }}</option>
+      <option *ngFor="let item of suppliers" [value]="item?.id">{{ item?.name }}</option>
     </select>
   </div>
   <div class="form-group">
