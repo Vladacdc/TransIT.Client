@@ -1,0 +1,57 @@
+<div class="modal fade" id="editVehicle" tabindex="-1" vehicleType="dialog" aria-labelledby="EditVehicle"
+  aria-hidden="true">
+  <div class="modal-dialog" vehicleType="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Редагувати транспорт</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]=vehicleForm>
+          <div class="form-group">
+            <label>Тип транспорту:</label>
+            <select formControlName="vehicleType" class="form-control">
+              <option hidden value="" disabled selected>--Select--</option>
+              <option *ngFor="let item of vehicleTypeList" [value]="item.name">{{ item.name }}</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Vin-код:</label>
+            <input type="text" class="form-control" formControlName="vincode"
+              autocomplete="off" />
+          </div>
+
+          <div class="form-group">
+            <label>Інвентарний номер:</label>
+            <input type="text" class="form-control" formControlName="inventoryId"
+              autocomplete="off" />
+          </div>
+          <div class="form-group">
+            <label>Реєстраційний номер:</label>
+            <input type="text" class="form-control" formControlName="regNum" 
+              autocomplete="off" />
+          </div>
+
+          <div class="form-group">
+            <label>Бренд:</label>
+            <input type="text" class="form-control" formControlName="brand" 
+              autocomplete="off" />
+          </div>
+
+          <div class="form-group">
+            <label>Модель:</label>
+            <input type="text" class="form-control" formControlName="model" 
+              autocomplete="off" />
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button #close type="button" class="btn btn-secondary" data-dismiss="modal">Закрити</button>
+        <button type="button" class="btn btn-primary" (click)="updateData()">Зберегти</button>
+      </div>
+    </div>
+  </div>
+</div>

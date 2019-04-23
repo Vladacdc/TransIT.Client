@@ -13,16 +13,22 @@ export class VehiclesComponent implements OnInit {
   vehicles: Vehicle[] = [];
   vehicleTypeList: VehicleType[] = [];
   datatable: any;
-  vehicle: Vehicle = {
-    brand: '',
-    inventoryId: '',
-    model: '',
-    regNum: '',
-    vehicleType: undefined,
-    vincode: ''
+  vehicle: Vehicle ;
+
+  private readonly tableParams: DataTables.Settings = {
+    columnDefs: [
+      {
+        targets: [6, 7],
+        orderable: false
+      }
+    ],
+    language: {
+      url: '//cdn.datatables.net/plug-ins/1.10.19/i18n/Ukrainian.json'
+    }
   };
+
   constructor(private serviceVehicle: VehicleService, private serviceVehicleType: VehicleTypeService,
-    private chRef: ChangeDetectorRef) {}
+    private chRef: ChangeDetectorRef) { }
 
   ngOnInit() {
     this.serviceVehicleType.getEntities().subscribe(type => (this.vehicleTypeList = type));
@@ -30,11 +36,25 @@ export class VehiclesComponent implements OnInit {
       this.vehicles = vehicles;
       this.chRef.detectChanges();
       const table: any = $('table');
-      this.datatable = table.DataTable();
+      this.datatable = table.DataTable(this.tableParams);
     });
   }
 
-  createItem() {}
+  addVehicle(vehicle: Vehicle) {
+    this.vehicles = [...this.vehicles, vehicle];
+  }
 
-  deleteItem(id: number) {}
+  selectVehicle(vehicleItem: Vehicle) {
+    this.vehicle = vehicleItem;
+  }
+
+  deleteVehicle(vehicle: Vehicle) {
+    this.vehicles = this.vehicles.filter(v => v.id !== vehicle.id);
+  }
+
+  updateVehicle(vehicle: Vehicle) {
+    const index = this.vehicles.findIndex(v => v.id === vehicle.id);
+    this.vehicles[index] = vehicle;
+    this.vehicles = [...this.vehicles];
+  }
 }
