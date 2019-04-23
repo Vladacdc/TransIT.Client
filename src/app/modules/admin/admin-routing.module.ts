@@ -18,9 +18,9 @@ const routes: Routes = [
       { path: 'users', component: UsersComponent },
       { path: 'users/create', component: CreateUserComponent },
       { path: 'vehicles', component: VehiclesComponent },
-      { path: 'malfunctions', 
+      { path: 'malfunctions',
       component: MalfunctionsComponent,
-      children:[
+      children: [
         { path: 'malfunc-group', component: MalfuncGroupComponent },
         { path: 'malfunc-subgroup', component: MalfunSubgroupComponent },
         { path: 'malfunc', component: MalfuncComponent }

@@ -1,10 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
-import {FormBuilder, FormGroup} from '@angular/forms';
+import {Component, OnInit} from '@angular/core';
 import {IssuelogService} from '../../services/issuelog.service';
-import {IssueLog} from '../../../core/models/issuelog';
-import {ActionType} from '../../../core/models/actionType';
-import {State} from '../../../core/models/state';
-import {ActivatedRoute} from '@angular/router';
+import {IssueLog} from '../../models/issuelog';
+import {Router} from '@angular/router';
+import {Observable} from 'rxjs';
 
 declare const $;
 
@@ -15,60 +13,57 @@ declare const $;
 })
 export class IssueLogsComponent implements OnInit {
 
-  public issueLog: IssueLog;
   public issueLogs: Array<IssueLog>;
-  public states: Array<State>;
-  public actionTypes: Array<ActionType>;
-
-  private issueLogForm: FormGroup;
+  protected table: any;
 
   constructor(
-    private fb: FormBuilder,
-    private activatedRoute: ActivatedRoute,
-    private issueLogService: IssuelogService
-  ) {
-    this.issueLog = new IssueLog();
-    this.issueLogForm = this.fb.group({
+    protected issueLogService: IssuelogService,
+    protected router: Router
+  ) {}
 
+  public ngOnInit() {
+    this.issueLogService.getEntities().subscribe(logs => {
+      this.initTable();
+      this.issueLogs = logs;
+      this.loadLogs();
     });
   }
 
-  ngOnInit() {
-    this.activatedRoute.params.subscribe(params => {
-      const issueId = params.id;
-      if (issueId) {
-        this.issueLogService.getEntitiesByIssueId(issueId).subscribe(logs => {
-          this.issueLogs = logs;
-        });
-      } else {
-        this.issueLogService.getEntities().subscribe(logs => {
-          this.issueLogs = logs;
-        });
-      }
-    });
-    $('#issue-logs-table').DataTable({
-      data: this.issueLogs,
-      columnDefs: [
-        {
-          targets: [9, 10],
-          orderable: false
-        }
+  protected initTable(): void {
+    this.table = $('#issue-logs-table').DataTable({
+      responsive: true,
+      select: {
+        style: 'single'
+      },
+      columns: [
+        { data: 'id', bVisible: false },
+        { title: 'Статус', data: 'issue.state.transName', defaultContent: '' },
+        { title: 'Творець', data: 'create.login', defaultContent: '' },
+        { title: 'Витрати', data: 'expenses', defaultContent: '' },
+        { title: 'Опис', data: 'description', defaultContent: '' },
+        { title: 'Дія', data: 'actionType.name', defaultContent: '' },
+        { title: 'Старий статус', data: 'oldState.transName', defaultContent: '' },
+        { title: 'Новий статус', data: 'newState.transName', defaultContent: '' },
+        { title: 'Постачальник', data: 'supplier.name', defaultContent: '' },
+        { title: 'Транспорт', data: 'issue.vehicle.inventoryId', defaultContent: '' },
+        { title: 'Створено', data: 'createDate', defaultContent: '' },
+        { title: 'Редаговано', data: 'modDate', defaultContent: '' },
       ],
+      paging: true,
       language: {
         url: '//cdn.datatables.net/plug-ins/1.10.19/i18n/Ukrainian.json'
       }
     });
+    this.table.on('select', this.selectRow);
   }
 
-  public createItem(): void {
-    this.issueLogService.addEntity(this.issueLog).subscribe();
+  protected loadLogs(): void {
+    this.table.rows.add(this.issueLogs);
+    this.table.draw();
   }
 
-  public editItem(): void {
-    this.issueLogService.updateEntity(this.issueLog).subscribe();
-  }
-
-  public deleteItem(id: number): void {
-    this.issueLogService.deleteEntity(id);
+  protected selectRow(e: any, dt: any, type: any, indexes: any): void {
+    const item = this.table.rows( indexes ).data()[0];
+    this.router.navigate(['/engineer/issue-logs/edit', item]);
   }
 }

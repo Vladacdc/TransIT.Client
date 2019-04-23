@@ -41,7 +41,7 @@ export class IssuesComponent implements OnInit {
   constructor(private issueService: IssueService, private toast: ToastrService) {}
 
   ngOnInit() {
-    $('#issues').DataTable(this.tableConfig);
+    $('#users').DataTable(this.tableConfig);
 
     this.issueService.getEntities().subscribe(data => {
       this.addTableData(data);
@@ -60,7 +60,7 @@ export class IssuesComponent implements OnInit {
       }" class="btn" data-toggle="modal" data-target="#editModal"><i class="fas fa-edit"></i></button>`
     ]);
 
-    $('#issues')
+    $('#users')
       .dataTable()
       .api()
       .rows.add(view)
@@ -76,7 +76,7 @@ export class IssuesComponent implements OnInit {
   }
 
   private removeTableData(issue: Issue) {
-    const row: any = $('#issues')
+    const row: any = $('#users')
       .DataTable()
       .row($(`button[id^="details-issue-${issue.id}"]`).parents('tr'));
     row.remove().draw(false);
