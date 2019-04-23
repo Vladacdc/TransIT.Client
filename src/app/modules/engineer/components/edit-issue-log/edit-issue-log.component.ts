@@ -64,11 +64,11 @@ export class EditIssueLogComponent implements OnInit {
   ngOnInit() {
     this.activatedRoute.params.subscribe(params => {
       const issue = params;
-      if (issue instanceof Issue) {
+      if (issue) {
         this.issueLog.issue = issue;
         this.issueLog.oldState = { id: issue.state.id };
-      } else if (issue instanceof IssueLog) {
-        this.issueLog = issue;
+      // } else if (issue instanceof IssueLog) {
+      //   this.issueLog = issue;
       } else {
         this.router.navigate(['/engineer/issues']);
       }
@@ -101,19 +101,22 @@ export class EditIssueLogComponent implements OnInit {
       alert('Invalid info!');
       return;
     }
+
     this.issueLog.supplier = this.issueLog.supplier.id == null
       ? null
       : this.issueLog.supplier;
+    alert(this.issueLog.description);
     this.issueLog.issue.assignedTo = this.assigneeUser;
-    this.issueLogService.addEntity(this.issueLog).subscribe(() => {
-      if (this.documents.length > 0) {
-        this.documents.map(d => {
-          d.issueLog = this.issueLog;
-          this.documentService.addEntity(d).subscribe(res => {
-            this.documents = this.documents.filter(x => x.id !== res.id);
-          });
+    if (this.documents.length > 0) {
+      alert(this.documents[0]);
+      this.documents.map(d => {
+        d.issueLog = this.issueLog;
+        this.documentService.addEntity(d).subscribe(res => {
+          this.documents = this.documents.filter(x => x.id !== res.id);
         });
-      }
+      });
+    }
+    this.issueLogService.addEntity(this.issueLog).subscribe(() => {
       this.router.navigate(['/engineer/issue-logs']).then();
     });
   }

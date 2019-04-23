@@ -63,7 +63,6 @@ export class IssueLogsComponent implements OnInit {
   }
 
   protected selectRow(e: any, dt: any, type: any, indexes: any): void {
-    console.dir(this.table);
     const item = this.table.rows( indexes ).data()[0];
     this.router.navigate(['/engineer/issue-logs/edit', item]);
   }

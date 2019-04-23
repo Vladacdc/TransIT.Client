@@ -16,13 +16,17 @@
 
           <div class="form-group">
             <label for="nameInput">Назва</label>
-            <input id="nameInput" type="text" class="form-control" formControlName="name"
+            <input id="nameInput" type="text" class="form-control"
+                   formControlName="name"
+                   [(ngModel)]="document.name"
                    placeholder="Введіть назву" >
           </div>
 
           <div class="form-group">
             <label for="descriptionInput">Опис</label>
-            <textarea id="descriptionInput" class="form-control" formControlName="description"
+            <textarea id="descriptionInput" class="form-control"
+                      formControlName="description"
+                      [(ngModel)]="document.description"
                       placeholder="Введіть опис"></textarea>
           </div>
         </form>

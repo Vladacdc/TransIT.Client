@@ -1,7 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {Issue} from '../../models/issue';
 import {ActivatedRoute} from '@angular/router';
-import {IssueService} from '../../services/issue.service';
 
 @Component({
   selector: 'app-edit-issue',
@@ -12,17 +11,11 @@ export class EditIssueComponent implements OnInit {
 
   public issue: Issue;
 
-  constructor(
-    private issueService: IssueService,
-    private activatedRoute: ActivatedRoute
-  ) {
-  }
+  constructor(private activatedRoute: ActivatedRoute) {}
 
   ngOnInit() {
     this.activatedRoute.params.subscribe(data => {
-    this.issue = data;
-      // this.issueService.getEntity(data.id).subscribe(res => {
-      // });
+      this.issue = data;
     });
   }
 }

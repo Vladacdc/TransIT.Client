@@ -16,6 +16,7 @@ export class CreateDocumentComponent implements OnInit {
   @Output() public createDocument: EventEmitter<Document>;
   @Input() public issueLog: IssueLog;
   public documentForm: FormGroup;
+  public document: Document;
 
   constructor(private activatedRoute: ActivatedRoute) {
     this.createDocument = new EventEmitter<Document>();
@@ -29,11 +30,21 @@ export class CreateDocumentComponent implements OnInit {
     });
   }
 
+  private newDocument(): Document {
+    return new Document(
+      0,
+      '',
+      '',
+      this.issueLog
+    );
+  }
+
   ngOnInit() {
+    this.document = this.newDocument();
     this.activatedRoute.params.subscribe(res => {
-      const doc: Document = res;
-      this.documentForm.setValue(['name', doc.name]);
-      this.documentForm.setValue(['description', doc.description]);
+      this.document = res;
+      // this.documentForm.setValue(['name', doc.name]);
+      // this.documentForm.setValue(['description', doc.description]);
     });
     $('#createDoc').on('hidden.bs.modal', () => {
       $(this).find('form').trigger('reset');

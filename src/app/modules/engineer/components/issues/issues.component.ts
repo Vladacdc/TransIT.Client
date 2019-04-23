@@ -39,13 +39,9 @@ export class IssuesComponent implements OnInit {
         { title: 'Редаговано', data: 'modDate', defaultContent: '' },
       ],
       paging: true,
-      columnDefs: [
-        {
-          targets: [8, 9],
-          orderable: false
-        }
-      ],
-      url: '//cdn.datatables.net/plug-ins/1.10.19/i18n/Ukrainian.json'
+      language: {
+        url: '//cdn.datatables.net/plug-ins/1.10.19/i18n/Ukrainian.json'
+      }
     });
     this.table.on('select', (e, dt, type, indexes) => {
       const item = this.table.rows( indexes ).data()[0];
