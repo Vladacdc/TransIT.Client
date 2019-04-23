@@ -18,14 +18,15 @@ const routes: Routes = [
       { path: 'users', component: UsersComponent },
       { path: 'users/create', component: CreateUserComponent },
       { path: 'vehicles', component: VehiclesComponent },
-      { path: 'malfunctions',
-      component: MalfunctionsComponent,
-      children: [
-        { path: 'malfunc-group', component: MalfuncGroupComponent },
-        { path: 'malfunc-subgroup', component: MalfunSubgroupComponent },
-        { path: 'malfunc', component: MalfuncComponent }
-      ]
-    },
+      {
+        path: 'malfunctions',
+        component: MalfunctionsComponent,
+        children: [
+          { path: 'malfunc-group', component: MalfuncGroupComponent },
+          { path: 'malfunc-subgroup', component: MalfunSubgroupComponent },
+          { path: 'malfunc', component: MalfuncComponent }
+        ]
+      },
       { path: 'actions', component: ActionComponent },
       { path: '**', redirectTo: 'users' }
     ]
