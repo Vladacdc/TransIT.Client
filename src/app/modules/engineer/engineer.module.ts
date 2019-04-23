@@ -19,6 +19,7 @@ import {SupplierService} from './services/supplier.service';
 import {DocumentService} from './services/document.service';
 import { CreateDocumentComponent } from './components/create-document/create-document.component';
 import { IssueLogAssigneesComponent } from './components/issue-log-assignees/issue-log-assignees.component';
+import { DocumentsComponent } from './components/documents/documents.component';
 
 const routes: Routes = [
   {
@@ -29,6 +30,7 @@ const routes: Routes = [
       { path: 'issues/edit', component: EditIssueComponent },
       { path: 'issue-logs', component: IssueLogsComponent },
       { path: 'issue-logs/edit', component: EditIssueLogComponent },
+      { path: 'issue-logs/documents', component: DocumentsComponent },
       { path: '**', redirectTo: 'issues' }
     ]
   }
@@ -47,7 +49,8 @@ const routes: Routes = [
     EditIssueLogComponent,
     NestedIssueLogsComponent,
     CreateDocumentComponent,
-    IssueLogAssigneesComponent
+    IssueLogAssigneesComponent,
+    DocumentsComponent
   ]
 })
 export class EngineerRoutingModule {}

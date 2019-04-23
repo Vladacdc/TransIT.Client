@@ -21,8 +21,6 @@ import {User} from '../../models/user';
 })
 export class EditIssueLogComponent implements OnInit {
 
-  @Output() public addDocument: EventEmitter<void>;
-
   public issueLog: IssueLog;
   public assigneeUser: User;
   public actionTypes: Array<ActionType>;
@@ -41,7 +39,6 @@ export class EditIssueLogComponent implements OnInit {
     private documentService: DocumentService
   ) {
     this.documents = new Array<Document>();
-    this.addDocument = new EventEmitter();
     this.issueLog = this.createIssueLog();
     this.issueLogForm = new FormGroup({
       state: new FormControl('', Validators.compose([Validators.required, Validators.nullValidator])),
@@ -67,11 +64,13 @@ export class EditIssueLogComponent implements OnInit {
   ngOnInit() {
     this.activatedRoute.params.subscribe(params => {
       const issue = params;
-      if (issue) {
+      if (issue instanceof Issue) {
         this.issueLog.issue = issue;
         this.issueLog.oldState = { id: issue.state.id };
+      } else if (issue instanceof IssueLog) {
+        this.issueLog = issue;
       } else {
-        this.router.navigate(['/engineer/users']);
+        this.router.navigate(['/engineer/issues']);
       }
     });
     this.actionTypeService.getEntities().subscribe(actions => {
@@ -107,7 +106,7 @@ export class EditIssueLogComponent implements OnInit {
       : this.issueLog.supplier;
     this.issueLog.issue.assignedTo = this.assigneeUser;
     this.issueLogService.addEntity(this.issueLog).subscribe(() => {
-      if (this.documents.length) {
+      if (this.documents.length > 0) {
         this.documents.map(d => {
           d.issueLog = this.issueLog;
           this.documentService.addEntity(d).subscribe(res => {
@@ -115,7 +114,6 @@ export class EditIssueLogComponent implements OnInit {
           });
         });
       }
-      this.issueLog = this.createIssueLog();
       this.router.navigate(['/engineer/issue-logs']).then();
     });
   }

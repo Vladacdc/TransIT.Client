@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Document} from '../../models/document';
 import {FormControl, FormGroup, Validators} from '@angular/forms';
 import {IssueLog} from '../../models/issuelog';
+import {ActivatedRoute} from '@angular/router';
 
 declare const $;
 
@@ -16,19 +17,24 @@ export class CreateDocumentComponent implements OnInit {
   @Input() public issueLog: IssueLog;
   public documentForm: FormGroup;
 
-  constructor() {
+  constructor(private activatedRoute: ActivatedRoute) {
     this.createDocument = new EventEmitter<Document>();
     this.documentForm = new FormGroup({
-      name: new FormControl(['', Validators.compose([
+      name: new FormControl('', Validators.compose([
         Validators.required,
         Validators.minLength(4),
         Validators.maxLength(100)
-      ])]),
-      description: new FormControl(['', Validators.maxLength(512)])
+      ])),
+      description: new FormControl('', Validators.maxLength(512))
     });
   }
 
   ngOnInit() {
+    this.activatedRoute.params.subscribe(res => {
+      const doc: Document = res;
+      this.documentForm.setValue(['name', doc.name]);
+      this.documentForm.setValue(['description', doc.description]);
+    });
     $('#createDoc').on('hidden.bs.modal', () => {
       $(this).find('form').trigger('reset');
     });
