@@ -1,8 +1,8 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef} from '@angular/core';
 import { ActionType } from '../../models/action/actiontype';
 import { ActionTypeService } from '../../services/actiontype.sevice';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
+import { FormGroup } from '@angular/forms';
+//declare const $;
 @Component({
   selector: 'app-action',
   templateUrl: './action.component.html',
@@ -13,9 +13,20 @@ export class ActionComponent implements OnInit {
   private actionTypeForm: FormGroup;
   action: ActionType = {
     id: 0,
-    name: ''
+    name: ''    
   };
-  constructor(private actionTypeService: ActionTypeService, private chRef: ChangeDetectorRef) {}
+  private readonly tableParams: DataTables.Settings = {
+    columnDefs: [
+      {
+        targets: [1,2],
+        orderable : false    
+      }
+    ],
+    language: {
+      url: '//cdn.datatables.net/plug-ins/1.10.19/i18n/Ukrainian.json'
+    }
+  };
+  constructor(private actionTypeService: ActionTypeService) {}
   onSubmit() {
     if (this.actionTypeForm.invalid) {
       return;
@@ -30,12 +41,20 @@ export class ActionComponent implements OnInit {
   clickSubmit() {
     this.actionTypeService.addEntity(this.action).subscribe();
   }
-  ngOnInit() {
-    this.actionTypeService.getEntities().subscribe(action => (this.actionTypeList = action));
-    $('#action').DataTable({
-      language: {
-        url: '//cdn.datatables.net/plug-ins/1.10.19/i18n/Ukrainian.json'
-      }
-    });
+  // ngOnInit() {    
+  //   this.actionTypeService.getEntities().subscribe(action => {
+  //     this.actionTypeList = action;
+  //     $('#action').DataTable(this.tableParams);      
+  //   });    
+  // }
+  ngOnInit() {    
+    $('#action').DataTable(this.tableParams)
+    this.actionTypeService.getEntities().subscribe(actions => {this.actionTypeList = actions});    
+  }
+  addAtionType(actionType: ActionType) {
+    this.actionTypeList = [...this.actionTypeList, actionType];
+  }
+  deleteActionType() {
+    this.actionTypeService.deleteEntity(this.action.id).subscribe();
   }
 }
