@@ -9,3 +9,4 @@ import { environment } from 'src/environments/environment';
 export class MalfuncGroupService extends CrudService<MalfuncGroup> {
   protected readonly serviceUrl = `${environment.apiUrl}/malfunctionGroup`;
 }
+

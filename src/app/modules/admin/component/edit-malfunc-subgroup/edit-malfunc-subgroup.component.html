@@ -1,13 +1,9 @@
-<button type="button" class="btn btn-info" data-toggle="modal" data-target="#createSubgroup">
-  <i class="fas fa-plus"></i>
-</button>
-
-<div class="modal fade" id="createSubgroup" tabindex="-1" role="dialog" aria-labelledby="CreateSubgroup"
+<div class="modal fade" id="editmalfuncsubgroup" tabindex="-1" role="dialog" aria-labelledby="Editmalfuncsubgroup"
   aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Створити підгрупу</h5>
+        <h5 class="modal-title" id="exampleModalLongTitle">Редагувати підгрупу</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -18,21 +14,20 @@
             <label>Група</label>
             <select class="form-control" formControlName="group">
               <option hidden value="" disabled selected>-</option>
-              <option *ngFor="let groupItem of malfuncGroupList" [value]="groupItem.name">{{groupItem.name}}</option>
+              <option *ngFor="let groupItem of malfunctionGroups" [value]="groupItem.name">{{groupItem.name}}</option>
             </select>
           </div>
           <div class="form-group">
             <label>Підгрупа</label>
-            <input type="text" class="form-control" formControlName="subgroup" autocomplete="off"
-              placeholder="Введіть підгрупу">
+            <input type="text" class="form-control" formControlName="name" autocomplete="off">
           </div>
           <button hidden type="submit" #submit></button>
         </form>
       </div>
       <div class="modal-footer">
-        <button #close type="button" class="btn btn-secondary" data-dismiss="modal">Закрити</button>
-        <button type="button" class="btn btn-primary" (click)="clickSubmit()" [disabled]="subGroupForm.invalid">
-          Створити
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" #close>Закрити</button>
+        <button type="button" class="btn btn-primary" [disabled]="subGroupForm.invalid" (click)="updateData()">
+          Зберегти
         </button>
       </div>
     </div>
