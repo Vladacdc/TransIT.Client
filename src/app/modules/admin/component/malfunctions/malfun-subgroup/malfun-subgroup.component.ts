@@ -1,8 +1,9 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { MalfunSubgroup } from '../../../models/malfun-subgroup/malfun-subgroup';
-import { MalfuncGroup } from '../../../models/malfuncGroup/malfunc-group';
 import { MalfunSubgroupService } from '../../../services/malfun-subgroup.service';
-import { MalfuncGroupService } from '../../../services/malfunc-group.service';
+import { Router } from '@angular/router';
+
+declare const $;
 
 @Component({
   selector: 'app-malfun-subgroup',
@@ -10,46 +11,41 @@ import { MalfuncGroupService } from '../../../services/malfunc-group.service';
   styleUrls: ['./malfun-subgroup.component.scss']
 })
 export class MalfunSubgroupComponent implements OnInit {
-  malfunSubgroups: MalfunSubgroup[] = [];
-  malfuncGroupList: MalfuncGroup[] = [];
-  datatable: any;
-  malfunSubGroup: MalfunSubgroup;
+  public malfuncSubgroup: Array<MalfunSubgroup>;
+  private table: any;
 
-  constructor(private serviceMalfuncSubGroup: MalfunSubgroupService, private serviceMalfuncGroup: MalfuncGroupService,
-    private chRef: ChangeDetectorRef) { }
+  constructor(
+    private malfuncSubroupService:MalfunSubgroupService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
-    this.serviceMalfuncGroup.getEntities().subscribe(group => (this.malfuncGroupList = group));
-    this.serviceMalfuncSubGroup.getEntities().subscribe(subGroups => {
-      this.malfunSubgroups = subGroups;
-      this.chRef.detectChanges();
-      const table: any = $('#subgroup');
-      this.datatable = table.DataTable({
-        language: {
-          url: '//cdn.datatables.net/plug-ins/1.10.19/i18n/Ukrainian.json'
-        },
-        scrollX: true
-      });
+    this.table = $('#subgroup-table').DataTable({
+      responsive: true,
+      select: {
+        style: 'single'
+      },
+      columns: [
+        { data: 'id', bVisible: false },
+        { title: 'Підгрупа', data: 'name', defaultContent: '' }
+      ],
+      paging: true,
+      language: {
+      url: '//cdn.datatables.net/plug-ins/1.10.19/i18n/Ukrainian.json'
+      }
+    })
+    this.malfuncSubroupService.getEntities().subscribe(malfuncSubgroup => {
+      this.malfuncSubgroup = malfuncSubgroup;
+      this.table.rows.add(this.malfuncSubgroup);
+      this.table.draw();
     });
-  }
+    this.table.on('select', (e, dt, type, indexes) => {
+      console.log("23456");
+      const item = this.table.rows( indexes ).data()[0];
+      this.router.navigate(['/admin/users', item]);
+    });
+    console.dir(this.table);
 
-  updateSubGroup(malfunSubGroup: MalfunSubgroup) {
-    const index = this.malfunSubgroups.findIndex(u => u.id === malfunSubGroup.id);
-    this.malfunSubgroups[index] = malfunSubGroup;
-    this.malfunSubgroups = [...this.malfunSubgroups];
-  }
-
-  addSubGroup(malfunSubGroup: MalfunSubgroup) {
-    this.malfunSubgroups = [...this.malfunSubgroups, malfunSubGroup];
-  }
-
-  deleteSubGroup(malfunSubGroup: MalfunSubgroup) {
-    this.malfunSubgroups = this.malfunSubgroups.filter(u => u.id !== malfunSubGroup.id);
-  }
-
-  selectSubGroup(malfuncSubGroupItem: MalfunSubgroup) {
-    this.malfunSubGroup = malfuncSubGroupItem;
-    console.log("aaaaaaaaa");
-    console.log(this.malfunSubGroup);
   }
 }
+
