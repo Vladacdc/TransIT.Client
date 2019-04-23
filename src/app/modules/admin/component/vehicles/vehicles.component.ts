@@ -13,15 +13,16 @@ export class VehiclesComponent implements OnInit {
   vehicles: Vehicle[] = [];
   vehicleTypeList: VehicleType[] = [];
   datatable: any;
-  vehicle: Vehicle ;
+  vehicle: Vehicle;
 
   private readonly tableParams: DataTables.Settings = {
     columnDefs: [
       {
-        targets: [6, 7],
+        targets: [6],
         orderable: false
       }
     ],
+    scrollX: true,
     language: {
       url: '//cdn.datatables.net/plug-ins/1.10.19/i18n/Ukrainian.json'
     }

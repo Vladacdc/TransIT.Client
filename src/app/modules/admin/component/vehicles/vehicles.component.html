@@ -1,37 +1,37 @@
-<app-create-vehicle (createVehicle)="addVehicle($event)"></app-create-vehicle>
-<app-edit-vehicle [vehicle]="vehicle" (updateVehicle)="updateVehicle($event)"></app-edit-vehicle> 
-<app-delete-vehicle [vehicle]="vehicle" (deleteVehicle)="deleteVehicle($event)"></app-delete-vehicle> 
-<br />
+<div class="border">
+  <app-create-vehicle (createVehicle)="addVehicle($event)"></app-create-vehicle>
+  <app-edit-vehicle [vehicle]="vehicle" (updateVehicle)="updateVehicle($event)"></app-edit-vehicle>
+  <app-delete-vehicle [vehicle]="vehicle" (deleteVehicle)="deleteVehicle($event)"></app-delete-vehicle>
+  <br />
+  <p></p>
 
-<table id="vehicles" class="table table-hover" cellspacing="0">
-  <thead>
-    <tr>
-      <th>Тип транспорту</th>
-      <th>Vin-код</th>
-      <th>Інвентарний номер</th>
-      <th>Реєстраційний номер</th>
-      <th>Бренд</th>
-      <th>Модель</th>
-      <th>Редагувати</th>
-      <th>Видалити</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let vehicleItem of vehicles">
-      <td>{{ vehicleItem.vehicleType.name }}</td>
-      <td>{{ vehicleItem.vincode }}</td>
-      <td>{{ vehicleItem.inventoryId }}</td>
-      <td>{{ vehicleItem.regNum }}</td>
-      <td>{{ vehicleItem.brand }}</td>
-      <td>{{ vehicleItem.model }}</td>
-      <td>
-        <button mat-button data-toggle="modal" data-target="#editVehicle"><i class="fas fa-edit"
-            (click)="selectVehicle(vehicleItem)"></i></button>
-      </td>
-      <td>
-        <button mat-button data-toggle="modal" data-target="#deleteModal"><i class="fas fa-trash-alt"
-            (click)="selectVehicle(vehicleItem)"></i></button>
-      </td>
-    </tr>
-  </tbody>
-</table>
+  <table id="vehicles" class="table table-hover" cellspacing="0">
+    <thead>
+      <tr>
+        <th>Тип транспорту</th>
+        <th>Vin-код</th>
+        <th>Інвентарний номер</th>
+        <th>Реєстраційний номер</th>
+        <th>Бренд</th>
+        <th>Модель</th>
+        <th>Дії</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let vehicleItem of vehicles">
+        <td>{{ vehicleItem.vehicleType.name }}</td>
+        <td>{{ vehicleItem.vincode }}</td>
+        <td>{{ vehicleItem.inventoryId }}</td>
+        <td>{{ vehicleItem.regNum }}</td>
+        <td>{{ vehicleItem.brand }}</td>
+        <td>{{ vehicleItem.model }}</td>
+        <td>
+          <button mat-button data-toggle="modal" data-target="#editVehicle"><i class="fas fa-edit"
+              (click)="selectVehicle(vehicleItem)"></i></button>
+          <button mat-button data-toggle="modal" data-target="#deleteModal"><i class="fas fa-trash-alt"
+              (click)="selectVehicle(vehicleItem)"></i></button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

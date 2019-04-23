@@ -53,12 +53,11 @@ import { NgxMaskModule } from 'ngx-mask';
 
     CreateVehicleComponent,
     EditVehicleComponent,
-    DeleteVehicleComponent
+    DeleteVehicleComponent,
 
     CreateMalfuncGroupComponent,
     CreateMalfuncComponent,
     CreateMalfuncSubgroupComponent,
-    create-crud-mulfunc-subgroup,
     EditMalfuncSubgroupComponent,
     DeleteMalfuncSubgroupComponent,
     EditMalfuncGroupComponent,
