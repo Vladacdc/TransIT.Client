@@ -1,5 +1,15 @@
-<div class="modal fade" id="editmalfuncsubgroup" tabindex="-1" role="dialog" aria-labelledby="Editmalfuncsubgroup"
-  aria-hidden="true">
+<button type="button" class="btn btn-info" data-toggle="modal" data-target="#editMalfuncSubgroup">
+  <i class="fas fa-pen fa-2x"></i>
+</button>
+
+<div
+  class="modal fade"
+  id="editMalfuncSubgroup"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="EditMalfuncSubgroup"
+  aria-hidden="true"
+>
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
@@ -14,12 +24,12 @@
             <label>Група</label>
             <select class="form-control" formControlName="group">
               <option hidden value="" disabled selected>-</option>
-              <option *ngFor="let groupItem of malfunctionGroups" [value]="groupItem.name">{{groupItem.name}}</option>
+              <option *ngFor="let groupItem of malfunctionGroups" [value]="groupItem.name">{{ groupItem.name }}</option>
             </select>
           </div>
           <div class="form-group">
             <label>Підгрупа</label>
-            <input type="text" class="form-control" formControlName="name" autocomplete="off">
+            <input type="text" class="form-control" formControlName="name" autocomplete="off" />
           </div>
           <button hidden type="submit" #submit></button>
         </form>

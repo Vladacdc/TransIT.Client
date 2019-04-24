@@ -8,19 +8,17 @@ import { MalfunSubgroupService } from '../../services/malfun-subgroup.service';
   styleUrls: ['./delete-malfunc-subgroup.component.scss']
 })
 export class DeleteMalfuncSubgroupComponent implements OnInit {
-
   @ViewChild('close') closeDiv: ElementRef;
-  @Input() malfunSubGroup: MalfunSubgroup;
+  @Input() malfunctionSubGroup: MalfunSubgroup;
   @Output() deleteMalfuncSubGroup = new EventEmitter<MalfunSubgroup>();
-  constructor(private serviceMalfuncSubGroup: MalfunSubgroupService) { }
+  constructor(private serviceMalfuncSubGroup: MalfunSubgroupService) {}
 
-  ngOnInit() { }
+  ngOnInit() {}
 
   delete() {
     this.closeDiv.nativeElement.click();
-    this.serviceMalfuncSubGroup.deleteEntity(this.malfunSubGroup.id).subscribe(data => {
-      this.deleteMalfuncSubGroup.next(this.malfunSubGroup);
+    this.serviceMalfuncSubGroup.deleteEntity(this.malfunctionSubGroup.id).subscribe(() => {
+      this.deleteMalfuncSubGroup.next(this.malfunctionSubGroup);
     });
   }
-
 }
