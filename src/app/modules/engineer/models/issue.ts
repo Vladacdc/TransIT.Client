@@ -11,7 +11,7 @@ export class Issue {
     public warranty?: number,
     public vehicle?: Vehicle,
     public assignedTo?: User,
-    public deadLine?: Date,
+    public deadline?: Date,
     public summary?: string,
     public createDate?: Date,
     public modDate?: Date

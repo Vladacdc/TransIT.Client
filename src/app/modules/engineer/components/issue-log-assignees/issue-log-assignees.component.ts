@@ -11,9 +11,13 @@ declare const $;
 })
 export class IssueLogAssigneesComponent implements OnInit {
 
+  public searchString: string;
+  public currentUser: User;
   public users: Array<User>;
+  private allUsers: Array<User>;
   @Output() public selectUser: EventEmitter<User>;
   private table: any;
+
 
   constructor(private userService: UserService) {
     this.selectUser = new EventEmitter<User>();
@@ -45,8 +49,30 @@ export class IssueLogAssigneesComponent implements OnInit {
     });
     this.userService.getEntities().subscribe(users => {
       this.users = users;
+      this.allUsers = this.users.slice();
       this.table.rows.add(this.users);
       this.table.draw();
     });
+  }
+
+  public onSearchChange(): void {
+    const search = this.searchString.toLowerCase();
+    this.users = this.allUsers.filter(x =>
+      x.lastName.toLowerCase().includes(search)
+      || x.firstName.toLowerCase().includes(search)
+      || x.login.toLowerCase().includes(search)
+    );
+    if (this.users.length) {
+      $('.dropdown-menu').addClass('show');
+    } else {
+      $('.dropdown-menu').removeClass('show');
+    }
+  }
+
+  public selectItem(item: User): void {
+    this.currentUser = item;
+    this.selectUser.emit(item);
+    this.searchString = item.login + ' ' + item.firstName + ' ' + item.lastName + ' ';
+    $('.dropdown-menu').removeClass('show');
   }
 }

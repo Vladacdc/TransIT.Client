@@ -13,8 +13,8 @@ export class NestedIssueLogsComponent extends IssueLogsComponent implements OnIn
 
   public ngOnInit() {
     this.issueLogService.getEntitiesByIssueId(this.issue.id).subscribe(logs => {
-      this.issueLogs = logs;
       this.initTable();
+      this.issueLogs = logs;
       this.loadLogs();
     });
   }

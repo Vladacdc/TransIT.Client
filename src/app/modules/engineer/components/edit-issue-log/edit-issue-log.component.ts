@@ -47,6 +47,7 @@ export class EditIssueLogComponent implements OnInit {
       expenses: new FormControl('', Validators.nullValidator),
       summary: new FormControl('', Validators.compose([Validators.nullValidator, Validators.maxLength(512)])),
       supplier: new FormControl('', Validators.nullValidator),
+      deadLine: new FormControl(''),
     });
   }
 
@@ -104,6 +105,9 @@ export class EditIssueLogComponent implements OnInit {
       return;
     }
     this.issueLog.id = 0;
+    this.issueLog.issue.deadline = this.issueLogForm.value.deadline
+      ? this.issueLog.issue.deadline
+      : this.issueLogForm.value.deadline;
     this.issueLog.newState = new State(
       this.issueLogForm.value.state || this.issueLog.issue.state.id);
     this.issueLog.supplier = !this.issueLog.supplier.id

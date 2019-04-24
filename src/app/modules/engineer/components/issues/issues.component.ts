@@ -33,7 +33,7 @@ export class IssuesComponent implements OnInit {
         { title: 'Гарантія', data: 'warranty', defaultContent: '' },
         { title: 'Транспорт', data: 'vehicle.inventoryId', defaultContent: '' },
         { title: 'Відповідальний', data: 'assignedTo.login', defaultContent: '' },
-        { title: 'Виконати до', data: 'deadLine', defaultContent: '' },
+        { title: 'Виконати до', data: 'deadline', defaultContent: '' },
         { title: 'Опис', data: 'summary', defaultContent: '' },
         { title: 'Створено', data: 'createDate', defaultContent: '' },
         { title: 'Редаговано', data: 'modDate', defaultContent: '' },

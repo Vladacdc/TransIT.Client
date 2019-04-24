@@ -10,20 +10,6 @@
       </li>
     </ul>
   </div>
-  <div class="form-group">
-    <app-issue-log-assignees (selectUser)="assignAssignee($event)"></app-issue-log-assignees>
-    <label>{{ assigneeUser?.login || '' + ' ' + assigneeUser?.lastName || '' + ' ' + assigneeUser?.firstName || '' + ' ' + assigneeUser?.middleName || '' }}</label>
-  </div>
-    <div class="form-group">
-      <label class="col-form-label">Новий стан:</label>
-      <select
-        formControlName="state"
-        name="state"
-        [(ngModel)]="issueLog.newState.id"
-        class="form-control">
-        <option *ngFor="let item of states" [value]="item.id">{{ item.transName }}</option>
-      </select>
-    </div>
     <div class="form-group">
       <label class="col-form-label">Тип дії:</label>
       <select
@@ -34,6 +20,19 @@
         <option *ngFor="let item of actionTypes" [value]="item.id">{{ item.name }}</option>
       </select>
     </div>
+    <div class="form-group">
+      <label class="col-form-label">Новий стан:</label>
+      <select
+        formControlName="state"
+        name="state"
+        [(ngModel)]="issueLog.newState.id"
+        class="form-control">
+        <option *ngFor="let item of states" [value]="item.id">{{ item.transName }}</option>
+      </select>
+    </div>
+  <div class="form-group">
+    <app-issue-log-assignees (selectUser)="assignAssignee($event)"></app-issue-log-assignees>
+  </div>
   <div class="form-group">
     <label class="col-form-label">Витрати:</label>
     <input
@@ -51,6 +50,15 @@
       class="form-control">
       <option *ngFor="let item of suppliers" [value]="item?.id">{{ item?.name }}</option>
     </select>
+  </div>
+  <div class="form-group">
+    <label class="col-form-label">Дедлайн</label>
+    <input
+      type="date"
+      formControlName="deadLine"
+      name="deadLine"
+      [(ngModel)]="issueLog.issue.deadline"
+      class="form-control datepicker">
   </div>
   <div class="form-group">
       <label for="summary" class="col-form-label">Опис:</label>
