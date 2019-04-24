@@ -8,7 +8,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./edit-issue.component.scss']
 })
 export class EditIssueComponent implements OnInit {
-  public issue: Issue;
+  issue: Issue;
 
   constructor(private activatedRoute: ActivatedRoute) {}
 

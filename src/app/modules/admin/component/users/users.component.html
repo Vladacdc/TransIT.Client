@@ -1,46 +1,44 @@
-<div class="border">
+<div class="table-background border">
   <app-create-user (createUser)="addUser($event)"></app-create-user>
   <app-edit-user [user]="user" (updateUser)="updateUser($event)"></app-edit-user>
   <app-dialog [user]="user" (deleteUser)="deleteUser($event)"></app-dialog>
-<p></p>
+  <p></p>
   <div>
-  <table id="userTable" class="table table-bordered table-responsive display ">
-    <thead>
-      <tr>
-        <th>Прізвище</th>
-        <th>Ім'я</th>
-        <th>По_батькові</th>
-        <th>Логін</th>
-        <th>Електронна пошта</th>
-        <th>Номер</th>
-        <th>Роль</th>
-        <th>Змінити</th>
-        <th>Видалити</th>
-
-      </tr>
-    </thead>
-    <tbody>
-      <tr class="center-cells" *ngFor="let userItem of users">
-        <td>{{ userItem.lastName }}</td>
-        <td>{{ userItem.firstName }}</td>
-        <td>{{ userItem.middleName }}</td>
-        <td>{{ userItem.login }}</td>
-        <td>{{ userItem.email }}</td>
-        <td>{{ userItem.phoneNumber }}</td>
-        <td>{{ userItem.role.transName }}</td>
-        <td>
-
-          <button data-toggle="modal" data-target="#editUser" class="btn" (click)="selectUser(userItem)">
-            <i class="fas fa-edit"></i>
-          </button>
-        </td>
-        <td>
-          <button data-toggle="modal" data-target="#deleteModal" class="btn" (click)="selectUser(userItem)">
-            <i class="fas fa-trash-alt color"></i>
-          </button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+    <table id="userTable" class="table table-bordered table-responsive display ">
+      <thead>
+        <tr>
+          <th>Прізвище</th>
+          <th>Ім'я</th>
+          <th>По_батькові</th>
+          <th>Логін</th>
+          <th>Електронна пошта</th>
+          <th>Номер</th>
+          <th>Роль</th>
+          <th>Змінити</th>
+          <th>Видалити</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="center-cells" *ngFor="let userItem of users">
+          <td>{{ userItem.lastName }}</td>
+          <td>{{ userItem.firstName }}</td>
+          <td>{{ userItem.middleName }}</td>
+          <td>{{ userItem.login }}</td>
+          <td>{{ userItem.email }}</td>
+          <td>{{ userItem.phoneNumber }}</td>
+          <td>{{ userItem.role.transName }}</td>
+          <td>
+            <button data-toggle="modal" data-target="#editUser" class="btn" (click)="selectUser(userItem)">
+              <i class="fas fa-edit"></i>
+            </button>
+          </td>
+          <td>
+            <button data-toggle="modal" data-target="#deleteModal" class="btn" (click)="selectUser(userItem)">
+              <i class="fas fa-trash-alt color"></i>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   </div>
 </div>
