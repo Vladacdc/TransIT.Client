@@ -1,7 +1,8 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { MalfunSubgroup } from '../../../models/malfun-subgroup/malfun-subgroup';
 import { MalfunSubgroupService } from '../../../services/malfun-subgroup.service';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { MalfuncGroup } from '../../../models/malfuncGroup/malfunc-group';
 
 declare const $;
 
@@ -11,7 +12,7 @@ declare const $;
   styleUrls: ['./malfun-subgroup.component.scss']
 })
 export class MalfunSubgroupComponent implements OnInit {
-  public malfuncSubgroup: Array<MalfunSubgroup>;
+  public malfuncSubgroups: Array<MalfunSubgroup>;
   private table: any;
 
   constructor(
@@ -20,6 +21,8 @@ export class MalfunSubgroupComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    
+
     this.table = $('#subgroup-table').DataTable({
       responsive: true,
       select: {
@@ -34,9 +37,9 @@ export class MalfunSubgroupComponent implements OnInit {
       url: '//cdn.datatables.net/plug-ins/1.10.19/i18n/Ukrainian.json'
       }
     })
-    this.malfuncSubroupService.getEntities().subscribe(malfuncSubgroup => {
-      this.malfuncSubgroup = malfuncSubgroup;
-      this.table.rows.add(this.malfuncSubgroup);
+    this.malfuncSubroupService.getEntities().subscribe(malfuncSubgroups => {
+      this.malfuncSubgroups = malfuncSubgroups;
+      this.table.rows.add(this.malfuncSubgroups);
       this.table.draw();
     });
     this.table.on('select', (e, dt, type, indexes) => {
@@ -45,7 +48,6 @@ export class MalfunSubgroupComponent implements OnInit {
       this.router.navigate(['/admin/users', item]);
     });
     console.dir(this.table);
-
   }
 }
 

@@ -18,13 +18,11 @@ export class EditMalfuncGroupComponent implements OnInit {
     this.userForm.patchValue({ ...malfuncGroup});
   }
   @Output() updateMalfuncGroup = new EventEmitter<MalfuncGroup>();
-  @Output() refresh_edit:EventEmitter<any>=new EventEmitter();
 
   userForm: FormGroup;
-  private malfuncGroup_:MalfuncGroup;
 
 
-  constructor(private formBuilder: FormBuilder,private serviceUser: MalfuncGroupService) {}
+  constructor(private formBuilder: FormBuilder,private serviceMalfunctionGroupService: MalfuncGroupService) {}
 
   ngOnInit() {
     this.userForm = this.formBuilder.group({
@@ -33,15 +31,10 @@ export class EditMalfuncGroupComponent implements OnInit {
     });
   }
 
-  refreshClick(){
-    this.refresh_edit.emit(this.malfuncGroup_);
-  }
-
   updateData() {
     if (this.userForm.invalid) {
       return;
     }
-    console.log(this.userForm.value);
     this.closeDiv.nativeElement.click();
     const form = this.userForm.value;
     const malfuncGroup: MalfuncGroup = {
@@ -49,8 +42,7 @@ export class EditMalfuncGroupComponent implements OnInit {
       name: form.name as string
     };
     console.log(malfuncGroup);
-    this.malfuncGroup_=malfuncGroup;
-    this.serviceUser.updateEntity(malfuncGroup).subscribe(_ => this.updateMalfuncGroup.next(malfuncGroup));
+    this.serviceMalfunctionGroupService.updateEntity(malfuncGroup).subscribe(_ => this.updateMalfuncGroup.next(malfuncGroup));
   }
 }
 

@@ -10,10 +10,8 @@ import { MalfuncGroupService } from '../../services/malfunc-group.service';
 })
 export class CreateMalfuncGroupComponent implements OnInit {
   @ViewChild('close') closeDiv: ElementRef;
-  @Output() refresh_add:EventEmitter<any>=new EventEmitter();
   @Output() createMalfuncGroup = new EventEmitter<MalfuncGroup>();
   malfuncGroupForm: FormGroup;
-  private malfuncGroup_:MalfuncGroup;
   
   constructor(private serviceMalfuncGroup: MalfuncGroupService, private formBuilder: FormBuilder) {}
 
@@ -26,10 +24,6 @@ export class CreateMalfuncGroupComponent implements OnInit {
     });
   }
 
-  refreshClick(){
-    this.refresh_add.emit(this.malfuncGroup_);
-  }
-  
   clickSubmit() {
     if (this.malfuncGroupForm.invalid) {
       return;
@@ -39,8 +33,7 @@ export class CreateMalfuncGroupComponent implements OnInit {
       id: 0,
       name: form.name as string
     };
-    this.malfuncGroup_=malfuncGroup;
-    this.serviceMalfuncGroup.addEntity(malfuncGroup).subscribe(_ => this.createMalfuncGroup.next(malfuncGroup));
+    this.serviceMalfuncGroup.addEntity(malfuncGroup).subscribe(newGroup => this.createMalfuncGroup.next(newGroup));
     this.closeDiv.nativeElement.click();
   }
 }

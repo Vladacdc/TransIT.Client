@@ -1,3 +1,7 @@
+<button type="button" class="btn btn-info" data-toggle="modal" data-target="#editMalfuncGroup">
+  <i class="fas fa-pen fa-2x"></i>
+</button>
+
 <div class="modal fade" id="editMalfuncGroup" tabindex="-1" role="dialog" aria-labelledby="CreateUser" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
@@ -18,7 +22,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal" #close>Закрити</button>
-          <button type="button" class="btn btn-primary" [disabled]="userForm.invalid" (click)="updateData();refreshClick()">
+          <button type="button" class="btn btn-primary" [disabled]="userForm.invalid" (click)="updateData()">
             Зберегти
           </button>
         </div>
