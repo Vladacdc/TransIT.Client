@@ -26,7 +26,7 @@
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрити</button>
+        <button #closeCreateModal id="close" type="button" class="btn btn-secondary" data-dismiss="modal">Назад</button>
         <button type="button" class="btn btn-primary" (click)="clickSubmit()">Створити</button>
       </div>
     </div>
@@ -69,7 +69,7 @@
         </button>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Назад</button>
+        <button #closeDeleteModal type="button" class="btn btn-secondary" data-dismiss="modal">Назад</button>
         <button type="button" data-toggle="modal" class="btn btn-primary" (click)="deleteActionType(index)">
           Видалити
         </button>
