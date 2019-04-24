@@ -34,6 +34,10 @@ import { DeleteMalfuncSubgroupComponent } from './component/delete-malfunc-subgr
 import { EditMalfuncGroupComponent } from './component/edit-malfunc-group/edit-malfunc-group.component';
 import { DeleteMalfuncGroupComponent } from './component/delete-malfunc-group/delete-malfunc-group.component';
 import { NgxMaskModule } from 'ngx-mask';
+import { CreateSupplierComponent } from './component/supplier/create-supplier/create-supplier.component';
+import { EditSupplierComponent } from './component/supplier/edit-supplier/edit-supplier.component';
+import { DeleteSupplierComponent } from './component/supplier/delete-supplier/delete-supplier.component';
+import { SupplierComponent } from './component/supplier/supplier.component';
 
 @NgModule({
   declarations: [
@@ -60,8 +64,11 @@ import { NgxMaskModule } from 'ngx-mask';
     EditMalfuncSubgroupComponent,
     DeleteMalfuncSubgroupComponent,
     EditMalfuncGroupComponent,
-    DeleteMalfuncGroupComponent
-
+    DeleteMalfuncGroupComponent,
+    SupplierComponent,
+    CreateSupplierComponent,
+    EditSupplierComponent,
+    DeleteSupplierComponent
   ],
   exports: [AdminComponent],
   imports: [

@@ -21,16 +21,13 @@ export class UsersComponent implements OnInit {
     },
     columns: [
       {
-        title: 'Прізвище'
-      },
-      {
-        title: "Ім'я"
-      },
-      {
-        title: 'По_батькові'
+        title: 'ПІП'
       },
       {
         title: 'Логін'
+      },
+      {
+        title: 'Пошта'
       },
       {
         title: 'Номер',
@@ -64,16 +61,17 @@ export class UsersComponent implements OnInit {
   addTableData(newUsers: User[]) {
     this.users = [...newUsers];
     const view = newUsers.map(i => [
-      i.lastName,
-      i.firstName,
-      i.middleName,
+      i.lastName + '\n' + i.firstName + '\n' + i.middleName,
       i.login,
+      i.email,
       i.phoneNumber,
       i.role.transName,
-      `<button id="find-user-${i.login}" class="btn" data-toggle="modal" data-target="#editUser"><i class="fas fa-edit"></i></button>`,
       `<button id="find-user-${
         i.login
-      }" class="btn" data-toggle="modal" data-target="#deleteModal"><i class="fas fa-trash-alt color"></i></button>`
+      }" class="btn" data-toggle="modal" data-target="#editUser"><i class="fas fa-edit"></i></button>`,
+      `<button id="find-user-${
+        i.login
+      }" class="btn" data-toggle="modal" data-target="#deleteModal"><i class="fas fa-trash-alt" style="color: darkred"></i></button>`
     ]);
 
     this.dataTable = $('#userTable')

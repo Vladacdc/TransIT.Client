@@ -1,4 +1,4 @@
-import { Component, ElementRef, Input, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { User } from '../../models/user/user';
@@ -33,19 +33,28 @@ export class CreateUserComponent implements OnInit {
         .trigger('reset');
     });
 
-    this.userForm = this.formBuilder.group({
-      lastName: '',
-      firstName: '',
-      middleName: '',
-      phoneNumber: '',
-      login: ['', Validators.required],
-      password: ['', Validators.required],
-      email: ['', Validators.email],
-      role: ['', Validators.required]
-    });
+    this.userForm = this.formBuilder.group(
+      {
+        lastName: '',
+        firstName: '',
+        middleName: '',
+        phoneNumber: '',
+        login: ['', Validators.required],
+        password: ['', Validators.required],
+        confirmPassword: ['', Validators.required],
+        email: ['', Validators.email],
+        role: ['', Validators.required]
+      },
+      { validator: this.checkPasswords }
+    );
     this.serviceRole.getEntities().subscribe(data => (this.roleList = data));
   }
 
+  checkPasswords(group: FormGroup) {
+    let pass = group.controls.password.value;
+    let confirmPass = group.controls.confirmPassword.value;
+    return pass === confirmPass ? null : { notSame: true };
+  }
   clickSubmit() {
     if (this.userForm.invalid) {
       return;
@@ -65,7 +74,10 @@ export class CreateUserComponent implements OnInit {
 
     this.serviceUser
       .addEntity(user)
-      .subscribe(newUser => this.createUser.next(newUser), error => this.toast.error('Помилка', 'Користувач з таким логіном'));
+      .subscribe(
+        newUser => this.createUser.next(newUser),
+        error => this.toast.error('Помилка', 'Користувач з таким логіном існує')
+      );
     this.closeCreateModal.nativeElement.click();
   }
 

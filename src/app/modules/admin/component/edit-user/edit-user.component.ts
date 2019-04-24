@@ -66,6 +66,9 @@ export class EditUserComponent implements OnInit {
     };
     this.serviceUser
       .updateEntity(user)
-      .subscribe(_ => this.updateUser.next(user), error => this.toast.error('Помилка', 'Користувач з таким логіном існує'));
+      .subscribe(
+        _ => this.updateUser.next(user),
+        error => this.toast.error('Помилка', 'Користувач з таким логіном існує')
+      );
   }
 }
