@@ -6,7 +6,7 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header color">
-        <h5 class="modal-title"> <i class="fas fa-user-plus"></i> Створити користувача</h5>
+        <h5 class="modal-title"><i class="fas fa-user-plus"></i> Створити користувача</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -15,50 +15,50 @@
         <form [formGroup]="userForm">
           <div class="form-group">
             <label>Прізвище</label>
-            <input type="text" class="form-control" formControlName="lastName"
-                   placeholder="Введіть Прізвище" >
+            <input type="text" class="form-control" formControlName="lastName" placeholder="Введіть Прізвище" />
           </div>
 
           <div class="form-group">
             <label>Ім'я</label>
-            <input type="text" class="form-control" formControlName="firstName"
-                   placeholder="Введіть Ім'я">
+            <input type="text" class="form-control" formControlName="firstName" placeholder="Введіть Ім'я" />
           </div>
 
           <div class="form-group">
             <label>По батькові</label>
-            <input type="text" class="form-control" formControlName="middleName"
-                   placeholder="Введіть По батькові">
+            <input type="text" class="form-control" formControlName="middleName" placeholder="Введіть По батькові" />
           </div>
 
           <div class="form-group">
             <label>Номер телефону</label>
-            <input id="phone" type="text" class="form-control" formControlName="phoneNumber"
-                   placeholder="+(380)99-99-99-999" mask="+(000)00-00-00-000" >
+            <input
+              id="phone"
+              type="text"
+              class="form-control"
+              formControlName="phoneNumber"
+              placeholder="+(380)99-99-99-999"
+              mask="+(000)00-00-00-000"
+            />
           </div>
 
           <div class="form-group">
             <label>Логін</label>
-            <input type="text" class="form-control" formControlName="login"
-                   placeholder="Введіть логін">
+            <input type="text" class="form-control" formControlName="login" placeholder="Введіть логін" />
           </div>
 
           <div class="form-group">
             <label>Пошта</label>
-            <input type="email" class="form-control" formControlName="email"
-                   placeholder="Введіть пошту">
+            <input type="email" class="form-control" formControlName="email" placeholder="Введіть пошту" />
           </div>
 
           <div class="form-group">
             <label>Пароль</label>
-            <input type= "password" class="form-control" formControlName="password"
-                   placeholder="Введіть пароль">
+            <input type="password" class="form-control" formControlName="password" placeholder="Введіть пароль" />
           </div>
           <div class="form-group">
             <label>Роль</label>
             <select class="form-control" formControlName="role">
               <option hidden value="" disabled selected>-</option>
-              <option *ngFor="let role of roleList" [value]="">{{role.name}}</option>
+              <option *ngFor="let role of roleList" [value]="">{{ role.transName }}</option>
             </select>
           </div>
         </form>

@@ -4,6 +4,7 @@ import { RoleService } from '../../services/role.service';
 import { UserService } from '../../services/user.service';
 import { Role } from '../../models/role/role';
 import { User } from '../../models/user/user';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-edit-user',
@@ -11,7 +12,8 @@ import { User } from '../../models/user/user';
   styleUrls: ['./edit-user.component.scss']
 })
 export class EditUserComponent implements OnInit {
-  @ViewChild('close') closeDiv: ElementRef;
+  @ViewChild('close') closeEditModal: ElementRef;
+  @Output() updateUser = new EventEmitter<User>();
   @Input()
   set user(user: User) {
     if (!user) {
@@ -19,12 +21,16 @@ export class EditUserComponent implements OnInit {
     }
     this.userForm.patchValue({ ...user, role: user.role.transName });
   }
-  @Output() updateUser = new EventEmitter<User>();
 
   userForm: FormGroup;
   roles: Role[] = [];
 
-  constructor(private formBuilder: FormBuilder, private serviceRole: RoleService, private serviceUser: UserService) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private serviceRole: RoleService,
+    private serviceUser: UserService,
+    private toast: ToastrService
+  ) {}
 
   ngOnInit() {
     this.userForm = this.formBuilder.group({
@@ -39,12 +45,13 @@ export class EditUserComponent implements OnInit {
     });
     this.serviceRole.getEntities().subscribe(data => (this.roles = data));
   }
+
   updateData() {
     if (this.userForm.invalid) {
       return;
     }
-    console.log(this.userForm.value);
-    this.closeDiv.nativeElement.click();
+
+    this.closeEditModal.nativeElement.click();
     const form = this.userForm.value;
     const user: User = {
       id: form.id as number,
@@ -54,10 +61,11 @@ export class EditUserComponent implements OnInit {
       phoneNumber: form.phoneNumber as number,
       login: form.login as string,
       email: form.email as string,
-      password: '' as string,
+      password: null,
       role: this.roles.find(r => r.transName === form.role)
     };
-    console.log(user);
-    this.serviceUser.updateEntity(user).subscribe(_ => this.updateUser.next(user));
+    this.serviceUser
+      .updateEntity(user)
+      .subscribe(_ => this.updateUser.next(user), error => this.toast.error('Помилка', 'Користувач з таким логіном існує'));
   }
 }

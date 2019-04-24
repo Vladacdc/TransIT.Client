@@ -1,9 +1,12 @@
 import { Component, ElementRef, Input, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 import { User } from '../../models/user/user';
 import { Role } from '../../models/role/role';
+
 import { RoleService } from '../../services/role.service';
 import { UserService } from '../../services/user.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-create-user',
@@ -11,17 +14,25 @@ import { UserService } from '../../services/user.service';
   styleUrls: ['./create-user.component.scss']
 })
 export class CreateUserComponent implements OnInit {
-  @ViewChild('close') closeDiv: ElementRef;
+  @ViewChild('close') closeCreateModal: ElementRef;
   @Output() createUser = new EventEmitter<User>();
   userForm: FormGroup;
   roleList: Role[] = [];
 
-  constructor(private serviceRole: RoleService, private serviceUser: UserService, private formBuilder: FormBuilder) {}
+  constructor(
+    private serviceRole: RoleService,
+    private serviceUser: UserService,
+    private formBuilder: FormBuilder,
+    private toast: ToastrService
+  ) {}
 
   ngOnInit() {
     $('#createUser').on('hidden.bs.modal', function() {
-      $(this).find('form').trigger('reset');
+      $(this)
+        .find('form')
+        .trigger('reset');
     });
+
     this.userForm = this.formBuilder.group({
       lastName: '',
       firstName: '',
@@ -34,6 +45,7 @@ export class CreateUserComponent implements OnInit {
     });
     this.serviceRole.getEntities().subscribe(data => (this.roleList = data));
   }
+
   clickSubmit() {
     if (this.userForm.invalid) {
       return;
@@ -43,18 +55,21 @@ export class CreateUserComponent implements OnInit {
       id: 0,
       firstName: form.firstName as string,
       lastName: form.lastName as string,
-      middleName : form.middleName as string,
+      middleName: form.middleName as string,
       phoneNumber: form.phoneNumber as number,
       login: form.login as string,
       email: form.email as string,
       password: form.password as string,
       role: this.roleList[this.roleName.findIndex(r => r === form.role)]
     };
-    this.serviceUser.addEntity(user).subscribe(_ => this.createUser.next(user));
-    this.closeDiv.nativeElement.click();
+
+    this.serviceUser
+      .addEntity(user)
+      .subscribe(newUser => this.createUser.next(newUser), error => this.toast.error('Помилка', 'Користувач з таким логіном'));
+    this.closeCreateModal.nativeElement.click();
   }
 
   get roleName(): string[] {
-    return this.roleList.map(r => r.name);
+    return this.roleList.map(r => r.transName);
   }
 }

@@ -35,7 +35,6 @@ import { EditMalfuncGroupComponent } from './component/edit-malfunc-group/edit-m
 import { DeleteMalfuncGroupComponent } from './component/delete-malfunc-group/delete-malfunc-group.component';
 import { NgxMaskModule } from 'ngx-mask';
 
-
 @NgModule({
   declarations: [
     AdminComponent,
@@ -65,15 +64,16 @@ import { NgxMaskModule } from 'ngx-mask';
 
   ],
   exports: [AdminComponent],
-  imports: [CommonModule,
-            CoreModule,
-            AdminRoutingModule,
-            FormsModule,
-            DataTablesModule,
-            HttpClientModule,
-            ReactiveFormsModule,
-            NgxMaskModule.forRoot()],
-  providers: [RoleService,
-              UserService]
+  imports: [
+    CommonModule,
+    CoreModule,
+    AdminRoutingModule,
+    FormsModule,
+    DataTablesModule,
+    HttpClientModule,
+    ReactiveFormsModule,
+    NgxMaskModule.forRoot()
+  ],
+  providers: [RoleService, UserService]
 })
 export class AdminModule {}

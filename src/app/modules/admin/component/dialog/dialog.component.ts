@@ -1,6 +1,9 @@
 import { Component, ElementRef, Input, OnInit, ViewChild, EventEmitter, Output } from '@angular/core';
 import { UserService } from '../../services/user.service';
 import { User } from '../../models/user/user';
+import { catchError } from 'rxjs/operators';
+import { throwError } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-dialog',
@@ -8,19 +11,21 @@ import { User } from '../../models/user/user';
   styleUrls: ['./dialog.component.scss']
 })
 export class DialogComponent implements OnInit {
-  @ViewChild('close') closeDiv: ElementRef;
+  @ViewChild('close') closeDeleteModal: ElementRef;
   @Input() user: User;
   @Output() deleteUser = new EventEmitter<User>();
 
-  constructor(private service: UserService) {}
+  constructor(private service: UserService, private toast: ToastrService) {}
 
   ngOnInit() {}
 
   delete() {
-    console.log(this.user);
-    this.closeDiv.nativeElement.click();
-    this.service.deleteEntity(this.user.id).subscribe(data => {
-      this.deleteUser.next(this.user);
-    });
+    this.closeDeleteModal.nativeElement.click();
+    this.service.deleteEntity(this.user.id).subscribe(
+      data => {
+        this.deleteUser.next(this.user);
+      },
+      error => this.toast.error('Помилка', 'Користувач містить записи')
+    );
   }
 }
