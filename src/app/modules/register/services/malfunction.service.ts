@@ -8,4 +8,8 @@ import { Malfunction } from '../models/malfunction';
 })
 export class MalfunctionService extends CrudService<Malfunction> {
   protected readonly serviceUrl = `${environment.apiUrl}/malfunction`;
+
+  protected mapEntity(malfunction: Malfunction): Malfunction {
+    return new Malfunction(malfunction);
+  }
 }

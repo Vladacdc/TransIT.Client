@@ -1,18 +1,18 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {IssueLog} from '../../models/issuelog';
-import {ActivatedRoute, Router} from '@angular/router';
-import {IssuelogService} from '../../services/issuelog.service';
-import {ActionType} from '../../models/actionType';
-import {Document} from '../../models/document';
-import {ActionTypeService} from '../../services/action-type.service';
-import {StateService} from '../../services/state.service';
-import {State} from '../../models/state';
-import {Supplier} from '../../models/supplier';
-import {SupplierService} from '../../services/supplier.service';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {Issue} from '../../models/issue';
-import {DocumentService} from '../../services/document.service';
-import {User} from '../../models/user';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { IssueLog } from '../../models/issuelog';
+import { ActivatedRoute, Router } from '@angular/router';
+import { IssuelogService } from '../../services/issuelog.service';
+import { ActionType } from '../../models/actionType';
+import { Document } from '../../models/document';
+import { ActionTypeService } from '../../services/action-type.service';
+import { StateService } from '../../services/state.service';
+import { State } from '../../models/state';
+import { Supplier } from '../../models/supplier';
+import { SupplierService } from '../../services/supplier.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Issue } from '../../models/issue';
+import { DocumentService } from '../../services/document.service';
+import { User } from '../../models/user';
 
 @Component({
   selector: 'app-edit-issue-log',
@@ -20,7 +20,6 @@ import {User} from '../../models/user';
   styleUrls: ['./edit-issue-log.component.scss']
 })
 export class EditIssueLogComponent implements OnInit {
-
   public issueLog: IssueLog;
   public assigneeUser: User;
   public actionTypes: Array<ActionType>;
@@ -45,30 +44,29 @@ export class EditIssueLogComponent implements OnInit {
       actionType: new FormControl('', Validators.compose([Validators.required, Validators.nullValidator])),
       expenses: new FormControl('', Validators.nullValidator),
       summary: new FormControl('', Validators.compose([Validators.nullValidator, Validators.maxLength(512)])),
-      supplier: new FormControl('', Validators.nullValidator),
+      supplier: new FormControl('', Validators.nullValidator)
     });
   }
 
   private createIssueLog(): IssueLog {
-    return new IssueLog(
-      0,
-      '',
-      0,
-      new ActionType(),
-      new Issue(),
-      new State(),
-      new State(),
-      new Supplier());
+    return new IssueLog({
+      id: 0,
+      description: '',
+      expenses: 0,
+      actionType: new ActionType(),
+      issue: new Issue(),
+      oldState: new State(),
+      newState: new State(),
+      supplier: new Supplier()
+    });
   }
 
   ngOnInit() {
     this.activatedRoute.params.subscribe(params => {
-      const issue = params;
+      const issue = new Issue(params);
       if (issue) {
         this.issueLog.issue = issue;
         this.issueLog.oldState = { id: issue.state.id };
-      // } else if (issue instanceof IssueLog) {
-      //   this.issueLog = issue;
       } else {
         this.router.navigate(['/engineer/issues']);
       }
@@ -102,9 +100,7 @@ export class EditIssueLogComponent implements OnInit {
       return;
     }
 
-    this.issueLog.supplier = this.issueLog.supplier.id == null
-      ? null
-      : this.issueLog.supplier;
+    this.issueLog.supplier = this.issueLog.supplier.id == null ? null : this.issueLog.supplier;
     alert(this.issueLog.description);
     this.issueLog.issue.assignedTo = this.assigneeUser;
     if (this.documents.length > 0) {

@@ -9,6 +9,7 @@ import { MalfunctionGroup } from '../../models/malfunction-group';
 import { Issue } from '../../models/issue';
 import { IssueService } from '../../services/issue.service';
 import { ToastrService } from 'ngx-toastr';
+import { TEntity } from 'src/app/modules/core/models/entity/entity';
 
 @Component({
   selector: 'app-create-issue',
@@ -16,10 +17,9 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./create-issue.component.scss']
 })
 export class CreateIssueComponent implements OnInit {
-  issueForm: FormGroup;
-
   @Output() createdIssue = new EventEmitter<Issue>();
 
+  issueForm: FormGroup;
   vehicles: Vehicle[] = [];
   malfunctionGroups: MalfunctionGroup[] = [];
   malfunctionSubgroups: MalfunctionSubgroup[] = [];
@@ -34,6 +34,36 @@ export class CreateIssueComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.setUpForm();
+    this.loadEntities();
+  }
+
+  onSubmit() {
+    if (this.issueForm.invalid) {
+      return;
+    }
+    this.createIssue();
+    this.setUpForm();
+    this.hideModalWindow();
+  }
+
+  get malfunctionSubgroupsFilteredByGroup(): MalfunctionSubgroup[] {
+    const selectedGroup = this.formValue.malfunctionGroup;
+    const filteredSubgroups = this.filterSubgroupsByGroup(selectedGroup);
+    return filteredSubgroups;
+  }
+
+  get malfunctionsFilteredByGroup(): MalfunctionGroup[] {
+    const selectedSubgroup = this.formValue.malfunctionSubgroup;
+    const filteredMalfunctions = this.filterMalfunctionsBySubgroup(selectedSubgroup);
+    return filteredMalfunctions;
+  }
+
+  clickSubmit(button: HTMLButtonElement) {
+    button.click();
+  }
+
+  private setUpForm() {
     this.issueForm = this.fb.group({
       vehicle: ['', Validators.required],
       malfunctionGroup: '',
@@ -41,93 +71,89 @@ export class CreateIssueComponent implements OnInit {
       malfunction: ['', Validators.required],
       summary: ['', Validators.required]
     });
+  }
 
+  private loadEntities() {
     this.vehicleService.getEntities().subscribe(data => (this.vehicles = data));
     this.malfunctionService.getEntities().subscribe(malfunctions => {
-      const filterFunct = (val: MalfunctionGroup | MalfunctionSubgroup, index: number, a: MalfunctionGroup[] | MalfunctionSubgroup[]) => {
-        return a.findIndex(v => v.name === val.name) === index;
-      };
       this.malfunctions = malfunctions;
-      this.malfunctionSubgroups = malfunctions.map(m => m.malfunctionSubgroup).filter(filterFunct);
-      this.malfunctionGroups = this.malfunctionSubgroups.map(s => s.malfunctionGroup).filter(filterFunct);
+
+      const allSubgroups = malfunctions.map(m => m.malfunctionSubgroup);
+      this.malfunctionSubgroups = Array.from(this.getDistinct(allSubgroups));
+
+      const allGroups = this.malfunctionSubgroups.map(s => s.malfunctionGroup);
+      this.malfunctionGroups = Array.from(this.getDistinct(allGroups));
     });
   }
 
-  onSubmit() {
-    if (this.issueForm.invalid) {
-      return;
-    }
+  private getDistinct<T extends TEntity<T>>(entities: T[]) {
+    return entities.filter((value, index, self) => self.findIndex(item => item.id === value.id) === index);
+  }
 
-    const form = this.issueForm.value;
-    const malfunction = this.malfunctions.find(m => m.name === form.malfunction);
-    const vehicle = this.vehicles.find(v => this.vehicleName(v) === form.vehicle);
-    const summary = form.summary as string;
-
-    const issue: Issue = {
-      summary,
-      malfunction: { id: malfunction.id },
-      vehicle: { id: vehicle.id }
-    };
-
+  private createIssue() {
+    const issue = new Issue(this.formValue);
     this.issueService
       .addEntity(issue)
       .subscribe(
         newIssue => this.createdIssue.next(newIssue),
         _ => this.toast.error('Не вдалось створити заявку', 'Помилка створення заявки')
       );
+  }
 
-    this.issueForm.reset();
+  private get formValue() {
+    return this.issueForm.value;
+  }
+
+  private hideModalWindow() {
     const modalWindow: any = $('#createIssue');
     modalWindow.modal('hide');
   }
 
-  clickSubmit(button: HTMLButtonElement) {
-    button.click();
-  }
-
-  get vehiclesNames(): string[] {
-    return this.vehicles.map(vehicle => this.vehicleName(vehicle));
-  }
-
-  get groupsNames(): string[] {
-    return this.malfunctionGroups.map(g => g.name);
-  }
-
-  get subgroupsNames(): string[] {
-    const subgroups = this.malfunctionSubgroups
-      .filter(val => {
-        const group = this.issueForm.value.malfunctionGroup;
-        if (!group) {
-          return true;
-        }
-        return val.malfunctionGroup.name === group;
-      })
-      .map(s => s.name);
-    if (subgroups.findIndex(s => s === this.issueForm.value.malfunctionSubgroup) === -1) {
-      this.issueForm.patchValue({ malfunctionSubgroup: '' });
+  private filterSubgroupsByGroup(group: MalfunctionGroup): MalfunctionSubgroup[] {
+    const subgroups = this.malfunctionSubgroups;
+    if (!group) {
+      return subgroups;
     }
-    return subgroups;
-  }
+    const filteredSubgroups = this.malfunctionSubgroups.filter(
+      subgroup => subgroup.malfunctionGroup.name === group.name
+    );
 
-  get malfunctionsNames(): string[] {
-    const malfunctions = this.malfunctions
-      .filter(val => {
-        const subgroup = this.issueForm.value.malfunctionSubgroup;
-        if (!subgroup) {
-          const subgroups = this.subgroupsNames;
-          return subgroups.findIndex(v => v === val.malfunctionSubgroup.name) !== -1;
-        } else {
-          return val.malfunctionSubgroup.name === subgroup;
-        }
-      })
-      .map(m => m.name);
-    if (malfunctions.findIndex(m => m === this.issueForm.value.malfunction) === -1) {
-      this.issueForm.patchValue({ malfunction: '' });
+    if (this.notSelectedSubgroup(filteredSubgroups)) {
+      this.setDefaultSubgroup();
     }
-    return malfunctions;
+    return filteredSubgroups;
   }
 
-  private vehicleName(vehicle: Vehicle): string {
-    return `${vehicle.brand} ${vehicle.model} ${vehicle.vincode || ''} ${vehicle.inventoryId || ''} ${vehicle.regNum || ''}`;
+  private notSelectedSubgroup(subgroups: MalfunctionSubgroup[]): boolean {
+    return subgroups.findIndex(s => s === this.formValue.malfunctionSubgroup) === -1;
+  }
+
+  private setDefaultSubgroup(): void {
+    this.issueForm.patchValue({ malfunctionSubgroup: '' });
+  }
+
+  private filterMalfunctionsBySubgroup(subgroup: MalfunctionSubgroup): Malfunction[] {
+    const malfunctions = this.malfunctions;
+    const filteredMalfunctions = malfunctions.filter(malfunction => {
+      if (!subgroup) {
+        const subgroups = this.malfunctionSubgroupsFilteredByGroup;
+        return subgroups.findIndex(item => item.name === malfunction.malfunctionSubgroup.name) !== -1;
+      } else {
+        return malfunction.malfunctionSubgroup.name === subgroup.name;
+      }
+    });
+
+    if (this.notSelectedMalfunction(filteredMalfunctions)) {
+      this.setDefaultMalfunction();
+    }
+    return filteredMalfunctions;
+  }
+
+  private notSelectedMalfunction(malfunctions: Malfunction[]): boolean {
+    return malfunctions.findIndex(m => m === this.formValue.malfunction) === -1;
+  }
+
+  private setDefaultMalfunction(): void {
+    this.issueForm.patchValue({ malfunction: '' });
   }
 }

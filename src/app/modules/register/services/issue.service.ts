@@ -8,4 +8,8 @@ import { environment } from 'src/environments/environment';
 })
 export class IssueService extends CrudService<Issue> {
   protected readonly serviceUrl = `${environment.apiUrl}/issue`;
+
+  protected mapEntity(issue: Issue): Issue {
+    return new Issue(issue);
+  }
 }

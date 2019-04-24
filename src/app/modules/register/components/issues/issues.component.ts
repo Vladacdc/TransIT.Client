@@ -18,22 +18,11 @@ export class IssuesComponent implements OnInit {
       url: '//cdn.datatables.net/plug-ins/1.10.19/i18n/Ukrainian.json'
     },
     columns: [
-      {
-        title: 'Транспорт'
-      },
-      {
-        title: 'Стан заявки'
-      },
-      {
-        title: 'Несправність'
-      },
-      {
-        title: 'Опис'
-      },
-      {
-        title: '',
-        orderable: false
-      }
+      { title: 'Транспорт' },
+      { title: 'Стан заявки' },
+      { title: 'Несправність' },
+      { title: 'Опис' },
+      { title: 'Дії', orderable: false }
     ],
     scrollX: true
   };

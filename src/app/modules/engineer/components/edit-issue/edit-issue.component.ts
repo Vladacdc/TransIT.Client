@@ -1,6 +1,6 @@
-import {Component, Input, OnInit} from '@angular/core';
-import {Issue} from '../../models/issue';
-import {ActivatedRoute} from '@angular/router';
+import { Component, Input, OnInit } from '@angular/core';
+import { Issue } from '../../models/issue';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-edit-issue',
@@ -8,14 +8,13 @@ import {ActivatedRoute} from '@angular/router';
   styleUrls: ['./edit-issue.component.scss']
 })
 export class EditIssueComponent implements OnInit {
-
   public issue: Issue;
 
   constructor(private activatedRoute: ActivatedRoute) {}
 
   ngOnInit() {
     this.activatedRoute.params.subscribe(data => {
-      this.issue = data;
+      this.issue = new Issue(data);
     });
   }
 }

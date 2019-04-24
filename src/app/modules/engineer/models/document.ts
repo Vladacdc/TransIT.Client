@@ -1,12 +1,10 @@
-import {IssueLog} from './issuelog';
+import { IssueLog } from './issuelog';
+import { TEntity } from '../../core/models/entity/entity';
 
-export class Document {
-  constructor(
-    public id?: number,
-    public name?: string,
-    public description?: string,
-    public issueLog?: IssueLog,
-    public createDate?: Date,
-    public modDate?: Date
-  ) {}
+export class Document extends TEntity<Document> {
+  name?: string;
+  description?: string;
+  issueLog?: IssueLog;
+  createDate?: Date;
+  modDate?: Date;
 }

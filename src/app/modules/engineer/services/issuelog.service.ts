@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
-import {environment} from '../../../../environments/environment';
-import {CrudService} from '../../core/services/crud.service';
-import {IssueLog} from '../models/issuelog';
-import {Observable} from 'rxjs';
-import {catchError, tap} from 'rxjs/operators';
+import { environment } from '../../../../environments/environment';
+import { CrudService } from '../../core/services/crud.service';
+import { IssueLog } from '../models/issuelog';
+import { Observable } from 'rxjs';
+import { catchError, tap } from 'rxjs/operators';
 
 @Injectable()
 export class IssuelogService extends CrudService<IssueLog> {

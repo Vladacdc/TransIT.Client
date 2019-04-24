@@ -12,7 +12,7 @@ import { VehicleTypeService } from '../../services/vehicle-type.service';
 export class VehiclesComponent implements OnInit {
   vehicles: Vehicle[] = [];
   vehicleTypeList: VehicleType[] = [];
-  datatable: any;
+  datatable: DataTables.Api;
   vehicle: Vehicle;
 
   private readonly tableParams: DataTables.Settings = {
@@ -28,15 +28,18 @@ export class VehiclesComponent implements OnInit {
     }
   };
 
-  constructor(private serviceVehicle: VehicleService, private serviceVehicleType: VehicleTypeService,
-    private chRef: ChangeDetectorRef) { }
+  constructor(
+    private serviceVehicle: VehicleService,
+    private serviceVehicleType: VehicleTypeService,
+    private chRef: ChangeDetectorRef
+  ) {}
 
   ngOnInit() {
     this.serviceVehicleType.getEntities().subscribe(type => (this.vehicleTypeList = type));
     this.serviceVehicle.getEntities().subscribe(vehicles => {
       this.vehicles = vehicles;
       this.chRef.detectChanges();
-      const table: any = $('table');
+      const table = $('table');
       this.datatable = table.DataTable(this.tableParams);
     });
   }

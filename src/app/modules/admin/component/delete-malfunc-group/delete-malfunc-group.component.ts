@@ -11,25 +11,23 @@ export class DeleteMalfuncGroupComponent implements OnInit {
   @ViewChild('close') closeDiv: ElementRef;
   @Input() malfuncGroup: MalfuncGroup;
   @Output() deleteUser = new EventEmitter<MalfuncGroup>();
-  @Output() refresh_delete:EventEmitter<any>=new EventEmitter();
-  private malfuncGroup_:MalfuncGroup;
-
+  @Output() refresh_delete: EventEmitter<any> = new EventEmitter();
+  private malfuncGroup_: MalfuncGroup;
 
   constructor(private service: MalfuncGroupService) {}
 
   ngOnInit() {}
 
-  refreshClick(){
+  refreshClick() {
     this.refresh_delete.emit(this.malfuncGroup);
   }
 
   deleteMalgGroup() {
     console.log(this.malfuncGroup);
     this.closeDiv.nativeElement.click();
-    this.malfuncGroup_=MalfuncGroup;
+    this.malfuncGroup_ = this.malfuncGroup;
     this.service.deleteEntity(this.malfuncGroup.id).subscribe(data => {
-    this.deleteUser.next(this.malfuncGroup_);
+      this.deleteUser.next(this.malfuncGroup_);
     });
   }
-  
 }

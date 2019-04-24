@@ -1,8 +1,8 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {Document} from '../../models/document';
-import {FormControl, FormGroup, Validators} from '@angular/forms';
-import {IssueLog} from '../../models/issuelog';
-import {ActivatedRoute} from '@angular/router';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Document } from '../../models/document';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { IssueLog } from '../../models/issuelog';
+import { ActivatedRoute } from '@angular/router';
 
 declare const $;
 
@@ -12,7 +12,6 @@ declare const $;
   styleUrls: ['./create-document.component.scss']
 })
 export class CreateDocumentComponent implements OnInit {
-
   @Output() public createDocument: EventEmitter<Document>;
   @Input() public issueLog: IssueLog;
   public documentForm: FormGroup;
@@ -21,33 +20,27 @@ export class CreateDocumentComponent implements OnInit {
   constructor(private activatedRoute: ActivatedRoute) {
     this.createDocument = new EventEmitter<Document>();
     this.documentForm = new FormGroup({
-      name: new FormControl('', Validators.compose([
-        Validators.required,
-        Validators.minLength(4),
-        Validators.maxLength(100)
-      ])),
+      name: new FormControl(
+        '',
+        Validators.compose([Validators.required, Validators.minLength(4), Validators.maxLength(100)])
+      ),
       description: new FormControl('', Validators.maxLength(512))
     });
   }
 
   private newDocument(): Document {
-    return new Document(
-      0,
-      '',
-      '',
-      this.issueLog
-    );
+    return new Document({ name: '', description: '', issueLog: this.issueLog });
   }
 
   ngOnInit() {
     this.document = this.newDocument();
     this.activatedRoute.params.subscribe(res => {
-      this.document = res;
-      // this.documentForm.setValue(['name', doc.name]);
-      // this.documentForm.setValue(['description', doc.description]);
+      this.document = new Document(res);
     });
     $('#createDoc').on('hidden.bs.modal', () => {
-      $(this).find('form').trigger('reset');
+      $(this)
+        .find('form')
+        .trigger('reset');
     });
   }
 
@@ -57,11 +50,13 @@ export class CreateDocumentComponent implements OnInit {
       return;
     }
 
-    this.createDocument.emit(new Document(
-      0,
-      this.documentForm.value.name,
-      this.documentForm.value.description,
-      this.issueLog
-    ));
+    this.createDocument.emit(
+      new Document({
+        id: 0,
+        name: this.documentForm.value.name,
+        description: this.documentForm.value.description,
+        issueLog: this.issueLog
+      })
+    );
   }
 }
