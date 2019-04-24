@@ -20,6 +20,7 @@ import {DocumentService} from './services/document.service';
 import { CreateDocumentComponent } from './components/create-document/create-document.component';
 import { IssueLogAssigneesComponent } from './components/issue-log-assignees/issue-log-assignees.component';
 import { DocumentsComponent } from './components/documents/documents.component';
+import { IssueLogSuppliersComponent } from './components/issue-log-suppliers/issue-log-suppliers.component';
 
 const routes: Routes = [
   {
@@ -50,7 +51,8 @@ const routes: Routes = [
     NestedIssueLogsComponent,
     CreateDocumentComponent,
     IssueLogAssigneesComponent,
-    DocumentsComponent
+    DocumentsComponent,
+    IssueLogSuppliersComponent
   ]
 })
 export class EngineerRoutingModule {}

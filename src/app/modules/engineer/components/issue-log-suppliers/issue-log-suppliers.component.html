@@ -1,0 +1,13 @@
+<div class="form-group dropdown">
+  <label for="supplierInput">Постачальник</label>
+  <input id="supplierInput" type="text"
+         class="dropdown-toggle form-control"
+         placeholder="Введіть постачальника"
+         [(ngModel)]="searchString"
+         (ngModelChange)="onSearchChange()">
+  <div class="dropdown-menu">
+    <button class="dropdown-item" type="button" *ngFor="let item of suppliers" (click)="selectItem(item)">
+      {{ item.name }}
+    </button>
+  </div>
+</div>

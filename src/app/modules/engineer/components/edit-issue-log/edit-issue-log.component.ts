@@ -24,6 +24,7 @@ export class EditIssueLogComponent implements OnInit {
 
   public issueLog: IssueLog;
   public assigneeUser: User;
+  public supplier: Supplier;
   public actionTypes: Array<ActionType>;
   public states: Array<State>;
   public suppliers: Array<Supplier>;
@@ -95,6 +96,10 @@ export class EditIssueLogComponent implements OnInit {
     this.assigneeUser = entity;
   }
 
+  public assignSupplier(entity: Supplier): void {
+    this.supplier = entity;
+  }
+
   public deleteDocument(entity: Document): void {
     this.documents = this.documents.filter(x => x.id === entity.id);
   }
@@ -110,9 +115,7 @@ export class EditIssueLogComponent implements OnInit {
       : this.issueLogForm.value.deadline;
     this.issueLog.newState = new State(
       this.issueLogForm.value.state || this.issueLog.issue.state.id);
-    this.issueLog.supplier = !this.issueLog.supplier.id
-      ? null
-      : this.issueLog.supplier;
+    this.issueLog.supplier = this.supplier;
     if (this.assigneeUser) {
       this.issueLog.issue.assignedTo = this.assigneeUser;
     }

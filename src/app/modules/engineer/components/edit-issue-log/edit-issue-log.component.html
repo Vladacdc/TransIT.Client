@@ -43,13 +43,7 @@
       class="form-control">
   </div>
   <div class="form-group">
-    <label class="col-form-label">Постачальники:</label>
-    <select
-      formControlName="supplier"
-      name="supplier"
-      class="form-control">
-      <option *ngFor="let item of suppliers" [value]="item?.id">{{ item?.name }}</option>
-    </select>
+    <app-issue-log-suppliers (selectSupplier)="assignSupplier($event)"></app-issue-log-suppliers>
   </div>
   <div class="form-group">
     <label class="col-form-label">Дедлайн</label>
