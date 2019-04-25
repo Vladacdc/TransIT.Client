@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { MalfuncService } from '../../../services/malfunc.service';
 import { Malfunction } from '../../../models/malfunc/malfunc';
 
+
 declare const $;
 
 @Component({
@@ -12,12 +13,15 @@ declare const $;
 })
 export class MalfuncComponent implements OnInit {
   public malfunction: Array<Malfunction>;
-  private table: any;
+  private tableMalfunction: any;
 
-  constructor(private malfuncService: MalfuncService, private router: Router) {}
+  constructor(
+    private malfuncService: MalfuncService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
-    this.table = $('#malfunc-table').DataTable({
+    this.tableMalfunction = $('#malfunc-table').DataTable({
       responsive: true,
       select: {
         style: 'single'
@@ -30,14 +34,14 @@ export class MalfuncComponent implements OnInit {
     });
     this.malfuncService.getEntities().subscribe(selectedMalfunction => {
       this.malfunction = selectedMalfunction;
-      this.table.rows.add(this.malfunction);
-      this.table.draw();
+      this.tableMalfunction.rows.add(this.malfunction);
+      this.tableMalfunction.draw();
     });
-    this.table.on('select', (e, dt, type, indexes) => {
+    this.tableMalfunction.on('select', (e, dt, type, indexes) => {
       console.log('23456');
-      const item = this.table.rows(indexes).data()[0];
+      const item = this.tableMalfunction.rows(indexes).data()[0];
       this.router.navigate(['/admin/users', item]);
     });
-    console.dir(this.table);
+    console.dir(this.tableMalfunction);
   }
 }
