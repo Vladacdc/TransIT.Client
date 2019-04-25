@@ -1,5 +1,5 @@
 import { Component, ElementRef, Input, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { RoleService } from '../../services/role.service';
 import { UserService } from '../../services/user.service';
 import { Role } from '../../models/role/role';
@@ -38,9 +38,9 @@ export class EditUserComponent implements OnInit {
       lastName: '',
       firstName: '',
       middleName: '',
-      phoneNumber: 0,
-      login: ['', Validators.required],
-      email: ['', Validators.email],
+      phoneNumber: new FormControl('', Validators.minLength(12)),
+      login: new FormControl('', Validators.compose([Validators.required, Validators.minLength(6)])),
+      email: new FormControl('', Validators.email),
       role: ['', Validators.required]
     });
     this.serviceRole.getEntities().subscribe(data => (this.roles = data));
@@ -71,4 +71,13 @@ export class EditUserComponent implements OnInit {
         error => this.toast.error('Помилка', 'Користувач з таким логіном існує')
       );
   }
+
+  account_validation_messages = {
+    email: [{ type: 'email', message: 'Введіть пошту коректно' }],
+    login: [
+      { type: 'required', message: "Поле логін є обов'язковим" },
+      { type: 'minlength', message: 'Логін має бути більше 6 символів' }
+    ],
+    phoneNumber: [{ type: 'minlength', message: 'Введіть коректно номер' }]
+  };
 }

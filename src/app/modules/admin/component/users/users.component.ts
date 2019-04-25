@@ -21,7 +21,13 @@ export class UsersComponent implements OnInit {
     },
     columns: [
       {
-        title: 'ПІП'
+        title: 'Прізвище'
+      },
+      {
+        title: "Ім'я"
+      },
+      {
+        title: 'Побатькові'
       },
       {
         title: 'Логін'
@@ -37,11 +43,7 @@ export class UsersComponent implements OnInit {
         title: 'Роль'
       },
       {
-        title: 'Змінити',
-        orderable: false
-      },
-      {
-        title: 'Видалити',
+        title: 'Дії',
         orderable: false
       }
     ]
@@ -61,15 +63,17 @@ export class UsersComponent implements OnInit {
   addTableData(newUsers: User[]) {
     this.users = [...newUsers];
     const view = newUsers.map(i => [
-      i.lastName + '\n' + i.firstName + '\n' + i.middleName,
+      i.lastName,
+      i.firstName,
+      i.middleName,
       i.login,
       i.email,
       i.phoneNumber,
       i.role.transName,
       `<button id="find-user-${
         i.login
-      }" class="btn" data-toggle="modal" data-target="#editUser"><i class="fas fa-edit"></i></button>`,
-      `<button id="find-user-${
+      }" class="btn" data-toggle="modal" data-target="#editUser"><i class="fas fa-edit"></i></button>
+      <button id="find-user-${
         i.login
       }" class="btn" data-toggle="modal" data-target="#deleteModal"><i class="fas fa-trash-alt" style="color: darkred"></i></button>`
     ]);

@@ -1,5 +1,5 @@
 import { Component, ElementRef, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 
 import { User } from '../../models/user/user';
 import { Role } from '../../models/role/role';
@@ -38,12 +38,12 @@ export class CreateUserComponent implements OnInit {
         lastName: '',
         firstName: '',
         middleName: '',
-        phoneNumber: '',
-        login: ['', Validators.required],
-        password: ['', Validators.required],
-        confirmPassword: ['', Validators.required],
-        email: ['', Validators.email],
-        role: ['', Validators.required]
+        phoneNumber: new FormControl('', Validators.minLength(12)),
+        login: new FormControl('', Validators.compose([Validators.required, Validators.minLength(6)])),
+        password: new FormControl('', Validators.compose([Validators.required, Validators.minLength(6)])),
+        confirmPassword: new FormControl('', Validators.compose([Validators.required, Validators.minLength(6)])),
+        email: new FormControl('', Validators.email),
+        role: new FormControl('', Validators.required)
       },
       { validator: this.checkPasswords }
     );
@@ -84,4 +84,22 @@ export class CreateUserComponent implements OnInit {
   get roleName(): string[] {
     return this.roleList.map(r => r.transName);
   }
+
+  account_validation_messages = {
+    email: [{ type: 'email', message: 'Введіть пошту коректно' }],
+    confirmPassword: [
+      { type: 'required', message: 'Підтвердження паролю вимагається' },
+      { type: 'notSame', message: 'Паролі не співпадають' }
+    ],
+    password: [
+      { type: 'required', message: "Поле пароль є обов'язковим" },
+      { type: 'minlength', message: 'Пароль має бути більше 6 символів' }
+    ],
+    login: [
+      { type: 'required', message: "Поле логін є обов'язковим" },
+      { type: 'minlength', message: 'Логін має бути більше 6 символів' }
+    ],
+    phoneNumber: [{ type: 'minlength', message: 'Введіть коректно номер' }],
+    role: [{ type: 'required', message: "Поле роль є обов'язковим" }]
+  };
 }
