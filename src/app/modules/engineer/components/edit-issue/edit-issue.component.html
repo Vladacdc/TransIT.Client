@@ -21,23 +21,30 @@
   </div>
   <div class="row">
     <div class="form-group col-sm-6 col-md-6">
-        <label for="vehicleDisInput">Транспорт</label>
-        <div class="form-control" id="vehicleDisInput">
-          {{ issue?.vehicle?.inventoryId || '' + ' ' + issue?.vehicle?.vincode || '' + ' ' + issue?.vehicle?.regNum || '' }}
-        </div>
+      <label for="vehicleDisInput">Транспорт</label>
+      <div class="form-control" id="vehicleDisInput">
+        {{
+          issue?.vehicle?.inventoryId || '' + ' ' + issue?.vehicle?.vincode || '' + ' ' + issue?.vehicle?.regNum || ''
+        }}
+      </div>
     </div>
     <div class="form-group col-sm-6 col-md-6">
       <label for="assigneeDisInput">Відповідальний</label>
       <div class="form-control" id="assigneeDisInput">
-        {{ issue?.assignedTo?.login || '' }}
+        {{
+          issue.assignedTo?.login ||
+            '' + ' ' + issue.assignedTo?.firstName ||
+            '' + ' ' + issue.assignedTo?.lastName ||
+            '' + ' '
+        }}
       </div>
     </div>
   </div>
   <div class="row">
-  <div class="form-group col-sm-12 col-md-4">
+    <div class="form-group col-sm-12 col-md-4">
       <label for="deadlineDisInput">Виконати до</label>
       <div class="form-control" id="deadlineDisInput">
-        {{ issue?.deadLine || '' }}
+        {{ issue?.deadline || '' }}
       </div>
     </div>
     <div class="form-group col-sm-12 col-md-4">
@@ -55,14 +62,14 @@
   </div>
   <div class="row">
     <div class="form-group col-sm-12 col-md-12">
-        <label for="summaryDisInput">Опис</label>
-        <div class="form-control" id="summaryDisInput">
-          {{ issue.summary }}
-        </div>
+      <label for="summaryDisInput">Опис</label>
+      <div class="form-control" id="summaryDisInput">
+        {{ issue.summary }}
+      </div>
     </div>
   </div>
   <div class="row">
-    <a class="btn btn-primary" [routerLink]="['/engineer/issue-logs/edit', issue]" >Створити історію</a>
+    <a class="btn btn-primary" [routerLink]="['/engineer/issue-logs/edit', issue]">Створити історію</a>
     <app-nested-issue-logs [issue]="issue"></app-nested-issue-logs>
   </div>
 </div>

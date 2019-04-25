@@ -1,8 +1,8 @@
-import {Component, OnInit} from '@angular/core';
-import {IssuelogService} from '../../services/issuelog.service';
-import {IssueLog} from '../../models/issuelog';
-import {Router} from '@angular/router';
-import {Observable} from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { IssuelogService } from '../../services/issuelog.service';
+import { IssueLog } from '../../models/issuelog';
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 declare const $;
 
@@ -12,14 +12,10 @@ declare const $;
   styleUrls: ['./issue-logs.component.scss']
 })
 export class IssueLogsComponent implements OnInit {
-
   public issueLogs: Array<IssueLog>;
   protected table: any;
 
-  constructor(
-    protected issueLogService: IssuelogService,
-    protected router: Router
-  ) {}
+  constructor(protected issueLogService: IssuelogService, protected router: Router) {}
 
   public ngOnInit() {
     this.issueLogService.getEntities().subscribe(logs => {
@@ -47,7 +43,7 @@ export class IssueLogsComponent implements OnInit {
         { title: 'Постачальник', data: 'supplier.name', defaultContent: '' },
         { title: 'Транспорт', data: 'issue.vehicle.inventoryId', defaultContent: '' },
         { title: 'Створено', data: 'createDate', defaultContent: '' },
-        { title: 'Редаговано', data: 'modDate', defaultContent: '' },
+        { title: 'Редаговано', data: 'modDate', defaultContent: '' }
       ],
       paging: true,
       language: {
@@ -63,7 +59,7 @@ export class IssueLogsComponent implements OnInit {
   }
 
   protected selectRow(e: any, dt: any, type: any, indexes: any): void {
-    const item = this.table.rows( indexes ).data()[0];
+    const item = this.table.rows(indexes).data()[0];
     this.router.navigate(['/engineer/issue-logs/edit', item]);
   }
 }

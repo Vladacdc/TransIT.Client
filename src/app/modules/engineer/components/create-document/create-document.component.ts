@@ -29,7 +29,11 @@ export class CreateDocumentComponent implements OnInit {
   }
 
   private newDocument(): Document {
-    return new Document({ name: '', description: '', issueLog: this.issueLog });
+    return new Document({
+      name: '',
+      description: '',
+      issueLog: this.issueLog
+    });
   }
 
   ngOnInit() {
@@ -58,5 +62,8 @@ export class CreateDocumentComponent implements OnInit {
         issueLog: this.issueLog
       })
     );
+    $('#close-btn').trigger('click');
+    this.documentForm.reset();
+    this.document = this.newDocument();
   }
 }

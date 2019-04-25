@@ -8,9 +8,8 @@ describe('NestedIssueLogsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ NestedIssueLogsComponent ]
-    })
-    .compileComponents();
+      declarations: [NestedIssueLogsComponent]
+    }).compileComponents();
   }));
 
   beforeEach(() => {

@@ -1,7 +1,7 @@
-import {Component, OnInit} from '@angular/core';
-import {IssueService} from '../../services/issue.service';
-import {Issue} from '../../models/issue';
-import {Router} from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { IssueService } from '../../services/issue.service';
+import { Issue } from '../../models/issue';
+import { Router } from '@angular/router';
 
 declare const $;
 
@@ -11,7 +11,6 @@ declare const $;
   styleUrls: ['./issues.component.scss']
 })
 export class IssuesComponent implements OnInit {
-
   public issues: Array<Issue>;
   private table: any;
 
@@ -33,10 +32,10 @@ export class IssuesComponent implements OnInit {
         { title: 'Гарантія', data: 'warranty', defaultContent: '' },
         { title: 'Транспорт', data: 'vehicle.inventoryId', defaultContent: '' },
         { title: 'Відповідальний', data: 'assignedTo.login', defaultContent: '' },
-        { title: 'Виконати до', data: 'deadLine', defaultContent: '' },
+        { title: 'Виконати до', data: 'deadline', defaultContent: '' },
         { title: 'Опис', data: 'summary', defaultContent: '' },
         { title: 'Створено', data: 'createDate', defaultContent: '' },
-        { title: 'Редаговано', data: 'modDate', defaultContent: '' },
+        { title: 'Редаговано', data: 'modDate', defaultContent: '' }
       ],
       paging: true,
       language: {
@@ -44,8 +43,8 @@ export class IssuesComponent implements OnInit {
       }
     });
     this.table.on('select', (e, dt, type, indexes) => {
-      const item = this.table.rows( indexes ).data()[0];
-      this.router.navigate(['/engineer/issues/edit', item]);
+      const item = this.table.rows(indexes).data()[0];
+      this.router.navigate(['/engineer/issues/edit', new Issue(item)]);
     });
     this.issueService.getEntities().subscribe(issues => {
       this.issues = issues;
