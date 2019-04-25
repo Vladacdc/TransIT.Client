@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {IssueLog} from '../../models/issuelog';
-import {Document} from '../../models/document';
-import {DocumentService} from '../../services/document.service';
+import { IssueLog } from '../../models/issuelog';
+import { Document } from '../../models/document';
+import { DocumentService } from '../../services/document.service';
 
 declare const $;
 
@@ -11,7 +11,6 @@ declare const $;
   styleUrls: ['./documents.component.scss']
 })
 export class DocumentsComponent implements OnInit {
-
   public selectedDocument: Document;
   public documents: Array<IssueLog>;
   protected table: any;
@@ -34,8 +33,8 @@ export class DocumentsComponent implements OnInit {
       },
       columns: [
         { data: 'id', bVisible: false },
-        { title: 'Ім\'я', data: 'name', defaultContent: '' },
-        { title: 'Опис', data: 'description', defaultContent: '' },
+        { title: "Ім'я", data: 'name', defaultContent: '' },
+        { title: 'Опис', data: 'description', defaultContent: '' }
       ],
       paging: true,
       language: {
@@ -55,6 +54,6 @@ export class DocumentsComponent implements OnInit {
   }
 
   protected selectRow(e: any, dt: any, type: any, indexes: any): void {
-    this.selectedDocument = this.table.rows( indexes ).data()[0];
+    this.selectedDocument = this.table.rows(indexes).data()[0];
   }
 }

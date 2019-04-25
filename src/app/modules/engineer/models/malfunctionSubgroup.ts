@@ -1,9 +1,7 @@
-import {MalfunctionGroup} from './malfunctionGroup';
+import { MalfunctionGroup } from './malfunctionGroup';
+import { TEntity } from '../../core/models/entity/entity';
 
-export class MalfunctionSubgroup {
-  constructor(
-    public id?: number,
-    public name?: string,
-    public malfunctionGroup?: MalfunctionGroup
-  ) {}
+export class MalfunctionSubgroup extends TEntity<MalfunctionSubgroup> {
+  public name?: string;
+  public malfunctionGroup?: MalfunctionGroup;
 }

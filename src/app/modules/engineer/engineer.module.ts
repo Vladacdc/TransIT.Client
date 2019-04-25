@@ -3,23 +3,24 @@ import { CommonModule } from '@angular/common';
 import { EngineerComponent } from './components/engineer/engineer.component';
 import { IssuesComponent } from './components/issues/issues.component';
 import { IssueLogsComponent } from './components/issue-logs/issue-logs.component';
-import {RouterModule, Routes} from '@angular/router';
-import {HttpClientModule} from '@angular/common/http';
-import {CoreModule} from '../core/core.module';
-import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {DataTablesModule} from 'angular-datatables';
-import {ActionTypeService} from './services/action-type.service';
-import {StateService} from './services/state.service';
-import {IssuelogService} from './services/issuelog.service';
-import {IssueService} from './services/issue.service';
+import { RouterModule, Routes } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
+import { CoreModule } from '../core/core.module';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DataTablesModule } from 'angular-datatables';
+import { ActionTypeService } from './services/action-type.service';
+import { StateService } from './services/state.service';
+import { IssuelogService } from './services/issuelog.service';
+import { IssueService } from './services/issue.service';
 import { EditIssueComponent } from './components/edit-issue/edit-issue.component';
 import { EditIssueLogComponent } from './components/edit-issue-log/edit-issue-log.component';
 import { NestedIssueLogsComponent } from './components/nested-issue-logs/nested-issue-logs.component';
-import {SupplierService} from './services/supplier.service';
-import {DocumentService} from './services/document.service';
+import { SupplierService } from './services/supplier.service';
+import { DocumentService } from './services/document.service';
 import { CreateDocumentComponent } from './components/create-document/create-document.component';
 import { IssueLogAssigneesComponent } from './components/issue-log-assignees/issue-log-assignees.component';
 import { DocumentsComponent } from './components/documents/documents.component';
+import { IssueLogSuppliersComponent } from './components/issue-log-suppliers/issue-log-suppliers.component';
 
 const routes: Routes = [
   {
@@ -37,12 +38,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [
-    RouterModule.forChild(routes),
-    FormsModule,
-    CommonModule,
-    ReactiveFormsModule
-  ],
+  imports: [RouterModule.forChild(routes), FormsModule, CommonModule, ReactiveFormsModule],
   exports: [RouterModule],
   declarations: [
     EditIssueComponent,
@@ -50,17 +46,14 @@ const routes: Routes = [
     NestedIssueLogsComponent,
     CreateDocumentComponent,
     IssueLogAssigneesComponent,
-    DocumentsComponent
+    DocumentsComponent,
+    IssueLogSuppliersComponent
   ]
 })
 export class EngineerRoutingModule {}
 
 @NgModule({
-  declarations: [
-    EngineerComponent,
-    IssuesComponent,
-    IssueLogsComponent
-  ],
+  declarations: [EngineerComponent, IssuesComponent, IssueLogsComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -79,4 +72,4 @@ export class EngineerRoutingModule {}
     DocumentService
   ]
 })
-export class EngineerModule { }
+export class EngineerModule {}
