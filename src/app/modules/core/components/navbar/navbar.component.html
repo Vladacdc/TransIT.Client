@@ -22,6 +22,7 @@
         <ng-content class="d-md-none"></ng-content>
       </div>
       <ng-container *ngIf="isLoggedIn">
+        <span class="nav-item nav-link login">{{ userLogin }}</span>
         <a class="nav-item nav-link" routerLink="logout" (click)="logout()">Вихід</a>
       </ng-container>
     </div>

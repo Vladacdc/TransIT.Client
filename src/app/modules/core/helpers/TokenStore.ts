@@ -30,7 +30,7 @@ export class TokenStore {
       return true;
     }
 
-    const date = this.getTokenExpirationDate(this.token.refreshToken);
+    const date = this.getTokenExpirationDate(this.getRefreshToken());
     return date.valueOf() <= new Date().valueOf();
   }
 
@@ -47,6 +47,28 @@ export class TokenStore {
     return tokenPayload;
   }
 
+  private getRefreshToken(): string {
+    return this.token && this.token.refreshToken;
+  }
+
+  getLogin(): string {
+    if (this.isTokenExpired()) {
+      return '';
+    }
+
+    const tokenPayload = this.getTokenPayload(this.getRefreshToken());
+    return tokenPayload.login;
+  }
+
+  getRole(): Role {
+    if (this.isTokenExpired()) {
+      return 'GUEST';
+    }
+
+    const tokenPayload = this.getTokenPayload(this.getRefreshToken());
+    return tokenPayload.role;
+  }
+
   getToken(): Token {
     return this.token;
   }
@@ -59,15 +81,5 @@ export class TokenStore {
   setToken(token: Token): void {
     localStorage.setItem(USER_TOKEN_STORE, JSON.stringify(token));
     this.token = token;
-  }
-
-  getRole(): Role {
-    if (this.isTokenExpired()) {
-      return 'GUEST';
-    }
-
-    const refreshToken = this.token.refreshToken;
-    const tokenPayload = this.getTokenPayload(refreshToken);
-    return tokenPayload.role;
   }
 }
