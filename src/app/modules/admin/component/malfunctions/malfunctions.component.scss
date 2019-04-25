@@ -13,5 +13,10 @@
         margin-left: auto;
       }
     }
+    tbody {
+      tr.selected {
+        background-color: #b0bed9;
+      }
+    }
   }
 }
