@@ -31,6 +31,7 @@ export class MalfunctionsComponent implements OnInit {
   //malfunctions
   public malfunctions: Array<Malfunction>;
   private tableMalfunction: any;
+  selectedMalfunction: Malfunction;
 
   constructor(
     private malfuncGroupService: MalfuncGroupService,
@@ -108,6 +109,7 @@ export class MalfunctionsComponent implements OnInit {
     this.tableMalfunction.on('select', (e, dt, type, indexes) => {
       console.log('23456');
       const item = this.tableMalfunction.rows(indexes).data()[0];
+      this.selectedMalfunction = item;
     });
   }
   //group
@@ -183,5 +185,23 @@ export class MalfunctionsComponent implements OnInit {
     );
     this.tableMalfunction.draw();
   }
+
+  deleteMalfunction(malfunction: Malfunction) {
+    this.malfunctions = this.malfunctions.filter(m => m !== malfunction);
+    this.tableMalfunction
+      .rows('.selected')
+      .remove()
+      .draw();
+    // console.log(malfunctionGroup);
+    console.log(this.malfunctions);
+  }
+
+  addMalfunction(malfunction: Malfunction) {
+    console.log('ttttttttttt1');
+    this.malfunctions = [...this.malfunctions, malfunction];
+    this.tableMalfunction.row.add(malfunction);
+    this.tableMalfunction.draw();
+  }
+
   //.............
 }

@@ -12,8 +12,11 @@ declare const $;
   styleUrls: ['./malfunc.component.scss']
 })
 export class MalfuncComponent implements OnInit {
-  public malfunction: Array<Malfunction>;
-  private tableMalfunction: any;
+  private tableMalfunction: DataTables.Api;
+
+  selectedMalfunction: Malfunction;
+  malfunctions: Array<Malfunction>;
+  malfunction: Malfunction;
 
   constructor(
     private malfuncService: MalfuncService,
@@ -32,16 +35,31 @@ export class MalfuncComponent implements OnInit {
         url: '//cdn.datatables.net/plug-ins/1.10.19/i18n/Ukrainian.json'
       }
     });
-    this.malfuncService.getEntities().subscribe(selectedMalfunction => {
-      this.malfunction = selectedMalfunction;
-      this.tableMalfunction.rows.add(this.malfunction);
+    this.malfuncService.getEntities().subscribe(malfunctions => {
+      this.malfunctions = malfunctions;
+      this.tableMalfunction.rows.add(this.malfunctions);
       this.tableMalfunction.draw();
     });
-    this.tableMalfunction.on('select', (e, dt, type, indexes) => {
-      console.log('23456');
-      const item = this.tableMalfunction.rows(indexes).data()[0];
-      this.router.navigate(['/admin/users', item]);
+    this.tableMalfunction.on('select', (e, dt, type, index) => {
+      const item = this.tableMalfunction.rows(index).data()[0];
+      this.selectedMalfunction=item;
     });
-    console.dir(this.tableMalfunction);
+  }
+
+  deleteMalfunction(malfunction: Malfunction) {
+    this.malfunctions = this.malfunctions.filter(m => m !== malfunction);
+    this.tableMalfunction
+      .rows('.selected')
+      .remove()
+      .draw();
+    // console.log(malfunctionGroup);
+    console.log(this.malfunctions);
+  }
+
+  addMalfunction(malfunction: Malfunction) {
+    this.malfunctions = [...this.malfunctions, malfunction];
+    this.tableMalfunction.row.add(malfunction);
+    console.log(this.malfunctions);
+    this.tableMalfunction.draw();
   }
 }

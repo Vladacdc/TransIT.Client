@@ -1,6 +1,6 @@
 import { Component, OnInit, ElementRef, ViewChild, Output, EventEmitter } from '@angular/core';
 import { MalfuncGroup } from '../../models/malfuncGroup/malfunc-group';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MalfuncGroupService } from '../../services/malfunc-group.service';
 
 @Component({
@@ -20,7 +20,7 @@ export class CreateMalfuncGroupComponent implements OnInit {
       $(this).find('form').trigger('reset');
     });
     this.malfuncGroupForm = this.formBuilder.group({
-      name: ''
+      name: ['', Validators.required]
     });
   }
 

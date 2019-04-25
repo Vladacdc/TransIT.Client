@@ -22,11 +22,11 @@ const routes: Routes = [
       {
         path: 'malfunctions',
         component: MalfunctionsComponent,
-        children: [
-          { path: 'malfunc-group', component: MalfuncGroupComponent },
-          { path: 'malfunc-subgroup', component: MalfunSubgroupComponent },
-          { path: 'malfunc', component: MalfuncComponent }
-        ]
+         children: [
+           { path: 'malfunc-group', component: MalfuncGroupComponent },
+           { path: 'malfunc-subgroup', component: MalfunSubgroupComponent },
+           { path: 'malfunc', component: MalfuncComponent }
+         ]
       },
       { path: 'actions', component: ActionComponent },
       { path: 'supplier', component: SupplierComponent },
