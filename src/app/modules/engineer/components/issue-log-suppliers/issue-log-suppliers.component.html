@@ -8,7 +8,7 @@
     [(ngModel)]="searchString"
     (ngModelChange)="onSearchChange()"
   />
-  <div class="dropdown-menu">
+  <div id="dropdown-supplier" class="dropdown-menu">
     <button class="dropdown-item" type="button" *ngFor="let item of suppliers" (click)="selectItem(item)">
       {{ item.name }}
     </button>

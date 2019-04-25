@@ -55,9 +55,9 @@ export class IssueLogSuppliersComponent implements OnInit {
     const search = this.searchString.toLowerCase();
     this.suppliers = this.allSuppliers.filter(x => x.name.toLowerCase().includes(search));
     if (this.suppliers.length) {
-      $('.dropdown-menu').addClass('show');
+      $('#dropdown-supplier').addClass('show');
     } else {
-      $('.dropdown-menu').removeClass('show');
+      $('#dropdown-supplier').removeClass('show');
     }
   }
 
@@ -65,6 +65,6 @@ export class IssueLogSuppliersComponent implements OnInit {
     this.currentSupplier = item;
     this.selectSupplier.emit(item);
     this.searchString = item.login + ' ' + item.firstName + ' ' + item.lastName + ' ';
-    $('.dropdown-menu').removeClass('show');
+    $('#dropdown-supplier').removeClass('show');
   }
 }
