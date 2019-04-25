@@ -3,29 +3,29 @@
 </button>
 
 <div class="modal fade" id="editMalfuncSubgroup" tabindex="-1" role="dialog" aria-labelledby="CreateUser" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">Редагувати групу</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <form [formGroup]="malfunctionGroupForm">
-            <div class="form-group">
-              <label>Прізвище</label>
-              <input type="text" class="form-control" formControlName="name" autocomplete="off" />
-            </div>
-            <button hidden type="submit" #submit></button>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal" #close>Закрити</button>
-          <button type="button" class="btn btn-primary" [disabled]="malfunctionGroupForm.invalid" (click)="updateData()">
-            Зберегти
-          </button>
-        </div>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Редагувати групу</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="malfunctionGroupForm">
+          <div class="form-group">
+            <label>Прізвище</label>
+            <input type="text" class="form-control" formControlName="name" autocomplete="off" />
+          </div>
+          <button hidden type="submit" #submit></button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" #close>Закрити</button>
+        <button type="button" class="btn btn-primary" [disabled]="malfunctionGroupForm.invalid">
+          Зберегти
+        </button>
       </div>
     </div>
   </div>
+</div>

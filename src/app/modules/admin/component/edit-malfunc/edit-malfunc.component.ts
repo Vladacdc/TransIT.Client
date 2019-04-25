@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-edit-malfunc',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./edit-malfunc.component.scss']
 })
 export class EditMalfuncComponent implements OnInit {
+
+  public malfunctionGroupForm: FormGroup;
 
   constructor() { }
 

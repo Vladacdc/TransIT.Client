@@ -116,7 +116,7 @@ export class EditIssueLogComponent implements OnInit {
     this.issueLog.issue.deadline = this.issueLogForm.value.deadline
       ? this.issueLog.issue.deadline
       : this.issueLogForm.value.deadline;
-    this.issueLog.newState = new State(this.issueLogForm.value.state);
+    this.issueLog.newState = new State({ id: this.issueLogForm.value.state });
     this.issueLog.supplier = this.supplier;
     if (this.assigneeUser) {
       this.issueLog.issue.assignedTo = this.assigneeUser;
