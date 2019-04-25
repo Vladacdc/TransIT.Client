@@ -1,7 +1,0 @@
-{
-  "editor.formatOnSave": true,
-  "editor.codeActionsOnSave": {
-    "source.fixAll.tslint": true
-  },
-  "typescript.updateImportsOnFileMove.enabled": "always"
-}
