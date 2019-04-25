@@ -13,11 +13,15 @@ export class NavbarComponent {
     this.authService.logout();
   }
 
-  get isLoggedIn() {
+  get isLoggedIn(): boolean {
     return this.authService.isLoggedIn();
   }
 
-  get isLoggedOut() {
+  get isLoggedOut(): boolean {
     return !this.isLoggedIn;
+  }
+
+  get userLogin(): string {
+    return this.authService.getLogin();
   }
 }

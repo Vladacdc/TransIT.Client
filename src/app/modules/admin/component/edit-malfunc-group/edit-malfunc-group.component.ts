@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef, Input, Output, EventEmitter} from '@angular/core';
 import { MalfuncGroup } from '../../models/malfuncGroup/malfunc-group';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MalfuncGroupService } from '../../services/malfunc-group.service';
 
 @Component({
@@ -15,28 +15,28 @@ export class EditMalfuncGroupComponent implements OnInit {
     if (!malfuncGroup) {
       return;
     }
-    this.userForm.patchValue({ ...malfuncGroup});
+    this.malfunctionGroupForm.patchValue({ ...malfuncGroup});
   }
   @Output() updateMalfuncGroup = new EventEmitter<MalfuncGroup>();
 
-  userForm: FormGroup;
+  malfunctionGroupForm: FormGroup;
 
 
   constructor(private formBuilder: FormBuilder,private serviceMalfunctionGroupService: MalfuncGroupService) {}
 
   ngOnInit() {
-    this.userForm = this.formBuilder.group({
+    this.malfunctionGroupForm = this.formBuilder.group({
       id: '',
-      name: ''
+      name: ['', Validators.required]
     });
   }
 
   updateData() {
-    if (this.userForm.invalid) {
+    if (this.malfunctionGroupForm.invalid) {
       return;
     }
     this.closeDiv.nativeElement.click();
-    const form = this.userForm.value;
+    const form = this.malfunctionGroupForm.value;
     const malfuncGroup: MalfuncGroup = {
       id: form.id as number,
       name: form.name as string

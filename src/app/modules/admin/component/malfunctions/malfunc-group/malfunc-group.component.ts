@@ -3,6 +3,7 @@ import { MalfuncGroup } from '../../../models/malfuncGroup/malfunc-group';
 import { MalfuncGroupService } from '../../../services/malfunc-group.service';
 import { Router } from '@angular/router';
 
+
 declare const $;
 
 @Component({
@@ -11,16 +12,19 @@ declare const $;
   styleUrls: ['./malfunc-group.component.scss']
 })
 export class MalfuncGroupComponent implements OnInit {
-  private table: DataTables.Api;
+  private tableGroup: DataTables.Api;
 
   selectedMalfunctionGroup: MalfuncGroup;
   malfuncGroups: Array<MalfuncGroup>;
   malfuncGroup: MalfuncGroup;
 
-  constructor(private malfuncGroupService: MalfuncGroupService, private router: Router) {}
+  constructor(
+    private malfuncGroupService: MalfuncGroupService,
+    private router: Router    
+  ) {}
 
   ngOnInit() {
-    this.table = $('#group-table').DataTable({
+    this.tableGroup = $('#group-table').DataTable({
       responsive: true,
       select: {
         style: 'single'
@@ -33,26 +37,26 @@ export class MalfuncGroupComponent implements OnInit {
     });
     this.malfuncGroupService.getEntities().subscribe(malfuncGroups => {
       this.malfuncGroups = malfuncGroups;
-      this.table.rows.add(this.malfuncGroups);
-      this.table.draw();
+      this.tableGroup.rows.add(this.malfuncGroups);
+      this.tableGroup.draw();
     });
 
-    this.table.on('select', (e, dt, type, index) => {
-      const item = this.table.rows(index).data()[0];
+    this.tableGroup.on('select', (e, dt, type, index) => {
+      const item = this.tableGroup.rows(index).data()[0];
       this.selectedMalfunctionGroup = item;
     });
   }
 
   addMalfunctionGroup(malfuncGroup: MalfuncGroup) {
     this.malfuncGroups = [...this.malfuncGroups, malfuncGroup];
-    this.table.row.add(malfuncGroup);
+    this.tableGroup.row.add(malfuncGroup);
     console.log(this.malfuncGroups);
-    this.table.draw();
+    this.tableGroup.draw();
   }
 
-  deleteMalfunction(malfunctionGroup: MalfuncGroup) {
+  deleteMalfunctionGroup(malfunctionGroup: MalfuncGroup) {
     this.malfuncGroups = this.malfuncGroups.filter(m => m !== malfunctionGroup);
-    this.table
+    this.tableGroup
       .rows('.selected')
       .remove()
       .draw();
@@ -62,10 +66,10 @@ export class MalfuncGroupComponent implements OnInit {
 
   editMalfunctionGroup(malfunctionGroup: MalfuncGroup) {
     this.malfuncGroups[this.malfuncGroups.findIndex(i => i.id === this.selectedMalfunctionGroup.id)] = malfunctionGroup;
-    this.table
+    this.tableGroup
       .row('.selected')
       .data(malfunctionGroup)
       .draw();
-      console.log(this.malfuncGroups);
+    console.log(this.malfuncGroups);
   }
 }

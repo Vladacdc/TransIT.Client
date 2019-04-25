@@ -38,6 +38,8 @@ import { CreateSupplierComponent } from './component/supplier/create-supplier/cr
 import { EditSupplierComponent } from './component/supplier/edit-supplier/edit-supplier.component';
 import { DeleteSupplierComponent } from './component/supplier/delete-supplier/delete-supplier.component';
 import { SupplierComponent } from './component/supplier/supplier.component';
+import { EditMalfuncComponent } from './component/edit-malfunc/edit-malfunc.component';
+import { DeleteMalfuncComponent } from './component/delete-malfunc/delete-malfunc.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +48,6 @@ import { SupplierComponent } from './component/supplier/supplier.component';
     CreateUserComponent,
     VehiclesComponent,
     DialogComponent,
-    MalfunctionsComponent,
     ActionComponent,
     MalfuncComponent,
     MalfuncGroupComponent,
@@ -61,6 +62,7 @@ import { SupplierComponent } from './component/supplier/supplier.component';
     CreateMalfuncGroupComponent,
     CreateMalfuncComponent,
     CreateMalfuncSubgroupComponent,
+    MalfunctionsComponent,
     EditMalfuncSubgroupComponent,
     DeleteMalfuncSubgroupComponent,
     EditMalfuncGroupComponent,
@@ -68,7 +70,9 @@ import { SupplierComponent } from './component/supplier/supplier.component';
     SupplierComponent,
     CreateSupplierComponent,
     EditSupplierComponent,
-    DeleteSupplierComponent
+    DeleteSupplierComponent,
+    EditMalfuncComponent,
+    DeleteMalfuncComponent
   ],
   exports: [AdminComponent],
   imports: [

@@ -1,19 +1,22 @@
 <div>
-    <caption class="caption">
-      <h2>Група</h2>
-    </caption>
+  <caption class="caption">
+    <h2>Група</h2>
+  </caption>
 </div>
 
 <span>
   <app-create-malfunc-group (createMalfuncGroup)="addMalfunctionGroup($event)"></app-create-malfunc-group>
 </span>
 <span class="second">
-  <app-edit-malfunc-group [malfuncGroup]="selectedMalfunctionGroup" (updateMalfuncGroup)="editMalfunctionGroup($event)"></app-edit-malfunc-group>
-</span>    
+  <app-edit-malfunc-group
+    [malfuncGroup]="selectedMalfunctionGroup"
+    (updateMalfuncGroup)="editMalfunctionGroup($event)"
+  ></app-edit-malfunc-group>
+</span>
 <span class="third">
   <app-delete-malfunc-group
     [malfunctionGroup]="selectedMalfunctionGroup"
-    (deleteMalfunctionGroup)="deleteMalfunction($event)"
+    (deleteMalfunctionGroup)="deleteMalfunctionGroup($event)"
   ></app-delete-malfunc-group>
 </span>
 <p></p>

@@ -20,12 +20,28 @@
               <option hidden value="" disabled selected>--Select--</option>
               <option *ngFor="let item of vehicleTypeList" [value]="item.name">{{ item.name }}</option>
             </select>
+            <div *ngFor="let validation of validation_messages.vehicleType">
+              <div class="alert alert-danger" *ngIf="
+                    vehicleForm.get('vehicleType').hasError(validation.type) &&
+                    (vehicleForm.get('vehicleType').dirty || vehicleForm.get('vehicleType').touched)
+                  ">
+                {{ validation.message }}
+              </div>
+            </div>
           </div>
 
           <div class="form-group">
             <label>Vin-код:</label>
-            <input type="text" class="form-control" formControlName="vincode" placeholder="Введіть Vin-код"
-              autocomplete="off" />
+            <input type="text" class="form-control" formControlName="vincode" placeholder="123/1234" autocomplete="off"
+              [dropSpecialCharacters]="false" mask="000/0000" />
+            <div *ngFor="let validation of validation_messages.vincode">
+              <div class="alert alert-danger" *ngIf="
+                    vehicleForm.get('vincode').hasError(validation.type) &&
+                    (vehicleForm.get('vincode').dirty || vehicleForm.get('vincode').touched)
+                  ">
+                {{ validation.message }}
+              </div>
+            </div>
           </div>
 
           <div class="form-group">
@@ -35,8 +51,16 @@
           </div>
           <div class="form-group">
             <label>Реєстраційний номер:</label>
-            <input type="text" class="form-control" formControlName="regNum" placeholder="Введіть реєстраційний номер"
-              autocomplete="off" />
+            <input type="text" class="form-control" formControlName="regNum" placeholder="AA1234AA" autocomplete="off"
+              mask="SS0000SS" />
+            <div *ngFor="let validation of validation_messages.regNum">
+              <div class="alert alert-danger" *ngIf="
+                      vehicleForm.get('regNum').hasError(validation.type) &&
+                      (vehicleForm.get('regNum').dirty || vehicleForm.get('regNum').touched)
+                    ">
+                {{ validation.message }}
+              </div>
+            </div>
           </div>
 
           <div class="form-group">

@@ -87,4 +87,8 @@ export class AuthenticationService {
   getRole(): Role {
     return this.tokenStore.getRole();
   }
+
+  getLogin(): string {
+    return this.tokenStore.getLogin();
+  }
 }

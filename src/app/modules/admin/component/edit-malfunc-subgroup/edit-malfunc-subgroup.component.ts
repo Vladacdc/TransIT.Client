@@ -58,11 +58,13 @@ export class EditMalfuncSubgroupComponent implements OnInit {
     console.log(form.id);
     const malfunSubGroup: MalfunSubgroup = {
       id: form.id as number,
-      name: form.subgroup as string,
+      name: form.name as string,
       malfunctionGroup: this.malfunctionGroups.find(f => f.name === form.group)
     };
+
     this.serviceMalfuncSubGroup
       .updateEntity(malfunSubGroup)
-      .subscribe(x => this.editMalfuncSubGroup.next(malfunSubGroup));
+      .subscribe(() => this.editMalfuncSubGroup.next(malfunSubGroup));
+    console.log('go to method eeeddit');
   }
 }

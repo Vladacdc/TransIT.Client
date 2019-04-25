@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { MalfuncService } from '../../../services/malfunc.service';
 import { Malfunction } from '../../../models/malfunc/malfunc';
 
+
 declare const $;
 
 @Component({
@@ -11,13 +12,19 @@ declare const $;
   styleUrls: ['./malfunc.component.scss']
 })
 export class MalfuncComponent implements OnInit {
-  public malfunction: Array<Malfunction>;
-  private table: any;
+  private tableMalfunction: DataTables.Api;
 
-  constructor(private malfuncService: MalfuncService, private router: Router) {}
+  selectedMalfunction: Malfunction;
+  malfunctions: Array<Malfunction>;
+  malfunction: Malfunction;
+
+  constructor(
+    private malfuncService: MalfuncService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
-    this.table = $('#malfunc-table').DataTable({
+    this.tableMalfunction = $('#malfunc-table').DataTable({
       responsive: true,
       select: {
         style: 'single'
@@ -28,16 +35,31 @@ export class MalfuncComponent implements OnInit {
         url: '//cdn.datatables.net/plug-ins/1.10.19/i18n/Ukrainian.json'
       }
     });
-    this.malfuncService.getEntities().subscribe(selectedMalfunction => {
-      this.malfunction = selectedMalfunction;
-      this.table.rows.add(this.malfunction);
-      this.table.draw();
+    this.malfuncService.getEntities().subscribe(malfunctions => {
+      this.malfunctions = malfunctions;
+      this.tableMalfunction.rows.add(this.malfunctions);
+      this.tableMalfunction.draw();
     });
-    this.table.on('select', (e, dt, type, indexes) => {
-      console.log('23456');
-      const item = this.table.rows(indexes).data()[0];
-      this.router.navigate(['/admin/users', item]);
+    this.tableMalfunction.on('select', (e, dt, type, index) => {
+      const item = this.tableMalfunction.rows(index).data()[0];
+      this.selectedMalfunction=item;
     });
-    console.dir(this.table);
+  }
+
+  deleteMalfunction(malfunction: Malfunction) {
+    this.malfunctions = this.malfunctions.filter(m => m !== malfunction);
+    this.tableMalfunction
+      .rows('.selected')
+      .remove()
+      .draw();
+    // console.log(malfunctionGroup);
+    console.log(this.malfunctions);
+  }
+
+  addMalfunction(malfunction: Malfunction) {
+    this.malfunctions = [...this.malfunctions, malfunction];
+    this.tableMalfunction.row.add(malfunction);
+    console.log(this.malfunctions);
+    this.tableMalfunction.draw();
   }
 }

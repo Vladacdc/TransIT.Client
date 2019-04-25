@@ -1,0 +1,70 @@
+<button type="button" class="btn btn-info" data-toggle="modal" data-target="#createMalfunction">
+  <i class="fas fa-plus fa-2x"></i>
+</button>
+
+<div
+  class="modal fade"
+  id="createMalfunction"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="CreateMafunction"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Створення заявки</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="malfunctionForm" (validSubmit)="onSubmit()">
+          <div class="form-group">
+            <label>Група несправності</label>
+            <select class="form-control" formControlName="group">
+              <option value="" selected>Виберіть групу несправності</option>
+              <option *ngFor="let malfunctionGroup of malfunctionGroupList" [ngValue]="malfunctionGroup">{{
+                malfunctionGroup.name
+              }}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Підгрупа несправності</label>
+            <select class="form-control" formControlName="subgroup">
+              <option value="" selected>Виберіть підгрупу несправності</option>
+              <option
+                *ngFor="let malfunctionSubgroup of malfunctionSubgroupsFilteredByGroup"
+                [ngValue]="malfunctionSubgroup"
+                >{{ malfunctionSubgroup.name }}</option
+              >
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Помилки</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="name"
+              autocomplete="off"
+              placeholder="Введіть помилки"
+            />
+          </div>
+          <button hidden type="submit" #submit></button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрити</button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          (click)="clickSubmit(submit)"
+          form="malfunctionForm"
+          [disabled]="malfunctionForm.invalid"
+        >
+          Створити
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -25,6 +25,17 @@ export class IssuesComponent implements OnInit {
       { title: 'Опис' },
       { title: 'Дії', orderable: false }
     ],
+    columnDefs: [
+      {
+        targets: [0, 2, 3],
+        render: data => {
+          if (data.length > 22) {
+            return data.substring(0, 20) + '...';
+          }
+          return data;
+        }
+      }
+    ],
     scrollX: true
   };
 
@@ -37,6 +48,15 @@ export class IssuesComponent implements OnInit {
 
   private initializeTable(): void {
     this.table = $('#issues').DataTable(this.tableConfig);
+    this.setUpDetailsButtonClick();
+  }
+
+  private setUpDetailsButtonClick(): void {
+    $('#issues tbody').on('click', 'button', event => {
+      const idTokens = event.currentTarget.id.split('-');
+      const id = parseInt(idTokens[idTokens.length - 1], 10);
+      this.selectedIssue = this.issues.find(i => i.id === id);
+    });
   }
 
   private loadEntities(): void {
@@ -51,7 +71,6 @@ export class IssuesComponent implements OnInit {
   private addIssuesToTable(newIssues: Issue[]) {
     const view = this.createTableView(newIssues);
     this.table.rows.add(view).draw();
-    this.setUpDetailsButtonClick();
   }
 
   private createTableView(issues: Issue[]): string[][] {
@@ -64,16 +83,6 @@ export class IssuesComponent implements OnInit {
         issue.id
       }" class="btn" data-toggle="modal" data-target="#editModal"><i class="fas fa-edit"></i></button>`
     ]);
-  }
-
-  private setUpDetailsButtonClick(): void {
-    $('button[id^="details-issue"]')
-      .off('click')
-      .on('click', event => {
-        const idTokens = event.currentTarget.id.split('-');
-        const id = parseInt(idTokens[idTokens.length - 1], 10);
-        this.selectedIssue = this.issues.find(i => i.id === id);
-      });
   }
 
   deleteIssue(issueToDelete: Issue) {

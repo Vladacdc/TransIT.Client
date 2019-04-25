@@ -12,7 +12,7 @@
           </button>
         </div>
         <div class="modal-body">
-          <form [formGroup]="userForm">
+          <form [formGroup]="malfunctionGroupForm">
             <div class="form-group">
               <label>Прізвище</label>
               <input type="text" class="form-control" formControlName="name" autocomplete="off" />
@@ -22,7 +22,7 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal" #close>Закрити</button>
-          <button type="button" class="btn btn-primary" [disabled]="userForm.invalid" (click)="updateData()">
+          <button type="button" class="btn btn-primary" [disabled]="malfunctionGroupForm.invalid" (click)="updateData()">
             Зберегти
           </button>
         </div>
