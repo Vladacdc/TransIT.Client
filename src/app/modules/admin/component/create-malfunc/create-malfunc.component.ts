@@ -105,9 +105,6 @@ export class CreateMalfuncComponent implements OnInit {
 
       const allSubgroups = malfunctions.map(m => m.malfunctionSubgroup);
       this.malfunctionSubgroupList = Array.from(this.getDistinct(allSubgroups));
-
-      // const allGroups = this.malfunctionSubgroupList.map(s => s.malfunctionGroup);
-      // this.malfunctionGroupList = Array.from(this.getDistinct(allGroups));
     });
   }
 
