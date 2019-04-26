@@ -10,7 +10,6 @@ import { Role } from '../../models/role/role';
 })
 export class UsersComponent implements OnInit {
   users: User[] = [];
-  roleList: Role[] = [];
   user: User;
   dataTable: any;
 
@@ -53,8 +52,6 @@ export class UsersComponent implements OnInit {
 
   ngOnInit() {
     $('#userTable').DataTable(this.tableParams);
-
-    this.serviceRole.getEntities().subscribe(role => (this.roleList = role));
     this.service.getEntities().subscribe(users => {
       this.addTableData(users);
     });

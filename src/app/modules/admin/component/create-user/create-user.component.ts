@@ -53,7 +53,7 @@ export class CreateUserComponent implements OnInit {
   checkPasswords(group: FormGroup) {
     let pass = group.controls.password.value;
     let confirmPass = group.controls.confirmPassword.value;
-    return pass === confirmPass ? null : { notSame: true };
+    return pass === confirmPass ? null : { checkPasswords: true };
   }
   clickSubmit() {
     if (this.userForm.invalid) {
@@ -89,7 +89,7 @@ export class CreateUserComponent implements OnInit {
     email: [{ type: 'email', message: 'Введіть пошту коректно' }],
     confirmPassword: [
       { type: 'required', message: 'Підтвердження паролю вимагається' },
-      { type: 'notSame', message: 'Паролі не співпадають' }
+      { type: 'checkPasswords', message: 'Паролі не співпадають' }
     ],
     password: [
       { type: 'required', message: "Поле пароль є обов'язковим" },

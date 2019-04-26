@@ -17,7 +17,6 @@ const routes: Routes = [
     component: AdminComponent,
     children: [
       { path: 'users', component: UsersComponent },
-      { path: 'users/create', component: CreateUserComponent },
       { path: 'vehicles', component: VehiclesComponent },
       {
         path: 'malfunctions',
