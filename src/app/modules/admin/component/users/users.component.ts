@@ -1,8 +1,8 @@
-import { Component, OnInit, ChangeDetectorRef, Output, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { User } from '../../models/user/user';
 import { UserService } from '../../services/user.service';
 import { RoleService } from '../../services/role.service';
-import { Role } from '../../models/role/role';
+
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
@@ -19,6 +19,9 @@ export class UsersComponent implements OnInit {
       url: '//cdn.datatables.net/plug-ins/1.10.19/i18n/Ukrainian.json'
     },
     columns: [
+      {
+        title: 'Статус'
+      },
       {
         title: 'Прізвище'
       },
@@ -60,6 +63,7 @@ export class UsersComponent implements OnInit {
   addTableData(newUsers: User[]) {
     this.users = [...newUsers];
     const view = newUsers.map(i => [
+      `<input type="checkbox"></input>`,
       i.lastName,
       i.firstName,
       i.middleName,
@@ -72,7 +76,8 @@ export class UsersComponent implements OnInit {
       }" class="btn" data-toggle="modal" data-target="#editUser"><i class="fas fa-edit"></i></button>
       <button id="find-user-${
         i.login
-      }" class="btn" data-toggle="modal" data-target="#deleteModal"><i class="fas fa-trash-alt" style="color: darkred"></i></button>`
+      }" class="btn" data-toggle="modal" data-target="#deleteModal"><i class="fas fa-trash-alt" style="color: darkred"></i>
+      </button>`
     ]);
 
     this.dataTable = $('#userTable')

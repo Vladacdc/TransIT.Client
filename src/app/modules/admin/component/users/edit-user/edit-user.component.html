@@ -1,3 +1,5 @@
+<app-restore-user-password></app-restore-user-password>
+
 <div class="modal fade" id="editUser" tabindex="-1" role="dialog" aria-labelledby="CreateUser" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
@@ -27,70 +29,26 @@
           <div class="form-group">
             <label>Номер телефону</label>
             <input class="form-control" formControlName="phoneNumber" mask="+(000)00-00-00-000" />
-            <div *ngFor="let validation of account_validation_messages.phoneNumber">
-              <div
-                class="alert alert-danger"
-                *ngIf="
-                  userForm.get('phoneNumber').hasError(validation.type) &&
-                  (userForm.get('phoneNumber').dirty || userForm.get('phoneNumber').touched)
-                "
-              >
-                <i class="fas fa-phone-slash"></i>
-                {{ validation.message }}
-                <a href="#" class="close d-flex" data-dismiss="alert">
-                  <i class="fas fa-times"></i>
-                </a>
-              </div>
-            </div>
           </div>
 
           <div class="form-group">
-            <label>Логін</label>
+            <label>Логін*</label>
             <input type="text" class="form-control" formControlName="login" />
-            <div *ngFor="let validation of account_validation_messages.login">
-              <div
-                class="alert alert-danger"
-                *ngIf="
-                  userForm.get('login').hasError(validation.type) &&
-                  (userForm.get('login').dirty || userForm.get('login').touched)
-                "
-              >
-                <i class="fas fa-sign-in-alt"></i>
-                {{ validation.message }}
-                <a href="#" class="close d-flex" data-dismiss="alert">
-                  <i class="fas fa-times"></i>
-                </a>
-              </div>
-            </div>
           </div>
 
           <div class="form-group">
             <label>Пошта</label>
             <input type="text" class="form-control" formControlName="email" />
-            <div *ngFor="let validation of account_validation_messages.email">
-              <div
-                class="alert alert-danger"
-                *ngIf="
-                  userForm.get('email').hasError(validation.type) &&
-                  (userForm.get('email').dirty || userForm.get('email').touched)
-                "
-              >
-                <i class="fas fa-envelope"></i>
-                {{ validation.message }}
-                <a href="#" class="close d-flex" data-dismiss="alert">
-                  <i class="fas fa-times"></i>
-                </a>
-              </div>
-            </div>
           </div>
 
           <div class="form-group">
-            <label>Роль</label>
+            <label>Роль*</label>
             <select class="form-control" formControlName="role">
               <option hidden value="" disabled selected></option>
               <option *ngFor="let role of roles"> {{ role.transName }}</option>
             </select>
           </div>
+          <a href="#" data-toggle="modal" data-target="#restore" data-dismiss="modal" class="right">Відновити пароль</a>
           <button hidden type="submit" #submit></button>
         </form>
       </div>

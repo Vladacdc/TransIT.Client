@@ -4,28 +4,19 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AdminRoutingModule } from './admin-routing.module';
 import { AdminComponent } from './component/admin/admin.component';
-import { UsersComponent } from './component/users/users.component';
-import { CreateUserComponent } from './component/create-user/create-user.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
 import { DataTablesModule } from 'angular-datatables';
 import { VehiclesComponent } from './component/vehicles/vehicles.component';
-import { DialogComponent } from './component/dialog/dialog.component';
 import { MalfunctionsComponent } from './component/malfunctions/malfunctions.component';
 import { ActionComponent } from './component/action/action.component';
 import { MalfuncComponent } from './component/malfunctions/malfunc/malfunc.component';
 import { MalfuncGroupComponent } from './component/malfunctions/malfunc-group/malfunc-group.component';
 import { MalfunSubgroupComponent } from './component/malfunctions/malfun-subgroup/malfun-subgroup.component';
 import { CoreModule } from '../core/core.module';
-import { RoleService } from './services/role.service';
-import { UserService } from './services/user.service';
 import { AdminNavbarComponent } from './component/admin-navbar/admin-navbar.component';
-import { EditUserComponent } from './component/edit-user/edit-user.component';
-
 import { CreateVehicleComponent } from './component/create-vehicle/create-vehicle.component';
 import { EditVehicleComponent } from './component/edit-vehicle/edit-vehicle.component';
 import { DeleteVehicleComponent } from './component/delete-vehicle/delete-vehicle.component';
-
 import { CreateMalfuncGroupComponent } from './component/create-malfunc-group/create-malfunc-group.component';
 import { CreateMalfuncComponent } from './component/create-malfunc/create-malfunc.component';
 import { CreateMalfuncSubgroupComponent } from './component/create-malfunc-subgroup/create-malfunc-subgroup.component';
@@ -40,6 +31,16 @@ import { DeleteSupplierComponent } from './component/supplier/delete-supplier/de
 import { SupplierComponent } from './component/supplier/supplier.component';
 import { EditMalfuncComponent } from './component/edit-malfunc/edit-malfunc.component';
 import { DeleteMalfuncComponent } from './component/delete-malfunc/delete-malfunc.component';
+import { RoleService } from './services/role.service';
+
+import { UserService } from './services/user.service';
+import { UsersComponent } from './component/users/users.component';
+import { CreateUserComponent } from './component/users/create-user/create-user.component';
+import { EditUserComponent } from './component/users/edit-user/edit-user.component';
+import { DeleteUserComponent } from './component/users/delete-user/delete-user.component';
+import { RestoreUserPasswordComponent } from './component/users/restore-user-password/restore-user-password.component';
+
+import { NgBootstrapFormValidationModule } from 'ng-bootstrap-form-validation';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,6 @@ import { DeleteMalfuncComponent } from './component/delete-malfunc/delete-malfun
     UsersComponent,
     CreateUserComponent,
     VehiclesComponent,
-    DialogComponent,
     ActionComponent,
     MalfuncComponent,
     MalfuncGroupComponent,
@@ -72,7 +72,9 @@ import { DeleteMalfuncComponent } from './component/delete-malfunc/delete-malfun
     EditSupplierComponent,
     DeleteSupplierComponent,
     EditMalfuncComponent,
-    DeleteMalfuncComponent
+    DeleteMalfuncComponent,
+    DeleteUserComponent,
+    RestoreUserPasswordComponent
   ],
   exports: [AdminComponent],
   imports: [
@@ -83,7 +85,8 @@ import { DeleteMalfuncComponent } from './component/delete-malfunc/delete-malfun
     DataTablesModule,
     HttpClientModule,
     ReactiveFormsModule,
-    NgxMaskModule.forRoot()
+    NgxMaskModule.forRoot(),
+    NgBootstrapFormValidationModule
   ],
   providers: [RoleService, UserService]
 })
