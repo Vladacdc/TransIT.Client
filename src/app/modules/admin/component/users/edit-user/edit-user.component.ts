@@ -14,17 +14,16 @@ import { User } from '../../../models/user/user';
 export class EditUserComponent implements OnInit {
   @ViewChild('close') closeEditModal: ElementRef;
   @Output() updateUser = new EventEmitter<User>();
-  @Input()
-  set user(user: User) {
+  @Input() set user(user: User) {
     if (!user) {
       return;
     }
     this.userForm.patchValue({ ...user, role: user.role.transName });
+    this.selectedUser = user;
   }
-
+  selectedUser = new User();
   userForm: FormGroup;
   roles: Role[] = [];
-
   constructor(
     private formBuilder: FormBuilder,
     private serviceRole: RoleService,
@@ -41,7 +40,8 @@ export class EditUserComponent implements OnInit {
       phoneNumber: new FormControl('', Validators.minLength(12)),
       login: new FormControl('', Validators.compose([Validators.required, Validators.minLength(6)])),
       email: new FormControl('', Validators.email),
-      role: ['', Validators.required]
+      role: ['', Validators.required],
+      isActive: true
     });
     this.serviceRole.getEntities().subscribe(data => (this.roles = data));
   }
@@ -61,7 +61,8 @@ export class EditUserComponent implements OnInit {
       phoneNumber: form.phoneNumber,
       login: form.login,
       email: form.email,
-      role: this.roles.find(r => r.transName === form.role)
+      role: this.roles.find(r => r.transName === form.role),
+      isActive: form.isActive
     });
     this.serviceUser.updateEntity(user).subscribe(
       _ => {
@@ -70,5 +71,8 @@ export class EditUserComponent implements OnInit {
       },
       error => this.toast.error('Помилка', 'Користувач з таким логіном існує')
     );
+  }
+  updateUserChangeActive(user: User) {
+    this.updateUser.next(user);
   }
 }

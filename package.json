@@ -23,6 +23,7 @@
     "@angular/router": "~7.2.0",
     "angular-confirmation-popover": "^4.2.0",
     "angular-datatables": "^7.0.0",
+    "bootstrap-switch-button": "^1.0.0",
     "core-js": "^2.5.4",
     "ng-bootstrap-form-validation": "^3.0.3",
     "ngx-mask": "^7.9.2",

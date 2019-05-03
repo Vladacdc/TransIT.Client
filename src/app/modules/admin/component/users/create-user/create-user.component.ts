@@ -63,7 +63,8 @@ export class CreateUserComponent implements OnInit {
       login: form.login,
       email: form.email,
       password: form.password,
-      role: this.roleList[this.roleName.findIndex(r => r === form.role)]
+      role: this.roleList[this.roleName.findIndex(r => r === form.role)],
+      isActive: true
     });
 
     this.serviceUser.addEntity(user).subscribe(
