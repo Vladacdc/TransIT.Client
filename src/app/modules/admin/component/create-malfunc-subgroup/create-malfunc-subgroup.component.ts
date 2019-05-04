@@ -36,6 +36,11 @@ export class CreateMalfuncSubgroupComponent implements OnInit {
       this.malfuncGroupList = group;
     });
   }
+
+  get malfuncGroupName(): string[] {
+    return this.malfuncGroupList.map(e => e.name);
+  }
+  
   clickSubmit() {
     if (this.subGroupForm.invalid) {
       return;
@@ -50,9 +55,5 @@ export class CreateMalfuncSubgroupComponent implements OnInit {
       this.createMalfuncSubGroup.next(malfunSubGroup);
     });
     this.closeDiv.nativeElement.click();
-  }
-
-  get malfuncGroupName(): string[] {
-    return this.malfuncGroupList.map(e => e.name);
   }
 }

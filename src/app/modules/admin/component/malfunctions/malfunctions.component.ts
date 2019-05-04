@@ -87,12 +87,17 @@ export class MalfunctionsComponent implements OnInit {
       this.filterMalfunctionSubGroup();
     });
 
+    this.tableGroup.on( 'deselect',(e, dt, type, indexes )=>{
+      this.unfilterMalfunctionSubGroup();
+    });
+    
+
     //subgroup
 
     this.malfuncSubgroupService.getEntities().subscribe(malfuncSubgroup => {
       this.malfuncSubgroups = malfuncSubgroup;
       this.tableSubGroup.rows.add(this.malfuncSubgroups);
-      this.tableSubGroup.draw();
+      //this.tableSubGroup.draw();
     });
     this.tableSubGroup.on('select', (e, dt, type, index) => {
       const item = this.tableSubGroup.rows(index).data()[0];
@@ -100,11 +105,15 @@ export class MalfunctionsComponent implements OnInit {
       this.filterMalfunctions();
     });
 
+    this.tableSubGroup.on( 'deselect',(e, dt, type, indexes )=>{
+      this.unfilterMalfunction();
+    });
+
     //malfunctions
     this.malfuncService.getEntities().subscribe(selectedMalfunction => {
       this.malfunctions = selectedMalfunction;
       this.tableMalfunction.rows.add(this.malfunctions);
-      this.tableMalfunction.draw();
+      // this.tableMalfunction.draw();
     });
     this.tableMalfunction.on('select', (e, dt, type, indexes) => {
       console.log('23456');
@@ -117,7 +126,7 @@ export class MalfunctionsComponent implements OnInit {
     this.malfuncGroups = [...this.malfuncGroups, malfuncGroup];
     this.tableGroup.row.add(malfuncGroup);
     console.log(this.malfuncGroups);
-    this.tableGroup.draw();
+    this.tableGroup.draw(); 
   }
 
   deleteMalfunctionGroup(malfunctionGroup: MalfuncGroup) {
@@ -126,8 +135,6 @@ export class MalfunctionsComponent implements OnInit {
       .rows('.selected')
       .remove()
       .draw();
-    // console.log(malfunctionGroup);
-    console.log(this.malfuncGroups);
   }
 
   editMalfunctionGroup(malfunctionGroup: MalfuncGroup) {
@@ -140,6 +147,13 @@ export class MalfunctionsComponent implements OnInit {
   }
 
   //subgroup
+
+  unfilterMalfunctionSubGroup(){
+    this.tableSubGroup.clear();
+    this.tableSubGroup.draw();
+    this.tableMalfunction.clear();
+    this.tableMalfunction.draw();
+  }
 
   filterMalfunctionSubGroup() {
     this.tableSubGroup.clear();
@@ -176,6 +190,11 @@ export class MalfunctionsComponent implements OnInit {
   }
 
   //malfunctions
+  unfilterMalfunction(){
+    this.tableMalfunction.clear();
+    this.tableMalfunction.draw();
+  }
+
   filterMalfunctions() {
     this.tableMalfunction.clear();
     this.tableMalfunction.rows.add(
@@ -192,8 +211,7 @@ export class MalfunctionsComponent implements OnInit {
       .rows('.selected')
       .remove()
       .draw();
-    // console.log(malfunctionGroup);
-    console.log(this.malfunctions);
+    // console.log(this.malfunctions);
   }
 
   addMalfunction(malfunction: Malfunction) {
