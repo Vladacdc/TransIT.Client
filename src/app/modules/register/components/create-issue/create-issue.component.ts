@@ -31,7 +31,7 @@ export class CreateIssueComponent implements OnInit {
     private malfunctionService: MalfunctionService,
     private issueService: IssueService,
     private toast: ToastrService
-  ) {}
+  ) { }
 
   ngOnInit() {
     this.setUpForm();
@@ -68,7 +68,7 @@ export class CreateIssueComponent implements OnInit {
       vehicle: ['', Validators.required],
       malfunctionGroup: '',
       malfunctionSubgroup: '',
-      malfunction: ['', Validators.required],
+      malfunction: '',
       summary: ['', Validators.required]
     });
   }
