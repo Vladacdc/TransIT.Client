@@ -31,14 +31,17 @@ export class CreateMalfuncSubgroupComponent implements OnInit {
     this.subGroupForm = this.formBuilder.group({
       group: ['', Validators.required],
       subgroup: ''
-    });
-    this.serviceMalfuncGroup.getEntities().subscribe(group => {
-      this.malfuncGroupList = group;
-    });
+    });    
   }
 
   get malfuncGroupName(): string[] {
     return this.malfuncGroupList.map(e => e.name);
+  }
+
+  clickAddMalfunctionSubGroup(){
+    this.serviceMalfuncGroup.getEntities().subscribe(group => {
+      this.malfuncGroupList = group;
+    });
   }
   
   clickSubmit() {

@@ -20,7 +20,7 @@
       </div>
       <div class="modal-body">
         <form [formGroup]="malfunctionForm">
-          <div class="form-group">
+          <!-- <div class="form-group">
             <label>Група несправності</label>
             <select class="form-control" formControlName="group">
               <option value="" selected>Виберіть групу несправності</option>
@@ -28,8 +28,14 @@
                 malfunctionGroup.name
               }}</option>
             </select>
-          </div>
+          </div> -->
           <div class="form-group">
+            <label>Група несправності</label>
+            <select class="form-control" disabled formControlName="group">
+              <option hidden disabled selected>{{ malfunction?.malfunctionSubgroup?.malfunctionGroup?.name }}</option>
+            </select>
+          </div>
+          <!-- <div class="form-group">
             <label>Підгрупа несправності</label>
             <select class="form-control" formControlName="subgroup">
               <option value="" selected>Виберіть підгрупу несправності</option>
@@ -39,6 +45,12 @@
                 >{{ malfunctionSubgroup.name }}</option
               >
             </select>
+          </div> -->
+          <div class="form-group">
+            <label>Підгрупа несправності</label>
+            <select class="form-control" disabled formControlName="subgroup">
+              <option hidden disabled selected>{{ malfunction?.malfunctionSubgroup?.name }}</option>
+            </select>
           </div>
           <div class="form-group">
             <label>Помилки</label>
@@ -47,7 +59,7 @@
               class="form-control"
               formControlName="name"
               autocomplete="off"
-              placeholder="Введіть помилку"
+              placeholder="Введіть помилку"              
             />
           </div>
           <button hidden type="submit" #submit></button>
