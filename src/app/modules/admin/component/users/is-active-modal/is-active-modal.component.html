@@ -10,8 +10,14 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">
-          <p *ngIf="user.isActive === true">Ви дійсно хочeте деактивувати користувача</p>
-          <p *ngIf="user.isActive === false">Ви дійсно хочeте активувати користувача</p>
+          <p *ngIf="user.isActive === true">
+            <i class="fas fa-user-lock"></i>
+            Деактивувати користувача?
+          </p>
+          <p *ngIf="user.isActive === false">
+            <i class="fas fa-user-lock"></i>
+            Активувати користувача?
+          </p>
         </h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>

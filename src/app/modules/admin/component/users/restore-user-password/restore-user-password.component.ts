@@ -26,8 +26,14 @@ export class RestoreUserPasswordComponent implements OnInit {
     this.userForm = this.formBuilder.group(
       {
         id: '',
-        password: new FormControl('', Validators.compose([Validators.required, Validators.minLength(6)])),
-        confirmPassword: new FormControl('', Validators.compose([Validators.required, Validators.minLength(6)]))
+        password: new FormControl(
+          '',
+          Validators.compose([Validators.required, Validators.minLength(6), Validators.maxLength(30)])
+        ),
+        confirmPassword: new FormControl(
+          '',
+          Validators.compose([Validators.required, Validators.minLength(6), Validators.maxLength(30)])
+        )
       },
       { validators: matchPassword }
     );

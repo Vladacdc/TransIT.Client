@@ -38,7 +38,10 @@ export class EditUserComponent implements OnInit {
       firstName: '',
       middleName: '',
       phoneNumber: new FormControl('', Validators.minLength(12)),
-      login: new FormControl('', Validators.compose([Validators.required, Validators.minLength(6)])),
+      login: new FormControl(
+        '',
+        Validators.compose([Validators.required, Validators.minLength(6), Validators.maxLength(50)])
+      ),
       email: new FormControl('', Validators.email),
       role: ['', Validators.required],
       isActive: true
