@@ -18,8 +18,7 @@ export class DeleteMalfuncSubgroupComponent implements OnInit {
 
   delete() {
     this.closeDiv.nativeElement.click();
-    this.serviceMalfuncSubGroup.deleteEntity(this.malfunctionSubGroup.id).subscribe(
-      () => {
+    this.serviceMalfuncSubGroup.deleteEntity(this.malfunctionSubGroup.id).subscribe(() => {
         this.deleteMalfuncSubGroup.next(this.malfunctionSubGroup);
       },
       error => this.toast.error('Помилка', 'Існує заявка з даною підгрупою')

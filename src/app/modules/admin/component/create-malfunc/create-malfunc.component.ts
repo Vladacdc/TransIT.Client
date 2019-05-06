@@ -34,16 +34,6 @@ export class CreateMalfuncComponent implements OnInit {
     this.loadEntities();
   }
 
-  onSubmit() {
-    if (this.malfunctionForm.invalid) {
-      return;
-    }
-    console.log('lllllllllllll');
-    this.createMalfunction();
-    this.setUpForm();
-    this.hideModalWindow();
-  }
-
   private get formValue() {
     return this.malfunctionForm.value;
   }
@@ -68,6 +58,7 @@ export class CreateMalfuncComponent implements OnInit {
     }
     return filteredSubgroups;
   }
+
   private notSelectedSubgroup(subgroups: MalfunSubgroup[]): boolean {
     return subgroups.findIndex(s => s === this.formValue.subgroup) === -1;
   }
@@ -99,12 +90,8 @@ export class CreateMalfuncComponent implements OnInit {
     this.serviceMalfunctionGroup.getEntities().subscribe(malfunctionGroupList => {
       this.malfunctionGroupList = malfunctionGroupList;
     });
-
-    this.serviceMalfunction.getEntities().subscribe(malfunctions => {
-      this.malfunctions = malfunctions;
-
-      const allSubgroups = malfunctions.map(m => m.malfunctionSubgroup);
-      this.malfunctionSubgroupList = Array.from(this.getDistinct(allSubgroups));
+    this.serviceMalfunctionSubgroup.getEntities().subscribe(malfunctionSubGroupList=>{
+      this.malfunctionSubgroupList=malfunctionSubGroupList;
     });
   }
 
@@ -117,7 +104,6 @@ export class CreateMalfuncComponent implements OnInit {
       name: this.formValue.name,
       malfunctionSubgroup: this.formValue.subgroup
     });
-    console.log(issue);
     this.serviceMalfunction
       .addEntity(issue)
       .subscribe(

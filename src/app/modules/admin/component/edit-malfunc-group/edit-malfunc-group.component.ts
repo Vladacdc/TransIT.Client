@@ -41,7 +41,6 @@ export class EditMalfuncGroupComponent implements OnInit {
       id: form.id as number,
       name: form.name as string
     };
-    console.log(malfuncGroup);
     this.serviceMalfunctionGroupService.updateEntity(malfuncGroup).subscribe(_ => this.updateMalfuncGroup.next(malfuncGroup));
   }
 }

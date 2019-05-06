@@ -116,7 +116,6 @@ export class MalfunctionsComponent implements OnInit {
       // this.tableMalfunction.draw();
     });
     this.tableMalfunction.on('select', (e, dt, type, indexes) => {
-      console.log('23456');
       const item = this.tableMalfunction.rows(indexes).data()[0];
       this.selectedMalfunction = item;
     });
@@ -125,7 +124,6 @@ export class MalfunctionsComponent implements OnInit {
   addMalfunctionGroup(malfuncGroup: MalfuncGroup) {
     this.malfuncGroups = [...this.malfuncGroups, malfuncGroup];
     this.tableGroup.row.add(malfuncGroup);
-    console.log(this.malfuncGroups);
     this.tableGroup.draw(); 
   }
 
@@ -143,7 +141,6 @@ export class MalfunctionsComponent implements OnInit {
       .row('.selected')
       .data(malfunctionGroup)
       .draw();
-    console.log(this.malfuncGroups);
   }
 
   //subgroup
@@ -179,7 +176,6 @@ export class MalfunctionsComponent implements OnInit {
       .draw();
   }
   editMalfunctionSubGroup(malfunctionSubGroup: MalfunSubgroup) {
-    console.log('I can edit entity');
     this.malfuncSubgroups[
       this.malfuncSubgroups.findIndex(i => i.id === this.selectedMalfunctionSubGroup.id)
     ] = malfunctionSubGroup;
@@ -211,25 +207,19 @@ export class MalfunctionsComponent implements OnInit {
       .rows('.selected')
       .remove()
       .draw();
-    // console.log(this.malfunctions);
   }
 
   addMalfunction(malfunction: Malfunction) {
-    console.log('ttttttttttt1');
     this.malfunctions = [...this.malfunctions, malfunction];
     this.tableMalfunction.row.add(malfunction);
     this.tableMalfunction.draw();
   }
 
   editMalfunction(malfunction: Malfunction) {
-    console.log('hello edit');
-    console.dir(malfunction);
     this.malfunctions[this.malfunctions.findIndex(i => i.id === this.selectedMalfunction.id)] = malfunction;
     this.tableMalfunction
       .row('.selected')
       .data(malfunction)
       .draw();
   }
-
-  //.............
 }
