@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { IssuelogService } from '../../services/issuelog.service';
 import { IssueLog } from '../../models/issuelog';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { environment } from '../../../../../environments/environment';
 
 declare const $;
 
@@ -15,14 +15,13 @@ export class IssueLogsComponent implements OnInit {
   public issueLogs: Array<IssueLog>;
   protected table: any;
 
-  constructor(protected issueLogService: IssuelogService, protected router: Router) {}
+  constructor(
+    protected issueLogService: IssuelogService,
+    protected router: Router
+  ) {}
 
   public ngOnInit() {
-    this.issueLogService.getEntities().subscribe(logs => {
-      this.initTable();
-      this.issueLogs = logs;
-      this.loadLogs();
-    });
+    this.initTable();
   }
 
   protected initTable(): void {
@@ -32,7 +31,6 @@ export class IssueLogsComponent implements OnInit {
         style: 'single'
       },
       columns: [
-        { data: 'id', bVisible: false },
         { title: 'Статус', data: 'issue.state.transName', defaultContent: '' },
         { title: 'Творець', data: 'create.login', defaultContent: '' },
         { title: 'Витрати', data: 'expenses', defaultContent: '' },
@@ -43,19 +41,21 @@ export class IssueLogsComponent implements OnInit {
         { title: 'Постачальник', data: 'supplier.name', defaultContent: '' },
         { title: 'Транспорт', data: 'issue.vehicle.inventoryId', defaultContent: '' },
         { title: 'Створено', data: 'createDate', defaultContent: '' },
-        { title: 'Редаговано', data: 'modDate', defaultContent: '' }
+        { title: 'Редаговано', data: 'modDate', defaultContent: '' },
+        { data: 'id', bVisible: false }
       ],
+      processing: true,
+      serverSide: true,
+      ajax: {
+        url: environment.apiUrl + '/datatable/issuelog',
+        type: 'POST'
+      },
       paging: true,
       language: {
         url: '//cdn.datatables.net/plug-ins/1.10.19/i18n/Ukrainian.json'
       }
     });
     this.table.on('select', this.selectRow);
-  }
-
-  protected loadLogs(): void {
-    this.table.rows.add(this.issueLogs);
-    this.table.draw();
   }
 
   protected selectRow(e: any, dt: any, type: any, indexes: any): void {
