@@ -14,7 +14,6 @@ export class EditMalfuncSubgroupComponent implements OnInit {
   @ViewChild('close') closeDiv: ElementRef;
   @Input()
   set malfunctionSubGroup(malfunctionSubGroup: MalfunSubgroup) {
-    console.log('please!!!!!!!!');
     if (!malfunctionSubGroup) {
       return;
     }
@@ -36,7 +35,6 @@ export class EditMalfuncSubgroupComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    console.log('go toooooo');
     this.subGroupForm = this.formBuilder.group({
       id: '',
       name: '',
@@ -44,8 +42,6 @@ export class EditMalfuncSubgroupComponent implements OnInit {
     });
     this.serviceMalfuncGroup.getEntities().subscribe(group => {
       this.malfunctionGroups = group;
-      console.log('grupaaaaaaaa123');
-      console.log(this.malfunctionGroups);
     });
   }
   updateData() {
@@ -54,17 +50,12 @@ export class EditMalfuncSubgroupComponent implements OnInit {
     }
     this.closeDiv.nativeElement.click();
     const form = this.subGroupForm.value;
-    console.log('ididididi');
-    console.log(form.id);
     const malfunSubGroup: MalfunSubgroup = {
       id: form.id as number,
       name: form.name as string,
       malfunctionGroup: this.malfunctionGroups.find(f => f.name === form.group)
     };
-
     this.serviceMalfuncSubGroup
-      .updateEntity(malfunSubGroup)
-      .subscribe(() => this.editMalfuncSubGroup.next(malfunSubGroup));
-    console.log('go to method eeeddit');
+      .updateEntity(malfunSubGroup).subscribe(_ => this.editMalfuncSubGroup.next(malfunSubGroup));
   }
 }

@@ -1,16 +1,14 @@
 import { Component, ElementRef, Input, OnInit, ViewChild, EventEmitter, Output } from '@angular/core';
-import { UserService } from '../../services/user.service';
-import { User } from '../../models/user/user';
-import { catchError } from 'rxjs/operators';
-import { throwError } from 'rxjs';
+import { UserService } from '../../../services/user.service';
 import { ToastrService } from 'ngx-toastr';
+import { User } from '../../../models/user/user';
 
 @Component({
-  selector: 'app-dialog',
-  templateUrl: './dialog.component.html',
-  styleUrls: ['./dialog.component.scss']
+  selector: 'app-delete-user',
+  templateUrl: './delete-user.component.html',
+  styleUrls: ['./delete-user.component.scss']
 })
-export class DialogComponent implements OnInit {
+export class DeleteUserComponent implements OnInit {
   @ViewChild('close') closeDeleteModal: ElementRef;
   @Input() user: User;
   @Output() deleteUser = new EventEmitter<User>();
@@ -24,6 +22,7 @@ export class DialogComponent implements OnInit {
     this.service.deleteEntity(this.user.id).subscribe(
       data => {
         this.deleteUser.next(this.user);
+        this.toast.success('', 'Користувача видалено');
       },
       error => this.toast.error('Помилка', 'Користувач містить записи')
     );

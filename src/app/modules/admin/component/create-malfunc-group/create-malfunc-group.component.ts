@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, ViewChild, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, Output, EventEmitter, ɵConsole } from '@angular/core';
 import { MalfuncGroup } from '../../models/malfuncGroup/malfunc-group';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MalfuncGroupService } from '../../services/malfunc-group.service';
@@ -33,6 +33,7 @@ export class CreateMalfuncGroupComponent implements OnInit {
       id: 0,
       name: form.name as string
     };
+    
     this.serviceMalfuncGroup.addEntity(malfuncGroup).subscribe(newGroup => this.createMalfuncGroup.next(newGroup));
     this.closeDiv.nativeElement.click();
   }

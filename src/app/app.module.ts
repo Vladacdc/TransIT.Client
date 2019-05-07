@@ -7,7 +7,6 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule } from '@angular/material';
 import { CoreModule } from './modules/core/core.module';
 import { CUSTOM_ERRORS } from './custom-errors';
 
@@ -15,7 +14,6 @@ import { CUSTOM_ERRORS } from './custom-errors';
   declarations: [AppComponent],
   imports: [
     BrowserModule,
-    MatButtonModule,
     AppRoutingModule,
     CoreModule,
     BrowserAnimationsModule,

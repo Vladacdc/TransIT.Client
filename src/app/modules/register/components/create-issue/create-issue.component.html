@@ -35,17 +35,14 @@
             <label>Підгрупа несправності</label>
             <select class="form-control" formControlName="malfunctionSubgroup">
               <option value="" selected>Виберіть підгрупу несправності</option>
-              <option
-                *ngFor="let malfunctionSubgroup of malfunctionSubgroupsFilteredByGroup"
-                [ngValue]="malfunctionSubgroup"
-                >{{ malfunctionSubgroup.name }}</option
-              >
+              <option *ngFor="let malfunctionSubgroup of malfunctionSubgroupsFilteredByGroup"
+                [ngValue]="malfunctionSubgroup">{{ malfunctionSubgroup.name }}</option>
             </select>
           </div>
           <div class="form-group">
             <label>Несправність</label>
             <select class="form-control" formControlName="malfunction">
-              <option hidden value="" disabled selected>*Виберіть несправність</option>
+              <option value="" selected>Виберіть несправність</option>
               <option *ngFor="let malfunction of malfunctionsFilteredByGroup" [ngValue]="malfunction">{{
                 malfunction.name
               }}</option>
@@ -60,13 +57,8 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрити</button>
-        <button
-          type="button"
-          class="btn btn-primary"
-          (click)="clickSubmit(submit)"
-          form="issueForm"
-          [disabled]="issueForm.invalid"
-        >
+        <button type="button" class="btn btn-primary" (click)="clickSubmit(submit)" form="issueForm"
+          [disabled]="issueForm.invalid">
           Створити
         </button>
       </div>

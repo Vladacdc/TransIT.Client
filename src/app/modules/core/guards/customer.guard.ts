@@ -1,14 +1,10 @@
 import { Injectable } from '@angular/core';
-import { CanActivate } from '@angular/router';
-import { AuthenticationService } from '../services/authentication.service';
+import { LoginGuard } from './login.guard';
+import { Role } from '../models/role/role';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CustomerGuard implements CanActivate {
-  constructor(private service: AuthenticationService) {}
-
-  canActivate(): boolean {
-    return this.service.getRole() === 'CUSTOMER';
-  }
+export class CustomerGuard extends LoginGuard {
+  protected expectedRole: Role = 'CUSTOMER';
 }

@@ -10,4 +10,5 @@ export class User extends TEntity<User> {
   login: string;
   password?: string;
   role: Role;
+  isActive: boolean;
 }

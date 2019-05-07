@@ -28,7 +28,7 @@ export class IssuesComponent implements OnInit {
     columnDefs: [
       {
         targets: [0, 2, 3],
-        render: data => {
+        render: (data: string = '') => {
           if (data.length > 22) {
             return data.substring(0, 20) + '...';
           }
@@ -39,7 +39,7 @@ export class IssuesComponent implements OnInit {
     scrollX: true
   };
 
-  constructor(private issueService: IssueService, private toast: ToastrService) {}
+  constructor(private issueService: IssueService, private toast: ToastrService) { }
 
   ngOnInit() {
     this.initializeTable();
@@ -80,7 +80,7 @@ export class IssuesComponent implements OnInit {
       issue.malfunction.name,
       issue.summary,
       `<button id="details-issue-${
-        issue.id
+      issue.id
       }" class="btn" data-toggle="modal" data-target="#editModal"><i class="fas fa-edit"></i></button>`
     ]);
   }

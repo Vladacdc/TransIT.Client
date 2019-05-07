@@ -1,8 +1,8 @@
-import { Component, OnInit, ChangeDetectorRef, Output, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { User } from '../../models/user/user';
 import { UserService } from '../../services/user.service';
 import { RoleService } from '../../services/role.service';
-import { Role } from '../../models/role/role';
+
 @Component({
   selector: 'app-users',
   templateUrl: './users.component.html',
@@ -42,6 +42,9 @@ export class UsersComponent implements OnInit {
         title: 'Роль'
       },
       {
+        title: 'Статус'
+      },
+      {
         title: 'Дії',
         orderable: false
       }
@@ -67,12 +70,14 @@ export class UsersComponent implements OnInit {
       i.email,
       i.phoneNumber,
       i.role.transName,
+      i.isActive ? 'активний' : 'неактивний',
       `<button id="find-user-${
-        i.login
+        i.id
       }" class="btn" data-toggle="modal" data-target="#editUser"><i class="fas fa-edit"></i></button>
       <button id="find-user-${
-        i.login
-      }" class="btn" data-toggle="modal" data-target="#deleteModal"><i class="fas fa-trash-alt" style="color: darkred"></i></button>`
+        i.id
+      }" class="btn" data-toggle="modal" data-target="#deleteModal"><i class="fas fa-trash-alt" style="color: darkred"></i>
+      </button>`
     ]);
 
     this.dataTable = $('#userTable')
@@ -82,13 +87,11 @@ export class UsersComponent implements OnInit {
       .rows.add(view)
       .draw();
 
-    $('button[id^="find-user"]')
-      .off('click')
-      .on('click', event => {
-        const idTokens = event.currentTarget.id.split('-');
-        const login = idTokens[idTokens.length - 1];
-        this.user = this.users.find(i => i.login === login);
-      });
+    $('#userTable tbody').on('click', 'button', event => {
+      const idTokens = event.currentTarget.id.split('-');
+      const id = parseInt(idTokens[idTokens.length - 1], 10);
+      this.user = this.users.find(i => i.id === id);
+    });
   }
 
   addUser(user: User) {

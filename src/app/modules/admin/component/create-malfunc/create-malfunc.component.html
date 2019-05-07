@@ -1,4 +1,4 @@
-<button type="button" class="btn btn-info" data-toggle="modal" data-target="#createMalfunction">
+<button type="button" class="btn btn-info" (click)="loadEntities()" data-toggle="modal" data-target="#createMalfunction">
   <i class="fas fa-plus fa-2x"></i>
 </button>
 
@@ -19,7 +19,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <form [formGroup]="malfunctionForm" (validSubmit)="onSubmit()">
+        <form [formGroup]="malfunctionForm" >
           <div class="form-group">
             <label>Група несправності</label>
             <select class="form-control" formControlName="group">

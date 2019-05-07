@@ -1,0 +1,93 @@
+<app-restore-user-password [selectedUser]="selectedUser"></app-restore-user-password>
+<app-is-active-modal
+  [selectedUser]="selectedUser"
+  (updateUserChangeActive)="updateUserChangeActive($event)"
+></app-is-active-modal>
+<div class="modal fade" id="editUser" tabindex="-1" role="dialog" aria-labelledby="CreateUser" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header color">
+        <h5 class="modal-title"><i class="fas fa-user-edit"></i> Редагувати користувача</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="userForm">
+          <div class="row">
+            <div class="form-group col-md-6">
+              <label>Прізвище</label>
+              <input type="text" class="form-control" formControlName="lastName" />
+            </div>
+
+            <div class="form-group col-md-6">
+              <label>Ім'я</label>
+              <input type="text" class="form-control" formControlName="firstName" />
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-md-6">
+              <label>По батькові</label>
+              <input type="text" class="form-control" formControlName="middleName" />
+            </div>
+
+            <div class="form-group col-md-6">
+              <label>Номер телефону</label>
+              <input class="form-control" formControlName="phoneNumber" mask="+(000)00-00-00-000" />
+            </div>
+          </div>
+          <div class="row">
+            <div class="form-group col-md-6">
+              <label>Логін*</label>
+              <input type="text" class="form-control" formControlName="login" />
+            </div>
+
+            <div class="form-group col-md-6">
+              <label>Пошта</label>
+              <input type="text" class="form-control" formControlName="email" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label>Роль*</label>
+            <select class="form-control" formControlName="role">
+              <option hidden value="" disabled selected></option>
+              <option *ngFor="let role of roles"> {{ role.transName }}</option>
+            </select>
+          </div>
+          <a href="#" data-toggle="modal" data-target="#restoreModal" data-dismiss="modal" class="right">
+            Відновити пароль
+          </a>
+          <br />
+          <a
+            href="#"
+            data-toggle="modal"
+            data-target="#activateModal"
+            data-dismiss="modal"
+            class="right"
+            *ngIf="selectedUser.isActive === true"
+          >
+            Деактивувати користувача
+          </a>
+          <a
+            href="#"
+            data-toggle="modal"
+            data-target="#activateModal"
+            data-dismiss="modal"
+            class="right"
+            *ngIf="selectedUser.isActive === false"
+          >
+            Активувати користувача
+          </a>
+          <button hidden type="submit" #submit></button>
+        </form>
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" #close>Закрити</button>
+        <button type="button" class="btn btn-primary" [disabled]="userForm.invalid" (click)="updateData()">
+          Зберегти
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
