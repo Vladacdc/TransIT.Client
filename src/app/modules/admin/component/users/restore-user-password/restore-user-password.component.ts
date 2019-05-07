@@ -1,8 +1,8 @@
 import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { matchPassword } from 'src/app/custom-errors';
-import { UserService } from '../../../services/user.service';
 import { ToastrService } from 'ngx-toastr';
+import { UserService } from '../../../services/user.service';
 
 @Component({
   selector: 'app-restore-user-password',
@@ -42,12 +42,13 @@ export class RestoreUserPasswordComponent implements OnInit {
     if (this.userForm.invalid) {
       return;
     }
+
     this.selectedUser.password = this.userForm.value.password;
-    this.serviceUser.updateEntity(this.selectedUser).subscribe(
+    this.serviceUser.updateUserPassword(this.selectedUser.id, this.selectedUser.password).subscribe(
       _ => {
         this.toast.success('', 'Пароль змінено');
       },
-      error => this.toast.error('Помилка')
+      error => this.toast.error('Помилка', 'Пароль не змінено')
     );
     this.closeRestoreModal.nativeElement.click();
   }
