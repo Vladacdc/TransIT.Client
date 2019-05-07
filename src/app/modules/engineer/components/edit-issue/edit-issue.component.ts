@@ -9,7 +9,7 @@ import { IssueService } from '../../services/issue.service';
   styleUrls: ['./edit-issue.component.scss']
 })
 export class EditIssueComponent implements OnInit {
-  public issue: Issue;
+  issue: Issue;
 
   constructor(
     private activatedRoute: ActivatedRoute,

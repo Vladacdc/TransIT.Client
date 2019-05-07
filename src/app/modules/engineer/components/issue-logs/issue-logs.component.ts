@@ -12,7 +12,7 @@ declare const $;
   styleUrls: ['./issue-logs.component.scss']
 })
 export class IssueLogsComponent implements OnInit {
-  public issueLogs: Array<IssueLog>;
+  issueLogs: Array<IssueLog>;
   protected table: any;
 
   constructor(
@@ -20,7 +20,7 @@ export class IssueLogsComponent implements OnInit {
     protected router: Router
   ) {}
 
-  public ngOnInit() {
+  ngOnInit() {
     this.initTable();
   }
 

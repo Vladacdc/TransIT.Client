@@ -11,8 +11,8 @@ declare const $;
   styleUrls: ['./documents.component.scss']
 })
 export class DocumentsComponent implements OnInit {
-  public selectedDocument: Document;
-  public documents: Array<IssueLog>;
+  selectedDocument: Document;
+  documents: Array<IssueLog>;
   protected table: any;
 
   constructor(protected documentService: DocumentService) {}
@@ -44,7 +44,7 @@ export class DocumentsComponent implements OnInit {
     this.table.on('select', this.selectRow);
   }
 
-  public updateDocument(item: Document): void {
+  updateDocument(item: Document): void {
     this.documentService.updateEntity(item).subscribe();
   }
 

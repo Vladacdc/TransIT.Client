@@ -10,11 +10,11 @@ declare const $;
   styleUrls: ['./issue-log-assignees.component.scss']
 })
 export class IssueLogAssigneesComponent implements OnInit {
-  public searchString: string;
-  public currentUser: User;
-  public users: Array<User>;
+  searchString: string;
+  currentUser: User;
+  users: Array<User>;
   private allUsers: Array<User>;
-  @Output() public selectUser: EventEmitter<User>;
+  @Output() selectUser: EventEmitter<User>;
   private table: any;
 
   constructor(private userService: UserService) {
@@ -53,7 +53,7 @@ export class IssueLogAssigneesComponent implements OnInit {
     });
   }
 
-  public onSearchChange(): void {
+  onSearchChange(): void {
     const search = this.searchString.toLowerCase();
     this.users = this.allUsers.filter(
       x =>
@@ -68,7 +68,7 @@ export class IssueLogAssigneesComponent implements OnInit {
     }
   }
 
-  public selectItem(item: User): void {
+  selectItem(item: User): void {
     this.currentUser = item;
     this.selectUser.emit(item);
     this.searchString = item.login + ' ' + item.firstName + ' ' + item.lastName + ' ';

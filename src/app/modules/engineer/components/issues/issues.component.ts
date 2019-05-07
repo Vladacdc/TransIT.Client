@@ -12,7 +12,7 @@ declare const $;
   styleUrls: ['./issues.component.scss']
 })
 export class IssuesComponent implements OnInit {
-  public issues: Array<Issue>;
+  issues: Array<Issue>;
   private table: any;
 
   constructor(

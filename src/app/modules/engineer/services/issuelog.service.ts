@@ -9,7 +9,7 @@ import { catchError, tap } from 'rxjs/operators';
 export class IssuelogService extends CrudService<IssueLog> {
   protected readonly serviceUrl = `${environment.apiUrl}/issuelog`;
 
-  public getEntitiesByIssueId(id: number): Observable<IssueLog[]> {
+  getEntitiesByIssueId(id: number): Observable<IssueLog[]> {
     this.spinner.show();
     return this.http.get<Array<IssueLog>>(`${environment.apiUrl}/issue/${id}/issuelog`).pipe(
       tap(data => this.handleSuccess('fetched data', data)),
