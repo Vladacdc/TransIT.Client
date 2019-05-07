@@ -12,15 +12,11 @@ declare const $;
   styleUrls: ['./issue-logs.component.scss']
 })
 export class IssueLogsComponent implements OnInit {
-  public issueLogs: Array<IssueLog>;
   protected table: any;
 
-  constructor(
-    protected issueLogService: IssuelogService,
-    protected router: Router
-  ) {}
+  constructor(protected router: Router) {}
 
-  public ngOnInit() {
+  ngOnInit() {
     this.initTable();
   }
 

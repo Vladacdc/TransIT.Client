@@ -6,15 +6,15 @@ import { User } from './user';
 import { TEntity } from '../../core/models/entity/entity';
 
 export class IssueLog extends TEntity<IssueLog> {
-  public description?: string;
-  public expenses?: number;
-  public actionType?: ActionType;
-  public issue?: Issue;
-  public newState?: State;
-  public oldState?: State;
-  public supplier?: Supplier;
-  public create?: User;
-  public mod?: User;
-  public createDate?: Date;
-  public modDate?: Date;
+  description?: string;
+  expenses?: number;
+  actionType?: ActionType;
+  issue?: Issue;
+  newState?: State;
+  oldState?: State;
+  supplier?: Supplier;
+  create?: User;
+  mod?: User;
+  createDate?: Date;
+  modDate?: Date;
 }

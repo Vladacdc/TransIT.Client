@@ -12,10 +12,10 @@ declare const $;
   styleUrls: ['./create-document.component.scss']
 })
 export class CreateDocumentComponent implements OnInit {
-  @Output() public createDocument: EventEmitter<Document>;
-  @Input() public issueLog: IssueLog;
-  public documentForm: FormGroup;
-  public document: Document;
+  @Output() createDocument: EventEmitter<Document>;
+  @Input() issueLog: IssueLog;
+  documentForm: FormGroup;
+  document: Document;
 
   constructor(private activatedRoute: ActivatedRoute) {
     this.createDocument = new EventEmitter<Document>();
@@ -48,7 +48,7 @@ export class CreateDocumentComponent implements OnInit {
     });
   }
 
-  public onSubmit(): void {
+  onSubmit(): void {
     if (this.documentForm.invalid) {
       alert('Invalid');
       return;

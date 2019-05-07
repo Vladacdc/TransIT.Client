@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TokenStore } from './modules/core/helpers/TokenStore';
 import { AuthenticationService } from './modules/core/services/authentication.service';
-import { Token } from './modules/core/models/token/token';
 import { environment } from '../environments/environment';
 
 declare const $;
@@ -12,6 +11,8 @@ declare const $;
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
+
+  private isInProgress: boolean;
 
   constructor(
     private tokenStore: TokenStore,
@@ -30,9 +31,14 @@ export class AppComponent implements OnInit {
       },
       statusCode: {
         401: () => {
-          this.authenticationService
-            .refreshAccessToken()
-            .subscribe((res: Token) => this.tokenStore.setToken(res));
+          if (!this.isInProgress) {
+            this.isInProgress = true;
+            this.authenticationService
+              .refreshAccessToken()
+              .subscribe(() =>
+                this.isInProgress = false
+              );
+          }
         }
       }
     });

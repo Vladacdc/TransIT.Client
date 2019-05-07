@@ -5,13 +5,13 @@ import { User } from './user';
 import { TEntity } from '../../core/models/entity/entity';
 
 export class Issue extends TEntity<Issue> {
-  public state?: State;
-  public malfunction?: Malfunction;
-  public warranty?: number;
-  public vehicle?: Vehicle;
-  public assignedTo?: User;
-  public deadline?: Date;
-  public summary?: string;
-  public createDate?: Date;
-  public modDate?: Date;
+  state?: State;
+  malfunction?: Malfunction;
+  warranty?: number;
+  vehicle?: Vehicle;
+  assignedTo?: User;
+  deadline?: Date;
+  summary?: string;
+  createDate?: Date;
+  modDate?: Date;
 }
