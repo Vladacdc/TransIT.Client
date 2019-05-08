@@ -8,13 +8,7 @@ import { Issue } from '../../models/issue';
   styleUrls: ['../issue-logs/issue-logs.component.scss']
 })
 export class NestedIssueLogsComponent extends IssueLogsComponent implements OnInit {
-  @Input() public issue: Issue = null;
+  @Input() issue: Issue = null;
 
-  public ngOnInit() {
-    this.issueLogService.getEntitiesByIssueId(this.issue.id).subscribe(logs => {
-      this.initTable();
-      this.issueLogs = logs;
-      this.loadLogs();
-    });
-  }
+  ngOnInit() {}
 }

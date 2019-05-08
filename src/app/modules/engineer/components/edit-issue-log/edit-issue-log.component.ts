@@ -21,14 +21,14 @@ import { IssueService } from '../../services/issue.service';
   styleUrls: ['./edit-issue-log.component.scss']
 })
 export class EditIssueLogComponent implements OnInit {
-  public issueLog: IssueLog;
-  public assigneeUser: User;
-  public supplier: Supplier;
-  public actionTypes: Array<ActionType>;
-  public states: Array<State>;
-  public suppliers: Array<Supplier>;
-  public issueLogForm: FormGroup;
-  public documents: Array<Document>;
+  issueLog: IssueLog;
+  assigneeUser: User;
+  supplier: Supplier;
+  actionTypes: Array<ActionType>;
+  states: Array<State>;
+  suppliers: Array<Supplier>;
+  issueLogForm: FormGroup;
+  documents: Array<Document>;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -90,23 +90,23 @@ export class EditIssueLogComponent implements OnInit {
     });
   }
 
-  public assignDocument(entity: Document): void {
+  assignDocument(entity: Document): void {
     this.documents.push(entity);
   }
 
-  public assignAssignee(entity: User): void {
+  assignAssignee(entity: User): void {
     this.assigneeUser = entity;
   }
 
-  public assignSupplier(entity: Supplier): void {
+  assignSupplier(entity: Supplier): void {
     this.supplier = entity;
   }
 
-  public deleteDocument(entity: Document): void {
+  deleteDocument(entity: Document): void {
     this.documents = this.documents.filter(x => x.id === entity.id);
   }
 
-  public onSubmit(): void {
+  onSubmit(): void {
     if (this.issueLogForm.invalid) {
       alert('Не правильно введені дані!');
       return;

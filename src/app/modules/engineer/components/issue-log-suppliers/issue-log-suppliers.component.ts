@@ -11,11 +11,11 @@ declare const $;
   styleUrls: ['./issue-log-suppliers.component.scss']
 })
 export class IssueLogSuppliersComponent implements OnInit {
-  public searchString: string;
-  public currentSupplier: Supplier;
-  public suppliers: Array<Supplier>;
+  searchString: string;
+  currentSupplier: Supplier;
+  suppliers: Array<Supplier>;
   private allSuppliers: Array<Supplier>;
-  @Output() public selectSupplier: EventEmitter<Supplier>;
+  @Output() selectSupplier: EventEmitter<Supplier>;
   private table: any;
 
   constructor(private supplierService: SupplierService) {
@@ -51,7 +51,7 @@ export class IssueLogSuppliersComponent implements OnInit {
     });
   }
 
-  public onSearchChange(): void {
+  onSearchChange(): void {
     const search = this.searchString.toLowerCase();
     this.suppliers = this.allSuppliers.filter(x => x.name.toLowerCase().includes(search));
     if (this.suppliers.length) {
@@ -61,7 +61,7 @@ export class IssueLogSuppliersComponent implements OnInit {
     }
   }
 
-  public selectItem(item: User): void {
+  selectItem(item: User): void {
     this.currentSupplier = item;
     this.selectSupplier.emit(item);
     this.searchString = item.login + ' ' + item.firstName + ' ' + item.lastName + ' ';

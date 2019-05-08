@@ -12,7 +12,7 @@ import { catchError, tap } from 'rxjs/operators';
 export class DocumentService extends CrudService<Document> {
   protected readonly serviceUrl = `${environment.apiUrl}/document`;
 
-  public getEntitiesByIssueLogId(id: number): Observable<Array<Document>> {
+  getEntitiesByIssueLogId(id: number): Observable<Array<Document>> {
     this.spinner.show();
     return this.http.get<Array<IssueLog>>(`${environment.apiUrl}/issuelog/${id}/document`).pipe(
       tap(data => this.handleSuccess('fetched data', data)),
