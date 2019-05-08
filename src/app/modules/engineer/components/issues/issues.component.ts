@@ -14,14 +14,11 @@ export class IssuesComponent implements OnInit {
   public issues: Array<Issue>;
   private table: any;
 
-  constructor(
-    private issueService: IssueService,
-    private router: Router
-  ) {}
+  constructor(private issueService: IssueService, private router: Router) {}
 
   ngOnInit() {
     this.table = $('#issue-table').DataTable({
-      responsive: true,
+      scrollX: true,
       select: {
         style: 'single'
       },

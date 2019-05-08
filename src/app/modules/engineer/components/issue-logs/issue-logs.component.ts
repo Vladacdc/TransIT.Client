@@ -27,7 +27,7 @@ export class IssueLogsComponent implements OnInit {
 
   protected initTable(): void {
     this.table = $('#issue-logs-table').DataTable({
-      responsive: true,
+      scrollX: true,
       select: {
         style: 'single'
       },
