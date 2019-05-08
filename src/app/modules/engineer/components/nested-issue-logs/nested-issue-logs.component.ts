@@ -10,5 +10,5 @@ import { Issue } from '../../models/issue';
 export class NestedIssueLogsComponent extends IssueLogsComponent implements OnInit {
   @Input() issue: Issue = null;
 
-  ngOnInit() { }
+  ngOnInit() {}
 }
