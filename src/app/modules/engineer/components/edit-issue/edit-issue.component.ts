@@ -19,6 +19,8 @@ export class EditIssueComponent implements OnInit {
   ngOnInit() {
     this.activatedRoute.params.subscribe(data => {
       this.issue = new Issue(data);
+      // console.log(data.id);
+      
       this.issueService.getEntity(data.id).subscribe(res => {
         this.issue = res;
       });
