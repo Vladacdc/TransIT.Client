@@ -6,4 +6,6 @@ import { environment } from '../../../../environments/environment';
 @Injectable()
 export class IssueService extends CrudService<Issue> {
   protected readonly serviceUrl = `${environment.apiUrl}/issue`;
+
+  selectedIssue: Issue = null;
 }

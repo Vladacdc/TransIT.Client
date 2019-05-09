@@ -11,17 +11,9 @@ import { IssueService } from '../../services/issue.service';
 export class EditIssueComponent implements OnInit {
   issue: Issue;
 
-  constructor(
-    private activatedRoute: ActivatedRoute,
-    private issueService: IssueService
-  ) {}
+  constructor(private issueService: IssueService) {}
 
   ngOnInit() {
-    this.activatedRoute.params.subscribe(data => {
-      this.issue = new Issue(data);
-      this.issueService.getEntity(data.id).subscribe(res => {
-        this.issue = res;
-      });
-    });
+    this.issue = this.issueService.selectedIssue;
   }
 }

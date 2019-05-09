@@ -21,7 +21,17 @@ export class IssueLogsComponent implements OnInit {
   }
 
   protected initTable(): void {
-    this.table = $('#issue-logs-table').DataTable({
+    this.table = $('#issue-logs-table').DataTable(this.tableConfig);
+    this.table.on('select', this.selectRow);
+  }
+
+  protected selectRow(e: any, dt: any, type: any, indexes: any): void {
+    const item = this.table.rows(indexes).data()[0];
+    this.router.navigate(['/engineer/issue-logs/edit', item]);
+  }
+
+  protected get tableConfig(): any {
+    return {
       scrollX: true,
       select: {
         style: 'single'
@@ -50,12 +60,6 @@ export class IssueLogsComponent implements OnInit {
       language: {
         url: '//cdn.datatables.net/plug-ins/1.10.19/i18n/Ukrainian.json'
       }
-    });
-    this.table.on('select', this.selectRow);
-  }
-
-  protected selectRow(e: any, dt: any, type: any, indexes: any): void {
-    const item = this.table.rows(indexes).data()[0];
-    this.router.navigate(['/engineer/issue-logs/edit', item]);
+    };
   }
 }

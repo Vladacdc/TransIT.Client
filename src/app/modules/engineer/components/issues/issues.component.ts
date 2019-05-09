@@ -12,17 +12,16 @@ declare const $;
   styleUrls: ['./issues.component.scss']
 })
 export class IssuesComponent implements OnInit {
-  issues: Array<Issue>;
-  private table: any;
+  protected table: any;
 
   constructor(private issueService: IssueService, private router: Router) {}
 
   ngOnInit() {
-    this.initTable();
+    this.table = this.initTable();
   }
 
   protected initTable(): void {
-    this.table = $('#issue-table').DataTable({
+    const table = $('#issue-table').DataTable({
       scrollX: true,
       select: {
         style: 'single'
@@ -50,11 +49,14 @@ export class IssuesComponent implements OnInit {
         url: '//cdn.datatables.net/plug-ins/1.10.19/i18n/Ukrainian.json'
       }
     });
-    this.table.on('select', this.selectRow);
+    table.on('select', (e: any, dt: any, type: any, indexes: any) => {
+      this.selectRow(e, dt, type, indexes);
+    });
+    return table;
   }
 
   protected selectRow(e: any, dt: any, type: any, indexes: any): void {
-    const item = this.table.rows(indexes).data()[0];
-    this.router.navigate(['/engineer/issues/edit', new Issue(item)]);
+    this.issueService.selectedIssue = new Issue(this.table.rows(indexes).data()[0]);
+    this.router.navigate(['/engineer/issues/edit']);
   }
 }
