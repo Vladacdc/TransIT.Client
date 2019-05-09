@@ -19,4 +19,8 @@ export class DocumentService extends CrudService<Document> {
       catchError(this.handleError())
     );
   }
+
+  protected mapEntity(entity: Document): Document {
+    return new Document(entity);
+  }
 }

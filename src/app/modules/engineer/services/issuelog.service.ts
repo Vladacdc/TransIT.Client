@@ -4,6 +4,7 @@ import { CrudService } from '../../core/services/crud.service';
 import { IssueLog } from '../models/issuelog';
 import { Observable } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
+import { ActionType } from '../models/actionType';
 
 @Injectable()
 export class IssuelogService extends CrudService<IssueLog> {
@@ -15,5 +16,9 @@ export class IssuelogService extends CrudService<IssueLog> {
       tap(data => this.handleSuccess('fetched data', data)),
       catchError(this.handleError())
     );
+  }
+
+  protected mapEntity(entity: IssueLog): IssueLog {
+    return new IssueLog(entity);
   }
 }

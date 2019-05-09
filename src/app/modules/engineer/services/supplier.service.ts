@@ -8,4 +8,8 @@ import { Supplier } from '../models/supplier';
 })
 export class SupplierService extends CrudService<Supplier> {
   protected readonly serviceUrl = `${environment.apiUrl}/supplier`;
+
+  protected mapEntity(entity: Supplier): Supplier {
+    return new Supplier(entity);
+  }
 }
