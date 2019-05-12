@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { IssueLogAnalystComponent } from './issue-log-analyst.component';
+import { GlobalIssueComponent } from './global-issue.component';
 
-describe('IssueLogAnalystComponent', () => {
-  let component: IssueLogAnalystComponent;
-  let fixture: ComponentFixture<IssueLogAnalystComponent>;
+describe('GlobalIssueComponent', () => {
+  let component: GlobalIssueComponent;
+  let fixture: ComponentFixture<GlobalIssueComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ IssueLogAnalystComponent ]
+      declarations: [ GlobalIssueComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(IssueLogAnalystComponent);
+    fixture = TestBed.createComponent(GlobalIssueComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
