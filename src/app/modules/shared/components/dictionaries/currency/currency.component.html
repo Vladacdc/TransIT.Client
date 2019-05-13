@@ -1,0 +1,12 @@
+<div class="table-background border">
+  <app-create-currency (createCurrency)="addCurrency($event)" *ngIf="isVisible"></app-create-currency>
+  <app-delete-currency
+    [currency]="currency"
+    (deleteCurrency)="deleteCurrency($event)"
+    *ngIf="isVisible"
+  ></app-delete-currency>
+  <p></p>
+  <div>
+    <table id="currencyTable" class="table table-bordered  table-hover" style="width:100%;"></table>
+  </div>
+</div>

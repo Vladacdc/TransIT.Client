@@ -1,0 +1,42 @@
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createCurrency">
+  <i class="fas fa-money-bill-alt"></i> Додати валюту
+</button>
+
+<div
+  class="modal fade"
+  id="createCurrency"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="createCurrency"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header color">
+        <h5 class="modal-title"><i class="fas fa-money-bill-alt"></i> Додати валюту</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="currencyForm">
+          <div class="form-group">
+            <label>Коротка назва валюти</label>
+            <input type="text" class="form-control" formControlName="shortName" placeholder="Введіть скорочену назву" />
+          </div>
+          <div class="form-group">
+            <label>Повна назва валюти</label>
+            <input type="text" class="form-control" formControlName="fullName" placeholder="Введіть повну назву" />
+          </div>
+        </form>
+      </div>
+
+      <div class="modal-footer">
+        <button #close type="button" class="btn btn-secondary" data-dismiss="modal">Закрити</button>
+        <button type="button" class="btn btn-primary" (click)="clickSubmit()" [disabled]="currencyForm.invalid">
+          Створити
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -50,7 +50,7 @@ import { DeleteVehicleTypeComponent } from './component/delete-vehicle-type/dele
 
 import { DocumentsComponent } from './component/documents/documents.component';
 import { IssueLogComponent } from './component/issue-log/issue-log.component';
-
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -92,12 +92,12 @@ import { IssueLogComponent } from './component/issue-log/issue-log.component';
     DeleteVehicleTypeComponent,
     DocumentsComponent,
     IssueLogComponent
-
   ],
   exports: [AdminComponent],
   imports: [
     CommonModule,
     CoreModule,
+    SharedModule,
     AdminRoutingModule,
     FormsModule,
     DataTablesModule,

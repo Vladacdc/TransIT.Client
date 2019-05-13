@@ -1,11 +1,12 @@
 <app-navbar></app-navbar>
-<div class="container-fluid page ">
+<div class="container page ">
   <div class="border d-none d-md-flex ">
     <nav class="nav nav-tabs " id="nav-tab" role="tablist">
       <a
         class="nav-item nav-link"
         routerLinkActive="active"
         routerLink="/analyst/issues"
+        routerLinkActive="active"
         data-toggle="tab"
         role="tab"
         aria-selected="false"
@@ -16,11 +17,23 @@
         class="nav-item nav-link"
         routerLinkActive="active"
         routerLink="/analyst/report"
+        routerLinkActive="active"
         data-toggle="tab"
         role="tab"
         aria-selected="false"
       >
         <i class="fas fa-clipboard"></i> Звіт</a
+      >
+
+      <a
+        class="nav-item nav-link"
+        routerLink="/analyst/dictionary"
+        routerLinkActive="active"
+        data-toggle="tab"
+        role="tab"
+        aria-selected="false"
+      >
+        <i class="fas fa-globe"></i> Словники</a
       >
     </nav>
   </div>

@@ -4,10 +4,10 @@
 <div class="container page">
   <div class="border d-none d-md-flex ">
     <nav class="nav nav-tabs " id="nav-tab" role="tablist">
-      <a class="nav-item nav-link active" routerLink="/admin/users" data-toggle="tab" role="tab" aria-selected="true">
+      <a class="nav-item nav-link" routerLink="/admin/users" routerLinkActive="active" data-toggle="tab" role="tab">
         <i class="fas fa-users"></i> Користувачі</a
       >
-      <a class="nav-item nav-link" routerLink="/admin/vehicles" data-toggle="tab" role="tab" aria-selected="false">
+      <a class="nav-item nav-link" routerLink="/admin/vehicles" routerLinkActive="active" data-toggle="tab" role="tab">
         <i class="fas fa-bus"></i> Транспорт</a
       >
       <a class="nav-item nav-link" routerLink="/admin/vehicle-types" data-toggle="tab" role="tab" aria-selected="false">
@@ -16,14 +16,45 @@
       <a class="nav-item nav-link" routerLink="/admin/malfunctions" data-toggle="tab" role="tab" aria-selected="false">
         <i class="fas fa-exclamation-triangle"></i> Несправності</a
       >
-      <a class="nav-item nav-link" routerLink="/admin/actions" data-toggle="tab" role="tab" aria-selected="false">
+      <a
+        class="nav-item nav-link"
+        routerLink="/admin/actions"
+        routerLinkActive="active"
+        data-toggle="tab"
+        role="tab"
+        aria-selected="false"
+      >
         <i class="fas fa-file-contract"></i> Дії</a
       >
-      <a class="nav-item nav-link" routerLink="/admin/supplier" data-toggle="tab" role="tab" aria-selected="false">
+      <a
+        class="nav-item nav-link"
+        routerLink="/admin/supplier"
+        routerLinkActive="active"
+        data-toggle="tab"
+        role="tab"
+        aria-selected="false"
+      >
         <i class="fas fa-address-card"></i> Постачальники</a
       >
-      <a class="nav-item nav-link" routerLink="/admin/documents" data-toggle="tab" role="tab" aria-selected="false">
+      <a
+        class="nav-item nav-link"
+        routerLink="/admin/documents"
+        routerLinkActive="active"
+        data-toggle="tab"
+        role="tab"
+        aria-selected="false"
+      >
         <i class="fa fa-folder-open"></i> Документи</a
+      >
+      <a
+        class="nav-item nav-link"
+        routerLink="/admin/dictionary"
+        routerLinkActive="active"
+        data-toggle="tab"
+        role="tab"
+        aria-selected="false"
+      >
+        <i class="fas fa-globe"></i> Словники</a
       >
     </nav>
   </div>
