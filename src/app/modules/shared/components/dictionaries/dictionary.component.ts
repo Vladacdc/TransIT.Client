@@ -18,8 +18,6 @@ export class DictionaryComponent implements OnInit {
   }
 
   isVisibleCheck() {
-    console.log("this._url === 'admin'");
-    console.log(this._url === 'admin');
     if (this._url === 'admin') this.isVisible = true;
     else this.isVisible = false;
   }
