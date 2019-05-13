@@ -86,12 +86,12 @@ export class CreateMalfuncComponent implements OnInit {
     modalWindow.modal('hide');
   }
 
-  private loadEntities() {
+  public loadEntities() {
     this.serviceMalfunctionGroup.getEntities().subscribe(malfunctionGroupList => {
       this.malfunctionGroupList = malfunctionGroupList;
     });
-    this.serviceMalfunctionSubgroup.getEntities().subscribe(malfunctionSubGroupList=>{
-      this.malfunctionSubgroupList=malfunctionSubGroupList;
+    this.serviceMalfunctionSubgroup.getEntities().subscribe(malfunctionSubGroupList => {
+      this.malfunctionSubgroupList = malfunctionSubGroupList;
     });
   }
 

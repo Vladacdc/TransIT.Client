@@ -12,7 +12,6 @@ declare const $;
   styleUrls: ['./issue-logs.component.scss']
 })
 export class IssueLogsComponent implements OnInit {
-
   protected table: any;
   protected readonly tableConfig: any = {
       scrollX: true,
@@ -35,24 +34,28 @@ export class IssueLogsComponent implements OnInit {
       ],
       processing: true,
       serverSide: true,
-      ajax: {
-        url: environment.apiUrl + '/datatable/issuelog',
-        type: 'POST'
-      },
+      ajax: this.ajaxCallback.bind(this),
       paging: true,
       language: {
         url: '//cdn.datatables.net/plug-ins/1.10.19/i18n/Ukrainian.json'
       }
     };
 
-  constructor(protected router: Router) {}
+  constructor(
+    protected issueLogService: IssuelogService,
+    protected router: Router
+  ) {}
 
   ngOnInit() {
-    this.initTable();
+    this.initTable(this.tableConfig);
   }
 
-  protected initTable(): void {
-    this.table = $('#issue-logs-table').DataTable(this.tableConfig);
+  protected ajaxCallback(dataTablesParameters: any, callback): void {
+    this.issueLogService.getFilteredEntities(dataTablesParameters).subscribe(callback);
+  }
+
+  protected initTable(tableConfig: any): void {
+    this.table = $('#issue-logs-table').DataTable(tableConfig);
     this.table.on('select', this.selectRow.bind(this));
   }
 

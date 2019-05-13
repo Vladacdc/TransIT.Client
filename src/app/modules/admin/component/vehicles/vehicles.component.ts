@@ -90,10 +90,6 @@ export class VehiclesComponent implements OnInit {
 
   updateVehicle(vehicle: Vehicle) {
     this.vehicles[this.vehicles.findIndex(i => i.id === vehicle.id)] = vehicle;
-
-    //  this.table.row($(`button[id^="vehicle-${vehicle.id}"]`).parents('tr'))
-    //   .invalidate()
-    //   .draw();
     this.vehicleService.getEntities().subscribe(vehicles => {
       this.addTableData(vehicles);
     });

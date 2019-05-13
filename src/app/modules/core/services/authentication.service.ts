@@ -7,7 +7,7 @@ import { Observable, throwError } from 'rxjs';
 import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { SpinnerService } from './spinner.service';
-import { TokenStore } from '../helpers/TokenStore';
+import { TokenStore } from '../helpers/token-store';
 import { Role } from '../models/role/role';
 
 @Injectable({

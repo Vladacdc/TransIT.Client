@@ -8,6 +8,7 @@ import { environment } from 'src/environments/environment';
 })
 export class IssueService extends CrudService<Issue> {
   protected readonly serviceUrl = `${environment.apiUrl}/issue`;
+  protected readonly datatableUrl = `${environment.apiUrl}/datatable/issue`;
 
   protected mapEntity(issue: Issue): Issue {
     return new Issue(issue);
