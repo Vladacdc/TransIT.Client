@@ -11,11 +11,12 @@ import { HttpErrorInterceptor } from './interceptors/http-error.interceptor';
 import { HttpAuthInterceptor } from './interceptors/http-auth.interceptor';
 import { CrudService } from './services/crud.service';
 import { SpinnerService } from './services/spinner.service';
+import { TruncatePipe } from './pipes/truncate.pipe';
 
 @NgModule({
-  declarations: [NavbarComponent, LoginComponent],
+  declarations: [NavbarComponent, LoginComponent, TruncatePipe],
   imports: [CommonModule, ReactiveFormsModule, RouterModule, NgBootstrapFormValidationModule, HttpClientModule],
-  exports: [NavbarComponent, LoginComponent],
+  exports: [NavbarComponent, LoginComponent, TruncatePipe],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: HttpAuthInterceptor, multi: true },

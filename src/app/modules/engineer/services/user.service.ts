@@ -8,6 +8,7 @@ import { User } from '../models/user';
 })
 export class UserService extends CrudService<User> {
   protected readonly serviceUrl = `${environment.apiUrl}/user`;
+  protected readonly datatableUrl = `${environment.apiUrl}/datatable/user`;
 
   protected mapEntity(entity: User): User {
     return new User(entity);

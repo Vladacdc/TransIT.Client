@@ -13,11 +13,6 @@ declare const $;
 export class NestedIssueLogsComponent extends IssueLogsComponent implements OnInit {
   @Input() issue: Issue = null;
 
-  private readonly ajaxSettings = {
-    url: environment.apiUrl + '/datatable/issuelog',
-    type: 'POST'
-  };
-
   protected readonly tableConfig: any = {
       scrollX: true,
       select: {
@@ -39,17 +34,18 @@ export class NestedIssueLogsComponent extends IssueLogsComponent implements OnIn
       ],
       processing: true,
       serverSide: true,
-      ajax: this.ajaxSettings,
+      ajax: this.ajaxCallback.bind(this),
       paging: true,
       language: {
         url: '//cdn.datatables.net/plug-ins/1.10.19/i18n/Ukrainian.json'
       }
-    };
+  };
+
+  protected ajaxCallback(dataTablesParameters: any, callback): void {
+    this.issueLogService.getFilteredEntitiesByIssueId(this.issue.id, dataTablesParameters).subscribe(callback);
+  }
 
   ngOnInit() {
-    if (this.issue) {
-      this.ajaxSettings.url = environment.apiUrl + `/datatable/issue/${this.issue.id}/issuelog`;
-    }
-    super.ngOnInit();
+    this.initTable(this.tableConfig);
   }
 }

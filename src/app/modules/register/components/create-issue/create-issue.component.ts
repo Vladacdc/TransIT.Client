@@ -17,7 +17,7 @@ import { TEntity } from 'src/app/modules/core/models/entity/entity';
   styleUrls: ['./create-issue.component.scss']
 })
 export class CreateIssueComponent implements OnInit {
-  @Output() createdIssue = new EventEmitter<Issue>();
+  @Output() addIssue = new EventEmitter<Issue>();
 
   issueForm: FormGroup;
   vehicles: Vehicle[] = [];
@@ -31,7 +31,7 @@ export class CreateIssueComponent implements OnInit {
     private malfunctionService: MalfunctionService,
     private issueService: IssueService,
     private toast: ToastrService
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.setUpForm();
@@ -95,7 +95,7 @@ export class CreateIssueComponent implements OnInit {
     this.issueService
       .addEntity(issue)
       .subscribe(
-        newIssue => this.createdIssue.next(newIssue),
+        newIssue => this.addIssue.next(newIssue),
         _ => this.toast.error('Не вдалось створити заявку', 'Помилка створення заявки')
       );
   }

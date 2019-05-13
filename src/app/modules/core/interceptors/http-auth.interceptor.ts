@@ -5,7 +5,7 @@ import { catchError, tap, switchMap, first } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../services/authentication.service';
 import { Token } from '../models/token/token';
-import { TokenStore } from '../helpers/TokenStore';
+import { TokenStore } from '../helpers/token-store';
 
 @Injectable()
 export class HttpAuthInterceptor implements HttpInterceptor {

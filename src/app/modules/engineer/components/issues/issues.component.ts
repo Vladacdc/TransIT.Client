@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { IssueService } from '../../services/issue.service';
 import { Issue } from '../../models/issue';
 import { Router } from '@angular/router';
-import { environment } from '../../../../../environments/environment';
 
 declare const $;
 
@@ -32,10 +31,7 @@ export class IssuesComponent implements OnInit {
     ],
     processing: true,
     serverSide: true,
-    ajax: {
-      url: environment.apiUrl + '/datatable/issue',
-      type: 'POST'
-    },
+    ajax: this.ajaxCallback.bind(this),
     paging: true,
     language: {
       url: '//cdn.datatables.net/plug-ins/1.10.19/i18n/Ukrainian.json'
@@ -46,6 +42,10 @@ export class IssuesComponent implements OnInit {
 
   ngOnInit() {
     this.initTable();
+  }
+
+  private ajaxCallback(dataTablesParameters: any, callback): void {
+    this.issueService.getFilteredEntities(dataTablesParameters).subscribe(callback);
   }
 
   protected initTable(): void {

@@ -63,13 +63,6 @@ export class EngineerRoutingModule {}
     HttpClientModule,
     ReactiveFormsModule
   ],
-  providers: [
-    IssueService,
-    IssuelogService,
-    StateService,
-    ActionTypeService,
-    SupplierService,
-    DocumentService
-  ]
+  providers: [IssueService, IssuelogService, StateService, ActionTypeService, SupplierService, DocumentService]
 })
 export class EngineerModule {}
