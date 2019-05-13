@@ -11,6 +11,7 @@ import { catchError, tap } from 'rxjs/operators';
 })
 export class DocumentService extends CrudService<Document> {
   protected readonly serviceUrl = `${environment.apiUrl}/document`;
+  protected readonly datatableUrl = `${environment.apiUrl}/datatable/document`;
 
   getEntitiesByIssueLogId(id: number): Observable<Array<Document>> {
     this.spinner.show();
@@ -18,5 +19,9 @@ export class DocumentService extends CrudService<Document> {
       tap(data => this.handleSuccess('fetched data', data)),
       catchError(this.handleError())
     );
+  }
+
+  protected mapEntity(entity: Document): Document {
+    return new Document(entity);
   }
 }
