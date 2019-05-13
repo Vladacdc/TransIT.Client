@@ -1,99 +1,62 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ViewChild, OnDestroy, AfterViewInit } from '@angular/core';
 import { IssueService } from '../../services/issue.service';
 import { Issue } from '../../models/issue';
-import { ToastrService } from 'ngx-toastr';
+import { DataTableDirective } from 'angular-datatables';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-issues',
   templateUrl: './issues.component.html',
   styleUrls: ['./issues.component.scss']
 })
-export class IssuesComponent implements OnInit {
-  private table: DataTables.Api;
-
-  issues: Issue[] = [];
-  selectedIssue: Issue;
-
-  private readonly tableConfig: DataTables.Settings = {
+export class IssuesComponent implements OnDestroy, AfterViewInit {
+  options: DataTables.Settings = {
+    pagingType: 'full_numbers',
+    pageLength: 10,
+    serverSide: true,
+    processing: true,
+    ajax: (dataTablesParameters: any, callback) => {
+      this.issueService.getFilteredEntities(dataTablesParameters).subscribe(response => {
+        this.issues = response.data;
+        callback({ ...response, data: [] });
+      });
+    },
+    columns: [
+      { data: 'vehicle.model' },
+      { data: 'state.transName' },
+      { data: 'malfunction.name' },
+      { data: 'summary' },
+      { data: null, orderable: false }
+    ],
     language: {
       url: '//cdn.datatables.net/plug-ins/1.10.19/i18n/Ukrainian.json'
     },
-    columns: [
-      { title: 'Транспорт' },
-      { title: 'Стан заявки' },
-      { title: 'Несправність' },
-      { title: 'Опис' },
-      { title: 'Дії', orderable: false }
-    ],
-    columnDefs: [
-      {
-        targets: [0, 2, 3],
-        render: (data: string = '') => {
-          if (data.length > 22) {
-            return data.substring(0, 20) + '...';
-          }
-          return data;
-        }
-      }
-    ],
     scrollX: true
   };
 
-  constructor(private issueService: IssueService, private toast: ToastrService) { }
+  issues: Issue[] = [];
+  selectedIssue: Issue;
+  renderTrigger: Subject<any> = new Subject();
+  @ViewChild(DataTableDirective) datatableElement: DataTableDirective;
 
-  ngOnInit() {
-    this.initializeTable();
-    this.loadEntities();
+  constructor(private issueService: IssueService) {}
+
+  ngAfterViewInit(): void {
+    this.renderTrigger.next();
   }
 
-  private initializeTable(): void {
-    this.table = $('#issues').DataTable(this.tableConfig);
-    this.setUpDetailsButtonClick();
+  ngOnDestroy(): void {
+    this.renderTrigger.unsubscribe();
   }
 
-  private setUpDetailsButtonClick(): void {
-    $('#issues tbody').on('click', 'button', event => {
-      const idTokens = event.currentTarget.id.split('-');
-      const id = parseInt(idTokens[idTokens.length - 1], 10);
-      this.selectedIssue = this.issues.find(i => i.id === id);
+  reloadTable(): void {
+    this.datatableElement.dtInstance.then((dtInstance: DataTables.Api) => {
+      dtInstance.destroy();
+      this.renderTrigger.next();
     });
   }
 
-  private loadEntities(): void {
-    this.issueService.getEntities().subscribe(issues => this.addIssues(issues));
-  }
-
-  addIssues(newIssues: Issue[]): void {
-    this.issues = [...this.issues, ...newIssues];
-    this.addIssuesToTable(newIssues);
-  }
-
-  private addIssuesToTable(newIssues: Issue[]) {
-    const view = this.createTableView(newIssues);
-    this.table.rows.add(view).draw();
-  }
-
-  private createTableView(issues: Issue[]): string[][] {
-    return issues.map(issue => [
-      issue.vehicle.name,
-      issue.state.transName,
-      issue.malfunction.name,
-      issue.summary,
-      `<button id="details-issue-${
-      issue.id
-      }" class="btn" data-toggle="modal" data-target="#editModal"><i class="fas fa-edit"></i></button>`
-    ]);
-  }
-
-  deleteIssue(issueToDelete: Issue) {
-    this.issues = this.issues.filter(i => i.id !== issueToDelete.id);
-    this.removeIssueFromTable(issueToDelete);
-  }
-
-  private removeIssueFromTable(issue: Issue) {
-    this.table
-      .rows($(`button[id^="details-issue-${issue.id}"]`).parents('tr'))
-      .remove()
-      .draw(false);
+  selectIssue(issue: Issue) {
+    this.selectedIssue = issue;
   }
 }

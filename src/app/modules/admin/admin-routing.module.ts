@@ -9,6 +9,10 @@ import { MalfuncComponent } from './component/malfunctions/malfunc/malfunc.compo
 import { ActionComponent } from './component/action/action.component';
 import { AdminComponent } from './component/admin/admin.component';
 import { SupplierComponent } from './component/supplier/supplier.component';
+import { VehicleTypeComponent } from './component/vehicle-type/vehicle-type.component';
+import { DocumentsComponent } from './component/documents/documents.component';
+import { IssueLogComponent } from './component/issue-log/issue-log.component';
+
 
 const routes: Routes = [
   {
@@ -28,6 +32,9 @@ const routes: Routes = [
       },
       { path: 'actions', component: ActionComponent },
       { path: 'supplier', component: SupplierComponent },
+      { path: 'vehicle-types', component: VehicleTypeComponent },
+      { path: 'documents', component: DocumentsComponent},
+      { path: 'issue-log', component: IssueLogComponent},
       { path: '**', redirectTo: 'users' }
     ]
   }
@@ -37,4 +44,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class AdminRoutingModule {}
+export class AdminRoutingModule { }
