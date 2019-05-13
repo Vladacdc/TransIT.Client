@@ -1,6 +1,6 @@
 import { Component, ViewChild, OnDestroy, AfterViewInit } from '@angular/core';
 import { IssueService } from '../../services/issue.service';
-import { Issue } from '../../models/issue';
+import { Issue, Priority } from '../../models/issue';
 import { DataTableDirective } from 'angular-datatables';
 import { Subject } from 'rxjs';
 
@@ -22,6 +22,7 @@ export class IssuesComponent implements OnDestroy, AfterViewInit {
       });
     },
     columns: [
+      { data: 'number' },
       { data: 'vehicle.model' },
       { data: 'state.transName' },
       { data: 'malfunction.name' },
@@ -58,5 +59,9 @@ export class IssuesComponent implements OnDestroy, AfterViewInit {
 
   selectIssue(issue: Issue) {
     this.selectedIssue = issue;
+  }
+
+  getPriorityClass(issue: Issue) {
+    return `priority-${Priority[issue.priority]}`;
   }
 }

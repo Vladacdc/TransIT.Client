@@ -8,3 +8,15 @@
 .table {
   width: 100% !important;
 }
+
+.priority-low {
+  background-color: #3d9970b0;
+}
+
+.priority-medium {
+  background-color: rgba(255, 237, 0, 0.56);
+}
+
+.priority-high {
+  background-color: rgba(255, 65, 54, 0.75);
+}

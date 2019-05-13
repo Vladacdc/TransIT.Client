@@ -1,18 +1,13 @@
 <div class="table-background border mt-3">
   <app-create-issue (addIssue)="reloadTable()"></app-create-issue>
   <app-issue-details [issue]="selectedIssue" (deleteIssue)="reloadTable()"></app-issue-details>
-  <table
-    id="issues"
-    datatable
-    [dtOptions]="options"
-    [dtTrigger]="renderTrigger"
-    class="table table-striped table-bordered"
-  >
+  <table id="issues" datatable [dtOptions]="options" [dtTrigger]="renderTrigger" class="table table-bordered">
     <caption class="table-caption">
       Мої Заявки
     </caption>
     <thead>
       <tr>
+        <th>Номер</th>
         <th>Транспорт</th>
         <th>Стан Заявки</th>
         <th>Несправність</th>
@@ -21,7 +16,8 @@
       </tr>
     </thead>
     <tbody *ngIf="issues?.length !== 0">
-      <tr *ngFor="let issue of issues">
+      <tr *ngFor="let issue of issues" [ngClass]="getPriorityClass(issue)">
+        <td>{{ issue.number }}</td>
         <td>{{ issue.vehicle.name | truncate }}</td>
         <td>{{ issue.state.transName | truncate }}</td>
         <td>{{ issue.malfunction.name | truncate }}</td>
@@ -35,7 +31,7 @@
     </tbody>
     <tbody *ngIf="issues?.length === 0">
       <tr>
-        <td colspan="5" class="no-data-available">Дані відсутні</td>
+        <td colspan="6" class="no-data-available">Дані відсутні</td>
       </tr>
     </tbody>
   </table>
