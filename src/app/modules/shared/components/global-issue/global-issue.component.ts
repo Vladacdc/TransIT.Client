@@ -10,7 +10,7 @@ declare const $;
   styleUrls: ['./global-issue.component.scss']
 })
 export class GlobalIssueComponent implements OnInit {
-  readonly priorityColors = Object.freeze (['#FFCCCC','#FFFFCC','#CCFFCC']);
+  readonly priorityColors = Object.freeze(['#FFCCCC', '#FFFFCC', '#CCFFCC']);
   protected table: any;
   protected readonly tableConfig: any = {
     scrollX: true,
@@ -49,6 +49,7 @@ export class GlobalIssueComponent implements OnInit {
     this.initTable();
   }
   private ajaxCallback(dataTablesParameters: any, callback): void {
+    //  dataTablesParameters.filters = [{entityPropertyPath: 'malfunction.name', value: ''},{}]
     this.issueService.getFilteredEntities(dataTablesParameters).subscribe(callback);
   }
 

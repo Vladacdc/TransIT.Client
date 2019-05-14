@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { VehicleType } from '../../models/vehicleType';
+import { VehicleTypeService } from 'src/app/modules/admin/services/vehicle-type.service';
 
 @Component({
   selector: 'app-filters-tabs',
@@ -6,9 +8,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./filters-tabs.component.scss']
 })
 export class FiltersTabsComponent implements OnInit {
-  constructor() {}
+  vehicleTypeList: VehicleType[] = [];
+
+  constructor(private vehicleTypeService: VehicleTypeService) {}
 
   ngOnInit() {
+    this.vehicleTypeService.getEntities().subscribe(data => (this.vehicleTypeList = data));
     (<any>$('#startDate')).datepicker({
       uiLibrary: 'bootstrap4',
       iconsLibrary: 'fontawesome',

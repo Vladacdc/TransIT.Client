@@ -2,6 +2,12 @@
   <div class="block">
     <input id="startDate" placeholder="Start Date" width="200" />
     <input id="endDate" placeholder="End Date" width="200" />
+    <div>
+      <select class="form-control" width="200">
+        <option value="" selected class="grey"> Виберіть транспорт</option>
+        <option *ngFor="let vehicleType of vehicleTypeList" [value]="">{{ vehicleType.name }}</option>
+      </select>
+    </div>
   </div>
   <button href="#" class="right btn btn-info"><i class="fas fa-file-excel"></i> Exels</button>
 </div>
