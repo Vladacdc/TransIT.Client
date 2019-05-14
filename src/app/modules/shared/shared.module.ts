@@ -9,6 +9,7 @@ import { DeleteCurrencyComponent } from './components/dictionaries/currency/dele
 import { CommonModule } from '@angular/common';
 import { CreateCountryComponent } from './components/dictionaries/country/create-country/create-country.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FiltersTabsComponent } from './components/filters-tabs/filters-tabs.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     CreateCountryComponent,
     DeleteCountryComponent,
     CreateCurrencyComponent,
-    DeleteCurrencyComponent
+    DeleteCurrencyComponent,
+    FiltersTabsComponent
   ],
   imports: [CommonModule, ReactiveFormsModule],
   exports: [GlobalIssueComponent]
