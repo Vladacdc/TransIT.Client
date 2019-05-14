@@ -19,33 +19,13 @@
         </button>
       </div>
       <div class="modal-body">
-        <form [formGroup]="malfunctionForm">
-          <!-- <div class="form-group">
-            <label>Група несправності</label>
-            <select class="form-control" formControlName="group">
-              <option value="" selected>Виберіть групу несправності</option>
-              <option *ngFor="let malfunctionGroup of malfunctionGroupList" [ngValue]="malfunctionGroup">{{
-                malfunctionGroup.name
-              }}</option>
-            </select>
-          </div> -->
+        <form [formGroup]="malfunctionForm">          
           <div class="form-group">
             <label>Група несправності</label>
             <select class="form-control" disabled formControlName="group">
               <option hidden disabled selected>{{ malfunction?.malfunctionSubgroup?.malfunctionGroup?.name }}</option>
             </select>
           </div>
-          <!-- <div class="form-group">
-            <label>Підгрупа несправності</label>
-            <select class="form-control" formControlName="subgroup">
-              <option value="" selected>Виберіть підгрупу несправності</option>
-              <option
-                *ngFor="let malfunctionSubgroup of malfunctionSubgroupsFilteredByGroup"
-                [ngValue]="malfunctionSubgroup"
-                >{{ malfunctionSubgroup.name }}</option
-              >
-            </select>
-          </div> -->
           <div class="form-group">
             <label>Підгрупа несправності</label>
             <select class="form-control" disabled formControlName="subgroup">
