@@ -2,19 +2,66 @@ import { Injectable } from '@angular/core';
 import { Token } from '../models/token/token';
 import { TokenPayload } from '../models/tokenPayload/tokenPayload';
 import { Role } from '../models/role/role';
+import { ChannelMessage } from './channel-message';
 
 const USER_TOKEN_STORE = 'userToken';
+const TRANS_IT_CHANNEL = 'TransITChannel';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TokenStore {
   private token: Token;
+  private channel = new BroadcastChannel(TRANS_IT_CHANNEL);
 
   constructor() {
-    const tokenString = localStorage.getItem(USER_TOKEN_STORE);
+    const tokenString = sessionStorage.getItem(USER_TOKEN_STORE);
     if (tokenString) {
       this.parseTokenString(tokenString);
+    } else {
+      this.requestStorage();
+    }
+    this.setUpChannel();
+  }
+
+  private requestStorage() {
+    this.channel.postMessage({ command: 'getStorage' });
+  }
+
+  private setUpChannel() {
+    this.channel.onmessage = event => {
+      const message: ChannelMessage = event.data;
+      switch (message.command) {
+        case 'getStorage':
+          this.shareStorage();
+          break;
+        case 'shareStorage':
+          this.getStorage(message.token);
+          break;
+        case 'cleanStorage':
+          this.cleanStorage();
+          break;
+      }
+    };
+  }
+
+  private shareStorage() {
+    if (this.token) {
+      this.channel.postMessage({ command: 'shareStorage', token: this.token });
+    }
+  }
+
+  private getStorage(token: Token) {
+    if (JSON.stringify(this.token) !== JSON.stringify(token)) {
+      this.setToken(token);
+      location.reload();
+    }
+  }
+
+  private cleanStorage() {
+    if (this.token) {
+      this.removeToken();
+      location.reload();
     }
   }
 
@@ -74,12 +121,14 @@ export class TokenStore {
   }
 
   removeToken(): void {
-    localStorage.removeItem(USER_TOKEN_STORE);
+    sessionStorage.removeItem(USER_TOKEN_STORE);
+    this.channel.postMessage({ command: 'cleanStorage' });
     this.token = null;
   }
 
   setToken(token: Token): void {
-    localStorage.setItem(USER_TOKEN_STORE, JSON.stringify(token));
+    sessionStorage.setItem(USER_TOKEN_STORE, JSON.stringify(token));
+    this.channel.postMessage({ command: 'shareStorage', token });
     this.token = token;
   }
 }
