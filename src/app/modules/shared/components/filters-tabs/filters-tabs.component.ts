@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { toDate } from '@angular/common/src/i18n/format_date';
 
 @Component({
   selector: 'app-filters-tabs',
@@ -10,16 +9,16 @@ export class FiltersTabsComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {
-    // var today = new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate());
-    $('#startDate').datepicker({
+    (<any>$('#startDate')).datepicker({
       uiLibrary: 'bootstrap4',
-      //  minDate: today,
+      iconsLibrary: 'fontawesome',
       maxDate: function() {
         return $('#endDate').val();
       }
     });
-    $('#endDate').datepicker({
+    (<any>$('#endDate')).datepicker({
       uiLibrary: 'bootstrap4',
+      iconsLibrary: 'fontawesome',
       minDate: function() {
         return $('#startDate').val();
       }
