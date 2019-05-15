@@ -13,12 +13,16 @@ declare const $;
   styleUrls: ['./issue-log.component.scss']
 })
 export class IssueLogComponent implements OnInit {
-
   public issueLogs: Array<IssueLog>;
   public issueLog: IssueLog;
   protected tableIssueLog: any;
+  public document:Documents;
 
-  constructor(protected issueLogService: IssueLogService,protected DocumentService: DocumentService, protected router: Router,private activatedRoute: ActivatedRoute,) {}
+  constructor(
+    protected issueLogService: IssueLogService,
+    protected DocumentService: DocumentService,
+    protected router: Router
+  ) {}
 
   ngOnInit() {
     this.tableIssueLog = $('#issue-logs-table').DataTable({
@@ -46,15 +50,13 @@ export class IssueLogComponent implements OnInit {
         url: '//cdn.datatables.net/plug-ins/1.10.19/i18n/Ukrainian.json'
       }
     });
-    this.activatedRoute.params.subscribe(data => {
-      this.issueLog = new IssueLog(data);
-    });
+    this.document = this.DocumentService.selectedDocument;
+    console.dir(this.document);
 
-    this.issueLogService.getEntity(this.issueLog.id).subscribe(issueLog =>{
-      this.issueLog=issueLog;
+    this.issueLogService.getEntity(this.document.issueLog.id).subscribe(issueLog => {
+      this.issueLog = issueLog;
       this.tableIssueLog.row.add(this.issueLog);
       this.tableIssueLog.draw();
     });
   }
-
 }

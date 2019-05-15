@@ -1,5 +1,6 @@
 import { TEntity } from 'src/app/modules/core/models/entity/entity';
 import { IssueLog } from '../issueLog/IssueLog';
+import { User } from '../user/user';
 
 export class Documents extends TEntity<Documents> {
     public name?: string;
@@ -7,4 +8,6 @@ export class Documents extends TEntity<Documents> {
     public issueLog?: IssueLog;
     public createDate?: Date;
     public modDate?: Date;
+    public create?: User;
+    public mod?: User;
   }

@@ -1,0 +1,47 @@
+<div
+  class="modal fade"
+  id="editDocument"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="EditDocument"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Редагувати документ</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="documentFrom">
+          <div class="form-group">
+            <label>Назва</label>
+            <input type="text" class="form-control" formControlName="name" autocomplete="off" />
+          </div>
+          <div class="form-group">
+            <label>Опис</label>
+            <input type="text" class="form-control" formControlName="description" autocomplete="off" />
+          </div>
+          <!-- <div class="form-group">
+            <label>Історія</label>
+            <select class="form-control" formControlName="issueLog">
+              <option hidden value="" disabled selected>-</option>
+              <option *ngFor="let groupItem of issueLogs" [value]="groupItem.description">{{
+                groupItem?.description
+              }}</option>
+            </select>
+          </div> -->
+          <button hidden type="submit" #submit></button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" #close>Закрити</button>
+        <button type="button" class="btn btn-primary" [disabled]="documentFrom.invalid" (click)="updateData()">
+          Зберегти
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -50,6 +50,10 @@ import { DeleteVehicleTypeComponent } from './component/delete-vehicle-type/dele
 
 import { DocumentsComponent } from './component/documents/documents.component';
 import { IssueLogComponent } from './component/issue-log/issue-log.component';
+import { CreateDocumentComponent} from './component/documents/create-document/create-document.component';
+import { DeleteDocumentComponent } from './component/documents/delete-document/delete-document.component';
+import { EditDocumentComponent } from './component/documents/edit-document/edit-document.component';
+import { NestedDocumentComponent } from './component/documents/nested-document/nested-document.component';
 import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
@@ -91,7 +95,11 @@ import { SharedModule } from '../shared/shared.module';
     EditVehicleTypeComponent,
     DeleteVehicleTypeComponent,
     DocumentsComponent,
-    IssueLogComponent
+    IssueLogComponent,
+    CreateDocumentComponent,
+    DeleteDocumentComponent,
+    EditDocumentComponent,
+    NestedDocumentComponent
   ],
   exports: [AdminComponent],
   imports: [

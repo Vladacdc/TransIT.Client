@@ -9,4 +9,10 @@ import { Documents } from '../models/document/document';
 
 export class DocumentService extends CrudService<Documents> {
   protected readonly serviceUrl = `${environment.apiUrl}/document`;
+
+  selectedDocument: Documents = null;
+
+  protected mapEntity(entity: Documents): Documents {
+    return new Documents(entity);
+  }
 }
