@@ -1,22 +1,24 @@
 <div class="borderFilterTab">
-  <form [formGroup]="filterForm">
-    <div class="block">
+  <div class="block">
+    <div>
       <input id="startDate" placeholder="Start Date" width="200" />
       <input id="endDate" placeholder="End Date" width="200" />
-      <div>
-        <select class="form-control" width="200">
-          <option value="" selected class="grey"> Виберіть транспорт</option>
-          <option *ngFor="let vehicleType of vehicleTypeList" [value]="">{{ vehicleType.name }}</option>
-        </select>
-      </div>
-      <div>
-        <select class="form-control" width="200">
-          <option value="" selected class="grey"> Виберіть статус</option>
-          <option *ngFor="let state of stateList" [value]="">{{ state.transName }}</option>
-        </select>
-      </div>
     </div>
-    <button href="#" class="right btn btn-info"><i class="fas fa-file-excel"></i> Exel</button>
-    <button href="#" class="right btn btn-info"><i class="fas fa-filter"></i> Фільтрувати</button>
-  </form>
+    <div>
+      <select class="form-control" width="200" (change)="selectVechicleType($event.target.value)">
+        <option value="" selected class="grey"> Виберіть транспорт</option>
+        <option *ngFor="let vehicleType of vehicleTypeList" [value]="">{{ vehicleType.name }}</option>
+      </select>
+    </div>
+    <div>
+      <select class="form-control" width="200" (change)="selectState($event.target.value)">
+        <option value="" selected class="grey"> Виберіть статус</option>
+        <option *ngFor="let state of stateList" [value]="">{{ state.transName }}</option>
+      </select>
+    </div>
+  </div>
+  <button href="#" class="right btn btn-info" (click)="onClickMe()"><i class="fas fa-file-excel"></i> Exel</button>
+  <button href="#" class="right btn btn-info" (click)="selectFilter()">
+    <i class="fas fa-filter"></i> Фільтрувати
+  </button>
 </div>

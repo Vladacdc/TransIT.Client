@@ -11,7 +11,13 @@ declare const $;
 })
 export class GlobalIssueComponent implements OnInit {
   readonly priorityColors = Object.freeze(['#FFCCCC', '#FFFFCC', '#CCFFCC']);
+
   protected table: any;
+  private startDate: string;
+  private endDate: string;
+  private vehicleType: string;
+  private state: string;
+
   protected readonly tableConfig: any = {
     scrollX: true,
     select: {
@@ -49,11 +55,43 @@ export class GlobalIssueComponent implements OnInit {
     this.initTable();
   }
   private ajaxCallback(dataTablesParameters: any, callback): void {
-    //  dataTablesParameters.filters = [{entityPropertyPath: 'malfunction.name', value: ''},{}]
+    console.log(this.state);
+    if (this.state) {
+      dataTablesParameters.filters = [
+        {
+          //entityPropertyPath: 'vehicle.vehicleType.name',
+          entityPropertyPath: 'state',
+          value: this.state,
+          operator: '=='
+        }
+      ];
+    }
+    console.dir(dataTablesParameters);
     this.issueService.getFilteredEntities(dataTablesParameters).subscribe(callback);
   }
 
   protected initTable(): void {
     this.table = $('#issue-table').DataTable(this.tableConfig);
+  }
+  getStartDateValue(value) {
+    console.log(value);
+    this.startDate = value;
+  }
+  getEndDateValue(value) {
+    console.log(value);
+    this.endDate = value;
+  }
+  getVechicleTypeValue(value) {
+    this.vehicleType = value;
+    console.log(value);
+  }
+  getStateValue(value) {
+    console.log(value);
+    this.table = $('#issue-table').DataTable({
+      ...this.tableConfig,
+      destroy: true
+    });
+    console.dir(this);
+    this.state = value;
   }
 }

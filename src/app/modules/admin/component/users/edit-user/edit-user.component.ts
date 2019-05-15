@@ -34,15 +34,24 @@ export class EditUserComponent implements OnInit {
   ngOnInit() {
     this.userForm = this.formBuilder.group({
       id: '',
-      lastName: '',
-      firstName: '',
-      middleName: '',
+      lastName: new FormControl(
+        '',
+        Validators.compose([Validators.maxLength(30), Validators.pattern('^[A-Za-zА-Яа-яїієЇІЯ-]+$')])
+      ),
+      firstName: new FormControl(
+        '',
+        Validators.compose([Validators.maxLength(30), Validators.pattern('^[A-Za-zА-Яа-яїієЇІЯ-]+$')])
+      ),
+      middleName: new FormControl(
+        '',
+        Validators.compose([Validators.maxLength(30), Validators.pattern('^[A-Za-zА-Яа-яїієЇІЯ-]+$')])
+      ),
       phoneNumber: new FormControl('', Validators.minLength(12)),
       login: new FormControl(
         '',
-        Validators.compose([Validators.required, Validators.minLength(6), Validators.maxLength(50)])
+        Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])
       ),
-      email: new FormControl('', Validators.email),
+      email: new FormControl('', Validators.compose([Validators.email, Validators.maxLength(30)])),
       role: ['', Validators.required],
       isActive: true
     });

@@ -17,6 +17,15 @@ export const CUSTOM_ERRORS: ErrorMessage[] = [
   {
     error: 'matchPassword',
     format: matchPasswordFormat
+  },
+
+  {
+    error: 'pattern',
+    format: patternFormat
+  },
+  {
+    error: 'email',
+    format: emailFormat
   }
 ];
 
@@ -34,6 +43,14 @@ export function maxLengthFormat(label: string, error: any): string {
 
 export function matchPasswordFormat(label: string, error: any): string {
   return 'Паролі не співпадають';
+}
+
+export function patternFormat(label: string, error: any): string {
+  return 'Дозволено тільки букви і спеціальні символи';
+}
+
+export function emailFormat(label: string, error: any): string {
+  return 'Вимагається "post@post.post"';
 }
 
 export function matchPassword(form: FormGroup) {
