@@ -27,14 +27,6 @@ export class CrudService<T extends TEntity<T>> {
       catchError(this.handleError())
     );
   }
-
-  getFilteredEntities(params: any): Observable<any> {
-    return this.http.post<any>(this.datatableUrl, params, {}).pipe(
-      map(response => ({ ...response, data: response.data.map(d => this.mapEntity(d)) })),
-      catchError(this.handleError())
-    );
-  }
-
   getEntity(id: number): Observable<T> {
     this.spinner.show();
     return this.http.get<T>(`${this.serviceUrl}/${id}`).pipe(

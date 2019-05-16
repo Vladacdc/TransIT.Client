@@ -13,7 +13,7 @@ declare const $;
 export class NestedDocumentComponent implements OnInit {
   private tableNestedDoc: DataTables.Api;
   protected tableIssueLog: any;
-  private chosenDocument: Documents;
+  public chosenDocument: Documents;
   @Input()
   set document(document: Documents) {
     this.chosenDocument = document;
