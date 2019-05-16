@@ -5,6 +5,8 @@ import { NgBootstrapFormValidationModule } from 'ng-bootstrap-form-validation';
 import { RegisterRoutingModule } from './register-routing.module';
 import { CoreModule } from '../core/core.module';
 import { DataTablesModule } from 'angular-datatables';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { FormsModule } from '@angular/forms';
 
 import { RegisterComponent } from './components/register/register.component';
 import { IssuesComponent } from './components/issues/issues.component';
@@ -12,20 +14,16 @@ import { CreateIssueComponent } from './components/create-issue/create-issue.com
 import { IssueDetailsComponent } from './components/issue-details/issue-details.component';
 
 @NgModule({
-  declarations: [
-    RegisterComponent,
-    IssuesComponent,
-    CreateIssueComponent,
-    IssueDetailsComponent,
-    IssueDetailsComponent
-  ],
+  declarations: [RegisterComponent, IssuesComponent, CreateIssueComponent, IssueDetailsComponent],
   imports: [
     CommonModule,
     RegisterRoutingModule,
     CoreModule,
     ReactiveFormsModule,
     NgBootstrapFormValidationModule,
-    DataTablesModule
+    DataTablesModule,
+    NgSelectModule,
+    FormsModule
   ]
 })
 export class RegisterModule {}

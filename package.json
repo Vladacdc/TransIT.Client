@@ -21,6 +21,7 @@
     "@angular/platform-browser": "~7.2.0",
     "@angular/platform-browser-dynamic": "~7.2.0",
     "@angular/router": "~7.2.0",
+    "@ng-select/ng-select": "^2.19.0",
     "angular-confirmation-popover": "^4.2.0",
     "angular-datatables": "^7.0.0",
     "bootstrap-switch-button": "^1.0.0",

@@ -61,3 +61,13 @@ export function matchPassword(form: FormGroup) {
     return null;
   }
 }
+
+export function malfunctionSelectedValidator(form: FormGroup) {
+  const { malfunctionGroup, malfunctionSubgroup, malfunction } = form.value;
+  if (malfunctionSubgroup && !malfunction) {
+    form.get('malfunction').setErrors({ required: true });
+  }
+  if (malfunctionGroup && !malfunctionSubgroup) {
+    form.get('malfunctionSubgroup').setErrors({ required: true });
+  }
+}

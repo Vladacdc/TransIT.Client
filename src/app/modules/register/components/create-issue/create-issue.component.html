@@ -17,10 +17,13 @@
         <form [formGroup]="issueForm" (validSubmit)="onSubmit()">
           <div class="form-group">
             <label>Транспорт</label>
-            <select class="form-control" formControlName="vehicle">
-              <option hidden value="" disabled selected>*Виберіть транспорт</option>
-              <option *ngFor="let vehicle of vehicles" [ngValue]="vehicle">{{ vehicle.name }}</option>
-            </select>
+            <ng-select
+              [items]="vehicles"
+              bindLabel="name"
+              formControlName="vehicle"
+              placeholder="*Виберіть транспорт"
+              notFoundText="Не знайдено"
+            ></ng-select>
           </div>
           <div class="form-group">
             <label>Група несправності</label>
@@ -35,8 +38,11 @@
             <label>Підгрупа несправності</label>
             <select class="form-control" formControlName="malfunctionSubgroup">
               <option value="" selected>Виберіть підгрупу несправності</option>
-              <option *ngFor="let malfunctionSubgroup of malfunctionSubgroupsFilteredByGroup"
-                [ngValue]="malfunctionSubgroup">{{ malfunctionSubgroup.name }}</option>
+              <option
+                *ngFor="let malfunctionSubgroup of malfunctionSubgroupsFilteredByGroup"
+                [ngValue]="malfunctionSubgroup"
+                >{{ malfunctionSubgroup.name }}</option
+              >
             </select>
           </div>
           <div class="form-group">
@@ -56,9 +62,14 @@
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрити</button>
-        <button type="button" class="btn btn-primary" (click)="clickSubmit(submit)" form="issueForm"
-          [disabled]="issueForm.invalid">
+        <button type="button" class="btn btn-secondary" (click)="closeModal()" data-dismiss="modal">Закрити</button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          (click)="clickSubmit(submit)"
+          form="issueForm"
+          [disabled]="issueForm.invalid"
+        >
           Створити
         </button>
       </div>

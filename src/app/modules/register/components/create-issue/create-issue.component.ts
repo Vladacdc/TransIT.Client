@@ -1,5 +1,5 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
 import { VehicleService } from '../../services/vehicle.service';
 import { MalfunctionService } from '../../services/malfunction.service';
 import { Vehicle } from '../../models/vehicle';
@@ -10,6 +10,7 @@ import { Issue } from '../../models/issue';
 import { IssueService } from '../../services/issue.service';
 import { ToastrService } from 'ngx-toastr';
 import { TEntity } from 'src/app/modules/core/models/entity/entity';
+import { malfunctionSelectedValidator } from 'src/app/custom-errors';
 
 @Component({
   selector: 'app-create-issue',
@@ -36,6 +37,7 @@ export class CreateIssueComponent implements OnInit {
   ngOnInit() {
     this.setUpForm();
     this.loadEntities();
+    this.configureMalfunctionControls();
   }
 
   onSubmit() {
@@ -63,14 +65,28 @@ export class CreateIssueComponent implements OnInit {
     button.click();
   }
 
+  closeModal() {
+    this.setUpForm();
+  }
+
+  configureMalfunctionControls() {
+    const { malfunctionGroup, malfunctionSubgroup, malfunction } = this.issueForm.controls;
+
+    this.setDependentControl(malfunctionGroup, malfunctionSubgroup);
+    this.setDependentControl(malfunctionSubgroup, malfunction);
+  }
+
   private setUpForm() {
-    this.issueForm = this.fb.group({
-      vehicle: ['', Validators.required],
-      malfunctionGroup: '',
-      malfunctionSubgroup: '',
-      malfunction: '',
-      summary: ['', Validators.required]
-    });
+    this.issueForm = this.fb.group(
+      {
+        vehicle: [undefined, Validators.required],
+        malfunctionGroup: '',
+        malfunctionSubgroup: [{ value: '', disabled: true }],
+        malfunction: [{ value: '', disabled: true }],
+        summary: ['', Validators.required]
+      },
+      { validators: malfunctionSelectedValidator }
+    );
   }
 
   private loadEntities() {
@@ -155,5 +171,16 @@ export class CreateIssueComponent implements OnInit {
 
   private setDefaultMalfunction(): void {
     this.issueForm.patchValue({ malfunction: '' });
+  }
+
+  private setDependentControl(main: AbstractControl, dependent: AbstractControl) {
+    main.valueChanges.subscribe(selectedValue => {
+      if (selectedValue !== '') {
+        dependent.enable();
+      } else {
+        dependent.disable();
+        dependent.setValue('');
+      }
+    });
   }
 }

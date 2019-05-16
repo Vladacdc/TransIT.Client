@@ -27,6 +27,7 @@ export class CrudService<T extends TEntity<T>> {
       catchError(this.handleError())
     );
   }
+
   getEntity(id: number): Observable<T> {
     this.spinner.show();
     return this.http.get<T>(`${this.serviceUrl}/${id}`).pipe(
@@ -63,13 +64,11 @@ export class CrudService<T extends TEntity<T>> {
   }
 
   protected handleSuccess(message: string, data: any) {
-    console.log(message, data);
     this.spinner.hide();
   }
 
   protected handleError() {
     return (error: any): Observable<never> => {
-      console.warn(error);
       this.spinner.hide();
       return throwError(error);
     };

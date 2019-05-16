@@ -12,15 +12,17 @@ export class SpinnerService {
   show(): void {
     this.spinnersCount += 1;
     if (this.spinnersCount === 1) {
-      this.spinner.show();
+      setTimeout(() => this.spinner.show(), 0);
     }
   }
 
   hide(): void {
     this.spinnersCount -= 1;
+    if (this.spinnersCount === 0) {
+      setTimeout(() => this.spinner.hide(), 0);
+    }
     if (this.spinnersCount <= 0) {
       this.spinnersCount = 0;
-      this.spinner.hide();
     }
   }
 }

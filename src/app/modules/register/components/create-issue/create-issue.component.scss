@@ -11,3 +11,7 @@ textarea.form-control.is-invalid {
 .margin-top-bottom {
   margin: 1rem 0;
 }
+
+:host ::ng-deep .ng-select .ng-select-container .ng-placeholder {
+  color: #495057;
+}
