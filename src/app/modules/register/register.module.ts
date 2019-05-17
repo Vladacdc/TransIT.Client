@@ -12,9 +12,10 @@ import { RegisterComponent } from './components/register/register.component';
 import { IssuesComponent } from './components/issues/issues.component';
 import { CreateIssueComponent } from './components/create-issue/create-issue.component';
 import { IssueDetailsComponent } from './components/issue-details/issue-details.component';
+import { DeleteIssueComponent } from './components/delete-issue/delete-issue.component';
 
 @NgModule({
-  declarations: [RegisterComponent, IssuesComponent, CreateIssueComponent, IssueDetailsComponent],
+  declarations: [RegisterComponent, IssuesComponent, CreateIssueComponent, IssueDetailsComponent, DeleteIssueComponent],
   imports: [
     CommonModule,
     RegisterRoutingModule,

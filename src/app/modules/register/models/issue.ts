@@ -23,4 +23,8 @@ export class Issue extends TEntity<Issue> {
     this.malfunction = new Malfunction(this.malfunction);
     this.vehicle = new Vehicle(this.vehicle);
   }
+
+  get deletable(): boolean {
+    return this.state.name.toLowerCase() === 'new';
+  }
 }
