@@ -32,47 +32,58 @@ import { SupplierComponent } from './component/supplier/supplier.component';
 import { EditMalfuncComponent } from './component/edit-malfunc/edit-malfunc.component';
 import { DeleteMalfuncComponent } from './component/delete-malfunc/delete-malfunc.component';
 import { RoleService } from './services/role.service';
-
+//====User===
 import { UserService } from './services/user.service';
 import { UsersComponent } from './component/users/users.component';
 import { CreateUserComponent } from './component/users/create-user/create-user.component';
 import { EditUserComponent } from './component/users/edit-user/edit-user.component';
 import { DeleteUserComponent } from './component/users/delete-user/delete-user.component';
 import { RestoreUserPasswordComponent } from './component/users/restore-user-password/restore-user-password.component';
-
-import { NgBootstrapFormValidationModule } from 'ng-bootstrap-form-validation';
 import { IsActiveModalComponent } from './component/users/is-active-modal/is-active-modal.component';
-
+//=====VechicleType====
 import { VehicleTypeComponent } from './component/vehicle-type/vehicle-type.component';
 import { CreateVehicleTypeComponent } from './component/create-vehicle-type/create-vehicle-type.component';
 import { EditVehicleTypeComponent } from './component/edit-vehicle-type/edit-vehicle-type.component';
 import { DeleteVehicleTypeComponent } from './component/delete-vehicle-type/delete-vehicle-type.component';
 
-import { DocumentsComponent } from './component/documents/documents.component';
+import { NgBootstrapFormValidationModule } from 'ng-bootstrap-form-validation';
 import { IssueLogComponent } from './component/issue-log/issue-log.component';
-import { CreateDocumentComponent} from './component/documents/create-document/create-document.component';
+
+import { DocumentsComponent } from './component/documents/documents.component';
+import { CreateDocumentComponent } from './component/documents/create-document/create-document.component';
 import { DeleteDocumentComponent } from './component/documents/delete-document/delete-document.component';
 import { EditDocumentComponent } from './component/documents/edit-document/edit-document.component';
 import { NestedDocumentComponent } from './component/documents/nested-document/nested-document.component';
+
 import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
     AdminComponent,
+    AdminNavbarComponent,
+    //====User===
     UsersComponent,
     CreateUserComponent,
-    VehiclesComponent,
-    ActionComponent,
-    MalfuncComponent,
-    MalfuncGroupComponent,
-    MalfunSubgroupComponent,
-    AdminNavbarComponent,
     EditUserComponent,
-
+    DeleteUserComponent,
+    IsActiveModalComponent,
+    RestoreUserPasswordComponent,
+    //====Action===
+    ActionComponent,
+    //====Vehicles===
+    VehiclesComponent,
     CreateVehicleComponent,
     EditVehicleComponent,
     DeleteVehicleComponent,
-
+    //====VehiclesType===
+    DeleteVehicleTypeComponent,
+    VehicleTypeComponent,
+    CreateVehicleTypeComponent,
+    EditVehicleTypeComponent,
+    //====Mulfunction===
+    MalfuncComponent,
+    MalfuncGroupComponent,
+    MalfunSubgroupComponent,
     CreateMalfuncGroupComponent,
     CreateMalfuncComponent,
     CreateMalfuncSubgroupComponent,
@@ -81,21 +92,17 @@ import { SharedModule } from '../shared/shared.module';
     DeleteMalfuncSubgroupComponent,
     EditMalfuncGroupComponent,
     DeleteMalfuncGroupComponent,
+    EditMalfuncComponent,
+    DeleteMalfuncComponent,
+    //====Supplier===
     SupplierComponent,
     CreateSupplierComponent,
     EditSupplierComponent,
     DeleteSupplierComponent,
-    EditMalfuncComponent,
-    DeleteMalfuncComponent,
-    DeleteUserComponent,
-    RestoreUserPasswordComponent,
-    IsActiveModalComponent,
-    VehicleTypeComponent,
-    CreateVehicleTypeComponent,
-    EditVehicleTypeComponent,
-    DeleteVehicleTypeComponent,
-    DocumentsComponent,
+    //====Issue===
     IssueLogComponent,
+    //====Document===
+    DocumentsComponent,
     CreateDocumentComponent,
     DeleteDocumentComponent,
     EditDocumentComponent,

@@ -28,6 +28,6 @@ import { GlobalMalfunctionsComponent } from './components/global-malfunctions/gl
     GlobalMalfunctionsComponent
   ],
   imports: [CommonModule, ReactiveFormsModule],
-  exports: [GlobalIssueComponent]
+  exports: [GlobalIssueComponent, FiltersTabsComponent]
 })
 export class SharedModule {}

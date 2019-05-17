@@ -21,6 +21,7 @@ import { CreateDocumentComponent } from './components/create-document/create-doc
 import { IssueLogAssigneesComponent } from './components/issue-log-assignees/issue-log-assignees.component';
 import { DocumentsComponent } from './components/documents/documents.component';
 import { IssueLogSuppliersComponent } from './components/issue-log-suppliers/issue-log-suppliers.component';
+import { SharedModule } from '../shared/shared.module';
 
 const routes: Routes = [
   {
@@ -38,7 +39,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes), FormsModule, CommonModule, ReactiveFormsModule],
+  imports: [RouterModule.forChild(routes), FormsModule, CommonModule, ReactiveFormsModule, SharedModule],
   exports: [RouterModule],
   declarations: [
     EditIssueComponent,
@@ -61,7 +62,8 @@ export class EngineerRoutingModule {}
     CoreModule,
     EngineerRoutingModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SharedModule
   ],
   providers: [IssueService, IssuelogService, StateService, ActionTypeService, SupplierService, DocumentService]
 })

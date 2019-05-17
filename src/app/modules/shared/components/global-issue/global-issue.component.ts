@@ -27,6 +27,8 @@ export class GlobalIssueComponent implements OnInit {
       { title: 'Номер', data: 'number', defaultContent: '' },
       { title: 'Пріоритет', data: 'priority', defaultContent: '', bVisible: false },
       { title: 'Статус', data: 'state.transName', defaultContent: '' },
+      { title: 'Група', data: 'malfunction.malfunctionSubgroup.malfunctionGroup.name', defaultContent: '' },
+      { title: 'Підрупа', data: 'malfunction.malfunctionSubgroup.name', defaultContent: '' },
       { title: 'Поломка', data: 'malfunction.name', defaultContent: '' },
       { title: 'Гарантія', data: 'warranty', defaultContent: '' },
       { title: 'Транспорт', data: 'vehicle.inventoryId', defaultContent: '' },
