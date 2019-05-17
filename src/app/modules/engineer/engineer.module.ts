@@ -31,7 +31,7 @@ const routes: Routes = [
       { path: 'issues', component: IssuesComponent },
       { path: 'issues/edit', component: EditIssueComponent },
       { path: 'issue-logs', component: IssueLogsComponent },
-      { path: 'issue-logs/edit', component: EditIssueLogComponent },
+      { path: 'issue-logs/edit', component: EditIssueLogComponent, data: [{isProd: true}] },
       { path: 'issue-logs/documents', component: DocumentsComponent },
       { path: '**', redirectTo: 'issues' }
     ]

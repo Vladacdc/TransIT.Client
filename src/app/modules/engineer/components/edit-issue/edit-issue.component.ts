@@ -14,6 +14,10 @@ export class EditIssueComponent implements OnInit {
   constructor(private issueService: IssueService) {}
 
   ngOnInit() {
-    this.issue = this.issueService.selectedIssue;
+    this.issue = this.issueService.selectedItem;
+  }
+
+  createHandler(): void {
+    this.issueService.selectedItem = this.issue;
   }
 }
