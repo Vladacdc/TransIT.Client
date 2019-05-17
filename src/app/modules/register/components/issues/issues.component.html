@@ -1,6 +1,7 @@
 <div class="table-background border mt-3">
   <app-create-issue (addIssue)="reloadTable()"></app-create-issue>
-  <app-issue-details [issue]="selectedIssue" (deleteIssue)="reloadTable()"></app-issue-details>
+  <app-issue-details [issue]="selectedIssue"></app-issue-details>
+  <app-delete-issue [issue]="selectedIssue" (deleteIssue)="reloadTable()"></app-delete-issue>
   <table id="issues" datatable [dtOptions]="options" [dtTrigger]="renderTrigger" class="table table-bordered">
     <caption class="table-caption">
       Мої Заявки
@@ -23,9 +24,20 @@
         <td>{{ issue.malfunction.name | truncate }}</td>
         <td>{{ issue.summary | truncate }}</td>
         <td>
-          <button (click)="selectIssue(issue)" class="btn" data-toggle="modal" data-target="#editModal">
-            <i class="fas fa-edit"></i>
-          </button>
+          <div class="d-flex flex-nowrap">
+            <button (click)="selectIssue(issue)" class="btn" data-toggle="modal" data-target="#editModal">
+              <i class="fas fa-info-circle"></i>
+            </button>
+            <button
+              *ngIf="issue.deletable"
+              (click)="selectIssue(issue)"
+              class="btn"
+              data-toggle="modal"
+              data-target="#deleteModal"
+            >
+              <i class="fas fa-trash-alt" style="color: darkred"></i>
+            </button>
+          </div>
         </td>
       </tr>
     </tbody>
