@@ -14,25 +14,23 @@ export class CountryComponent implements OnInit {
   @Input() isVisible: boolean;
   constructor(private service: CountryService) {}
 
-  private readonly tableParams: DataTables.Settings = {
-    scrollX: true,
-    language: {
-      url: '//cdn.datatables.net/plug-ins/1.10.19/i18n/Ukrainian.json'
-    },
-    columns: [
-      {
-        title: 'Назва країни'
-      },
-      {
-        title: '',
-        orderable: false,
-        visible: this.isVisible
-      }
-    ]
-  };
-
   ngOnInit() {
-    $('#countryTable').DataTable(this.tableParams);
+    $('#countryTable').DataTable({
+      scrollX: true,
+      language: {
+        url: '//cdn.datatables.net/plug-ins/1.10.19/i18n/Ukrainian.json'
+      },
+      columns: [
+        {
+          title: 'Назва країни'
+        },
+        {
+          title: 'Дії',
+          orderable: false,
+          visible: this.isVisible
+        }
+      ]
+    });
     this.service.getEntities().subscribe(countries => {
       this.addTableData(countries);
     });
@@ -48,7 +46,7 @@ export class CountryComponent implements OnInit {
       </button>`
     ]);
 
-    this.dataTable = $('#currencyTable')
+    this.dataTable = $('#countryTable')
       .dataTable()
       .api()
       .clear()

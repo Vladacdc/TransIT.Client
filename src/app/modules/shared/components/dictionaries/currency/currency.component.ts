@@ -14,29 +14,28 @@ export class CurrencyComponent implements OnInit {
   @Input() isVisible: boolean;
   constructor(private service: CurrencyService) {}
 
-  private readonly tableParams: DataTables.Settings = {
-    scrollX: true,
-    language: {
-      url: '//cdn.datatables.net/plug-ins/1.10.19/i18n/Ukrainian.json'
-    },
-    columns: [
-      {
-        title: 'Абреавіатура'
-      },
-      {
-        title: 'Повна назва'
-      },
-      {
-        title: '',
-        orderable: false,
-        visible: this.isVisible
-      }
-    ]
-  };
   ngOnInit() {
-    $('#currencyTable').DataTable(this.tableParams);
-    this.service.getEntities().subscribe(currency => {
-      this.addTableData(currency);
+    $('#currencyTable').DataTable({
+      scrollX: true,
+      language: {
+        url: '//cdn.datatables.net/plug-ins/1.10.19/i18n/Ukrainian.json'
+      },
+      columns: [
+        {
+          title: 'Абреавіатура'
+        },
+        {
+          title: 'Повна назва'
+        },
+        {
+          title: 'Дії',
+          orderable: false,
+          visible: this.isVisible
+        }
+      ]
+    });
+    this.service.getEntities().subscribe(currencies => {
+      this.addTableData(currencies);
     });
   }
 
