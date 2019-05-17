@@ -10,6 +10,8 @@ import { CommonModule } from '@angular/common';
 import { CreateCountryComponent } from './components/dictionaries/country/create-country/create-country.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FiltersTabsComponent } from './components/filters-tabs/filters-tabs.component';
+import { FilterMalfunctionsComponent } from './components/filter-malfunctions/filter-malfunctions.component';
+import { GlobalMalfunctionsComponent } from './components/global-malfunctions/global-malfunctions.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,9 @@ import { FiltersTabsComponent } from './components/filters-tabs/filters-tabs.com
     DeleteCountryComponent,
     CreateCurrencyComponent,
     DeleteCurrencyComponent,
-    FiltersTabsComponent
+    FiltersTabsComponent,
+    FilterMalfunctionsComponent,
+    GlobalMalfunctionsComponent
   ],
   imports: [CommonModule, ReactiveFormsModule],
   exports: [GlobalIssueComponent]
