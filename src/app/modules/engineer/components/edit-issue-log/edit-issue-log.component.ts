@@ -65,20 +65,21 @@ export class EditIssueLogComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.issueLog = this.createIssueLog();
-    this.activatedRoute.params.subscribe(params => {
-      const issue = new Issue(params);
-      if (issue) {
-        this.issueLog.issue = issue;
-        this.issueLog.oldState = issue.state;
-        this.issueService.getEntity(issue.id).subscribe((res: Issue) => {
-          this.issueLog.issue = res;
-          this.issueLog.oldState = this.issueLog.newState = res.state;
-        });
-      } else {
-        this.router.navigate(['/engineer/issues']);
-      }
+    // this.issueLog = this.createIssueLog();
+    const selectedIssue = this.issueService.selectedItem;
+    this.issueLog = new IssueLog({
+      id: 0,
+      description: '',
+      expenses: 0,
+      actionType: new ActionType(),
+      supplier: new Supplier(),
+      issue: selectedIssue,
+      oldState: selectedIssue.state,
+      newState: selectedIssue.state
     });
+    if (!this.issueLog.issue) {
+      this.router.navigate(['/engineer/issues']);
+    }
     this.actionTypeService.getEntities().subscribe(actions => {
       this.actionTypes = actions;
     });
@@ -124,7 +125,7 @@ export class EditIssueLogComponent implements OnInit {
     this.issueLogService.addEntity(this.issueLog).subscribe(res => {
       if (this.documents.length) {
         this.documents.forEach(d => {
-          d.issueLog = res; // { id: res.id };
+          d.issueLog = res;
           this.documentService.addEntity(d).subscribe();
         });
       }
