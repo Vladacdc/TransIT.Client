@@ -9,18 +9,6 @@
   width: 100% !important;
 }
 
-.priority-low {
-  background-color: #ccffcc;
-}
-
-.priority-medium {
-  background-color: #ffffcc;
-}
-
-.priority-high {
-  background-color: #ffcccc;
-}
-
 :host ::ng-deep .dataTables_empty {
   display: none;
 }

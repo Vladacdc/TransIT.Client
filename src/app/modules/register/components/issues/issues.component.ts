@@ -58,7 +58,7 @@ export class IssuesComponent implements OnDestroy, AfterViewInit {
   }
 
   selectIssue(issue: Issue) {
-    this.selectedIssue = issue;
+    this.selectedIssue = { ...issue };
   }
 
   getPriorityClass(issue: Issue) {

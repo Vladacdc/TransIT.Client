@@ -1,0 +1,35 @@
+<div class="modal fade" id="editPost" tabindex="-1" role="dialog" aria-labelledby="editPost" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editPost">Деталі заявки</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="postForm" (validSubmit)="onSubmit()">
+          <div class="form-group">
+            <label>Назва</label>
+            <input type="text" placeholder="*Введіть назву" class="form-control" formControlName="name" />
+          </div>
+          <button hidden type="submit" #submit data-toggle="modal" data-target="#editPost"></button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#editPost">Закрити</button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          (click)="clickSubmit(submit)"
+          form="postForm"
+          [disabled]="postForm.invalid"
+          data-toggle="modal"
+          data-target="#editPost"
+        >
+          Зберегти
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

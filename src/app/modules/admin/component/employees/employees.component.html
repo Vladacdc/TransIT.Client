@@ -1,0 +1,39 @@
+<div class="table-background border mt-3">
+  <app-create-employee (addEmployee)="reloadTable()"></app-create-employee>
+  <app-edit-employee [employee]="selectedEmployee" (editEmployee)="reloadTable()"></app-edit-employee>
+  <app-delete-employee [employee]="selectedEmployee" (deleteEmployee)="reloadTable()"></app-delete-employee>
+  <table id="employee" datatable [dtOptions]="options" [dtTrigger]="renderTrigger" class="table table-bordered">
+    <caption class="table-caption">
+      Посади
+    </caption>
+    <thead>
+      <tr>
+        <th>Прізвище</th>
+        <th>Ім'я</th>
+        <th>По батькові</th>
+        <th>Коротке ім'я</th>
+        <th>Посада</th>
+        <th>Дії</th>
+      </tr>
+    </thead>
+    <tbody *ngIf="employees?.length !== 0">
+      <tr *ngFor="let employee of employees">
+        <td>{{ employee.lastName }}</td>
+        <td>{{ employee.firstName }}</td>
+        <td>{{ employee.middleName }}</td>
+        <td>{{ employee.shortName }}</td>
+        <td>{{ employee.post?.name }}</td>
+        <td>
+          <div class="d-flex flex-nowrap">
+            <button (click)="selectPost(employee)" class="btn" data-toggle="modal" data-target="#editEmployee">
+              <i class="fas fa-info-circle"></i>
+            </button>
+            <button (click)="selectPost(employee)" class="btn" data-toggle="modal" data-target="#deleteModal">
+              <i class="fas fa-trash-alt" style="color: darkred"></i>
+            </button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
