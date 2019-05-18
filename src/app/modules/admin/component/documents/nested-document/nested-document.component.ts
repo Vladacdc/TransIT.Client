@@ -17,32 +17,10 @@ export class NestedDocumentComponent implements OnInit {
   @Input()
   set document(document: Documents) {
     this.chosenDocument = document;
-    console.dir(document);
   }
 
-  constructor(private nestedDocument: DocumentService) {}
+  constructor() {}
 
   ngOnInit() {
-    // this.tableNestedDoc = $('#nested-document-table').DataTable({
-    //   responsive: true,
-    //   select: {
-    //     style: 'single'
-    //   },
-    //   columns: [
-    //     { data: 'id', bVisible: false },
-    //     { title: 'Назва', data: 'name', defaultContent: '' },
-    //     { title: 'Опис', data: 'description', defaultContent: '' },
-    //     { title: 'Змінено', data: 'modDate', defaultContent: '' }
-    //   ],
-    //   paging: true,
-    //   language: {
-    //     url: '//cdn.datatables.net/plug-ins/1.10.19/i18n/Ukrainian.json'
-    //   }
-    // });
-    // this.nestedDocument.getEntity(this.chosenDocument.id).subscribe(document => {
-    //   this.chosenDocument = document;
-    //   this.tableNestedDoc.row.add(this.chosenDocument);
-    //   this.tableNestedDoc.draw();
-    // });
   }
 }

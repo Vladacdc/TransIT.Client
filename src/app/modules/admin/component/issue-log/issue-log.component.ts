@@ -50,8 +50,7 @@ export class IssueLogComponent implements OnInit {
         url: '//cdn.datatables.net/plug-ins/1.10.19/i18n/Ukrainian.json'
       }
     });
-    this.document = this.DocumentService.selectedDocument;
-    console.dir(this.document);
+    this.document = this.DocumentService.selectedItem;
 
     this.issueLogService.getEntity(this.document.issueLog.id).subscribe(issueLog => {
       this.issueLog = issueLog;

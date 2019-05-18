@@ -60,7 +60,6 @@ export class EditDocumentComponent implements OnInit {
       description: form.description as string,
       issueLog: this.selectedDoc.issueLog
     };
-    console.log(document.issueLog);
     this.serviceDocument.updateEntity(document).subscribe(_ => this.editDocument.next(document));
   }
 }
