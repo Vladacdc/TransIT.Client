@@ -1,4 +1,4 @@
-import { Issue } from './issue';
+import { Issue } from '../../shared/models/issue';
 import { State } from './state';
 import { ActionType } from './actionType';
 import { Supplier } from './supplier';

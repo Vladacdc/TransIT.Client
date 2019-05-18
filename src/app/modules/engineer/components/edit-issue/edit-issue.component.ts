@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Issue } from '../../models/issue';
-import { ActivatedRoute } from '@angular/router';
-import { IssueService } from '../../services/issue.service';
+import { Issue } from '../../../shared/models/issue';
+import { IssueService } from '../../../shared/services/issue.service';
 
 @Component({
   selector: 'app-edit-issue',

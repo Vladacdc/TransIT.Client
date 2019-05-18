@@ -1,25 +1,23 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { IssueLogsComponent } from '../issue-logs/issue-logs.component';
-import { Issue } from '../../models/issue';
-import { environment } from '../../../../../environments/environment';
+import { Component, OnInit } from '@angular/core';
+import { IssuelogService } from '../../../services/issuelog.service';
+import { Router } from '@angular/router';
 
 declare const $;
 
 @Component({
-  selector: 'app-nested-issue-logs',
-  templateUrl: '../issue-logs/issue-logs.component.html',
-  styleUrls: ['../issue-logs/issue-logs.component.scss']
+  selector: 'app-issue-logs',
+  templateUrl: './issue-logs.component.html',
+  styleUrls: ['./issue-logs.component.scss']
 })
-export class NestedIssueLogsComponent extends IssueLogsComponent implements OnInit {
-  @Input() issue: Issue = null;
-
+export class IssueLogsComponent implements OnInit {
+  protected table: any;
   protected readonly tableConfig: any = {
       scrollX: true,
       select: {
         style: 'single'
       },
       columns: [
-        { title: 'Статус', data: 'issue.state.transName', defaultContent: '', bVisible: false },
+        { title: 'Статус', data: 'issue.state.transName', defaultContent: '', bVisible: false  },
         { title: 'Творець', data: 'create.login', defaultContent: '' },
         { title: 'Витрати', data: 'expenses', defaultContent: '' },
         { title: 'Опис', data: 'description', defaultContent: '' },
@@ -29,7 +27,7 @@ export class NestedIssueLogsComponent extends IssueLogsComponent implements OnIn
         { title: 'Постачальник', data: 'supplier.name', defaultContent: '' },
         { title: 'Транспорт', data: 'issue.vehicle.inventoryId', defaultContent: '' },
         { title: 'Створено', data: 'createDate', defaultContent: '' },
-        { title: 'Редаговано', data: 'modDate', defaultContent: '', bVisible: false },
+        { title: 'Редаговано', data: 'modDate', defaultContent: '', bVisible: false  },
         { data: 'id', bVisible: false }
       ],
       processing: true,
@@ -39,13 +37,28 @@ export class NestedIssueLogsComponent extends IssueLogsComponent implements OnIn
       language: {
         url: '//cdn.datatables.net/plug-ins/1.10.19/i18n/Ukrainian.json'
       }
-  };
+    };
 
-  protected ajaxCallback(dataTablesParameters: any, callback): void {
-    this.issueLogService.getFilteredEntitiesByIssueId(this.issue.id, dataTablesParameters).subscribe(callback);
-  }
+  constructor(
+    protected issueLogService: IssuelogService,
+    protected router: Router
+  ) {}
 
   ngOnInit() {
     this.initTable(this.tableConfig);
+  }
+
+  protected ajaxCallback(dataTablesParameters: any, callback): void {
+    this.issueLogService.getFilteredEntities(dataTablesParameters).subscribe(callback);
+  }
+
+  protected initTable(tableConfig: any): void {
+    this.table = $('#issue-logs-table').DataTable(tableConfig);
+    this.table.on('select', this.selectRow.bind(this));
+  }
+
+  protected selectRow(e: any, dt: any, type: any, indexes: any): void {
+    const item = this.table.rows(indexes).data()[0];
+    this.router.navigate(['/engineer/issue-logs/edit', item]);
   }
 }

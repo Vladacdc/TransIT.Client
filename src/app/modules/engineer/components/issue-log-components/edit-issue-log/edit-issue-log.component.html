@@ -11,16 +11,10 @@
     </ul>
   </div>
   <div class="form-group">
-    <label class="col-form-label">Тип дії:</label>
-    <select formControlName="actionType" name="actionType" [(ngModel)]="issueLog.actionType.id" class="form-control">
-      <option *ngFor="let item of actionTypes" [value]="item.id">{{ item.name }}</option>
-    </select>
+    <app-issue-log-action-type (selectActionType)="assignActionType($event)"></app-issue-log-action-type>
   </div>
   <div class="form-group">
-    <label class="col-form-label">Новий стан:</label>
-    <select formControlName="state" name="state" [(ngModel)]="issueLog.newState.id" class="form-control">
-      <option *ngFor="let item of states" [value]="item.id">{{ item.transName }}</option>
-    </select>
+    <app-issue-log-state [currentState]="issueLog.issue.state" (selectState)="assignState($event)"></app-issue-log-state>
   </div>
   <div class="form-group">
     <app-issue-log-assignees (selectUser)="assignAssignee($event)"></app-issue-log-assignees>

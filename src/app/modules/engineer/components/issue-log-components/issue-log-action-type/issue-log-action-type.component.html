@@ -1,0 +1,11 @@
+<div class="form-group">
+    <label>Дії</label>
+    <ng-select
+      [items]="actions"
+      (ngModelChange)="selectItem(event)"
+      [(ngModel)]="currentActionType"
+      bindLabel="name"
+      placeholder="Виберіть дію"
+      notFoundText="Не знайдено"
+    ></ng-select>
+</div>

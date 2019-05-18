@@ -32,10 +32,7 @@
       <label for="assigneeDisInput">Відповідальний</label>
       <div class="form-control" id="assigneeDisInput">
         {{
-          issue.assignedTo?.login ||
-            '' + ' ' + issue.assignedTo?.firstName ||
-            '' + ' ' + issue.assignedTo?.lastName ||
-            '' + ' '
+          issue?.assignedTo?.shortName
         }}
       </div>
     </div>

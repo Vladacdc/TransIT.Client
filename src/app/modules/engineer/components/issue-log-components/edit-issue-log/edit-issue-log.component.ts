@@ -1,19 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { IssueLog } from '../../models/issuelog';
-import { ActivatedRoute, Router } from '@angular/router';
-import { IssuelogService } from '../../services/issuelog.service';
-import { ActionType } from '../../models/actionType';
-import { Document } from '../../models/document';
-import { ActionTypeService } from '../../services/action-type.service';
-import { StateService } from '../../services/state.service';
-import { State } from '../../models/state';
-import { Supplier } from '../../models/supplier';
-import { SupplierService } from '../../services/supplier.service';
+import { IssueLog } from '../../../models/issuelog';
+import { Router } from '@angular/router';
+import { IssuelogService } from '../../../services/issuelog.service';
+import { ActionType } from '../../../models/actionType';
+import { Document } from '../../../models/document';
+import { ActionTypeService } from '../../../services/action-type.service';
+import { StateService } from '../../../services/state.service';
+import { State } from '../../../models/state';
+import { Supplier } from '../../../models/supplier';
+import { SupplierService } from '../../../services/supplier.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Issue } from '../../models/issue';
-import { DocumentService } from '../../services/document.service';
-import { User } from '../../models/user';
-import { IssueService } from '../../services/issue.service';
+import { DocumentService } from '../../../services/document.service';
+import { IssueService } from '../../../../shared/services/issue.service';
+import { Employee } from '../../../models/employee';
 
 @Component({
   selector: 'app-edit-issue-log',
@@ -22,7 +21,7 @@ import { IssueService } from '../../services/issue.service';
 })
 export class EditIssueLogComponent implements OnInit {
   issueLog: IssueLog;
-  assigneeUser: User;
+  assigneeUser: Employee;
   supplier: Supplier;
   actionTypes: Array<ActionType>;
   states: Array<State>;
@@ -31,7 +30,6 @@ export class EditIssueLogComponent implements OnInit {
   documents: Array<Document>;
 
   constructor(
-    private activatedRoute: ActivatedRoute,
     private router: Router,
     private issueService: IssueService,
     private issueLogService: IssuelogService,
@@ -51,21 +49,7 @@ export class EditIssueLogComponent implements OnInit {
     });
   }
 
-  private createIssueLog(): IssueLog {
-    return new IssueLog({
-      id: 0,
-      description: '',
-      expenses: 0,
-      actionType: new ActionType(),
-      issue: new Issue(),
-      oldState: new State(),
-      newState: new State(),
-      supplier: new Supplier()
-    });
-  }
-
   ngOnInit() {
-    // this.issueLog = this.createIssueLog();
     const selectedIssue = this.issueService.selectedItem;
     this.issueLog = new IssueLog({
       id: 0,
@@ -95,12 +79,20 @@ export class EditIssueLogComponent implements OnInit {
     this.documents.push(entity);
   }
 
-  assignAssignee(entity: User): void {
-    this.assigneeUser = entity;
+  assignAssignee(entity: Employee): void {
+    this.issueLog.issue.assignedTo = entity;
   }
 
   assignSupplier(entity: Supplier): void {
-    this.supplier = entity;
+    this.issueLog.supplier = entity;
+  }
+
+  assignActionType(entity: ActionType): void {
+    this.issueLog.actionType = entity;
+  }
+
+  assignState(entity: State): void {
+    this.issueLog.newState = entity;
   }
 
   deleteDocument(entity: Document): void {
@@ -117,11 +109,6 @@ export class EditIssueLogComponent implements OnInit {
     this.issueLog.issue.deadline = this.issueLogForm.value.deadline
       ? this.issueLog.issue.deadline
       : this.issueLogForm.value.deadline;
-    this.issueLog.newState = new State({ id: this.issueLogForm.value.state });
-    this.issueLog.supplier = this.supplier;
-    if (this.assigneeUser) {
-      this.issueLog.issue.assignedTo = this.assigneeUser;
-    }
     this.issueLogService.addEntity(this.issueLog).subscribe(res => {
       if (this.documents.length) {
         this.documents.forEach(d => {
