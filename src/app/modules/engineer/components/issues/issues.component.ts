@@ -13,8 +13,8 @@ declare const $;
 })
 export class IssuesComponent extends GlobalIssueComponent {
 
-  constructor(issueService: IssueService, router: Router) {
-    super(issueService, router);
+  constructor(issueService: IssueService) {
+    super(issueService);
     this.tableConfig.columns = [
       ...this.tableConfig.columns,
       {

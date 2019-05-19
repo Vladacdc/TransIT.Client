@@ -16,6 +16,7 @@ export class FiltersTabsComponent implements OnInit {
   @Output() EndDateValue = new EventEmitter<string>();
   @Output() VechicleTypeValue = new EventEmitter<string>();
   @Output() StateValue = new EventEmitter<string>();
+  @Output() Filter = new EventEmitter();
 
   selectedType: string;
   selectedState: string;
@@ -59,5 +60,6 @@ export class FiltersTabsComponent implements OnInit {
     );
     this.VechicleTypeValue.next(this.selectedType);
     this.StateValue.next(this.selectedState);
+    this.Filter.next();
   }
 }

@@ -3,6 +3,8 @@ import { CrudService } from '../../core/services/crud.service';
 import { Issue } from '../models/issue';
 import { environment } from '../../../../environments/environment';
 import { saveToStorage, getFromStorage } from './serviceTools';
+import { Observable } from 'rxjs';
+import { map, catchError } from 'rxjs/operators';
 
 @Injectable()
 export class IssueService extends CrudService<Issue> {
@@ -14,6 +16,13 @@ export class IssueService extends CrudService<Issue> {
   }
   set selectedItem(value: Issue) {
     saveToStorage('selectedIssue', value);
+  }
+
+  getFilteredEntities(params: any): Observable<Issue> {
+    return this.http.post<any>(this.datatableUrl, params, {}).pipe(
+      map(response => ({ ...response, data: response.data.map(d => this.mapEntity(d)) })),
+      catchError(this.handleError())
+    );
   }
 
   protected mapEntity(entity: Issue): Issue {

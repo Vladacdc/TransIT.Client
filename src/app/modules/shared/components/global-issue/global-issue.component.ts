@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { IssueService } from '../../services/issue.service';
-import { Router } from '@angular/router';
 import { priorityColors } from '../../declarations';
 
 declare const $;
@@ -31,9 +30,9 @@ export class GlobalIssueComponent implements OnInit {
       { title: 'Поломка', data: 'malfunction.name', defaultContent: '' },
       { title: 'Пріоритет', data: 'priority', defaultContent: '', bVisible: false },
       { title: 'Гарантія', data: 'warranty', defaultContent: '' },
-      { title: 'Транспорт', data: 'vehicle.inventoryId', defaultContent: '' },
-      { title: 'Відповідальний', data: 'assignedTo.login', defaultContent: '' },
-      { title: 'Виконати до', data: 'deadline', defaultContent: '' },
+      { title: 'Транспорт', data: 'vehicle.model', defaultContent: '' },
+      { title: 'Відповідальний', data: 'assignedTo.login', defaultContent: '', bVisible: false },
+      { title: 'Виконати до', data: 'deadline', defaultContent: '', bVisible: false },
       { title: 'Опис', data: 'summary', defaultContent: '' },
       { title: 'Створено', data: 'createDate', defaultContent: '', bVisible: false },
       { title: 'Редаговано', data: 'modDate', defaultContent: '', bVisible: false },
@@ -49,7 +48,7 @@ export class GlobalIssueComponent implements OnInit {
     createdRow: this.createRow
   };
 
-  constructor(private issueService: IssueService, private router: Router) {}
+  constructor(private issueService: IssueService) {}
 
   ngOnInit() {
     this.initTable();
@@ -60,34 +59,37 @@ export class GlobalIssueComponent implements OnInit {
   }
 
   private ajaxCallback(dataTablesParameters: any, callback): void {
-    dataTablesParameters.filters = [];
+    const filters = [];
     if (this.state) {
-      dataTablesParameters.filters.push({
+      filters.push({
         entityPropertyPath: 'state.transName',
         value: this.state,
         operator: '=='
       });
     }
     if (this.startDate) {
-      dataTablesParameters.filters.push({
+      filters.push({
         entityPropertyPath: 'createDate',
         value: this.startDate,
         operator: '>='
       });
     }
     if (this.endDate) {
-      dataTablesParameters.filters.push({
+      filters.push({
         entityPropertyPath: 'createDate',
         value: this.endDate,
         operator: '<='
       });
     }
     if (this.vehicleType) {
-      dataTablesParameters.filters.push({
+      filters.push({
         entityPropertyPath: 'vehicle.vehicleType.name',
         value: this.vehicleType,
         operator: '=='
       });
+    }
+    if (filters.length) {
+      dataTablesParameters.filters = filters;
     }
     this.issueService.getFilteredEntities(dataTablesParameters).subscribe(callback);
   }
@@ -96,7 +98,7 @@ export class GlobalIssueComponent implements OnInit {
     this.table = $('#issue-table').DataTable(this.tableConfig);
   }
 
-  protected redrawTable(): void {
+  redrawTable(): void {
     this.table = $('#issue-table').DataTable({
       ...this.tableConfig,
       destroy: true
@@ -104,22 +106,18 @@ export class GlobalIssueComponent implements OnInit {
   }
 
   setStartDateValue(value) {
-    this.redrawTable();
     this.startDate = value;
   }
 
   setEndDateValue(value) {
-    this.redrawTable();
     this.endDate = value;
   }
 
   setVechicleTypeValue(value) {
-    this.redrawTable();
     this.vehicleType = value;
   }
 
   setStateValue(value) {
-    this.redrawTable();
     this.state = value;
   }
 }

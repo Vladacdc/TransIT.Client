@@ -24,7 +24,7 @@ export class IssueLogsComponent implements OnInit {
         { title: 'Дія', data: 'actionType.name', defaultContent: '' },
         { title: 'Старий статус', data: 'oldState.transName', defaultContent: '' },
         { title: 'Новий статус', data: 'newState.transName', defaultContent: '' },
-        { title: 'Постачальник', data: 'supplier.name', defaultContent: '' },
+        { title: 'Постачальник', data: 'supplier.name', defaultContent: '', bVisible: false },
         { title: 'Транспорт', data: 'issue.vehicle.inventoryId', defaultContent: '' },
         { title: 'Створено', data: 'createDate', defaultContent: '' },
         { title: 'Редаговано', data: 'modDate', defaultContent: '', bVisible: false  },
