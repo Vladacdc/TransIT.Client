@@ -1,0 +1,13 @@
+<div class="table-background border">
+  <h1 style="text-align:center">Екшини</h1>
+  <span><app-create-action (createAction)="addAction($event)"></app-create-action></span>
+  <span class="second">
+    <app-edit-action [action]="selectedAction" (editAction)="editAction($event)"></app-edit-action>
+  </span>
+  <span class="third">
+    <app-delete-action [action]="selectedAction" (deleteAction)="deleteAction($event)"></app-delete-action>
+  </span>
+  <p></p>
+  <table id="action-table" class="table table-bordered  table-hover" style="width:100%;" cellspacing="0"></table>
+</div>
+

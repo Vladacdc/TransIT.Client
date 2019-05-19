@@ -13,6 +13,7 @@ import { VehicleTypeComponent } from './component/vehicle-type/vehicle-type.comp
 import { DictionaryComponent } from '../shared/components/dictionaries/dictionary.component';
 import { PostsComponent } from './component/posts/posts.component';
 import { EmployeesComponent } from './component/employees/employees.component';
+import { ActionStateDictionaryComponent } from './component/action-state-dictionary/action-state-dictionary.component';
 import { GlobalDocumentComponent } from '../shared/components/global-document/global-document.component';
 import { IssueLogComponent } from '../shared/components/issue-log/issue-log.component';
 
@@ -32,7 +33,7 @@ const routes: Routes = [
           { path: 'malfunc', component: MalfuncComponent }
         ]
       },
-      { path: 'actions', component: ActionComponent },
+      { path: 'actions', component: ActionStateDictionaryComponent },
       { path: 'supplier', component: SupplierComponent },
       { path: 'vehicle-types', component: VehicleTypeComponent },
       { path: 'documents', component: GlobalDocumentComponent },

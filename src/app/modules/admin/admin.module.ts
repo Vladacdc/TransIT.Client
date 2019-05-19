@@ -63,6 +63,17 @@ import { EmployeesComponent } from './component/employees/employees.component';
 import { CreateEmployeeComponent } from './component/employees/create-employee/create-employee.component';
 import { EditEmployeeComponent } from './component/employees/edit-employee/edit-employee.component';
 import { DeleteEmployeeComponent } from './component/employees/delete-employee/delete-employee.component';
+import { ActionStateDictionaryComponent } from './component/action-state-dictionary/action-state-dictionary.component';
+import { StateDictionaryComponent } from './component/action-state-dictionary/state-dictionary/state-dictionary.component';
+import { ActionDictionaryComponent } from './component/action-state-dictionary/action-dictionary/action-dictionary.component';
+import { CreateStateComponent } from './component/action-state-dictionary/state-dictionary/create-state/create-state.component';
+import { DeleteStateComponent } from './component/action-state-dictionary/state-dictionary/delete-state/delete-state.component';
+import { EditStateComponent } from './component/action-state-dictionary/state-dictionary/edit-state/edit-state.component';
+import { CreateActionComponent } from './component/action-state-dictionary/action-dictionary/create-action/create-action.component';
+import { EditActionComponent } from './component/action-state-dictionary/action-dictionary/edit-action/edit-action.component';
+import { DeleteActionComponent } from './component/action-state-dictionary/action-dictionary/delete-action/delete-action.component';
+import { DocumentComponent } from '../shared/components/global-document/document/document.component';
+
 
 @NgModule({
   declarations: [
@@ -116,7 +127,16 @@ import { DeleteEmployeeComponent } from './component/employees/delete-employee/d
     EmployeesComponent,
     CreateEmployeeComponent,
     EditEmployeeComponent,
-    DeleteEmployeeComponent
+    DeleteEmployeeComponent,
+    ActionStateDictionaryComponent,
+    StateDictionaryComponent,
+    ActionDictionaryComponent,
+    CreateStateComponent,
+    DeleteStateComponent,
+    EditStateComponent,
+    CreateActionComponent,
+    EditActionComponent,
+    DeleteActionComponent
   ],
   exports: [AdminComponent],
   imports: [
