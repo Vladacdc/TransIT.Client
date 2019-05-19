@@ -27,7 +27,6 @@ import { IssueLogActionTypeComponent } from './components/issue-log-components/i
 import { IssueLogStateComponent } from './components/issue-log-components/issue-log-state/issue-log-state.component';
 import { IssueLogDocumentsComponent } from './components/issue-log-components/issue-log-documents/issue-log-documents.component';
 import { DocumentComponent } from '../shared/components/global-document/document/document.component';
-import { CreateDocumentComponent } from '../shared/components/global-document/document/create-document/create-document.component';
 
 const routes: Routes = [
   {
@@ -41,7 +40,7 @@ const routes: Routes = [
       { path: 'issue-logs/documents', component: DocumentComponent },
       { path: 'documents', component: GlobalDocumentComponent },
       { path: 'issue-log', component: IssueLogComponent },
-      
+
       { path: '**', redirectTo: 'issues' }
     ]
   }
@@ -49,7 +48,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [
-    RouterModule.forChild(routes), 
+    RouterModule.forChild(routes),
     FormsModule,
     CommonModule,
     ReactiveFormsModule,
@@ -71,11 +70,7 @@ const routes: Routes = [
 export class EngineerRoutingModule {}
 
 @NgModule({
-  declarations: [
-    EngineerComponent,
-    IssuesComponent,
-    IssueLogsComponent
-  ],
+  declarations: [EngineerComponent, IssuesComponent, IssueLogsComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -86,13 +81,6 @@ export class EngineerRoutingModule {}
     SharedModule,
     EngineerRoutingModule
   ],
-  providers: [
-    IssueService,
-    IssuelogService,
-    StateService,
-    ActionTypeService,
-    SupplierService,
-    DocumentService
-  ]
+  providers: [IssueService, IssuelogService, StateService, ActionTypeService, SupplierService, DocumentService]
 })
 export class EngineerModule {}

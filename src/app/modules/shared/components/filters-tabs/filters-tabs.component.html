@@ -16,6 +16,12 @@
         <option *ngFor="let state of stateList" [value]="">{{ state.transName }}</option>
       </select>
     </div>
+    <div>
+      <select class="form-control" width="200" (change)="selectPriority($event.target.value)">
+        <option value="" selected class="grey"> Виберіть пріорітет</option>
+        <option *ngFor="let key of keys" [value]="key" [label]="priorityList[key]"></option>
+      </select>
+    </div>
   </div>
   <button href="#" class="right btn btn-info"><i class="fas fa-file-excel"></i> Excel</button>
   <button href="#" class="right btn btn-info" (click)="selectFilter()">

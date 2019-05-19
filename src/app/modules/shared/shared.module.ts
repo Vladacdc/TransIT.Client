@@ -39,9 +39,15 @@ import { IssueLogComponent } from './components/issue-log/issue-log.component';
     DeleteDocumentComponent,
     EditDocumentComponent,
     NestedDocumentComponent,
-    IssueLogComponent,
+    IssueLogComponent
   ],
   imports: [CommonModule, ReactiveFormsModule],
-  exports: [GlobalIssueComponent, FiltersTabsComponent, CreateDocumentComponent]
+  exports: [
+    GlobalIssueComponent,
+    FiltersTabsComponent,
+    CreateDocumentComponent,
+    DocumentComponent,
+    NestedDocumentComponent
+  ]
 })
 export class SharedModule {}

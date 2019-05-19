@@ -10,12 +10,12 @@ declare const $;
   styleUrls: ['./global-issue.component.scss']
 })
 export class GlobalIssueComponent implements OnInit {
-
   protected table: any;
   protected startDate: string;
   protected endDate: string;
   protected vehicleType: string;
   protected state: string;
+  protected priority: string;
 
   protected readonly tableConfig: any = {
     scrollX: true,
@@ -119,5 +119,8 @@ export class GlobalIssueComponent implements OnInit {
 
   setStateValue(value) {
     this.state = value;
+  }
+  setPriorityValue(value) {
+    this.priority = value;
   }
 }
