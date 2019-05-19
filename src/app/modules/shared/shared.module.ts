@@ -42,6 +42,6 @@ import { IssueLogComponent } from './components/issue-log/issue-log.component';
     IssueLogComponent,
   ],
   imports: [CommonModule, ReactiveFormsModule],
-  exports: [GlobalIssueComponent, FiltersTabsComponent]
+  exports: [GlobalIssueComponent, FiltersTabsComponent, CreateDocumentComponent]
 })
 export class SharedModule {}

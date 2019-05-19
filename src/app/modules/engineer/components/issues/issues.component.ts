@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { IssueService } from '../../../shared/services/issue.service';
 import { Router } from '@angular/router';
 import { priorityColors } from '../../../shared/declarations';
@@ -13,7 +13,7 @@ declare const $;
 })
 export class IssuesComponent extends GlobalIssueComponent {
 
-  constructor(issueService: IssueService) {
+  constructor(issueService: IssueService, private router: Router) {
     super(issueService);
     this.tableConfig.columns = [
       ...this.tableConfig.columns,

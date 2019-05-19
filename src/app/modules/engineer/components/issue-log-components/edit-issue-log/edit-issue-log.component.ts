@@ -13,6 +13,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DocumentService } from '../../../services/document.service';
 import { IssueService } from '../../../../shared/services/issue.service';
 import { Employee } from '../../../models/employee';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-edit-issue-log',
@@ -36,7 +37,8 @@ export class EditIssueLogComponent implements OnInit {
     private actionTypeService: ActionTypeService,
     private stateService: StateService,
     private supplierService: SupplierService,
-    private documentService: DocumentService
+    private documentService: DocumentService,
+    private toast: ToastrService
   ) {
     this.documents = new Array<Document>();
     this.issueLogForm = new FormGroup({
@@ -64,18 +66,17 @@ export class EditIssueLogComponent implements OnInit {
     if (!this.issueLog.issue) {
       this.router.navigate(['/engineer/issues']);
     }
-    this.actionTypeService.getEntities().subscribe(actions => {
-      this.actionTypes = actions;
-    });
-    this.stateService.getEntities().subscribe(states => {
-      this.states = states;
-    });
-    this.supplierService.getEntities().subscribe(suppliers => {
-      this.suppliers = suppliers;
-    });
+    this.actionTypeService.getEntities().subscribe(actions => this.actionTypes = actions);
+    this.stateService.getEntities().subscribe(states => this.states = states);
+    this.supplierService.getEntities().subscribe(suppliers => this.suppliers = suppliers);
   }
 
   assignDocument(entity: Document): void {
+    if (this.documents.some(value => value.name === entity.name)) {
+      this.toast.error('Документ з таки самим ім\'ям вже існує', 'Дублювання');
+      return;
+    }
+    entity.issueLog = this.issueLog;
     this.documents.push(entity);
   }
 
@@ -96,12 +97,12 @@ export class EditIssueLogComponent implements OnInit {
   }
 
   deleteDocument(entity: Document): void {
-    this.documents = this.documents.filter(x => x.id === entity.id);
+    this.documents = this.documents.filter(x => x.name !== entity.name);
   }
 
   onSubmit(): void {
     if (this.issueLogForm.invalid) {
-      alert('Не правильно введені дані!');
+      this.toast.error('Не правильно введені дані!', 'Помилка')
       return;
     }
 
@@ -116,7 +117,7 @@ export class EditIssueLogComponent implements OnInit {
           this.documentService.addEntity(d).subscribe();
         });
       }
-      this.router.navigate(['/engineer/issue-logs']).then();
+      this.router.navigate(['/engineer/issue-logs']).then(_ => this.toast.success('', 'Обробку зроблено'));
     });
   }
 }

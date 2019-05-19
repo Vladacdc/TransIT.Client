@@ -66,6 +66,7 @@ import { EmployeesComponent } from './component/employees/employees.component';
 import { CreateEmployeeComponent } from './component/employees/create-employee/create-employee.component';
 import { EditEmployeeComponent } from './component/employees/edit-employee/edit-employee.component';
 import { DeleteEmployeeComponent } from './component/employees/delete-employee/delete-employee.component';
+import { DocumentComponent } from '../shared/components/global-document/document/document.component';
 
 @NgModule({
   declarations: [
@@ -126,7 +127,7 @@ import { DeleteEmployeeComponent } from './component/employees/delete-employee/d
     EditEmployeeComponent,
     DeleteEmployeeComponent
   ],
-  exports: [AdminComponent],
+  exports: [AdminComponent, DocumentComponent],
   imports: [
     CommonModule,
     CoreModule,

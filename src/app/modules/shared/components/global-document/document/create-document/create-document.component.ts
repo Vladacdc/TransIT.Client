@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, Output, EventEmitter, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Documents } from 'src/app/modules/admin/models/document/document';
 import { IssueLog } from 'src/app/modules/admin/models/issueLog/IssueLog';
@@ -14,6 +14,7 @@ import { ToastrService } from 'ngx-toastr';
 export class CreateDocumentComponent implements OnInit {
   @ViewChild('close') closeDiv: ElementRef;
   @Output() createDocument = new EventEmitter<Documents>();
+  @Input() issueLog;
   documentForm: FormGroup;
   issueLogList: IssueLog[];
 
@@ -46,7 +47,8 @@ export class CreateDocumentComponent implements OnInit {
     const document: Documents = {
       id: 0,
       name: form.name as string,
-      description: form.description as string
+      description: form.description as string,
+      issueLog: this.issueLog
     };
 
     this.serviceDocument.addEntity(document).subscribe(newGroup => this.createDocument.next(newGroup));

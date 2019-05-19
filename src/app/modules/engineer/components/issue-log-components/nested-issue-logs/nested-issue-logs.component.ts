@@ -18,13 +18,13 @@ export class NestedIssueLogsComponent extends IssueLogsComponent implements OnIn
         style: 'single'
       },
       columns: [
+        { title: 'Старий статус', data: 'oldState.transName', defaultContent: '' },
+        { title: 'Новий статус', data: 'newState.transName', defaultContent: '' },
         { title: 'Статус', data: 'issue.state.transName', defaultContent: '', bVisible: false },
-        { title: 'Творець', data: 'create.login', defaultContent: '' },
+        { title: 'Творець', data: 'create.login', defaultContent: '', bVisible: false },
         { title: 'Витрати', data: 'expenses', defaultContent: '' },
         { title: 'Опис', data: 'description', defaultContent: '' },
         { title: 'Дія', data: 'actionType.name', defaultContent: '' },
-        { title: 'Старий статус', data: 'oldState.transName', defaultContent: '' },
-        { title: 'Новий статус', data: 'newState.transName', defaultContent: '' },
         { title: 'Постачальник', data: 'supplier.name', defaultContent: '' },
         { title: 'Транспорт', data: 'issue.vehicle.inventoryId', defaultContent: '' },
         { title: 'Створено', data: 'createDate', defaultContent: '' },

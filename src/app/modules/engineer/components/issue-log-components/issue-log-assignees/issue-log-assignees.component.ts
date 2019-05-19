@@ -25,6 +25,5 @@ export class IssueLogAssigneesComponent implements OnInit {;
   selectItem(item: Employee): void {
     this.currentUser = item;
     this.selectUser.emit(item);
-    console.dir(this.users);
   }
 }

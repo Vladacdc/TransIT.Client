@@ -1,15 +1,18 @@
 <form class="container" [formGroup]="issueLogForm" (submit)="onSubmit()">
   <div class="form-group">
-    <app-create-document [issueLog]="issueLog" (createDocument)="assignDocument($event)"></app-create-document>
+    <app-create-document class="badge-head" [issueLog]="issueLog" (createDocument)="assignDocument($event)"></app-create-document>
+  </div>
+  <div class="form-group">
     <ul>
       <li *ngFor="let item of documents">
-        <span class="badge badge-secondary">
-          <h4>{{ item.name }}</h4>
-          <button class="badge badge-secondary" (click)="deleteDocument(item)">&times;</button>
+        <span class="badge badge-info">
+          <h5>{{ item.name }}</h5>
+          <button class="badge badge-danger" (click)="deleteDocument(item)">&times;</button>
         </span>
       </li>
     </ul>
   </div>
+  <br><br>
   <div class="form-group">
     <app-issue-log-action-type (selectActionType)="assignActionType($event)"></app-issue-log-action-type>
   </div>

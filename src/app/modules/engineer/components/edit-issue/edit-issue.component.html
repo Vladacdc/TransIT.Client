@@ -65,10 +65,11 @@
       </div>
     </div>
   </div>
-  <div class="row">
+  <div style="float: left">
     <a class="btn btn-primary" [routerLink]="['/engineer/issue-logs/edit']" (click)="createHandler()">Обробка</a>
   </div>
-  <div class="row">
+  <br><br>
+  <div>
     <app-nested-issue-logs [issue]="issue"></app-nested-issue-logs>
   </div>
 </div>
