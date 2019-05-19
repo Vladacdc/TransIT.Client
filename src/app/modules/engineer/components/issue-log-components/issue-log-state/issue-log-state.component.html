@@ -1,11 +1,11 @@
 <div class="form-group">
-    <label>Статус</label>
-    <ng-select
-      [items]="states"
-      (ngModelChange)="selectItem(event)"
-      [(ngModel)]="currentState"
-      bindLabel="transName"
-      placeholder="Виберіть статус"
-      notFoundText="Не знайдено"
-    ></ng-select>
+  <label>Статус</label>
+  <ng-select
+    [items]="states"
+    (ngModelChange)="selectItem($event)"
+    [(ngModel)]="currentState"
+    bindLabel="transName"
+    placeholder="Виберіть статус"
+    notFoundText="Не знайдено"
+  ></ng-select>
 </div>

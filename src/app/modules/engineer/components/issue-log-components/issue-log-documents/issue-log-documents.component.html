@@ -2,7 +2,7 @@
   <label>Документи</label>
   <ng-select
     [items]="documents"
-    (ngModelChange)="selectItem(event)"
+    (ngModelChange)="selectItem($event)"
     [(ngModel)]="currentDocument"
     bindLabel="name"
     placeholder="Виберіть документ"

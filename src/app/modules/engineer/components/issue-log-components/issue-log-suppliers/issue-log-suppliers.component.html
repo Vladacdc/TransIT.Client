@@ -1,11 +1,11 @@
 <div class="form-group">
-    <label>Постачальник</label>
-    <ng-select
-      [items]="suppliers"
-      (ngModelChange)="selectItem(event)"
-      [(ngModel)]="currentSupplier"
-      bindLabel="name"
-      placeholder="Виберіть постачальника"
-      notFoundText="Не знайдено"
-    ></ng-select>
+  <label>Постачальник</label>
+  <ng-select
+    [items]="suppliers"
+    (ngModelChange)="selectItem($event)"
+    [(ngModel)]="currentSupplier"
+    bindLabel="name"
+    placeholder="Виберіть постачальника"
+    notFoundText="Не знайдено"
+  ></ng-select>
 </div>

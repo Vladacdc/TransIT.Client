@@ -12,8 +12,8 @@ import { SupplierService } from '../../../services/supplier.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DocumentService } from '../../../services/document.service';
 import { IssueService } from '../../../../shared/services/issue.service';
-import { Employee } from '../../../models/employee';
 import { ToastrService } from 'ngx-toastr';
+import { Employee } from 'src/app/modules/shared/models/employee';
 
 @Component({
   selector: 'app-edit-issue-log',
@@ -66,14 +66,14 @@ export class EditIssueLogComponent implements OnInit {
     if (!this.issueLog.issue) {
       this.router.navigate(['/engineer/issues']);
     }
-    this.actionTypeService.getEntities().subscribe(actions => this.actionTypes = actions);
-    this.stateService.getEntities().subscribe(states => this.states = states);
-    this.supplierService.getEntities().subscribe(suppliers => this.suppliers = suppliers);
+    this.actionTypeService.getEntities().subscribe(actions => (this.actionTypes = actions));
+    this.stateService.getEntities().subscribe(states => (this.states = states));
+    this.supplierService.getEntities().subscribe(suppliers => (this.suppliers = suppliers));
   }
 
   assignDocument(entity: Document): void {
     if (this.documents.some(value => value.name === entity.name)) {
-      this.toast.error('Документ з таки самим ім\'ям вже існує', 'Дублювання');
+      this.toast.error("Документ з таки самим ім'ям вже існує", 'Дублювання');
       return;
     }
     entity.issueLog = this.issueLog;
@@ -102,7 +102,7 @@ export class EditIssueLogComponent implements OnInit {
 
   onSubmit(): void {
     if (this.issueLogForm.invalid) {
-      this.toast.error('Не правильно введені дані!', 'Помилка')
+      this.toast.error('Не правильно введені дані!', 'Помилка');
       return;
     }
 

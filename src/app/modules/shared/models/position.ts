@@ -9,4 +9,3 @@ export class Post extends TEntity<Post> {
     super(post);
   }
 }
-  
