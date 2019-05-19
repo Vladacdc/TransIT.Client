@@ -3,6 +3,12 @@ import { VehicleType } from '../../models/vehicleType';
 import { VehicleTypeService } from 'src/app/modules/admin/services/vehicle-type.service';
 import { State } from '../../models/state';
 import { StateService } from 'src/app/modules/admin/services/state.service';
+import { MalfuncGroup } from 'src/app/modules/admin/models/malfuncGroup/malfunc-group';
+import { MalfuncGroupService } from 'src/app/modules/admin/services/malfunc-group.service';
+import { MalfunSubgroup } from 'src/app/modules/admin/models/malfun-subgroup/malfun-subgroup';
+import { MalfunSubgroupService } from 'src/app/modules/admin/services/malfun-subgroup.service';
+import { Malfunction } from 'src/app/modules/admin/models/malfunc/malfunc';
+import { MalfuncService } from 'src/app/modules/admin/services/malfunc.service';
 import { Priority } from 'src/app/modules/core/models/priority';
 
 @Component({
@@ -13,6 +19,9 @@ import { Priority } from 'src/app/modules/core/models/priority';
 export class FiltersTabsComponent implements OnInit {
   vehicleTypeList: VehicleType[] = [];
   stateList: State[] = [];
+  malfunctionGroupList: MalfuncGroup[] = [];
+  malfunctionSubGroupList: MalfunSubgroup[] = [];
+  malfunctionList: Malfunction[] = [];
   priorityList = Priority;
   keys = [];
 
@@ -27,13 +36,22 @@ export class FiltersTabsComponent implements OnInit {
   selectedState: string;
   selectedPriority: string;
 
-  constructor(private vehicleTypeService: VehicleTypeService, private stateService: StateService) {
+  constructor(
+    private vehicleTypeService: VehicleTypeService,
+    private stateService: StateService,
+    private malfunctionGropService: MalfuncGroupService,
+    private malfunctionSubGropService: MalfunSubgroupService,
+    private malfunctionService: MalfuncService
+  ) {
     this.keys = Object.keys(this.priorityList).filter(f => !isNaN(Number(f)));
   }
 
   ngOnInit() {
     this.vehicleTypeService.getEntities().subscribe(data => (this.vehicleTypeList = data));
     this.stateService.getEntities().subscribe(data => (this.stateList = data));
+    this.malfunctionGropService.getEntities().subscribe(items => (this.malfunctionGroupList = items));
+    this.malfunctionSubGropService.getEntities().subscribe(data => (this.malfunctionSubGroupList = data));
+    this.malfunctionService.getEntities().subscribe(data => (this.malfunctionList = data));
     (<any>$('#startDate')).datepicker({
       uiLibrary: 'bootstrap4',
       iconsLibrary: 'fontawesome',

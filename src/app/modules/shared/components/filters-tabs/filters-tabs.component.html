@@ -8,13 +8,31 @@
       <select class="form-control" width="200" (change)="selectVechicleType($event.target.value)">
         <option value="" selected class="grey"> Виберіть тип транспорту</option>
         <option *ngFor="let vehicleType of vehicleTypeList" [value]="">{{ vehicleType.name }}</option>
-      </select>
-    </div>
-    <div>
+      </select>    
       <select class="form-control" width="200" (change)="selectState($event.target.value)">
         <option value="" selected class="grey"> Виберіть статус</option>
         <option *ngFor="let state of stateList" [value]="">{{ state.transName }}</option>
       </select>
+    </div>
+    <div class="form-group">
+      <ng-select
+        [items]="malfunctionGroupList"
+        bindLabel="name"
+        placeholder="*Група несправності"
+        notFoundText="Не знайдено"
+      ></ng-select>
+      <ng-select
+        [items]="malfunctionSubGroupList"
+        bindLabel="name"
+        placeholder="*Підгрупа несправності"
+        notFoundText="Не знайдено"
+      ></ng-select>
+      <ng-select
+        [items]="malfunctionList"
+        bindLabel="name"
+        placeholder="*Несправність"
+        notFoundText="Не знайдено"
+      ></ng-select>
     </div>
     <div>
       <select class="form-control" width="200" (change)="selectPriority($event.target.value)">
@@ -26,6 +44,5 @@
   <button href="#" class="right btn btn-info"><i class="fas fa-file-excel"></i> Excel</button>
   <button href="#" class="right btn btn-info" (click)="selectFilter()">
     <i class="fas fa-filter"></i> Фільтрувати
-  </button>
-  <app-filter-malfunctions></app-filter-malfunctions>
+  </button> 
 </div>
