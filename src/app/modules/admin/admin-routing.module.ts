@@ -10,11 +10,11 @@ import { ActionComponent } from './component/action/action.component';
 import { AdminComponent } from './component/admin/admin.component';
 import { SupplierComponent } from './component/supplier/supplier.component';
 import { VehicleTypeComponent } from './component/vehicle-type/vehicle-type.component';
-import { DocumentsComponent } from './component/documents/documents.component';
-import { IssueLogComponent } from './component/issue-log/issue-log.component';
 import { DictionaryComponent } from '../shared/components/dictionaries/dictionary.component';
 import { PostsComponent } from './component/posts/posts.component';
 import { EmployeesComponent } from './component/employees/employees.component';
+import { GlobalDocumentComponent } from '../shared/components/global-document/global-document.component';
+import { IssueLogComponent } from '../shared/components/issue-log/issue-log.component';
 
 const routes: Routes = [
   {
@@ -35,7 +35,7 @@ const routes: Routes = [
       { path: 'actions', component: ActionComponent },
       { path: 'supplier', component: SupplierComponent },
       { path: 'vehicle-types', component: VehicleTypeComponent },
-      { path: 'documents', component: DocumentsComponent },
+      { path: 'documents', component: GlobalDocumentComponent },
       { path: 'issue-log', component: IssueLogComponent },
       { path: 'dictionary', component: DictionaryComponent },
       { path: 'posts', component: PostsComponent },

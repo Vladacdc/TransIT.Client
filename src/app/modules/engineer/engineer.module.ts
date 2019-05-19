@@ -16,6 +16,8 @@ import { DocumentService } from './services/document.service';
 import { CreateDocumentComponent } from './components/create-document/create-document.component';
 import { DocumentsComponent } from './components/documents/documents.component';
 import { SharedModule } from '../shared/shared.module';
+import { GlobalDocumentComponent } from '../shared/components/global-document/global-document.component';
+import { IssueLogComponent } from '../shared/components/issue-log/issue-log.component';
 import { IssueService } from '../shared/services/issue.service';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { IssueLogsComponent } from './components/issue-log-components/issue-logs/issue-logs.component';
@@ -36,6 +38,9 @@ const routes: Routes = [
       { path: 'issue-logs', component: IssueLogsComponent },
       { path: 'issue-logs/edit', component: EditIssueLogComponent, data: [{isProd: true}] },
       { path: 'issue-logs/documents', component: DocumentsComponent },
+      { path: 'documents', component: GlobalDocumentComponent },
+      { path: 'issue-log', component: IssueLogComponent },
+      
       { path: '**', redirectTo: 'issues' }
     ]
   }
