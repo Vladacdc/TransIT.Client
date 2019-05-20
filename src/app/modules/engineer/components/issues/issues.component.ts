@@ -12,7 +12,7 @@ declare const $;
   styleUrls: ['../../../shared/components/global-issue/global-issue.component.scss']
 })
 export class IssuesComponent extends GlobalIssueComponent {
-  constructor(issueService: IssueService) {
+  constructor(issueService: IssueService, private router: Router) {
     super(issueService);
     this.tableConfig.columns = [
       ...this.tableConfig.columns,
