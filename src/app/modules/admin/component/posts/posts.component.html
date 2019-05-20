@@ -1,11 +1,11 @@
 <div class="table-background border mt-3">
+  <h2 class="table-caption">
+    Посади
+  </h2>
   <app-create-post (addPost)="reloadTable()"></app-create-post>
   <app-edit-post [post]="selectedPost" (editPost)="reloadTable()"></app-edit-post>
   <app-delete-post [post]="selectedPost" (deletePost)="reloadTable()"></app-delete-post>
   <table id="post" datatable [dtOptions]="options" [dtTrigger]="renderTrigger" class="table table-bordered">
-    <caption class="table-caption">
-      Посади
-    </caption>
     <thead>
       <tr>
         <th>Назва</th>

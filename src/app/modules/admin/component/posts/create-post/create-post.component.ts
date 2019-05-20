@@ -3,6 +3,7 @@ import { Post } from '../../../models/post/post';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { PostService } from '../../../services/post.service';
+import { STRING_FIELD_ERRORS } from 'src/app/custom-errors';
 
 @Component({
   selector: 'app-create-post',
@@ -10,6 +11,14 @@ import { PostService } from '../../../services/post.service';
   styleUrls: ['./create-post.component.scss']
 })
 export class CreatePostComponent implements OnInit {
+  private readonly stringFieldValidators: Validators[] = [
+    Validators.required,
+    Validators.minLength(0),
+    Validators.maxLength(30),
+    Validators.pattern(/^[A-Za-zА-Яа-яЄєІіЇїҐґ\-\']+$/)
+  ];
+  readonly customFieldErrors = STRING_FIELD_ERRORS;
+
   @Output() addPost = new EventEmitter<Post>();
   postForm: FormGroup;
 
@@ -38,7 +47,7 @@ export class CreatePostComponent implements OnInit {
 
   private setUpForm() {
     this.postForm = this.fb.group({
-      name: [undefined, Validators.required]
+      name: [undefined, this.stringFieldValidators]
     });
   }
 

@@ -5,6 +5,7 @@ import { Employee } from '../../../models/employee/employee';
 import { EmployeeService } from '../../../services/employee.service';
 import { Post } from '../../../models/post/post';
 import { PostService } from '../../../services/post.service';
+import { STRING_FIELD_ERRORS } from 'src/app/custom-errors';
 
 @Component({
   selector: 'app-create-employee',
@@ -12,6 +13,13 @@ import { PostService } from '../../../services/post.service';
   styleUrls: ['./create-employee.component.scss']
 })
 export class CreateEmployeeComponent implements OnInit {
+  private readonly stringFieldValidators: Validators[] = [
+    Validators.minLength(0),
+    Validators.maxLength(30),
+    Validators.pattern(/^[A-Za-zА-Яа-яЄєІіЇїҐґ\-\']+$/)
+  ];
+  readonly customFieldErrors = STRING_FIELD_ERRORS;
+
   @Output() addEmployee = new EventEmitter<Employee>();
   employeeForm: FormGroup;
   posts: Post[] = [];
@@ -48,10 +56,10 @@ export class CreateEmployeeComponent implements OnInit {
   private setUpForm() {
     this.employeeForm = this.fb.group({
       boardNumber: [1, [Validators.required, Validators.min(1), Validators.max(1000000000)]],
-      lastName: [undefined, Validators.required],
-      firstName: [undefined, Validators.required],
-      middleName: [undefined, Validators.required],
-      shortName: [undefined, Validators.required],
+      lastName: [undefined, this.stringFieldValidators],
+      firstName: [undefined, this.stringFieldValidators],
+      middleName: [undefined, this.stringFieldValidators],
+      shortName: [undefined, [...this.stringFieldValidators, Validators.required]],
       post: ['', Validators.required]
     });
   }
@@ -62,8 +70,6 @@ export class CreateEmployeeComponent implements OnInit {
 
   private createEmployee() {
     const employee = new Employee(this.formValue);
-    console.log(employee);
-    console.log(this.formValue);
     this.employeeService
       .addEntity(employee)
       .subscribe(

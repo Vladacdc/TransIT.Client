@@ -40,6 +40,14 @@ export const LOGIN_ERRORS: ErrorMessage[] = [
   }
 ];
 
+export const STRING_FIELD_ERRORS: ErrorMessage[] = [
+  ...CUSTOM_ERRORS,
+  {
+    error: 'pattern',
+    format: stringFieldFormat
+  }
+];
+
 export function requiredFormat(label: string, error: any): string {
   return `Поле "${label}" є обов'язковим`;
 }
@@ -73,6 +81,10 @@ export function loginFormat(label: string, error: any): string {
 }
 export function loginPatternFormat(label: string, error: any): string {
   return 'Дозволено тільки букви латинського алфавіту та цифри';
+}
+
+export function stringFieldFormat(label: string, error: any): string {
+  return `Дозволено тільки літери, і спецстмволи ("-" та " ' ")`;
 }
 
 export function emailFormat(label: string, error: any): string {

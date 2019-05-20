@@ -1,11 +1,11 @@
 <div class="table-background border mt-3">
+  <h2 class="table-caption">
+    Працівники
+  </h2>
   <app-create-employee (addEmployee)="reloadTable()"></app-create-employee>
   <app-edit-employee [employee]="selectedEmployee" (editEmployee)="reloadTable()"></app-edit-employee>
   <app-delete-employee [employee]="selectedEmployee" (deleteEmployee)="reloadTable()"></app-delete-employee>
   <table id="employee" datatable [dtOptions]="options" [dtTrigger]="renderTrigger" class="table table-bordered">
-    <caption class="table-caption">
-      Посади
-    </caption>
     <thead>
       <tr>
         <th>Табельний номер</th>

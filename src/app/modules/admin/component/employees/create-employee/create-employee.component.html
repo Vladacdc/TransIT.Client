@@ -15,14 +15,14 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Створення працівника</h5>
+        <h5 class="modal-title" id="exampleModalLongTitle">Створити працівника</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
         <form [formGroup]="employeeForm" (validSubmit)="onSubmit()">
-          <div class="form-group">
+          <div class="form-group" [customErrorMessages]="customFieldErrors">
             <label class="required-field">Табельний номер</label>
             <input
               type="number"
@@ -37,23 +37,25 @@
             <label>Прізвище</label>
             <input type="text" placeholder="Введіть прізвище" class="form-control" formControlName="lastName" />
           </div>
-          <div class="form-group">
+          <div class="form-group" [customErrorMessages]="customFieldErrors">
             <label>Ім'я</label>
             <input type="text" placeholder="Введіть ім'я" class="form-control" formControlName="firstName" />
           </div>
-          <div class="form-group">
+          <div class="form-group" [customErrorMessages]="customFieldErrors">
             <label>По батькові</label>
             <input type="text" placeholder="Введіть ім'я батька" class="form-control" formControlName="middleName" />
           </div>
-          <div class="form-group">
-            <label>Коротке ім'я</label>
+          <div class="form-group" [customErrorMessages]="customFieldErrors">
+            <label class="required-field">Коротке ім'я</label>
             <input type="text" placeholder="Введіть коротке ім'я" class="form-control" formControlName="shortName" />
           </div>
-          <label class="required-field">Посада</label>
-          <select class="form-control" formControlName="post">
-            <option value="" selected>Виберіть посаду</option>
-            <option *ngFor="let post of posts" [ngValue]="post">{{ post.name }}</option>
-          </select>
+          <div>
+            <label class="required-field">Посада</label>
+            <select class="form-control" formControlName="post">
+              <option value="" selected>Виберіть посаду</option>
+              <option *ngFor="let post of posts" [ngValue]="post">{{ post.name }}</option>
+            </select>
+          </div>
           <button hidden type="submit" #submit data-toggle="modal" data-target="#createEmployee"></button>
         </form>
       </div>
@@ -65,7 +67,7 @@
           data-toggle="modal"
           data-target="#createEmployee"
         >
-          Закрити
+          Скасувати
         </button>
         <button
           type="button"

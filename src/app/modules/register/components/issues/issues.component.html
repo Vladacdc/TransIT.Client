@@ -1,11 +1,11 @@
 <div class="table-background border mt-3">
+  <h2 class="table-caption">
+    Мої Заявки
+  </h2>
   <app-create-issue (addIssue)="reloadTable()"></app-create-issue>
   <app-issue-details [issue]="selectedIssue"></app-issue-details>
   <app-delete-issue [issue]="selectedIssue" (deleteIssue)="reloadTable()"></app-delete-issue>
   <table id="issues" datatable [dtOptions]="options" [dtTrigger]="renderTrigger" class="table table-bordered">
-    <caption class="table-caption">
-      Мої Заявки
-    </caption>
     <thead>
       <tr>
         <th>Номер</th>

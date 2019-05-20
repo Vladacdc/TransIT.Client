@@ -32,7 +32,7 @@ import { SupplierComponent } from './component/supplier/supplier.component';
 import { EditMalfuncComponent } from './component/edit-malfunc/edit-malfunc.component';
 import { DeleteMalfuncComponent } from './component/delete-malfunc/delete-malfunc.component';
 import { RoleService } from './services/role.service';
-//====User===
+// ====User===
 import { UserService } from './services/user.service';
 import { UsersComponent } from './component/users/users.component';
 import { CreateUserComponent } from './component/users/create-user/create-user.component';
@@ -40,7 +40,7 @@ import { EditUserComponent } from './component/users/edit-user/edit-user.compone
 import { DeleteUserComponent } from './component/users/delete-user/delete-user.component';
 import { RestoreUserPasswordComponent } from './component/users/restore-user-password/restore-user-password.component';
 import { IsActiveModalComponent } from './component/users/is-active-modal/is-active-modal.component';
-//=====VechicleType====
+// =====VechicleType====
 import { VehicleTypeComponent } from './component/vehicle-type/vehicle-type.component';
 import { CreateVehicleTypeComponent } from './component/create-vehicle-type/create-vehicle-type.component';
 import { EditVehicleTypeComponent } from './component/edit-vehicle-type/edit-vehicle-type.component';
@@ -72,33 +72,37 @@ import { EditStateComponent } from './component/action-state-dictionary/state-di
 import { CreateActionComponent } from './component/action-state-dictionary/action-dictionary/create-action/create-action.component';
 import { EditActionComponent } from './component/action-state-dictionary/action-dictionary/edit-action/edit-action.component';
 import { DeleteActionComponent } from './component/action-state-dictionary/action-dictionary/delete-action/delete-action.component';
-import { DocumentComponent } from '../shared/components/global-document/document/document.component';
-
+import { TransitionDictionaryComponent } from './component/action-state-dictionary/transition-dictionary/transition-dictionary.component';
+import { CreateTransitionComponent } from './component/action-state-dictionary/transition-dictionary/create-transition/create-transition.component';
+import { EditTransitionComponent } from './component/action-state-dictionary/transition-dictionary/edit-transition/edit-transition.component';
+import { DeleteTransitionComponent } from './component/action-state-dictionary/transition-dictionary/delete-transition/delete-transition.component';
+import { TransitionService } from './services/transition.service';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
   declarations: [
     AdminComponent,
     AdminNavbarComponent,
-    //====User===
+    // ====User===
     UsersComponent,
     CreateUserComponent,
     EditUserComponent,
     DeleteUserComponent,
     IsActiveModalComponent,
     RestoreUserPasswordComponent,
-    //====Action===
+    // ====Action===
     ActionComponent,
-    //====Vehicles===
+    // ====Vehicles===
     VehiclesComponent,
     CreateVehicleComponent,
     EditVehicleComponent,
     DeleteVehicleComponent,
-    //====VehiclesType===
+    // ====VehiclesType===
     DeleteVehicleTypeComponent,
     VehicleTypeComponent,
     CreateVehicleTypeComponent,
     EditVehicleTypeComponent,
-    //====Mulfunction===
+    // ====Mulfunction===
     MalfuncComponent,
     MalfuncGroupComponent,
     MalfunSubgroupComponent,
@@ -112,14 +116,14 @@ import { DocumentComponent } from '../shared/components/global-document/document
     DeleteMalfuncGroupComponent,
     EditMalfuncComponent,
     DeleteMalfuncComponent,
-    //====Supplier===
+    // ====Supplier===
     SupplierComponent,
     CreateSupplierComponent,
     EditSupplierComponent,
     DeleteSupplierComponent,
-    //====Issue===
+    // ====Issue===
     IssueLogComponent,
-    //====Post===
+    // ====Post===
     PostsComponent,
     CreatePostComponent,
     EditPostComponent,
@@ -136,7 +140,11 @@ import { DocumentComponent } from '../shared/components/global-document/document
     EditStateComponent,
     CreateActionComponent,
     EditActionComponent,
-    DeleteActionComponent
+    DeleteActionComponent,
+    TransitionDictionaryComponent,
+    CreateTransitionComponent,
+    EditTransitionComponent,
+    DeleteTransitionComponent
   ],
   exports: [AdminComponent],
   imports: [
@@ -149,8 +157,9 @@ import { DocumentComponent } from '../shared/components/global-document/document
     HttpClientModule,
     ReactiveFormsModule,
     NgxMaskModule.forRoot(),
-    NgBootstrapFormValidationModule
+    NgBootstrapFormValidationModule,
+    NgSelectModule
   ],
-  providers: [RoleService, UserService, PostService, EmployeeService]
+  providers: [RoleService, UserService, PostService, EmployeeService, TransitionService]
 })
 export class AdminModule {}

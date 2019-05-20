@@ -9,7 +9,7 @@
       </div>
       <div class="modal-body">
         <form [formGroup]="employeeForm" (validSubmit)="onSubmit()">
-          <div class="form-group">
+          <div class="form-group" [customErrorMessages]="customFieldErrors">
             <label class="required-field">Табельний номер</label>
             <input
               type="number"
@@ -24,27 +24,32 @@
             <label>Прізвище</label>
             <input type="text" placeholder="Введіть прізвище" class="form-control" formControlName="lastName" />
           </div>
-          <div class="form-group">
+          <div class="form-group" [customErrorMessages]="customFieldErrors">
             <label>Ім'я</label>
             <input type="text" placeholder="Введіть ім'я" class="form-control" formControlName="firstName" />
           </div>
-          <div class="form-group">
+          <div class="form-group" [customErrorMessages]="customFieldErrors">
             <label>По батькові</label>
             <input type="text" placeholder="Введіть ім'я батька" class="form-control" formControlName="middleName" />
           </div>
-          <div class="form-group">
-            <label>Коротке ім'я</label>
+          <div class="form-group" [customErrorMessages]="customFieldErrors">
+            <label class="required-field">Коротке ім'я</label>
             <input type="text" placeholder="Введіть коротке ім'я" class="form-control" formControlName="shortName" />
           </div>
-          <label>*Посада</label>
-          <select class="form-control" formControlName="post" [compareWith]="comparePosts">
-            <option *ngFor="let post of posts" [ngValue]="post">{{ post.name }}</option>
-          </select>
+          <div>
+            <label class="required-field">Посада</label>
+            <select class="form-control" formControlName="post">
+              <option value="" selected>Виберіть посаду</option>
+              <option *ngFor="let post of posts" [ngValue]="post">{{ post.name }}</option>
+            </select>
+          </div>
           <button hidden type="submit" #submit data-toggle="modal" data-target="#editEmployee"></button>
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#editEmployee">Закрити</button>
+        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#editEmployee">
+          Скасувати
+        </button>
         <button
           type="button"
           class="btn btn-primary"

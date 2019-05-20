@@ -1,0 +1,61 @@
+<div
+  class="modal fade"
+  id="editTransition"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="editTransition"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="editTransition">Деталі переходу</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="transitionForm" (validSubmit)="onSubmit()">
+          <div class="form-group">
+            <label class="required-field">Старий стан</label>
+            <select class="form-control" formControlName="fromState">
+              <option value="" selected>Виберіть старий стан</option>
+              <option *ngFor="let state of states" [ngValue]="state">{{ state.transName }}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="required-field">Новий стан</label>
+            <select class="form-control" formControlName="toState">
+              <option value="" selected>Виберіть новий стан</option>
+              <option *ngFor="let state of states" [ngValue]="state">{{ state.transName }}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="required-field">Екшин</label>
+            <select class="form-control" formControlName="actionType">
+              <option value="" selected>Виберіть екшин</option>
+              <option *ngFor="let actionType of actionTypes" [ngValue]="actionType">{{ actionType.name }}</option>
+            </select>
+          </div>
+          <button hidden type="submit" #submit data-toggle="modal" data-target="#createTransition"></button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#editTransition">
+          Скасувати
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          (click)="clickSubmit(submit)"
+          form="transitionForm"
+          [disabled]="transitionForm.invalid"
+          data-toggle="modal"
+          data-target="#editTransition"
+        >
+          Зберегти
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
