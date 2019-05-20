@@ -11,6 +11,7 @@ import { User } from '../../../models/user/user';
   templateUrl: './edit-user.component.html',
   styleUrls: ['./edit-user.component.scss']
 })
+//clear form
 export class EditUserComponent implements OnInit {
   @ViewChild('close') closeEditModal: ElementRef;
   @Output() updateUser = new EventEmitter<User>();
@@ -56,10 +57,6 @@ export class EditUserComponent implements OnInit {
         ])
       ),
       phoneNumber: new FormControl('', Validators.minLength(12)),
-      login: new FormControl(
-        '',
-        Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])
-      ),
       email: new FormControl('', Validators.compose([Validators.email, Validators.maxLength(30)])),
       role: ['', Validators.required],
       isActive: true

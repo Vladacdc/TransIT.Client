@@ -17,6 +17,7 @@ export class CreateUserComponent implements OnInit {
   @ViewChild('close') closeCreateModal: ElementRef;
   @Output() createUser = new EventEmitter<User>();
   userForm: FormGroup;
+  //sort acs
   roleList: Role[] = [];
 
   constructor(
@@ -51,6 +52,7 @@ export class CreateUserComponent implements OnInit {
         login: new FormControl(
           '',
           Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(30)])
+          //add valid
         ),
         password: new FormControl(
           '',

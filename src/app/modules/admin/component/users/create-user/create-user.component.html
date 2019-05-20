@@ -1,5 +1,5 @@
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createUser">
-  <i class="fas fa-user-plus"></i> Додати користувача
+  <i class="fas fa-user-plus"></i> Створити користувача
 </button>
 
 <div class="modal fade" id="createUser" tabindex="-1" role="dialog" aria-labelledby="CreateUser" aria-hidden="true">
@@ -77,9 +77,9 @@
       </div>
 
       <div class="modal-footer">
-        <button #close type="button" class="btn btn-secondary" data-dismiss="modal">Закрити</button>
+        <button #close type="button" class="btn btn-secondary" data-dismiss="modal">Скасувати</button>
         <button type="button" class="btn btn-primary" (click)="clickSubmit()" [disabled]="userForm.invalid">
-          Створити
+          Зберегти
         </button>
       </div>
     </div>
