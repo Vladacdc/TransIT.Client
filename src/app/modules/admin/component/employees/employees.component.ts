@@ -19,6 +19,7 @@ export class EmployeesComponent implements AfterViewInit, OnDestroy {
       this.employeeService.getFilteredEntities(dataTablesParameters).subscribe(response => {
         this.employees = response.data;
         callback({ ...response, data: [] });
+        this.adjustColumns();
       });
     },
     columns: [
@@ -57,5 +58,9 @@ export class EmployeesComponent implements AfterViewInit, OnDestroy {
 
   selectPost(employee: Employee) {
     this.selectedEmployee = { ...employee };
+  }
+
+  private adjustColumns() {
+    setTimeout(() => $(window).trigger('resize'), 0);
   }
 }

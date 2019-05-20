@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { AuthenticationService } from '../../services/authentication.service';
+import { LOGIN_ERRORS } from 'src/app/custom-errors';
 
 @Component({
   selector: 'app-login',
@@ -9,12 +10,13 @@ import { AuthenticationService } from '../../services/authentication.service';
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
+  CustomLoginErrorMessages = LOGIN_ERRORS;
 
   constructor(private authService: AuthenticationService) {}
 
   ngOnInit() {
     this.loginForm = new FormGroup({
-      login: new FormControl('', [Validators.required, Validators.minLength(3)]),
+      login: new FormControl('', [Validators.required, Validators.minLength(3), Validators.pattern('^[A-Za-z0-9]+$')]),
       password: new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(30)])
     });
   }

@@ -38,9 +38,9 @@
             <label>Коротке ім'я</label>
             <input type="text" placeholder="Введіть коротке ім'я" class="form-control" formControlName="shortName" />
           </div>
-          <label>Посада</label>
+          <label class="required-field">Посада</label>
           <select class="form-control" formControlName="post">
-            <option value="" selected>*Виберіть посаду</option>
+            <option value="" selected>Виберіть посаду</option>
             <option *ngFor="let post of posts" [ngValue]="post">{{ post.name }}</option>
           </select>
           <button hidden type="submit" #submit data-toggle="modal" data-target="#createEmployee"></button>

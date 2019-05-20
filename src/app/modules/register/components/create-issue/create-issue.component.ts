@@ -25,6 +25,8 @@ export class CreateIssueComponent implements OnInit {
   malfunctionGroups: MalfunctionGroup[] = [];
   malfunctionSubgroups: MalfunctionSubgroup[] = [];
   malfunctions: Malfunction[] = [];
+  malfunctionSubgroupsFilteredByGroup: MalfunctionSubgroup[] = [];
+  malfunctionsFilteredByGroup: Malfunction[] = [];
 
   constructor(
     private fb: FormBuilder,
@@ -49,24 +51,12 @@ export class CreateIssueComponent implements OnInit {
     this.hideModalWindow();
   }
 
-  get malfunctionSubgroupsFilteredByGroup(): MalfunctionSubgroup[] {
-    const selectedGroup = this.formValue.malfunctionGroup;
-    const filteredSubgroups = this.filterSubgroupsByGroup(selectedGroup);
-    return filteredSubgroups;
-  }
-
-  get malfunctionsFilteredByGroup(): MalfunctionGroup[] {
-    const selectedSubgroup = this.formValue.malfunctionSubgroup;
-    const filteredMalfunctions = this.filterMalfunctionsBySubgroup(selectedSubgroup);
-    return filteredMalfunctions;
-  }
-
   clickSubmit(button: HTMLButtonElement) {
     button.click();
   }
 
   closeModal() {
-    this.setUpForm();
+    this.issueForm.reset();
   }
 
   configureMalfunctionControls() {
@@ -76,17 +66,34 @@ export class CreateIssueComponent implements OnInit {
     this.setDependentControl(malfunctionSubgroup, malfunction);
   }
 
+  reload() {
+    this.malfunctionSubgroupsFilteredByGroup = this.getMalfunctionSubgroupsFilteredByGroup();
+    this.malfunctionsFilteredByGroup = this.getMalfunctionsFilteredByGroup();
+  }
+
   private setUpForm() {
     this.issueForm = this.fb.group(
       {
-        vehicle: [undefined, Validators.required],
-        malfunctionGroup: '',
-        malfunctionSubgroup: [{ value: '', disabled: true }],
-        malfunction: [{ value: '', disabled: true }],
+        vehicle: [null, Validators.required],
+        malfunctionGroup: null,
+        malfunctionSubgroup: [{ value: null, disabled: true }],
+        malfunction: [{ value: null, disabled: true }],
         summary: ['', Validators.required]
       },
       { validators: malfunctionSelectedValidator }
     );
+  }
+
+  private getMalfunctionSubgroupsFilteredByGroup(): MalfunctionSubgroup[] {
+    const selectedGroup = this.formValue.malfunctionGroup;
+    const filteredSubgroups = this.filterSubgroupsByGroup(selectedGroup);
+    return filteredSubgroups;
+  }
+
+  private getMalfunctionsFilteredByGroup(): Malfunction[] {
+    const selectedSubgroup = this.formValue.malfunctionSubgroup;
+    const filteredMalfunctions = this.filterMalfunctionsBySubgroup(selectedSubgroup);
+    return filteredMalfunctions;
   }
 
   private loadEntities() {
@@ -126,9 +133,9 @@ export class CreateIssueComponent implements OnInit {
   }
 
   private filterSubgroupsByGroup(group: MalfunctionGroup): MalfunctionSubgroup[] {
-    const subgroups = this.malfunctionSubgroups;
     if (!group) {
-      return subgroups;
+      this.setDefaultSubgroup();
+      return [];
     }
     const filteredSubgroups = this.malfunctionSubgroups.filter(
       subgroup => subgroup.malfunctionGroup.name === group.name
@@ -145,19 +152,18 @@ export class CreateIssueComponent implements OnInit {
   }
 
   private setDefaultSubgroup(): void {
-    this.issueForm.patchValue({ malfunctionSubgroup: '' });
+    this.issueForm.patchValue({ malfunctionSubgroup: null });
   }
 
   private filterMalfunctionsBySubgroup(subgroup: MalfunctionSubgroup): Malfunction[] {
-    const malfunctions = this.malfunctions;
-    const filteredMalfunctions = malfunctions.filter(malfunction => {
-      if (!subgroup) {
-        const subgroups = this.malfunctionSubgroupsFilteredByGroup;
-        return subgroups.findIndex(item => item.name === malfunction.malfunctionSubgroup.name) !== -1;
-      } else {
-        return malfunction.malfunctionSubgroup.name === subgroup.name;
-      }
-    });
+    if (!subgroup) {
+      this.setDefaultMalfunction();
+      return [];
+    }
+
+    const filteredMalfunctions = this.malfunctions.filter(
+      malfunction => malfunction.malfunctionSubgroup.name === subgroup.name
+    );
 
     if (this.notSelectedMalfunction(filteredMalfunctions)) {
       this.setDefaultMalfunction();
@@ -170,16 +176,16 @@ export class CreateIssueComponent implements OnInit {
   }
 
   private setDefaultMalfunction(): void {
-    this.issueForm.patchValue({ malfunction: '' });
+    this.issueForm.patchValue({ malfunction: null });
   }
 
   private setDependentControl(main: AbstractControl, dependent: AbstractControl) {
     main.valueChanges.subscribe(selectedValue => {
-      if (selectedValue !== '') {
+      if (selectedValue !== null) {
         dependent.enable();
       } else {
         dependent.disable();
-        dependent.setValue('');
+        dependent.setValue(null);
       }
     });
   }

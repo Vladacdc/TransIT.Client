@@ -19,6 +19,7 @@ export class IssuesComponent implements OnDestroy, AfterViewInit {
       this.issueService.getFilteredEntities(dataTablesParameters).subscribe(response => {
         this.issues = response.data;
         callback({ ...response, data: [] });
+        this.adjustColumns();
       });
     },
     columns: [
@@ -63,5 +64,9 @@ export class IssuesComponent implements OnDestroy, AfterViewInit {
 
   getPriorityClass(issue: Issue) {
     return `priority-${Priority[issue.priority]}`;
+  }
+
+  private adjustColumns() {
+    setTimeout(() => $(window).trigger('resize'), 0);
   }
 }

@@ -19,6 +19,7 @@ export class PostsComponent implements AfterViewInit, OnDestroy {
       this.postService.getFilteredEntities(dataTablesParameters).subscribe(response => {
         this.posts = response.data;
         callback({ ...response, data: [] });
+        this.adjustColumns();
       });
     },
     columns: [{ data: 'name' }, { data: null, orderable: false }],
@@ -50,5 +51,9 @@ export class PostsComponent implements AfterViewInit, OnDestroy {
 
   selectPost(post: Post) {
     this.selectedPost = { ...post };
+  }
+
+  private adjustColumns() {
+    setTimeout(() => $(window).trigger('resize'), 0);
   }
 }

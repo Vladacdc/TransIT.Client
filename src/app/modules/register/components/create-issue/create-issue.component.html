@@ -16,47 +16,54 @@
       <div class="modal-body">
         <form [formGroup]="issueForm" (validSubmit)="onSubmit()">
           <div class="form-group">
-            <label>Транспорт</label>
+            <label class="required-field">Транспорт</label>
             <ng-select
               [items]="vehicles"
               bindLabel="name"
               formControlName="vehicle"
-              placeholder="*Виберіть транспорт"
+              placeholder="Виберіть транспорт"
               notFoundText="Не знайдено"
             ></ng-select>
           </div>
           <div class="form-group">
             <label>Група несправності</label>
-            <select class="form-control" formControlName="malfunctionGroup">
-              <option value="" selected>Виберіть групу несправності</option>
-              <option *ngFor="let malfunctionGroup of malfunctionGroups" [ngValue]="malfunctionGroup">{{
-                malfunctionGroup.name
-              }}</option>
-            </select>
+            <ng-select
+              [items]="malfunctionGroups"
+              bindLabel="name"
+              formControlName="malfunctionGroup"
+              placeholder="Виберіть групу несправності"
+              notFoundText="не знайдено"
+              (change)="reload()"
+              (clear)="reload()"
+            ></ng-select>
           </div>
           <div class="form-group">
             <label>Підгрупа несправності</label>
-            <select class="form-control" formControlName="malfunctionSubgroup">
-              <option value="" selected>Виберіть підгрупу несправності</option>
-              <option
-                *ngFor="let malfunctionSubgroup of malfunctionSubgroupsFilteredByGroup"
-                [ngValue]="malfunctionSubgroup"
-                >{{ malfunctionSubgroup.name }}</option
-              >
-            </select>
+            <ng-select
+              [items]="malfunctionSubgroupsFilteredByGroup"
+              bindLabel="name"
+              formControlName="malfunctionSubgroup"
+              placeholder="Виберіть підгрупу несправності"
+              notFoundText="не знайдено"
+              (change)="reload()"
+              (clear)="reload()"
+            ></ng-select>
           </div>
           <div class="form-group">
             <label>Несправність</label>
-            <select class="form-control" formControlName="malfunction">
-              <option value="" selected>Виберіть несправність</option>
-              <option *ngFor="let malfunction of malfunctionsFilteredByGroup" [ngValue]="malfunction">{{
-                malfunction.name
-              }}</option>
-            </select>
+            <ng-select
+              [items]="malfunctionsFilteredByGroup"
+              bindLabel="name"
+              formControlName="malfunction"
+              placeholder="Виберіть несправність"
+              notFoundText="не знайдено"
+              (change)="reload()"
+              (clear)="reload()"
+            ></ng-select>
           </div>
           <div class="form-group">
-            <label>Опис несправності</label>
-            <textarea class="form-control" formControlName="summary" placeholder="*Опишіть вашу поломку"></textarea>
+            <label class="required-field">Опис несправності</label>
+            <textarea class="form-control" formControlName="summary" placeholder="Опишіть вашу поломку"></textarea>
           </div>
           <button hidden type="submit" #submit data-toggle="modal" data-target="#createIssue"></button>
         </form>

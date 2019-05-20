@@ -9,3 +9,10 @@ body {
   padding: 1rem 0.8rem;
   border-radius: 0.7rem;
 }
+
+.required-field {
+  &::after {
+    content: '*';
+    color: red;
+  }
+}

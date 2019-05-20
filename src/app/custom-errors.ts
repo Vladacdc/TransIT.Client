@@ -18,14 +18,17 @@ export const CUSTOM_ERRORS: ErrorMessage[] = [
     error: 'matchPassword',
     format: matchPasswordFormat
   },
-
-  {
-    error: 'pattern',
-    format: patternFormat
-  },
   {
     error: 'email',
     format: emailFormat
+  }
+];
+
+export const LOGIN_ERRORS: ErrorMessage[] = [
+  ...CUSTOM_ERRORS,
+  {
+    error: 'pattern',
+    format: loginPatternFormat
   }
 ];
 
@@ -45,8 +48,8 @@ export function matchPasswordFormat(label: string, error: any): string {
   return 'Паролі не співпадають';
 }
 
-export function patternFormat(label: string, error: any): string {
-  return 'Дозволено тільки букви, дефіс та апостроф всередині слова';
+export function loginPatternFormat(label: string, error: any): string {
+  return 'Дозволено тільки букви латинського алфавіту та цифри';
 }
 
 export function emailFormat(label: string, error: any): string {
