@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef, Input, Output, EventEmitter } from '@angular/core';
 import { State } from 'src/app/modules/admin/models/state/state';
 import { StateService } from 'src/app/modules/admin/services/state.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-delete-state',
@@ -12,15 +13,16 @@ export class DeleteStateComponent implements OnInit {
   @Input() state: State;
   @Output() deleteState = new EventEmitter<State>();
 
-  constructor(private serviceState: StateService) {}
+  constructor(private serviceState: StateService, private toast: ToastrService) {}
 
   ngOnInit() {}
 
   DeleteState() {
-    console.dir(this.state);
-    this.closeDiv.nativeElement.click();
-    this.serviceState.deleteEntity(this.state.id).subscribe(() => {
-      this.deleteState.next(this.state);
-    });
+      this.closeDiv.nativeElement.click();
+      this.serviceState.deleteEntity(this.state.id).subscribe(() => {
+        this.deleteState.next(this.state);
+      },
+      error => this.toast.error('Даний стан використовується','Помилка')
+      );
   }
 }

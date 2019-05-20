@@ -31,7 +31,7 @@ export class CreateStateComponent implements OnInit {
     const form = this.stateForm.value;
     const state: State = {
       id: 0,
-      transName: form.transName as string,
+      transName: form.transName as string
     };
     
     this.serviceState.addEntity(state).subscribe(newGroup => this.createState.next(newGroup));
