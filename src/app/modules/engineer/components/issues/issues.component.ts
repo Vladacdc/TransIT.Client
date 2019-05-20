@@ -19,7 +19,9 @@ export class IssuesComponent extends GlobalIssueComponent {
       {
         title: 'Дія',
         data: null,
-        defaultContent: '<button class="btn"><i class="fas fa-info-circle"></i></button>'
+        defaultContent: `
+        <button class="btn"><i class="fas fa-info-circle"></i></button>
+        `
       }
     ];
   }

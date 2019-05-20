@@ -14,9 +14,7 @@
     </div>
     <div class="form-group col-sm-12 col-md-4">
       <label for="warrantyDisInput">Гарантія</label>
-      <div class="form-control" id="warrantyDisInput">
-        {{ issue?.warranty || '' }}
-      </div>
+      <input type="number" class="form-control" [(ngModel)]="issue.warranty" min="0" max="1">
     </div>
   </div>
   <div class="row">
@@ -58,11 +56,58 @@
     </div>
   </div>
   <div class="row">
+    <div class="form-group col-sm-12 col-md-4">
+      <label>Група несправності</label>
+      <ng-select
+        [(ngModel)]="currentMalfunctionGroup"
+        (ngModelChange)="selectGroup()"
+        [items]="malfunctionGroupList"
+        bindLabel="name"
+        placeholder="Група несправності"
+        notFoundText="Не знайдено"
+      ></ng-select>
+    </div>
+    <div class="form-group col-sm-12 col-md-4">
+      <label>Підгрупа несправності</label>
+      <ng-select
+        [(ngModel)]="currentMalfunctionSubgroup"
+        [items]="malfunctionSubGroupFilteredList"
+        (ngModelChange)="selectSubgroup()"
+        bindLabel="name"
+        placeholder="Підгрупа несправності"
+        notFoundText="Не знайдено"
+        [disabled]="!currentMalfunctionGroup"
+      ></ng-select>
+    </div>
+    <div class="form-group col-sm-12 col-md-4">
+      <label>Несправність</label>
+      <ng-select
+        [(ngModel)]="currentMalfunction"
+        [items]="malfunctionFilteredList"
+        (ngModelChange)="selectMalfunc()"
+        bindLabel="name"
+        placeholder="Несправність"
+        notFoundText="Не знайдено"
+        [disabled]="!currentMalfunctionSubgroup"
+      ></ng-select>
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group col-sm-12 col-md-12">
+      <label>Приорітет</label>
+      <input type="number" class="form-control" [(ngModel)]="issue.priority" min="0" max="2">
+    </div>
+  </div>
+  <div class="row">
     <div class="form-group col-sm-12 col-md-12">
       <label for="summaryDisInput">Опис</label>
-      <div class="form-control" id="summaryDisInput">
-        {{ issue.summary }}
-      </div>
+      <textarea [(ngModel)]="issue.summary" class="form-control" id="summaryDisInput">
+      </textarea>
+    </div>
+  </div>
+  <div class="row">
+    <div class="form-group col-sm-12 col-md-12">
+      <a class="btn btn-primary" style="color: white" (click)="editIssue()">Зберегти заявку</a>
     </div>
   </div>
   <div style="float: left">
