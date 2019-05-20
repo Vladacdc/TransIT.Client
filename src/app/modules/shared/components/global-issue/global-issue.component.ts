@@ -16,6 +16,9 @@ export class GlobalIssueComponent implements OnInit {
   protected vehicleType: string;
   protected state: string;
   protected priority: string;
+  protected malfunctionGroup: string;
+  protected malfunctionSubGroup: string;
+  protected malfunction: string;
 
   protected readonly tableConfig: any = {
     scrollX: true,
@@ -67,6 +70,27 @@ export class GlobalIssueComponent implements OnInit {
         operator: '=='
       });
     }
+    if (this.malfunctionGroup) {
+      filters.push({
+        entityPropertyPath: 'malfunction.malfunctionSubgroup.malfunctionGroup.name',
+        value: this.malfunctionGroup,
+        operator: '=='
+      });
+    }
+    if(this.malfunctionSubGroup){
+      filters.push({
+        entityPropertyPath: 'malfunction.malfunctionSubgroup.name',
+        value: this.malfunctionSubGroup,
+        operator: '=='
+      });
+    }
+    if(this.malfunction){
+      filters.push({
+        entityPropertyPath: 'malfunction.name',
+        value: this.malfunction,
+        operator: '=='
+      });
+    }
     if (this.priority) {
       filters.push({
         entityPropertyPath: 'priority',
@@ -110,6 +134,17 @@ export class GlobalIssueComponent implements OnInit {
       ...this.tableConfig,
       destroy: true
     });
+  }
+
+  setMalfunctionGroupValue(value){
+    this.malfunctionGroup = value;
+  }
+
+  setMalfunctionSubGroupValue(value){
+    this.malfunctionSubGroup = value;
+  }
+  setMalfunctionValue(value){
+    this.malfunction = value;
   }
 
   setStartDateValue(value) {

@@ -10,6 +10,7 @@ import { MalfunSubgroupService } from 'src/app/modules/admin/services/malfun-sub
 import { Malfunction } from 'src/app/modules/admin/models/malfunc/malfunc';
 import { MalfuncService } from 'src/app/modules/admin/services/malfunc.service';
 import { Priority } from 'src/app/modules/core/models/priority';
+import { group } from '@angular/animations';
 
 @Component({
   selector: 'app-filters-tabs',
@@ -24,6 +25,10 @@ export class FiltersTabsComponent implements OnInit {
   malfunctionList: Malfunction[] = [];
   priorityList = Priority;
   keys = [];
+  malfunctionSubGroupFilteredList: MalfunSubgroup[] = [];
+  malfunctionFilteredList: Malfunction[] = [];
+  currentMalfunctionSubgroup: MalfunSubgroup;
+  currentMalfunction: Malfunction;
 
   @Output() StartDateValue = new EventEmitter<string>();
   @Output() EndDateValue = new EventEmitter<string>();
@@ -31,10 +36,16 @@ export class FiltersTabsComponent implements OnInit {
   @Output() StateValue = new EventEmitter<string>();
   @Output() Filter = new EventEmitter();
   @Output() PriorityValue = new EventEmitter<string>();
+  @Output() MalfunctionGroupValue = new EventEmitter<string>();
+  @Output() MalfunctionSubGroupValue = new EventEmitter<string>();
+  @Output() MalfunctionValue = new EventEmitter<string>();
 
   selectedType: string;
   selectedState: string;
   selectedPriority: string;
+  selectedMalfunctionGroup: string;
+  selectedMalfunctionSubGroup: string;
+  selectedMalfunction: string;
 
   constructor(
     private vehicleTypeService: VehicleTypeService,
@@ -50,8 +61,14 @@ export class FiltersTabsComponent implements OnInit {
     this.vehicleTypeService.getEntities().subscribe(data => (this.vehicleTypeList = data));
     this.stateService.getEntities().subscribe(data => (this.stateList = data));
     this.malfunctionGropService.getEntities().subscribe(items => (this.malfunctionGroupList = items));
-    this.malfunctionSubGropService.getEntities().subscribe(data => (this.malfunctionSubGroupList = data));
-    this.malfunctionService.getEntities().subscribe(data => (this.malfunctionList = data));
+    this.malfunctionSubGropService.getEntities().subscribe(data => {
+      this.malfunctionSubGroupList = data;
+      this.malfunctionSubGroupFilteredList = data;
+    });
+    this.malfunctionService.getEntities().subscribe(data => {
+      this.malfunctionList = data;
+      this.malfunctionFilteredList = data;
+    });
     (<any>$('#startDate')).datepicker({
       uiLibrary: 'bootstrap4',
       iconsLibrary: 'fontawesome',
@@ -67,6 +84,52 @@ export class FiltersTabsComponent implements OnInit {
       }
     });
   }
+
+  selectGroup(): void {
+    this.selectedMalfunctionSubGroup = null;
+    this.selectedMalfunction = null;
+    if (this.selectedMalfunctionGroup) {
+      this.malfunctionSubGroupFilteredList = this.getByGroup(this.selectedMalfunctionGroup);
+    }
+  }
+  private getByGroup(group: string): Array<MalfunSubgroup> {
+    return this.malfunctionSubGroupList.filter(subgroup => subgroup.malfunctionGroup.name === group);
+  }
+
+  selectMalfunctionGroupType(group) {
+    this.selectedMalfunctionSubGroup = null;
+    this.currentMalfunctionSubgroup = null;
+    this.malfunctionSubGroupFilteredList = this.malfunctionSubGroupList;
+    if (group) {
+      this.selectedMalfunctionGroup = group.name;
+      this.selectGroup();
+    }
+  }
+  selectSubgroup(): void {
+    this.selectedMalfunction = null;    
+    if (this.selectedMalfunctionSubGroup) {
+      this.malfunctionFilteredList = this.getBySubgroup(this.selectedMalfunctionSubGroup);
+    }
+  }
+  private getBySubgroup(subgroup: string): Array<Malfunction> {
+    return this.malfunctionList.filter(malfunc => malfunc.malfunctionSubgroup.name === subgroup);
+  }
+
+  selectMalfunctionSubGroupType(subgroup) {
+    this.selectedMalfunction = null;
+    this.currentMalfunction = null;
+    this.malfunctionFilteredList = this.malfunctionList;
+    if (subgroup) {
+      this.selectedMalfunctionSubGroup = subgroup.name;
+      this.selectSubgroup();
+    }
+  }
+  selectMalfunctionType(malfunction) {
+    if (malfunction) {
+      this.selectedMalfunction = malfunction.name;
+    }
+  }
+
   selectVechicleType(type) {
     this.selectedType = type;
   }
@@ -90,6 +153,9 @@ export class FiltersTabsComponent implements OnInit {
     this.VechicleTypeValue.next(this.selectedType);
     this.StateValue.next(this.selectedState);
     this.PriorityValue.next(this.selectedPriority);
+    this.MalfunctionGroupValue.next(this.selectedMalfunctionGroup);
+    this.MalfunctionSubGroupValue.next(this.selectedMalfunctionSubGroup);
+    this.MalfunctionValue.next(this.selectedMalfunction);
     this.Filter.next();
   }
 }
