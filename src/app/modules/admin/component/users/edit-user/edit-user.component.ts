@@ -61,7 +61,9 @@ export class EditUserComponent implements OnInit {
       role: ['', Validators.required],
       isActive: true
     });
-    this.serviceRole.getEntities().subscribe(data => (this.roles = data));
+    this.serviceRole
+      .getEntities()
+      .subscribe(data => (this.roles = data.sort((a, b) => a.transName.localeCompare(b.transName))));
   }
 
   updateData() {
@@ -77,7 +79,7 @@ export class EditUserComponent implements OnInit {
       lastName: form.lastName,
       middleName: form.middleName,
       phoneNumber: form.phoneNumber,
-      login: form.login,
+      login: this.selectedUser.login,
       email: form.email,
       role: this.roles.find(r => r.transName === form.role),
       isActive: form.isActive
@@ -93,4 +95,9 @@ export class EditUserComponent implements OnInit {
   updateUserChangeActive(user: User) {
     this.updateUser.next(user);
   }
+}
+function resetForm() {
+  $('#editUser')
+    .find('form')
+    .trigger('reset');
 }

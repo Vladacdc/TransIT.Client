@@ -1,7 +1,6 @@
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createUser">
   <i class="fas fa-user-plus"></i> Створити користувача
 </button>
-
 <div class="modal fade" id="createUser" tabindex="-1" role="dialog" aria-labelledby="CreateUser" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
@@ -14,18 +13,18 @@
       <div class="modal-body">
         <form [formGroup]="userForm">
           <div class="row">
-            <div class="form-group col-md-6 ">
+            <div class="form-group col-md-6 " [customErrorMessages]="CustomNameErrorMessages">
               <label>Прізвище</label>
               <input type="text" class="form-control" formControlName="lastName" placeholder="Введіть Прізвище" />
             </div>
 
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-6" [customErrorMessages]="CustomNameErrorMessages">
               <label>Ім'я</label>
               <input type="text" class="form-control" formControlName="firstName" placeholder="Введіть Ім'я" />
             </div>
           </div>
           <div class="row">
-            <div class="form-group col-md-6">
+            <div class="form-group col-md-6" [customErrorMessages]="CustomNameErrorMessages">
               <label>По батькові</label>
               <input type="text" class="form-control" formControlName="middleName" placeholder="Введіть По батькові" />
             </div>
@@ -41,8 +40,8 @@
             </div>
           </div>
           <div class="row">
-            <div class="form-group col-md-6">
-              <label>Логін*</label>
+            <div class="form-group col-md-6" [customErrorMessages]="CustomLoginErrorMessages">
+              <label class="required-field">Логін</label>
               <input type="text" class="form-control" formControlName="login" placeholder="Введіть логін" />
             </div>
 
@@ -52,12 +51,12 @@
             </div>
           </div>
           <div class="form-group">
-            <label>Пароль*</label>
+            <label class="required-field">Пароль</label>
             <input type="password" class="form-control" formControlName="password" placeholder="Введіть пароль" />
           </div>
 
           <div class="form-group">
-            <label>Підтвердження паролю* </label>
+            <label class="required-field">Підтвердження паролю</label>
             <input
               type="password"
               class="form-control"
@@ -67,7 +66,7 @@
           </div>
 
           <div class="form-group">
-            <label>Роль*</label>
+            <label class="required-field">Роль</label>
             <select class="form-control" formControlName="role">
               <option hidden value="" disabled selected>Виберіть роль для користувача</option>
               <option *ngFor="let role of roleList" [value]="">{{ role.transName }}</option>

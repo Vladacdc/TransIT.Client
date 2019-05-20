@@ -20,6 +20,7 @@ import { EditDocumentComponent } from './components/global-document/document/edi
 import { NestedDocumentComponent } from './components/global-document/document/nested-document/nested-document.component';
 import { IssueLogComponent } from './components/issue-log/issue-log.component';
 import { CoreModule } from '../core/core.module';
+import { NgBootstrapFormValidationModule } from 'ng-bootstrap-form-validation';
 
 @NgModule({
   declarations: [
@@ -47,7 +48,8 @@ import { CoreModule } from '../core/core.module';
     CoreModule,
     ReactiveFormsModule,
     NgSelectModule,
-    FormsModule
+    FormsModule,
+    NgBootstrapFormValidationModule
   ],
   exports: [
     NestedDocumentComponent,
@@ -56,7 +58,7 @@ import { CoreModule } from '../core/core.module';
     GlobalIssueComponent,
     FiltersTabsComponent,
     CreateDocumentComponent,
-    DocumentComponent    
+    DocumentComponent
   ]
 })
 export class SharedModule {}
