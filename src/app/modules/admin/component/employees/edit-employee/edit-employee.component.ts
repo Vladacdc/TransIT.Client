@@ -64,6 +64,10 @@ export class EditEmployeeComponent implements OnInit {
 
   private setUpForm() {
     this.employeeForm = this.fb.group({
+      boardNumber: [
+        this._employee && this._employee.boardNumber,
+        [Validators.required, Validators.min(1), Validators.max(1000000000)]
+      ],
       lastName: [this._employee && this._employee.lastName, Validators.required],
       firstName: [this._employee && this._employee.firstName, Validators.required],
       middleName: [this._employee && this._employee.middleName, Validators.required],

@@ -9,17 +9,17 @@ declare const $;
   templateUrl: './issue-log-assignees.component.html',
   styleUrls: ['./issue-log-assignees.component.scss']
 })
-export class IssueLogAssigneesComponent implements OnInit {;
+export class IssueLogAssigneesComponent implements OnInit {
   currentUser: Employee;
   users: Array<Employee>;
   @Output() selectUser: EventEmitter<Employee>;
 
-  constructor(private userService: EmployeeService) {
+  constructor(private employeeService: EmployeeService) {
     this.selectUser = new EventEmitter<Employee>();
   }
 
   ngOnInit() {
-    this.userService.getEntities().subscribe(users => this.users = users);
+    this.employeeService.getEntities().subscribe(employees => (this.users = employees));
   }
 
   selectItem(item: Employee): void {

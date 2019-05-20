@@ -6,6 +6,7 @@ export class Employee extends TEntity<Employee> {
   middleName: string;
   lastName: string;
   shortName: string;
+  boardNumber: number;
   post: Post;
 
   constructor(employee: Partial<Employee>) {

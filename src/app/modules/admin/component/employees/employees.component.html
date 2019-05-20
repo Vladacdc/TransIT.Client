@@ -8,6 +8,7 @@
     </caption>
     <thead>
       <tr>
+        <th>Табельний номер</th>
         <th>Прізвище</th>
         <th>Ім'я</th>
         <th>По батькові</th>
@@ -18,6 +19,7 @@
     </thead>
     <tbody *ngIf="employees?.length !== 0">
       <tr *ngFor="let employee of employees">
+        <td>{{ employee.boardNumber }}</td>
         <td>{{ employee.lastName }}</td>
         <td>{{ employee.firstName }}</td>
         <td>{{ employee.middleName }}</td>

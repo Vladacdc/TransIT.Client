@@ -47,6 +47,7 @@ export class CreateEmployeeComponent implements OnInit {
 
   private setUpForm() {
     this.employeeForm = this.fb.group({
+      boardNumber: [1, [Validators.required, Validators.min(1), Validators.max(1000000000)]],
       lastName: [undefined, Validators.required],
       firstName: [undefined, Validators.required],
       middleName: [undefined, Validators.required],

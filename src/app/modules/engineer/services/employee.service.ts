@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { CrudService } from '../../core/services/crud.service';
-import { Employee } from '../../shared/models/employee';
+import { Employee } from '../../admin/models/employee/employee';
 
 @Injectable({
   providedIn: 'root'

@@ -23,6 +23,7 @@ export class EmployeesComponent implements AfterViewInit, OnDestroy {
       });
     },
     columns: [
+      { data: 'boardNumber' },
       { data: 'lastName' },
       { data: 'firstName' },
       { data: 'middleName' },

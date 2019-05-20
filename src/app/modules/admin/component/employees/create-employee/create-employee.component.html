@@ -23,6 +23,17 @@
       <div class="modal-body">
         <form [formGroup]="employeeForm" (validSubmit)="onSubmit()">
           <div class="form-group">
+            <label class="required-field">Табельний номер</label>
+            <input
+              type="number"
+              min="1"
+              max="1000000000"
+              placeholder="Введіть табельний номер"
+              class="form-control"
+              formControlName="boardNumber"
+            />
+          </div>
+          <div class="form-group">
             <label>Прізвище</label>
             <input type="text" placeholder="Введіть прізвище" class="form-control" formControlName="lastName" />
           </div>
