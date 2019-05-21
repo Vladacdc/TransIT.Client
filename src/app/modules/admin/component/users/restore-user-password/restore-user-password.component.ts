@@ -28,11 +28,11 @@ export class RestoreUserPasswordComponent implements OnInit {
         id: '',
         password: new FormControl(
           '',
-          Validators.compose([Validators.required, Validators.minLength(6), Validators.maxLength(30)])
+          Validators.compose([Validators.required, Validators.minLength(8), Validators.maxLength(30)])
         ),
         confirmPassword: new FormControl(
           '',
-          Validators.compose([Validators.required, Validators.minLength(6), Validators.maxLength(30)])
+          Validators.compose([Validators.required, Validators.minLength(8), Validators.maxLength(30)])
         )
       },
       { validators: matchPassword }

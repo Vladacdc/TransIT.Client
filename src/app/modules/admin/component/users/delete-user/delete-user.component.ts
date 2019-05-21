@@ -10,7 +10,14 @@ import { User } from '../../../models/user/user';
 })
 export class DeleteUserComponent implements OnInit {
   @ViewChild('close') closeDeleteModal: ElementRef;
-  @Input() user: User;
+  @Input() set user(user: User) {
+    if (!user) {
+      return;
+    }
+    this.login = user.login;
+  }
+
+  login: string = '';
   @Output() deleteUser = new EventEmitter<User>();
 
   constructor(private service: UserService, private toast: ToastrService) {}

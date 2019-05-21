@@ -31,8 +31,8 @@
         (change)="selectMalfunctionSubGroupType($event)"
       ></ng-select>
       <ng-select
-        [items]="malfunctionFilteredList"  
-        [(ngModel)]="currentMalfunction"      
+        [items]="malfunctionFilteredList"
+        [(ngModel)]="currentMalfunction"
         bindLabel="name"
         placeholder="*Несправність"
         notFoundText="Не знайдено"
@@ -46,7 +46,6 @@
       </select>
     </div>
   </div>
-  <button href="#" class="right btn btn-info"><i class="fas fa-file-excel"></i> Excel</button>
   <button href="#" class="right btn btn-info" (click)="selectFilter()">
     <i class="fas fa-filter"></i> Фільтрувати
   </button>

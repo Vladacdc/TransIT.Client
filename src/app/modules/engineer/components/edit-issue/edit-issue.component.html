@@ -14,7 +14,7 @@
     </div>
     <div class="form-group col-sm-12 col-md-4">
       <label for="warrantyDisInput">Гарантія</label>
-      <input type="number" class="form-control" [(ngModel)]="issue.warranty" min="0" max="1">
+      <input type="number" class="form-control" [(ngModel)]="issue.warranty" min="0" max="1" />
     </div>
   </div>
   <div class="row">
@@ -29,9 +29,7 @@
     <div class="form-group col-sm-6 col-md-6">
       <label for="assigneeDisInput">Відповідальний</label>
       <div class="form-control" id="assigneeDisInput">
-        {{
-          issue?.assignedTo?.shortName
-        }}
+        {{ issue?.assignedTo?.shortName }}
       </div>
     </div>
   </div>
@@ -84,7 +82,7 @@
       <ng-select
         [(ngModel)]="currentMalfunction"
         [items]="malfunctionFilteredList"
-        (ngModelChange)="selectMalfunc()"
+        (ngModelChange)="selectMalfunction()"
         bindLabel="name"
         placeholder="Несправність"
         notFoundText="Не знайдено"
@@ -95,14 +93,13 @@
   <div class="row">
     <div class="form-group col-sm-12 col-md-12">
       <label>Приорітет</label>
-      <input type="number" class="form-control" [(ngModel)]="issue.priority" min="0" max="2">
+      <input type="number" class="form-control" [(ngModel)]="issue.priority" min="0" max="2" />
     </div>
   </div>
   <div class="row">
     <div class="form-group col-sm-12 col-md-12">
       <label for="summaryDisInput">Опис</label>
-      <textarea [(ngModel)]="issue.summary" class="form-control" id="summaryDisInput">
-      </textarea>
+      <textarea [(ngModel)]="issue.summary" class="form-control" id="summaryDisInput"> </textarea>
     </div>
   </div>
   <div class="row">
@@ -113,7 +110,7 @@
   <div style="float: left">
     <a class="btn btn-primary" [routerLink]="['/engineer/issue-logs/edit']" (click)="createHandler()">Обробка</a>
   </div>
-  <br><br>
+  <br /><br />
   <div>
     <app-nested-issue-logs [issue]="issue"></app-nested-issue-logs>
   </div>

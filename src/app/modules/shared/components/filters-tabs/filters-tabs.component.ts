@@ -81,7 +81,8 @@ export class FiltersTabsComponent implements OnInit {
       iconsLibrary: 'fontawesome',
       minDate: function() {
         return $('#startDate').val();
-      }
+      },
+      maxDate: new Date()
     });
   }
 
@@ -106,7 +107,7 @@ export class FiltersTabsComponent implements OnInit {
     }
   }
   selectSubgroup(): void {
-    this.selectedMalfunction = null;    
+    this.selectedMalfunction = null;
     if (this.selectedMalfunctionSubGroup) {
       this.malfunctionFilteredList = this.getBySubgroup(this.selectedMalfunctionSubGroup);
     }
