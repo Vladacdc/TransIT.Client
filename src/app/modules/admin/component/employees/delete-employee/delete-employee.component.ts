@@ -1,7 +1,7 @@
 import { Component, Input, EventEmitter, Output } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { Employee } from '../../../models/employee/employee';
-import { EmployeeService } from '../../../services/employee.service';
+import { EmployeeService } from '../../../../shared/services/employee.service';
+import { Employee } from 'src/app/modules/shared/models/employee';
 
 @Component({
   selector: 'app-delete-employee',

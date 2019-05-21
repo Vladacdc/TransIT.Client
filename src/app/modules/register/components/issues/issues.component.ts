@@ -1,8 +1,9 @@
 import { Component, ViewChild, OnDestroy, AfterViewInit } from '@angular/core';
-import { IssueService } from '../../services/issue.service';
-import { Issue, Priority } from '../../models/issue';
 import { DataTableDirective } from 'angular-datatables';
 import { Subject } from 'rxjs';
+import { Issue } from 'src/app/modules/shared/models/issue';
+import { IssueService } from 'src/app/modules/shared/services/issue.service';
+import { Priority } from '../../models/priority/priority';
 
 @Component({
   selector: 'app-issues',

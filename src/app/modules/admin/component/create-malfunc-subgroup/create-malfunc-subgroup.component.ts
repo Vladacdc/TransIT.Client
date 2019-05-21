@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewChild, ElementRef, Output, EventEmitter } from '@angular/core';
-import { MalfuncGroup } from '../../models/malfuncGroup/malfunc-group';
-import { MalfuncGroupService } from '../../services/malfunc-group.service';
-import { MalfunSubgroup } from '../../models/malfun-subgroup/malfun-subgroup';
+import { MalfunctionSubgroup } from 'src/app/modules/shared/models/malfunction-subgroup';
+import { MalfunctionGroup } from 'src/app/modules/shared/models/malfunction-group';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { MalfunSubgroupService } from '../../services/malfun-subgroup.service';
+import { MalfunctionSubgroupService } from 'src/app/modules/shared/services/malfunction-subgroup.service';
+import { MalfunctionGroupService } from 'src/app/modules/shared/services/malfunction-group.service';
 
 @Component({
   selector: 'app-create-malfunc-subgroup',
@@ -12,13 +12,13 @@ import { MalfunSubgroupService } from '../../services/malfun-subgroup.service';
 })
 export class CreateMalfuncSubgroupComponent implements OnInit {
   @ViewChild('close') closeDiv: ElementRef;
-  @Output() createMalfuncSubGroup = new EventEmitter<MalfunSubgroup>();
+  @Output() createMalfuncSubGroup = new EventEmitter<MalfunctionSubgroup>();
   subGroupForm: FormGroup;
-  malfuncGroupList: MalfuncGroup[];
+  malfuncGroupList: MalfunctionGroup[];
 
   constructor(
-    private serviceMalfuncGroup: MalfuncGroupService,
-    private serviceMalfuncSubGroup: MalfunSubgroupService,
+    private serviceMalfuncGroup: MalfunctionGroupService,
+    private serviceMalfuncSubGroup: MalfunctionSubgroupService,
     private formBuilder: FormBuilder
   ) {}
 
@@ -30,7 +30,7 @@ export class CreateMalfuncSubgroupComponent implements OnInit {
     });
     this.subGroupForm = this.formBuilder.group({
       group: ['', Validators.required],
-      subgroup: ['',Validators.required]
+      subgroup: ['', Validators.required]
     });
     this.serviceMalfuncGroup.getEntities().subscribe(group => {
       this.malfuncGroupList = group;
@@ -41,18 +41,18 @@ export class CreateMalfuncSubgroupComponent implements OnInit {
     return this.malfuncGroupList.map(e => e.name);
   }
 
-  clickAddMalfunctionSubGroup(){
+  clickAddMalfunctionSubGroup() {
     this.serviceMalfuncGroup.getEntities().subscribe(group => {
       this.malfuncGroupList = group;
     });
   }
-  
+
   clickSubmit() {
     if (this.subGroupForm.invalid) {
       return;
     }
     const form = this.subGroupForm.value;
-    const malfunSubGroup: MalfunSubgroup = {
+    const malfunSubGroup: MalfunctionSubgroup = {
       id: 0,
       name: form.subgroup as string,
       malfunctionGroup: this.malfuncGroupList[this.malfuncGroupName.findIndex(f => f === form.group)]

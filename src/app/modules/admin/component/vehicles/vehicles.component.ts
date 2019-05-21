@@ -1,8 +1,6 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { Vehicle } from '../../models/vehicle/vehicle';
-import { VehicleType } from '../../models/vehicleType/vehicle-type';
-import { VehicleService } from '../../services/vehicle.service';
-import { VehicleTypeService } from '../../services/vehicle-type.service';
+import { Vehicle } from 'src/app/modules/shared/models/vehicle';
+import { VehicleService } from 'src/app/modules/shared/services/vehicle.service';
 
 declare const $;
 
@@ -16,7 +14,7 @@ export class VehiclesComponent implements OnInit {
   table: DataTables.Api;
   selectedVehicle: Vehicle;
 
-  constructor(private vehicleService: VehicleService, private chRef: ChangeDetectorRef) { }
+  constructor(private vehicleService: VehicleService) {}
 
   private readonly tableConfig: DataTables.Settings = {
     responsive: true,
@@ -58,7 +56,6 @@ export class VehiclesComponent implements OnInit {
         console.log(id);
         this.selectedVehicle = this.vehicles.find(i => i.id === id);
       });
-
   }
 
   addVehicle(vehicle: Vehicle) {
@@ -74,19 +71,23 @@ export class VehiclesComponent implements OnInit {
       vehicle.regNum,
       vehicle.brand,
       vehicle.model,
-      `<button id="vehicle-${vehicle.id}" class="btn" data-toggle="modal" data-target="#editVehicle"><i class="fas fa-edit"></i></button>
-     <button id="vehicle-${vehicle.id}" class="btn" data-toggle="modal" data-target="#deleteVehicle"><i class="fas fas fa-trash-alt"></i></button>`
+      `<button id="vehicle-${
+        vehicle.id
+      }" class="btn" data-toggle="modal" data-target="#editVehicle"><i class="fas fa-edit"></i></button>
+     <button id="vehicle-${
+       vehicle.id
+     }" class="btn" data-toggle="modal" data-target="#deleteVehicle"><i class="fas fas fa-trash-alt"></i></button>`
     ];
   }
 
   deleteVehicle(vehicle: Vehicle) {
     console.log(this.selectedVehicle);
     this.vehicles = this.vehicles.filter(v => v.id !== vehicle.id);
-    this.table.rows($(`button[id^="vehicle-${vehicle.id}"]`).parents('tr'))
+    this.table
+      .rows($(`button[id^="vehicle-${vehicle.id}"]`).parents('tr'))
       .remove()
       .draw(false);
   }
-
 
   updateVehicle(vehicle: Vehicle) {
     this.vehicles[this.vehicles.findIndex(i => i.id === vehicle.id)] = vehicle;
@@ -94,5 +95,4 @@ export class VehiclesComponent implements OnInit {
       this.addTableData(vehicles);
     });
   }
-
 }

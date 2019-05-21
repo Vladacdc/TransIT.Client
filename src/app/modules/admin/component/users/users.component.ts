@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from '../../models/user/user';
-import { UserService } from '../../services/user.service';
-import { RoleService } from '../../services/role.service';
+import { User } from 'src/app/modules/shared/models/user';
+import { UserService } from 'src/app/modules/shared/services/user.service';
 import { AuthenticationService } from 'src/app/modules/core/services/authentication.service';
+import { RoleService } from 'src/app/modules/shared/services/role.service';
 
 @Component({
   selector: 'app-users',

@@ -1,8 +1,8 @@
 import { Component, OnInit, ChangeDetectorRef, ElementRef, ViewChild, Output, EventEmitter } from '@angular/core';
-import { ActionType } from '../../models/action/actiontype';
 import { FormGroup } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { ActionTypeService } from '../../services/action-type.sevice';
+import { ActionType } from 'src/app/modules/shared/models/action-type';
+import { ActionTypeService } from 'src/app/modules/shared/services/action-type.service';
 
 @Component({
   selector: 'app-action',
@@ -19,7 +19,7 @@ export class ActionComponent implements OnInit {
       {
         targets: [1],
         orderable: false
-      },
+      }
     ],
     language: {
       url: '//cdn.datatables.net/plug-ins/1.10.19/i18n/Ukrainian.json'
@@ -52,15 +52,15 @@ export class ActionComponent implements OnInit {
   }
 
   clickSubmit() {
-    this.actionTypeService.addEntity(this.action).subscribe(       
-      () => this.toast.success('Дія додана', 'Сервер'),
-      );   
-    this.closeCreateModal.nativeElement.click();  
-}
+    this.actionTypeService.addEntity(this.action).subscribe(() => this.toast.success('Дія додана', 'Сервер'));
+    this.closeCreateModal.nativeElement.click();
+  }
 
   ngOnInit() {
     $('#createAction').on('hidden.bs.modal', function() {
-      $(this).find('form').trigger('reset');
+      $(this)
+        .find('form')
+        .trigger('reset');
     });
 
     this.actionTypeService.getEntities().subscribe(actions => {
@@ -75,10 +75,10 @@ export class ActionComponent implements OnInit {
       .deleteEntity(this.actionTypeList[selectedIndex].id)
       .subscribe(
         () => this.actionTypeList.splice(selectedIndex, 1),
-        () => this.toast.error('Дія в експлуатації', 'Сервер'),        
+        () => this.toast.error('Дія в експлуатації', 'Сервер'),
         () => this.toast.success('Дію видалено', 'Сервер')
       );
-      this.closeDeleleModal.nativeElement.click();  
+    this.closeDeleleModal.nativeElement.click();
   }
 
   selectIndex(selectIndex: number) {

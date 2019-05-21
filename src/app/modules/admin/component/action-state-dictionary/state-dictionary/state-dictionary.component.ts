@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { State } from '../../../models/state/state';
 import { ToastrService } from 'ngx-toastr';
-import { StateService } from '../../../services/state.service';
 import { Router } from '@angular/router';
+import { State } from 'src/app/modules/shared/models/state';
+import { StateService } from 'src/app/modules/shared/services/state.service';
 
 declare const $;
 

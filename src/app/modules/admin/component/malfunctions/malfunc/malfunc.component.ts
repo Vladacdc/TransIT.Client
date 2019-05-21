@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { MalfuncService } from '../../../services/malfunc.service';
-import { Malfunction } from '../../../models/malfunc/malfunc';
-
+import { Malfunction } from 'src/app/modules/shared/models/malfunction';
+import { MalfunctionService } from 'src/app/modules/shared/services/malfunction.service';
 
 declare const $;
 
@@ -18,10 +17,7 @@ export class MalfuncComponent implements OnInit {
   malfunctions: Array<Malfunction>;
   malfunction: Malfunction;
 
-  constructor(
-    private malfuncService: MalfuncService,
-    private router: Router
-  ) {}
+  constructor(private malfuncService: MalfunctionService, private router: Router) {}
 
   ngOnInit() {
     this.tableMalfunction = $('#malfunc-table').DataTable({
@@ -42,7 +38,7 @@ export class MalfuncComponent implements OnInit {
     });
     this.tableMalfunction.on('select', (e, dt, type, index) => {
       const item = this.tableMalfunction.rows(index).data()[0];
-      this.selectedMalfunction=item;
+      this.selectedMalfunction = item;
     });
   }
 

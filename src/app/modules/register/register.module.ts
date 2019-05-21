@@ -13,6 +13,7 @@ import { IssuesComponent } from './components/issues/issues.component';
 import { CreateIssueComponent } from './components/create-issue/create-issue.component';
 import { IssueDetailsComponent } from './components/issue-details/issue-details.component';
 import { DeleteIssueComponent } from './components/delete-issue/delete-issue.component';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [RegisterComponent, IssuesComponent, CreateIssueComponent, IssueDetailsComponent, DeleteIssueComponent],
@@ -24,7 +25,8 @@ import { DeleteIssueComponent } from './components/delete-issue/delete-issue.com
     NgBootstrapFormValidationModule,
     DataTablesModule,
     NgSelectModule,
-    FormsModule
+    FormsModule,
+    SharedModule
   ]
 })
 export class RegisterModule {}

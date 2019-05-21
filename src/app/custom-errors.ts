@@ -39,19 +39,12 @@ export const LOGIN_ERRORS: ErrorMessage[] = [
     format: loginPatternFormat
   }
 ];
-export const NAME_ERRORS: ErrorMessage[] = [
-  ...CUSTOM_ERRORS,
-  {
-    error: 'pattern',
-    format: namePatternFormat
-  }
-];
 
-export const STRING_FIELD_ERRORS: ErrorMessage[] = [
+export const NAME_FIELD_ERRORS: ErrorMessage[] = [
   ...CUSTOM_ERRORS,
   {
     error: 'pattern',
-    format: stringFieldFormat
+    format: nameFieldFormat
   }
 ];
 
@@ -87,11 +80,7 @@ export function loginPatternFormat(label: string, error: any): string {
   return 'Дозволено тільки букви латинського алфавіту та цифри';
 }
 
-export function namePatternFormat(label: string, error: any): string {
-  return 'Дозволено тільки букви, дефіс та апостроф.';
-}
-
-export function stringFieldFormat(label: string, error: any): string {
+export function nameFieldFormat(label: string, error: any): string {
   return `Дозволено тільки літери, і спецстмволи ("-" та " ' ")`;
 }
 

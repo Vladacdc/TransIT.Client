@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { VehicleType } from 'src/app/modules/engineer/models/vehicleType';
-import { VehicleTypeService } from '../../services/vehicle-type.service';
+import { VehicleType } from 'src/app/modules/shared/models/vehicleType';
+import { VehicleTypeService } from 'src/app/modules/shared/services/vehicle-type.service';
 
 @Component({
   selector: 'app-vehicle-type',
@@ -12,14 +12,11 @@ export class VehicleTypeComponent implements OnInit {
   table: DataTables.Api;
   selectedVehicleType: VehicleType;
 
-  constructor(private vehicleTypeService: VehicleTypeService, private chRef: ChangeDetectorRef) { }
+  constructor(private vehicleTypeService: VehicleTypeService, private chRef: ChangeDetectorRef) {}
 
   private readonly tableConfig: DataTables.Settings = {
     responsive: true,
-    columns: [
-      { title: 'Тип транспорту' },
-      { title: 'Дії', orderable: false }
-    ],
+    columns: [{ title: 'Тип транспорту' }, { title: 'Дії', orderable: false }],
     paging: true,
     scrollX: true,
     language: {
@@ -49,7 +46,6 @@ export class VehicleTypeComponent implements OnInit {
         console.log(id);
         this.selectedVehicleType = this.vehicleTypes.find(i => i.id === id);
       });
-
   }
 
   addVehicleType(vehicleType: VehicleType) {
@@ -60,15 +56,20 @@ export class VehicleTypeComponent implements OnInit {
   vehicleToRow(vehicleType: VehicleType): string[] {
     return [
       vehicleType.name,
-      `<button id="vehicleType-${vehicleType.id}" class="btn" data-toggle="modal" data-target="#editVehicleType"><i class="fas fa-edit"></i></button>
-     <button id="vehicleType-${vehicleType.id}" class="btn" data-toggle="modal" data-target="#deleteVehicleType"><i class="fas fas fa-trash-alt"></i></button>`
+      `<button id="vehicleType-${
+        vehicleType.id
+      }" class="btn" data-toggle="modal" data-target="#editVehicleType"><i class="fas fa-edit"></i></button>
+     <button id="vehicleType-${
+       vehicleType.id
+     }" class="btn" data-toggle="modal" data-target="#deleteVehicleType"><i class="fas fas fa-trash-alt"></i></button>`
     ];
   }
 
   deleteVehicleType(vehicleType: VehicleType) {
     console.log(this.selectedVehicleType);
     this.vehicleTypes = this.vehicleTypes.filter(v => v.id !== vehicleType.id);
-    this.table.rows($(`button[id^="vehicleType-${vehicleType.id}"]`).parents('tr'))
+    this.table
+      .rows($(`button[id^="vehicleType-${vehicleType.id}"]`).parents('tr'))
       .remove()
       .draw(false);
   }

@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef, Output, EventEmitter } from '@angular/core';
-import { ActionType } from 'src/app/modules/admin/models/action/actiontype';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { ActionTypeService } from 'src/app/modules/admin/services/action-type.sevice';
+import { ActionType } from 'src/app/modules/shared/models/action-type';
+import { ActionTypeService } from 'src/app/modules/shared/services/action-type.service';
 
 @Component({
   selector: 'app-create-action',
@@ -13,11 +13,13 @@ export class CreateActionComponent implements OnInit {
   @Output() createAction = new EventEmitter<ActionType>();
   actionForm: FormGroup;
 
-  constructor(private serviceAction: ActionTypeService, private formBuilder: FormBuilder) { }
+  constructor(private serviceAction: ActionTypeService, private formBuilder: FormBuilder) {}
 
   ngOnInit() {
     $('#createAction').on('hidden.bs.modal', function() {
-      $(this).find('form').trigger('reset');
+      $(this)
+        .find('form')
+        .trigger('reset');
     });
     this.actionForm = this.formBuilder.group({
       name: ['', Validators.required]
@@ -31,9 +33,9 @@ export class CreateActionComponent implements OnInit {
     const form = this.actionForm.value;
     const action: ActionType = {
       id: 0,
-      name: form.name as string,
+      name: form.name as string
     };
-    
+
     this.serviceAction.addEntity(action).subscribe(newGroup => this.createAction.next(newGroup));
     this.closeDiv.nativeElement.click();
   }

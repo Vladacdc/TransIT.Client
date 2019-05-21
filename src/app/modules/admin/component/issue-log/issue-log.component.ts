@@ -1,9 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { IssueLog } from '../../models/issueLog/IssueLog';
-import { IssueLogService } from '../../services/issue-log.service';
-import { Router, ActivatedRoute } from '@angular/router';
-import { Documents } from '../../models/document/document';
-import { DocumentService } from '../../services/document.service';
+import { Component, OnInit } from '@angular/core';
+import { IssueLog } from 'src/app/modules/shared/models/issuelog';
+import { DocumentService } from 'src/app/modules/shared/services/document.service';
+import { Router } from '@angular/router';
+import { IssuelogService } from 'src/app/modules/shared/services/issuelog.service';
+import { Document } from 'src/app/modules/shared/models/document';
 
 declare const $;
 
@@ -13,13 +13,13 @@ declare const $;
   styleUrls: ['./issue-log.component.scss']
 })
 export class IssueLogComponent implements OnInit {
-  public issueLogs: Array<IssueLog>;
-  public issueLog: IssueLog;
+  issueLogs: Array<IssueLog>;
+  issueLog: IssueLog;
   protected tableIssueLog: any;
-  public document:Documents;
+  document: Document;
 
   constructor(
-    protected issueLogService: IssueLogService,
+    protected issueLogService: IssuelogService,
     protected DocumentService: DocumentService,
     protected router: Router
   ) {}

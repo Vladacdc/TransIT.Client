@@ -1,10 +1,10 @@
 import { Component, OnInit, ViewChild, ElementRef, Output, EventEmitter, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Documents } from 'src/app/modules/admin/models/document/document';
-import { IssueLog } from 'src/app/modules/admin/models/issueLog/IssueLog';
-import { IssueLogService } from 'src/app/modules/admin/services/issue-log.service';
-import { DocumentService } from 'src/app/modules/admin/services/document.service';
 import { ToastrService } from 'ngx-toastr';
+import { Document } from 'src/app/modules/shared/models/document';
+import { IssueLog } from 'src/app/modules/shared/models/issuelog';
+import { IssuelogService } from 'src/app/modules/shared/services/issuelog.service';
+import { DocumentService } from 'src/app/modules/shared/services/document.service';
 
 @Component({
   selector: 'app-create-document',
@@ -13,13 +13,13 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class CreateDocumentComponent implements OnInit {
   @ViewChild('close') closeDiv: ElementRef;
-  @Output() createDocument = new EventEmitter<Documents>();
+  @Output() createDocument = new EventEmitter<Document>();
   @Input() issueLog;
   documentForm: FormGroup;
   issueLogList: IssueLog[];
 
   constructor(
-    private serviceIssueLog: IssueLogService,
+    private serviceIssueLog: IssuelogService,
     private serviceDocument: DocumentService,
     private formBuilder: FormBuilder,
     private toast: ToastrService
@@ -44,12 +44,12 @@ export class CreateDocumentComponent implements OnInit {
       return;
     }
     const form = this.documentForm.value;
-    const document: Documents = {
+    const document: Document = new Document({
       id: 0,
       name: form.name as string,
       description: form.description as string,
       issueLog: this.issueLog
-    };
+    });
 
     this.serviceDocument.addEntity(document).subscribe(newGroup => this.createDocument.next(newGroup));
     this.closeDiv.nativeElement.click();

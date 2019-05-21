@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef, Input, Output, EventEmitter } from '@angular/core';
-import { MalfuncGroup } from '../../models/malfuncGroup/malfunc-group';
-import { MalfuncGroupService } from '../../services/malfunc-group.service';
 import { ToastrService } from 'ngx-toastr';
+import { MalfunctionGroup } from 'src/app/modules/shared/models/malfunction-group';
+import { MalfunctionGroupService } from 'src/app/modules/shared/services/malfunction-group.service';
 
 @Component({
   selector: 'app-delete-malfunc-group',
@@ -10,19 +10,20 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class DeleteMalfuncGroupComponent implements OnInit {
   @ViewChild('close') closeDiv: ElementRef;
-  @Input() malfunctionGroup: MalfuncGroup;
-  @Output() deleteMalfunctionGroup = new EventEmitter<MalfuncGroup>();
+  @Input() malfunctionGroup: MalfunctionGroup;
+  @Output() deleteMalfunctionGroup = new EventEmitter<MalfunctionGroup>();
 
-  constructor(private service: MalfuncGroupService,private toast: ToastrService) {}
+  constructor(private service: MalfunctionGroupService, private toast: ToastrService) {}
 
   ngOnInit() {}
 
   deleteMalfuncGroup() {
     this.closeDiv.nativeElement.click();
-    this.service.deleteEntity(this.malfunctionGroup.id).subscribe(() => {
-      this.deleteMalfunctionGroup.next(this.malfunctionGroup);
-    },
-    error => this.toast.error('Помилка', 'Існує заявка з даною групою помилки')
+    this.service.deleteEntity(this.malfunctionGroup.id).subscribe(
+      () => {
+        this.deleteMalfunctionGroup.next(this.malfunctionGroup);
+      },
+      error => this.toast.error('Помилка', 'Існує заявка з даною групою помилки')
     );
   }
 }

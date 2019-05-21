@@ -31,9 +31,7 @@ import { DeleteSupplierComponent } from './component/supplier/delete-supplier/de
 import { SupplierComponent } from './component/supplier/supplier.component';
 import { EditMalfuncComponent } from './component/edit-malfunc/edit-malfunc.component';
 import { DeleteMalfuncComponent } from './component/delete-malfunc/delete-malfunc.component';
-import { RoleService } from './services/role.service';
 // ====User===
-import { UserService } from './services/user.service';
 import { UsersComponent } from './component/users/users.component';
 import { CreateUserComponent } from './component/users/create-user/create-user.component';
 import { EditUserComponent } from './component/users/edit-user/edit-user.component';
@@ -56,9 +54,8 @@ import { PostsComponent } from './component/posts/posts.component';
 import { CreatePostComponent } from './component/posts/create-post/create-post.component';
 import { EditPostComponent } from './component/posts/edit-post/edit-post.component';
 import { DeletePostComponent } from './component/posts/delete-post/delete-post.component';
-import { PostService } from './services/post.service';
 
-import { EmployeeService } from './services/employee.service';
+import { EmployeeService } from '../shared/services/employee.service';
 import { EmployeesComponent } from './component/employees/employees.component';
 import { CreateEmployeeComponent } from './component/employees/create-employee/create-employee.component';
 import { EditEmployeeComponent } from './component/employees/edit-employee/edit-employee.component';
@@ -76,7 +73,6 @@ import { TransitionDictionaryComponent } from './component/action-state-dictiona
 import { CreateTransitionComponent } from './component/action-state-dictionary/transition-dictionary/create-transition/create-transition.component';
 import { EditTransitionComponent } from './component/action-state-dictionary/transition-dictionary/edit-transition/edit-transition.component';
 import { DeleteTransitionComponent } from './component/action-state-dictionary/transition-dictionary/delete-transition/delete-transition.component';
-import { TransitionService } from './services/transition.service';
 import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
@@ -159,7 +155,6 @@ import { NgSelectModule } from '@ng-select/ng-select';
     NgxMaskModule.forRoot(),
     NgBootstrapFormValidationModule,
     NgSelectModule
-  ],
-  providers: [RoleService, UserService, PostService, EmployeeService, TransitionService]
+  ]
 })
 export class AdminModule {}

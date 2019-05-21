@@ -1,7 +1,7 @@
 import { Component, Input, EventEmitter, Output } from '@angular/core';
-import { Post } from '../../../models/post/post';
-import { PostService } from '../../../services/post.service';
 import { ToastrService } from 'ngx-toastr';
+import { Post } from 'src/app/modules/shared/models/post';
+import { PostService } from 'src/app/modules/shared/services/post.service';
 
 @Component({
   selector: 'app-delete-post',

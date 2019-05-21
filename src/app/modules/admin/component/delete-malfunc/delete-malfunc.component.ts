@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef, Input, Output, EventEmitter } from '@angular/core';
-import { Malfunction } from '../../models/malfunc/malfunc';
-import { MalfuncService } from '../../services/malfunc.service';
 import { ToastrService } from 'ngx-toastr';
+import { Malfunction } from 'src/app/modules/shared/models/malfunction';
+import { MalfunctionService } from 'src/app/modules/shared/services/malfunction.service';
 
 @Component({
   selector: 'app-delete-malfunc',
@@ -13,7 +13,7 @@ export class DeleteMalfuncComponent implements OnInit {
   @Input() malfunction: Malfunction;
   @Output() deleteMalfunction = new EventEmitter<Malfunction>();
 
-  constructor(private service: MalfuncService, private toast: ToastrService) {}
+  constructor(private service: MalfunctionService, private toast: ToastrService) {}
 
   ngOnInit() {}
 

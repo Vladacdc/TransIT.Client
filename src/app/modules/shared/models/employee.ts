@@ -1,11 +1,12 @@
 import { TEntity } from '../../core/models/entity/entity';
-import { Post } from './position';
+import { Post } from './post';
 
 export class Employee extends TEntity<Employee> {
   firstName: string;
   middleName: string;
   lastName: string;
   shortName: string;
+  boardNumber: number;
   post: Post;
 
   constructor(employee: Partial<Employee>) {

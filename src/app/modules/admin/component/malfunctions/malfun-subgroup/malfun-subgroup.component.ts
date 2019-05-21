@@ -1,9 +1,7 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { MalfunSubgroup } from '../../../models/malfun-subgroup/malfun-subgroup';
-import { MalfunSubgroupService } from '../../../services/malfun-subgroup.service';
-import { Router, ActivatedRoute } from '@angular/router';
-import { MalfuncGroup } from '../../../models/malfuncGroup/malfunc-group';
-
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { MalfunctionSubgroup } from 'src/app/modules/shared/models/malfunction-subgroup';
+import { MalfunctionSubgroupService } from 'src/app/modules/shared/services/malfunction-subgroup.service';
 
 declare const $;
 
@@ -15,14 +13,11 @@ declare const $;
 export class MalfunSubgroupComponent implements OnInit {
   private tableSubGroup: DataTables.Api;
 
-  malfuncSubgroups: Array<MalfunSubgroup>;
-  malfuncSubgroup: MalfunSubgroup;
-  selectedMalfunctionSubGroup: MalfunSubgroup;
+  malfuncSubgroups: Array<MalfunctionSubgroup>;
+  malfuncSubgroup: MalfunctionSubgroup;
+  selectedMalfunctionSubGroup: MalfunctionSubgroup;
 
-  constructor(
-    private malfuncSubgroupService: MalfunSubgroupService,
-    private router: Router
-  ) {}
+  constructor(private malfuncSubgroupService: MalfunctionSubgroupService, private router: Router) {}
 
   ngOnInit() {
     this.tableSubGroup = $('#subgroup-table').DataTable({
@@ -47,20 +42,20 @@ export class MalfunSubgroupComponent implements OnInit {
     });
   }
 
-  addMalfunctionSubGroup(malfuncSubgroup: MalfunSubgroup) {
+  addMalfunctionSubGroup(malfuncSubgroup: MalfunctionSubgroup) {
     this.malfuncSubgroups = [...this.malfuncSubgroups, malfuncSubgroup];
     this.tableSubGroup.row.add(malfuncSubgroup);
     this.tableSubGroup.draw();
   }
 
-  deleteMalfunctionSubGroup(malfunctionSubGroup: MalfunSubgroup) {
+  deleteMalfunctionSubGroup(malfunctionSubGroup: MalfunctionSubgroup) {
     this.malfuncSubgroups = this.malfuncSubgroups.filter(x => x !== malfunctionSubGroup);
     this.tableSubGroup
       .rows('.selected')
       .remove()
       .draw();
   }
-  editMalfunctionSubGroup(malfunctionSubGroup: MalfunSubgroup) {
+  editMalfunctionSubGroup(malfunctionSubGroup: MalfunctionSubgroup) {
     console.log('I can edit entity');
     this.malfuncSubgroups[
       this.malfuncSubgroups.findIndex(i => i.id === this.selectedMalfunctionSubGroup.id)

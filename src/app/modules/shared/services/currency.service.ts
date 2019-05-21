@@ -8,4 +8,9 @@ import { environment } from 'src/environments/environment';
 })
 export class CurrencyService extends CrudService<Currency> {
   protected readonly serviceUrl = `${environment.apiUrl}/currency`;
+  protected readonly datatableUrl = `${environment.apiUrl}/datatable/currency`;
+
+  protected mapEntity(entity: Currency): Currency {
+    return new Currency(entity);
+  }
 }

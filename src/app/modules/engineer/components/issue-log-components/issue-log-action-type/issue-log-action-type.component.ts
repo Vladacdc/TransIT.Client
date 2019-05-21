@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { ActionType } from '../../../models/actionType';
-import { ActionTypeService } from '../../../services/action-type.service';
+import { ActionType } from 'src/app/modules/shared/models/action-type';
+import { ActionTypeService } from 'src/app/modules/shared/services/action-type.service';
 
 @Component({
   selector: 'app-issue-log-action-type',
@@ -8,7 +8,6 @@ import { ActionTypeService } from '../../../services/action-type.service';
   styleUrls: ['./issue-log-action-type.component.scss']
 })
 export class IssueLogActionTypeComponent implements OnInit {
-
   currentActionType: ActionType;
   actions: Array<ActionType>;
   @Output() selectActionType: EventEmitter<ActionType>;
@@ -18,7 +17,7 @@ export class IssueLogActionTypeComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.actionTypeService.getEntities().subscribe(items => this.actions = items);
+    this.actionTypeService.getEntities().subscribe(items => (this.actions = items));
   }
 
   selectItem(item: ActionType): void {

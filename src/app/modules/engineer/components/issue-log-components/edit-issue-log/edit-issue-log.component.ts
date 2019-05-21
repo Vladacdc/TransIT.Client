@@ -1,19 +1,19 @@
 import { Component, OnInit } from '@angular/core';
-import { IssueLog } from '../../../models/issuelog';
 import { Router } from '@angular/router';
-import { IssuelogService } from '../../../services/issuelog.service';
-import { ActionType } from '../../../models/actionType';
-import { Document } from '../../../models/document';
-import { ActionTypeService } from '../../../services/action-type.service';
-import { StateService } from '../../../services/state.service';
-import { State } from '../../../models/state';
-import { Supplier } from '../../../models/supplier';
-import { SupplierService } from '../../../services/supplier.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { DocumentService } from '../../../services/document.service';
-import { IssueService } from '../../../../shared/services/issue.service';
 import { ToastrService } from 'ngx-toastr';
 import { Employee } from 'src/app/modules/shared/models/employee';
+import { IssueLog } from 'src/app/modules/shared/models/issuelog';
+import { Supplier } from 'src/app/modules/shared/models/supplier';
+import { ActionType } from 'src/app/modules/shared/models/action-type';
+import { State } from 'src/app/modules/shared/models/state';
+import { IssueService } from 'src/app/modules/shared/services/issue.service';
+import { IssuelogService } from 'src/app/modules/shared/services/issuelog.service';
+import { ActionTypeService } from 'src/app/modules/shared/services/action-type.service';
+import { StateService } from 'src/app/modules/shared/services/state.service';
+import { SupplierService } from 'src/app/modules/shared/services/supplier.service';
+import { DocumentService } from 'src/app/modules/shared/services/document.service';
+import { Document } from 'src/app/modules/shared/models/document';
 
 @Component({
   selector: 'app-edit-issue-log',
@@ -57,8 +57,8 @@ export class EditIssueLogComponent implements OnInit {
       id: 0,
       description: '',
       expenses: 0,
-      actionType: new ActionType(),
-      supplier: new Supplier(),
+      actionType: new ActionType({}),
+      supplier: new Supplier({}),
       issue: selectedIssue,
       oldState: selectedIssue.state,
       newState: selectedIssue.state

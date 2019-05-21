@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { MalfuncGroup } from '../../models/malfuncGroup/malfunc-group';
-import { MalfunSubgroup } from '../../models/malfun-subgroup/malfun-subgroup';
-import { Malfunction } from '../../models/malfunc/malfunc';
-import { MalfuncGroupService } from '../../services/malfunc-group.service';
-import { MalfunSubgroupService } from '../../services/malfun-subgroup.service';
-import { MalfuncService } from '../../services/malfunc.service';
+import { MalfunctionSubgroup } from 'src/app/modules/shared/models/malfunction-subgroup';
+import { MalfunctionGroup } from 'src/app/modules/shared/models/malfunction-group';
+import { Malfunction } from 'src/app/modules/shared/models/malfunction';
+import { MalfunctionGroupService } from 'src/app/modules/shared/services/malfunction-group.service';
+import { MalfunctionSubgroupService } from 'src/app/modules/shared/services/malfunction-subgroup.service';
+import { MalfunctionService } from 'src/app/modules/shared/services/malfunction.service';
 
 declare const $;
 
@@ -14,29 +14,29 @@ declare const $;
   styleUrls: ['./malfunctions.component.scss']
 })
 export class MalfunctionsComponent implements OnInit {
-  //group
+  // group
   private tableGroup: DataTables.Api;
 
-  selectedMalfunctionGroup: MalfuncGroup;
-  malfuncGroups: Array<MalfuncGroup>;
-  malfuncGroup: MalfuncGroup;
+  selectedMalfunctionGroup: MalfunctionGroup;
+  malfuncGroups: Array<MalfunctionGroup>;
+  malfuncGroup: MalfunctionGroup;
 
-  //subgroup
+  // subgroup
   private tableSubGroup: DataTables.Api;
 
-  malfuncSubgroups: Array<MalfunSubgroup>;
-  malfuncSubgroup: MalfunSubgroup;
-  selectedMalfunctionSubGroup: MalfunSubgroup;
+  malfuncSubgroups: Array<MalfunctionSubgroup>;
+  malfuncSubgroup: MalfunctionSubgroup;
+  selectedMalfunctionSubGroup: MalfunctionSubgroup;
 
-  //malfunctions
-  public malfunctions: Array<Malfunction>;
+  // malfunctions
+  malfunctions: Array<Malfunction>;
   private tableMalfunction: any;
   selectedMalfunction: Malfunction;
 
   constructor(
-    private malfuncGroupService: MalfuncGroupService,
-    private malfuncSubgroupService: MalfunSubgroupService,
-    private malfuncService: MalfuncService
+    private malfuncGroupService: MalfunctionGroupService,
+    private malfuncSubgroupService: MalfunctionSubgroupService,
+    private malfuncService: MalfunctionService
   ) {}
 
   ngOnInit() {
@@ -74,7 +74,7 @@ export class MalfunctionsComponent implements OnInit {
       }
     });
 
-    //group
+    // group
     this.malfuncGroupService.getEntities().subscribe(malfuncGroups => {
       this.malfuncGroups = malfuncGroups;
       this.tableGroup.rows.add(this.malfuncGroups);
@@ -87,17 +87,16 @@ export class MalfunctionsComponent implements OnInit {
       this.filterMalfunctionSubGroup();
     });
 
-    this.tableGroup.on( 'deselect',(e, dt, type, indexes )=>{
+    this.tableGroup.on('deselect', (e, dt, type, indexes) => {
       this.unfilterMalfunctionSubGroup();
     });
-    
 
-    //subgroup
+    // subgroup
 
     this.malfuncSubgroupService.getEntities().subscribe(malfuncSubgroup => {
       this.malfuncSubgroups = malfuncSubgroup;
       this.tableSubGroup.rows.add(this.malfuncSubgroups);
-      //this.tableSubGroup.draw();
+      // this.tableSubGroup.draw();
     });
     this.tableSubGroup.on('select', (e, dt, type, index) => {
       const item = this.tableSubGroup.rows(index).data()[0];
@@ -105,11 +104,11 @@ export class MalfunctionsComponent implements OnInit {
       this.filterMalfunctions();
     });
 
-    this.tableSubGroup.on( 'deselect',(e, dt, type, indexes )=>{
+    this.tableSubGroup.on('deselect', (e, dt, type, indexes) => {
       this.unfilterMalfunction();
     });
 
-    //malfunctions
+    // malfunctions
     this.malfuncService.getEntities().subscribe(selectedMalfunction => {
       this.malfunctions = selectedMalfunction;
       this.tableMalfunction.rows.add(this.malfunctions);
@@ -120,14 +119,14 @@ export class MalfunctionsComponent implements OnInit {
       this.selectedMalfunction = item;
     });
   }
-  //group
-  addMalfunctionGroup(malfuncGroup: MalfuncGroup) {
+  // group
+  addMalfunctionGroup(malfuncGroup: MalfunctionGroup) {
     this.malfuncGroups = [...this.malfuncGroups, malfuncGroup];
     this.tableGroup.row.add(malfuncGroup);
-    this.tableGroup.draw(); 
+    this.tableGroup.draw();
   }
 
-  deleteMalfunctionGroup(malfunctionGroup: MalfuncGroup) {
+  deleteMalfunctionGroup(malfunctionGroup: MalfunctionGroup) {
     this.malfuncGroups = this.malfuncGroups.filter(m => m !== malfunctionGroup);
     this.tableGroup
       .rows('.selected')
@@ -135,7 +134,7 @@ export class MalfunctionsComponent implements OnInit {
       .draw();
   }
 
-  editMalfunctionGroup(malfunctionGroup: MalfuncGroup) {
+  editMalfunctionGroup(malfunctionGroup: MalfunctionGroup) {
     this.malfuncGroups[this.malfuncGroups.findIndex(i => i.id === this.selectedMalfunctionGroup.id)] = malfunctionGroup;
     this.tableGroup
       .row('.selected')
@@ -143,9 +142,9 @@ export class MalfunctionsComponent implements OnInit {
       .draw();
   }
 
-  //subgroup
+  // subgroup
 
-  unfilterMalfunctionSubGroup(){
+  unfilterMalfunctionSubGroup() {
     this.tableSubGroup.clear();
     this.tableSubGroup.draw();
     this.tableMalfunction.clear();
@@ -162,20 +161,20 @@ export class MalfunctionsComponent implements OnInit {
     this.tableSubGroup.draw();
   }
 
-  addMalfunctionSubGroup(malfuncSubgroup: MalfunSubgroup) {
+  addMalfunctionSubGroup(malfuncSubgroup: MalfunctionSubgroup) {
     this.malfuncSubgroups = [...this.malfuncSubgroups, malfuncSubgroup];
     this.tableSubGroup.row.add(malfuncSubgroup);
     this.tableSubGroup.draw();
   }
 
-  deleteMalfunctionSubGroup(malfunctionSubGroup: MalfunSubgroup) {
+  deleteMalfunctionSubGroup(malfunctionSubGroup: MalfunctionSubgroup) {
     this.malfuncSubgroups = this.malfuncSubgroups.filter(x => x !== malfunctionSubGroup);
     this.tableSubGroup
       .rows('.selected')
       .remove()
       .draw();
   }
-  editMalfunctionSubGroup(malfunctionSubGroup: MalfunSubgroup) {
+  editMalfunctionSubGroup(malfunctionSubGroup: MalfunctionSubgroup) {
     this.malfuncSubgroups[
       this.malfuncSubgroups.findIndex(i => i.id === this.selectedMalfunctionSubGroup.id)
     ] = malfunctionSubGroup;
@@ -185,8 +184,8 @@ export class MalfunctionsComponent implements OnInit {
       .draw();
   }
 
-  //malfunctions
-  unfilterMalfunction(){
+  // malfunctions
+  unfilterMalfunction() {
     this.tableMalfunction.clear();
     this.tableMalfunction.draw();
   }

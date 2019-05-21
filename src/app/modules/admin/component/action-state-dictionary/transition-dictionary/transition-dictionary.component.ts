@@ -1,8 +1,8 @@
 import { Component, OnDestroy, AfterViewInit, ViewChild } from '@angular/core';
-import { TransitionService } from '../../../services/transition.service';
 import { DataTableDirective } from 'angular-datatables';
 import { Subject } from 'rxjs';
-import { Transition } from '../../../models/transition/transition';
+import { Transition } from '../../../../shared/models/transition';
+import { TransitionService } from 'src/app/modules/shared/services/transition.service';
 
 @Component({
   selector: 'app-transition-dictionary',

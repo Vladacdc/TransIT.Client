@@ -1,18 +1,18 @@
 import { Component, ElementRef, Input, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
-import { RoleService } from '../../../services/role.service';
-import { UserService } from '../../../services/user.service';
-import { Role } from '../../../models/role/role';
 import { ToastrService } from 'ngx-toastr';
-import { User } from '../../../models/user/user';
-import { NAME_ERRORS } from 'src/app/custom-errors';
+import { User } from 'src/app/modules/shared/models/user';
+import { RoleService } from 'src/app/modules/shared/services/role.service';
+import { UserService } from 'src/app/modules/shared/services/user.service';
+import { Role } from 'src/app/modules/shared/models/role';
+import { NAME_FIELD_ERRORS } from 'src/app/custom-errors';
 
 @Component({
   selector: 'app-edit-user',
   templateUrl: './edit-user.component.html',
   styleUrls: ['./edit-user.component.scss']
 })
-//clear form
+// clear form
 export class EditUserComponent implements OnInit {
   @ViewChild('close') closeEditModal: ElementRef;
   @Output() updateUser = new EventEmitter<User>();
@@ -23,10 +23,10 @@ export class EditUserComponent implements OnInit {
     this.userForm.patchValue({ ...user, role: user.role.transName });
     this.selectedUser = user;
   }
-  selectedUser = new User();
+  selectedUser = new User({});
   userForm: FormGroup;
   roles: Role[] = [];
-  CustomNameErrorMessages = NAME_ERRORS;
+  CustomNameErrorMessages = NAME_FIELD_ERRORS;
 
   constructor(
     private formBuilder: FormBuilder,

@@ -1,6 +1,6 @@
 import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
-import { StateService } from 'src/app/modules/admin/services/state.service';
-import { State } from '../../../models/state';
+import { State } from 'src/app/modules/shared/models/state';
+import { StateService } from 'src/app/modules/shared/services/state.service';
 
 @Component({
   selector: 'app-issue-log-state',
@@ -8,7 +8,6 @@ import { State } from '../../../models/state';
   styleUrls: ['./issue-log-state.component.scss']
 })
 export class IssueLogStateComponent implements OnInit {
-
   @Input() currentState: State;
   states: Array<State>;
   @Output() selectState: EventEmitter<State>;
@@ -18,7 +17,7 @@ export class IssueLogStateComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.stateService.getEntities().subscribe(items => this.states = items);
+    this.stateService.getEntities().subscribe(items => (this.states = items));
   }
 
   selectItem(item: State): void {

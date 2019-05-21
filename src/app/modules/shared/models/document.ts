@@ -1,10 +1,17 @@
 import { IssueLog } from './issuelog';
 import { TEntity } from '../../core/models/entity/entity';
+import { User } from './user';
 
 export class Document extends TEntity<Document> {
-  public name?: string;
-  public description?: string;
-  public issueLog?: IssueLog;
-  public createDate?: Date;
-  public modDate?: Date;
+  name: string;
+  description: string;
+  issueLog: IssueLog;
+  mod: User;
+  modDate: Date;
+
+  constructor(document: Partial<Document>) {
+    super(document);
+    this.issueLog = new IssueLog(this.issueLog);
+    this.mod = new User(this.mod);
+  }
 }

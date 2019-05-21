@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef, Input, Output, EventEmitter } from '@angular/core';
-import { State } from 'src/app/modules/admin/models/state/state';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { StateService } from 'src/app/modules/admin/services/state.service';
+import { State } from 'src/app/modules/shared/models/state';
+import { StateService } from 'src/app/modules/shared/services/state.service';
 
 @Component({
   selector: 'app-edit-state',
@@ -9,14 +9,14 @@ import { StateService } from 'src/app/modules/admin/services/state.service';
   styleUrls: ['./edit-state.component.scss']
 })
 export class EditStateComponent implements OnInit {
-  selectedState:State;
+  selectedState: State;
   @ViewChild('close') closeDiv: ElementRef;
   @Input()
   set state(state: State) {
     if (!state) {
       return;
     }
-    this.selectedState=state;
+    this.selectedState = state;
     state = new State(state);
     this.stateFrom.patchValue(state);
   }
@@ -24,13 +24,10 @@ export class EditStateComponent implements OnInit {
 
   stateFrom: FormGroup;
 
-  constructor(
-    private formBuilder: FormBuilder,
-    private serviceState: StateService,
-  ) { }
+  constructor(private formBuilder: FormBuilder, private serviceState: StateService) {}
 
   ngOnInit() {
-  this.stateFrom = this.formBuilder.group({
+    this.stateFrom = this.formBuilder.group({
       id: '',
       transName: ''
     });
@@ -50,5 +47,4 @@ export class EditStateComponent implements OnInit {
     };
     this.serviceState.updateEntity(state).subscribe(_ => this.editState.next(state));
   }
-
 }

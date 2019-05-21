@@ -1,8 +1,7 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { MalfuncGroup } from '../../../models/malfuncGroup/malfunc-group';
-import { MalfuncGroupService } from '../../../services/malfunc-group.service';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-
+import { MalfunctionGroup } from 'src/app/modules/shared/models/malfunction-group';
+import { MalfunctionGroupService } from 'src/app/modules/shared/services/malfunction-group.service';
 
 declare const $;
 
@@ -14,14 +13,11 @@ declare const $;
 export class MalfuncGroupComponent implements OnInit {
   private tableGroup: DataTables.Api;
 
-  selectedMalfunctionGroup: MalfuncGroup;
-  malfuncGroups: Array<MalfuncGroup>;
-  malfuncGroup: MalfuncGroup;
+  selectedMalfunctionGroup: MalfunctionGroup;
+  malfuncGroups: Array<MalfunctionGroup>;
+  malfuncGroup: MalfunctionGroup;
 
-  constructor(
-    private malfuncGroupService: MalfuncGroupService,
-    private router: Router    
-  ) {}
+  constructor(private malfuncGroupService: MalfunctionGroupService, private router: Router) {}
 
   ngOnInit() {
     this.tableGroup = $('#group-table').DataTable({
@@ -47,14 +43,14 @@ export class MalfuncGroupComponent implements OnInit {
     });
   }
 
-  addMalfunctionGroup(malfuncGroup: MalfuncGroup) {
+  addMalfunctionGroup(malfuncGroup: MalfunctionGroup) {
     this.malfuncGroups = [...this.malfuncGroups, malfuncGroup];
     this.tableGroup.row.add(malfuncGroup);
     console.log(this.malfuncGroups);
     this.tableGroup.draw();
   }
 
-  deleteMalfunctionGroup(malfunctionGroup: MalfuncGroup) {
+  deleteMalfunctionGroup(malfunctionGroup: MalfunctionGroup) {
     this.malfuncGroups = this.malfuncGroups.filter(m => m !== malfunctionGroup);
     this.tableGroup
       .rows('.selected')
@@ -64,7 +60,7 @@ export class MalfuncGroupComponent implements OnInit {
     console.log(this.malfuncGroups);
   }
 
-  editMalfunctionGroup(malfunctionGroup: MalfuncGroup) {
+  editMalfunctionGroup(malfunctionGroup: MalfunctionGroup) {
     this.malfuncGroups[this.malfuncGroups.findIndex(i => i.id === this.selectedMalfunctionGroup.id)] = malfunctionGroup;
     this.tableGroup
       .row('.selected')

@@ -1,12 +1,12 @@
 import { Component, EventEmitter, Output, OnInit } from '@angular/core';
-import { Transition } from 'src/app/modules/admin/models/transition/transition';
+import { Transition } from 'src/app/modules/shared/models/transition';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { State } from 'src/app/modules/admin/models/state/state';
-import { TransitionService } from 'src/app/modules/admin/services/transition.service';
-import { StateService } from 'src/app/modules/admin/services/state.service';
 import { ToastrService } from 'ngx-toastr';
-import { ActionTypeService } from 'src/app/modules/admin/services/action-type.sevice';
-import { ActionType } from 'src/app/modules/admin/models/action/actiontype';
+import { State } from 'src/app/modules/shared/models/state';
+import { ActionType } from 'src/app/modules/shared/models/action-type';
+import { StateService } from 'src/app/modules/shared/services/state.service';
+import { ActionTypeService } from 'src/app/modules/shared/services/action-type.service';
+import { TransitionService } from 'src/app/modules/shared/services/transition.service';
 
 @Component({
   selector: 'app-create-transition',

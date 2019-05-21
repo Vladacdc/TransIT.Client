@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewChild, ElementRef, Input, Output, EventEmitter } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { Documents } from 'src/app/modules/admin/models/document/document';
-import { IssueLog } from 'src/app/modules/admin/models/issueLog/IssueLog';
-import { DocumentService } from 'src/app/modules/admin/services/document.service';
-import { IssueLogService } from 'src/app/modules/admin/services/issue-log.service';
+import { FormGroup, FormBuilder } from '@angular/forms';
+import { Document } from 'src/app/modules/shared/models/document';
+import { DocumentService } from 'src/app/modules/shared/services/document.service';
+import { IssuelogService } from 'src/app/modules/shared/services/issuelog.service';
+import { IssueLog } from 'src/app/modules/shared/models/issuelog';
 
 @Component({
   selector: 'app-edit-document',
@@ -11,19 +11,19 @@ import { IssueLogService } from 'src/app/modules/admin/services/issue-log.servic
   styleUrls: ['./edit-document.component.scss']
 })
 export class EditDocumentComponent implements OnInit {
-  selectedDoc:Documents;
+  selectedDoc: Document;
   @ViewChild('close') closeDiv: ElementRef;
   @Input()
-  set document(document: Documents) {
+  set document(document: Document) {
     console.dir(document);
     if (!document) {
       return;
     }
-    this.selectedDoc=document;
-    document = new Documents(document);
+    this.selectedDoc = document;
+    document = new Document(document);
     this.documentFrom.patchValue(document);
   }
-  @Output() editDocument = new EventEmitter<Documents>();
+  @Output() editDocument = new EventEmitter<Document>();
 
   documentFrom: FormGroup;
 
@@ -31,7 +31,7 @@ export class EditDocumentComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private serviceDocument: DocumentService,
-    private serviceIssueLog: IssueLogService
+    private serviceIssueLog: IssuelogService
   ) {}
 
   ngOnInit() {
@@ -52,14 +52,14 @@ export class EditDocumentComponent implements OnInit {
     }
     this.closeDiv.nativeElement.click();
     const form = this.documentFrom.value;
-    // const document = new Documents(this.documentFrom.value);
+    // const document = new Document(this.documentFrom.value);
 
-    const document: Documents = {
+    const document: Document = new Document({
       id: form.id as number,
       name: form.name as string,
       description: form.description as string,
       issueLog: this.selectedDoc.issueLog
-    };
+    });
     this.serviceDocument.updateEntity(document).subscribe(_ => this.editDocument.next(document));
   }
 }

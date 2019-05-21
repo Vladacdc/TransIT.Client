@@ -1,16 +1,15 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { VehicleType } from '../../models/vehicleType';
-import { VehicleTypeService } from 'src/app/modules/admin/services/vehicle-type.service';
 import { State } from '../../models/state';
-import { StateService } from 'src/app/modules/admin/services/state.service';
-import { MalfuncGroup } from 'src/app/modules/admin/models/malfuncGroup/malfunc-group';
-import { MalfuncGroupService } from 'src/app/modules/admin/services/malfunc-group.service';
-import { MalfunSubgroup } from 'src/app/modules/admin/models/malfun-subgroup/malfun-subgroup';
-import { MalfunSubgroupService } from 'src/app/modules/admin/services/malfun-subgroup.service';
-import { Malfunction } from 'src/app/modules/admin/models/malfunc/malfunc';
-import { MalfuncService } from 'src/app/modules/admin/services/malfunc.service';
-import { Priority } from 'src/app/modules/core/models/priority';
-import { group } from '@angular/animations';
+import { MalfunctionGroup } from '../../models/malfunction-group';
+import { MalfunctionSubgroup } from '../../models/malfunction-subgroup';
+import { Malfunction } from '../../models/malfunction';
+import { Priority } from 'src/app/modules/core/models/priority/priority';
+import { StateService } from '../../services/state.service';
+import { MalfunctionService } from '../../services/malfunction.service';
+import { MalfunctionGroupService } from '../../services/malfunction-group.service';
+import { MalfunctionSubgroupService } from '../../services/malfunction-subgroup.service';
+import { VehicleTypeService } from '../../services/vehicle-type.service';
 
 @Component({
   selector: 'app-filters-tabs',
@@ -20,14 +19,14 @@ import { group } from '@angular/animations';
 export class FiltersTabsComponent implements OnInit {
   vehicleTypeList: VehicleType[] = [];
   stateList: State[] = [];
-  malfunctionGroupList: MalfuncGroup[] = [];
-  malfunctionSubGroupList: MalfunSubgroup[] = [];
+  malfunctionGroupList: MalfunctionGroup[] = [];
+  malfunctionSubGroupList: MalfunctionSubgroup[] = [];
   malfunctionList: Malfunction[] = [];
   priorityList = Priority;
   keys = [];
-  malfunctionSubGroupFilteredList: MalfunSubgroup[] = [];
+  malfunctionSubGroupFilteredList: MalfunctionSubgroup[] = [];
   malfunctionFilteredList: Malfunction[] = [];
-  currentMalfunctionSubgroup: MalfunSubgroup;
+  currentMalfunctionSubgroup: MalfunctionSubgroup;
   currentMalfunction: Malfunction;
 
   @Output() StartDateValue = new EventEmitter<string>();
@@ -50,9 +49,9 @@ export class FiltersTabsComponent implements OnInit {
   constructor(
     private vehicleTypeService: VehicleTypeService,
     private stateService: StateService,
-    private malfunctionGropService: MalfuncGroupService,
-    private malfunctionSubGropService: MalfunSubgroupService,
-    private malfunctionService: MalfuncService
+    private malfunctionGropService: MalfunctionGroupService,
+    private malfunctionSubGropService: MalfunctionSubgroupService,
+    private malfunctionService: MalfunctionService
   ) {
     this.keys = Object.keys(this.priorityList).filter(f => !isNaN(Number(f)));
   }
@@ -69,17 +68,17 @@ export class FiltersTabsComponent implements OnInit {
       this.malfunctionList = data;
       this.malfunctionFilteredList = data;
     });
-    (<any>$('#startDate')).datepicker({
+    ($('#startDate') as any).datepicker({
       uiLibrary: 'bootstrap4',
       iconsLibrary: 'fontawesome',
-      maxDate: function() {
+      maxDate() {
         return $('#endDate').val();
       }
     });
-    (<any>$('#endDate')).datepicker({
+    ($('#endDate') as any).datepicker({
       uiLibrary: 'bootstrap4',
       iconsLibrary: 'fontawesome',
-      minDate: function() {
+      minDate() {
         return $('#startDate').val();
       },
       maxDate: new Date()
@@ -93,7 +92,7 @@ export class FiltersTabsComponent implements OnInit {
       this.malfunctionSubGroupFilteredList = this.getByGroup(this.selectedMalfunctionGroup);
     }
   }
-  private getByGroup(group: string): Array<MalfunSubgroup> {
+  private getByGroup(group: string): Array<MalfunctionSubgroup> {
     return this.malfunctionSubGroupList.filter(subgroup => subgroup.malfunctionGroup.name === group);
   }
 

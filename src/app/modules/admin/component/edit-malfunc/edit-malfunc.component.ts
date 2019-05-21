@@ -1,8 +1,8 @@
 import { Component, OnInit, ViewChild, ElementRef, Input, Output, EventEmitter } from '@angular/core';
-import { Malfunction } from '../../models/malfunc/malfunc';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { MalfuncService } from '../../services/malfunc.service';
 import { ToastrService } from 'ngx-toastr';
+import { Malfunction } from 'src/app/modules/shared/models/malfunction';
+import { MalfunctionService } from 'src/app/modules/shared/services/malfunction.service';
 
 @Component({
   selector: 'app-edit-malfunc',
@@ -24,7 +24,7 @@ export class EditMalfuncComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private serviceMalfunction: MalfuncService,
+    private serviceMalfunction: MalfunctionService,
     private toast: ToastrService
   ) {}
 

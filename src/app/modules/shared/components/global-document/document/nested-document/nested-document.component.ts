@@ -1,5 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Documents } from 'src/app/modules/admin/models/document/document';
+import { Component, Input } from '@angular/core';
+import { Document } from 'src/app/modules/shared/models/document';
 
 declare const $;
 
@@ -8,17 +8,12 @@ declare const $;
   templateUrl: './nested-document.component.html',
   styleUrls: ['./nested-document.component.scss']
 })
-export class NestedDocumentComponent implements OnInit {
-  private tableNestedDoc: DataTables.Api;
+export class NestedDocumentComponent {
   protected tableIssueLog: any;
-  public chosenDocument: Documents;
+  chosenDocument: Document;
+
   @Input()
-  set document(document: Documents) {
+  set document(document: Document) {
     this.chosenDocument = document;
-  }
-
-  constructor() {}
-
-  ngOnInit() {
   }
 }

@@ -1,16 +1,16 @@
 import { Component, OnInit, EventEmitter, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, AbstractControl } from '@angular/forms';
-import { VehicleService } from '../../services/vehicle.service';
-import { MalfunctionService } from '../../services/malfunction.service';
-import { Vehicle } from '../../models/vehicle';
-import { MalfunctionSubgroup } from '../../models/malfunction-subgroup';
-import { Malfunction } from '../../models/malfunction';
-import { MalfunctionGroup } from '../../models/malfunction-group';
-import { Issue } from '../../models/issue';
-import { IssueService } from '../../services/issue.service';
 import { ToastrService } from 'ngx-toastr';
 import { TEntity } from 'src/app/modules/core/models/entity/entity';
 import { malfunctionSelectedValidator } from 'src/app/custom-errors';
+import { Vehicle } from 'src/app/modules/shared/models/vehicle';
+import { MalfunctionGroup } from 'src/app/modules/shared/models/malfunction-group';
+import { MalfunctionSubgroup } from 'src/app/modules/shared/models/malfunction-subgroup';
+import { Malfunction } from 'src/app/modules/shared/models/malfunction';
+import { Issue } from 'src/app/modules/shared/models/issue';
+import { MalfunctionService } from 'src/app/modules/shared/services/malfunction.service';
+import { IssueService } from 'src/app/modules/shared/services/issue.service';
+import { VehicleService } from 'src/app/modules/shared/services/vehicle.service';
 
 @Component({
   selector: 'app-create-issue',

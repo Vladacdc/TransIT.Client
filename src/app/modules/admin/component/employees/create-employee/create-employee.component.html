@@ -33,7 +33,7 @@
               formControlName="boardNumber"
             />
           </div>
-          <div class="form-group">
+          <div class="form-group" [customErrorMessages]="customFieldErrors">
             <label>Прізвище</label>
             <input type="text" placeholder="Введіть прізвище" class="form-control" formControlName="lastName" />
           </div>

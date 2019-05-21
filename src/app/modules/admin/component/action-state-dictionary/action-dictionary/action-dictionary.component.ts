@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { ActionType } from '../../../models/action/actiontype';
 import { ToastrService } from 'ngx-toastr';
-import { ActionTypeService } from '../../../services/action-type.sevice';
 import { Router } from '@angular/router';
+import { ActionType } from 'src/app/modules/shared/models/action-type';
+import { ActionTypeService } from 'src/app/modules/shared/services/action-type.service';
 
 @Component({
   selector: 'app-action-dictionary',
@@ -15,7 +15,7 @@ export class ActionDictionaryComponent implements OnInit {
   selectedAction: ActionType;
   tost: ToastrService;
 
-  constructor(private actionService: ActionTypeService, private router: Router, private toast: ToastrService) { }
+  constructor(private actionService: ActionTypeService, private router: Router, private toast: ToastrService) {}
 
   private readonly tableConfig: DataTables.Settings = {
     responsive: true,
@@ -81,5 +81,4 @@ export class ActionDictionaryComponent implements OnInit {
     this.actions[this.actions.findIndex(i => i.id === action.id)] = action;
     this.tableAction.draw();
   }
-
 }

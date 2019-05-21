@@ -1,13 +1,14 @@
-import { Component, OnInit, ViewChild, Output, ElementRef, EventEmitter } from '@angular/core';
-import { Malfunction } from '../../models/malfunc/malfunc';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Malfunction } from 'src/app/modules/shared/models/malfunction';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { MalfunSubgroup } from '../../models/malfun-subgroup/malfun-subgroup';
-import { MalfuncGroup } from '../../models/malfuncGroup/malfunc-group';
-import { MalfuncService } from '../../services/malfunc.service';
 import { ToastrService } from 'ngx-toastr';
 import { TEntity } from 'src/app/modules/core/models/entity/entity';
-import { MalfuncGroupService } from '../../services/malfunc-group.service';
-import { MalfunSubgroupService } from '../../services/malfun-subgroup.service';
+import { MalfunctionSubgroup } from 'src/app/modules/shared/models/malfunction-subgroup';
+import { MalfunctionService } from 'src/app/modules/shared/services/malfunction.service';
+import { MalfunctionGroup } from 'src/app/modules/shared/models/malfunction-group';
+import { MalfunctionGroupService } from 'src/app/modules/shared/services/malfunction-group.service';
+import { MalfunctionSubgroupService } from 'src/app/modules/shared/services/malfunction-subgroup.service';
+
 @Component({
   selector: 'app-create-malfunc',
   templateUrl: './create-malfunc.component.html',
@@ -17,14 +18,14 @@ export class CreateMalfuncComponent implements OnInit {
   @Output() createdMalfunction = new EventEmitter<Malfunction>();
 
   malfunctionForm: FormGroup;
-  malfunctionSubgroupList: MalfunSubgroup[];
-  malfunctionGroupList: MalfuncGroup[];
+  malfunctionSubgroupList: MalfunctionSubgroup[];
+  malfunctionGroupList: MalfunctionGroup[];
   malfunctions: Malfunction[];
 
   constructor(
-    private serviceMalfunctionGroup: MalfuncGroupService,
-    private serviceMalfunctionSubgroup: MalfunSubgroupService,
-    private serviceMalfunction: MalfuncService,
+    private serviceMalfunctionGroup: MalfunctionGroupService,
+    private serviceMalfunctionSubgroup: MalfunctionSubgroupService,
+    private serviceMalfunction: MalfunctionService,
     private formBuilder: FormBuilder,
     private toast: ToastrService
   ) {}
@@ -38,13 +39,13 @@ export class CreateMalfuncComponent implements OnInit {
     return this.malfunctionForm.value;
   }
 
-  get malfunctionSubgroupsFilteredByGroup(): MalfunSubgroup[] {
+  get malfunctionSubgroupsFilteredByGroup(): MalfunctionSubgroup[] {
     const selectedGroup = this.formValue.group;
     const filteredSubgroups = this.filterSubgroupsByGroup(selectedGroup);
     return filteredSubgroups;
   }
 
-  private filterSubgroupsByGroup(group: MalfuncGroup): MalfunSubgroup[] {
+  private filterSubgroupsByGroup(group: MalfunctionGroup): MalfunctionSubgroup[] {
     const subgroups = this.malfunctionSubgroupList;
     if (!group) {
       return subgroups;
@@ -59,7 +60,7 @@ export class CreateMalfuncComponent implements OnInit {
     return filteredSubgroups;
   }
 
-  private notSelectedSubgroup(subgroups: MalfunSubgroup[]): boolean {
+  private notSelectedSubgroup(subgroups: MalfunctionSubgroup[]): boolean {
     return subgroups.findIndex(s => s === this.formValue.subgroup) === -1;
   }
 
@@ -86,7 +87,7 @@ export class CreateMalfuncComponent implements OnInit {
     modalWindow.modal('hide');
   }
 
-  public loadEntities() {
+  loadEntities() {
     this.serviceMalfunctionGroup.getEntities().subscribe(malfunctionGroupList => {
       this.malfunctionGroupList = malfunctionGroupList;
     });

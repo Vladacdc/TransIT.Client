@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { Issue } from '../../models/issue';
-import { IssueService } from '../../services/issue.service';
 import { ToastrService } from 'ngx-toastr';
+import { Issue } from 'src/app/modules/shared/models/issue';
+import { IssueService } from 'src/app/modules/shared/services/issue.service';
 
 @Component({
   selector: 'app-delete-issue',

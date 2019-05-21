@@ -1,7 +1,7 @@
 import { Component, OnInit, ElementRef, ViewChild, Output, EventEmitter, ɵConsole } from '@angular/core';
-import { MalfuncGroup } from '../../models/malfuncGroup/malfunc-group';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { MalfuncGroupService } from '../../services/malfunc-group.service';
+import { MalfunctionGroup } from 'src/app/modules/shared/models/malfunction-group';
+import { MalfunctionGroupService } from 'src/app/modules/shared/services/malfunction-group.service';
 
 @Component({
   selector: 'app-create-malfunc-group',
@@ -10,14 +10,16 @@ import { MalfuncGroupService } from '../../services/malfunc-group.service';
 })
 export class CreateMalfuncGroupComponent implements OnInit {
   @ViewChild('close') closeDiv: ElementRef;
-  @Output() createMalfuncGroup = new EventEmitter<MalfuncGroup>();
+  @Output() createMalfuncGroup = new EventEmitter<MalfunctionGroup>();
   malfuncGroupForm: FormGroup;
-  
-  constructor(private serviceMalfuncGroup: MalfuncGroupService, private formBuilder: FormBuilder) {}
+
+  constructor(private serviceMalfuncGroup: MalfunctionGroupService, private formBuilder: FormBuilder) {}
 
   ngOnInit() {
     $('#createGroup').on('hidden.bs.modal', function() {
-      $(this).find('form').trigger('reset');
+      $(this)
+        .find('form')
+        .trigger('reset');
     });
     this.malfuncGroupForm = this.formBuilder.group({
       name: ['', Validators.required]
@@ -29,11 +31,11 @@ export class CreateMalfuncGroupComponent implements OnInit {
       return;
     }
     const form = this.malfuncGroupForm.value;
-    const malfuncGroup: MalfuncGroup = {
+    const malfuncGroup: MalfunctionGroup = {
       id: 0,
       name: form.name as string
     };
-    
+
     this.serviceMalfuncGroup.addEntity(malfuncGroup).subscribe(newGroup => this.createMalfuncGroup.next(newGroup));
     this.closeDiv.nativeElement.click();
   }

@@ -8,4 +8,9 @@ import { environment } from 'src/environments/environment';
 })
 export class CountryService extends CrudService<Country> {
   protected readonly serviceUrl = `${environment.apiUrl}/country`;
+  protected readonly datatableUrl = `${environment.apiUrl}/datatable/country`;
+
+  protected mapEntity(entity: Country): Country {
+    return new Country(entity);
+  }
 }

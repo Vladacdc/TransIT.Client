@@ -1,20 +1,25 @@
 import { Issue } from './issue';
 import { State } from './state';
-import { ActionType } from './actionType';
+import { ActionType } from './action-type';
 import { Supplier } from './supplier';
-import { User } from './user';
 import { TEntity } from '../../core/models/entity/entity';
 
 export class IssueLog extends TEntity<IssueLog> {
-  public description?: string;
-  public expenses?: number;
-  public actionType?: ActionType;
-  public issue?: Issue;
-  public newState?: State;
-  public oldState?: State;
-  public supplier?: Supplier;
-  public create?: User;
-  public mod?: User;
-  public createDate?: Date;
-  public modDate?: Date;
+  description: string;
+  expenses: number;
+  actionType: ActionType;
+  issue: Issue;
+  newState: State;
+  oldState: State;
+  supplier: Supplier;
+  modDate: Date;
+  createDate: Date;
+
+  constructor(issueLog: Partial<IssueLog>) {
+    super(issueLog);
+    this.oldState = new State(this.oldState);
+    this.newState = new State(this.newState);
+    this.actionType = new ActionType(this.actionType);
+    this.supplier = new Supplier(this.supplier);
+  }
 }

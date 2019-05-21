@@ -1,8 +1,8 @@
 import { Component, OnInit, EventEmitter, Output, Input, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { Supplier } from 'src/app/modules/engineer/models/supplier';
-import { SupplierService } from 'src/app/modules/engineer/services/supplier.service';
+import { Supplier } from 'src/app/modules/shared/models/supplier';
+import { SupplierService } from 'src/app/modules/shared/services/supplier.service';
 
 @Component({
   selector: 'app-create-supplier',
@@ -11,10 +11,10 @@ import { SupplierService } from 'src/app/modules/engineer/services/supplier.serv
 })
 export class CreateSupplierComponent implements OnInit {
   [x: string]: any;
-  @Output() public createSupplier: EventEmitter<Supplier>; 
-  @ViewChild ('close') modalClose;
-  public supplierForm: FormGroup;
-  public supplier: Supplier;
+  @Output() createSupplier: EventEmitter<Supplier>;
+  @ViewChild('close') modalClose;
+  supplierForm: FormGroup;
+  supplier: Supplier;
 
   constructor(private activatedRoute: ActivatedRoute, private supplierService: SupplierService) {
     this.createSupplier = new EventEmitter<Supplier>();
@@ -28,7 +28,7 @@ export class CreateSupplierComponent implements OnInit {
   }
 
   private newSupplier(): Supplier {
-    return new Supplier({ name: ''});
+    return new Supplier({ name: '' });
   }
 
   ngOnInit() {
@@ -43,7 +43,7 @@ export class CreateSupplierComponent implements OnInit {
     });
   }
 
-  public onSubmit(): void {      
+  onSubmit(): void {
     if (this.supplierForm.invalid) {
       alert('Invalid');
       return;
@@ -51,16 +51,15 @@ export class CreateSupplierComponent implements OnInit {
     const form = this.supplierForm.value;
     const supplier: Supplier = {
       id: 0,
-      name: form.name as string,
-      };
-      
-      this.supplierService
-      .addEntity(supplier)
-      .subscribe(
-        newSupplier => {
-          this.modalClose.nativeElement.click();
-          this.createSupplier.next(newSupplier)},
-        error => this.toast.error('Помилка', 'Постачальник з таким іменем існує')
-      );
+      name: form.name as string
+    };
+
+    this.supplierService.addEntity(supplier).subscribe(
+      newSupplier => {
+        this.modalClose.nativeElement.click();
+        this.createSupplier.next(newSupplier);
+      },
+      error => this.toast.error('Помилка', 'Постачальник з таким іменем існує')
+    );
   }
 }

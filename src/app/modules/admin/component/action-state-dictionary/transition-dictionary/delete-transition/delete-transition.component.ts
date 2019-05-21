@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { Transition } from 'src/app/modules/admin/models/transition/transition';
-import { TransitionService } from 'src/app/modules/admin/services/transition.service';
+import { Transition } from 'src/app/modules/shared/models/transition';
 import { ToastrService } from 'ngx-toastr';
+import { TransitionService } from 'src/app/modules/shared/services/transition.service';
 
 @Component({
   selector: 'app-delete-transition',

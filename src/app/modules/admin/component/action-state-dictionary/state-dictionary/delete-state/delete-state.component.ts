@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef, Input, Output, EventEmitter } from '@angular/core';
-import { State } from 'src/app/modules/admin/models/state/state';
-import { StateService } from 'src/app/modules/admin/services/state.service';
 import { ToastrService } from 'ngx-toastr';
+import { State } from 'src/app/modules/shared/models/state';
+import { StateService } from 'src/app/modules/shared/services/state.service';
 
 @Component({
   selector: 'app-delete-state',
@@ -18,11 +18,12 @@ export class DeleteStateComponent implements OnInit {
   ngOnInit() {}
 
   DeleteState() {
-      this.closeDiv.nativeElement.click();
-      this.serviceState.deleteEntity(this.state.id).subscribe(() => {
+    this.closeDiv.nativeElement.click();
+    this.serviceState.deleteEntity(this.state.id).subscribe(
+      () => {
         this.deleteState.next(this.state);
       },
-      error => this.toast.error('Даний стан використовується','Помилка')
-      );
+      error => this.toast.error('Даний стан використовується', 'Помилка')
+    );
   }
 }

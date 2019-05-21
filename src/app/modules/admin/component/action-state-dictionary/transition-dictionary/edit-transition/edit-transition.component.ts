@@ -1,12 +1,12 @@
 import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
-import { Transition } from 'src/app/modules/admin/models/transition/transition';
+import { Transition } from 'src/app/modules/shared/models/transition';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { State } from 'src/app/modules/admin/models/state/state';
-import { ActionType } from 'src/app/modules/admin/models/action/actiontype';
-import { TransitionService } from 'src/app/modules/admin/services/transition.service';
-import { StateService } from 'src/app/modules/admin/services/state.service';
-import { ActionTypeService } from 'src/app/modules/admin/services/action-type.sevice';
 import { ToastrService } from 'ngx-toastr';
+import { State } from 'src/app/modules/shared/models/state';
+import { ActionType } from 'src/app/modules/shared/models/action-type';
+import { TransitionService } from 'src/app/modules/shared/services/transition.service';
+import { StateService } from 'src/app/modules/shared/services/state.service';
+import { ActionTypeService } from 'src/app/modules/shared/services/action-type.service';
 
 @Component({
   selector: 'app-edit-transition',

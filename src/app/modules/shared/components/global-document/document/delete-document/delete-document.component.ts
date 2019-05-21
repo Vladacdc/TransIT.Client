@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef, Input, Output, EventEmitter } from '@angular/core';
-import { Documents } from 'src/app/modules/admin/models/document/document';
-import { DocumentService } from 'src/app/modules/admin/services/document.service';
 import { ToastrService } from 'ngx-toastr';
+import { Document } from 'src/app/modules/shared/models/document';
+import { DocumentService } from 'src/app/modules/shared/services/document.service';
 
 @Component({
   selector: 'app-delete-document',
@@ -10,8 +10,8 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class DeleteDocumentComponent implements OnInit {
   @ViewChild('close') closeDiv: ElementRef;
-  @Input() document: Documents;
-  @Output() deleteDocument = new EventEmitter<Documents>();
+  @Input() document: Document;
+  @Output() deleteDocument = new EventEmitter<Document>();
 
   constructor(private service: DocumentService, private toast: ToastrService) {}
 

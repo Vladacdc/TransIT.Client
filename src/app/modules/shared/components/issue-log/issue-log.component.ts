@@ -1,9 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { DocumentService } from 'src/app/modules/admin/services/document.service';
-import { IssueLog } from 'src/app/modules/admin/models/issueLog/IssueLog';
-import { Documents } from 'src/app/modules/admin/models/document/document';
-import { IssueLogService } from 'src/app/modules/admin/services/issue-log.service';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { IssueLog } from '../../models/issuelog';
+import { Document } from '../../models/document';
+import { DocumentService } from '../../services/document.service';
+import { IssuelogService } from '../../services/issuelog.service';
 
 declare const $;
 
@@ -13,14 +13,13 @@ declare const $;
   styleUrls: ['./issue-log.component.scss']
 })
 export class IssueLogComponent implements OnInit {
-  public issueLogs: Array<IssueLog>;
-  public issueLog: IssueLog;
   protected tableIssueLog: any;
-  public document:Documents;
+  issueLog: IssueLog;
+  document: Document;
 
   constructor(
-    protected issueLogService: IssueLogService,
-    protected DocumentService: DocumentService,
+    protected issueLogService: IssuelogService,
+    protected documentService: DocumentService,
     protected router: Router
   ) {}
 
@@ -50,7 +49,7 @@ export class IssueLogComponent implements OnInit {
         url: '//cdn.datatables.net/plug-ins/1.10.19/i18n/Ukrainian.json'
       }
     });
-    this.document = this.DocumentService.selectedItem;
+    this.document = this.documentService.selectedItem;
 
     this.issueLogService.getEntity(this.document.issueLog.id).subscribe(issueLog => {
       this.issueLog = issueLog;

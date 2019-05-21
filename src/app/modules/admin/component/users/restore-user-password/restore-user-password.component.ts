@@ -2,7 +2,7 @@ import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { matchPassword } from 'src/app/custom-errors';
 import { ToastrService } from 'ngx-toastr';
-import { UserService } from '../../../services/user.service';
+import { UserService } from 'src/app/modules/shared/services/user.service';
 
 @Component({
   selector: 'app-restore-user-password',

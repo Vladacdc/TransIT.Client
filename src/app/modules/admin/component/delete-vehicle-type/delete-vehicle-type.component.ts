@@ -1,7 +1,7 @@
 import { Component, OnInit, EventEmitter, ViewChild, Input, Output, ElementRef } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
-import { VehicleType } from '../../models/vehicleType/vehicle-type';
-import { VehicleTypeService } from '../../services/vehicle-type.service';
+import { VehicleType } from 'src/app/modules/shared/models/vehicleType';
+import { VehicleTypeService } from 'src/app/modules/shared/services/vehicle-type.service';
 
 @Component({
   selector: 'app-delete-vehicle-type',
@@ -13,16 +13,17 @@ export class DeleteVehicleTypeComponent implements OnInit {
   @Input() vehicleType: VehicleType;
   @Output() deleteVehicleType = new EventEmitter<VehicleType>();
 
-  constructor(private service: VehicleTypeService, private toast: ToastrService) { }
- 
-  ngOnInit() {
-  }
+  constructor(private service: VehicleTypeService, private toast: ToastrService) {}
+
+  ngOnInit() {}
 
   delete() {
     this.closeDiv.nativeElement.click();
-    this.service.deleteEntity(this.vehicleType.id).subscribe(data => 
-      this.deleteVehicleType.next(this.vehicleType),
-      _ => this.toast.error('Не вдалось видалити тип транспорту', 'Помилка видалення типу транспорту')
-    );
+    this.service
+      .deleteEntity(this.vehicleType.id)
+      .subscribe(
+        data => this.deleteVehicleType.next(this.vehicleType),
+        _ => this.toast.error('Не вдалось видалити тип транспорту', 'Помилка видалення типу транспорту')
+      );
   }
 }

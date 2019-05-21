@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Malfunction } from 'src/app/modules/shared/models/malfunction';
-import { MalfuncService } from 'src/app/modules/admin/services/malfunc.service';
+import { MalfunctionService } from 'src/app/modules/shared/services/malfunction.service';
 
 @Component({
   selector: 'app-report',
@@ -54,7 +54,7 @@ export class ReportComponent implements OnInit {
     });
   }
 
-  constructor(private malfuncService: MalfuncService) {}
+  constructor(private malfuncService: MalfunctionService) {}
 }
 function format(data) {
   return '<div> rthesth</div>';

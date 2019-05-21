@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef, Input, Output, EventEmitter } from '@angular/core';
-import { ActionType } from 'src/app/modules/admin/models/action/actiontype';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { ActionTypeService } from 'src/app/modules/admin/services/action-type.sevice';
+import { ActionType } from 'src/app/modules/shared/models/action-type';
+import { ActionTypeService } from 'src/app/modules/shared/services/action-type.service';
 
 @Component({
   selector: 'app-edit-action',
@@ -9,14 +9,14 @@ import { ActionTypeService } from 'src/app/modules/admin/services/action-type.se
   styleUrls: ['./edit-action.component.scss']
 })
 export class EditActionComponent implements OnInit {
-  selectedAction:ActionType;
+  selectedAction: ActionType;
   @ViewChild('close') closeDiv: ElementRef;
   @Input()
   set action(action: ActionType) {
     if (!action) {
       return;
     }
-    this.selectedAction=action;
+    this.selectedAction = action;
     action = new ActionType(action);
     this.actionFrom.patchValue(action);
   }
@@ -24,30 +24,26 @@ export class EditActionComponent implements OnInit {
 
   actionFrom: FormGroup;
 
-  constructor(
-    private formBuilder: FormBuilder,
-    private serviceAction: ActionTypeService,
-  ) { }
+  constructor(private formBuilder: FormBuilder, private serviceAction: ActionTypeService) {}
 
   ngOnInit() {
     this.actionFrom = this.formBuilder.group({
-        id: '',
-        name: ''
-      });
-    }
-  
-    updateData() {
-      if (this.actionFrom.invalid) {
-        return;
-      }
-      this.closeDiv.nativeElement.click();
-      const form = this.actionFrom.value;
-  
-      const action: ActionType = {
-        id: form.id as number,
-        name: form.name as string,
-      };
-      this.serviceAction.updateEntity(action).subscribe(_ => this.editAction.next(action));
-    }
+      id: '',
+      name: ''
+    });
+  }
 
+  updateData() {
+    if (this.actionFrom.invalid) {
+      return;
+    }
+    this.closeDiv.nativeElement.click();
+    const form = this.actionFrom.value;
+
+    const action: ActionType = {
+      id: form.id as number,
+      name: form.name as string
+    };
+    this.serviceAction.updateEntity(action).subscribe(_ => this.editAction.next(action));
+  }
 }

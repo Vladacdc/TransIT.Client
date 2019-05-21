@@ -1,8 +1,8 @@
-import { Component, OnInit, ChangeDetectorRef, Input } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
-import { Documents } from 'src/app/modules/admin/models/document/document';
-import { DocumentService } from 'src/app/modules/admin/services/document.service';
+import { Document } from '../../../models/document';
+import { DocumentService } from '../../../services/document.service';
 
 declare const $;
 
@@ -12,9 +12,9 @@ declare const $;
   styleUrls: ['./document.component.scss']
 })
 export class DocumentComponent implements OnInit {
-  documents: Documents[] = [];
+  documents: Document[] = [];
   tableDocument: DataTables.Api;
-  selectedDocument: Documents;
+  selectedDocument: Document;
   tost: ToastrService;
   @Input() isVisible: boolean;
 
@@ -85,23 +85,23 @@ export class DocumentComponent implements OnInit {
         });
       }
       if (this.selectedDocument.issueLog) {
-        component.documentService.selectedItem = new Documents(this.selectedDocument);
+        component.documentService.selectedItem = new Document(this.selectedDocument);
         component.router.navigate([`${component._url}/issue-log`]);
       }
     };
   }
 
-  addDocument(document: Documents) {
+  addDocument(document: Document) {
     this.documents.push(document);
     this.tableDocument.draw();
   }
 
-  deleteDocument(document: Documents) {
+  deleteDocument(document: Document) {
     this.documents = this.documents.filter(v => v.id !== document.id);
     this.tableDocument.draw();
   }
 
-  editDocument(document: Documents) {
+  editDocument(document: Document) {
     this.documents[this.documents.findIndex(i => i.id === document.id)] = document;
     this.tableDocument.draw();
   }

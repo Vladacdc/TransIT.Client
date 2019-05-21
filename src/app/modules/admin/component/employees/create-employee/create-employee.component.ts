@@ -1,11 +1,11 @@
 import { Component, EventEmitter, Output, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { Employee } from '../../../models/employee/employee';
-import { EmployeeService } from '../../../services/employee.service';
-import { Post } from '../../../models/post/post';
-import { PostService } from '../../../services/post.service';
-import { STRING_FIELD_ERRORS } from 'src/app/custom-errors';
+import { NAME_FIELD_ERRORS } from 'src/app/custom-errors';
+import { Employee } from 'src/app/modules/shared/models/employee';
+import { Post } from 'src/app/modules/shared/models/post';
+import { EmployeeService } from 'src/app/modules/shared/services/employee.service';
+import { PostService } from 'src/app/modules/shared/services/post.service';
 
 @Component({
   selector: 'app-create-employee',
@@ -18,7 +18,7 @@ export class CreateEmployeeComponent implements OnInit {
     Validators.maxLength(30),
     Validators.pattern(/^[A-Za-zА-Яа-яЄєІіЇїҐґ\-\']+$/)
   ];
-  readonly customFieldErrors = STRING_FIELD_ERRORS;
+  readonly customFieldErrors = NAME_FIELD_ERRORS;
 
   @Output() addEmployee = new EventEmitter<Employee>();
   employeeForm: FormGroup;

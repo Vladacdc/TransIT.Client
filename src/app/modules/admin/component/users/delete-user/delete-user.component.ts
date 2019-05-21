@@ -1,7 +1,7 @@
 import { Component, ElementRef, Input, OnInit, ViewChild, EventEmitter, Output } from '@angular/core';
-import { UserService } from '../../../services/user.service';
 import { ToastrService } from 'ngx-toastr';
-import { User } from '../../../models/user/user';
+import { User } from 'src/app/modules/shared/models/user';
+import { UserService } from 'src/app/modules/shared/services/user.service';
 
 @Component({
   selector: 'app-delete-user',

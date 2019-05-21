@@ -1,5 +1,9 @@
 import { TEntity } from '../../core/models/entity/entity';
 
 export class VehicleType extends TEntity<VehicleType> {
-  public name?: string;
+  name: string;
+
+  constructor(vehicleType: Partial<VehicleType>) {
+    super(vehicleType);
+  }
 }

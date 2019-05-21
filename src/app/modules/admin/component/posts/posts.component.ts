@@ -1,8 +1,8 @@
 import { Component, ViewChild, AfterViewInit, OnDestroy } from '@angular/core';
-import { PostService } from '../../services/post.service';
-import { Post } from '../../models/post/post';
 import { Subject } from 'rxjs';
 import { DataTableDirective } from 'angular-datatables';
+import { Post } from 'src/app/modules/shared/models/post';
+import { PostService } from 'src/app/modules/shared/services/post.service';
 
 @Component({
   selector: 'app-posts',

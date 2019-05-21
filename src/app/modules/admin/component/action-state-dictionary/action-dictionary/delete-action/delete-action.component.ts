@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, ElementRef, Input, Output, EventEmitter } from '@angular/core';
-import { ActionType } from 'src/app/modules/admin/models/action/actiontype';
-import { ActionTypeService } from 'src/app/modules/admin/services/action-type.sevice';
 import { ToastrService } from 'ngx-toastr';
+import { ActionType } from 'src/app/modules/shared/models/action-type';
+import { ActionTypeService } from 'src/app/modules/shared/services/action-type.service';
 
 @Component({
   selector: 'app-delete-action',

@@ -1,9 +1,9 @@
 import { Component, OnInit, ElementRef, ViewChild, Input, EventEmitter, Output } from '@angular/core';
-import { MalfunSubgroup } from '../../models/malfun-subgroup/malfun-subgroup';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { MalfuncGroup } from '../../models/malfuncGroup/malfunc-group';
-import { MalfuncGroupService } from '../../services/malfunc-group.service';
-import { MalfunSubgroupService } from '../../services/malfun-subgroup.service';
+import { MalfunctionSubgroup } from 'src/app/modules/shared/models/malfunction-subgroup';
+import { MalfunctionGroup } from 'src/app/modules/shared/models/malfunction-group';
+import { MalfunctionGroupService } from 'src/app/modules/shared/services/malfunction-group.service';
+import { MalfunctionSubgroupService } from 'src/app/modules/shared/services/malfunction-subgroup.service';
 
 @Component({
   selector: 'app-edit-malfunc-subgroup',
@@ -13,7 +13,7 @@ import { MalfunSubgroupService } from '../../services/malfun-subgroup.service';
 export class EditMalfuncSubgroupComponent implements OnInit {
   @ViewChild('close') closeDiv: ElementRef;
   @Input()
-  set malfunctionSubGroup(malfunctionSubGroup: MalfunSubgroup) {
+  set malfunctionSubGroup(malfunctionSubGroup: MalfunctionSubgroup) {
     if (!malfunctionSubGroup) {
       return;
     }
@@ -22,16 +22,16 @@ export class EditMalfuncSubgroupComponent implements OnInit {
       group: malfunctionSubGroup.malfunctionGroup.name
     });
   }
-  @Output() editMalfuncSubGroup = new EventEmitter<MalfunSubgroup>();
+  @Output() editMalfuncSubGroup = new EventEmitter<MalfunctionSubgroup>();
 
   subGroupForm: FormGroup;
 
-  malfunctionGroups: MalfuncGroup[] = [];
+  malfunctionGroups: MalfunctionGroup[] = [];
 
   constructor(
     private formBuilder: FormBuilder,
-    private serviceMalfuncGroup: MalfuncGroupService,
-    private serviceMalfuncSubGroup: MalfunSubgroupService
+    private serviceMalfuncGroup: MalfunctionGroupService,
+    private serviceMalfuncSubGroup: MalfunctionSubgroupService
   ) {}
 
   ngOnInit() {
@@ -50,12 +50,13 @@ export class EditMalfuncSubgroupComponent implements OnInit {
     }
     this.closeDiv.nativeElement.click();
     const form = this.subGroupForm.value;
-    const malfunSubGroup: MalfunSubgroup = {
+    const malfunSubGroup: MalfunctionSubgroup = {
       id: form.id as number,
       name: form.name as string,
       malfunctionGroup: this.malfunctionGroups.find(f => f.name === form.group)
     };
     this.serviceMalfuncSubGroup
-      .updateEntity(malfunSubGroup).subscribe(_ => this.editMalfuncSubGroup.next(malfunSubGroup));
+      .updateEntity(malfunSubGroup)
+      .subscribe(_ => this.editMalfuncSubGroup.next(malfunSubGroup));
   }
 }

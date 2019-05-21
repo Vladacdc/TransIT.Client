@@ -1,7 +1,7 @@
-import { Component, OnInit, ViewChild, ElementRef, Input, Output, EventEmitter} from '@angular/core';
-import { MalfuncGroup } from '../../models/malfuncGroup/malfunc-group';
+import { Component, OnInit, ViewChild, ElementRef, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { MalfuncGroupService } from '../../services/malfunc-group.service';
+import { MalfunctionGroup } from 'src/app/modules/shared/models/malfunction-group';
+import { MalfunctionGroupService } from 'src/app/modules/shared/services/malfunction-group.service';
 
 @Component({
   selector: 'app-edit-malfunc-group',
@@ -11,18 +11,17 @@ import { MalfuncGroupService } from '../../services/malfunc-group.service';
 export class EditMalfuncGroupComponent implements OnInit {
   @ViewChild('close') closeDiv: ElementRef;
   @Input()
-  set malfuncGroup(malfuncGroup: MalfuncGroup) {
+  set malfuncGroup(malfuncGroup: MalfunctionGroup) {
     if (!malfuncGroup) {
       return;
     }
-    this.malfunctionGroupForm.patchValue({ ...malfuncGroup});
+    this.malfunctionGroupForm.patchValue({ ...malfuncGroup });
   }
-  @Output() updateMalfuncGroup = new EventEmitter<MalfuncGroup>();
+  @Output() updateMalfuncGroup = new EventEmitter<MalfunctionGroup>();
 
   malfunctionGroupForm: FormGroup;
 
-
-  constructor(private formBuilder: FormBuilder,private serviceMalfunctionGroupService: MalfuncGroupService) {}
+  constructor(private formBuilder: FormBuilder, private serviceMalfunctionGroupService: MalfunctionGroupService) {}
 
   ngOnInit() {
     this.malfunctionGroupForm = this.formBuilder.group({
@@ -37,12 +36,12 @@ export class EditMalfuncGroupComponent implements OnInit {
     }
     this.closeDiv.nativeElement.click();
     const form = this.malfunctionGroupForm.value;
-    const malfuncGroup: MalfuncGroup = {
+    const malfuncGroup: MalfunctionGroup = {
       id: form.id as number,
       name: form.name as string
     };
-    this.serviceMalfunctionGroupService.updateEntity(malfuncGroup).subscribe(_ => this.updateMalfuncGroup.next(malfuncGroup));
+    this.serviceMalfunctionGroupService
+      .updateEntity(malfuncGroup)
+      .subscribe(_ => this.updateMalfuncGroup.next(malfuncGroup));
   }
 }
-
-

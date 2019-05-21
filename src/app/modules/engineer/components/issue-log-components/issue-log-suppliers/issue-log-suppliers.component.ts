@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
-import { Supplier } from '../../../models/supplier';
-import { SupplierService } from '../../../services/supplier.service';
+import { Supplier } from 'src/app/modules/shared/models/supplier';
+import { SupplierService } from 'src/app/modules/shared/services/supplier.service';
 
 declare const $;
 
@@ -10,7 +10,6 @@ declare const $;
   styleUrls: ['./issue-log-suppliers.component.scss']
 })
 export class IssueLogSuppliersComponent implements OnInit {
-
   currentSupplier: Supplier;
   suppliers: Array<Supplier>;
   @Output() selectSupplier: EventEmitter<Supplier>;
@@ -20,7 +19,7 @@ export class IssueLogSuppliersComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.supplierService.getEntities().subscribe(items => this.suppliers = items);
+    this.supplierService.getEntities().subscribe(items => (this.suppliers = items));
   }
 
   selectItem(item: Supplier): void {

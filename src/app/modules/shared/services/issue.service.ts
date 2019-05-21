@@ -18,13 +18,6 @@ export class IssueService extends CrudService<Issue> {
     saveToStorage('selectedIssue', value);
   }
 
-  getFilteredEntities(params: any): Observable<Issue> {
-    return this.http.post<any>(this.datatableUrl, params, {}).pipe(
-      map(response => ({ ...response, data: response.data.map(d => this.mapEntity(d)) })),
-      catchError(this.handleError())
-    );
-  }
-
   protected mapEntity(entity: Issue): Issue {
     return new Issue(entity);
   }
