@@ -28,6 +28,14 @@
           </div>
           <button hidden type="submit" #submit></button>
         </form>
+        <form [formGroup]="documentForm">
+          <div class="form-group">
+            <label>Шлях документа</label>
+            <input type="text" class="form-control" formControlName="path" autocomplete="off"
+                   placeholder="Введіть шлях документа" >
+          </div>
+          <button hidden type="submit" #submit></button>
+        </form>
         <!-- <form [formGroup]="documentForm">
         <div class="form-group">
           <label>Історія</label>

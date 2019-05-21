@@ -33,7 +33,8 @@ export class CreateDocumentComponent implements OnInit {
     });
     this.documentForm = this.formBuilder.group({
       name: ['', Validators.required],
-      description: ['', Validators.required]
+      description: ['', Validators.required],
+      path: ['', Validators.required]
     });
     this.serviceIssueLog.getEntities().subscribe(issuelog => {
       this.issueLogList = issuelog;
@@ -44,11 +45,12 @@ export class CreateDocumentComponent implements OnInit {
       return;
     }
     const form = this.documentForm.value;
-    const document: Document = new Document({
+    const document: Document = ({
       id: 0,
       name: form.name as string,
       description: form.description as string,
-      issueLog: this.issueLog
+      issueLog: this.issueLog,
+      path:form.path as string
     });
 
     this.serviceDocument.addEntity(document).subscribe(newGroup => this.createDocument.next(newGroup));

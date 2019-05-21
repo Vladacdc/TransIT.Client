@@ -42,7 +42,8 @@ export class DocumentComponent implements OnInit {
           data: null,
           defaultContent: `<button class="first btn" data-toggle="modal" data-target="#editDocument"><i class="fas fa-edit"></i></button>
            <button class="second btn" data-toggle="modal" data-target="#deleteDocument"><i class="fas fas fa-trash-alt"></i></button>
-           <button class="third btn" data-toggle="modal"><i class="fas fa-info-circle"></i></button>`
+           <button class="third btn" data-toggle="modal"><i class="fas fa-info-circle"></i></button>
+           <button class="fourth btn btn-info">Копіювати шлях документа</button>`
         }
       ],
       paging: true,
@@ -54,6 +55,7 @@ export class DocumentComponent implements OnInit {
     $('#document-table tbody').on('click', '.first', this.selectFirstItem(this));
     $('#document-table tbody').on('click', '.second', this.selectSecondItem(this));
     $('#document-table tbody').on('click', '.third', this.selectThirdItem(this));
+    $('#document-table tbody').on('click', '.fourth', this.copyMessage(this));
   }
 
   private ajaxCallback(dataTablesParameters: any, callback): void {
@@ -88,6 +90,26 @@ export class DocumentComponent implements OnInit {
         component.documentService.selectedItem = new Document(this.selectedDocument);
         component.router.navigate([`${component._url}/issue-log`]);
       }
+    };
+  }
+
+  copyMessage(component: any) {
+    return function() {
+      const data = component.tableDocument.row($(this).parents('tr')).data();
+      let selBox = document.createElement('textarea');
+      selBox.style.position = 'fixed';
+      selBox.style.left = '0';
+      selBox.style.top = '0';
+      selBox.style.opacity = '0';
+      selBox.value = data.path;
+      document.body.appendChild(selBox);
+      selBox.focus();
+      selBox.select();
+      document.execCommand('copy');
+      document.body.removeChild(selBox);
+      component.toast.success(`шлях документа "${data.name}" скопійований`,  'Скопійовано', {
+        timeOut: 3000
+      });
     };
   }
 

@@ -39,7 +39,8 @@ export class EditDocumentComponent implements OnInit {
       id: '',
       name: '',
       description: '',
-      issueLog: ''
+      issueLog: '',
+      path:''
     });
     this.serviceIssueLog.getEntities().subscribe(issueLogs => {
       this.issueLogs = issueLogs;
@@ -58,7 +59,8 @@ export class EditDocumentComponent implements OnInit {
       id: form.id as number,
       name: form.name as string,
       description: form.description as string,
-      issueLog: this.selectedDoc.issueLog
+      issueLog: this.selectedDoc.issueLog,
+      path:form.path as string
     });
     this.serviceDocument.updateEntity(document).subscribe(_ => this.editDocument.next(document));
   }
