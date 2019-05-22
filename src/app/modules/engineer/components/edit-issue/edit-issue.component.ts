@@ -8,6 +8,7 @@ import { Malfunction } from 'src/app/modules/shared/models/malfunction';
 import { MalfunctionGroupService } from 'src/app/modules/shared/services/malfunction-group.service';
 import { MalfunctionSubgroupService } from 'src/app/modules/shared/services/malfunction-subgroup.service';
 import { MalfunctionService } from 'src/app/modules/shared/services/malfunction.service';
+import { Priority } from 'src/app/modules/core/models/priority/priority';
 
 @Component({
   selector: 'app-edit-issue',
@@ -27,6 +28,8 @@ export class EditIssueComponent implements OnInit {
   currentMalfunctionSubgroup: MalfunctionSubgroup;
   currentMalfunctionGroup: MalfunctionGroup;
 
+  priorityList = Object.values(Priority).filter(n => typeof n === typeof '');
+
   constructor(
     private issueService: IssueService,
     private toastr: ToastrService,
@@ -43,6 +46,10 @@ export class EditIssueComponent implements OnInit {
     this.currentMalfunction = this.issue.malfunction;
     this.currentMalfunctionSubgroup = this.currentMalfunction.malfunctionSubgroup;
     this.currentMalfunctionGroup = this.currentMalfunctionSubgroup.malfunctionGroup;
+  }
+
+  selectPriority(item) {
+    this.issue.priority = parseInt(Priority[item]);
   }
 
   editIssue() {
@@ -73,7 +80,6 @@ export class EditIssueComponent implements OnInit {
     this.currentMalfunction = null;
     if (this.currentMalfunctionSubgroup) {
       this.malfunctionFilteredList = this.getBySubgroup(this.currentMalfunctionSubgroup);
-      console.dir(this.malfunctionFilteredList);
     }
   }
 

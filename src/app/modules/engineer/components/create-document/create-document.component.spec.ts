@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { IssueLogStateComponent } from './issue-log-state.component';
+import { CreateDocumentComponent } from './create-document.component';
 
-describe('IssueLogStateComponent', () => {
-  let component: IssueLogStateComponent;
-  let fixture: ComponentFixture<IssueLogStateComponent>;
+describe('CreateDocumentComponent', () => {
+  let component: CreateDocumentComponent;
+  let fixture: ComponentFixture<CreateDocumentComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ IssueLogStateComponent ]
+      declarations: [ CreateDocumentComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(IssueLogStateComponent);
+    fixture = TestBed.createComponent(CreateDocumentComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,10 +1,10 @@
 <form class="container" [formGroup]="issueLogForm" (submit)="onSubmit()">
   <div class="form-group">
-    <app-create-document class="badge-head" [issueLog]="issueLog" (createDocument)="assignDocument($event)"></app-create-document>
+    <app-add-document class="badge-head" [issueLog]="issueLog" (addExistingDocument)="assignExistingDocument($event)" (createDocument)="assignDocument($event)"></app-add-document>
   </div>
   <div class="form-group">
     <ul>
-      <li *ngFor="let item of documents">
+      <li *ngFor="let item of shownDocuments">
         <span class="badge badge-info">
           <h5>{{ item.name }}</h5>
           <button class="badge badge-danger" (click)="deleteDocument(item)">&times;</button>
@@ -17,7 +17,19 @@
     <app-issue-log-action-type (selectActionType)="assignActionType($event)"></app-issue-log-action-type>
   </div>
   <div class="form-group">
-    <app-issue-log-state [currentState]="issueLog.issue.state" (selectState)="assignState($event)"></app-issue-log-state>
+    <div class="form-group">
+      <label>Статус</label>
+      <ng-select
+        [ngModelOptions]="{standalone: true}"
+        [disabled]="isStatesDisabled"
+        [items]="states"
+        (ngModelChange)="assignState($event)"
+        [(ngModel)]="issueLog.newState"
+        bindLabel="transName"
+        placeholder="Виберіть статус"
+        notFoundText="Не знайдено"
+      ></ng-select>
+    </div>
   </div>
   <div class="form-group">
     <app-issue-log-assignees (selectUser)="assignAssignee($event)"></app-issue-log-assignees>
@@ -57,7 +69,7 @@
     </textarea>
   </div>
   <div class="form-group">
-    <button type="submit" id="submit" class="btn btn-primary">
+    <button type="submit" id="submit" class="btn btn-primary" [disabled]="issueLogForm.invalid">
       Підтвердити
     </button>
   </div>
