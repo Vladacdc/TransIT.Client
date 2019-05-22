@@ -58,6 +58,10 @@ export class TransitionDictionaryComponent implements OnDestroy, AfterViewInit {
     this.selectedTransition = { ...transition };
   }
 
+  isDeletable(transition: Transition): boolean {
+    return !transition.isFixed;
+  }
+
   private adjustColumns() {
     setTimeout(() => $(window).trigger('resize'), 0);
   }

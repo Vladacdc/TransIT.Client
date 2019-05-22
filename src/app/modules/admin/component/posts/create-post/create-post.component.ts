@@ -15,7 +15,7 @@ export class CreatePostComponent implements OnInit {
     Validators.required,
     Validators.minLength(0),
     Validators.maxLength(30),
-    Validators.pattern(/^[A-Za-zА-Яа-яЄєІіЇїҐґ\-\']+$/)
+    Validators.pattern(/^[A-Za-zА-Яа-яЄєІіЇїҐґ\-\']+( [A-Za-zА-Яа-яЄєІіЇїҐґ\-\']+)*$$/)
   ];
   readonly customFieldErrors = NAME_FIELD_ERRORS;
 

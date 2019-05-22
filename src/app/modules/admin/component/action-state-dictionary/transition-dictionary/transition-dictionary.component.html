@@ -21,10 +21,21 @@
         <td>{{ transition.actionType.name }}</td>
         <td>
           <div class="d-flex flex-nowrap">
-            <button (click)="selectTransition(transition)" class="btn" data-toggle="modal" data-target="#editModal">
+            <button
+              (click)="selectTransition(transition)"
+              class="btn"
+              data-toggle="modal"
+              data-target="#editTransition"
+            >
               <i class="fas fa-info-circle"></i>
             </button>
-            <button (click)="selectTransition(transition)" class="btn" data-toggle="modal" data-target="#deleteModal">
+            <button
+              (click)="selectTransition(transition)"
+              class="btn"
+              data-toggle="modal"
+              data-target="#deleteModal"
+              *ngIf="isDeletable(transition)"
+            >
               <i class="fas fa-trash-alt" style="color: darkred"></i>
             </button>
           </div>

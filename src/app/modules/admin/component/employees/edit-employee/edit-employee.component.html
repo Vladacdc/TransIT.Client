@@ -38,8 +38,8 @@
           </div>
           <div>
             <label class="required-field">Посада</label>
-            <select class="form-control" formControlName="post">
-              <option value="" selected>Виберіть посаду</option>
+            <select class="form-control" formControlName="post" [compareWith]="comparePosts">
+              <option value="">Виберіть посаду</option>
               <option *ngFor="let post of posts" [ngValue]="post">{{ post.name }}</option>
             </select>
           </div>

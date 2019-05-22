@@ -18,26 +18,26 @@
         <form [formGroup]="transitionForm" (validSubmit)="onSubmit()">
           <div class="form-group">
             <label class="required-field">Старий стан</label>
-            <select class="form-control" formControlName="fromState">
-              <option value="" selected>Виберіть старий стан</option>
+            <select class="form-control" formControlName="fromState" [compareWith]="compareEntities">
+              <option value="">Виберіть старий стан</option>
               <option *ngFor="let state of states" [ngValue]="state">{{ state.transName }}</option>
             </select>
           </div>
           <div class="form-group">
             <label class="required-field">Новий стан</label>
-            <select class="form-control" formControlName="toState">
-              <option value="" selected>Виберіть новий стан</option>
+            <select class="form-control" formControlName="toState" [compareWith]="compareEntities">
+              <option value="">Виберіть новий стан</option>
               <option *ngFor="let state of states" [ngValue]="state">{{ state.transName }}</option>
             </select>
           </div>
           <div class="form-group">
             <label class="required-field">Екшин</label>
-            <select class="form-control" formControlName="actionType">
-              <option value="" selected>Виберіть екшин</option>
+            <select class="form-control" formControlName="actionType" [compareWith]="compareEntities">
+              <option value="">Виберіть екшин</option>
               <option *ngFor="let actionType of actionTypes" [ngValue]="actionType">{{ actionType.name }}</option>
             </select>
           </div>
-          <button hidden type="submit" #submit data-toggle="modal" data-target="#createTransition"></button>
+          <button hidden type="submit" #submit data-toggle="modal" data-target="#editTransition"></button>
         </form>
       </div>
       <div class="modal-footer">
@@ -49,7 +49,7 @@
           class="btn btn-primary"
           (click)="clickSubmit(submit)"
           form="transitionForm"
-          [disabled]="transitionForm.invalid"
+          [disabled]="transitionForm.invalid || transitionForm.disabled"
           data-toggle="modal"
           data-target="#editTransition"
         >

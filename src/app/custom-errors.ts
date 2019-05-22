@@ -81,7 +81,7 @@ export function loginPatternFormat(label: string, error: any): string {
 }
 
 export function nameFieldFormat(label: string, error: any): string {
-  return `Дозволено тільки літери, і спецстмволи ("-" та " ' ")`;
+  return `Дозволено тільки літери, і спецсимволи ("-" та " ' ")`;
 }
 
 export function emailFormat(label: string, error: any): string {

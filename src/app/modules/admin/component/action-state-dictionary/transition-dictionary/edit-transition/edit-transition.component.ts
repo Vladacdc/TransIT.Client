@@ -7,6 +7,7 @@ import { ActionType } from 'src/app/modules/shared/models/action-type';
 import { TransitionService } from 'src/app/modules/shared/services/transition.service';
 import { StateService } from 'src/app/modules/shared/services/state.service';
 import { ActionTypeService } from 'src/app/modules/shared/services/action-type.service';
+import { TEntity } from 'src/app/modules/core/models/entity/entity';
 
 @Component({
   selector: 'app-edit-transition',
@@ -17,8 +18,19 @@ export class EditTransitionComponent implements OnInit {
   @Output() editTransition = new EventEmitter<Transition>();
   @Input()
   set transition(transition: Transition) {
+    if (!transition) {
+      return;
+    }
     this._transition = transition;
     this.setUpForm();
+
+    setTimeout(() => {
+      if (this._transition.isFixed) {
+        this.transitionForm.disable();
+      } else {
+        this.transitionForm.enable();
+      }
+    }, 0);
   }
 
   transitionForm: FormGroup;
@@ -54,6 +66,10 @@ export class EditTransitionComponent implements OnInit {
 
   closeModal() {
     this.setUpForm();
+  }
+
+  compareEntities<T>(entity: TEntity<T>, otherEntity: TEntity<T>) {
+    return entity && otherEntity ? entity.id === otherEntity.id : entity === otherEntity;
   }
 
   private loadEntities() {
