@@ -1,4 +1,4 @@
-<div class="modal fade" id="editSupplier" tabindex="-1" vehicleType="dialog" aria-labelledby="EditSupplier"
+<div class="modal fade" id="editSupplier" tabindex="-1" vehicleType="dialog" aria-labelledby="editSupplier"
   aria-hidden="true">
   <div class="modal-dialog" vehicleType="document">
     <div class="modal-content">
@@ -26,7 +26,7 @@
             <label>Країна</label>
             <select class="form-control" formControlName="country">
               <option value="" selected>Виберіть Країну</option>
-              <option *ngFor="let country of countries" [value]="country">{{ country.name }}</option>
+              <option *ngFor="let country of countries" [ngValue]="country">{{ country.name }}</option>
             </select>
           </div>
           <div class="form-group">

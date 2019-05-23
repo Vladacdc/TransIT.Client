@@ -17,7 +17,9 @@ export class EditSupplierComponent implements OnInit {
   selectedSupplier: Supplier;
   countries: Array<Country>;
   currencies: Array<Currency>;
-  @ViewChild('close') closeDiv: ElementRef;
+  supplierForm: FormGroup;
+  @ViewChild('close') closeDiv: ElementRef;  
+  @Output() updateSupplier = new EventEmitter<Supplier>();
   @Input()
   set supplier(supplier: Supplier) {
     if (!supplier) {
@@ -25,11 +27,8 @@ export class EditSupplierComponent implements OnInit {
     }
     this.selectedSupplier=supplier;
     supplier = new Supplier(supplier);
-    this.supplierForm.patchValue(supplier);
-  }
-  @Output() updateSupplier = new EventEmitter<Supplier>();
-
-  supplierForm: FormGroup;
+    this.supplierForm.patchValue({...supplier, currency: supplier.currency.fullName, country: supplier.country.name});
+  };
 
   constructor(
     private currencyService: CurrencyService,
@@ -37,8 +36,8 @@ export class EditSupplierComponent implements OnInit {
     private formBuilder: FormBuilder, 
     private service: SupplierService, 
     private toast: ToastrService
-    ) { }
-
+    ) {}
+  
    ngOnInit() {
     $('#editSupplier').on('hidden.bs.modal', function() {
       $(this)
@@ -46,6 +45,7 @@ export class EditSupplierComponent implements OnInit {
         .trigger('reset');
     });
     this.supplierForm = this.formBuilder.group({
+      id: [''],
       name: ['', Validators.required],
       fullName: ['', Validators.required],
       edrpou: [''],
@@ -81,9 +81,11 @@ export class EditSupplierComponent implements OnInit {
       fullName: form.fullName as string,
       edrpou: form.edrpou as string,
       country: form.country as Country,
-      currency: form.Currency as Currency
+      currency: form.currency as Currency
     };
+
     this.service.updateEntity(supplier).subscribe(_ => this.updateSupplier.next(supplier));
+    this.closeDiv.nativeElement.click();
   }
 }
 

@@ -2,6 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { SupplierService } from 'src/app/modules/shared/services/supplier.service';
 import { Supplier } from 'src/app/modules/shared/models/supplier';
 import { Router } from '@angular/router';
+import { isRootView } from '@angular/core/src/render3/util';
 
 declare const $;
 
@@ -21,7 +22,7 @@ export class SupplierComponent implements OnInit {
   constructor(private service: SupplierService, private router: Router) {}
   _url = this.router.url.substring(1, this.router.url.length - 1);
 
-  private readonly tableConfig: DataTables.Settings = {
+  private readonly tableConfig: any = {
     responsive: true,
       columns: [
             {
@@ -39,14 +40,6 @@ export class SupplierComponent implements OnInit {
             {
               title: 'ЄДРПОУ', data: 'edrpou', defaultContent:''
             },
-            {
-              title: 'Дії',
-              orderable: false,
-              visible: this.isVisible,
-              data: null,
-        defaultContent:`<button class="first btn" data-toggle="modal" data-target="#editSupplier"><i class="fas fa-edit"></i></button>
-        <button class="second btn" data-toggle="modal" data-target="#deleteSupplier"><i class="fas fas fa-trash-alt"></i></button>`
-     },
             { 
               data: 'id', visible: false 
             }
@@ -62,10 +55,22 @@ export class SupplierComponent implements OnInit {
   };
 
   ngOnInit() {
-
-    this.dataTable = $('#supplier-table').DataTable(this.tableConfig);
     this._url = this._url.substring(0, this._url.indexOf('/'));
     this.isVisibleCheck();
+    if (this._url === 'admin') {
+    this.tableConfig.columns = [
+      ...this.tableConfig.columns,
+      {
+        title: 'Дії',
+        orderable: false,
+        bVisible: this.isVisible,
+        data: null,
+  defaultContent:`<button class="first btn" data-toggle="modal" data-target="#editSupplier"><i class="fas fa-edit"></i></button>
+  <button class="second btn" data-toggle="modal" data-target="#deleteSupplier"><i class="fas fas fa-trash-alt"></i></button>`
+      }
+    ];
+  }
+    this.dataTable = $('#supplier-table').DataTable(this.tableConfig);
     $('#supplier-table tbody').on('click', '.first', this.selectFirstItem(this));
     $('#supplier-table tbody').on('click', '.second', this.selectSecondItem(this));
   
@@ -106,8 +111,7 @@ export class SupplierComponent implements OnInit {
   }
 
   isVisibleCheck() {
-    if (this._url === 'admin') this.isVisible = true;
-    else this.isVisible = false;
+    this.isVisible = this._url === 'admin';
   }
 }
 
