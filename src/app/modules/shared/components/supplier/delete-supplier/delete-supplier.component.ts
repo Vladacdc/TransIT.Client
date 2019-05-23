@@ -21,8 +21,8 @@ export class DeleteSupplierComponent {
     this.closeDeleteModal.nativeElement.click();
     this.service.deleteEntity(this.supplier.id).subscribe(
       data => {
-        this.deleteSupplier.next(this.supplier);
         this.toast.success('', 'Постачальника видалено');
+        this.deleteSupplier.next(this.supplier);        
       },
       error => this.toast.error('Помилка')
     );

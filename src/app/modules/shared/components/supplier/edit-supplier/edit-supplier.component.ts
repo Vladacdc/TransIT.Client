@@ -84,7 +84,12 @@ export class EditSupplierComponent implements OnInit {
       currency: form.currency as Currency
     };
 
-    this.service.updateEntity(supplier).subscribe(_ => this.updateSupplier.next(supplier));
+    this.service.updateEntity(supplier).subscribe(_ => 
+      {
+        this.toast.success('', 'Постачальника відредаговано');
+        this.updateSupplier.next(supplier)
+      },
+      error => this.toast.error('Помилка'));
     this.closeDiv.nativeElement.click();
   }
 }
