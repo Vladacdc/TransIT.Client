@@ -25,7 +25,7 @@ export class EditStateComponent implements OnInit {
 
   stateFrom: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private serviceState: StateService,private toast: ToastrService) {}
+  constructor(private formBuilder: FormBuilder, private serviceState: StateService, private toast: ToastrService) {}
 
   ngOnInit() {
     this.stateFrom = this.formBuilder.group({
@@ -41,15 +41,16 @@ export class EditStateComponent implements OnInit {
     this.closeDiv.nativeElement.click();
     const form = this.stateFrom.value;
 
-    const state: State = {
+    const state: State = new State({
       id: form.id as number,
       transName: form.transName as string,
       name: this.selectedState.name as string
-    };
+    });
     this.serviceState.updateEntity(state).subscribe(
-      _ => {this.editState.next(state);
+      _ => {
+        this.editState.next(state);
       },
       error => this.toast.error('Даний стан неможливо змінити', 'Помилка')
-      );
+    );
   }
 }
