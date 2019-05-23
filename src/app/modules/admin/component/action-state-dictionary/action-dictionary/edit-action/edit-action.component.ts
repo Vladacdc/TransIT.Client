@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef, Input, Output, EventEmitter }
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { ActionType } from 'src/app/modules/shared/models/action-type';
 import { ActionTypeService } from 'src/app/modules/shared/services/action-type.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-edit-action',
@@ -24,7 +25,7 @@ export class EditActionComponent implements OnInit {
 
   actionFrom: FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private serviceAction: ActionTypeService) {}
+  constructor(private formBuilder: FormBuilder, private serviceAction: ActionTypeService,private toast: ToastrService) {}
 
   ngOnInit() {
     this.actionFrom = this.formBuilder.group({
@@ -40,10 +41,14 @@ export class EditActionComponent implements OnInit {
     this.closeDiv.nativeElement.click();
     const form = this.actionFrom.value;
 
-    const action = new ActionType({
+    const action: ActionType = {
       id: form.id as number,
       name: form.name as string
-    });
-    this.serviceAction.updateEntity(action).subscribe(_ => this.editAction.next(action));
+    };
+    this.serviceAction.updateEntity(action).subscribe(
+      _ => {this.editAction.next(action);
+      },
+      error => this.toast.error('Даний стан неможливо змінити', 'Помилка')
+      );
   }
 }
