@@ -1,12 +1,12 @@
 <button type="button" class="btn btn-info" data-toggle="modal" data-target="#createState">
-  <i class="fas fa-plus"></i> Додати стан
+  <i class="fas fa-plus"></i> Створити стан
 </button>
 
 <div class="modal fade" id="createState" tabindex="-1" role="dialog" aria-labelledby="CreateState" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle"> <i class="fas fa-plus"></i> Створити стан</h5>
+        <h5 class="modal-title" id="exampleModalLongTitle"><i class="fas fa-plus"></i> Створити стан</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -15,14 +15,19 @@
         <form [formGroup]="stateForm">
           <div class="form-group">
             <label>Назва</label>
-            <input type="text" class="form-control" formControlName="transName" autocomplete="off"
-                   placeholder="Введіть назву стану" >
+            <input
+              type="text"
+              class="form-control"
+              formControlName="transName"
+              autocomplete="off"
+              placeholder="Введіть назву стану"
+            />
           </div>
           <button hidden type="submit" #submit></button>
         </form>
       </div>
       <div class="modal-footer">
-        <button #close type="button" class="btn btn-secondary" data-dismiss="modal">Закрити</button>
+        <button #close type="button" class="btn btn-secondary" data-dismiss="modal">Скасувати</button>
         <button type="button" class="btn btn-primary" (click)="clickSubmit()" [disabled]="stateForm.invalid">
           Створити
         </button>

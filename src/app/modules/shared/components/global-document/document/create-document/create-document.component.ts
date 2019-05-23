@@ -45,16 +45,20 @@ export class CreateDocumentComponent implements OnInit {
       return;
     }
     const form = this.documentForm.value;
-    const document: Document = ({
+    const document: Document = {
       id: 0,
       name: form.name as string,
       description: form.description as string,
       issueLog: this.issueLog,
-      path:form.path as string
-    });
+      path: form.path as string
+    };
 
-    this.serviceDocument.addEntity(document).subscribe(newGroup => this.createDocument.next(newGroup));
+    this.serviceDocument.addEntity(document).subscribe(
+      newGroup => {
+        this.createDocument.next(newGroup);
+      },
+      error => this.toast.error('Неможливо додати документ', 'Помилка')
+    );
     this.closeDiv.nativeElement.click();
-    this.toast.success('', 'Документ створено');
   }
 }

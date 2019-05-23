@@ -1,5 +1,5 @@
 <div class="table-background border">
-  <h1 style="text-align:center">Екшини</h1>
+  <h1 style="text-align:center">Переходи</h1>
   <span><app-create-action (createAction)="addAction($event)"></app-create-action></span>
   <span class="second">
     <app-edit-action [action]="selectedAction" (editAction)="editAction($event)"></app-edit-action>
@@ -10,4 +10,3 @@
   <p></p>
   <table id="action-table" class="table table-bordered  table-hover" style="width:100%;" cellspacing="0"></table>
 </div>
-

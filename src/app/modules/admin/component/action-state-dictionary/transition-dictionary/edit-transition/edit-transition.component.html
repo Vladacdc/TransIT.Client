@@ -9,7 +9,7 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="editTransition">Деталі переходу</h5>
+        <h5 class="modal-title" id="editTransition">Деталі переходу між станами</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -31,9 +31,9 @@
             </select>
           </div>
           <div class="form-group">
-            <label class="required-field">Екшин</label>
+            <label class="required-field">Перехід</label>
             <select class="form-control" formControlName="actionType" [compareWith]="compareEntities">
-              <option value="">Виберіть екшин</option>
+              <option value="">Виберіть перехід</option>
               <option *ngFor="let actionType of actionTypes" [ngValue]="actionType">{{ actionType.name }}</option>
             </select>
           </div>

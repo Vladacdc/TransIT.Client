@@ -3,7 +3,7 @@
     Переходи між станами
   </h2>
   <app-create-transition (addTransition)="reloadTable()"></app-create-transition>
-  <app-edit-transition [transition]="selectedTransition"></app-edit-transition>
+  <app-edit-transition [transition]="selectedTransition" (editTransition)="reloadTable()"></app-edit-transition>
   <app-delete-transition [transition]="selectedTransition" (deleteTransition)="reloadTable()"></app-delete-transition>
   <table id="transitions" datatable [dtOptions]="options" [dtTrigger]="renderTrigger" class="table table-bordered">
     <thead>
@@ -27,7 +27,7 @@
               data-toggle="modal"
               data-target="#editTransition"
             >
-              <i class="fas fa-info-circle"></i>
+              <i class="fas fa-edit"></i>
             </button>
             <button
               (click)="selectTransition(transition)"
