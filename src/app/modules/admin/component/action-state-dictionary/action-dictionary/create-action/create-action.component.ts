@@ -31,10 +31,10 @@ export class CreateActionComponent implements OnInit {
       return;
     }
     const form = this.actionForm.value;
-    const action: ActionType = {
+    const action = new ActionType ({
       id: 0,
       name: form.name as string
-    };
+    });
 
     this.serviceAction.addEntity(action).subscribe(newGroup => this.createAction.next(newGroup));
     this.closeDiv.nativeElement.click();

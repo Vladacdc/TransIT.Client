@@ -28,10 +28,7 @@ export class ActionComponent implements OnInit {
 
   actionTypeList: ActionType[] = [];
   index: number;
-  action: ActionType = {
-    id: 0,
-    name: ''
-  };
+  action = new ActionType({ id: 0, name: '' });
 
   constructor(
     private actionTypeService: ActionTypeService,
@@ -44,10 +41,10 @@ export class ActionComponent implements OnInit {
       return;
     }
     const form = this.actionTypeForm.value;
-    const action: ActionType = {
+    const action = new ActionType({
       id: 0,
       name: form.name as string
-    };
+    });
     this.action = action;
   }
 

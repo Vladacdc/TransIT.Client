@@ -40,10 +40,10 @@ export class EditActionComponent implements OnInit {
     this.closeDiv.nativeElement.click();
     const form = this.actionFrom.value;
 
-    const action: ActionType = {
+    const action = new ActionType({
       id: form.id as number,
       name: form.name as string
-    };
+    });
     this.serviceAction.updateEntity(action).subscribe(_ => this.editAction.next(action));
   }
 }
