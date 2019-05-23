@@ -25,4 +25,8 @@ export class Issue extends TEntity<Issue> {
     this.vehicle = new Vehicle(this.vehicle);
     this.assignedTo = new Employee(this.assignedTo);
   }
+
+  get deletable(): boolean {
+    return this.state.name.toLowerCase() === 'new';
+  }
 }

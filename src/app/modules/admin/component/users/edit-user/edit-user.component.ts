@@ -70,9 +70,9 @@ export class EditUserComponent implements OnInit {
     const form = this.userForm.value;
     const user: User = new User({
       id: this.selectedUser.id,
-      firstName: form.firstName,
-      lastName: form.lastName,
-      middleName: form.middleName,
+      firstName: form.firstName || '',
+      lastName: form.lastName || '',
+      middleName: form.middleName || '',
       phoneNumber: form.phoneNumber,
       login: this.selectedUser.login,
       email: form.email,

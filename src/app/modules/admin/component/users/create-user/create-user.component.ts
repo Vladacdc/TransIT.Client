@@ -78,9 +78,9 @@ export class CreateUserComponent implements OnInit {
     }
     const form = this.userForm.value;
     const user: User = new User({
-      firstName: form.firstName,
-      lastName: form.lastName,
-      middleName: form.middleName,
+      firstName: form.firstName || '',
+      lastName: form.lastName || '',
+      middleName: form.middleName || '',
       phoneNumber: form.phoneNumber,
       login: form.login,
       email: form.email,
