@@ -1,0 +1,11 @@
+<div class="form-group">
+  <label>Відповідальний</label>
+  <ng-select
+    [items]="users"
+    (ngModelChange)="selectItem($event)"
+    [(ngModel)]="currentUser"
+    bindLabel="shortName"
+    placeholder="Виберіть працівника"
+    notFoundText="Не знайдено"
+  ></ng-select>
+</div>

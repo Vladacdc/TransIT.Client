@@ -1,0 +1,49 @@
+<app-navbar> </app-navbar>
+<div class="container page">
+  <nav class="border nav nav-tabs d-none d-md-flex" id="nav-tab" role="tablist">
+    <a
+      class="nav-item nav-link"
+      id="issues-navbar-link"
+      routerLink="/engineer/issues"
+      data-toggle="tab"
+      role="tab"
+      routerLinkActive="active"
+      ><i class="fas fa-warning"></i> Заявки</a
+    >
+    <a
+      class="nav-item nav-link"
+      id="issue-logs-navbar-link"
+      routerLink="/engineer/issue-logs"
+      data-toggle="tab"
+      role="tab"
+      routerLinkActive="active"
+      ><i class="fas fa-book"></i> Історія</a
+    >
+
+    <a
+        class="nav-item nav-link"
+        routerLink="/engineer/documents"
+        routerLinkActive="active"
+        data-toggle="tab"
+        role="tab"
+        aria-selected="false"
+      >
+        <i class="fa fa-folder-open"></i> Документи</a
+      >
+      <a
+      class="nav-item nav-link"
+      routerLink="/engineer/supplier"
+      routerLinkActive="active"
+      data-toggle="tab"
+      role="tab"
+      aria-selected="false"
+    >
+      <i class="fas fa-address-card"></i> Постачальники</a
+    >
+  </nav>
+  <div class="tab-content">
+    <div class="tab-pane fade show active" role="tabpanel" aria-labelledby="nav-home-tab">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,57 @@
+<button type="button" class="btn btn-info" data-toggle="modal" data-target="#createDocument">
+  <i class="fas fa-plus"></i> Додати документ
+</button>
+
+<div class="modal fade" id="createDocument" tabindex="-1" role="dialog" aria-labelledby="CreateDocument" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle"> <i class="fas fa-plus"></i> Створити документ</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="documentForm">
+          <div class="form-group">
+            <label>Назва</label>
+            <input type="text" class="form-control" formControlName="name" autocomplete="off"
+                   placeholder="Введіть назву документа" >
+          </div>
+          <button hidden type="submit" #submit></button>
+        </form>
+        <form [formGroup]="documentForm">
+          <div class="form-group">
+            <label>Опис</label>
+            <input type="text" class="form-control" formControlName="description" autocomplete="off"
+                   placeholder="Введіть опис документа" >
+          </div>
+          <button hidden type="submit" #submit></button>
+        </form>
+        <form [formGroup]="documentForm">
+          <div class="form-group">
+            <label>Шлях документа</label>
+            <input type="text" class="form-control" formControlName="path" autocomplete="off"
+                   placeholder="Введіть шлях документа" >
+          </div>
+          <button hidden type="submit" #submit></button>
+        </form>
+        <!-- <form [formGroup]="documentForm">
+        <div class="form-group">
+          <label>Історія</label>
+          <select class="form-control" formControlName="issueLog">
+            <option hidden value="" disabled selected>-</option>
+            <option *ngFor="let groupItem of issueLogList" [value]="groupItem.description">{{ groupItem.description }}</option>
+          </select>
+        </div>
+      </form> -->
+      </div>
+      <div class="modal-footer">
+        <button #close type="button" class="btn btn-secondary" data-dismiss="modal">Скасувати</button>
+        <button type="button" class="btn btn-primary" (click)="clickSubmit()" [disabled]="documentForm.invalid">
+          Створити
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

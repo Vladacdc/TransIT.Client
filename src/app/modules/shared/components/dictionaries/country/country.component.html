@@ -1,0 +1,17 @@
+<div class="table-background border">
+  <app-create-country (createCountry)="addCountry($event)" *ngIf="isVisible"></app-create-country>
+  <app-delete-country
+    [country]="country"
+    (deleteCountry)="deleteCountry($event)"
+    *ngIf="isVisible"
+  ></app-delete-country>
+  <p></p>
+  <div>
+    <div class="captBox col-md-4 offset-5">
+      <caption class="caption">
+        Країни
+      </caption>
+    </div>
+    <table id="countryTable" class="table table-bordered  table-hover" style="width:100%;"></table>
+  </div>
+</div>

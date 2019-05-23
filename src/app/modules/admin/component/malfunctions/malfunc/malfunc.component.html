@@ -1,0 +1,22 @@
+<div>
+  <caption class="caption">
+    <h2>Помилка</h2>
+  </caption>
+</div>
+
+<span class="second">
+  <app-create-malfunc (createdMalfunction)="addMalfunction($event)"></app-create-malfunc>
+</span>
+
+<span class="second">
+<app-edit-malfunc></app-edit-malfunc>
+</span>
+
+<span class="third">
+  <app-delete-malfunc
+    [malfunction]="selectedMalfunction"
+    (deleteMalfunction)="deleteMalfunction($event)"
+  ></app-delete-malfunc>
+</span>
+<p></p>
+<table id="malfunc-table" class="table table-striped table-bordered" cellspacing="0"></table>

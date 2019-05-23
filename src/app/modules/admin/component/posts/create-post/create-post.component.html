@@ -1,0 +1,49 @@
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#createPost">
+  <i class="fas fa-plus"></i> Створити посаду
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="createPost" tabindex="-1" role="dialog" aria-labelledby="createPost" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Створити посади</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="postForm" (validSubmit)="onSubmit()">
+          <div class="form-group" [customErrorMessages]="customFieldErrors">
+            <label>Назва</label>
+            <input type="text" placeholder="Введіть назву" class="form-control" formControlName="name" />
+          </div>
+          <button hidden type="submit" #submit data-toggle="modal" data-target="#createPost"></button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          (click)="closeModal()"
+          data-toggle="modal"
+          data-target="#createPost"
+        >
+          Скасувати
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          (click)="clickSubmit(submit)"
+          form="postForm"
+          [disabled]="postForm.invalid"
+          data-toggle="modal"
+          data-target="#createPost"
+        >
+          Створити
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,17 @@
+.is-valid,
+.is-invalid {
+  background-position: center right 1rem;
+}
+
+textarea.form-control.is-valid,
+textarea.form-control.is-invalid {
+  background-position: top calc(0.375em + 0.1875rem) right 1rem;
+}
+
+.margin-top-bottom {
+  margin: 1rem 0;
+}
+
+:host ::ng-deep .ng-select .ng-select-container .ng-placeholder {
+  color: #495057;
+}

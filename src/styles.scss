@@ -1,1 +1,18 @@
 /* You can add global styles to this file, and also import other style files */
+html,
+body {
+  height: 100%;
+}
+
+.table-background {
+  background: #f8f9fa;
+  padding: 1rem 0.8rem;
+  border-radius: 0.7rem;
+}
+
+.required-field {
+  &::after {
+    content: '*';
+    color: red;
+  }
+}

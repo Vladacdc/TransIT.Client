@@ -1,0 +1,22 @@
+.borderFilterTab {
+  background: #f8f9fa;
+  border-radius: 0.7rem;
+  padding: 0.3rem;
+  padding-right: 1.5rem;
+  border: 1px solid;
+  margin-bottom: 0.5rem;
+  color: #dee2e6 !important;
+}
+.block {
+  display: inline-flex;
+  justify-content: space-between;
+}
+.right {
+  float: right;
+}
+.grey {
+  background-color: rgba(201, 201, 223, 0.342);
+}
+.right.btn.btn-info{
+ margin-right: 0.5rem;
+}

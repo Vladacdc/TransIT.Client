@@ -1,0 +1,79 @@
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#CreateActionModal">Створити дію</button>
+<p></p>
+<div class="modal fade" id="CreateActionModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" actionType="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Створити дію</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="name" class="col-form-label">Назва дії</label>
+            <input
+              type="text"
+              class="form-control"
+              id="name"
+              placeholder="Введіть назву дії "
+              [(ngModel)]="action.name"
+              [ngModelOptions]="{ standalone: true }"
+              #nameRequired="ngModel"
+            />
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button #closeCreateModal id="close" type="button" class="btn btn-secondary" data-dismiss="modal">Скасувати</button>
+        <button type="button" class="btn btn-primary" (click)="clickSubmit()">Створити</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<table id="action" class="table table-striped table-bordered" cellspacing="0">
+  <thead>
+    <tr>
+      <th>Назва дії</th>
+      <th>Керування</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let actionItem of actionTypeList; let index = index">
+      <td>{{ actionItem.name }}</td>
+      <td>
+        <button mat-button data-toggle="modal" (click)="selectIndex(index)" data-target="#deleteModal">
+          <i class="fas fa-trash-alt"></i>
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div
+  class="modal fade"
+  id="deleteModal"
+  tabindex="-1"
+  actionType="dialog"
+  aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered" actionType="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Ви дійсно бажаєте видалити елемент?</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-footer">
+        <button #closeDeleteModal type="button" class="btn btn-secondary" data-dismiss="modal">Назад</button>
+        <button type="button" data-toggle="modal" class="btn btn-primary" (click)="deleteActionType(index)">
+          Видалити
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

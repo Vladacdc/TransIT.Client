@@ -1,0 +1,31 @@
+<div class="table-background border mt-3">
+  <h2 class="table-caption">
+    Посади
+  </h2>
+  <app-create-post (addPost)="reloadTable()"></app-create-post>
+  <app-edit-post [post]="selectedPost" (editPost)="reloadTable()"></app-edit-post>
+  <app-delete-post [post]="selectedPost" (deletePost)="reloadTable()"></app-delete-post>
+  <table id="post" datatable [dtOptions]="options" [dtTrigger]="renderTrigger" class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Назва</th>
+        <th>Дії</th>
+      </tr>
+    </thead>
+    <tbody *ngIf="posts?.length !== 0">
+      <tr *ngFor="let post of posts">
+        <td>{{ post.name }}</td>
+        <td>
+          <div class="d-flex flex-nowrap">
+            <button (click)="selectPost(post)" class="btn" data-toggle="modal" data-target="#editPost">
+              <i class="fas fa-edit"></i>
+            </button>
+            <button (click)="selectPost(post)" class="btn" data-toggle="modal" data-target="#deleteModal">
+              <i class="fas fa-trash-alt" style="color: darkred"></i>
+            </button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

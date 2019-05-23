@@ -17,9 +17,12 @@
     "max-classes-per-file": false,
     "max-line-length": [
       true,
-      140
+      120
     ],
-    "member-access": false,
+    "member-access": [
+      true,
+      "no-public"
+    ],
     "member-ordering": [
       true,
       {

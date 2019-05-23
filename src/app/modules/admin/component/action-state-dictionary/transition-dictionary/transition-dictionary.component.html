@@ -1,0 +1,46 @@
+<div class="table-background border mt-3">
+  <h2 class="table-caption">
+    Переходи між станами
+  </h2>
+  <app-create-transition (addTransition)="reloadTable()"></app-create-transition>
+  <app-edit-transition [transition]="selectedTransition"></app-edit-transition>
+  <app-delete-transition [transition]="selectedTransition" (deleteTransition)="reloadTable()"></app-delete-transition>
+  <table id="transitions" datatable [dtOptions]="options" [dtTrigger]="renderTrigger" class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Старий стан</th>
+        <th>Новий стан</th>
+        <th>Екшин</th>
+        <th>Дії</th>
+      </tr>
+    </thead>
+    <tbody *ngIf="transitions?.length !== 0">
+      <tr *ngFor="let transition of transitions">
+        <td>{{ transition.fromState.transName }}</td>
+        <td>{{ transition.toState.transName }}</td>
+        <td>{{ transition.actionType.name }}</td>
+        <td>
+          <div class="d-flex flex-nowrap">
+            <button
+              (click)="selectTransition(transition)"
+              class="btn"
+              data-toggle="modal"
+              data-target="#editTransition"
+            >
+              <i class="fas fa-info-circle"></i>
+            </button>
+            <button
+              (click)="selectTransition(transition)"
+              class="btn"
+              data-toggle="modal"
+              data-target="#deleteModal"
+              *ngIf="isDeletable(transition)"
+            >
+              <i class="fas fa-trash-alt" style="color: darkred"></i>
+            </button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

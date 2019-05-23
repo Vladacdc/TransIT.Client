@@ -1,0 +1,56 @@
+<button type="button" class="btn btn-info" data-toggle="modal" data-target="#editMalfunction">
+  <i class="fas fa-pen fa-2x"></i>
+</button>
+
+<div
+  class="modal fade"
+  id="editMalfunction"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="EditMafunction"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Редагування помилки</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="malfunctionForm">          
+          <div class="form-group">
+            <label>Група несправності</label>
+            <select class="form-control" disabled formControlName="group">
+              <option hidden disabled selected>{{ malfunction?.malfunctionSubgroup?.malfunctionGroup?.name }}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Підгрупа несправності</label>
+            <select class="form-control" disabled formControlName="subgroup">
+              <option hidden disabled selected>{{ malfunction?.malfunctionSubgroup?.name }}</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Помилки</label>
+            <input
+              type="text"
+              class="form-control"
+              formControlName="name"
+              autocomplete="off"
+              placeholder="Введіть помилку"              
+            />
+          </div>
+          <button hidden type="submit" #submit></button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" #close>Скасувати</button>
+        <button type="button" class="btn btn-primary" [disabled]="malfunctionForm.invalid" (click)="updateData()">
+          Зберегти
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

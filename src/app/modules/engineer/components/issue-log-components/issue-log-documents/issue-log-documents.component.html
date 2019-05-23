@@ -1,0 +1,11 @@
+<div class="form-group">
+  <label>Документи</label>
+  <ng-select
+    [items]="documents"
+    (ngModelChange)="selectItem($event)"
+    [(ngModel)]="currentDocument"
+    bindLabel="name"
+    placeholder="Виберіть документ"
+    notFoundText="Не знайдено"
+  ></ng-select>
+</div>
