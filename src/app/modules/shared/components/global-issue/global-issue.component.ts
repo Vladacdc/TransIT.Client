@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { IssueService } from '../../services/issue.service';
 import { priorityColors } from '../../declarations';
+import { ExportExelService } from '../../services/export-exel.service';
+import { IssueService } from '../../services/issue.service';
+import { Issue } from '../../models/issue';
 
 declare const $;
 
@@ -11,6 +13,7 @@ declare const $;
 })
 export class GlobalIssueComponent implements OnInit {
   protected table: any;
+  protected date: Issue[];
   protected startDate: string;
   protected endDate: string;
   protected vehicleType: string;
@@ -46,20 +49,36 @@ export class GlobalIssueComponent implements OnInit {
     ajax: this.ajaxCallback.bind(this),
     paging: true,
     language: {
-      url: '//cdn.datatables.net/plug-ins/1.10.19/i18n/Ukrainian.json'
+      url: '//cdn.datatables.net/plug-ins/1.10.19/i18n/Ukrainian.json',
+      buttons: {
+        pageLength: {
+          _: 'Показати %d записів',
+          '-1': 'Показати всі'
+        }
+      }
     },
     createdRow: this.createRow,
     dom: 'Bfrtip',
+    lengthMenu: [[10, 25, 50, 1000], ['10 записів', '25 записів', '50 записів', 'Показати всі']],
     buttons: [
       { extend: 'copy', text: 'Скопіювати' },
       { extend: 'csv' },
       { extend: 'excel' },
       { extend: 'pdf' },
-      { extend: 'print', text: 'Друк' }
+      { extend: 'print', text: 'Друк' },
+      {
+        text: 'Всі записи в Exel',
+        action: _ => {
+          this.issueService.getEntities().subscribe(issues => {
+            this.date = issues;
+            this.excelService.exportAsExcelFile(this.date, 'Заявки');
+          });
+        }
+      },
+      'pageLength'
     ],
     exportOptions: {
       modifier: {
-        // DataTables core
         order: 'current', // 'current', 'applied', 'index',  'original'
         page: 'all', // 'all',     'current'
         search: 'applied' // 'none',    'applied', 'removed'
@@ -67,7 +86,7 @@ export class GlobalIssueComponent implements OnInit {
     }
   };
 
-  constructor(private issueService: IssueService) {}
+  constructor(private issueService: IssueService, private excelService: ExportExelService) {}
 
   ngOnInit() {
     this.initTable();

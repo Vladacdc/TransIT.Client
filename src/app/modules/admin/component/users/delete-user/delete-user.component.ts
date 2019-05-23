@@ -10,15 +10,16 @@ import { UserService } from 'src/app/modules/shared/services/user.service';
 })
 export class DeleteUserComponent implements OnInit {
   @ViewChild('close') closeDeleteModal: ElementRef;
+  @Output() deleteUser = new EventEmitter<User>();
+
   @Input() set user(user: User) {
     if (!user) {
       return;
     }
-    this.login = user.login;
+    this.userSelected = user;
   }
 
-  login: string = '';
-  @Output() deleteUser = new EventEmitter<User>();
+  userSelected: User = new User({ login: '' });
 
   constructor(private service: UserService, private toast: ToastrService) {}
 
@@ -26,9 +27,10 @@ export class DeleteUserComponent implements OnInit {
 
   delete() {
     this.closeDeleteModal.nativeElement.click();
-    this.service.deleteEntity(this.user.id).subscribe(
+
+    this.service.deleteEntity(this.userSelected.id).subscribe(
       data => {
-        this.deleteUser.next(this.user);
+        this.deleteUser.next(this.userSelected);
         this.toast.success('', 'Користувача видалено');
       },
       error => this.toast.error('Помилка', 'Користувач містить записи')

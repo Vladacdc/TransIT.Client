@@ -9,7 +9,6 @@ import { UserService } from 'src/app/modules/shared/services/user.service';
   styleUrls: ['./is-active-modal.component.scss']
 })
 export class IsActiveModalComponent implements OnInit {
-  user: User;
   @Output() updateUserChangeActive = new EventEmitter<User>();
   @ViewChild('close') closeIsActiveModal: ElementRef;
 
@@ -19,6 +18,8 @@ export class IsActiveModalComponent implements OnInit {
     }
     this.user = selectedUser;
   }
+  user = new User({});
+
   constructor(private serviceUser: UserService, private toast: ToastrService) {}
   ngOnInit() {}
   changeActive() {
@@ -27,12 +28,13 @@ export class IsActiveModalComponent implements OnInit {
     } else {
       this.user.isActive = true;
     }
+    console.log(this.user);
     this.serviceUser.updateEntity(this.user).subscribe(
       _ => {
         this.updateUserChangeActive.next(this.user);
         this.toast.success('', 'Активацію змінено');
       },
-      error => this.toast.error('Помилка')
+      error => this.toast.error(error)
     );
     this.closeIsActiveModal.nativeElement.click();
   }

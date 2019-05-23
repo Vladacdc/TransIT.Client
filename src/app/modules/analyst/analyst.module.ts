@@ -6,7 +6,6 @@ import { IssueAnalystComponent } from './components/issue-analyst/issue-analyst.
 import { CoreModule } from '../core/core.module';
 import { WebDataRocksPivot } from 'src/types/webdatarocks/webdatarocks.angular4';
 import { ReportComponent } from './components/report/report.component';
-import { GlobalIssueComponent } from '../shared/components/global-issue/global-issue.component';
 import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
