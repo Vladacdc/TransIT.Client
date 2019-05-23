@@ -17,7 +17,7 @@ export class CreateVehicleComponent implements OnInit {
     private serviceVehicle: VehicleService,
     private formBuilder: FormBuilder,
     private toast: ToastrService
-  ) {}
+  ) { }
 
   get vehicleTypeName(): string[] {
     return this.vehicleTypeList.map(t => t.name);
@@ -27,25 +27,21 @@ export class CreateVehicleComponent implements OnInit {
   vehicleForm: FormGroup;
   vehicleTypeList: VehicleType[] = [];
 
-  validation_messages = {
-    vehicleType: [{ type: 'required', message: 'Оберіть тип транспорту' }],
-    vincode: [{ type: 'minlength', message: 'Vin-код має мати 8 символів' }],
-    regNum: [{ type: 'minlength', message: 'Введіть коректно номер' }]
-  };
-
   ngOnInit() {
-    $('#createVehicle').on('hidden.bs.modal', function() {
+    $('#createVehicle').on('hidden.bs.modal', function () {
       $(this)
         .find('form')
         .trigger('reset');
     });
     this.vehicleForm = this.formBuilder.group({
       vehicleType: new FormControl('', Validators.required),
-      vincode: new FormControl('', Validators.minLength(8)),
+      vincode: new FormControl('', Validators.compose([Validators.required, Validators.minLength(17), Validators.maxLength(17)])),
       inventoryId: '',
       regNum: new FormControl('', Validators.minLength(8)),
       brand: '',
-      model: ''
+      model: '',
+      commissioningDate: '',
+      warrantyEndDate: ''
     });
     this.serviceVehicleType.getEntities().subscribe(data => (this.vehicleTypeList = data));
   }
@@ -63,7 +59,9 @@ export class CreateVehicleComponent implements OnInit {
       inventoryId: form.inventoryId as string,
       regNum: form.regNum as string,
       brand: form.brand as string,
-      model: form.model as string
+      model: form.model as string,
+      commissioningDate: form.commissioningDate as Date,
+      warrantyEndDate: form.warrantyEndDate as Date
     });
     this.serviceVehicle
       .addEntity(vehicle)

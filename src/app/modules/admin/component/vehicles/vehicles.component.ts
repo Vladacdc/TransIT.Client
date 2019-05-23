@@ -14,85 +14,78 @@ export class VehiclesComponent implements OnInit {
   table: DataTables.Api;
   selectedVehicle: Vehicle;
 
-  constructor(private vehicleService: VehicleService) {}
+  constructor(private vehicleService: VehicleService) { }
 
-  private readonly tableConfig: DataTables.Settings = {
-    responsive: true,
-    columns: [
-      { title: 'Тип транспорту' },
-      { title: 'Vin-код' },
-      { title: 'Інвентарний номер' },
-      { title: 'Реєстраційний номер' },
-      { title: 'Бренд' },
-      { title: 'Модель' },
-      { title: 'Дії', orderable: false }
-    ],
-    paging: true,
-    scrollX: true,
-    language: {
-      url: '//cdn.datatables.net/plug-ins/1.10.19/i18n/Ukrainian.json'
-    }
-  };
+  private readonly tableConfig: DataTables.Settings =
+    {
+      responsive: true,
+      columns: [
+        { title: 'Тип транспорту', data: 'vehicleType.name', defaultContent: '' },
+        { title: 'Vin-код', data: 'vincode', defaultContent: '' },
+        { title: 'Інвентарний номер', data: 'inventoryId', defaultContent: '' },
+        { title: 'Реєстраційний номер', data: 'regNum', defaultContent: '' },
+        { title: 'Бренд', data: 'brand', defaultContent: '' },
+        { title: 'Модель', data: 'model', defaultContent: '' },
+        { title: 'Дата введення в експлуатацію', data: 'commissioningDate', defaultContent: '' },
+        { title: 'Дата закінчення гарантії', data: 'warrantyEndDate', defaultContent: '' },
+        { title: 'Дії', orderable: false }
+      ],
+      processing: true,
+      serverSide: true,
+      ajax: this.ajaxCallback.bind(this),
+      columnDefs: [
+        {
+          targets: -1,
+          data: null,
+          defaultContent: `<button class="edit btn" data-toggle="modal" data-target="#editVehicle"><i class="fas fa-edit"></i></button>
+           <button class="delete btn" data-toggle="modal" data-target="#deleteVehicle"><i class="fas fas fa-trash-alt" style="color: darkred"></i></button>`
+        }
+      ],
+      paging: true,
+      scrollX: true,
+      language: {
+        url: '//cdn.datatables.net/plug-ins/1.10.19/i18n/Ukrainian.json'
+      }
+    };
+
 
   ngOnInit() {
     this.table = $('#vehicles').DataTable(this.tableConfig);
-    this.vehicleService.getEntities().subscribe(vehicles => {
-      this.addTableData(vehicles);
-    });
+    $('#vehicles tbody').on('click', '.edit', this.selectEditItem(this));
+    $('#vehicles tbody').on('click', '.delete', this.selectDeleteItem(this));
+
   }
 
-  addTableData(newVehicles: Vehicle[]) {
-    this.vehicles = [...newVehicles];
-    const view = newVehicles.map(vehicle => this.vehicleToRow(vehicle));
-    console.log(view);
-    this.table.clear();
-    this.table.rows.add(view).draw();
+  private ajaxCallback(dataTablesParameters: any, callback): void {
+    this.vehicleService.getFilteredEntities(dataTablesParameters).subscribe(callback);
+  }
 
-    $('#vehicles tbody')
-      .off('click')
-      .on('click', 'button[id^="vehicle"]', event => {
-        const idTokens = event.currentTarget.id.split('-');
-        const id = parseInt(idTokens[idTokens.length - 1], 10);
-        console.log(id);
-        this.selectedVehicle = this.vehicles.find(i => i.id === id);
-      });
+  selectEditItem(component: any) {
+    return function () {
+      const data = component.table.row($(this).parents('tr')).data();
+      component.selectedVehicle = data;
+    };
+  }
+
+  selectDeleteItem(component: any) {
+    return function () {
+      const data = component.table.row($(this).parents('tr')).data();
+      component.selectedVehicle = data;
+    };
   }
 
   addVehicle(vehicle: Vehicle) {
     this.vehicles.push(vehicle);
-    this.table.row.add(this.vehicleToRow(vehicle)).draw();
-  }
-
-  vehicleToRow(vehicle: Vehicle): string[] {
-    return [
-      vehicle.vehicleType.name,
-      vehicle.vincode,
-      vehicle.inventoryId,
-      vehicle.regNum,
-      vehicle.brand,
-      vehicle.model,
-      `<button id="vehicle-${
-        vehicle.id
-      }" class="btn" data-toggle="modal" data-target="#editVehicle"><i class="fas fa-edit"></i></button>
-     <button id="vehicle-${
-       vehicle.id
-     }" class="btn" data-toggle="modal" data-target="#deleteVehicle"><i class="fas fas fa-trash-alt"></i></button>`
-    ];
+    this.table.draw();
   }
 
   deleteVehicle(vehicle: Vehicle) {
-    console.log(this.selectedVehicle);
     this.vehicles = this.vehicles.filter(v => v.id !== vehicle.id);
-    this.table
-      .rows($(`button[id^="vehicle-${vehicle.id}"]`).parents('tr'))
-      .remove()
-      .draw(false);
+    this.table.draw();
   }
 
   updateVehicle(vehicle: Vehicle) {
     this.vehicles[this.vehicles.findIndex(i => i.id === vehicle.id)] = vehicle;
-    this.vehicleService.getEntities().subscribe(vehicles => {
-      this.addTableData(vehicles);
-    });
+    this.table.draw();
   }
 }

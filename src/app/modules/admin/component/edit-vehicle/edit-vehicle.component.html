@@ -9,62 +9,56 @@
         </button>
       </div>
       <div class="modal-body">
-        <form [formGroup]=vehicleForm>
-          <div class="form-group">
-            <label>Тип транспорту:</label>
-            <select formControlName="vehicleType" class="form-control">
-              <option hidden value="" disabled selected>--Select--</option>
-              <option *ngFor="let item of vehicleTypeList" [value]="item.name">{{ item.name }}</option>
-            </select>
-            <div *ngFor="let validation of validation_messages.vehicleType">
-              <div class="alert alert-danger" *ngIf="
-                    vehicleForm.get('vehicleType').hasError(validation.type) &&
-                    (vehicleForm.get('vehicleType').dirty || vehicleForm.get('vehicleType').touched)
-                  ">
-                {{ validation.message }}
-              </div>
+        <form [formGroup]="vehicleForm">
+          <div class="row">
+            <div class="form-group col-md-6 ">
+              <label>Тип транспорту:</label>
+              <select formControlName="vehicleType" class="form-control">
+                <option hidden value="" disabled selected>--Select--</option>
+                <option *ngFor="let item of vehicleTypeList" [value]="item.name">{{ item.name }}</option>
+              </select>
+            </div>
+
+            <div class="form-group col-md-6 ">
+              <label>Vin-код:</label>
+              <input type="text" class="form-control" formControlName="vincode" autocomplete="off"
+                />
             </div>
           </div>
 
-          <div class="form-group">
-            <label>Vin-код:</label>
-            <input type="text" class="form-control" formControlName="vincode" autocomplete="off"
-              [dropSpecialCharacters]="false" mask="000/0000" />
-            <div *ngFor="let validation of validation_messages.vincode">
-              <div class="alert alert-danger" *ngIf="
-                    vehicleForm.get('vincode').hasError(validation.type) &&
-                    (vehicleForm.get('vincode').dirty || vehicleForm.get('vincode').touched)
-                  ">
-                {{ validation.message }}
-              </div>
+          <div class="row">
+            <div class="form-group col-md-6 ">
+              <label>Інвентарний номер:</label>
+              <input type="text" class="form-control" formControlName="inventoryId" autocomplete="off" />
+            </div>
+            <div class="form-group col-md-6 ">
+              <label>Реєстраційний номер:</label>
+              <input type="text" class="form-control" formControlName="regNum" autocomplete="off" mask="SS0000SS" />
             </div>
           </div>
 
-          <div class="form-group">
-            <label>Інвентарний номер:</label>
-            <input type="text" class="form-control" formControlName="inventoryId" autocomplete="off" />
-          </div>
-          <div class="form-group">
-            <label>Реєстраційний номер:</label>
-            <input type="text" class="form-control" formControlName="regNum" autocomplete="off" mask="SS0000SS" />
-            <div *ngFor="let validation of validation_messages.regNum">
-              <div class="alert alert-danger" *ngIf="
-                      vehicleForm.get('regNum').hasError(validation.type) &&
-                      (vehicleForm.get('regNum').dirty || vehicleForm.get('regNum').touched)
-                    ">
-                {{ validation.message }}
-              </div>
+          <div class="row">
+            <div class="form-group col-md-6 ">
+              <label>Бренд:</label>
+              <input type="text" class="form-control" formControlName="brand" autocomplete="off" />
+            </div>
+
+            <div class="form-group col-md-6 ">
+              <label>Модель:</label>
+              <input type="text" class="form-control" formControlName="model" autocomplete="off" />
             </div>
           </div>
 
-          <div class="form-group">
-            <label>Бренд:</label>
-            <input type="text" class="form-control" formControlName="brand" autocomplete="off" />
-          </div>
+          <div class="row">
+            <div class="form-group col-md-6 ">
+              <label>Дата введення в експлуатацію:</label>
+              <input type="date" class="form-control" formControlName="commissioningDate" autocomplete="off" />
+            </div>
 
-          <div class="form-group">
-            <label>Модель:</label>
-            <input type="text" class="form-control" formControlName="model" autocomplete="off" />
+            <div class="form-group col-md-6 ">
+              <label>Дата закінчення гарантії:</label>
+              <input type="date" class="form-control" formControlName="warrantyEndDate" autocomplete="off" />
+            </div>
           </div>
         </form>
       </div>

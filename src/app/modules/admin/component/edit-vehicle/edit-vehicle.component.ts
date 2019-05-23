@@ -5,25 +5,31 @@ import { Vehicle } from 'src/app/modules/shared/models/vehicle';
 import { VehicleType } from 'src/app/modules/shared/models/vehicleType';
 import { VehicleTypeService } from 'src/app/modules/shared/services/vehicle-type.service';
 import { VehicleService } from 'src/app/modules/shared/services/vehicle.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-edit-vehicle',
   templateUrl: './edit-vehicle.component.html',
-  styleUrls: ['./edit-vehicle.component.scss']
+  styleUrls: ['./edit-vehicle.component.scss'],
+  providers: [DatePipe]
 })
 export class EditVehicleComponent implements OnInit {
+  
   @Input()
   set vehicle(vehicle: Vehicle) {
     if (!vehicle) {
       return;
     }
-    this.vehicleForm.patchValue({ ...vehicle, vehicleType: vehicle.vehicleType.name });
+    this.vehicleForm.patchValue({ ...vehicle, vehicleType: vehicle.vehicleType.name,
+      commissioningDate: this.datePipe.transform(vehicle.commissioningDate, 'yyyy-MM-dd'),
+      warrantyEndDate: this.datePipe.transform(vehicle.warrantyEndDate, 'yyyy-MM-dd') });
   }
 
   constructor(
     private formBuilder: FormBuilder,
     private serviceVehicleType: VehicleTypeService,
     private serviceVehicle: VehicleService,
+    private datePipe : DatePipe,
     private toast: ToastrService
   ) {}
   @ViewChild('close') closeDiv: ElementRef;
@@ -32,21 +38,19 @@ export class EditVehicleComponent implements OnInit {
   vehicleForm: FormGroup;
   vehicleTypeList: VehicleType[] = [];
 
-  validation_messages = {
-    vehicleType: [{ type: 'required', message: 'Оберіть тип транспорту' }],
-    vincode: [{ type: 'minlength', message: 'Vin-код має мати 8 символів' }],
-    regNum: [{ type: 'minlength', message: 'Введіть коректно номер' }]
-  };
+ 
 
   ngOnInit() {
     this.vehicleForm = this.formBuilder.group({
       id: '',
       vehicleType: new FormControl('', Validators.required),
-      vincode: new FormControl('', Validators.minLength(8)),
+      vincode: new FormControl('', Validators.compose([Validators.required, Validators.minLength(17), Validators.maxLength(17)])),
       inventoryId: '',
       regNum: new FormControl('', Validators.minLength(8)),
       brand: '',
-      model: ''
+      model: '',
+      commissioningDate: '',
+      warrantyEndDate: ''
     });
     this.serviceVehicleType.getEntities().subscribe(data => (this.vehicleTypeList = data));
   }
@@ -64,7 +68,9 @@ export class EditVehicleComponent implements OnInit {
       inventoryId: form.inventoryId as string,
       regNum: form.regNum as string,
       brand: form.brand as string,
-      model: form.model as string
+      model: form.model as string,
+      commissioningDate: form.commissioningDate as Date,
+      warrantyEndDate: form.warrantyEndDate as Date
     });
     console.log(vehicle);
     this.serviceVehicle

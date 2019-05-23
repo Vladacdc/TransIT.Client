@@ -8,6 +8,8 @@ export class Vehicle extends TEntity<Vehicle> {
   regNum: string;
   brand: string;
   model: string;
+  commissioningDate: Date;
+  warrantyEndDate: Date;
 
   constructor(vehicle: Partial<Vehicle>) {
     super(vehicle);
