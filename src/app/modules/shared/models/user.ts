@@ -14,6 +14,6 @@ export class User extends TEntity<User> {
 
   constructor(user: Partial<User>) {
     super(user);
-    this.role = new Role(user.role);
+    this.role = new Role(this.role);
   }
 }
