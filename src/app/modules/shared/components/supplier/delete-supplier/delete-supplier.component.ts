@@ -15,14 +15,16 @@ export class DeleteSupplierComponent {
 
   constructor(private service: SupplierService, private toast: ToastrService) {}
 
+  ngOnInit() {}
+  
   delete() {
     this.closeDeleteModal.nativeElement.click();
-    this.service
-      .deleteEntity(this.supplier.id)
-      .subscribe(
-        () => this.deleteSupplier.next(this.supplier),
-        () => this.toast.error('Помилка', 'Постачальник задіяний'),
-        () => this.toast.success('Готово', "Об'єкт видалено")
-      );
+    this.service.deleteEntity(this.supplier.id).subscribe(
+      data => {
+        this.deleteSupplier.next(this.supplier);
+        this.toast.success('', 'Постачальника видалено');
+      },
+      error => this.toast.error('Помилка')
+    );
   }
 }

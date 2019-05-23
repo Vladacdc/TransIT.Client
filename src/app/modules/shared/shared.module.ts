@@ -21,6 +21,10 @@ import { NestedDocumentComponent } from './components/global-document/document/n
 import { IssueLogComponent } from './components/issue-log/issue-log.component';
 import { CoreModule } from '../core/core.module';
 import { NgBootstrapFormValidationModule } from 'ng-bootstrap-form-validation';
+import { SupplierComponent } from './components/supplier/supplier.component';
+import { CreateSupplierComponent } from './components/supplier/create-supplier/create-supplier.component';
+import { EditSupplierComponent } from './components/supplier/edit-supplier/edit-supplier.component';
+import { DeleteSupplierComponent } from './components/supplier/delete-supplier/delete-supplier.component';
 import { ActionTypeService } from './services/action-type.service';
 import { CurrencyService } from './services/currency.service';
 import { DocumentService } from './services/document.service';
@@ -43,6 +47,10 @@ import { CountryService } from './services/country.service';
 @NgModule({
   declarations: [
     GlobalIssueComponent,
+    SupplierComponent,
+    CreateSupplierComponent,
+    EditSupplierComponent,
+    DeleteSupplierComponent,
     CountryComponent,
     DictionaryComponent,
     CurrencyComponent,
@@ -70,6 +78,10 @@ import { CountryService } from './services/country.service';
     NgBootstrapFormValidationModule
   ],
   exports: [
+    SupplierComponent,
+    CreateSupplierComponent,
+    EditSupplierComponent,
+    DeleteSupplierComponent,
     NestedDocumentComponent,
     GlobalIssueComponent,
     FiltersTabsComponent,

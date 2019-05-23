@@ -8,7 +8,6 @@ import { MalfunSubgroupComponent } from './component/malfunctions/malfun-subgrou
 import { MalfuncComponent } from './component/malfunctions/malfunc/malfunc.component';
 import { ActionComponent } from './component/action/action.component';
 import { AdminComponent } from './component/admin/admin.component';
-import { SupplierComponent } from './component/supplier/supplier.component';
 import { VehicleTypeComponent } from './component/vehicle-type/vehicle-type.component';
 import { DictionaryComponent } from '../shared/components/dictionaries/dictionary.component';
 import { PostsComponent } from './component/posts/posts.component';
@@ -16,6 +15,7 @@ import { EmployeesComponent } from './component/employees/employees.component';
 import { ActionStateDictionaryComponent } from './component/action-state-dictionary/action-state-dictionary.component';
 import { GlobalDocumentComponent } from '../shared/components/global-document/global-document.component';
 import { IssueLogComponent } from '../shared/components/issue-log/issue-log.component';
+import { SupplierComponent } from '../shared/components/supplier/supplier.component';
 
 const routes: Routes = [
   {

@@ -25,10 +25,10 @@ import { DeleteMalfuncSubgroupComponent } from './component/delete-malfunc-subgr
 import { EditMalfuncGroupComponent } from './component/edit-malfunc-group/edit-malfunc-group.component';
 import { DeleteMalfuncGroupComponent } from './component/delete-malfunc-group/delete-malfunc-group.component';
 import { NgxMaskModule } from 'ngx-mask';
-import { CreateSupplierComponent } from './component/supplier/create-supplier/create-supplier.component';
-import { EditSupplierComponent } from './component/supplier/edit-supplier/edit-supplier.component';
-import { DeleteSupplierComponent } from './component/supplier/delete-supplier/delete-supplier.component';
-import { SupplierComponent } from './component/supplier/supplier.component';
+import { CreateSupplierComponent } from '../shared/components/supplier/create-supplier/create-supplier.component';
+import { EditSupplierComponent } from '../shared/components/supplier/edit-supplier/edit-supplier.component';
+import { DeleteSupplierComponent } from '../shared/components/supplier/delete-supplier/delete-supplier.component';
+import { SupplierComponent } from '../shared/components/supplier/supplier.component';
 import { EditMalfuncComponent } from './component/edit-malfunc/edit-malfunc.component';
 import { DeleteMalfuncComponent } from './component/delete-malfunc/delete-malfunc.component';
 // ====User===
@@ -112,11 +112,6 @@ import { NgSelectModule } from '@ng-select/ng-select';
     DeleteMalfuncGroupComponent,
     EditMalfuncComponent,
     DeleteMalfuncComponent,
-    // ====Supplier===
-    SupplierComponent,
-    CreateSupplierComponent,
-    EditSupplierComponent,
-    DeleteSupplierComponent,
     // ====Issue===
     IssueLogComponent,
     // ====Post===

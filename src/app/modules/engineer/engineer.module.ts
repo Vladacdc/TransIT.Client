@@ -20,6 +20,7 @@ import { IssueLogSuppliersComponent } from './components/issue-log-components/is
 import { IssueLogActionTypeComponent } from './components/issue-log-components/issue-log-action-type/issue-log-action-type.component';
 import { IssueLogDocumentsComponent } from './components/issue-log-components/issue-log-documents/issue-log-documents.component';
 import { DocumentComponent } from '../shared/components/global-document/document/document.component';
+import { SupplierComponent } from '../shared/components/supplier/supplier.component';
 import { CreateDocumentComponent } from './components/create-document/create-document.component';
 
 const routes: Routes = [
@@ -33,6 +34,7 @@ const routes: Routes = [
       { path: 'issue-logs/edit', component: EditIssueLogComponent },
       { path: 'issue-logs/documents', component: DocumentComponent },
       { path: 'documents', component: GlobalDocumentComponent },
+      { path: 'supplier', component: SupplierComponent},
       { path: 'issue-log', component: IssueLogComponent },
 
       { path: '**', redirectTo: 'issues' }

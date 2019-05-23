@@ -5,6 +5,7 @@ import { IssueAnalystComponent } from './components/issue-analyst/issue-analyst.
 import { ReportComponent } from './components/report/report.component';
 import { DictionaryComponent } from '../shared/components/dictionaries/dictionary.component';
 import { GlobalDocumentComponent } from '../shared/components/global-document/global-document.component';
+import { SupplierComponent } from '../shared/components/supplier/supplier.component';
 
 const routes: Routes = [
   {
@@ -14,7 +15,8 @@ const routes: Routes = [
       { path: 'issues', component: IssueAnalystComponent },
       { path: 'report', component: ReportComponent },
       { path: 'dictionary', component: DictionaryComponent },
-      { path: 'document', component:GlobalDocumentComponent},
+      { path: 'document', component:GlobalDocumentComponent},      
+      { path: 'supplier', component:SupplierComponent},
       { path: '**', redirectTo: 'issues' }
     ]
   }
