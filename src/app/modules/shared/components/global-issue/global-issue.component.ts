@@ -23,27 +23,30 @@ export class GlobalIssueComponent implements OnInit {
   protected malfunctionSubGroup: string;
   protected malfunction: string;
 
+  protected readonly columns: Array<any> = [
+    { title: 'Номер', data: 'number', defaultContent: '' },
+    { title: 'Статус', data: 'state.transName', defaultContent: '' },
+    { title: 'Група', data: 'malfunction.malfunctionSubgroup.malfunctionGroup.name', defaultContent: '' },
+    { title: 'Підгрупа', data: 'malfunction.malfunctionSubgroup.name', defaultContent: '' },
+    { title: 'Поломка', data: 'malfunction.name', defaultContent: '' },
+    { title: 'Пріоритет', data: 'priority', defaultContent: '', bVisible: false },
+    { title: 'Гарантія', data: 'warranty', defaultContent: '' },
+    { title: 'Транспорт', data: 'vehicle.model', defaultContent: '' },
+    { title: 'Відповідальний', data: 'assignedTo.login', defaultContent: '', bVisible: false },
+    { title: 'Виконати до', data: 'deadline', defaultContent: '', bVisible: false },
+    { title: 'Опис', data: 'summary', defaultContent: '' },
+    { title: 'Створено', data: 'createDate', defaultContent: '', bVisible: false },
+    { title: 'Редаговано', data: 'modDate', defaultContent: '', bVisible: false },
+    { data: 'id', bVisible: false }
+  ];
+
   protected readonly tableConfig: any = {
     scrollX: true,
     select: {
       style: 'single'
     },
-    columns: [
-      { title: 'Номер', data: 'number', defaultContent: '' },
-      { title: 'Статус', data: 'state.transName', defaultContent: '' },
-      { title: 'Група', data: 'malfunction.malfunctionSubgroup.malfunctionGroup.name', defaultContent: '' },
-      { title: 'Підгрупа', data: 'malfunction.malfunctionSubgroup.name', defaultContent: '' },
-      { title: 'Поломка', data: 'malfunction.name', defaultContent: '' },
-      { title: 'Пріоритет', data: 'priority', defaultContent: '', bVisible: false },
-      { title: 'Гарантія', data: 'warranty', defaultContent: '' },
-      { title: 'Транспорт', data: 'vehicle.model', defaultContent: '' },
-      { title: 'Відповідальний', data: 'assignedTo.login', defaultContent: '', bVisible: false },
-      { title: 'Виконати до', data: 'deadline', defaultContent: '', bVisible: false },
-      { title: 'Опис', data: 'summary', defaultContent: '' },
-      { title: 'Створено', data: 'createDate', defaultContent: '', bVisible: false },
-      { title: 'Редаговано', data: 'modDate', defaultContent: '', bVisible: false },
-      { data: 'id', bVisible: false }
-    ],
+    columns: this.columns,
+    order: [[ this.columns.indexOf(this.columns.filter(x => x.data === 'modDate')[0]), "desc" ]],
     processing: true,
     serverSide: true,
     ajax: this.ajaxCallback.bind(this),
