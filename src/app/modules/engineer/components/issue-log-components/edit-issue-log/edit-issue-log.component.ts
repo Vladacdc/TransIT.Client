@@ -3,7 +3,6 @@ import { Router } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Employee } from 'src/app/modules/shared/models/employee';
-import { IssueLog } from 'src/app/modules/shared/models/issuelog';
 import { Supplier } from 'src/app/modules/shared/models/supplier';
 import { ActionType } from 'src/app/modules/shared/models/action-type';
 import { State } from 'src/app/modules/shared/models/state';
@@ -14,6 +13,7 @@ import { DocumentService } from 'src/app/modules/shared/services/document.servic
 import { Document } from 'src/app/modules/shared/models/document';
 import { TransitionService } from 'src/app/modules/shared/services/transition.service';
 import { Issue } from 'src/app/modules/shared/models/issue';
+import { EmployeeService } from 'src/app/modules/shared/services/employee.service';
 
 @Component({
   selector: 'app-edit-issue-log',
@@ -21,27 +21,19 @@ import { Issue } from 'src/app/modules/shared/models/issue';
   styleUrls: ['./edit-issue-log.component.scss']
 })
 export class EditIssueLogComponent implements OnInit {
-  issueLog: IssueLog;
   assigneeUser: Employee;
-  supplier: Supplier;
   actionTypes: Array<ActionType>;
   states: Array<State>;
   suppliers: Array<Supplier>;
+  users: Array<Employee>;
   issueLogForm: FormGroup;
 
   documents: Array<Document> = new Array<Document>();
   existingDocuments: Array<Document> = new Array<Document>();
   shownDocuments: Array<Document> = new Array<Document>();
 
-  private selectedIssue: Issue;
-
-  componentState: any = {
-    isDisabled: true,
-    states: []
-  };
-
   get isStatesDisabled(): boolean {
-    return !this.issueLog.actionType
+    return !this.issueLogForm.value.actionType
       || !this.states
       || !this.states.length;
   }
@@ -53,64 +45,88 @@ export class EditIssueLogComponent implements OnInit {
     private transitionService: TransitionService,
     private supplierService: SupplierService,
     private documentService: DocumentService,
+    private employeeService: EmployeeService,
     private toast: ToastrService
   ) {
     this.documents = new Array<Document>();
     this.issueLogForm = new FormGroup({
-      expenses: new FormControl('', Validators.nullValidator),
-      summary: new FormControl('', Validators.compose([Validators.nullValidator, Validators.maxLength(512)])),
-      deadLine: new FormControl('')
+      expenses: new FormControl(0, Validators.nullValidator),
+      description: new FormControl('', Validators.compose([Validators.nullValidator, Validators.maxLength(512)])),
+      actionType: new FormControl(null, Validators.compose([Validators.required, Validators.nullValidator])),
+      oldState: new FormControl(null),
+      newState: new FormControl(null, Validators.nullValidator),
+      supplier: new FormControl(null),
+      issue: new FormGroup({
+        id: new FormControl(-1),
+        state: new FormControl(null),
+        deadLine: new FormControl(null),
+        assignedTo: new FormControl(null)
+      })
     });
   }
 
   ngOnInit() {
-    this.selectedIssue = this.issueService.selectedItem;
-    this.issueLog = new IssueLog({
-      id: 0,
-      description: '',
-      expenses: 0,
-      actionType: null,
-      supplier: new Supplier({}),
-      issue: this.selectedIssue,
-      oldState: this.selectedIssue.state,
-      newState: this.selectedIssue.state
+    const issue = new Issue(this.issueService.selectedItem);
+    this.issueLogForm.patchValue({
+      issue: issue,
+      oldState: issue.state,
+      newState: issue.state
     });
-    if (!this.issueLog.issue) {
+    if (!this.issueLogForm.value.issue) {
       this.router.navigate(['/engineer/issues']);
     }
-    this.issueLog.newState = this.selectedIssue.state;
     this.supplierService.getEntities().subscribe(suppliers => this.suppliers = suppliers);
+    this.employeeService.getEntities().subscribe(employees => this.users = employees);
     this.loadActionTypes();
   }
 
   private loadActionTypes(): void {
     this.transitionService.getFilteredEntities({
       filters: [
-      {
-        entityPropertyPath: 'fromState.id',
-        value: this.selectedIssue.state.id,
-        operator: '=='
-      }
+        {
+          entityPropertyPath: 'fromState.id',
+          value: this.issueLogForm.value.issue.state.id,
+          operator: '=='
+        }
     ]
     }).subscribe(transitions => {
       this.actionTypes = this.distinct(transitions.data.map(t => t.actionType));
-      this.issueLog.newState = this.distinct(transitions.data.map(t => t.toState))[0];
+      if (!this.actionTypes.length) {
+        this.toast.warning(
+          `Спробуйте додати перехід для поточного стану '${this.issueLogForm.value.oldState.transName}'`,
+          'Заявку неможливо перевести в інший стан'
+          );
+      }
+      this.states = this.distinct(transitions.data.map(t => t.toState));
+      this.issueLogForm.patchValue({
+        ...this.issueLogForm.value,
+        actionType: this.actionTypes[0],
+        newState: this.states[0]
+      });
     });
   }
 
   private loadNewStates(): void {
-    if (this.issueLog.actionType) {
+    if (this.issueLogForm.value.actionType) {
       this.transitionService.getFilteredEntities({
         filters: [
-        {
-          entityPropertyPath: 'actionType.id',
-          value: this.issueLog.actionType.id,
-          operator: '=='
-        }
+          {
+            entityPropertyPath: 'fromState.id',
+            value: this.issueLogForm.value.oldState.id,
+            operator: '=='
+          },
+          {
+            entityPropertyPath: 'actionType.id',
+            value: this.issueLogForm.value.actionType.id,
+            operator: '=='
+          }
       ]
       }).subscribe(transitions => {
         this.states = this.distinct(transitions.data.map(t => t.toState));
-        this.issueLog.newState = this.states[0];
+        this.issueLogForm.patchValue({
+          ...this.issueLogForm.value,
+          newState: this.states[0]
+        });
       });
     }
   }
@@ -130,46 +146,32 @@ export class EditIssueLogComponent implements OnInit {
       && this.documents.some(value => value.name === entity.name)
       || this.existingDocuments
       && this.existingDocuments.some(value => value.name === entity.name)) {
-      this.toast.error("Документ з таки самим ім'ям вже існує", 'Дублювання');
+      this.toast.error('Документ з таки самим ім\'ям вже існує', 'Дублювання');
       return;
     }
-    entity.issueLog = this.issueLog;
+    entity.issueLog = this.issueLogForm.value;
     this.documents.push(entity);
     this.shownDocuments.push(entity);
   }
 
   assignExistingDocument(entity: Document): void {
     if (this.shownDocuments && this.shownDocuments.length >= 5) {
-      this.toast.warning("Дозволено 5 документів", 'Забагато документів');
+      this.toast.warning('Дозволено 5 документів', 'Забагато документів');
       return;
     } else if (this.documents
       && this.documents.some(value => value.name === entity.name)
       || this.existingDocuments
       && this.existingDocuments.some(value => value.name === entity.name)) {
-      this.toast.error("Документ з таки самим ім'ям вже існує", 'Дублювання');
+      this.toast.error('Документ з таки самим ім\'ям вже існує', 'Дублювання');
       return;
     }
-    entity.issueLog = this.issueLog;
+    entity.issueLog = this.issueLogForm.value;
     this.existingDocuments.push(entity);
     this.shownDocuments.push(entity);
   }
 
-  assignAssignee(entity: Employee): void {
-    this.issueLog.issue.assignedTo = entity;
-  }
-
-  assignSupplier(entity: Supplier): void {
-    this.issueLog.supplier = entity;
-  }
-
-  assignActionType(entity: ActionType): void {
-    this.issueLog.actionType = entity;
+  assignActionType(): void {
     this.loadNewStates();
-    this.componentState.isDisabled = false;
-  }
-
-  assignState(entity: State): void {
-    this.issueLog.newState = entity;
   }
 
   deleteDocument(entity: Document): void {
@@ -186,14 +188,7 @@ export class EditIssueLogComponent implements OnInit {
       return;
     }
 
-    this.issueLog.id = 0;
-    this.issueLog.issue.deadline = this.issueLogForm.value.deadline
-      ? this.issueLog.issue.deadline
-      : this.issueLogForm.value.deadline;
-    this.issueLog.supplier = this.issueLog.supplier.id
-      ? this.issueLog.supplier
-      : null;
-    this.issueLogService.addEntity(this.issueLog).subscribe(res => {
+    this.issueLogService.addEntity(this.issueLogForm.value).subscribe(res => {
       if (this.documents.length) {
         this.documents.forEach(d => {
           d.issueLog = res;

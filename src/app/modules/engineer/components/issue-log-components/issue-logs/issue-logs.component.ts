@@ -51,11 +51,11 @@ export class IssueLogsComponent implements OnInit {
 
   protected initTable(tableConfig: any): void {
     this.table = $('#issue-logs-table').DataTable(tableConfig);
-    this.table.on('select', this.selectRow.bind(this));
+    // this.table.on('select', this.selectRow.bind(this));
   }
 
-  protected selectRow(e: any, dt: any, type: any, indexes: any): void {
-    const item = this.table.rows(indexes).data()[0];
-    this.router.navigate(['/engineer/issue-logs/edit', item]);
-  }
+  // protected selectRow(e: any, dt: any, type: any, indexes: any): void {
+  //   const item = this.table.rows(indexes).data()[0];
+  //   this.router.navigate(['/engineer/issue-logs/edit', item]);
+  // }
 }

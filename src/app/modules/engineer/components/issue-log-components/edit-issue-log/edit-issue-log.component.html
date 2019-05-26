@@ -14,25 +14,49 @@
   </div>
   <br><br>
   <div class="form-group">
-    <app-issue-log-action-type (selectActionType)="assignActionType($event)"></app-issue-log-action-type>
+    <label class="required-field">Дії</label>
+    <ng-select
+      formControlName="actionType"
+      [items]="actionTypes"
+      (change)="assignActionType()"
+      bindLabel="name"
+      placeholder="Виберіть дію"
+      notFoundText="Не знайдено"
+    ></ng-select>
   </div>
   <div class="form-group">
     <div class="form-group">
-      <label>Статус</label>
+      <label class="required-field">Статус</label>
       <ng-select
-        [ngModelOptions]="{standalone: true}"
+        formControlName="newState"
         [disabled]="isStatesDisabled"
         [items]="states"
-        (ngModelChange)="assignState($event)"
-        [(ngModel)]="issueLog.newState"
         bindLabel="transName"
         placeholder="Виберіть статус"
         notFoundText="Не знайдено"
       ></ng-select>
     </div>
   </div>
-  <div class="form-group">
-    <app-issue-log-assignees (selectUser)="assignAssignee($event)"></app-issue-log-assignees>
+  <div formGroupName="issue">
+    <div class="form-group">
+      <label>Відповідальний</label>
+      <ng-select
+        formControllName="assignedTo"
+        [items]="users"
+        bindLabel="shortName"
+        placeholder="Виберіть працівника"
+        notFoundText="Не знайдено"
+      ></ng-select>
+    </div>
+    <div class="form-group">
+      <label class="col-form-label">Дедлайн</label>
+      <input
+        type="date"
+        formControlName="deadLine"
+        name="deadLine"
+        class="form-control datepicker"
+      />
+    </div>
   </div>
   <div class="form-group">
     <label class="col-form-label">Витрати:</label>
@@ -40,31 +64,26 @@
       type="number"
       formControlName="expenses"
       name="expenses"
-      [(ngModel)]="issueLog.expenses"
       class="form-control"
     />
   </div>
   <div class="form-group">
-    <app-issue-log-suppliers (selectSupplier)="assignSupplier($event)"></app-issue-log-suppliers>
-  </div>
-  <div class="form-group">
-    <label class="col-form-label">Дедлайн</label>
-    <input
-      type="date"
-      formControlName="deadLine"
-      name="deadLine"
-      [(ngModel)]="issueLog.issue.deadline"
-      class="form-control datepicker"
-    />
+    <label>Постачальник</label>
+    <ng-select
+      formControlName="supplier"
+      [items]="suppliers"
+      bindLabel="name"
+      placeholder="Виберіть постачальника"
+      notFoundText="Не знайдено"
+    ></ng-select>
   </div>
   <div class="form-group">
     <label for="summary" class="col-form-label">Опис:</label>
     <textarea
       class="form-control"
-      formControlName="summary"
+      formControlName="description"
       id="summary"
       placeholder="Введіть опис"
-      [(ngModel)]="issueLog.description"
     >
     </textarea>
   </div>

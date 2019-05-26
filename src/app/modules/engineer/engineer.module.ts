@@ -15,9 +15,6 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { IssueLogsComponent } from './components/issue-log-components/issue-logs/issue-logs.component';
 import { EditIssueLogComponent } from './components/issue-log-components/edit-issue-log/edit-issue-log.component';
 import { NestedIssueLogsComponent } from './components/issue-log-components/nested-issue-logs/nested-issue-logs.component';
-import { IssueLogAssigneesComponent } from './components/issue-log-components/issue-log-assignees/issue-log-assignees.component';
-import { IssueLogSuppliersComponent } from './components/issue-log-components/issue-log-suppliers/issue-log-suppliers.component';
-import { IssueLogActionTypeComponent } from './components/issue-log-components/issue-log-action-type/issue-log-action-type.component';
 import { IssueLogDocumentsComponent } from './components/issue-log-components/issue-log-documents/issue-log-documents.component';
 import { DocumentComponent } from '../shared/components/global-document/document/document.component';
 import { SupplierComponent } from '../shared/components/supplier/supplier.component';
@@ -56,9 +53,6 @@ const routes: Routes = [
     EditIssueComponent,
     EditIssueLogComponent,
     NestedIssueLogsComponent,
-    IssueLogAssigneesComponent,
-    IssueLogSuppliersComponent,
-    IssueLogActionTypeComponent,
     IssueLogDocumentsComponent,
     CreateDocumentComponent
   ]
