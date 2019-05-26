@@ -10,7 +10,14 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="deleteTransition">
-          <i class="fas fa-exclamation-triangle color-red"></i> Ви дійсно хочeте видалити перехід?
+          <i class="fas fa-exclamation-triangle text-danger"></i> Ви дійсно хочeте видалити перехід?
+          <br />
+          <b>
+            <i
+              >{{ transition?.fromState.transName }} -> {{ transition?.toState.transName }} (
+              {{ transition?.actionType.name }} )
+            </i>
+          </b>
         </h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
@@ -21,7 +28,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal" #close>Скасувати</button>
-        <button type="button" class="btn btn-danger" (click)="delete()" data-dismiss="modal" #close>ОК</button>
+        <button type="button" class="btn btn-danger" (click)="delete()" data-dismiss="modal" #close>Видалити</button>
       </div>
     </div>
   </div>

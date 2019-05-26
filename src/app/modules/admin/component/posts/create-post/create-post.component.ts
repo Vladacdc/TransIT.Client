@@ -53,12 +53,13 @@ export class CreatePostComponent implements OnInit {
 
   private createPost() {
     const post = new Post(this.formValue);
-    this.postService
-      .addEntity(post)
-      .subscribe(
-        newPost => this.addPost.next(newPost),
-        _ => this.toast.error('Не вдалось створити посаду', 'Помилка створення посади')
-      );
+    this.postService.addEntity(post).subscribe(
+      newPost => {
+        this.addPost.next(newPost);
+        this.toast.success('', 'Посаду створено');
+      },
+      _ => this.toast.error('Не вдалось створити посаду', 'Помилка створення посади')
+    );
   }
 
   private get formValue() {

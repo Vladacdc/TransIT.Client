@@ -15,11 +15,12 @@ export class DeletePostComponent {
   constructor(private postService: PostService, private toast: ToastrService) {}
 
   delete(): void {
-    this.postService
-      .deleteEntity(this.post.id)
-      .subscribe(
-        () => this.deletePost.next(this.post),
-        () => this.toast.error('Не вдалось видалити посаду', 'Помилка видалення')
-      );
+    this.postService.deleteEntity(this.post.id).subscribe(
+      () => {
+        this.deletePost.next(this.post);
+        this.toast.success('', 'Посаду видалено');
+      },
+      () => this.toast.error('Не вдалось видалити посаду', 'Помилка видалення')
+    );
   }
 }

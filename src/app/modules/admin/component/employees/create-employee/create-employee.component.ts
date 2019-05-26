@@ -70,12 +70,13 @@ export class CreateEmployeeComponent implements OnInit {
 
   private createEmployee() {
     const employee = new Employee(this.formValue);
-    this.employeeService
-      .addEntity(employee)
-      .subscribe(
-        newEmployee => this.addEmployee.next(newEmployee),
-        _ => this.toast.error('Не вдалось створити посаду', 'Помилка створення посади')
-      );
+    this.employeeService.addEntity(employee).subscribe(
+      newEmployee => {
+        this.addEmployee.next(newEmployee);
+        this.toast.success('', 'Працівника створено');
+      },
+      _ => this.toast.error('Не вдалось створити посаду', 'Помилка створення посади')
+    );
   }
 
   private get formValue() {

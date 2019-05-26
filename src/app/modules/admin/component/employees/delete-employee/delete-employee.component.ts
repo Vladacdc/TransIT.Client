@@ -15,11 +15,12 @@ export class DeleteEmployeeComponent {
   constructor(private employeeService: EmployeeService, private toast: ToastrService) {}
 
   delete(): void {
-    this.employeeService
-      .deleteEntity(this.employee.id)
-      .subscribe(
-        () => this.deleteEmployee.next(this.employee),
-        () => this.toast.error('Не вдалось видалити працівника', 'Помилка видалення')
-      );
+    this.employeeService.deleteEntity(this.employee.id).subscribe(
+      () => {
+        this.deleteEmployee.next(this.employee);
+        this.toast.success('', 'Працівника видалено');
+      },
+      () => this.toast.error('Не вдалось видалити працівника', 'Помилка видалення')
+    );
   }
 }
