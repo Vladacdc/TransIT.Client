@@ -20,8 +20,8 @@ export class EditUserComponent implements OnInit {
     if (!user) {
       return;
     }
-    this.userForm.patchValue({ ...user, role: user.role.transName });
     this.selectedUser = user;
+    this.userForm.patchValue({ ...this.selectedUser, role: this.selectedUser.role.transName });
   }
   selectedUser = new User({});
   userForm: FormGroup;
@@ -36,6 +36,13 @@ export class EditUserComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    $('#editUser').on('hidden.bs.modal', () => {
+      this.userForm.patchValue({ ...this.selectedUser, role: this.selectedUser.role.transName });
+      $(this)
+        .find('form')
+        .trigger('reset');
+    });
+
     this.userForm = this.formBuilder.group({
       id: '',
       lastName: new FormControl(
@@ -90,6 +97,7 @@ export class EditUserComponent implements OnInit {
         this.toast.error('Помилка', 'Користувача не змінено');
       }
     );
+    this.userForm.reset();
   }
   updateUserChangeActive(user: User) {
     this.updateUser.next(user);
