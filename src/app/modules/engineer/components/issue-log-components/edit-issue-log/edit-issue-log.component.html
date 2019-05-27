@@ -41,6 +41,7 @@
     <div class="form-group">
       <label>Відповідальний</label>
       <ng-select
+        (change)="assignAssignee($event)"
         formControllName="assignedTo"
         [items]="users"
         bindLabel="shortName"

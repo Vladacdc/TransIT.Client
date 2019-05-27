@@ -22,7 +22,6 @@ import { IssueLog } from 'src/app/modules/shared/models/issuelog';
   styleUrls: ['./edit-issue-log.component.scss']
 })
 export class EditIssueLogComponent implements OnInit {
-  assigneeUser: Employee;
   actionTypes: Array<ActionType>;
   states: Array<State>;
   suppliers: Array<Supplier>;
@@ -173,6 +172,16 @@ export class EditIssueLogComponent implements OnInit {
 
   assignActionType(): void {
     this.loadNewStates();
+  }
+
+  assignAssignee(item: Employee): void {
+    this.issueLogForm.patchValue({
+      ...this.issueLogForm.value,
+      issue: {
+        ...this.issueLogForm.value.issue,
+        assignedTo: item
+      }
+    });
   }
 
   deleteDocument(entity: Document): void {
