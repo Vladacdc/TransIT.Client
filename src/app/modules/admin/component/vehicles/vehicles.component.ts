@@ -1,6 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Vehicle } from 'src/app/modules/shared/models/vehicle';
 import { VehicleService } from 'src/app/modules/shared/services/vehicle.service';
+import * as moment from 'moment';
 
 declare const $;
 
@@ -16,7 +17,7 @@ export class VehiclesComponent implements OnInit {
 
   constructor(private vehicleService: VehicleService) { }
 
-  private readonly tableConfig: DataTables.Settings =
+  private readonly tableConfig: any =
     {
       responsive: true,
       columns: [
@@ -26,8 +27,8 @@ export class VehiclesComponent implements OnInit {
         { title: 'Реєстраційний номер', data: 'regNum', defaultContent: '' },
         { title: 'Бренд', data: 'brand', defaultContent: '' },
         { title: 'Модель', data: 'model', defaultContent: '' },
-        { title: 'Дата введення в експлуатацію', data: 'commissioningDate', defaultContent: '' },
-        { title: 'Дата закінчення гарантії', data: 'warrantyEndDate', defaultContent: '' },
+        { title: 'Дата введення в експлуатацію', data: 'commissioningDate', defaultContent: '', render: function (data) { return moment(data).format("DD.MM.YYYY"); } },
+        { title: 'Дата закінчення гарантії', data: 'warrantyEndDate', defaultContent: '', render: function (data) { return moment(data).format("DD.MM.YYYY"); } },
         { title: 'Дії', orderable: false }
       ],
       processing: true,
@@ -38,7 +39,7 @@ export class VehiclesComponent implements OnInit {
           targets: -1,
           data: null,
           defaultContent: `<button class="edit btn" data-toggle="modal" data-target="#editVehicle"><i class="fas fa-edit"></i></button>
-           <button class="delete btn" data-toggle="modal" data-target="#deleteVehicle"><i class="fas fas fa-trash-alt" style="color: darkred"></i></button>`
+           <button class="delete btn" data-toggle="modal" data-target="#deleteVehicle"><i class="fas fas fa-trash-alt"></i></button>`
         }
       ],
       paging: true,

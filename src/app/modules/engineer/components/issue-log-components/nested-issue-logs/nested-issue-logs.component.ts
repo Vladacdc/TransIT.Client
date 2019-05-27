@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { IssueLogsComponent } from '../issue-logs/issue-logs.component';
 import { Issue } from '../../../../shared/models/issue';
+import * as moment from 'moment';
 
 declare const $;
 
@@ -27,7 +28,7 @@ export class NestedIssueLogsComponent extends IssueLogsComponent implements OnIn
         { title: 'Дія', data: 'actionType.name', defaultContent: '' },
         { title: 'Постачальник', data: 'supplier.name', defaultContent: '' },
         { title: 'Транспорт', data: 'issue.vehicle.inventoryId', defaultContent: '' },
-        { title: 'Створено', data: 'createDate', defaultContent: '' },
+        { title: 'Створено', data: 'createDate', defaultContent: '', render: function (data) { return moment(data).format("DD.MM.YYYY"); } },
         { title: 'Редаговано', data: 'modDate', defaultContent: '', bVisible: false },
         { data: 'id', bVisible: false }
       ],

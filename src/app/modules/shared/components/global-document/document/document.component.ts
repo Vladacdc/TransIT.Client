@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { Document } from '../../../models/document';
 import { DocumentService } from '../../../services/document.service';
+import * as moment from 'moment';
 
 declare const $;
 
@@ -18,7 +19,7 @@ export class DocumentComponent implements OnInit {
   tost: ToastrService;
   @Input() isVisible: boolean;
 
-  constructor(private documentService: DocumentService, private router: Router, private toast: ToastrService) {}
+  constructor(private documentService: DocumentService, private router: Router, private toast: ToastrService) { }
   _url = this.router.url.substring(1, this.router.url.length - 1);
 
   ngOnInit() {
@@ -29,7 +30,7 @@ export class DocumentComponent implements OnInit {
       columns: [
         { title: 'Назва', data: 'name', defaultContent: '' },
         { title: 'Опис', data: 'description', defaultContent: '' },
-        { title: 'Змінено', data: 'modDate', defaultContent: '' },
+        { title: 'Змінено', data: 'modDate', defaultContent: '', render: function (data) { return moment(data).format("DD.MM.YYYY"); } },
         { data: 'id', visible: false },
         { title: 'Дії⠀', orderable: false, visible: this.isVisible }
       ],
@@ -63,21 +64,21 @@ export class DocumentComponent implements OnInit {
   }
 
   selectFirstItem(component: any) {
-    return function() {
+    return function () {
       const data = component.tableDocument.row($(this).parents('tr')).data();
       component.selectedDocument = data;
     };
   }
 
   selectSecondItem(component: any) {
-    return function() {
+    return function () {
       const data = component.tableDocument.row($(this).parents('tr')).data();
       component.selectedDocument = data;
     };
   }
 
   selectThirdItem(component: any) {
-    return function() {
+    return function () {
       const data = component.tableDocument.row($(this).parents('tr')).data();
       this.selectedDocument = data;
 
@@ -94,7 +95,7 @@ export class DocumentComponent implements OnInit {
   }
 
   copyMessage(component: any) {
-    return function() {
+    return function () {
       const data = component.tableDocument.row($(this).parents('tr')).data();
       let selBox = document.createElement('textarea');
       selBox.style.position = 'fixed';
@@ -107,7 +108,7 @@ export class DocumentComponent implements OnInit {
       selBox.select();
       document.execCommand('copy');
       document.body.removeChild(selBox);
-      component.toast.success(`шлях документа "${data.name}" скопійований`,  'Скопійовано', {
+      component.toast.success(`шлях документа "${data.name}" скопійований`, 'Скопійовано', {
         timeOut: 3000
       });
     };

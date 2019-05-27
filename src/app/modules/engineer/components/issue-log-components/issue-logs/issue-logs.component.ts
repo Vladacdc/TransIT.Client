@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { IssuelogService } from 'src/app/modules/shared/services/issuelog.service';
+import * as moment from 'moment';
 
 declare const $;
 
@@ -21,7 +22,7 @@ export class IssueLogsComponent implements OnInit {
     { title: 'Новий статус', data: 'newState.transName', defaultContent: '' },
     { title: 'Постачальник', data: 'supplier.name', defaultContent: '', bVisible: false },
     { title: 'Транспорт', data: 'issue.vehicle.inventoryId', defaultContent: '' },
-    { title: 'Створено', data: 'createDate', defaultContent: '' },
+    { title: 'Створено', data: 'createDate', defaultContent: '', render: function (data) { return moment(data).format("DD.MM.YYYY"); } },
     { title: 'Редаговано', data: 'modDate', defaultContent: '', bVisible: false },
     { data: 'id', bVisible: false }
   ];

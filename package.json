@@ -30,6 +30,7 @@
     "bootstrap-switch-button": "^1.0.0",
     "core-js": "^2.5.4",
     "file-saver": "^2.0.2",
+    "moment": "^2.24.0",
     "ng-bootstrap-form-validation": "^3.0.3",
     "ngx-mask": "^7.9.2",
     "ngx-spinner": "^7.0.0",
