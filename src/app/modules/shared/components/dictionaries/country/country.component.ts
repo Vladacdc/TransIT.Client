@@ -42,7 +42,7 @@ export class CountryComponent implements OnInit {
       i.name,
       `<button id="find-country-${
         i.id
-      }" class="btn" data-toggle="modal" data-target="#deleteCountry"><i class="fas fa-trash-alt" style="color: darkred"></i>
+      }" class="btn" data-toggle="modal" data-target="#deleteCountry"><i class="fas fa-trash-alt"></i>
       </button>`
     ]);
 

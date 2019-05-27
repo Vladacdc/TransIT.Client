@@ -46,7 +46,7 @@ export class CurrencyComponent implements OnInit {
       i.fullName,
       `<button id="find-currency-${
         i.id
-      }" class="btn" data-toggle="modal" data-target="#deleteCurrency"><i class="fas fa-trash-alt" style="color: darkred"></i>
+      }" class="btn" data-toggle="modal" data-target="#deleteCurrency"><i class="fas fa-trash-alt"></i>
       </button>`
     ]);
 

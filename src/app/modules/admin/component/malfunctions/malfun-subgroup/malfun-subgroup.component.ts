@@ -56,7 +56,6 @@ export class MalfunSubgroupComponent implements OnInit {
       .draw();
   }
   editMalfunctionSubGroup(malfunctionSubGroup: MalfunctionSubgroup) {
-    console.log('I can edit entity');
     this.malfuncSubgroups[
       this.malfuncSubgroups.findIndex(i => i.id === this.selectedMalfunctionSubGroup.id)
     ] = malfunctionSubGroup;

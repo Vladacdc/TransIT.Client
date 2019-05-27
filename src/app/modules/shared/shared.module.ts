@@ -43,6 +43,7 @@ import { VehicleService } from './services/vehicle.service';
 import { SupplierService } from './services/supplier.service';
 import { TransitionService } from './services/transition.service';
 import { CountryService } from './services/country.service';
+import { UniqueFieldValidator } from './validators/unique-field-validator';
 
 @NgModule({
   declarations: [

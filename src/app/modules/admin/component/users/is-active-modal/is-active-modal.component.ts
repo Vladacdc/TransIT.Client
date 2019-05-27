@@ -28,7 +28,6 @@ export class IsActiveModalComponent implements OnInit {
     } else {
       this.user.isActive = true;
     }
-    console.log(this.user);
     this.serviceUser.updateEntity(this.user).subscribe(
       _ => {
         this.updateUserChangeActive.next(this.user);

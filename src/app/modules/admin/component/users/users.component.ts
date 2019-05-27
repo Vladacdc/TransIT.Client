@@ -78,7 +78,7 @@ export class UsersComponent implements OnInit {
           }" class="btn" data-toggle="modal" data-target="#editUser"><i class="fas fa-edit"></i></button>
       <button id="edit-user-${
         i.id
-      }" class="btn" data-toggle="modal" data-target="#deleteModal"><i class="fas fa-trash-alt" style="color: darkred"></i>
+      }" class="btn" data-toggle="modal" data-target="#deleteModal"><i class="fas fa-trash-alt"></i>
       </button>`
         : `<button id="find2-user-${
             i.id

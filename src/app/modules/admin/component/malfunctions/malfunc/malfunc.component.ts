@@ -48,14 +48,11 @@ export class MalfuncComponent implements OnInit {
       .rows('.selected')
       .remove()
       .draw();
-    // console.log(malfunctionGroup);
-    console.log(this.malfunctions);
   }
 
   addMalfunction(malfunction: Malfunction) {
     this.malfunctions = [...this.malfunctions, malfunction];
     this.tableMalfunction.row.add(malfunction);
-    console.log(this.malfunctions);
     this.tableMalfunction.draw();
   }
 }

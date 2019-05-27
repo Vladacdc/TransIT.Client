@@ -6,6 +6,7 @@ import { Employee } from 'src/app/modules/shared/models/employee';
 import { Post } from 'src/app/modules/shared/models/post';
 import { EmployeeService } from 'src/app/modules/shared/services/employee.service';
 import { PostService } from 'src/app/modules/shared/services/post.service';
+import { UniqueFieldValidator } from 'src/app/modules/shared/validators/unique-field-validator';
 
 @Component({
   selector: 'app-create-employee',
@@ -42,6 +43,7 @@ export class CreateEmployeeComponent implements OnInit {
     }
 
     this.createEmployee();
+    this.hideModalWindow();
     this.setUpForm();
   }
 
@@ -50,16 +52,25 @@ export class CreateEmployeeComponent implements OnInit {
   }
 
   closeModal() {
+    this.hideModalWindow();
     this.setUpForm();
   }
 
   private setUpForm() {
     this.employeeForm = this.fb.group({
-      boardNumber: [1, [Validators.required, Validators.min(1), Validators.max(1000000000)]],
+      boardNumber: [
+        1,
+        [Validators.required, Validators.min(1), Validators.max(1000000000)],
+        [UniqueFieldValidator.createValidator(this.employeeService, 'boardNumber')]
+      ],
       lastName: [undefined, this.stringFieldValidators],
       firstName: [undefined, this.stringFieldValidators],
       middleName: [undefined, this.stringFieldValidators],
-      shortName: [undefined, [...this.stringFieldValidators, Validators.required]],
+      shortName: [
+        undefined,
+        [...this.stringFieldValidators, Validators.required],
+        [UniqueFieldValidator.createValidator(this.employeeService, 'shortName')]
+      ],
       post: ['', Validators.required]
     });
   }
@@ -77,6 +88,11 @@ export class CreateEmployeeComponent implements OnInit {
       },
       _ => this.toast.error('Не вдалось створити посаду', 'Помилка створення посади')
     );
+  }
+
+  private hideModalWindow() {
+    const modalWindow: any = $('#createEmployee');
+    modalWindow.modal('hide');
   }
 
   private get formValue() {

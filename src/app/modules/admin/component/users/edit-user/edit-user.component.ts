@@ -87,7 +87,6 @@ export class EditUserComponent implements OnInit {
       role: this.roles.find(r => r.transName === form.role),
       isActive: this.selectedUser.isActive
     });
-    console.log(user);
     this.serviceUser.updateEntity(user).subscribe(
       _ => {
         this.updateUser.next(user);

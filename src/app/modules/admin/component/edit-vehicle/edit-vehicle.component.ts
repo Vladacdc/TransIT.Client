@@ -14,22 +14,24 @@ import { DatePipe } from '@angular/common';
   providers: [DatePipe]
 })
 export class EditVehicleComponent implements OnInit {
-  
   @Input()
   set vehicle(vehicle: Vehicle) {
     if (!vehicle) {
       return;
     }
-    this.vehicleForm.patchValue({ ...vehicle, vehicleType: vehicle.vehicleType.name,
+    this.vehicleForm.patchValue({
+      ...vehicle,
+      vehicleType: vehicle.vehicleType.name,
       commissioningDate: this.datePipe.transform(vehicle.commissioningDate, 'yyyy-MM-dd'),
-      warrantyEndDate: this.datePipe.transform(vehicle.warrantyEndDate, 'yyyy-MM-dd') });
+      warrantyEndDate: this.datePipe.transform(vehicle.warrantyEndDate, 'yyyy-MM-dd')
+    });
   }
 
   constructor(
     private formBuilder: FormBuilder,
     private serviceVehicleType: VehicleTypeService,
     private serviceVehicle: VehicleService,
-    private datePipe : DatePipe,
+    private datePipe: DatePipe,
     private toast: ToastrService
   ) {}
   @ViewChild('close') closeDiv: ElementRef;
@@ -38,13 +40,14 @@ export class EditVehicleComponent implements OnInit {
   vehicleForm: FormGroup;
   vehicleTypeList: VehicleType[] = [];
 
- 
-
   ngOnInit() {
     this.vehicleForm = this.formBuilder.group({
       id: '',
       vehicleType: new FormControl('', Validators.required),
-      vincode: new FormControl('', Validators.compose([Validators.required, Validators.minLength(17), Validators.maxLength(17)])),
+      vincode: new FormControl(
+        '',
+        Validators.compose([Validators.required, Validators.minLength(17), Validators.maxLength(17)])
+      ),
       inventoryId: '',
       regNum: new FormControl('', Validators.minLength(8)),
       brand: '',
@@ -72,7 +75,6 @@ export class EditVehicleComponent implements OnInit {
       commissioningDate: form.commissioningDate as Date,
       warrantyEndDate: form.warrantyEndDate as Date
     });
-    console.log(vehicle);
     this.serviceVehicle
       .updateEntity(vehicle)
       .subscribe(

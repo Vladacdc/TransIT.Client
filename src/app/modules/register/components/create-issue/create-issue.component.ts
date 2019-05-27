@@ -47,7 +47,6 @@ export class CreateIssueComponent implements OnInit {
       return;
     }
     this.createIssue();
-    this.setUpForm();
     this.hideModalWindow();
   }
 
@@ -56,7 +55,7 @@ export class CreateIssueComponent implements OnInit {
   }
 
   closeModal() {
-    this.issueForm.reset();
+    this.hideModalWindow();
   }
 
   configureMalfunctionControls() {
@@ -130,6 +129,7 @@ export class CreateIssueComponent implements OnInit {
   private hideModalWindow() {
     const modalWindow: any = $('#createIssue');
     modalWindow.modal('hide');
+    this.issueForm.reset();
   }
 
   private filterSubgroupsByGroup(group: MalfunctionGroup): MalfunctionSubgroup[] {

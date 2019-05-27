@@ -12,14 +12,11 @@ export class VehicleTypeComponent implements OnInit {
   table: DataTables.Api;
   selectedVehicleType: VehicleType;
 
-  constructor(private vehicleTypeService: VehicleTypeService, private chRef: ChangeDetectorRef) { }
+  constructor(private vehicleTypeService: VehicleTypeService, private chRef: ChangeDetectorRef) {}
 
   private readonly tableConfig: DataTables.Settings = {
     responsive: true,
-    columns: [
-      { title: 'Тип транспорту', data: 'name', defaultContent: '' },
-      { title: 'Дії', orderable: false }
-    ],
+    columns: [{ title: 'Тип транспорту', data: 'name', defaultContent: '' }, { title: 'Дії', orderable: false }],
     processing: true,
     serverSide: true,
     ajax: this.ajaxCallback.bind(this),
@@ -49,14 +46,14 @@ export class VehicleTypeComponent implements OnInit {
   }
 
   selectEditItem(component: any) {
-    return function () {
+    return function() {
       const data = component.table.row($(this).parents('tr')).data();
       component.selectedVehicleType = data;
     };
   }
 
   selectDeleteItem(component: any) {
-    return function () {
+    return function() {
       const data = component.table.row($(this).parents('tr')).data();
       component.selectedVehicleType = data;
     };

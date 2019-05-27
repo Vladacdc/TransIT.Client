@@ -4,6 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { NAME_FIELD_ERRORS } from 'src/app/custom-errors';
 import { Post } from 'src/app/modules/shared/models/post';
 import { PostService } from 'src/app/modules/shared/services/post.service';
+import { UniqueFieldValidator } from 'src/app/modules/shared/validators/unique-field-validator';
 
 @Component({
   selector: 'app-create-post',
@@ -34,6 +35,7 @@ export class CreatePostComponent implements OnInit {
     }
 
     this.createPost();
+    this.hideModalWindow();
     this.setUpForm();
   }
 
@@ -42,12 +44,13 @@ export class CreatePostComponent implements OnInit {
   }
 
   closeModal() {
+    this.hideModalWindow();
     this.setUpForm();
   }
 
   private setUpForm() {
     this.postForm = this.fb.group({
-      name: [undefined, this.stringFieldValidators]
+      name: [undefined, this.stringFieldValidators, UniqueFieldValidator.createValidator(this.postService, 'name')]
     });
   }
 
@@ -60,6 +63,11 @@ export class CreatePostComponent implements OnInit {
       },
       _ => this.toast.error('Не вдалось створити посаду', 'Помилка створення посади')
     );
+  }
+
+  private hideModalWindow() {
+    const modalWindow: any = $('#createPost');
+    modalWindow.modal('hide');
   }
 
   private get formValue() {

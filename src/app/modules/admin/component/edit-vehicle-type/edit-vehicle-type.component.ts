@@ -45,7 +45,6 @@ export class EditVehicleTypeComponent implements OnInit {
       id: form.id as number,
       name: form.name as string
     };
-    console.log(vehicleType);
     this.serviceVehicleType
       .updateEntity(vehicleType)
       .subscribe(

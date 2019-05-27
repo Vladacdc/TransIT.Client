@@ -46,7 +46,6 @@ export class MalfuncGroupComponent implements OnInit {
   addMalfunctionGroup(malfuncGroup: MalfunctionGroup) {
     this.malfuncGroups = [...this.malfuncGroups, malfuncGroup];
     this.tableGroup.row.add(malfuncGroup);
-    console.log(this.malfuncGroups);
     this.tableGroup.draw();
   }
 
@@ -56,8 +55,6 @@ export class MalfuncGroupComponent implements OnInit {
       .rows('.selected')
       .remove()
       .draw();
-    // console.log(malfunctionGroup);
-    console.log(this.malfuncGroups);
   }
 
   editMalfunctionGroup(malfunctionGroup: MalfunctionGroup) {
@@ -66,6 +63,5 @@ export class MalfuncGroupComponent implements OnInit {
       .row('.selected')
       .data(malfunctionGroup)
       .draw();
-    console.log(this.malfuncGroups);
   }
 }

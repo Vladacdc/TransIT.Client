@@ -38,6 +38,7 @@ export class CreateTransitionComponent implements OnInit {
     }
 
     this.createTransition();
+    this.hideModalWindow();
     this.setUpForm();
   }
 
@@ -46,6 +47,7 @@ export class CreateTransitionComponent implements OnInit {
   }
 
   closeModal() {
+    this.hideModalWindow();
     this.setUpForm();
   }
 
@@ -70,6 +72,11 @@ export class CreateTransitionComponent implements OnInit {
         newTransition => this.addTransition.next(newTransition),
         _ => this.toast.error('Не вдалось створити перехід', 'Помилка створення переходу')
       );
+  }
+
+  private hideModalWindow() {
+    const modalWindow: any = $('#createTransition');
+    modalWindow.modal('hide');
   }
 
   private get formValue() {
