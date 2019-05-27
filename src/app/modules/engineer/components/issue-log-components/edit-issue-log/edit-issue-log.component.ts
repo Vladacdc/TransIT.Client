@@ -14,6 +14,7 @@ import { Document } from 'src/app/modules/shared/models/document';
 import { TransitionService } from 'src/app/modules/shared/services/transition.service';
 import { Issue } from 'src/app/modules/shared/models/issue';
 import { EmployeeService } from 'src/app/modules/shared/services/employee.service';
+import { IssueLog } from 'src/app/modules/shared/models/issuelog';
 
 @Component({
   selector: 'app-edit-issue-log',

@@ -15,7 +15,6 @@ export class CreateDocumentComponent implements OnInit {
   @ViewChild('close') closeDiv: ElementRef;
   @Output() createDocument = new EventEmitter<Document>();
   @Output() addExistingDocument = new EventEmitter<Document>();
-  @Input() issueLog;
   documentForm: FormGroup;
   issueLogList: IssueLog[];
 
@@ -53,8 +52,7 @@ export class CreateDocumentComponent implements OnInit {
     const form = this.documentForm.value;
     const document = new Document({
       name: form.name,
-      description: form.description,
-      issueLog: this.issueLog
+      description: form.description
     });
 
     this.createDocument.emit(document);
