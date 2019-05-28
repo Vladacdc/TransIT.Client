@@ -34,7 +34,8 @@ export class IssuesComponent implements OnDestroy, AfterViewInit {
     language: {
       url: '//cdn.datatables.net/plug-ins/1.10.19/i18n/Ukrainian.json'
     },
-    scrollX: true
+    scrollX: true,
+    order: [[0, 'desc']]
   };
 
   issues: Issue[] = [];

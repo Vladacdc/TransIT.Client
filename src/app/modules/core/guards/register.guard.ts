@@ -5,6 +5,6 @@ import { Role } from '../models/role/role';
 @Injectable({
   providedIn: 'root'
 })
-export class CustomerGuard extends LoginGuard {
-  protected expectedRole: Role = 'CUSTOMER';
+export class RegisterGuard extends LoginGuard {
+  protected expectedRole: Role = 'REGISTER';
 }

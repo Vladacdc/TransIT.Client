@@ -4,7 +4,7 @@ import { LoginComponent } from './modules/core/components/login/login.component'
 import { LoginGuard } from './modules/core/guards/login.guard';
 import { AdminGuard } from './modules/core/guards/admin.guard';
 import { EngineerGuard } from './modules/core/guards/engineer.guard';
-import { CustomerGuard } from './modules/core/guards/customer.guard';
+import { RegisterGuard } from './modules/core/guards/register.guard';
 import { AnalystGuard } from './modules/core/guards/analyst.guard';
 
 const routes: Routes = [
@@ -29,9 +29,9 @@ const routes: Routes = [
     canActivate: [AnalystGuard]
   },
   {
-    path: 'customer',
+    path: 'register',
     loadChildren: './modules/register/register.module#RegisterModule',
-    canActivate: [CustomerGuard]
+    canActivate: [RegisterGuard]
   },
   {
     path: '**',
