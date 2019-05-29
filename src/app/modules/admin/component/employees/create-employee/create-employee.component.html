@@ -21,7 +21,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <form [formGroup]="employeeForm" (validSubmit)="onSubmit()">
+        <form [formGroup]="employeeForm" (submit)="onSubmit()">
           <div class="form-group" [customErrorMessages]="customFieldErrors">
             <label class="required-field">Табельний номер</label>
             <input

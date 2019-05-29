@@ -14,7 +14,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <form [formGroup]="postForm" (validSubmit)="onSubmit()">
+        <form [formGroup]="postForm" (submit)="onSubmit()">
           <div class="form-group" [customErrorMessages]="customFieldErrors">
             <label>Назва</label>
             <input type="text" placeholder="Введіть назву" class="form-control" formControlName="name" />

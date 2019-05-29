@@ -3,8 +3,6 @@ import { CrudService } from '../../core/services/crud.service';
 import { Issue } from '../models/issue';
 import { environment } from '../../../../environments/environment';
 import { saveToStorage, getFromStorage } from './serviceTools';
-import { Observable } from 'rxjs';
-import { map, catchError } from 'rxjs/operators';
 
 @Injectable()
 export class IssueService extends CrudService<Issue> {

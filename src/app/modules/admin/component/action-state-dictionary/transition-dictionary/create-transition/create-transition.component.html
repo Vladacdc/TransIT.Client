@@ -21,7 +21,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <form [formGroup]="transitionForm" (validSubmit)="onSubmit()">
+        <form [formGroup]="transitionForm" (submit)="onSubmit()">
           <div class="form-group">
             <label class="required-field">Старий стан</label>
             <ng-select
