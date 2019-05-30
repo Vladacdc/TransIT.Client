@@ -9,6 +9,7 @@ import { MalfunctionGroupService } from 'src/app/modules/shared/services/malfunc
 import { MalfunctionSubgroupService } from 'src/app/modules/shared/services/malfunction-subgroup.service';
 import { MalfunctionService } from 'src/app/modules/shared/services/malfunction.service';
 import { Priority } from 'src/app/modules/core/models/priority/priority';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-edit-issue',
@@ -30,6 +31,8 @@ export class EditIssueComponent implements OnInit {
 
   priorityList = Object.values(Priority).filter(n => typeof n === typeof '');
 
+  private isEdited: boolean = false;
+
   constructor(
     private issueService: IssueService,
     private toastr: ToastrService,
@@ -48,8 +51,15 @@ export class EditIssueComponent implements OnInit {
     this.currentMalfunctionGroup = this.currentMalfunctionSubgroup.malfunctionGroup;
   }
 
+  formatedDate(date): string {
+    return date
+      ? moment(date).format("DD.MM.YYYY")
+      : '';
+  }
+
   selectPriority(item) {
     this.issue.priority = parseInt(Priority[item]);
+    this.isEdited = true;
   }
 
   editIssue() {
@@ -66,6 +76,13 @@ export class EditIssueComponent implements OnInit {
 
   createHandler(): void {
     this.issueService.selectedItem = this.issue;
+    if (this.isEdited) {
+      this.editIssue();
+    }
+  }
+
+  selectWarranty(): void {
+    this.isEdited = true;
   }
 
   selectGroup(): void {
@@ -74,6 +91,7 @@ export class EditIssueComponent implements OnInit {
     if (this.currentMalfunctionGroup) {
       this.malfunctionSubGroupFilteredList = this.getByGroup(this.currentMalfunctionGroup);
     }
+    this.isEdited = true;
   }
 
   selectSubgroup(): void {
@@ -81,11 +99,13 @@ export class EditIssueComponent implements OnInit {
     if (this.currentMalfunctionSubgroup) {
       this.malfunctionFilteredList = this.getBySubgroup(this.currentMalfunctionSubgroup);
     }
+    this.isEdited = true;
   }
 
   selectMalfunction(): void {
     this.currentMalfunctionSubgroup.malfunctionGroup = this.currentMalfunctionGroup;
     this.currentMalfunction.malfunctionSubgroup = this.currentMalfunctionSubgroup;
+    this.isEdited = true;
   }
 
   private getByGroup(group: MalfunctionGroup): Array<MalfunctionSubgroup> {

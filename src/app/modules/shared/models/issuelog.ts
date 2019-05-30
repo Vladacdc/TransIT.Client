@@ -2,6 +2,7 @@ import { Issue } from './issue';
 import { State } from './state';
 import { ActionType } from './action-type';
 import { Supplier } from './supplier';
+import { Document } from './document';
 import { TEntity } from '../../core/models/entity/entity';
 
 export class IssueLog extends TEntity<IssueLog> {
@@ -14,6 +15,7 @@ export class IssueLog extends TEntity<IssueLog> {
   supplier: Supplier;
   modDate: Date;
   createDate: Date;
+  documents: Array<Document>;
 
   constructor(issueLog: Partial<IssueLog>) {
     super(issueLog);

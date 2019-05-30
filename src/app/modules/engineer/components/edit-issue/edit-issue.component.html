@@ -1,58 +1,30 @@
 <div class="container-fluid">
   <div class="row">
     <div class="form-group col-sm-12 col-md-4">
-      <label for="stateDisInput">Статус</label>
-      <div class="form-control" id="stateDisInput">
-        {{ issue?.state?.transName || '' }}
-      </div>
-    </div>
-    <div class="form-group col-sm-12 col-md-4">
-      <label for="malfunctionDisInput">Поломка</label>
-      <div class="form-control" id="malfunctionDisInput">
-        {{ issue?.malfunction?.name || '' }}
-      </div>
-    </div>
-    <div class="form-group col-sm-12 col-md-4">
-      <label for="warrantyDisInput">Гарантія</label>
-      <input type="number" class="form-control" [(ngModel)]="issue.warranty" min="0" max="1" />
-    </div>
-  </div>
-  <div class="row">
-    <div class="form-group col-sm-6 col-md-6">
       <label for="vehicleDisInput">Транспорт</label>
       <div class="form-control" id="vehicleDisInput">
         {{
           issue?.vehicle?.inventoryId || '' + ' ' + issue?.vehicle?.vincode || '' + ' ' + issue?.vehicle?.regNum || ''
         }}
       </div>
-    </div>
-    <div class="form-group col-sm-6 col-md-6">
-      <label for="assigneeDisInput">Відповідальний</label>
-      <div class="form-control" id="assigneeDisInput">
-        {{ issue?.assignedTo?.shortName }}
-      </div>
-    </div>
-  </div>
-  <div class="row">
+    </div>    
     <div class="form-group col-sm-12 col-md-4">
-      <label for="deadlineDisInput">Виконати до</label>
-      <div class="form-control" id="deadlineDisInput">
-        {{ issue?.deadline || '' }}
-      </div>
-    </div>
-    <div class="form-group col-sm-12 col-md-4">
-      <label for="createdDisInput">Створено</label>
-      <div class="form-control" id="createdDisInput">
-        {{ issue?.createDate || '' }}
+      <label for="stateDisInput">Статус</label>
+      <div class="form-control" id="stateDisInput">
+        {{ issue?.state?.transName || '' }}
       </div>
     </div>
     <div class="form-group col-sm-12 col-md-4">
       <label for="modDisInput">Редаговано</label>
-      <div class="form-control" id="modDisInput">
-        {{ issue?.modDate || '' }}
-      </div>
+      <label class="form-control" id="modDisInput">{{ formatedDate(issue.modDate) }}</label>
     </div>
   </div>
+  <div class="row">
+    <div class="form-group col-sm-12 col-md-12">
+      <label for="summaryDisInput">Опис</label>
+      <textarea [(ngModel)]="issue.summary" class="form-control" id="summaryDisInput"> </textarea>
+    </div>
+  </div>  
   <div class="row">
     <div class="form-group col-sm-12 col-md-4">
       <label>Група несправності</label>
@@ -91,7 +63,7 @@
     </div>
   </div>
   <div class="row">
-    <div class="form-group col-sm-12 col-md-12">
+    <div class="form-group col-sm-12 col-md-6">
       <label>Приорітет</label>
       <ng-select
         [items]="priorityList"
@@ -101,23 +73,37 @@
         notFoundText="Не знайдено"
       ></ng-select>
     </div>
+    <div class="form-group col-sm-12 col-md-6">
+      <label for="warrantyDisInput">Гарантія</label>
+      <input type="number" class="form-control" (ngModelChange)="selectWarranty()" [(ngModel)]="issue.warranty" min="0" max="1" />
+    </div>  
   </div>
   <div class="row">
-    <div class="form-group col-sm-12 col-md-12">
-      <label for="summaryDisInput">Опис</label>
-      <textarea [(ngModel)]="issue.summary" class="form-control" id="summaryDisInput"> </textarea>
+    <div class="form-group col-sm-12 col-md-6">
+      <label for="assigneeDisInput">Відповідальний</label>
+      <div class="form-control" id="assigneeDisInput">
+        {{ issue?.assignedTo?.shortName }}
+      </div>
     </div>
+    <div class="form-group col-sm-12 col-md-6">
+      <label for="deadlineDisInput">Виконати до</label>
+      <div class="form-control" id="deadlineDisInput">
+        {{ formatedDate(issue.deadLine) }}
+      </div>
+    </div>  
   </div>
   <div class="row">
-    <div class="form-group col-sm-12 col-md-12">
-      <a class="btn btn-primary" style="color: white" (click)="editIssue()">Зберегти заявку</a>
+    <div class="form-group col-sm-12 col-md-12 offset-md-10">
+      <a class="btn btn-primary align-self-end" style="color: white" (click)="editIssue()">Зберегти заявку</a>
     </div>
   </div>
-  <div style="float: left">
-    <a class="btn btn-primary" [routerLink]="['/engineer/issue-logs/edit']" (click)="createHandler()">Обробка</a>
-  </div>
-  <br /><br />
-  <div>
-    <app-nested-issue-logs [issue]="issue"></app-nested-issue-logs>
+  <div class="table-background">
+    <div style="float: left">
+      <a class="btn btn-primary" [routerLink]="['/engineer/issue-logs/edit']" (click)="createHandler()">Обробка</a>
+    </div>
+    <br /><br />
+    <div>
+      <app-nested-issue-logs [issue]="issue"></app-nested-issue-logs>
+    </div>
   </div>
 </div>

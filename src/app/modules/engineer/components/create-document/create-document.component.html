@@ -13,7 +13,7 @@
       </div>
       <div class="modal-body">
         <div class="form-group">
-          <app-issue-log-documents (selectDocument)="selectExisting($event)"></app-issue-log-documents>
+          <app-issue-log-documents [idSelectDisabled]="!!documentForm.value.name || !!documentForm.value.description" (selectDocument)="selectExisting($event)"></app-issue-log-documents>
         </div>
         <form [formGroup]="documentForm">
           <div class="form-group">

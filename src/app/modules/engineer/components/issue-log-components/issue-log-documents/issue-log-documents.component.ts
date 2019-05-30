@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { Document } from 'src/app/modules/shared/models/document';
 import { DocumentService } from 'src/app/modules/shared/services/document.service';
 
@@ -11,6 +11,7 @@ export class IssueLogDocumentsComponent implements OnInit {
   currentDocument: Document;
   documents: Array<Document>;
   @Output() selectDocument: EventEmitter<Document>;
+  @Input() idSelectDisabled: boolean = false;
 
   constructor(private documentService: DocumentService) {
     this.selectDocument = new EventEmitter<Document>();
