@@ -21,9 +21,9 @@ export class DeleteCountryComponent implements OnInit {
     this.service.deleteEntity(this.country.id).subscribe(
       data => {
         this.deleteCountry.next(this.country);
-        this.toast.success('', 'Країну видалено');
+        this.toast.success('', 'Країну видалено!');
       },
-      error => this.toast.error('Помилка')
+      error => this.toast.error('Країну не можливо видалити!')
     );
   }
 }

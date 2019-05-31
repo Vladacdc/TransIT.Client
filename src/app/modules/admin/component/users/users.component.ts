@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/modules/shared/models/user';
 import { UserService } from 'src/app/modules/shared/services/user.service';
 import { AuthenticationService } from 'src/app/modules/core/services/authentication.service';
-import { RoleService } from 'src/app/modules/shared/services/role.service';
 
 @Component({
   selector: 'app-users',
@@ -46,13 +45,12 @@ export class UsersComponent implements OnInit {
     ]
   };
 
-  constructor(
-    private service: UserService,
-    private serviceRole: RoleService,
-    private authService: AuthenticationService
-  ) {}
+  constructor(private service: UserService, private authService: AuthenticationService) {}
 
   ngOnInit() {
+    $(document).on('preInit.dt', function() {
+      $(".dataTables_filter input[type='search']").attr('maxlength', 255);
+    });
     $('#userTable').DataTable(this.tableParams);
     this.service.getEntities().subscribe(users => {
       this.addTableData(users);

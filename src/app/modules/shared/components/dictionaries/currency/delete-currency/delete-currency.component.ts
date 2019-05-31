@@ -23,7 +23,7 @@ export class DeleteCurrencyComponent implements OnInit {
         this.deleteCurrency.next(this.currency);
         this.toast.success('', 'Валюту видалено');
       },
-      error => this.toast.error('Помилка')
+      error => this.toast.error('Валюту не можливо видалити.')
     );
   }
 }

@@ -3,6 +3,9 @@ import { MalfunctionGroup } from 'src/app/modules/shared/models/malfunction-grou
 import { MalfunctionGroupService } from 'src/app/modules/shared/services/malfunction-group.service';
 import { MalfunctionSubgroup } from 'src/app/modules/shared/models/malfunction-subgroup';
 import { MalfunctionSubgroupService } from 'src/app/modules/shared/services/malfunction-subgroup.service';
+import { VehicleTypeService } from 'src/app/modules/shared/services/vehicle-type.service';
+import { Malfunction } from 'src/app/modules/shared/models/malfunction';
+import { MalfunctionService } from 'src/app/modules/shared/services/malfunction.service';
 
 @Component({
   selector: 'app-report',
@@ -10,121 +13,160 @@ import { MalfunctionSubgroupService } from 'src/app/modules/shared/services/malf
   styleUrls: ['./report.component.scss']
 })
 export class ReportComponent implements OnInit {
+  malfunc: Malfunction[] = [];
   malfuncGroups: Array<MalfunctionGroup>;
-  malfuncSubgroups: Array<MalfunctionSubgroup>;
+  malfuncSubgroups: MalfunctionSubgroup[] = [];
 
+  selectedMalfunction: Malfunction;
   selectedMalfunctionGroup: MalfunctionGroup;
+  selectedMalfunctionSubGroup: MalfunctionSubgroup;
 
   tableGroup: any;
+  tableSubGroup: any;
+  tableSubSubGroup: any;
+
+  clickAllowCheck: boolean;
+  iteratorCheck: boolean;
 
   constructor(
+    private malfuncService: MalfunctionService,
     private malfuncGroupService: MalfunctionGroupService,
-    private malfuncSubGroupService: MalfunctionSubgroupService
-  ) {}
+    private malfuncSubGroupService: MalfunctionSubgroupService,
+    private vechicleTypeService: VehicleTypeService
+  ) {
+    this.clickAllowCheck = true;
+    this.iteratorCheck = true;
+  }
+
   tdOption: any = {
     responsive: true,
-    select: {},
-    columns: [
-      {
-        title: 'Група',
-        className: 'details-control',
-        data: 'name',
-        defaultContent: ''
-      },
-      {
-        title: 'Автобус',
-        data: null,
-        defaultContent: '0'
-      },
-      {
-        title: 'Трамвай',
-        data: null,
-        defaultContent: '1'
-      },
-      {
-        title: 'Тролейбус',
-        data: null,
-        defaultContent: '2'
-      },
-      {
-        title: 'Електробус',
-        data: null,
-        defaultContent: '3'
-      }
-    ],
-
+    columns: [],
+    scrollX: true,
     paging: true,
     language: {
       url: '//cdn.datatables.net/plug-ins/1.10.19/i18n/Ukrainian.json'
     }
   };
-  ngOnInit() {
-    this.tableGroup = $('#example').DataTable(this.tdOption);
 
-    this.tableGroup.on('select', (e, dt, type, index) => {
-      const item = this.tableGroup.rows(index).data()[0];
-      this.selectedMalfunctionGroup = item;
+  ngOnInit() {
+    this.malfuncSubGroupService.getEntities().subscribe(malfuncSubgroups => {
+      this.malfuncSubgroups = malfuncSubgroups;
     });
+
+    this.malfuncService.getEntities().subscribe(malfunc => {
+      this.malfunc = malfunc;
+    });
+
+    this.tdOption.columns = [
+      {
+        title: 'Група',
+        className: 'table-cell-edit',
+        data: 'name',
+        defaultContent: ''
+      }
+    ];
+    this.vechicleTypeService.getEntities().subscribe(VehicleType => {
+      VehicleType.forEach(a => {
+        this.tdOption.columns.push({
+          title: a.name,
+          data: null,
+          defaultContent: '0'
+        });
+      });
+
+      this.tableGroup.destroy();
+      $('#example').empty();
+      this.tableGroup = $('#example').DataTable(this.tdOption);
+
+      $('#example tbody').on('click', 'td', this.showRow(this));
+    });
+
+    this.tableGroup = $('#example').DataTable(this.tdOption);
 
     this.malfuncGroupService.getEntities().subscribe(malfuncGroups => {
       this.malfuncGroups = malfuncGroups;
       this.tableGroup.rows.add(this.malfuncGroups);
       this.tableGroup.draw();
     });
-
-    this.malfuncSubGroupService.getEntities().subscribe(malfuncSubgroups => {
-      this.malfuncSubgroups = malfuncSubgroups;
-    });
-    $('#example tbody').on('dblclick', 'td', this.showRow(this));
   }
-  format(group) {
-    let b = '';
-    for (let i = 0; i < group.length; i++) {
-      b +=
-        `<tr>
-        <td>` +
-        group[i].name +
-        `</td>
-        <td>1</td>
-        <td>2</td>
-        <td>3</td>
-        <td>4</td>
-      </tr>`;
-    }
-    return (
-      `<table  class="table table-bordered table-hover" cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;">
-          <thead>
-              <tr>
-                <th>Підгрупа</th>
-                <th>Автобус</th>
-                <th>Трамвай</th>
-                <th>Тролейбус</th>
-                <th>Електробус</th>
-              </tr>
-          </thead>
-    <tbody>` +
-      b +
-      `</tbody> </table>`
-    );
+
+  formatTable() {
+    return `
+    <div style ="background-color : #E4FBE2;">
+    <table id="example2"  class="table table-bordered table-hover table-condensed" style="width:100%; background-color:rgba(0, 0, 0, 0.5);">
+        </table>
+    </div>`;
+  }
+
+  formatSubTable() {
+    return `
+    <div style = "background-color : #DFF2FD;">
+    <table id="example3"  class="table table-bordered table-hover" style="width:100%; background-color: rgb(221, 195, 220)">
+        </table>
+      </div>`;
   }
 
   private showRow(component: any) {
     return function() {
+      if (component.clickAllowCheck) {
+        const tr = $(this).closest('tr');
+        const row = component.tableGroup.row(tr);
+        component.selectedMalfunctionGroup = row.data();
+
+        if (row.child.isShown()) {
+          row.child.hide();
+          tr.removeClass('shown');
+        } else {
+          row.child(component.formatTable()).show();
+          tr.addClass('shown');
+        }
+        component.tdOption.retrieve = true;
+        component.tdOption.paging = false;
+        //component.tdOption.searching = false;
+        component.tableSubGroup = $('#example2').DataTable(component.tdOption);
+        $('#example2 tbody').on('click', 'td', component.showSubRow(component));
+
+        component.tableSubGroup.rows.add(component.filterMalfunctionSubGroup);
+        component.tableSubGroup.draw();
+      } else {
+        if (component.iteratorCheck) {
+          component.clickAllowCheck = true;
+        }
+        component.iteratorCheck = true;
+      }
+    };
+  }
+
+  private showSubRow(component: any) {
+    return function() {
+      component.clickAllowCheck = false;
+      component.iteratorCheck = false;
       const tr = $(this).closest('tr');
-      const row = component.tableGroup.row(tr);
+      const row = component.tableSubGroup.row(tr);
+      component.selectedMalfunctionSubGroup = row.data();
       if (row.child.isShown()) {
         row.child.hide();
-        tr.removeClass('shown');
+        tr.removeClass('shownsub');
       } else {
-        row.child(component.format(component.filterMalfunctionSubGroup)).show();
-        tr.addClass('shown');
+        row.child(component.formatSubTable()).show();
+        tr.addClass('shownsub');
       }
+
+      component.tableSubSubGroup = $('#example3').DataTable(component.tdOption);
+      component.tableSubSubGroup.rows.add(component.filterMalfunction);
+      component.tableSubSubGroup.draw();
     };
   }
 
   get filterMalfunctionSubGroup(): Array<MalfunctionSubgroup> {
     return this.malfuncSubgroups.filter(x => {
       return x.malfunctionGroup !== null && x.malfunctionGroup.id === this.selectedMalfunctionGroup.id;
+    });
+  }
+
+  get filterMalfunction(): Array<Malfunction> {
+    return this.malfunc.filter(x => {
+      return x.malfunctionSubgroup !== null && x.malfunctionSubgroup.id === this.selectedMalfunctionSubGroup.id;
     });
   }
 }

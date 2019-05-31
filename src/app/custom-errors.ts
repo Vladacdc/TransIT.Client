@@ -73,7 +73,7 @@ export function maxFormat(label: string, error: any): string {
 }
 
 export function matchPasswordFormat(label: string, error: any): string {
-  return 'Паролі не співпадають';
+  return 'Паролі не збігаються';
 }
 
 export function patternFormat(label: string, error: any): string {
@@ -89,7 +89,7 @@ export function nameFieldFormat(label: string, error: any): string {
 }
 
 export function emailFormat(label: string, error: any): string {
-  return 'Невірний формат email адреси. Введіть вірний формат, наприклад email@gmail.com.';
+  return 'Введіть правильний формат адреси, наприклад email@gmail.com.';
 }
 
 export function uniqueViolationFormat(label: string, error: any): string {

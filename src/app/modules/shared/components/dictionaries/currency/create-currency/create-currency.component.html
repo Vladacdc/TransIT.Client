@@ -20,11 +20,11 @@
       </div>
       <div class="modal-body">
         <form [formGroup]="currencyForm">
-          <div class="form-group">
+          <div class="form-group" [customErrorMessages]="CustomNameErrorMessages">
             <label>Коротка назва валюти</label>
             <input type="text" class="form-control" formControlName="shortName" placeholder="Введіть скорочену назву" />
           </div>
-          <div class="form-group">
+          <div class="form-group" [customErrorMessages]="CustomNameErrorMessages">
             <label>Повна назва валюти</label>
             <input type="text" class="form-control" formControlName="fullName" placeholder="Введіть повну назву" />
           </div>
