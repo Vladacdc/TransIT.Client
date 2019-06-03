@@ -3,6 +3,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { State } from 'src/app/modules/shared/models/state';
 import { StateService } from 'src/app/modules/shared/services/state.service';
+import { DatatableSettings } from 'src/app/modules/shared/helpers/datatable-settings';
 
 declare const $;
 
@@ -19,16 +20,13 @@ export class StateDictionaryComponent implements OnInit {
 
   constructor(private stateService: StateService, private router: Router, private toast: ToastrService) {}
 
-  private readonly tableConfig: DataTables.Settings = {
+  private readonly tableConfig = new DatatableSettings({
     responsive: true,
-
     columns: [
       { title: 'Назва', data: 'transName', defaultContent: '' },
       { data: 'id', visible: false },
       { title: 'Дії⠀', orderable: false }
     ],
-    processing: true,
-    serverSide: true,
     ajax: this.ajaxCallback.bind(this),
     columnDefs: [
       {
@@ -38,12 +36,10 @@ export class StateDictionaryComponent implements OnInit {
          <button class="second btn" data-toggle="modal" data-target="#deleteState"><i class="fas fas fa-trash-alt"></i></button>`
       }
     ],
-    paging: true,
-    scrollX: true,
     language: {
       url: '//cdn.datatables.net/plug-ins/1.10.19/i18n/Ukrainian.json'
     }
-  };
+  });
 
   ngOnInit() {
     this.tableState = $('#state-table').DataTable(this.tableConfig);

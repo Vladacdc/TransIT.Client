@@ -1,6 +1,7 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { VehicleType } from 'src/app/modules/shared/models/vehicleType';
 import { VehicleTypeService } from 'src/app/modules/shared/services/vehicle-type.service';
+import { DatatableSettings } from 'src/app/modules/shared/helpers/datatable-settings';
 
 @Component({
   selector: 'app-vehicle-type',
@@ -14,11 +15,9 @@ export class VehicleTypeComponent implements OnInit {
 
   constructor(private vehicleTypeService: VehicleTypeService, private chRef: ChangeDetectorRef) {}
 
-  private readonly tableConfig: DataTables.Settings = {
+  private readonly tableConfig = new DatatableSettings({
     responsive: true,
     columns: [{ title: 'Тип транспорту', data: 'name', defaultContent: '' }, { title: 'Дії', orderable: false }],
-    processing: true,
-    serverSide: true,
     ajax: this.ajaxCallback.bind(this),
     columnDefs: [
       {
@@ -27,13 +26,8 @@ export class VehicleTypeComponent implements OnInit {
         defaultContent: `<button class="edit btn" data-toggle="modal" data-target="#editVehicleType"><i class="fas fa-edit"></i></button>
            <button class="delete btn" data-toggle="modal" data-target="#deleteVehicleType"><i class="fas fas fa-trash-alt"></i></button>`
       }
-    ],
-    paging: true,
-    scrollX: true,
-    language: {
-      url: '//cdn.datatables.net/plug-ins/1.10.19/i18n/Ukrainian.json'
-    }
-  };
+    ]
+  });
 
   ngOnInit() {
     this.table = $('#vehicleTypes').DataTable(this.tableConfig);

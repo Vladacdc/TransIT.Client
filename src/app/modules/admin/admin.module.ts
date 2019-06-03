@@ -8,7 +8,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DataTablesModule } from 'angular-datatables';
 import { VehiclesComponent } from './component/vehicles/vehicles.component';
 import { MalfunctionsComponent } from './component/malfunctions/malfunctions.component';
-import { ActionComponent } from './component/action/action.component';
 import { MalfuncComponent } from './component/malfunctions/malfunc/malfunc.component';
 import { MalfuncGroupComponent } from './component/malfunctions/malfunc-group/malfunc-group.component';
 import { MalfunSubgroupComponent } from './component/malfunctions/malfun-subgroup/malfun-subgroup.component';
@@ -25,10 +24,6 @@ import { DeleteMalfuncSubgroupComponent } from './component/delete-malfunc-subgr
 import { EditMalfuncGroupComponent } from './component/edit-malfunc-group/edit-malfunc-group.component';
 import { DeleteMalfuncGroupComponent } from './component/delete-malfunc-group/delete-malfunc-group.component';
 import { NgxMaskModule } from 'ngx-mask';
-import { CreateSupplierComponent } from '../shared/components/supplier/create-supplier/create-supplier.component';
-import { EditSupplierComponent } from '../shared/components/supplier/edit-supplier/edit-supplier.component';
-import { DeleteSupplierComponent } from '../shared/components/supplier/delete-supplier/delete-supplier.component';
-import { SupplierComponent } from '../shared/components/supplier/supplier.component';
 import { EditMalfuncComponent } from './component/edit-malfunc/edit-malfunc.component';
 import { DeleteMalfuncComponent } from './component/delete-malfunc/delete-malfunc.component';
 // ====User===
@@ -55,7 +50,6 @@ import { CreatePostComponent } from './component/posts/create-post/create-post.c
 import { EditPostComponent } from './component/posts/edit-post/edit-post.component';
 import { DeletePostComponent } from './component/posts/delete-post/delete-post.component';
 
-import { EmployeeService } from '../shared/services/employee.service';
 import { EmployeesComponent } from './component/employees/employees.component';
 import { CreateEmployeeComponent } from './component/employees/create-employee/create-employee.component';
 import { EditEmployeeComponent } from './component/employees/edit-employee/edit-employee.component';
@@ -86,8 +80,6 @@ import { NgSelectModule } from '@ng-select/ng-select';
     DeleteUserComponent,
     IsActiveModalComponent,
     RestoreUserPasswordComponent,
-    // ====Action===
-    ActionComponent,
     // ====Vehicles===
     VehiclesComponent,
     CreateVehicleComponent,

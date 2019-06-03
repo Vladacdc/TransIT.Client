@@ -3,6 +3,7 @@ import { Subject } from 'rxjs';
 import { DataTableDirective } from 'angular-datatables';
 import { Post } from 'src/app/modules/shared/models/post';
 import { PostService } from 'src/app/modules/shared/services/post.service';
+import { DatatableSettings } from 'src/app/modules/shared/helpers/datatable-settings';
 
 @Component({
   selector: 'app-posts',
@@ -10,11 +11,7 @@ import { PostService } from 'src/app/modules/shared/services/post.service';
   styleUrls: ['./posts.component.scss']
 })
 export class PostsComponent implements AfterViewInit, OnDestroy {
-  options: DataTables.Settings = {
-    pagingType: 'full_numbers',
-    pageLength: 10,
-    serverSide: true,
-    processing: true,
+  readonly options = new DatatableSettings({
     ajax: (dataTablesParameters: any, callback) => {
       this.postService.getFilteredEntities(dataTablesParameters).subscribe(response => {
         this.posts = response.data;
@@ -23,9 +20,8 @@ export class PostsComponent implements AfterViewInit, OnDestroy {
       });
     },
     columns: [{ data: 'name' }, { data: null, orderable: false }],
-    language: { url: '//cdn.datatables.net/plug-ins/1.10.19/i18n/Ukrainian.json' },
-    scrollX: true
-  };
+    language: { url: '//cdn.datatables.net/plug-ins/1.10.19/i18n/Ukrainian.json' }
+  });
 
   posts: Post[] = [];
   selectedPost: Post;

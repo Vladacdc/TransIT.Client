@@ -3,6 +3,7 @@ import { Subject } from 'rxjs';
 import { DataTableDirective } from 'angular-datatables';
 import { EmployeeService } from '../../../shared/services/employee.service';
 import { Employee } from 'src/app/modules/shared/models/employee';
+import { DatatableSettings } from 'src/app/modules/shared/helpers/datatable-settings';
 
 @Component({
   selector: 'app-employee',
@@ -10,11 +11,7 @@ import { Employee } from 'src/app/modules/shared/models/employee';
   styleUrls: ['./employees.component.scss']
 })
 export class EmployeesComponent implements AfterViewInit, OnDestroy {
-  options: DataTables.Settings = {
-    pagingType: 'full_numbers',
-    pageLength: 10,
-    serverSide: true,
-    processing: true,
+  readonly options = new DatatableSettings({
     ajax: (dataTablesParameters: any, callback) => {
       this.employeeService.getFilteredEntities(dataTablesParameters).subscribe(response => {
         this.employees = response.data;
@@ -30,10 +27,8 @@ export class EmployeesComponent implements AfterViewInit, OnDestroy {
       { data: 'shortName' },
       { data: 'post.name' },
       { data: null, orderable: false }
-    ],
-    language: { url: '//cdn.datatables.net/plug-ins/1.10.19/i18n/Ukrainian.json' },
-    scrollX: true
-  };
+    ]
+  });
 
   employees: Employee[] = [];
   selectedEmployee: Employee;

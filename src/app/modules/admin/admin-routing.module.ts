@@ -6,7 +6,6 @@ import { MalfunctionsComponent } from './component/malfunctions/malfunctions.com
 import { MalfuncGroupComponent } from './component/malfunctions/malfunc-group/malfunc-group.component';
 import { MalfunSubgroupComponent } from './component/malfunctions/malfun-subgroup/malfun-subgroup.component';
 import { MalfuncComponent } from './component/malfunctions/malfunc/malfunc.component';
-import { ActionComponent } from './component/action/action.component';
 import { AdminComponent } from './component/admin/admin.component';
 import { VehicleTypeComponent } from './component/vehicle-type/vehicle-type.component';
 import { DictionaryComponent } from '../shared/components/dictionaries/dictionary.component';

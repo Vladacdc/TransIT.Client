@@ -3,6 +3,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Router } from '@angular/router';
 import { ActionType } from 'src/app/modules/shared/models/action-type';
 import { ActionTypeService } from 'src/app/modules/shared/services/action-type.service';
+import { DatatableSettings } from 'src/app/modules/shared/helpers/datatable-settings';
 
 @Component({
   selector: 'app-action-dictionary',
@@ -17,16 +18,13 @@ export class ActionDictionaryComponent implements OnInit {
 
   constructor(private actionService: ActionTypeService, private router: Router, private toast: ToastrService) {}
 
-  private readonly tableConfig: DataTables.Settings = {
+  private readonly tableConfig = new DatatableSettings({
     responsive: true,
-
     columns: [
       { title: 'Назва', data: 'name', defaultContent: '' },
       { data: 'id', visible: false },
       { title: 'Дії⠀', orderable: false }
     ],
-    processing: true,
-    serverSide: true,
     ajax: this.ajaxCallback.bind(this),
     columnDefs: [
       {
@@ -35,13 +33,8 @@ export class ActionDictionaryComponent implements OnInit {
         defaultContent: `<button class="first btn" data-toggle="modal" data-target="#editAction"><i class="fas fa-edit"></i></button>
          <button class="second btn" data-toggle="modal" data-target="#deleteAction"><i class="fas fas fa-trash-alt"></i></button>`
       }
-    ],
-    paging: true,
-    scrollX: true,
-    language: {
-      url: '//cdn.datatables.net/plug-ins/1.10.19/i18n/Ukrainian.json'
-    }
-  };
+    ]
+  });
 
   ngOnInit() {
     this.tableAction = $('#action-table').DataTable(this.tableConfig);

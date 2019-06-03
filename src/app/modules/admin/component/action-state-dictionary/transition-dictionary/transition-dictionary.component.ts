@@ -3,6 +3,7 @@ import { DataTableDirective } from 'angular-datatables';
 import { Subject } from 'rxjs';
 import { Transition } from '../../../../shared/models/transition';
 import { TransitionService } from 'src/app/modules/shared/services/transition.service';
+import { DatatableSettings } from 'src/app/modules/shared/helpers/datatable-settings';
 
 @Component({
   selector: 'app-transition-dictionary',
@@ -10,11 +11,7 @@ import { TransitionService } from 'src/app/modules/shared/services/transition.se
   styleUrls: ['./transition-dictionary.component.scss']
 })
 export class TransitionDictionaryComponent implements OnDestroy, AfterViewInit {
-  options: DataTables.Settings = {
-    pagingType: 'full_numbers',
-    pageLength: 10,
-    serverSide: true,
-    processing: true,
+  readonly options = new DatatableSettings({
     ajax: (dataTablesParameters: any, callback) => {
       this.transitionService.getFilteredEntities(dataTablesParameters).subscribe(response => {
         this.transitions = response.data;
@@ -27,10 +24,8 @@ export class TransitionDictionaryComponent implements OnDestroy, AfterViewInit {
       { data: 'toState.name' },
       { data: 'actionType.name' },
       { data: null, orderable: false }
-    ],
-    language: { url: '//cdn.datatables.net/plug-ins/1.10.19/i18n/Ukrainian.json' },
-    scrollX: true
-  };
+    ]
+  });
 
   transitions: Transition[] = [];
   selectedTransition: Transition;
