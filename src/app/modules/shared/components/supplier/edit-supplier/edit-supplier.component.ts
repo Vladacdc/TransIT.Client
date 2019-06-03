@@ -45,7 +45,7 @@ export class EditSupplierComponent implements OnInit {
       id: [''],
       name: new FormControl('', Validators.compose([Validators.required, Validators.maxLength(30)])),
       fullName: new FormControl('', Validators.compose([Validators.required, Validators.maxLength(500)])),
-      edrpou: new FormControl('', [Validators.maxLength(14)]),
+      edrpou: new FormControl('', Validators.compose([Validators.required, Validators.maxLength(14)])),
       country: [''],
       currency: [''],
    });    
