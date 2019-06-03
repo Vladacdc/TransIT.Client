@@ -17,6 +17,8 @@ export class EditSupplierComponent implements OnInit {
   selectedSupplier: Supplier;
   countries: Array<Country>;
   currencies: Array<Currency>;
+  country: Country;
+  currency: Currency;
   supplierForm: FormGroup;
   @ViewChild('close') closeDiv: ElementRef;  
   @Output() updateSupplier = new EventEmitter<Supplier>();
@@ -27,7 +29,7 @@ export class EditSupplierComponent implements OnInit {
     }
     this.selectedSupplier=supplier;
     supplier = new Supplier(supplier);
-    this.supplierForm.patchValue({...supplier, currency: supplier.currency.fullName, country: supplier.country.name});
+    this.supplierForm.patchValue({...supplier, currency: supplier.currency ? supplier.currency.id : null, country: supplier.country ? supplier.country.id : null});
   };
 
   constructor(
@@ -39,19 +41,14 @@ export class EditSupplierComponent implements OnInit {
     ) {}
   
    ngOnInit() {
-    $('#editSupplier').on('hidden.bs.modal', function() {
-      $(this)
-        .find('form')
-        .trigger('reset');
-    });
-    this.supplierForm = this.formBuilder.group({
+        this.supplierForm = this.formBuilder.group({
       id: [''],
-      name: ['', Validators.required],
-      fullName: ['', Validators.required],
-      edrpou: [''],
+      name: new FormControl('', Validators.compose([Validators.required, Validators.maxLength(30)])),
+      fullName: new FormControl('', Validators.compose([Validators.required, Validators.maxLength(500)])),
+      edrpou: new FormControl('', [Validators.maxLength(14)]),
       country: [''],
       currency: [''],
-    });    
+   });    
     this.countryService.getEntities().subscribe(data => {
       this.countries = data;
     });
@@ -75,18 +72,33 @@ export class EditSupplierComponent implements OnInit {
     this.closeDiv.nativeElement.click();
     const form = this.supplierForm.value;
 
+    let currentCurrency = null;
+    this.currencies.forEach(element => {
+      if(element.id == form.currency){
+        currentCurrency = element;
+      }
+      
+    });
+
+    let currentCountry = null;
+    this.countries.forEach(element => {
+      if(element.id == form.country){
+        currentCountry = element;
+      }
+      
+    });
+
     const supplier: Supplier = {
       id: form.id as number,
       name: form.name as string,
       fullName: form.fullName as string,
       edrpou: form.edrpou as string,
-      country: form.country as Country,
-      currency: form.currency as Currency
+      country: currentCountry as Country,
+      currency: currentCurrency as Currency
     };
-
     this.service.updateEntity(supplier).subscribe(_ => 
       {
-        this.toast.success('', 'Постачальника відредаговано');
+        this.toast.success('', 'Постачальника оновлено');
         this.updateSupplier.next(supplier)
       },
       error => this.toast.error('Помилка'));

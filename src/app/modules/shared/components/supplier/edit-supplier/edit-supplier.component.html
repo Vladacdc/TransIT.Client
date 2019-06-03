@@ -26,14 +26,14 @@
             <label>Країна</label>
             <select class="form-control" formControlName="country">
               <option value="" selected>Виберіть Країну</option>
-              <option *ngFor="let country of countries" [ngValue]="country">{{ country.name }}</option>
+              <option *ngFor="let country of countries" [value]="country.id">{{ country.name }}</option>
             </select>
           </div>
           <div class="form-group">
             <label>Валюта</label>
             <select class="form-control" formControlName="currency">
               <option value="" selected>Виберіть Валюту</option>
-              <option *ngFor="let currencys of currencies" [ngValue]="currencys">{{ currencys.fullName }}</option>
+              <option *ngFor="let currencys of currencies" [value]="currencys.id">{{ currencys.fullName }}</option>
             </select>
           </div>
         </form>

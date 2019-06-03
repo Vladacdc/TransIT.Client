@@ -38,9 +38,9 @@ export class CreateSupplierComponent implements OnInit {
         .trigger('reset');
     });
     this.supplierForm = this.formBuilder.group({
-      name: ['', Validators.required],
-      fullName: ['', Validators.required],
-      edrpou: [''],
+      name: new FormControl('', Validators.compose([Validators.required, Validators.maxLength(30)])),
+      fullName: new FormControl('', Validators.compose([Validators.required, Validators.maxLength(500)])),
+      edrpou: new FormControl('', [Validators.maxLength(14)]),
       country: [''],
       currency: [''],
     });
