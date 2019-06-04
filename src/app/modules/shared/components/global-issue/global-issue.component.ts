@@ -22,6 +22,7 @@ export class GlobalIssueComponent implements OnInit {
   protected malfunctionGroup: string;
   protected malfunctionSubGroup: string;
   protected malfunction: string;
+  protected location: string;
 
   protected readonly columns: Array<any> = [
     { title: 'Номер', data: 'number', defaultContent: '' },
@@ -46,7 +47,7 @@ export class GlobalIssueComponent implements OnInit {
       style: 'single'
     },
     columns: this.columns,
-    order: [[ this.columns.indexOf(this.columns.filter(x => x.data === 'modDate')[0]), "desc" ]],
+    order: [[this.columns.indexOf(this.columns.filter(x => x.data === 'modDate')[0]), 'desc']],
     processing: true,
     serverSide: true,
     ajax: this.ajaxCallback.bind(this),
@@ -150,6 +151,15 @@ export class GlobalIssueComponent implements OnInit {
         operator: '<='
       });
     }
+
+    if (this.location) {
+      filters.push({
+        entityPropertyPath: 'vehicle.location.name',
+        value: this.location,
+        operator: '=='
+      });
+    }
+
     if (this.vehicleType) {
       filters.push({
         entityPropertyPath: 'vehicle.vehicleType.name',
@@ -202,5 +212,8 @@ export class GlobalIssueComponent implements OnInit {
   }
   setPriorityValue(value) {
     this.priority = value;
+  }
+  setLocationValue(value) {
+    this.location = value;
   }
 }

@@ -9,6 +9,10 @@
         <option value="" selected class="grey"> Виберіть тип транспорту</option>
         <option *ngFor="let vehicleType of vehicleTypeList" [value]="">{{ vehicleType.name }}</option>
       </select>
+      <select class="form-control" width="200" (change)="selectLocation($event.target.value)">
+        <option value="" selected class="grey"> Виберіть місцезнаходження</option>
+        <option *ngFor="let location of locationList" [value]="">{{ location.name }}</option>
+      </select>
       <select class="form-control" width="200" (change)="selectState($event.target.value)">
         <option value="" selected class="grey"> Виберіть статус</option>
         <option *ngFor="let state of stateList" [value]="">{{ state.transName }}</option>

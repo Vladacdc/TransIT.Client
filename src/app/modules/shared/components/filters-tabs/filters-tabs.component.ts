@@ -10,6 +10,8 @@ import { MalfunctionService } from '../../services/malfunction.service';
 import { MalfunctionGroupService } from '../../services/malfunction-group.service';
 import { MalfunctionSubgroupService } from '../../services/malfunction-subgroup.service';
 import { VehicleTypeService } from '../../services/vehicle-type.service';
+import { Location } from '../../models/location';
+import { LocationService } from '../../services/location.service';
 
 @Component({
   selector: 'app-filters-tabs',
@@ -22,6 +24,7 @@ export class FiltersTabsComponent implements OnInit {
   malfunctionGroupList: MalfunctionGroup[] = [];
   malfunctionSubGroupList: MalfunctionSubgroup[] = [];
   malfunctionList: Malfunction[] = [];
+  locationList: Location[] = [];
   priorityList = Priority;
   keys = [];
   malfunctionSubGroupFilteredList: MalfunctionSubgroup[] = [];
@@ -38,6 +41,7 @@ export class FiltersTabsComponent implements OnInit {
   @Output() MalfunctionGroupValue = new EventEmitter<string>();
   @Output() MalfunctionSubGroupValue = new EventEmitter<string>();
   @Output() MalfunctionValue = new EventEmitter<string>();
+  @Output() LocationValue = new EventEmitter<string>();
 
   selectedType: string;
   selectedState: string;
@@ -45,13 +49,15 @@ export class FiltersTabsComponent implements OnInit {
   selectedMalfunctionGroup: string;
   selectedMalfunctionSubGroup: string;
   selectedMalfunction: string;
+  selectedLocation: string;
 
   constructor(
     private vehicleTypeService: VehicleTypeService,
     private stateService: StateService,
     private malfunctionGropService: MalfunctionGroupService,
     private malfunctionSubGropService: MalfunctionSubgroupService,
-    private malfunctionService: MalfunctionService
+    private malfunctionService: MalfunctionService,
+    private locationService: LocationService
   ) {
     this.keys = Object.keys(this.priorityList).filter(f => !isNaN(Number(f)));
   }
@@ -64,6 +70,7 @@ export class FiltersTabsComponent implements OnInit {
       this.malfunctionSubGroupList = data;
       this.malfunctionSubGroupFilteredList = data;
     });
+    this.locationService.getEntities().subscribe(data => (this.locationList = data));
     this.malfunctionService.getEntities().subscribe(data => {
       this.malfunctionList = data;
       this.malfunctionFilteredList = data;
@@ -138,6 +145,9 @@ export class FiltersTabsComponent implements OnInit {
   }
   selectPriority(value) {
     this.selectedPriority = value;
+  }
+  selectLocation(value) {
+    this.selectedLocation = value;
   }
   selectFilter() {
     this.EndDateValue.next(

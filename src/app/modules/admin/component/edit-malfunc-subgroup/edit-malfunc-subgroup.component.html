@@ -22,7 +22,7 @@
         <form [formGroup]="subGroupForm">
           <div class="form-group">
             <label>Група</label>
-            <select class="form-control" formControlName="group">
+            <select class="form-control" disabled formControlName="group">
               <option hidden value="" disabled selected>-</option>
               <option *ngFor="let groupItem of malfunctionGroups" [value]="groupItem.name">{{ groupItem.name }}</option>
             </select>
