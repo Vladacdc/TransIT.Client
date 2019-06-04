@@ -24,7 +24,7 @@ export class SupplierComponent implements OnInit {
 
   private readonly tableConfig: any = {
     responsive: true,
-      columns: [
+    columns: [
             {
               title: 'Коротка назва', data: 'name', defaultContent:''
             },
@@ -43,7 +43,7 @@ export class SupplierComponent implements OnInit {
             { 
               data: 'id', visible: false 
             }
-          ],
+          ],          
     processing: true,
     serverSide: true,
     ajax: this.ajaxCallback.bind(this),
@@ -67,7 +67,7 @@ export class SupplierComponent implements OnInit {
         data: null,
   defaultContent:`<button class="first btn" data-toggle="modal" data-target="#editSupplier"><i class="fas fa-edit"></i></button>
   <button class="second btn" data-toggle="modal" data-target="#deleteSupplier"><i class="fas fas fa-trash-alt"></i></button>`
-      }
+      },      
     ];
   }
     this.dataTable = $('#supplier-table').DataTable(this.tableConfig);

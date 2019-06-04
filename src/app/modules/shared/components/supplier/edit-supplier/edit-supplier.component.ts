@@ -101,7 +101,7 @@ export class EditSupplierComponent implements OnInit {
         this.toast.success('', 'Постачальника оновлено');
         this.updateSupplier.next(supplier)
       },
-      error => this.toast.error('Помилка'));
+      error => this.toast.error('Помилка редагування'));
     this.closeDiv.nativeElement.click();
   }
 }

@@ -24,7 +24,7 @@ export class DeleteSupplierComponent {
         this.toast.success('', 'Постачальника видалено');
         this.deleteSupplier.next(this.supplier);        
       },
-      error => this.toast.error('Помилка')
+      error => this.toast.error('Помилка видалення')
     );
   }
 }
