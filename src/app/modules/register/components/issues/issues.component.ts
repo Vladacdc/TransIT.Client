@@ -25,6 +25,7 @@ export class IssuesComponent implements OnDestroy, AfterViewInit {
       { data: 'vehicle.model' },
       { data: 'state.transName' },
       { data: 'malfunction.name' },
+      { data: 'date' },
       { data: 'summary' },
       { data: null, orderable: false }
     ],

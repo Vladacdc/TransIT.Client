@@ -12,6 +12,7 @@
         <th>Транспорт</th>
         <th>Стан Заявки</th>
         <th>Несправність</th>
+        <th>Дата</th>
         <th>Опис</th>
         <th>Дії</th>
       </tr>
@@ -22,6 +23,7 @@
         <td [attr.title]="issue.vehicle.name">{{ issue.vehicle.name | truncate }}</td>
         <td [attr.title]="issue.state.transName">{{ issue.state.transName | truncate }}</td>
         <td [attr.title]="issue.malfunction.name">{{ issue.malfunction.name | truncate }}</td>
+        <td [attr.title]="issue.date">{{ issue.date | date: 'yyyy-MM-dd' }}</td>
         <td [attr.title]="issue.summary">{{ issue.summary | truncate }}</td>
         <td>
           <div class="d-flex flex-nowrap">

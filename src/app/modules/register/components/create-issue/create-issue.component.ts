@@ -11,6 +11,8 @@ import { Issue } from 'src/app/modules/shared/models/issue';
 import { MalfunctionService } from 'src/app/modules/shared/services/malfunction.service';
 import { IssueService } from 'src/app/modules/shared/services/issue.service';
 import { VehicleService } from 'src/app/modules/shared/services/vehicle.service';
+import { VehicleTypeService } from 'src/app/modules/shared/services/vehicle-type.service';
+import { VehicleType } from 'src/app/modules/shared/models/vehicleType';
 
 @Component({
   selector: 'app-create-issue',
@@ -22,11 +24,14 @@ export class CreateIssueComponent implements OnInit {
 
   issueForm: FormGroup;
   vehicles: Vehicle[] = [];
+  vehicleTypes: VehicleType[] = [];
   malfunctionGroups: MalfunctionGroup[] = [];
   malfunctionSubgroups: MalfunctionSubgroup[] = [];
   malfunctions: Malfunction[] = [];
+
   malfunctionSubgroupsFilteredByGroup: MalfunctionSubgroup[] = [];
   malfunctionsFilteredByGroup: Malfunction[] = [];
+  vehiclesFilteredByTypes: Vehicle[] = [];
 
   constructor(
     private fb: FormBuilder,
@@ -59,24 +64,28 @@ export class CreateIssueComponent implements OnInit {
   }
 
   configureMalfunctionControls() {
-    const { malfunctionGroup, malfunctionSubgroup, malfunction } = this.issueForm.controls;
+    const { malfunctionGroup, malfunctionSubgroup, malfunction, vehicle, vehicleType } = this.issueForm.controls;
 
     this.setDependentControl(malfunctionGroup, malfunctionSubgroup);
     this.setDependentControl(malfunctionSubgroup, malfunction);
+    this.setDependentControl(vehicleType, vehicle);
   }
 
   reload() {
     this.malfunctionSubgroupsFilteredByGroup = this.getMalfunctionSubgroupsFilteredByGroup();
     this.malfunctionsFilteredByGroup = this.getMalfunctionsFilteredByGroup();
+    this.vehiclesFilteredByTypes = this.getVehiclesFilteredByTypes();
   }
 
   private setUpForm() {
     this.issueForm = this.fb.group(
       {
-        vehicle: [null, Validators.required],
+        vehicleType: [null, Validators.required],
+        vehicle: [{ value: null, disabled: true }, Validators.required],
         malfunctionGroup: null,
         malfunctionSubgroup: [{ value: null, disabled: true }],
         malfunction: [{ value: null, disabled: true }],
+        date: [new Date(), Validators.required],
         summary: ['', Validators.required]
       },
       { validators: malfunctionSelectedValidator }
@@ -95,8 +104,20 @@ export class CreateIssueComponent implements OnInit {
     return filteredMalfunctions;
   }
 
+  private getVehiclesFilteredByTypes(): Vehicle[] {
+    const selectedType = this.formValue.vehicleType;
+    const filteredVehicles = this.filterVehiclesByTypes(selectedType);
+    return filteredVehicles;
+  }
+
   private loadEntities() {
-    this.vehicleService.getEntities().subscribe(data => (this.vehicles = data));
+    this.vehicleService.getEntities().subscribe(data => {
+      this.vehicles = data;
+
+      const allTypes = this.vehicles.map(v => v.vehicleType);
+      this.vehicleTypes = Array.from(this.getDistinct(allTypes));
+    });
+
     this.malfunctionService.getEntities().subscribe(malfunctions => {
       this.malfunctions = malfunctions;
 
@@ -177,6 +198,27 @@ export class CreateIssueComponent implements OnInit {
 
   private setDefaultMalfunction(): void {
     this.issueForm.patchValue({ malfunction: null });
+  }
+
+  private filterVehiclesByTypes(type: VehicleType): Vehicle[] {
+    if (!type) {
+      this.setDefaultVehicle();
+      return [];
+    }
+    const filteredVehicles = this.vehicles.filter(vehicle => vehicle.vehicleType.name === type.name);
+
+    if (this.notSelectedVehicle(filteredVehicles)) {
+      this.setDefaultVehicle();
+    }
+    return filteredVehicles;
+  }
+
+  private setDefaultVehicle(): void {
+    this.issueForm.patchValue({ vehicle: null });
+  }
+
+  private notSelectedVehicle(vehicles: Vehicle[]): boolean {
+    return vehicles.findIndex(v => v === this.formValue.vehicle) === -1;
   }
 
   private setDependentControl(main: AbstractControl, dependent: AbstractControl) {

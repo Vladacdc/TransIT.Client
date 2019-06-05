@@ -16,6 +16,7 @@ export class Issue extends TEntity<Issue> {
   modDate: Date;
   priority: number;
   number: number;
+  date: Date;
 
   constructor(issue: Partial<Issue>) {
     super(issue);
