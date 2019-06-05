@@ -14,14 +14,19 @@ export class PostsComponent implements AfterViewInit, OnDestroy {
   readonly options = new DatatableSettings({
     ajax: (dataTablesParameters: any, callback) => {
       this.postService.getFilteredEntities(dataTablesParameters).subscribe(response => {
+        if (response.recordsTotal < 11) {
+          $('.dataTables_paginate').hide();
+          $('.dataTables_length').hide();
+        }
         this.posts = response.data;
         callback({ ...response, data: [] });
         this.adjustColumns();
       });
     },
     columns: [{ data: 'name' }, { data: null, orderable: false }],
-    language: { url: '//cdn.datatables.net/plug-ins/1.10.19/i18n/Ukrainian.json' }
-  });
+    language: { url: 'assets/language.json'},
+    scrollX: true
+  };
 
   posts: Post[] = [];
   selectedPost: Post;

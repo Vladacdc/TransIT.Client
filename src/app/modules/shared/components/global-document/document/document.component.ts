@@ -19,18 +19,24 @@ export class DocumentComponent implements OnInit {
   tost: ToastrService;
   @Input() isVisible: boolean;
 
-  constructor(private documentService: DocumentService, private router: Router, private toast: ToastrService) { }
+  constructor(private documentService: DocumentService, private router: Router, private toast: ToastrService) {}
   _url = this.router.url.substring(1, this.router.url.length - 1);
 
   ngOnInit() {
     this._url = this._url.substring(0, this._url.indexOf('/'));
     this.tableDocument = $('#document-table').DataTable({
       responsive: true,
-
       columns: [
         { title: 'Назва', data: 'name', defaultContent: '' },
         { title: 'Опис', data: 'description', defaultContent: '' },
-        { title: 'Змінено', data: 'modDate', defaultContent: '', render: function (data) { return moment(data).format("DD.MM.YYYY"); } },
+        {
+          title: 'Змінено',
+          data: 'modDate',
+          defaultContent: '',
+          render: function(data) {
+            return moment(data).format('DD.MM.YYYY');
+          }
+        },
         { data: 'id', visible: false },
         { title: 'Дії⠀', orderable: false, visible: this.isVisible }
       ],
@@ -50,7 +56,7 @@ export class DocumentComponent implements OnInit {
       paging: true,
       scrollX: true,
       language: {
-        url: '//cdn.datatables.net/plug-ins/1.10.19/i18n/Ukrainian.json'
+        url: 'assets/language.json'
       }
     });
     $('#document-table tbody').on('click', '.first', this.selectFirstItem(this));
@@ -60,25 +66,36 @@ export class DocumentComponent implements OnInit {
   }
 
   private ajaxCallback(dataTablesParameters: any, callback): void {
-    this.documentService.getFilteredEntities(dataTablesParameters).subscribe(callback);
+    this.documentService.getFilteredEntities(dataTablesParameters).subscribe(x => {
+      if (x.recordsTotal < 11) {
+        $('#document-table_wrapper')
+          .find('.dataTables_paginate')
+          .hide();
+
+        $('#document-table_wrapper')
+          .find('.dataTables_length')
+          .hide();
+      }
+      callback(x);
+    });
   }
 
   selectFirstItem(component: any) {
-    return function () {
+    return function() {
       const data = component.tableDocument.row($(this).parents('tr')).data();
       component.selectedDocument = data;
     };
   }
 
   selectSecondItem(component: any) {
-    return function () {
+    return function() {
       const data = component.tableDocument.row($(this).parents('tr')).data();
       component.selectedDocument = data;
     };
   }
 
   selectThirdItem(component: any) {
-    return function () {
+    return function() {
       const data = component.tableDocument.row($(this).parents('tr')).data();
       this.selectedDocument = data;
 
@@ -95,7 +112,7 @@ export class DocumentComponent implements OnInit {
   }
 
   copyMessage(component: any) {
-    return function () {
+    return function() {
       const data = component.tableDocument.row($(this).parents('tr')).data();
       let selBox = document.createElement('textarea');
       selBox.style.position = 'fixed';

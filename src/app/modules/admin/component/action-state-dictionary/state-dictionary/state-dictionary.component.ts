@@ -37,7 +37,7 @@ export class StateDictionaryComponent implements OnInit {
       }
     ],
     language: {
-      url: '//cdn.datatables.net/plug-ins/1.10.19/i18n/Ukrainian.json'
+      url: 'assets/language.json'
     }
   });
 
@@ -48,7 +48,18 @@ export class StateDictionaryComponent implements OnInit {
   }
 
   private ajaxCallback(dataTablesParameters: any, callback): void {
-    this.stateService.getFilteredEntities(dataTablesParameters).subscribe(callback);
+    this.stateService.getFilteredEntities(dataTablesParameters).subscribe(x => {
+      if (x.recordsTotal < 11) {
+        $('#state-table_wrapper')
+          .find('.dataTables_paginate')
+          .hide();
+
+        $('#state-table_wrapper')
+          .find('.dataTables_length')
+          .hide();
+      }
+      callback(x);
+    });
   }
 
   selectFirstItem(component: any) {

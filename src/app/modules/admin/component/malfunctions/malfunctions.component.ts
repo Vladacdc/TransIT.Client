@@ -45,10 +45,11 @@ export class MalfunctionsComponent implements OnInit {
       select: {
         style: 'single'
       },
+
       columns: [{ data: 'id', bVisible: false }, { title: 'Група', data: 'name', defaultContent: '' }],
       paging: true,
       language: {
-        url: '//cdn.datatables.net/plug-ins/1.10.19/i18n/Ukrainian.json'
+        url: 'assets/language.json'
       }
     });
     this.tableSubGroup = $('#subgroup-table').DataTable({
@@ -59,7 +60,7 @@ export class MalfunctionsComponent implements OnInit {
       columns: [{ data: 'id', bVisible: false }, { title: 'Підгрупа', data: 'name', defaultContent: '' }],
       paging: true,
       language: {
-        url: '//cdn.datatables.net/plug-ins/1.10.19/i18n/Ukrainian.json'
+        url: 'assets/language.json'
       }
     });
     this.tableMalfunction = $('#malfunc-table').DataTable({
@@ -70,9 +71,10 @@ export class MalfunctionsComponent implements OnInit {
       columns: [{ data: 'id', bVisible: false }, { title: 'Помилки', data: 'name', defaultContent: '' }],
       paging: true,
       language: {
-        url: '//cdn.datatables.net/plug-ins/1.10.19/i18n/Ukrainian.json'
+        url: 'assets/language.json'
       }
     });
+    $('.info:contains("записів")').css('background-color', 'red');
 
     // group
     this.malfuncGroupService.getEntities().subscribe(malfuncGroups => {

@@ -23,17 +23,14 @@ export class IssueLogsComponent implements OnInit {
     { title: 'Новий статус', data: 'newState.transName', defaultContent: '' },
     { title: 'Постачальник', data: 'supplier.name', defaultContent: '', bVisible: false },
     { title: 'Транспорт', data: 'issue.vehicle.inventoryId', defaultContent: '' },
-    { title: 'Створено', data: 'createDate', defaultContent: '', render: data => moment(data).format("DD.MM.YYYY") },
+    { title: 'Створено', data: 'createDate', defaultContent: '', render: data => moment(data).format('DD.MM.YYYY') },
     { title: 'Редаговано', data: 'modDate', defaultContent: '', bVisible: false },
     {
       orderable: false,
       title: 'Документи',
       data: 'documents',
       defaultContent: '',
-      render: (data, type, row, meta) =>
-        row.documents
-          ? row.documents.map(x => x.name).join('; ')
-          : ''
+      render: (data, type, row, meta) => (row.documents ? row.documents.map(x => x.name).join('; ') : '')
     },
     { data: 'id', bVisible: false }
   ];
@@ -44,13 +41,13 @@ export class IssueLogsComponent implements OnInit {
       style: 'single'
     },
     columns: this.columns,
-    order: [[ this.columns.indexOf(this.columns.filter(x => x.data === 'modDate')[0]), "desc" ]],
+    order: [[this.columns.indexOf(this.columns.filter(x => x.data === 'modDate')[0]), 'desc']],
     processing: true,
     serverSide: true,
     ajax: this.ajaxCallback.bind(this),
     paging: true,
     language: {
-      url: '//cdn.datatables.net/plug-ins/1.10.19/i18n/Ukrainian.json'
+      url: 'assets/language.json'
     }
   };
 
@@ -58,7 +55,7 @@ export class IssueLogsComponent implements OnInit {
     protected issueLogService: IssuelogService,
     protected documentsService: DocumentService,
     protected router: Router
-    ) {}
+  ) {}
 
   ngOnInit() {
     this.initTable(this.tableConfig);

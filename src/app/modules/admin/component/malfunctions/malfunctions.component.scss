@@ -6,6 +6,10 @@
 }
 @media all and (min-width: 768px) {
   :host ::ng-deep .dt-bootstrap4 {
+    span.select-info {
+      display: block;
+      color: blue;
+    }
     .row:first-child,
     .row:last-child {
       div {

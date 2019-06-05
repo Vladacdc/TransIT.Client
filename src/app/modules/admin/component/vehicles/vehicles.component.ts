@@ -19,6 +19,7 @@ export class VehiclesComponent implements OnInit {
 
   private readonly tableConfig: any = {
     responsive: true,
+
     columns: [
       { title: 'Тип транспорту', data: 'vehicleType.name', defaultContent: '' },
       { title: 'Vin-код', data: 'vincode', defaultContent: '' },
@@ -59,7 +60,7 @@ export class VehiclesComponent implements OnInit {
     paging: true,
     scrollX: true,
     language: {
-      url: '//cdn.datatables.net/plug-ins/1.10.19/i18n/Ukrainian.json'
+      url: 'assets/language.json'
     }
   };
 
@@ -70,7 +71,21 @@ export class VehiclesComponent implements OnInit {
   }
 
   private ajaxCallback(dataTablesParameters: any, callback): void {
-    this.vehicleService.getFilteredEntities(dataTablesParameters).subscribe(callback);
+    this.vehicleService.getFilteredEntities(dataTablesParameters).subscribe(x => {
+      if (x.recordsTotal < 11) {
+        $('#vehicles_wrapper')
+          .find('.dataTables_paginate')
+          .hide();
+
+        $('#vehicles_wrapper')
+          .find('.dataTables_length')
+          .hide();
+
+        //   $('#action-table .dataTables_paginate').hide();
+        //   $('#action-table .dataTables_length').hide();
+      }
+      callback(x);
+    });
   }
 
   selectEditItem(component: any) {

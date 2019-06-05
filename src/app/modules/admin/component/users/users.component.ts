@@ -16,7 +16,7 @@ export class UsersComponent implements OnInit {
   private readonly tableParams: any = {
     scrollX: true,
     language: {
-      url: '//cdn.datatables.net/plug-ins/1.10.19/i18n/Ukrainian.json'
+      url: 'assets/language.json'
     },
     columns: [
       {

@@ -18,7 +18,7 @@ export class CountryComponent implements OnInit {
     $('#countryTable').DataTable({
       scrollX: true,
       language: {
-        url: '//cdn.datatables.net/plug-ins/1.10.19/i18n/Ukrainian.json'
+        url: 'assets/language.json'
       },
       columns: [
         {
