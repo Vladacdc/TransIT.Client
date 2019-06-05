@@ -12,34 +12,33 @@
         <form [formGroup]="vehicleForm">
           <div class="row">
             <div class="form-group col-md-6 ">
-              <label>Тип транспорту:</label>
+              <label class="required-field">Тип транспорту:</label>
               <select formControlName="vehicleType" class="form-control">
-                <option hidden value="" disabled selected>--Select--</option>
+                <option hidden value="" disabled selected>Оберіть тип транспорту</option>
                 <option *ngFor="let item of vehicleTypeList" [value]="item.name">{{ item.name }}</option>
               </select>
             </div>
 
-            <div class="form-group col-md-6 ">
-              <label>Vin-код:</label>
-              <input type="text" class="form-control" formControlName="vincode" autocomplete="off"
-                />
+            <div class="form-group col-md-6 " [customErrorMessages]="CustomLetNumErrorMessages">
+              <label class="required-field">Vin-код:</label>
+              <input type="text" class="form-control" formControlName="vincode" autocomplete="off" />
             </div>
           </div>
 
           <div class="row">
-            <div class="form-group col-md-6 ">
+            <div class="form-group col-md-6 " [customErrorMessages]="CustomNumErrorMessages">
               <label>Інвентарний номер:</label>
               <input type="text" class="form-control" formControlName="inventoryId" autocomplete="off" />
             </div>
-            <div class="form-group col-md-6 ">
-              <label>Реєстраційний номер:</label>
-              <input type="text" class="form-control" formControlName="regNum" autocomplete="off" mask="SS0000SS" />
+            <div class="form-group col-md-6 " [customErrorMessages]="CustomLetNumErrorMessages">
+              <label class="required-field">Реєстраційний номер:</label>
+              <input type="text" class="form-control" formControlName="regNum" autocomplete="off" />
             </div>
           </div>
 
           <div class="row">
-            <div class="form-group col-md-6 ">
-              <label>Бренд:</label>
+            <div class="form-group col-md-6 " [customErrorMessages]="CustomLetNumErrorMessages">
+              <label class="required-field">Бренд:</label>
               <input type="text" class="form-control" formControlName="brand" autocomplete="off" />
             </div>
 
@@ -49,14 +48,22 @@
             </div>
           </div>
 
+          <div class="form-group ">
+            <label>Місцезнаходження:</label>
+            <select formControlName="location" class="form-control">
+              <option hidden value="" disabled selected>Оберіть місцезнаходження</option>
+              <option *ngFor="let item of locationList" [value]="item.name">{{ item.name }}</option>
+            </select>
+          </div>
+
           <div class="row">
             <div class="form-group col-md-6 ">
-              <label>Дата введення в експлуатацію:</label>
+              <label class="required-field">Дата введення в експлуатацію:</label>
               <input type="date" class="form-control" formControlName="commissioningDate" autocomplete="off" />
             </div>
 
             <div class="form-group col-md-6 ">
-              <label>Дата закінчення гарантії:</label>
+              <label class="required-field">Дата закінчення гарантії:</label>
               <input type="date" class="form-control" formControlName="warrantyEndDate" autocomplete="off" />
             </div>
           </div>

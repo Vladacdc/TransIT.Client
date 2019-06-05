@@ -26,6 +26,7 @@ export class VehiclesComponent implements OnInit {
       { title: 'Реєстраційний номер', data: 'regNum', defaultContent: '' },
       { title: 'Бренд', data: 'brand', defaultContent: '' },
       { title: 'Модель', data: 'model', defaultContent: '' },
+      { title: 'Місцезнаходження', data: 'location.name', defaultContent: '' },
       {
         title: 'Дата введення в експлуатацію',
         data: 'commissioningDate',
@@ -81,8 +82,7 @@ export class VehiclesComponent implements OnInit {
 
   selectDeleteItem(component: any) {
     return function() {
-      const data = component.table.row($(this).parents('tr')).data();
-      component.selectedVehicle = data;
+      component.selectedVehicle = component.table.row($(this).parents('tr')).data();;
     };
   }
 

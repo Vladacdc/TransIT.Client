@@ -1,5 +1,6 @@
 import { VehicleType } from './vehicleType';
 import { TEntity } from '../../core/models/entity/entity';
+import { Location } from './location';
 
 export class Vehicle extends TEntity<Vehicle> {
   vehicleType: VehicleType;
@@ -8,6 +9,7 @@ export class Vehicle extends TEntity<Vehicle> {
   regNum: string;
   brand: string;
   model: string;
+  location: Location;
   commissioningDate: Date;
   warrantyEndDate: Date;
 

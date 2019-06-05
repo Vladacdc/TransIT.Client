@@ -52,6 +52,22 @@ export const NAME_FIELD_ERRORS: ErrorMessage[] = [
   }
 ];
 
+export const NUM_FIELD_ERRORS: ErrorMessage[] = [
+  ...CUSTOM_ERRORS,
+  {
+    error: 'pattern',
+    format: numberOnlyPatternFormat
+  }
+];
+
+export const LET_NUM_FIELD_ERRORS: ErrorMessage[] = [
+  ...CUSTOM_ERRORS,
+  {
+    error: 'pattern',
+    format: letterAndNumberOnlyPatternFormat
+  }
+];
+
 export function requiredFormat(label: string, error: any): string {
   return `Поле "${label}" є обов'язковим`;
 }
@@ -82,6 +98,14 @@ export function patternFormat(label: string, error: any): string {
 
 export function loginPatternFormat(label: string, error: any): string {
   return 'Дозволено тільки букви латинського алфавіту та цифри';
+}
+
+export function numberOnlyPatternFormat(label: string, error: any): string {
+  return 'Дозволено тільки цифри';
+}
+
+export function letterAndNumberOnlyPatternFormat(label: string, error: any): string {
+  return 'Дозволено тільки букви та цифри';
 }
 
 export function nameFieldFormat(label: string, error: any): string {
