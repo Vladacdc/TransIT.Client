@@ -205,9 +205,10 @@ export class EditIssueLogComponent implements OnInit {
         });
       }
       if (this.existingDocuments.length) {
-        this.existingDocuments.forEach(d =>
-          this.documentService.addEntity(d).subscribe()
-          );
+        this.existingDocuments.forEach(d => {
+          d.issueLog = res;
+          this.documentService.updateEntity(d).subscribe()
+        });
       }
       this.router.navigate(['/engineer/issues/edit'])
         .then(_ => this.toast.success('', 'Обробку зроблено'))
@@ -215,3 +216,4 @@ export class EditIssueLogComponent implements OnInit {
     });
   }
 }
+
