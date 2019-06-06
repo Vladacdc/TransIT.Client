@@ -29,6 +29,7 @@ export class EditVehicleComponent implements OnInit {
       commissioningDate: this.datePipe.transform(vehicle.commissioningDate, 'yyyy-MM-dd'),
       warrantyEndDate: this.datePipe.transform(vehicle.warrantyEndDate, 'yyyy-MM-dd')
     });
+    this.selectedVehicle = vehicle;
   }
 
   constructor(
@@ -42,6 +43,7 @@ export class EditVehicleComponent implements OnInit {
   @ViewChild('close') closeDiv: ElementRef;
   @Output() updateVehicle = new EventEmitter<Vehicle>();
 
+  selectedVehicle = new Vehicle({});
   vehicleForm: FormGroup;
   vehicleTypeList: VehicleType[] = [];
   locationList: Location[] = [];
@@ -50,6 +52,17 @@ export class EditVehicleComponent implements OnInit {
   CustomLetNumErrorMessages = LET_NUM_FIELD_ERRORS;
 
   ngOnInit() {
+    $('#editVehicle').on('hidden.bs.modal', () => {
+      this.vehicleForm.patchValue({
+        ...this.selectedVehicle,
+        vehicleType: this.selectedVehicle.vehicleType.name,
+        location: this.selectedVehicle.location && this.selectedVehicle.location.name,
+        commissioningDate: this.datePipe.transform(this.selectedVehicle.commissioningDate, 'yyyy-MM-dd'),
+        warrantyEndDate: this.datePipe.transform(this.selectedVehicle.warrantyEndDate, 'yyyy-MM-dd')
+      });
+      $(this).find('form').trigger('reset');
+    });
+
     this.vehicleForm = this.formBuilder.group({
       id: '',
       vehicleType: new FormControl('', Validators.required),
@@ -70,7 +83,6 @@ export class EditVehicleComponent implements OnInit {
     if (this.vehicleForm.invalid) {
       return;
     }
-    this.closeDiv.nativeElement.click();
     const form = this.vehicleForm.value;
     const vehicle: Vehicle = new Vehicle({
       id: form.id as number,
@@ -89,9 +101,12 @@ export class EditVehicleComponent implements OnInit {
       .subscribe(
         () => {
           this.updateVehicle.next(vehicle);
-          this.toast.success('Транспорт оновлено');
         },
-        _ => this.toast.error('Не вдалось редагувати дані про транспорт', 'Помилка редагування даних')
+        _ => this.toast.error('Не вдалось редагувати дані про транспорт', 'Помилка редагування даних'),
+        () => {
+          this.closeDiv.nativeElement.click();
+          this.toast.success('Транспорт оновлено');
+        }
       );
   }
 }

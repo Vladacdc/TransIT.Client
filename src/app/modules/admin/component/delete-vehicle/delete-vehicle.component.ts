@@ -13,9 +13,9 @@ export class DeleteVehicleComponent implements OnInit {
   @Input() vehicle: Vehicle;
   @Output() deleteVehicle = new EventEmitter<Vehicle>();
 
-  constructor(private service: VehicleService, private toast: ToastrService) {}
+  constructor(private service: VehicleService, private toast: ToastrService) { }
 
-  ngOnInit() {}
+  ngOnInit() { }
 
   delete() {
     this.closeDiv.nativeElement.click();
@@ -23,7 +23,8 @@ export class DeleteVehicleComponent implements OnInit {
       .deleteEntity(this.vehicle.id)
       .subscribe(
         data => this.deleteVehicle.next(this.vehicle),
-        _ => this.toast.error('Не вдалось видалити транспорт', 'Помилка видалення транспорту')
+        _ => this.toast.error('Не вдалось видалити транспорт', 'Помилка видалення транспорту'),
+        () => { this.toast.success('Транспорт видалено'); }
       );
   }
 }

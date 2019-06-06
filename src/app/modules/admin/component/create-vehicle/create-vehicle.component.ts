@@ -79,11 +79,12 @@ export class CreateVehicleComponent implements OnInit {
       .subscribe(
         newVehicle => {
           this.createVehicle.next(newVehicle);
-          this.toast.success('Транспорт створено');
         },
-        _ => this.toast.error('Не вдалось створити транспорт', 'Помилка створення нового транспорту'),
-
+        _ => this.toast.error('Транспорт з таким vin-кодом вже існує'),
+        () => {
+          this.closeDiv.nativeElement.click();
+          this.toast.success('Транспорт створено');
+        }
       );
-    this.closeDiv.nativeElement.click();
   }
 }
