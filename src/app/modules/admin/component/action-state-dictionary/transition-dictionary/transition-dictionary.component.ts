@@ -35,7 +35,7 @@ export class TransitionDictionaryComponent implements OnDestroy, AfterViewInit {
     ],
     language: { url: 'assets/language.json' },
     scrollX: true
-  };
+  });
 
   transitions: Transition[] = [];
   selectedTransition: Transition;

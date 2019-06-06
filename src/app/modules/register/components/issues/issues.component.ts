@@ -34,7 +34,7 @@ export class IssuesComponent implements OnDestroy, AfterViewInit {
     },
     scrollX: true,
     order: [[0, 'desc']]
-  };
+  });
 
   issues: Issue[] = [];
   selectedIssue: Issue;

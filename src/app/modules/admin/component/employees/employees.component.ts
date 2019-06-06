@@ -30,7 +30,7 @@ export class EmployeesComponent implements AfterViewInit, OnDestroy {
     ],
     language: { url: 'assets/language.json' },
     scrollX: true
-  };
+  });
   employees: Employee[] = [];
   selectedEmployee: Employee;
   renderTrigger: Subject<any> = new Subject();
