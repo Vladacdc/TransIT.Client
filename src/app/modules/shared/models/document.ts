@@ -14,7 +14,7 @@ export class Document extends TEntity<Document> {
 
   constructor(document: Partial<Document>) {
     super(document);
-    this.issueLog = new IssueLog(this.issueLog);
+    this.issueLog = this.issueLog && new IssueLog(this.issueLog);
     this.mod = new User(this.mod);
   }
 }

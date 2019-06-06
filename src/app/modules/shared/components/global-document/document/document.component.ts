@@ -113,9 +113,11 @@ export class DocumentComponent implements OnInit {
       this.selectedDocument = data;
 
       if (!this.selectedDocument.issueLog) {
-        component.toast.error('У даного документа відсутня історія заявок', 'Помилка', {
-          timeOut: 2500
-        });
+        // component.toast.error('У даного документа відсутня історія заявок', 'Помилка', {
+        //   timeOut: 2500
+        // });
+        component.documentService.selectedItem = new Document(this.selectedDocument);
+        component.router.navigate([`${component._url}/issue-log`]);
       }
       if (this.selectedDocument.issueLog) {
         component.documentService.selectedItem = new Document(this.selectedDocument);
