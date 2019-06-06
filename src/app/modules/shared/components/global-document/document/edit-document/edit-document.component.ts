@@ -39,7 +39,8 @@ export class EditDocumentComponent implements OnInit {
       name: '',
       description: '',
       issueLog: '',
-      path: ''
+      path: '',
+      newDate: ''
     });
     this.serviceIssueLog.getEntities().subscribe(issueLogs => {
       this.issueLogs = issueLogs;
@@ -59,9 +60,10 @@ export class EditDocumentComponent implements OnInit {
       name: form.name as string,
       description: form.description as string,
       issueLog: this.selectedDoc.issueLog,
-      path: this.selectedDoc.path
+      path: this.selectedDoc.path,
+      newDate: this.selectedDoc.newDate
     });
-    
+
     this.serviceDocument.updateEntity(document).subscribe(_ => this.editDocument.next(document));
     console.dir(document);
   }

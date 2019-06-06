@@ -36,7 +36,8 @@ export class CreateDocumentComponent implements OnInit {
     });
     this.documentForm = this.formBuilder.group({
       name: ['', Validators.required],
-      description: ['', Validators.required]
+      description: ['', Validators.required],
+      newDate:['', Validators.required]
     });
     this.serviceIssueLog.getEntities().subscribe(issuelog => {
       this.issueLogList = issuelog;
@@ -58,6 +59,7 @@ export class CreateDocumentComponent implements OnInit {
       description: form.description as string,
       issueLog: this.issueLog,
       path: '',
+      newDate: form.newDate as Date,
       file: fileToUpload
     };
     this.serviceDocument.addDocument(document as Document).subscribe(

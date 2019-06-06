@@ -30,6 +30,14 @@ export class DocumentComponent implements OnInit {
         { title: 'Назва', data: 'name', defaultContent: '' },
         { title: 'Опис', data: 'description', defaultContent: '' },
         {
+          title: 'Дата створення',
+          data: 'newDate',
+          defaultContent: '',
+          render: function(data) {
+            return moment(data).format('DD.MM.YYYY');
+          }
+        },
+        {
           title: 'Змінено',
           data: 'modDate',
           defaultContent: '',

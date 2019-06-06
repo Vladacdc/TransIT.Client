@@ -43,8 +43,23 @@
               placeholder="Введіть опис документа"
             ></textarea>
           </div>
+
           <button hidden type="submit" #submit></button>
           <input #fileInput type="file" class="btn border" />
+        </form>
+
+        <form [formGroup]="documentForm">
+          <div class="form-group">
+            <label>Дата</label>
+            <input
+              type="date"
+              class="form-control"
+              formControlName="newDate"
+              autocomplete="off"
+              placeholder="Введіть дату документа"
+            />
+          </div>
+          <button hidden type="submit" #submit></button>
         </form>
 
         <!-- <form [formGroup]="documentForm">

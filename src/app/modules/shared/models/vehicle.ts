@@ -16,7 +16,7 @@ export class Vehicle extends TEntity<Vehicle> {
   constructor(vehicle: Partial<Vehicle>) {
     super(vehicle);
     this.vehicleType = new VehicleType(this.vehicleType);
-    this.location = new Location(this.location);
+    //this.location = new Location(this.location);
   }
 
   get name(): string {
