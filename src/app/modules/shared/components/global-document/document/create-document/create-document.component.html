@@ -45,8 +45,16 @@
           </div>
 
           <button hidden type="submit" #submit></button>
-          <input #fileInput type="file" class="btn border" />
         </form>
+
+        <form [formGroup]="documentForm">
+          <div class="form-group">
+            <label>Документ</label>
+            <input #fileInput type="file" formControlName="file" class="btn border" accept="application/pdf" />
+          </div>
+          <button hidden type="submit" #submit></button>
+        </form>
+
 
         <form [formGroup]="documentForm">
           <div class="form-group">
@@ -62,15 +70,6 @@
           <button hidden type="submit" #submit></button>
         </form>
 
-        <!-- <form [formGroup]="documentForm">
-        <div class="form-group">
-          <label>Історія</label>
-          <select class="form-control" formControlName="issueLog">
-            <option hidden value="" disabled selected>-</option>
-            <option *ngFor="let groupItem of issueLogList" [value]="groupItem.description">{{ groupItem.description }}</option>
-          </select>
-        </div>
-      </form> -->
       </div>
       <div class="modal-footer">
         <button #close type="button" class="btn btn-secondary" data-dismiss="modal">Скасувати</button>
