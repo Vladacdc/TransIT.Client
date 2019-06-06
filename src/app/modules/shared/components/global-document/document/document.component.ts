@@ -88,7 +88,7 @@ export class DocumentComponent implements OnInit {
   selectFirstItem(component: any) {
     return function() {
       const data = component.tableDocument.row($(this).parents('tr')).data();
-      component.selectedDocument = data;
+      component.selectedDocument = new Document({ ...data });
     };
   }
 
