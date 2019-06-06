@@ -15,7 +15,6 @@ export class EditDocumentComponent implements OnInit {
   @ViewChild('close') closeDiv: ElementRef;
   @Input()
   set document(document: Document) {
-    console.dir(document);
     if (!document) {
       return;
     }
@@ -60,7 +59,7 @@ export class EditDocumentComponent implements OnInit {
       name: form.name as string,
       description: form.description as string,
       issueLog: this.selectedDoc.issueLog,
-      path: form.path as string
+      path: this.selectedDoc.path
     });
     this.serviceDocument.updateEntity(document).subscribe(_ => this.editDocument.next(document));
   }

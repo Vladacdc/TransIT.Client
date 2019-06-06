@@ -6,9 +6,10 @@ export class Document extends TEntity<Document> {
   name?: string;
   description?: string;
   issueLog?: IssueLog;
+  file?: File;
   mod?: User;
   modDate?: Date;
-  path?:string;
+  path?: string;
 
   constructor(document: Partial<Document>) {
     super(document);
