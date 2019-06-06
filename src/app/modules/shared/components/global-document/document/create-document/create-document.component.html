@@ -46,16 +46,6 @@
 
           <button hidden type="submit" #submit></button>
         </form>
-
-        <form [formGroup]="documentForm">
-          <div class="form-group">
-            <label>Документ</label>
-            <input #fileInput type="file" formControlName="file" class="btn border" accept="application/pdf" />
-          </div>
-          <button hidden type="submit" #submit></button>
-        </form>
-
-
         <form [formGroup]="documentForm">
           <div class="form-group">
             <label>Дата</label>
@@ -69,7 +59,12 @@
           </div>
           <button hidden type="submit" #submit></button>
         </form>
-
+        <form [formGroup]="documentForm">
+          <div class="form-group">
+            <input #fileInput type="file" formControlName="file" class="btn border" accept="application/pdf" />
+          </div>
+          <button hidden type="submit" #submit></button>
+        </form>
       </div>
       <div class="modal-footer">
         <button #close type="button" class="btn btn-secondary" data-dismiss="modal">Скасувати</button>
