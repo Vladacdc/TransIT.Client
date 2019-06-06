@@ -68,7 +68,7 @@ export class MalfunctionsComponent implements OnInit {
       select: {
         style: 'single'
       },
-      columns: [{ data: 'id', bVisible: false }, { title: 'Помилки', data: 'name', defaultContent: '' }],
+      columns: [{ data: 'id', bVisible: false }, { title: 'Несправності', data: 'name', defaultContent: '' }],
       paging: true,
       language: {
         url: 'assets/language.json'
