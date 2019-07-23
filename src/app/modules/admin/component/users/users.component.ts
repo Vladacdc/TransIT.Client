@@ -65,12 +65,12 @@ export class UsersComponent implements OnInit {
     this.users = [...newUsers];
     const view = newUsers.map(i => [
       i.lastName + '\n' + i.firstName + '\n' + i.middleName,
-      i.login,
+      i.userName,
       i.email,
       i.phoneNumber,
       i.role.transName,
       i.isActive ? 'активний' : 'неактивний',
-      i.login !== this.userLogin
+      i.userName !== this.userLogin
         ? `<button id="find-user-${
             i.id
           }" class="btn" data-toggle="modal" data-target="#editUser"><i class="fas fa-edit"></i></button>

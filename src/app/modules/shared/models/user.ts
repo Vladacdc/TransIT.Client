@@ -7,7 +7,7 @@ export class User extends TEntity<User> {
   lastName: string;
   email: string;
   phoneNumber: string;
-  login: string;
+  userName: string;
   password: string;
   role: Role;
   isActive: boolean;
