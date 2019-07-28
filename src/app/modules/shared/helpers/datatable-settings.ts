@@ -16,5 +16,5 @@ export class DatatableSettings implements DataTables.Settings {
     $(settings.nTableWrapper)
       .find('.pagination, .dataTables_length')
       .toggle(settings._iRecordsTotal > 10);
-  };
+  }
 }
