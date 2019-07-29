@@ -24,7 +24,7 @@ export class IssueLogsComponent implements OnInit {
     { title: 'Постачальник', data: 'supplier.name', defaultContent: '', bVisible: false },
     { title: 'Транспорт', data: 'issue.vehicle.inventoryId', defaultContent: '' },
     { title: 'Створено', data: 'createDate', defaultContent: '', render: data => moment(data).format('DD.MM.YYYY') },
-    { title: 'Редаговано', data: 'modDate', defaultContent: '', bVisible: false },
+    { title: 'Редаговано', data: 'updatedDate', defaultContent: '', bVisible: false },
     {
       orderable: false,
       title: 'Документи',
@@ -41,7 +41,7 @@ export class IssueLogsComponent implements OnInit {
       style: 'single'
     },
     columns: this.columns,
-    order: [[this.columns.indexOf(this.columns.filter(x => x.data === 'modDate')[0]), 'desc']],
+    order: [[this.columns.indexOf(this.columns.filter(x => x.data === 'updatedDate')[0]), 'desc']],
     processing: true,
     serverSide: true,
     ajax: this.ajaxCallback.bind(this),

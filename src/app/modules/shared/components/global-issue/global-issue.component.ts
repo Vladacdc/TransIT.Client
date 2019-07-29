@@ -38,7 +38,7 @@ export class GlobalIssueComponent implements OnInit {
     { title: 'Місцезнаходження', data: 'vehicle.location.name', defaultContent: '' },
     { title: 'Опис', data: 'summary', defaultContent: '' },
     { title: 'Створено', data: 'createDate', defaultContent: '', bVisible: false },
-    { title: 'Редаговано', data: 'modDate', defaultContent: '', bVisible: false },
+    { title: 'Редаговано', data: 'updatedDate', defaultContent: '', bVisible: false },
     { data: 'id', bVisible: false }
   ];
 
@@ -48,7 +48,7 @@ export class GlobalIssueComponent implements OnInit {
       style: 'single'
     },
     columns: this.columns,
-    order: [[this.columns.indexOf(this.columns.filter(x => x.data === 'modDate')[0]), 'desc']],
+    order: [[this.columns.indexOf(this.columns.filter(x => x.data === 'updatedDate')[0]), 'desc']],
     processing: true,
     serverSide: true,
     ajax: this.ajaxCallback.bind(this),

@@ -39,7 +39,7 @@ export class DocumentComponent implements OnInit {
         },
         {
           title: 'Змінено',
-          data: 'modDate',
+          data: 'updatedDate',
           defaultContent: '',
           render: function(data) {
             return moment(data).format('DD.MM.YYYY');

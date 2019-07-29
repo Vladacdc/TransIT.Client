@@ -13,7 +13,7 @@ export class Issue extends TEntity<Issue> {
   deadline: Date;
   summary: string;
   createDate: Date;
-  modDate: Date;
+  updatedDate: Date;
   priority: number;
   number: number;
   date: Date;
