@@ -57,7 +57,7 @@ export class EditUserComponent implements OnInit {
         '',
         Validators.compose([Validators.maxLength(30), Validators.pattern("^[A-Za-zА-Яа-яїієЇІЯЄ/'/`-]+$")])
       ),
-      login: new FormControl({ value: '', disabled: true }),
+      userName: new FormControl({ value: '', disabled: true }),
       phoneNumber: new FormControl('', Validators.minLength(14)),
       email: new FormControl('', Validators.compose([Validators.email, Validators.maxLength(30)])),
       role: ['', Validators.required],
@@ -81,7 +81,7 @@ export class EditUserComponent implements OnInit {
       lastName: form.lastName || '',
       middleName: form.middleName || '',
       phoneNumber: form.phoneNumber,
-      login: this.selectedUser.login,
+      userName: this.selectedUser.userName,
       email: form.email,
       password: this.selectedUser.password,
       role: this.roles.find(r => r.transName === form.role),
