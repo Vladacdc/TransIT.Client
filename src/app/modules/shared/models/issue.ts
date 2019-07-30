@@ -7,7 +7,7 @@ import { Employee } from './employee';
 export class Issue extends TEntity<Issue> {
   state: State;
   malfunction: Malfunction;
-  warranty: number;
+  warranty: boolean;
   vehicle: Vehicle;
   assignedTo: Employee;
   deadline: Date;
