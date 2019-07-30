@@ -10,7 +10,7 @@ export class Supplier extends TEntity<Supplier> {
   public currency: Currency;
   public country: Country;
   public createDate?: Date;
-  public modDate?: Date;
+  public updatedDate?: Date;
   public create?: User;
   public mod?: User;
 }

@@ -8,7 +8,7 @@ export class Document extends TEntity<Document> {
   issueLog?: IssueLog;
   file?: File;
   mod?: User;
-  modDate?: Date;
+  updatedDate?: Date;
   newDate?: Date;
   path?: string;
 

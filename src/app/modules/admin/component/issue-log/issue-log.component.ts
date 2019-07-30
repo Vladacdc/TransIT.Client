@@ -43,7 +43,7 @@ export class IssueLogComponent implements OnInit {
         { title: 'Постачальник', data: 'supplier.name', defaultContent: '' },
         { title: 'Транспорт', data: 'issue.vehicle.inventoryId', defaultContent: '' },
         { title: 'Створено', data: 'createDate', defaultContent: '' },
-        { title: 'Редаговано', data: 'modDate', defaultContent: '' }
+        { title: 'Редаговано', data: 'updatedDate', defaultContent: '' }
       ],
       paging: true,
       language: {
