@@ -50,7 +50,7 @@ export class CreateUserComponent implements OnInit {
           Validators.compose([Validators.maxLength(30), Validators.pattern("^[A-Za-zА-Яа-яїієЇІЯЄ/'/`-]+$")])
         ),
         phoneNumber: new FormControl('', Validators.minLength(14)),
-        login: new FormControl(
+        userName: new FormControl(
           '',
           Validators.compose([Validators.required, Validators.minLength(3), Validators.pattern('^[A-Za-z0-9]+$')])
         ),
@@ -82,7 +82,7 @@ export class CreateUserComponent implements OnInit {
       lastName: form.lastName || '',
       middleName: form.middleName || '',
       phoneNumber: form.phoneNumber,
-      login: form.login,
+      userName: form.userName,
       email: form.email,
       password: form.password,
       role: this.roleList[this.roleName.findIndex(r => r === form.role)],

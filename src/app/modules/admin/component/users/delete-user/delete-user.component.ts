@@ -19,7 +19,7 @@ export class DeleteUserComponent implements OnInit {
     this.userSelected = user;
   }
 
-  userSelected: User = new User({ login: '' });
+  userSelected: User = new User({ userName: '' });
 
   constructor(private service: UserService, private toast: ToastrService) {}
 

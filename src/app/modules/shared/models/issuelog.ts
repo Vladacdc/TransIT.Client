@@ -13,7 +13,7 @@ export class IssueLog extends TEntity<IssueLog> {
   newState: State;
   oldState: State;
   supplier: Supplier;
-  modDate: Date;
+  updatedDate: Date;
   createDate: Date;
   documents: Array<Document>;
 
