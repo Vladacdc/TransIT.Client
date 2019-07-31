@@ -63,9 +63,18 @@ export class CreateEmployeeComponent implements OnInit {
         [Validators.required, Validators.min(1), Validators.max(1000000000)],
         [UniqueFieldValidator.createValidator(this.employeeService, 'boardNumber')]
       ],
-      lastName: [undefined, this.stringFieldValidators],
-      firstName: [undefined, this.stringFieldValidators],
-      middleName: [undefined, this.stringFieldValidators],
+      lastName: [undefined,
+        [...this.stringFieldValidators, Validators.required],
+        [UniqueFieldValidator.createValidator(this.employeeService, 'boardNumber')]
+      ],
+      firstName: [undefined,
+        [...this.stringFieldValidators, Validators.required],
+        [UniqueFieldValidator.createValidator(this.employeeService, 'boardNumber')]
+      ],
+      middleName: [undefined,
+        [...this.stringFieldValidators, Validators.required],
+        [UniqueFieldValidator.createValidator(this.employeeService, 'boardNumber')]
+      ],
       shortName: [
         undefined,
         [...this.stringFieldValidators, Validators.required],
