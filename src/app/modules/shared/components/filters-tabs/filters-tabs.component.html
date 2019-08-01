@@ -3,6 +3,10 @@
     <div>
       <input id="startDate" placeholder="Start Date" width="200" />
       <input id="endDate" placeholder="End Date" width="200" />
+      <select class="form-control" width="200" (change)="selectPriority($event.target.value)">
+        <option value="" selected class="grey"> Виберіть пріорітет</option>
+        <option *ngFor="let key of keys" [value]="key" [label]="priorityList[key]"></option>
+      </select>
     </div>
     <div>
       <select class="form-control" width="200" (change)="selectVechicleType($event.target.value)">
@@ -19,35 +23,18 @@
       </select>
     </div>
     <div class="form-group">
-      <ng-select
-        [items]="malfunctionGroupList"
-        bindLabel="name"
-        placeholder="*Група несправності"
-        notFoundText="Не знайдено"
-        (change)="selectMalfunctionGroupType($event)"
-      ></ng-select>
-      <ng-select
-        [items]="malfunctionSubGroupFilteredList"
-        [(ngModel)]="currentMalfunctionSubgroup"
-        bindLabel="name"
-        placeholder="*Підгрупа несправності"
-        notFoundText="Не знайдено"
-        (change)="selectMalfunctionSubGroupType($event)"
-      ></ng-select>
-      <ng-select
-        [items]="malfunctionFilteredList"
-        [(ngModel)]="currentMalfunction"
-        bindLabel="name"
-        placeholder="*Несправність"
-        notFoundText="Не знайдено"
-        (change)="selectMalfunctionType($event)"
-      ></ng-select>
-    </div>
-    <div>
-      <select class="form-control" width="200" (change)="selectPriority($event.target.value)">
-        <option value="" selected class="grey"> Виберіть пріорітет</option>
-        <option *ngFor="let key of keys" [value]="key" [label]="priorityList[key]"></option>
-      </select>
+      <select class="form-control" width="200" (change)="selectMulfunctionGroup($event.target.value)">
+        <option value="" selected class="grey"> Виберіть групу несправності</option>
+        <option *ngFor="let  malfunctionGL of malfunctionGroupList" [value]="">{{ malfunctionGL.name }}</option>
+       </select>
+       <select class="form-control" width="200" (change)="selectMulfunctionSubGroup($event.target.value)">
+        <option value="" selected class="grey"> Виберіть підгрупу несправності</option>
+        <option *ngFor="let  malfunctionSubGL of malfunctionSubGroupList" [value]="">{{ malfunctionSubGL.name }}</option>
+       </select>
+        <select class="form-control" width="200" (change)="selectMalfunctionType($event.target.value)">
+        <option value="" selected class="grey"> Виберіть несправність</option>
+        <option *ngFor="let malfunction of malfunctionList" [value]="">{{ malfunction.name }}</option>
+       </select>
     </div>
   </div>
   <button href="#" class="right btn btn-info" (click)="selectFilter()">

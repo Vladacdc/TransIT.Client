@@ -132,11 +132,8 @@ export class FiltersTabsComponent implements OnInit {
     }
   }
   selectMalfunctionType(malfunction) {
-    if (malfunction) {
-      this.selectedMalfunction = malfunction.name;
-    }
+      this.selectedMalfunction = malfunction;
   }
-
   selectVechicleType(type) {
     this.selectedType = type;
   }
@@ -149,23 +146,30 @@ export class FiltersTabsComponent implements OnInit {
   selectLocation(value) {
     this.selectedLocation = value;
   }
+  selectMulfunctionGroup(value) {
+    this.selectedMalfunctionGroup = value;
+  }
+  selectMulfunctionSubGroup(value) {
+    this.selectedMalfunctionSubGroup = value;
+  }
   selectFilter() {
-    this.EndDateValue.next(
+    this.EndDateValue.emit(
       $('#endDate')
         .val()
         .toString()
     );
-    this.StartDateValue.next(
+    this.StartDateValue.emit(
       $('#startDate')
         .val()
         .toString()
     );
-    this.VechicleTypeValue.next(this.selectedType);
-    this.StateValue.next(this.selectedState);
-    this.PriorityValue.next(this.selectedPriority);
-    this.MalfunctionGroupValue.next(this.selectedMalfunctionGroup);
-    this.MalfunctionSubGroupValue.next(this.selectedMalfunctionSubGroup);
-    this.MalfunctionValue.next(this.selectedMalfunction);
-    this.Filter.next();
+    this.VechicleTypeValue.emit(this.selectedType);
+    this.LocationValue.emit(this.selectedLocation);
+    this.StateValue.emit(this.selectedState);
+    this.PriorityValue.emit(this.selectedPriority);
+    this.MalfunctionGroupValue.emit(this.selectedMalfunctionGroup);
+    this.MalfunctionSubGroupValue.emit(this.selectedMalfunctionSubGroup);
+    this.MalfunctionValue.emit(this.selectedMalfunction);
+    this.Filter.emit();
   }
 }
