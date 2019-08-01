@@ -49,7 +49,7 @@ export class CreateUserComponent implements OnInit {
           '',
           Validators.compose([Validators.maxLength(30), Validators.pattern("^[A-Za-zА-Яа-яїієЇІЯЄ/'/`-]+$")])
         ),
-        phoneNumber: new FormControl('', Validators.minLength(14)),
+        phoneNumber: new FormControl('', Validators.minLength(12)),
         userName: new FormControl(
           '',
           Validators.compose([Validators.required, Validators.minLength(3), Validators.pattern('^[A-Za-z0-9]+$')])

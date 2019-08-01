@@ -28,7 +28,7 @@ export class CrudService<T extends TEntity<T>> {
     );
   }
 
-  getEntity(id: number): Observable<T> {
+  getEntity(id: number | string): Observable<T> {
     this.spinner.show();
     return this.http.get<T>(`${this.serviceUrl}/${id}`).pipe(
       map(entity => this.mapEntity(entity)),
@@ -55,7 +55,7 @@ export class CrudService<T extends TEntity<T>> {
     );
   }
 
-  deleteEntity(id: number): Observable<T> {
+  deleteEntity(id: number | string): Observable<T> {
     this.spinner.show();
     return this.http.delete<T>(`${this.serviceUrl}/${id}`).pipe(
       tap(_ => this.handleSuccess('deleted entity', id)),

@@ -92,8 +92,7 @@ export class UsersComponent implements OnInit {
 
     $('#userTable tbody').on('click', 'button', event => {
       const idTokens = event.currentTarget.id.split('-');
-      const id = parseInt(idTokens[idTokens.length - 1], 10);
-      this.user = this.users.find(i => i.id === id);
+      this.user = this.users.find(i => i.id === idTokens.slice(2).join('-'));
     });
   }
 
