@@ -58,7 +58,7 @@ export class EditUserComponent implements OnInit {
         Validators.compose([Validators.maxLength(30), Validators.pattern("^[A-Za-zА-Яа-яїієЇІЯЄ/'/`-]+$")])
       ),
       userName: new FormControl({ value: '', disabled: true }),
-      phoneNumber: new FormControl('', Validators.minLength(14)),
+      phoneNumber: new FormControl('', Validators.minLength(12)),
       email: new FormControl('', Validators.compose([Validators.email, Validators.maxLength(30)])),
       role: ['', Validators.required],
       isActive: true
