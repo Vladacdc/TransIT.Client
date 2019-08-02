@@ -20,7 +20,13 @@ export class UsersComponent implements OnInit {
     },
     columns: [
       {
-        title: 'ПІП'
+        title: 'Прізвище'
+      },
+      {
+        title: 'Ім\'я'
+      },
+      {
+        title: 'По батькові'
       },
       {
         title: 'Логін'
@@ -49,7 +55,7 @@ export class UsersComponent implements OnInit {
 
   ngOnInit() {
     $(document).on('preInit.dt', function() {
-      $(".dataTables_filter input[type='search']").attr('maxlength', 255);
+      $('.dataTables_filter input[type=\'search\']').attr('maxlength', 255);
     });
     $('#userTable').DataTable(this.tableParams);
     this.service.getEntities().subscribe(users => {
@@ -64,7 +70,7 @@ export class UsersComponent implements OnInit {
   addTableData(newUsers: User[]) {
     this.users = [...newUsers];
     const view = newUsers.map(i => [
-      i.lastName + '\n' + i.firstName + '\n' + i.middleName,
+      i.lastName, i.firstName, i.middleName,
       i.userName,
       i.email,
       i.phoneNumber,
