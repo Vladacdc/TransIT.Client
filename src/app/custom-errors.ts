@@ -109,7 +109,7 @@ export function letterAndNumberOnlyPatternFormat(label: string, error: any): str
 }
 
 export function nameFieldFormat(label: string, error: any): string {
-  return `Дозволено тільки літери і спецcимволи ("-" та " ' ")`;
+  return `Дозволено тільки букви, дефіс та апостроф всередині слова`;
 }
 
 export function emailFormat(label: string, error: any): string {

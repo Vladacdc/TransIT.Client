@@ -80,7 +80,7 @@ export class CreateVehicleComponent implements OnInit {
         newVehicle => {
           this.createVehicle.next(newVehicle);
         },
-        _ => this.toast.error('Транспорт з таким vin-кодом вже існує'),
+        _ => this.toast.error('Транспорт з таким vin-кодом або інвентарним номером вже існує'),
         () => {
           this.closeDiv.nativeElement.click();
           this.toast.success('Транспорт створено');
