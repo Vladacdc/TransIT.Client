@@ -71,7 +71,7 @@ See [TransIT.API readme development](https://github.com/Vladacdc/TransIT.API/tre
 
 ## Deployment
 
-If you have a question about deployment, ask [Vladislav](https://github.com/Vladacdc).
+If you have a question about deployment, ask [Vladyslav](https://github.com/Vladacdc).
 
 ## Running unit tests
 
