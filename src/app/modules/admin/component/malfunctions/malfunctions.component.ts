@@ -51,7 +51,6 @@ export class MalfunctionsComponent implements OnInit {
       select: {
         style: 'single'
       },
-
       columns: [{ data: 'id', bVisible: false }, { title: 'Група', data: 'name', defaultContent: '' }],
       paging: true,
       language: {

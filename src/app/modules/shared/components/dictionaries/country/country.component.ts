@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Country } from '../../../models/country';
 import { CountryService } from '../../../services/country.service';
+import { DatatableSettings } from '../../../helpers/datatable-settings';
 
 @Component({
   selector: 'app-country',
@@ -14,29 +15,22 @@ export class CountryComponent implements OnInit {
   @Input() isVisible: boolean;
   constructor(private service: CountryService) {}
 
+  readonly options = new DatatableSettings({
+    columns: [
+      {
+        title: 'Назва країни'
+      },
+      {
+        title: 'Дії',
+        orderable: false,
+        visible: this.isVisible
+      }
+    ],
+    language: { url: 'assets/language.json'}
+  });
+
   ngOnInit() {
-    $('#countryTable').DataTable({
-      drawCallback: function(settings) {
-        let pagination = $(this).closest('.dataTables_wrapper').find('.dataTables_paginate');
-        let pagelength = $(this).closest('.dataTables_wrapper').find('.dataTables_length');
-        pagination.toggle(this.api().page.info().pages > 1);
-        pagelength.toggle(this.api().data().length > 10);
-      },
-      scrollX: true,
-      language: {
-        url: 'assets/language.json'
-      },
-      columns: [
-        {
-          title: 'Назва країни'
-        },
-        {
-          title: 'Дії',
-          orderable: false,
-          visible: this.isVisible
-        }
-      ]
-    });
+    $('#countryTable').DataTable(this.options);
     this.service.getEntities().subscribe(countries => {
       this.addTableData(countries);
     });
