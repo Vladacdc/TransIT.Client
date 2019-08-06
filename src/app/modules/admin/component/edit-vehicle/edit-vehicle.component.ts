@@ -102,7 +102,7 @@ export class EditVehicleComponent implements OnInit {
         () => {
           this.updateVehicle.next(vehicle);
         },
-        _ => this.toast.error('Не вдалось редагувати дані про транспорт', 'Помилка редагування даних'),
+        _ => this.toast.error('Транспорт з таким vin-кодом або інвентарним номером вже існує', 'Помилка редагування даних'),
         () => {
           this.closeDiv.nativeElement.click();
           this.toast.success('Транспорт оновлено');
