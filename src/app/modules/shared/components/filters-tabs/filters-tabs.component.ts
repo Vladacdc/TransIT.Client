@@ -4,7 +4,7 @@ import { State } from '../../models/state';
 import { MalfunctionGroup } from '../../models/malfunction-group';
 import { MalfunctionSubgroup } from '../../models/malfunction-subgroup';
 import { Malfunction } from '../../models/malfunction';
-import { Priority } from 'src/app/modules/core/models/priority/priority';
+import { Priority, convertPriorityToInt } from 'src/app/modules/core/models/priority/priority';
 import { StateService } from '../../services/state.service';
 import { MalfunctionService } from '../../services/malfunction.service';
 import { MalfunctionGroupService } from '../../services/malfunction-group.service';
@@ -25,8 +25,7 @@ export class FiltersTabsComponent implements OnInit {
   malfunctionSubGroupList: MalfunctionSubgroup[] = [];
   malfunctionList: Malfunction[] = [];
   locationList: Location[] = [];
-  priorityList = Priority;
-  keys = [];
+  priorityList = [Priority.low, Priority.medium, Priority.high];
   malfunctionSubGroupFilteredList: MalfunctionSubgroup[] = [];
   malfunctionFilteredList: Malfunction[] = [];
   currentMalfunctionSubgroup: MalfunctionSubgroup;
@@ -59,7 +58,6 @@ export class FiltersTabsComponent implements OnInit {
     private malfunctionService: MalfunctionService,
     private locationService: LocationService
   ) {
-    this.keys = Object.keys(this.priorityList).filter(f => !isNaN(Number(f)));
   }
 
   ngOnInit() {
@@ -103,13 +101,17 @@ export class FiltersTabsComponent implements OnInit {
     return this.malfunctionSubGroupList.filter(subgroup => subgroup.malfunctionGroup.name === group);
   }
 
-  selectMalfunctionGroupType(group) {
+  selectMalfunctionGroupType(group: MalfunctionGroup) {
     this.selectedMalfunctionSubGroup = null;
     this.currentMalfunctionSubgroup = null;
     this.malfunctionSubGroupFilteredList = this.malfunctionSubGroupList;
     if (group) {
       this.selectedMalfunctionGroup = group.name;
       this.selectGroup();
+    }
+    else
+    {
+      this.selectedMalfunctionGroup = "";
     }
   }
   selectSubgroup(): void {
@@ -121,8 +123,7 @@ export class FiltersTabsComponent implements OnInit {
   private getBySubgroup(subgroup: string): Array<Malfunction> {
     return this.malfunctionList.filter(malfunc => malfunc.malfunctionSubgroup.name === subgroup);
   }
-
-  selectMalfunctionSubGroupType(subgroup) {
+  selectMalfunctionSubGroupType(subgroup: MalfunctionSubgroup) {
     this.selectedMalfunction = null;
     this.currentMalfunction = null;
     this.malfunctionFilteredList = this.malfunctionList;
@@ -130,27 +131,80 @@ export class FiltersTabsComponent implements OnInit {
       this.selectedMalfunctionSubGroup = subgroup.name;
       this.selectSubgroup();
     }
+    else
+    {
+      this.selectedMalfunctionSubGroup = "";
+    }
   }
-  selectMalfunctionType(malfunction) {
-      this.selectedMalfunction = malfunction;
+  selectMalfunctionType(value: Malfunction) {
+    if(value)
+    {  
+      this.selectedMalfunction = value.name;
+    }
+    else
+    {
+      this.selectedMalfunction = "";
+    }
   }
-  selectVechicleType(type) {
-    this.selectedType = type;
+  selectVechicleType(value: VehicleType) {
+    if(value)  
+    {
+      this.selectedType = value.name;
+    }
+    else
+    {
+      this.selectedType = "";
+    }
   }
-  selectState(state) {
-    this.selectedState = state;
+  selectState(value: State) {
+    if(value)
+    {
+      this.selectedState = value.name;
+    }
+    else
+    {
+      this.selectedState = "";
+    }
   }
-  selectPriority(value) {
-    this.selectedPriority = value;
+  selectPriority(value: string) {
+    if(value)
+    {
+      this.selectedPriority = convertPriorityToInt(value).toString();
+    }
+    else
+    {
+      this.selectedPriority = "";
+    }
   }
-  selectLocation(value) {
-    this.selectedLocation = value;
+  selectLocation(value: Location) {
+    if(value)
+    {
+      this.selectedLocation = value.name;
+    }
+    else
+    {
+      this.selectedLocation = "";
+    }
   }
-  selectMulfunctionGroup(value) {
-    this.selectedMalfunctionGroup = value;
+  selectMalfunctionGroup(value: MalfunctionGroup) {
+    if(value)
+    {
+      this.selectedMalfunctionGroup = value.name;
+    }
+    else
+    {
+      this.selectedMalfunctionGroup = "";
+    }
   }
-  selectMulfunctionSubGroup(value) {
-    this.selectedMalfunctionSubGroup = value;
+  selectMalfunctionSubGroup(value: MalfunctionSubgroup) {
+    if(value)
+    {
+      this.selectedMalfunctionSubGroup = value.name;
+    }
+    else
+    {
+      this.selectedMalfunctionSubGroup = "";
+    }
   }
   selectFilter() {
     this.EndDateValue.emit(

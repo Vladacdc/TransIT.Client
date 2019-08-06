@@ -37,7 +37,7 @@ export class GlobalIssueComponent implements OnInit {
     { title: 'Виконати до', data: 'deadline', defaultContent: '', bVisible: false },
     { title: 'Місцезнаходження', data: 'vehicle.location.name', defaultContent: '' },
     { title: 'Опис', data: 'summary', defaultContent: '' },
-    { title: 'Створено', data: 'createDate', defaultContent: '', bVisible: false },
+    { title: 'Створено', data: 'createdDate', defaultContent: '', bVisible: false },
     { title: 'Редаговано', data: 'updatedDate', defaultContent: '', bVisible: false },
     { data: 'id', bVisible: false }
   ];
@@ -143,14 +143,14 @@ export class GlobalIssueComponent implements OnInit {
     }
     if (this.startDate) {
       filters.push({
-        entityPropertyPath: 'createDate',
+        entityPropertyPath: 'createdDate',
         value: this.startDate,
         operator: '>='
       });
     }
     if (this.endDate) {
       filters.push({
-        entityPropertyPath: 'createDate',
+        entityPropertyPath: 'createdDate',
         value: this.endDate,
         operator: '<='
       });

@@ -14,7 +14,7 @@ export class IssueLog extends TEntity<IssueLog> {
   oldState: State;
   supplier: Supplier;
   updatedDate: Date;
-  createDate: Date;
+  createdDate: Date;
   documents: Array<Document>;
 
   constructor(issueLog: Partial<IssueLog>) {
