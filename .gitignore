@@ -1,14 +1,18 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
+# See https://www.gitignore.io/ for generate .gitignore
 
 /.vs
 
 # compiled output
 /dist
 /tmp
+/app/**/*.js
+/app/**/*.js.map
 /out-tsc
 
 # dependencies
 /node_modules
+/bower_components
 
 # profiling files
 chrome-profiler-events.json
@@ -23,25 +27,33 @@ speed-measure-plugin.json
 .settings/
 *.sublime-workspace
 
-# IDE - VSCode
+#VisualStudioCode
 .vscode/*
 !.vscode/settings.json
 !.vscode/tasks.json
 !.vscode/launch.json
 !.vscode/extensions.json
-.history/*
+.history
 
 # misc
 /.sass-cache
 /connect.lock
-/coverage
+/coverage/*
 /libpeerconnection.log
 npm-debug.log
 yarn-error.log
 testem.log
 /typings
 
-# System Files
+# e2e
+/e2e/*.js
+/e2e/*.map
+
+#System Files
 .DS_Store
 Thumbs.db
 package-lock.json
+
+
+
+# End of https://www.gitignore.io/api/angular,visualstudiocode
