@@ -12,7 +12,7 @@ export class Issue extends TEntity<Issue> {
   assignedTo: Employee;
   deadline: Date;
   summary: string;
-  createDate: Date;
+  createdDate: Date;
   updatedDate: Date;
   priority: number;
   number: number;
