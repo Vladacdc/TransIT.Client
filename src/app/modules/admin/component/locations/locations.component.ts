@@ -13,6 +13,12 @@ export class LocationsComponent implements OnInit {
   selectedLocation: Location;
   constructor(private locationService: LocationService) { }
   private readonly tableConfig: any = {
+    drawCallback: function(settings) {
+      let pagination = $(this).closest('.dataTables_wrapper').find('.dataTables_paginate');
+      let pagelength = $(this).closest('.dataTables_wrapper').find('.dataTables_length');
+      pagination.toggle(this.api().page.info().pages > 1);
+      pagelength.toggle(this.api().data().length > 10);
+    },
     responsive: true,
     columns: [
       { title: 'Назва', data: 'name', defaultContent: '' },

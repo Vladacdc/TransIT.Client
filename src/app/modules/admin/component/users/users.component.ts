@@ -14,6 +14,12 @@ export class UsersComponent implements OnInit {
   dataTable: any;
 
   private readonly tableParams: any = {
+    drawCallback: function(settings) {
+      let pagination = $(this).closest('.dataTables_wrapper').find('.dataTables_paginate');
+      let pagelength = $(this).closest('.dataTables_wrapper').find('.dataTables_length');
+      pagination.toggle(this.api().page.info().pages > 1);
+      pagelength.toggle(this.api().data().length > 10);
+    },
     scrollX: true,
     language: {
       url: 'assets/language.json'
