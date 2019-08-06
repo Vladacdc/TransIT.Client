@@ -43,6 +43,10 @@ export class GlobalIssueComponent implements OnInit {
   ];
 
   protected readonly tableConfig: any = {
+    drawCallback: function(settings) {
+      let pagination = $(this).closest('.dataTables_wrapper').find('.dataTables_paginate');
+      pagination.toggle(this.api().page.info().pages > 1);
+    },
     scrollX: true,
     select: {
       style: 'single'
@@ -57,14 +61,13 @@ export class GlobalIssueComponent implements OnInit {
       url: 'assets/language.json',
       buttons: {
         pageLength: {
-          _: 'Показати %d записів',
-          '-1': 'Показати всі'
+          _: 'Показати %d записів'
         }
       }
     },
     createdRow: this.createRow,
     dom: 'Bfrtip',
-    lengthMenu: [[10, 25, 50, 1000], ['10 записів', '25 записів', '50 записів', 'Показати всі']],
+    lengthMenu: [[10, 25, 50, 1000], ['10 записів', '25 записів', '50 записів', '1000 записів']],
     buttons: [
       { extend: 'copy', text: 'Скопіювати' },
       { extend: 'csv' },
