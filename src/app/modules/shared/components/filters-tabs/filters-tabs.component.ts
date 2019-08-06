@@ -4,7 +4,7 @@ import { State } from '../../models/state';
 import { MalfunctionGroup } from '../../models/malfunction-group';
 import { MalfunctionSubgroup } from '../../models/malfunction-subgroup';
 import { Malfunction } from '../../models/malfunction';
-import { Priority } from 'src/app/modules/core/models/priority/priority';
+import { Priority, convertPriorityToInt } from 'src/app/modules/core/models/priority/priority';
 import { StateService } from '../../services/state.service';
 import { MalfunctionService } from '../../services/malfunction.service';
 import { MalfunctionGroupService } from '../../services/malfunction-group.service';
@@ -25,7 +25,7 @@ export class FiltersTabsComponent implements OnInit {
   malfunctionSubGroupList: MalfunctionSubgroup[] = [];
   malfunctionList: Malfunction[] = [];
   locationList: Location[] = [];
-  priorityList = [Priority.high, Priority.low, Priority.medium];
+  priorityList = [Priority.low, Priority.medium, Priority.high];
   malfunctionSubGroupFilteredList: MalfunctionSubgroup[] = [];
   malfunctionFilteredList: Malfunction[] = [];
   currentMalfunctionSubgroup: MalfunctionSubgroup;
@@ -109,6 +109,10 @@ export class FiltersTabsComponent implements OnInit {
       this.selectedMalfunctionGroup = group.name;
       this.selectGroup();
     }
+    else
+    {
+      this.selectedMalfunctionGroup = "";
+    }
   }
   selectSubgroup(): void {
     this.selectedMalfunction = null;
@@ -127,27 +131,80 @@ export class FiltersTabsComponent implements OnInit {
       this.selectedMalfunctionSubGroup = subgroup.name;
       this.selectSubgroup();
     }
+    else
+    {
+      this.selectedMalfunctionSubGroup = "";
+    }
   }
   selectMalfunctionType(value: Malfunction) {
+    if(value)
+    {  
       this.selectedMalfunction = value.name;
+    }
+    else
+    {
+      this.selectedMalfunction = "";
+    }
   }
   selectVechicleType(value: VehicleType) {
-    this.selectedType = value.name;
+    if(value)  
+    {
+      this.selectedType = value.name;
+    }
+    else
+    {
+      this.selectedType = "";
+    }
   }
   selectState(value: State) {
-    this.selectedState = value.name;
+    if(value)
+    {
+      this.selectedState = value.name;
+    }
+    else
+    {
+      this.selectedState = "";
+    }
   }
   selectPriority(value: string) {
-    this.selectedPriority = value;
+    if(value)
+    {
+      this.selectedPriority = convertPriorityToInt(value).toString();
+    }
+    else
+    {
+      this.selectedPriority = "";
+    }
   }
   selectLocation(value: Location) {
-    this.selectedLocation = value.name;
+    if(value)
+    {
+      this.selectedLocation = value.name;
+    }
+    else
+    {
+      this.selectedLocation = "";
+    }
   }
   selectMalfunctionGroup(value: MalfunctionGroup) {
-    this.selectedMalfunctionGroup = value.name;
+    if(value)
+    {
+      this.selectedMalfunctionGroup = value.name;
+    }
+    else
+    {
+      this.selectedMalfunctionGroup = "";
+    }
   }
   selectMalfunctionSubGroup(value: MalfunctionSubgroup) {
-    this.selectedMalfunctionSubGroup = value.name;
+    if(value)
+    {
+      this.selectedMalfunctionSubGroup = value.name;
+    }
+    else
+    {
+      this.selectedMalfunctionSubGroup = "";
+    }
   }
   selectFilter() {
     this.EndDateValue.emit(
