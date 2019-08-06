@@ -101,7 +101,7 @@ export class FiltersTabsComponent implements OnInit {
     return this.malfunctionSubGroupList.filter(subgroup => subgroup.malfunctionGroup.name === group);
   }
 
-  selectMalfunctionGroupType(group) {
+  selectMalfunctionGroupType(group: MalfunctionGroup) {
     this.selectedMalfunctionSubGroup = null;
     this.currentMalfunctionSubgroup = null;
     this.malfunctionSubGroupFilteredList = this.malfunctionSubGroupList;
@@ -119,8 +119,7 @@ export class FiltersTabsComponent implements OnInit {
   private getBySubgroup(subgroup: string): Array<Malfunction> {
     return this.malfunctionList.filter(malfunc => malfunc.malfunctionSubgroup.name === subgroup);
   }
-
-  selectMalfunctionSubGroupType(subgroup) {
+  selectMalfunctionSubGroupType(subgroup: MalfunctionSubgroup) {
     this.selectedMalfunction = null;
     this.currentMalfunction = null;
     this.malfunctionFilteredList = this.malfunctionList;
@@ -129,26 +128,26 @@ export class FiltersTabsComponent implements OnInit {
       this.selectSubgroup();
     }
   }
-  selectMalfunctionType(malfunction) {
-      this.selectedMalfunction = malfunction;
+  selectMalfunctionType(value: Malfunction) {
+      this.selectedMalfunction = value.name;
   }
-  selectVechicleType(type) {
-    this.selectedType = type;
+  selectVechicleType(value: VehicleType) {
+    this.selectedType = value.name;
   }
-  selectState(state) {
-    this.selectedState = state;
+  selectState(value: State) {
+    this.selectedState = value.name;
   }
-  selectPriority(value) {
+  selectPriority(value: string) {
     this.selectedPriority = value;
   }
-  selectLocation(value) {
-    this.selectedLocation = value;
+  selectLocation(value: Location) {
+    this.selectedLocation = value.name;
   }
-  selectMulfunctionGroup(value) {
-    this.selectedMalfunctionGroup = value;
+  selectMalfunctionGroup(value: MalfunctionGroup) {
+    this.selectedMalfunctionGroup = value.name;
   }
-  selectMulfunctionSubGroup(value) {
-    this.selectedMalfunctionSubGroup = value;
+  selectMalfunctionSubGroup(value: MalfunctionSubgroup) {
+    this.selectedMalfunctionSubGroup = value.name;
   }
   selectFilter() {
     this.EndDateValue.emit(
