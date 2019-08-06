@@ -9,7 +9,7 @@ export class Supplier extends TEntity<Supplier> {
   public edrpou?: string;
   public currency: Currency;
   public country: Country;
-  public createDate?: Date;
+  public createdDate?: Date;
   public updatedDate?: Date;
   public create?: User;
   public mod?: User;
