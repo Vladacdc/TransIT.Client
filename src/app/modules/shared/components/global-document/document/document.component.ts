@@ -58,7 +58,8 @@ export class DocumentComponent implements OnInit {
           defaultContent: `<button class="first btn" data-toggle="modal" data-target="#editDocument"><i class="fas fa-edit"></i></button>
            <button class="second btn" data-toggle="modal" data-target="#deleteDocument"><i class="fas fas fa-trash-alt"></i></button>
            <button class="third btn" data-toggle="modal"><i class="fas fa-info-circle"></i></button>
-           <button class="five btn"><i class="fas fa-file-download"></i></button>`
+           <button class="fourth btn"><i class="fas fa-file-pdf"></i></i></button>
+           <button class="fifth btn"><i class="fas fa-file-download">`
         }
         // <button class="fourth btn btn-info">Шлях</button>
       ],
@@ -71,8 +72,11 @@ export class DocumentComponent implements OnInit {
     $('#document-table tbody').on('click', '.first', this.selectFirstItem(this));
     $('#document-table tbody').on('click', '.second', this.selectSecondItem(this));
     $('#document-table tbody').on('click', '.third', this.selectThirdItem(this));
-    $('#document-table tbody').on('click', '.fourth', this.copyMessage(this));
-    $('#document-table tbody').on('click', '.five', event => {
+    $('#document-table tbody').on('click', '.fourth', event => {
+      const data = this.tableDocument.row($(event.currentTarget).parents('tr')).data() as Document;
+      this.documentService.previewFile(data);
+    });
+    $('#document-table tbody').on('click', '.fifth', event => {
       const data = this.tableDocument.row($(event.currentTarget).parents('tr')).data() as Document;
       this.documentService.downloadFile(data);
     });

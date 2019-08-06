@@ -45,6 +45,13 @@ export class DocumentService extends CrudService<Document> {
       saveAs(blob, document.path.replace(/^.*[\\\/]/, ''));
     });
   }
+  public previewFile(document: Document) {
+    this.http.get(`${this.serviceUrl}/${document.id}/file`, { responseType: 'arraybuffer' }).subscribe(data => {
+      let newBlob : Blob = new Blob([data], {type: "application/pdf"});
+      const bloburl = window.URL.createObjectURL(newBlob);
+      window.open(bloburl,"_blank", 'location=yes,height=765,width=520,scrollbars=yes,status=yes');
+  });
+  }
   protected mapEntity(entity: Document): Document {
     return new Document(entity);
   }
