@@ -25,8 +25,7 @@ export class FiltersTabsComponent implements OnInit {
   malfunctionSubGroupList: MalfunctionSubgroup[] = [];
   malfunctionList: Malfunction[] = [];
   locationList: Location[] = [];
-  priorityList = Priority;
-  keys = [];
+  priorityList = [Priority.high, Priority.low, Priority.medium];
   malfunctionSubGroupFilteredList: MalfunctionSubgroup[] = [];
   malfunctionFilteredList: Malfunction[] = [];
   currentMalfunctionSubgroup: MalfunctionSubgroup;
@@ -59,7 +58,6 @@ export class FiltersTabsComponent implements OnInit {
     private malfunctionService: MalfunctionService,
     private locationService: LocationService
   ) {
-    this.keys = Object.keys(this.priorityList).filter(f => !isNaN(Number(f)));
   }
 
   ngOnInit() {
