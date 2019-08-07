@@ -57,7 +57,7 @@ export class ReportComponent implements OnInit {
       this.malfunc = malfunc;
     });
 
-    this.createColumns(this.tableGroup);
+    this.createColumns();
 
     this.tableGroup = $('#example').DataTable(this.tdOption);
 
@@ -77,7 +77,7 @@ export class ReportComponent implements OnInit {
     });
   }
 
-  private createColumns(table: DataTables.Api)
+  private createColumns()
   {
     this.tdOption.columns = [
       {
@@ -99,7 +99,7 @@ export class ReportComponent implements OnInit {
       $('#example').empty();
       this.tableGroup = $('#example').DataTable(this.tdOption);
 
-      $('#example tbody').on('click', 'td', this.showRow(table));
+      $('#example tbody').on('click', 'td', this.showRow(this));
     });
   }
 
