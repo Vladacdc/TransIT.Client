@@ -6,6 +6,7 @@ import { MalfunctionSubgroupService } from 'src/app/modules/shared/services/malf
 import { VehicleTypeService } from 'src/app/modules/shared/services/vehicle-type.service';
 import { Malfunction } from 'src/app/modules/shared/models/malfunction';
 import { MalfunctionService } from 'src/app/modules/shared/services/malfunction.service';
+import { StatisticsService } from 'src/app/modules/shared/services/statistics.service';
 
 @Component({
   selector: 'app-report',
@@ -32,7 +33,8 @@ export class ReportComponent implements OnInit {
     private malfuncService: MalfunctionService,
     private malfuncGroupService: MalfunctionGroupService,
     private malfuncSubGroupService: MalfunctionSubgroupService,
-    private vechicleTypeService: VehicleTypeService
+    private vechicleTypeService: VehicleTypeService,
+    private statistics: StatisticsService
   ) {
     this.clickAllowCheck = true;
     this.iteratorCheck = true;
@@ -68,11 +70,12 @@ export class ReportComponent implements OnInit {
       malfuncGroups.forEach(malfunc => {
         currentRow=[malfunc.name]
         this.tdOption.columns.slice(1).forEach(col =>{
-          currentRow.push(malfunc.name+col.title);  /////here will be count function
+          this.statistics.countMalfunctionGroup(malfunc.name, col.title).subscribe(num =>{
+            currentRow.push(num.toString());  /////here will be count function
+          })
         });
         this.tableGroup.row.add(currentRow);
       })
-      
       this.tableGroup.draw();
     });
   }
