@@ -14,16 +14,16 @@ import { MalfunctionService } from 'src/app/modules/shared/services/malfunction.
 })
 export class ReportComponent implements OnInit {
   malfunc: Malfunction[] = [];
-  malfuncGroups: Array<MalfunctionGroup>;
+  malfuncGroups: MalfunctionGroup[] = [];
   malfuncSubgroups: MalfunctionSubgroup[] = [];
 
   selectedMalfunction: Malfunction;
   selectedMalfunctionGroup: MalfunctionGroup;
   selectedMalfunctionSubGroup: MalfunctionSubgroup;
 
-  tableGroup: any;
-  tableSubGroup: any;
-  tableSubSubGroup: any;
+  tableGroup: DataTables.Api;
+  tableSubGroup: DataTables.Api;
+  tableSubSubGroup: DataTables.Api;
 
   clickAllowCheck: boolean;
   iteratorCheck: boolean;
@@ -38,7 +38,7 @@ export class ReportComponent implements OnInit {
     this.iteratorCheck = true;
   }
 
-  tdOption: any = {
+  public tdOption: DataTables.Settings = {
     responsive: true,
     columns: [],
     scrollX: true,
@@ -48,7 +48,7 @@ export class ReportComponent implements OnInit {
     }
   };
 
-  ngOnInit() {
+  ngOnInit() {   
     this.malfuncSubGroupService.getEntities().subscribe(malfuncSubgroups => {
       this.malfuncSubgroups = malfuncSubgroups;
     });
@@ -57,19 +57,40 @@ export class ReportComponent implements OnInit {
       this.malfunc = malfunc;
     });
 
+    this.createColumns(this.tableGroup);
+
+    this.tableGroup = $('#example').DataTable(this.tdOption);
+
+    this.malfuncGroupService.getEntities().subscribe(malfuncGroups => {
+      this.malfuncGroups = malfuncGroups;
+      let currentRow: string[];
+
+      malfuncGroups.forEach(malfunc => {
+        currentRow=[malfunc.name]
+        this.tdOption.columns.slice(1).forEach(col =>{
+          currentRow.push(malfunc.name+col.title);  /////here will be count function
+        });
+        this.tableGroup.row.add(currentRow);
+      })
+      
+      this.tableGroup.draw();
+    });
+  }
+
+  private createColumns(table: DataTables.Api)
+  {
     this.tdOption.columns = [
       {
         title: 'Група',
         className: 'table-cell-edit',
-        data: 'name',
         defaultContent: ''
       }
     ];
+
     this.vechicleTypeService.getEntities().subscribe(VehicleType => {
       VehicleType.forEach(a => {
         this.tdOption.columns.push({
           title: a.name,
-          data: null,
           defaultContent: '0'
         });
       });
@@ -78,19 +99,11 @@ export class ReportComponent implements OnInit {
       $('#example').empty();
       this.tableGroup = $('#example').DataTable(this.tdOption);
 
-      $('#example tbody').on('click', 'td', this.showRow(this));
-    });
-
-    this.tableGroup = $('#example').DataTable(this.tdOption);
-
-    this.malfuncGroupService.getEntities().subscribe(malfuncGroups => {
-      this.malfuncGroups = malfuncGroups;
-      this.tableGroup.rows.add(this.malfuncGroups);
-      this.tableGroup.draw();
+      $('#example tbody').on('click', 'td', this.showRow(table));
     });
   }
 
-  formatTable() {
+  private formatTable() {
     return `
     <div style ="background-color : #E4FBE2;">
     <table id="example2"  class="table table-bordered table-hover table-condensed" style="width:100%; background-color:rgba(0, 0, 0, 0.5);">
@@ -98,14 +111,14 @@ export class ReportComponent implements OnInit {
     </div>`;
   }
 
-  formatSubTable() {
+  private formatSubTable() {
     return `
     <div style = "background-color : #DFF2FD;">
     <table id="example3"  class="table table-bordered table-hover" style="width:100%; background-color: rgb(221, 195, 220)">
         </table>
       </div>`;
   }
-
+  //rework
   private showRow(component: any) {
     return function() {
       if (component.clickAllowCheck) {
@@ -125,8 +138,15 @@ export class ReportComponent implements OnInit {
         //component.tdOption.searching = false;
         component.tableSubGroup = $('#example2').DataTable(component.tdOption);
         $('#example2 tbody').on('click', 'td', component.showSubRow(component));
-
-        component.tableSubGroup.rows.add(component.filterMalfunctionSubGroup);
+        
+        component.filterMalfunctionSubGroup.forEach(malfSubGrup => {
+          let currentRow=[malfSubGrup.name]
+          component.tdOption.columns.slice(1).forEach(col =>{
+            currentRow.push(malfSubGrup.name+col.title);  /////here will be count function
+          });
+          this.tableGroup.row.add(currentRow);
+        });
+        
         component.tableSubGroup.draw();
       } else {
         if (component.iteratorCheck) {
@@ -136,7 +156,7 @@ export class ReportComponent implements OnInit {
       }
     };
   }
-
+  //rework
   private showSubRow(component: any) {
     return function() {
       component.clickAllowCheck = false;
