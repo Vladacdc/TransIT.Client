@@ -1,3 +1,18 @@
+.date-selection {
+  position: relative;
+
+  input {
+    width: 100%;
+  }
+ 
+  mat-datepicker-toggle {
+    z-index: 100;
+    position: absolute;
+    right: 0px;
+    top: 0px;
+  }
+}
+
 .borderFilterTab {
   background: #f8f9fa;
   border-radius: 0.7rem;
