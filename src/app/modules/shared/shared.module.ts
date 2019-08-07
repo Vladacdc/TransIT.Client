@@ -44,6 +44,10 @@ import { SupplierService } from './services/supplier.service';
 import { TransitionService } from './services/transition.service';
 import { CountryService } from './services/country.service';
 import { UniqueFieldValidator } from './validators/unique-field-validator';
+// Materials
+import { MatDatepickerModule,
+         MatNativeDateModule,
+         MatInputModule} from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -69,6 +73,9 @@ import { UniqueFieldValidator } from './validators/unique-field-validator';
     IssueLogComponent
   ],
   imports: [
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatInputModule,
     CommonModule,
     ReactiveFormsModule,
     CommonModule,
@@ -76,7 +83,7 @@ import { UniqueFieldValidator } from './validators/unique-field-validator';
     ReactiveFormsModule,
     NgSelectModule,
     FormsModule,
-    NgBootstrapFormValidationModule
+    NgBootstrapFormValidationModule,
   ],
   exports: [
     SupplierComponent,

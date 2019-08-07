@@ -30,6 +30,7 @@ export class FiltersTabsComponent implements OnInit {
   malfunctionFilteredList: Malfunction[] = [];
   currentMalfunctionSubgroup: MalfunctionSubgroup;
   currentMalfunction: Malfunction;
+  maxDate = new Date();
 
   @Output() StartDateValue = new EventEmitter<string>();
   @Output() EndDateValue = new EventEmitter<string>();
@@ -42,6 +43,8 @@ export class FiltersTabsComponent implements OnInit {
   @Output() MalfunctionValue = new EventEmitter<string>();
   @Output() LocationValue = new EventEmitter<string>();
 
+  selectedMinDate: Date;
+  selectedMaxDate: Date;
   selectedType: string;
   selectedState: string;
   selectedPriority: string;
@@ -73,21 +76,6 @@ export class FiltersTabsComponent implements OnInit {
       this.malfunctionList = data;
       this.malfunctionFilteredList = data;
     });
-    ($('#startDate') as any).datepicker({
-      uiLibrary: 'bootstrap4',
-      iconsLibrary: 'fontawesome',
-      maxDate() {
-        return $('#endDate').val();
-      }
-    });
-    ($('#endDate') as any).datepicker({
-      uiLibrary: 'bootstrap4',
-      iconsLibrary: 'fontawesome',
-      minDate() {
-        return $('#startDate').val();
-      },
-      maxDate: new Date()
-    });
   }
 
   selectGroup(): void {
@@ -108,10 +96,8 @@ export class FiltersTabsComponent implements OnInit {
     if (group) {
       this.selectedMalfunctionGroup = group.name;
       this.selectGroup();
-    }
-    else
-    {
-      this.selectedMalfunctionGroup = "";
+    } else {
+      this.selectedMalfunctionGroup = '';
     }
   }
   selectSubgroup(): void {
@@ -130,92 +116,65 @@ export class FiltersTabsComponent implements OnInit {
     if (subgroup) {
       this.selectedMalfunctionSubGroup = subgroup.name;
       this.selectSubgroup();
-    }
-    else
-    {
-      this.selectedMalfunctionSubGroup = "";
+    } else {
+      this.selectedMalfunctionSubGroup = '';
     }
   }
   selectMalfunctionType(value: Malfunction) {
-    if(value)
-    {  
+    if (value) {
       this.selectedMalfunction = value.name;
-    }
-    else
-    {
-      this.selectedMalfunction = "";
+    } else {
+      this.selectedMalfunction = '';
     }
   }
   selectVechicleType(value: VehicleType) {
-    if(value)  
-    {
+    if (value) {
       this.selectedType = value.name;
-    }
-    else
-    {
-      this.selectedType = "";
+    } else {
+      this.selectedType = '';
     }
   }
   selectState(value: State) {
-    if(value)
-    {
+    if (value) {
       this.selectedState = value.name;
-    }
-    else
-    {
-      this.selectedState = "";
+    } else {
+      this.selectedState = '';
     }
   }
   selectPriority(value: string) {
-    if(value)
-    {
+    if (value) {
       this.selectedPriority = convertPriorityToInt(value).toString();
-    }
-    else
-    {
-      this.selectedPriority = "";
+    } else {
+      this.selectedPriority = '';
     }
   }
   selectLocation(value: Location) {
-    if(value)
-    {
+    if (value) {
       this.selectedLocation = value.name;
-    }
-    else
-    {
-      this.selectedLocation = "";
+    } else {
+      this.selectedLocation = '';
     }
   }
   selectMalfunctionGroup(value: MalfunctionGroup) {
-    if(value)
-    {
+    if (value) {
       this.selectedMalfunctionGroup = value.name;
-    }
-    else
-    {
-      this.selectedMalfunctionGroup = "";
+    } else {
+      this.selectedMalfunctionGroup = '';
     }
   }
   selectMalfunctionSubGroup(value: MalfunctionSubgroup) {
-    if(value)
-    {
+    if (value) {
       this.selectedMalfunctionSubGroup = value.name;
-    }
-    else
-    {
-      this.selectedMalfunctionSubGroup = "";
+    } else {
+      this.selectedMalfunctionSubGroup = '';
     }
   }
   selectFilter() {
     this.EndDateValue.emit(
-      $('#endDate')
-        .val()
-        .toString()
+      this.selectedMaxDate === null ? '' : this.selectedMaxDate.toDateString()
     );
     this.StartDateValue.emit(
-      $('#startDate')
-        .val()
-        .toString()
+      this.selectedMinDate === null ? '' : this.selectedMinDate.toDateString()
     );
     this.VechicleTypeValue.emit(this.selectedType);
     this.LocationValue.emit(this.selectedLocation);
