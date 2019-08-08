@@ -52,6 +52,8 @@ export class FiltersTabsComponent implements OnInit {
   selectedMalfunctionSubGroup: string;
   selectedMalfunction: string;
   selectedLocation: string;
+  malfunctionSubGroupDisabled = true;
+  malfunctionDisabled = true;
 
   constructor(
     private vehicleTypeService: VehicleTypeService,
@@ -92,12 +94,16 @@ export class FiltersTabsComponent implements OnInit {
   selectMalfunctionGroupType(group: MalfunctionGroup) {
     this.selectedMalfunctionSubGroup = null;
     this.currentMalfunctionSubgroup = null;
+    this.currentMalfunction = null;
     this.malfunctionSubGroupFilteredList = this.malfunctionSubGroupList;
     if (group) {
       this.selectedMalfunctionGroup = group.name;
       this.selectGroup();
+      this.malfunctionSubGroupDisabled = false;
     } else {
       this.selectedMalfunctionGroup = '';
+      this.malfunctionSubGroupDisabled = true;
+      this.malfunctionDisabled = true;
     }
   }
   selectSubgroup(): void {
@@ -116,8 +122,10 @@ export class FiltersTabsComponent implements OnInit {
     if (subgroup) {
       this.selectedMalfunctionSubGroup = subgroup.name;
       this.selectSubgroup();
+      this.malfunctionDisabled = false;
     } else {
       this.selectedMalfunctionSubGroup = '';
+      this.malfunctionDisabled = true;
     }
   }
   selectMalfunctionType(value: Malfunction) {
