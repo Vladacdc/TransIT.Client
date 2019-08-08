@@ -13,19 +13,20 @@ export class StatisticsService {
   constructor(protected http: HttpClient, protected spinner: SpinnerService) {}
 
   countMalfunctionGroup(malfunction: string, vehicle: string): Observable<number> {
-    this.spinner.show();
+    //this.spinner.show();
     return this.http.get<number>(
-        `${this.serviceUrl}/countmalfunctiongroup/?malfunctionName=${malfunction}&vehicleTypeName=${vehicle}`
+        `${this.serviceUrl}/countmalfunctiongroup/?malfunctiongroupName=${malfunction}&vehicleTypeName=${vehicle}`
         );
+    
   }
 
   countMalfunctionSubGroup(malfunction: string, vehicle: string): Observable<number> {
-    this.spinner.show();
-    return this.http.get<number>(`${this.serviceUrl}/countmalfunctionsubgroup/?malfunctionName=${malfunction}&vehicleTypeName=${vehicle}`);
+    //this.spinner.show();
+    return this.http.get<number>(`${this.serviceUrl}/countmalfunctionsubgroup/?malfunctionsubgroupName=${malfunction}&vehicleTypeName=${vehicle}`);
   }
   
   countMalfunction(malfunction: string, vehicle: string): Observable<number> {
-    this.spinner.show();
+    //this.spinner.show();
     return this.http.get<number>(`${this.serviceUrl}/countmalfunction/?malfunctionName=${malfunction}&vehicleTypeName=${vehicle}`);
   }
 }

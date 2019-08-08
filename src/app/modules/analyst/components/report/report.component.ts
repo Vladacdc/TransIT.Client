@@ -69,12 +69,16 @@ export class ReportComponent implements OnInit {
 
       malfuncGroups.forEach(malfunc => {
         currentRow=[malfunc.name]
+        ///////////////////////////////////////////////////////////////
         this.tdOption.columns.slice(1).forEach(col =>{
-          this.statistics.countMalfunctionGroup(malfunc.name, col.title).subscribe(num =>{
-            currentRow.push(num.toString());  /////here will be count function
-          })
+          //let count: number;
+          //this.statistics.countMalfunctionGroup(malfunc.name, col.title).subscribe(num =>
+          //  currentRow.push("hi")//num.toString())//num.toString());  /////here will be count function ///here bug
+          //)
+          currentRow.push(malfunc.name + col.title);
+        ////////////////////////////////////////////////////////////////
         });
-        this.tableGroup.row.add(currentRow);
+        this.tableGroup.row.add(currentRow).draw(false);
       })
       this.tableGroup.draw();
     });
@@ -85,8 +89,8 @@ export class ReportComponent implements OnInit {
     this.tdOption.columns = [
       {
         title: 'Група',
-        className: 'table-cell-edit',
-        defaultContent: ''
+        //className: 'table-cell-edit',
+        //defaultContent: 'x'
       }
     ];
 
@@ -94,7 +98,7 @@ export class ReportComponent implements OnInit {
       VehicleType.forEach(a => {
         this.tdOption.columns.push({
           title: a.name,
-          defaultContent: '0'
+          //defaultContent: 'x'
         });
       });
 
@@ -106,7 +110,7 @@ export class ReportComponent implements OnInit {
     });
   }
 
-  private formatTable() {
+  formatTable() {
     return `
     <div style ="background-color : #E4FBE2;">
     <table id="example2"  class="table table-bordered table-hover table-condensed" style="width:100%; background-color:rgba(0, 0, 0, 0.5);">
@@ -114,7 +118,7 @@ export class ReportComponent implements OnInit {
     </div>`;
   }
 
-  private formatSubTable() {
+  formatSubTable() {
     return `
     <div style = "background-color : #DFF2FD;">
     <table id="example3"  class="table table-bordered table-hover" style="width:100%; background-color: rgb(221, 195, 220)">
@@ -122,7 +126,7 @@ export class ReportComponent implements OnInit {
       </div>`;
   }
   //rework
-  private showRow(component: any) {
+  showRow(component: any) {
     return function() {
       if (component.clickAllowCheck) {
         const tr = $(this).closest('tr');
@@ -160,7 +164,7 @@ export class ReportComponent implements OnInit {
     };
   }
   //rework
-  private showSubRow(component: any) {
+  showSubRow(component: any) {
     return function() {
       component.clickAllowCheck = false;
       component.iteratorCheck = false;
