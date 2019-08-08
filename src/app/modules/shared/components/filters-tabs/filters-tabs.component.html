@@ -1,8 +1,25 @@
 <div class="borderFilterTab">
   <div class="block">
-    <div>
-      <input id = "startDate" placeholder = "Start Date" width = "200"/>
-      <input id = "endDate" placeholder = "End Date" width = "200"/>
+    <div>  
+       <div class="date-selection">
+         <input class="form-control"
+                placeholder="Start Date" 
+                [max]="maxDate"
+                [(ngModel)]="selectedMinDate"
+                [matDatepicker]="pickerStartDate" />
+         <mat-datepicker-toggle matSuffix [for]="pickerStartDate"></mat-datepicker-toggle>
+         <mat-datepicker #pickerStartDate></mat-datepicker> 
+       </div>
+
+       <div class="date-selection">
+         <input class="form-control"
+                placeholder="End Date" 
+                [max]="maxDate"
+                [(ngModel)]="selectedMaxDate"
+                [matDatepicker]="pickerEndDate" />
+         <mat-datepicker-toggle matSuffix [for]="pickerEndDate"></mat-datepicker-toggle> 
+         <mat-datepicker #pickerEndDate></mat-datepicker>
+       </div>
       <ng-select
         [items] = "priorityList"
         placeholder = "Виберіть пріорітет"
@@ -49,6 +66,7 @@
         placeholder = "*Підгрупа несправності"
         notFoundText = "Не знайдено"
         (change) = "selectMalfunctionSubGroupType($event)"
+        [disabled] = "malfunctionSubGroupDisabled"
       ></ng-select>
       <ng-select
         [items] = "malfunctionFilteredList"
@@ -57,6 +75,7 @@
         placeholder = "*Несправність"
         notFoundText = "Не знайдено"
         (change) = "selectMalfunctionType($event)"
+        [disabled] = "malfunctionDisabled"
       ></ng-select>
     </div>
   </div>

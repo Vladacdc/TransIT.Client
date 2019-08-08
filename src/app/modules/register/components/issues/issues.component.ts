@@ -32,10 +32,7 @@ export class IssuesComponent implements OnDestroy, AfterViewInit {
     language: {
       url: 'assets/language.json'
     },
-    scrollX: true,
-    order: [[0, 'desc']],
-    serverSide: true,
-    //processing: true
+    order: [[0, 'asc']]
   });
 
   issues: Issue[] = [];

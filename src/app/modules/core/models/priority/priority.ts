@@ -4,9 +4,8 @@ export enum Priority {
   low = 'Низький'
 }
 
-export function convertPriorityToInt(priority: string) : number
-{
-  switch(priority) {
+export function convertPriorityToInt(priority: string): number {
+  switch (priority) {
     case 'Високий':
       return 0;
     case 'Середній':
