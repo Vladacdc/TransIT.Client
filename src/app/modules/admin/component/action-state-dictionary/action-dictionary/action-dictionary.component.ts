@@ -20,8 +20,7 @@ export class ActionDictionaryComponent implements OnInit {
 
   constructor(private actionService: ActionTypeService, private router: Router, private toast: ToastrService) {}
 
-  private readonly tableConfig: any = {
-    responsive: true,
+  private readonly tableConfig = new DatatableSettings({
     columns: [
       { title: 'Назва', data: 'name', defaultContent: '' },
       { data: 'id', visible: false },
@@ -36,12 +35,10 @@ export class ActionDictionaryComponent implements OnInit {
          <button class="second btn" data-toggle="modal" data-target="#deleteAction"><i class="fas fas fa-trash-alt"></i></button>`
       }
     ],
-    paging: true,
-    scrollX: true,
     language: {
       url: 'assets/language.json'
     }
-  };
+  });
 
   ngOnInit() {
     this.tableAction = $('#action-table').DataTable(this.tableConfig);
@@ -51,15 +48,6 @@ export class ActionDictionaryComponent implements OnInit {
 
   private ajaxCallback(dataTablesParameters: any, callback): void {
     this.actionService.getFilteredEntities(dataTablesParameters).subscribe(x => {
-      if (x.recordsTotal < 11) {
-        $('#action-table_wrapper')
-          .find('.dataTables_paginate')
-          .hide();
-
-        $('#action-table_wrapper')
-          .find('.dataTables_length')
-          .hide();
-      }
       callback(x);
     });
   }

@@ -3,6 +3,7 @@ import { SupplierService } from 'src/app/modules/shared/services/supplier.servic
 import { Supplier } from 'src/app/modules/shared/models/supplier';
 import { Router } from '@angular/router';
 import { isRootView } from '@angular/core/src/render3/util';
+import { DatatableSettings } from '../../helpers/datatable-settings';
 
 declare const $;
 
@@ -22,8 +23,7 @@ export class SupplierComponent implements OnInit {
   constructor(private service: SupplierService, private router: Router) {}
   _url = this.router.url.substring(1, this.router.url.length - 1);
 
-  private readonly tableConfig: any = {
-    responsive: true,
+  private readonly tableConfig = new DatatableSettings({
     columns: [
       {
         title: 'Коротка назва',
@@ -58,12 +58,10 @@ export class SupplierComponent implements OnInit {
     processing: true,
     serverSide: true,
     ajax: this.ajaxCallback.bind(this),
-    paging: true,
-    scrollX: true,
     language: {
       url: 'assets/language.json'
     }
-  };
+  });
 
   ngOnInit() {
     this._url = this._url.substring(0, this._url.indexOf('/'));
@@ -88,15 +86,6 @@ export class SupplierComponent implements OnInit {
 
   private ajaxCallback(dataTablesParameters: any, callback): void {
     this.service.getFilteredEntities(dataTablesParameters).subscribe(x => {
-      if (x.recordsTotal < 11) {
-        $('#supplier-table_wrapper')
-          .find('.dataTables_paginate')
-          .hide();
-
-        $('#supplier-table_wrapper')
-          .find('.dataTables_length')
-          .hide();
-      }
       callback(x);
     });
   }

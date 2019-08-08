@@ -2,6 +2,7 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { Vehicle } from 'src/app/modules/shared/models/vehicle';
 import { VehicleService } from 'src/app/modules/shared/services/vehicle.service';
 import * as moment from 'moment';
+import { DatatableSettings } from 'src/app/modules/shared/helpers/datatable-settings';
 
 declare const $;
 
@@ -17,9 +18,7 @@ export class VehiclesComponent implements OnInit {
 
   constructor(private vehicleService: VehicleService) {}
 
-  private readonly tableConfig: any = {
-    responsive: true,
-
+  private readonly tableConfig = new DatatableSettings({
     columns: [
       { title: 'Тип транспорту', data: 'vehicleType.name', defaultContent: '' },
       { title: 'Vin-код', data: 'vincode', defaultContent: '' },
@@ -57,12 +56,10 @@ export class VehiclesComponent implements OnInit {
            <button class="delete btn" data-toggle="modal" data-target="#deleteVehicle"><i class="fas fas fa-trash-alt"></i></button>`
       }
     ],
-    paging: true,
-    scrollX: true,
     language: {
       url: 'assets/language.json'
     }
-  };
+  });
 
   ngOnInit() {
     this.table = $('#vehicles').DataTable(this.tableConfig);
@@ -72,18 +69,6 @@ export class VehiclesComponent implements OnInit {
 
   private ajaxCallback(dataTablesParameters: any, callback): void {
     this.vehicleService.getFilteredEntities(dataTablesParameters).subscribe(x => {
-      if (x.recordsTotal < 11) {
-        $('#vehicles_wrapper')
-          .find('.dataTables_paginate')
-          .hide();
-
-        $('#vehicles_wrapper')
-          .find('.dataTables_length')
-          .hide();
-
-        //   $('#action-table .dataTables_paginate').hide();
-        //   $('#action-table .dataTables_length').hide();
-      }
       callback(x);
     });
   }

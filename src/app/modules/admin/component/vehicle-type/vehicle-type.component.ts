@@ -15,8 +15,7 @@ export class VehicleTypeComponent implements OnInit {
 
   constructor(private vehicleTypeService: VehicleTypeService, private chRef: ChangeDetectorRef) {}
 
-  private readonly tableConfig: any = {
-    responsive: true,
+  private readonly tableConfig = new DatatableSettings({
     columns: [{ title: 'Тип транспорту', data: 'name', defaultContent: '' }, { title: 'Дії', orderable: false }],
     ajax: this.ajaxCallback.bind(this),
     columnDefs: [
@@ -27,12 +26,10 @@ export class VehicleTypeComponent implements OnInit {
            <button class="delete btn" data-toggle="modal" data-target="#deleteVehicleType"><i class="fas fas fa-trash-alt"></i></button>`
       }
     ],
-    paging: true,
-    scrollX: true,
     language: {
       url: 'assets/language.json'
     }
-  };
+  });
 
   ngOnInit() {
     this.table = $('#vehicleTypes').DataTable(this.tableConfig);
@@ -42,15 +39,6 @@ export class VehicleTypeComponent implements OnInit {
 
   private ajaxCallback(dataTablesParameters: any, callback): void {
     this.vehicleTypeService.getFilteredEntities(dataTablesParameters).subscribe(x => {
-      if (x.recordsTotal < 11) {
-        $('#vehicleTypes_wrapper')
-          .find('.dataTables_paginate')
-          .hide();
-
-        $('#vehicleTypes_wrapper')
-          .find('.dataTables_length')
-          .hide();
-      }
       callback(x);
     });
   }
