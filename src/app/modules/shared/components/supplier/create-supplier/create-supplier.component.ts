@@ -18,13 +18,13 @@ import { CurrencyService } from '../../../services/currency.service';
 export class CreateSupplierComponent implements OnInit {
   supplierForm: FormGroup;
   countries: Array<Country>;
-  currencies:Array<Currency>;
+  currencies: Array<Currency>;
   currentCountry: Country;
   @ViewChild('close') closeCreateModal: ElementRef;
   @Output() createSupplier = new EventEmitter<Supplier>();
 
   constructor(
-    private currencyService:CurrencyService,
+    private currencyService: CurrencyService,
     private countryService: CountryService,
     private service: SupplierService,
     private formBuilder: FormBuilder,
@@ -39,7 +39,7 @@ export class CreateSupplierComponent implements OnInit {
     });
     this.supplierForm = this.formBuilder.group({
       name: new FormControl('', Validators.compose([Validators.required, Validators.maxLength(30)])),
-      fullName: new FormControl('', Validators.compose([Validators.required, Validators.maxLength(500)])),
+      fullName: new FormControl('', Validators.compose([Validators.required, Validators.maxLength(100)])),
       edrpou: new FormControl('', Validators.compose([Validators.required, Validators.maxLength(14)])),
       country: [''],
       currency: [''],
@@ -72,7 +72,7 @@ export class CreateSupplierComponent implements OnInit {
       currency: form.currency as Currency,
       country: form.country as Country,
     };
-    
+
     this.service.addEntity(supplier).subscribe(newGroup => this.createSupplier.next(newGroup));
     this.closeCreateModal.nativeElement.click();
   }

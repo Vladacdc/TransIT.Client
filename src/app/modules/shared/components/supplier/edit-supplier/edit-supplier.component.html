@@ -24,17 +24,23 @@
           </div>
           <div class="form-group">
             <label>Країна</label>
-            <select class="form-control" formControlName="country">
-              <option value="" selected>Виберіть Країну</option>
-              <option *ngFor="let country of countries" [value]="country.id">{{ country.name }}</option>
-            </select>
+            <ng-select 
+              [items] = "countries"
+              bindLabel = "name"
+              placeholder = "Виберіть Країну"
+              notFoundText = "Не знайдено"
+              (change) = "setCountry($event)">
+            </ng-select>
           </div>
           <div class="form-group">
             <label>Валюта</label>
-            <select class="form-control" formControlName="currency">
-              <option value="" selected>Виберіть Валюту</option>
-              <option *ngFor="let currencys of currencies" [value]="currencys.id">{{ currencys.fullName }}</option>
-            </select>
+            <ng-select 
+              [items] = "currencies"
+              bindLabel = "fullName"
+              placeholder = "Виберіть Валюту"
+              notFoundText = "Не знайдено"
+              (change) = "setCurrency($event)">
+            </ng-select>
           </div>
         </form>
       </div>
