@@ -102,6 +102,7 @@ export class FiltersTabsComponent implements OnInit {
       this.malfunctionSubGroupDisabled = false;
     } else {
       this.selectedMalfunctionGroup = '';
+      this.selectedMalfunction = '';
       this.malfunctionSubGroupDisabled = true;
       this.malfunctionDisabled = true;
     }
@@ -182,7 +183,7 @@ export class FiltersTabsComponent implements OnInit {
       this.selectedMaxDate === null || this.selectedMaxDate === undefined ? '' : this.selectedMaxDate.toDateString()
     );
     this.StartDateValue.emit(
-      this.selectedMinDate === null || this.selectedMaxDate === undefined ? '' : this.selectedMinDate.toDateString()
+      this.selectedMinDate === null || this.selectedMinDate === undefined ? '' : this.selectedMinDate.toDateString()
     );
     this.VechicleTypeValue.emit(this.selectedType);
     this.LocationValue.emit(this.selectedLocation);
