@@ -4,6 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Document } from '../../../models/document';
 import { DocumentService } from '../../../services/document.service';
 import * as moment from 'moment';
+import { DatatableSettings } from '../../../helpers/datatable-settings';
 
 declare const $;
 
@@ -22,57 +23,60 @@ export class DocumentComponent implements OnInit {
   constructor(private documentService: DocumentService, private router: Router, private toast: ToastrService) {}
   _url = this.router.url.substring(1, this.router.url.length - 1);
 
+  private readonly settings = new DatatableSettings({
+    columns: [
+      { title: 'Назва', data: 'name', defaultContent: '' },
+      { title: 'Опис', data: 'description', defaultContent: '' },
+      {
+        title: 'Дата створення',
+        data: 'newDate',
+        defaultContent: '',
+        render: function(data) {
+          return moment(data).format('DD.MM.YYYY');
+        }
+      },
+      {
+        title: 'Змінено',
+        data: 'updatedDate',
+        defaultContent: '',
+        render: function(data) {
+          return moment(data).format('DD.MM.YYYY');
+        }
+      },
+      { data: 'id', visible: false },
+      { title: 'Дії⠀', orderable: false, visible: this.isVisible }
+    ],
+    processing: true,
+    serverSide: true,
+    ajax: this.ajaxCallback.bind(this),
+    columnDefs: [
+      {
+        targets: -1,
+        data: null,
+        defaultContent: `<button class="first btn" data-toggle="modal" data-target="#editDocument"><i class="fas fa-edit"></i></button>
+         <button class="second btn" data-toggle="modal" data-target="#deleteDocument"><i class="fas fas fa-trash-alt"></i></button>
+         <button class="third btn" data-toggle="modal"><i class="fas fa-info-circle"></i></button>
+         <button class="fourth btn"><i class="fas fa-file-pdf"></i></i></button>
+         <button class="fifth btn"><i class="fas fa-file-download">`
+      }
+      // <button class="fourth btn btn-info">Шлях</button>
+    ],
+    language: {
+      url: 'assets/language.json'
+    }
+  });
+
   ngOnInit() {
     this._url = this._url.substring(0, this._url.indexOf('/'));
-    this.tableDocument = $('#document-table').DataTable({
-      responsive: true,
-      columns: [
-        { title: 'Назва', data: 'name', defaultContent: '' },
-        { title: 'Опис', data: 'description', defaultContent: '' },
-        {
-          title: 'Дата створення',
-          data: 'newDate',
-          defaultContent: '',
-          render: function(data) {
-            return moment(data).format('DD.MM.YYYY');
-          }
-        },
-        {
-          title: 'Змінено',
-          data: 'updatedDate',
-          defaultContent: '',
-          render: function(data) {
-            return moment(data).format('DD.MM.YYYY');
-          }
-        },
-        { data: 'id', visible: false },
-        { title: 'Дії⠀', orderable: false, visible: this.isVisible }
-      ],
-      processing: true,
-      serverSide: true,
-      ajax: this.ajaxCallback.bind(this),
-      columnDefs: [
-        {
-          targets: -1,
-          data: null,
-          defaultContent: `<button class="first btn" data-toggle="modal" data-target="#editDocument"><i class="fas fa-edit"></i></button>
-           <button class="second btn" data-toggle="modal" data-target="#deleteDocument"><i class="fas fas fa-trash-alt"></i></button>
-           <button class="third btn" data-toggle="modal"><i class="fas fa-info-circle"></i></button>
-           <button class="five btn"><i class="fas fa-file-download"></i></button>`
-        }
-        // <button class="fourth btn btn-info">Шлях</button>
-      ],
-      paging: true,
-      scrollX: true,
-      language: {
-        url: 'assets/language.json'
-      }
-    });
+    this.tableDocument = $('#document-table').DataTable(this.settings);
     $('#document-table tbody').on('click', '.first', this.selectFirstItem(this));
     $('#document-table tbody').on('click', '.second', this.selectSecondItem(this));
     $('#document-table tbody').on('click', '.third', this.selectThirdItem(this));
-    $('#document-table tbody').on('click', '.fourth', this.copyMessage(this));
-    $('#document-table tbody').on('click', '.five', event => {
+    $('#document-table tbody').on('click', '.fourth', event => {
+      const data = this.tableDocument.row($(event.currentTarget).parents('tr')).data() as Document;
+      this.documentService.previewFile(data);
+    });
+    $('#document-table tbody').on('click', '.fifth', event => {
       const data = this.tableDocument.row($(event.currentTarget).parents('tr')).data() as Document;
       this.documentService.downloadFile(data);
     });
@@ -80,15 +84,6 @@ export class DocumentComponent implements OnInit {
 
   private ajaxCallback(dataTablesParameters: any, callback): void {
     this.documentService.getFilteredEntities(dataTablesParameters).subscribe(x => {
-      if (x.recordsTotal < 11) {
-        $('#document-table_wrapper')
-          .find('.dataTables_paginate')
-          .hide();
-
-        $('#document-table_wrapper')
-          .find('.dataTables_length')
-          .hide();
-      }
       callback(x);
     });
   }

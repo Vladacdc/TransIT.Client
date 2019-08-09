@@ -25,7 +25,8 @@ export class PostsComponent implements AfterViewInit, OnDestroy {
     },
     columns: [{ data: 'name' }, { data: null, orderable: false }],
     language: { url: 'assets/language.json'},
-    scrollX: true
+    serverSide: true,
+    processing: true
   });
 
   posts: Post[] = [];

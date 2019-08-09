@@ -29,7 +29,9 @@ export class EmployeesComponent implements AfterViewInit, OnDestroy {
       { data: null, orderable: false }
     ],
     language: { url: 'assets/language.json' },
-    scrollX: true
+    scrollX: true,
+    serverSide: true,
+    processing: true
   });
   employees: Employee[] = [];
   selectedEmployee: Employee;
