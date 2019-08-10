@@ -156,7 +156,7 @@ export class ReportComponent implements OnInit {
       } else {
         row.child(component.formatSubTable()).show();
         tr.addClass('shownsub');
-      } 
+      }
 
       component.tableSubSubGroup = $('#example3').DataTable(component.tdOption);
       component.tableSubSubGroup.rows.add(component.filterMalfunction);
