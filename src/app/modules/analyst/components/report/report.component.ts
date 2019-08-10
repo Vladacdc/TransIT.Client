@@ -41,7 +41,14 @@ export class ReportComponent implements OnInit {
 
   tdOption = new DatatableSettings({
     responsive: true,
-    columns: [],
+    columns: [
+      {
+        title: 'Група',
+        className: 'table-cell-edit',
+        data: 'name',
+        defaultContent: ''
+      }
+    ],
     language: {
       url: 'assets/language.json'
     }
@@ -56,14 +63,6 @@ export class ReportComponent implements OnInit {
       this.malfunc = malfunc;
     });
 
-    this.tdOption.columns = [
-      {
-        title: 'Група',
-        className: 'table-cell-edit',
-        data: 'name',
-        defaultContent: ''
-      }
-    ];
     this.vechicleTypeService.getEntities().subscribe(VehicleType => {
       VehicleType.forEach(a => {
         this.tdOption.columns.push({
