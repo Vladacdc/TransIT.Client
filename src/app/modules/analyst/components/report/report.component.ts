@@ -6,6 +6,7 @@ import { MalfunctionSubgroupService } from 'src/app/modules/shared/services/malf
 import { VehicleTypeService } from 'src/app/modules/shared/services/vehicle-type.service';
 import { Malfunction } from 'src/app/modules/shared/models/malfunction';
 import { MalfunctionService } from 'src/app/modules/shared/services/malfunction.service';
+import { DatatableSettings } from 'src/app/modules/shared/helpers/datatable-settings';
 
 @Component({
   selector: 'app-report',
@@ -38,21 +39,13 @@ export class ReportComponent implements OnInit {
     this.iteratorCheck = true;
   }
 
-  tdOption: any = {
-    drawCallback: function(settings) {
-      let pagination = $(this).closest('.dataTables_wrapper').find('.dataTables_paginate');
-      let pagelength = $(this).closest('.dataTables_wrapper').find('.dataTables_length');
-      pagination.toggle(this.api().page.info().pages > 1);
-      pagelength.toggle(this.api().data().length > 10);
-    },
+  tdOption = new DatatableSettings({
     responsive: true,
     columns: [],
-    scrollX: true,
-    paging: true,
     language: {
       url: 'assets/language.json'
     }
-  };
+  });
 
   ngOnInit() {
     this.malfuncSubGroupService.getEntities().subscribe(malfuncSubgroups => {
@@ -156,7 +149,7 @@ export class ReportComponent implements OnInit {
       } else {
         row.child(component.formatSubTable()).show();
         tr.addClass('shownsub');
-      }
+      } 
 
       component.tableSubSubGroup = $('#example3').DataTable(component.tdOption);
       component.tableSubSubGroup.rows.add(component.filterMalfunction);
