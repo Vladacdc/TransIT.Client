@@ -15,16 +15,16 @@ import { StatisticsService } from 'src/app/modules/shared/services/statistics.se
 })
 export class ReportComponent implements OnInit {
   malfunc: Malfunction[] = [];
-  malfuncGroups: MalfunctionGroup[] = [];
+  malfuncGroups: Array<MalfunctionGroup>;
   malfuncSubgroups: MalfunctionSubgroup[] = [];
 
   selectedMalfunction: Malfunction;
   selectedMalfunctionGroup: MalfunctionGroup;
   selectedMalfunctionSubGroup: MalfunctionSubgroup;
 
-  tableGroup: DataTables.Api;
-  tableSubGroup: DataTables.Api;
-  tableSubSubGroup: DataTables.Api;
+  //tableGroup: any;
+  tableSubGroup: any;
+  tableSubSubGroup: any;
 
   clickAllowCheck: boolean;
   iteratorCheck: boolean;
@@ -34,13 +34,13 @@ export class ReportComponent implements OnInit {
     private malfuncGroupService: MalfunctionGroupService,
     private malfuncSubGroupService: MalfunctionSubgroupService,
     private vechicleTypeService: VehicleTypeService,
-    private statistics: StatisticsService
+    private statisticsService: StatisticsService
   ) {
     this.clickAllowCheck = true;
     this.iteratorCheck = true;
   }
 
-  public tdOption: DataTables.Settings = {
+  tdOption: any = {
     responsive: true,
     columns: [],
     scrollX: true,
@@ -50,7 +50,7 @@ export class ReportComponent implements OnInit {
     }
   };
 
-  ngOnInit() {   
+  ngOnInit() {
     this.malfuncSubGroupService.getEntities().subscribe(malfuncSubgroups => {
       this.malfuncSubgroups = malfuncSubgroups;
     });
@@ -59,54 +59,35 @@ export class ReportComponent implements OnInit {
       this.malfunc = malfunc;
     });
 
-    this.createColumns();
-
-    this.tableGroup = $('#example').DataTable(this.tdOption);
-
-    this.malfuncGroupService.getEntities().subscribe(malfuncGroups => {
-      this.malfuncGroups = malfuncGroups;
-      let currentRow: string[];
-
-      malfuncGroups.forEach(malfunc => {
-        currentRow=[malfunc.name]
-        ///////////////////////////////////////////////////////////////
-        this.tdOption.columns.slice(1).forEach(col =>{
-          //let count: number;
-          //this.statistics.countMalfunctionGroup(malfunc.name, col.title).subscribe(num =>
-          //  currentRow.push("hi")//num.toString())//num.toString());  /////here will be count function ///here bug
-          //)
-          currentRow.push(malfunc.name + col.title);
-        ////////////////////////////////////////////////////////////////
-        });
-        this.tableGroup.row.add(currentRow).draw(false);
-      })
-      this.tableGroup.draw();
-    });
-  }
-
-  private createColumns()
-  {
     this.tdOption.columns = [
       {
         title: 'Група',
-        //className: 'table-cell-edit',
-        //defaultContent: 'x'
+        className: 'table-cell-edit',
+        defaultContent: 'x'
       }
     ];
-
     this.vechicleTypeService.getEntities().subscribe(VehicleType => {
       VehicleType.forEach(a => {
         this.tdOption.columns.push({
           title: a.name,
-          //defaultContent: 'x'
+          defaultContent: 'x'
         });
       });
 
-      this.tableGroup.destroy();
-      $('#example').empty();
-      this.tableGroup = $('#example').DataTable(this.tdOption);
 
-      $('#example tbody').on('click', 'td', this.showRow(this));
+      $('#example').DataTable(this.tdOption);
+
+      $('#example tbody').on('click', 'td', this.showSubGroups(this));
+    });
+
+    this.malfuncGroupService.getEntities().subscribe(malfuncGroups => {
+      this.malfuncGroups = malfuncGroups;
+      malfuncGroups.forEach(malfuncGroup => { 
+        this.statisticsService.GetMalfunctionGroupStatistics(malfuncGroup.name).subscribe(statistics => {
+          $('#example').DataTable().row.add([malfuncGroup.name].concat(statistics)).draw();
+          $('#example').DataTable().draw();
+        });       
+      });
     });
   }
 
@@ -125,37 +106,32 @@ export class ReportComponent implements OnInit {
         </table>
       </div>`;
   }
-  //rework
-  showRow(component: any) {
+
+  private showSubGroups(component: any) {
     return function() {
       if (component.clickAllowCheck) {
         const tr = $(this).closest('tr');
-        const row = component.tableGroup.row(tr);
+        const row = $("#example").DataTable().row(tr);
         component.selectedMalfunctionGroup = row.data();
 
         if (row.child.isShown()) {
           row.child.hide();
           tr.removeClass('shown');
-        } else {
+        } 
+        else {
           row.child(component.formatTable()).show();
           tr.addClass('shown');
         }
         component.tdOption.retrieve = true;
         component.tdOption.paging = false;
-        //component.tdOption.searching = false;
+        
         component.tableSubGroup = $('#example2').DataTable(component.tdOption);
         $('#example2 tbody').on('click', 'td', component.showSubRow(component));
-        
-        component.filterMalfunctionSubGroup.forEach(malfSubGrup => {
-          let currentRow=[malfSubGrup.name]
-          component.tdOption.columns.slice(1).forEach(col =>{
-            currentRow.push(malfSubGrup.name+col.title);  /////here will be count function
-          });
-          this.tableGroup.row.add(currentRow);
-        });
-        
+
+        component.tableSubGroup.rows.add(component.filterMalfunctionSubGroup);
         component.tableSubGroup.draw();
-      } else {
+      } 
+      else {
         if (component.iteratorCheck) {
           component.clickAllowCheck = true;
         }
@@ -163,8 +139,8 @@ export class ReportComponent implements OnInit {
       }
     };
   }
-  //rework
-  showSubRow(component: any) {
+
+  private showSubRow(component: any) {
     return function() {
       component.clickAllowCheck = false;
       component.iteratorCheck = false;
