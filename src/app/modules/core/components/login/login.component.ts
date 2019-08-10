@@ -26,6 +26,9 @@ export class LoginComponent implements OnInit {
       return;
     }
     const { login, password } = this.loginForm.value;
-    this.authService.login(login, password).subscribe();
+    this.authService.login(login, password).subscribe(null, error => {
+      this.loginForm.controls.login.setErrors({incorrect: true});
+      this.loginForm.controls.password.setErrors({incorrect: true});
+    });
   }
 }
