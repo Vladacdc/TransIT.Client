@@ -12,15 +12,15 @@
         <form [formGroup]=supplierForm>
           <div class="form-group">
             <label class="required-field">Коротка назва</label>
-            <input type="text" class="form-control" formControlName="name" (change) = "setName($event)" autocomplete="off" />
+            <input type="text" class="form-control" formControlName="name" autocomplete="off" />
           </div>
           <div class="form-group">
             <label class="required-field">Повна назва</label>
-            <input type="text" class="form-control" formControlName="fullName" (change) = "setFullName($event)" autocomplete="off" />
+            <input type="text" class="form-control" formControlName="fullName" autocomplete="off" />
           </div>
           <div class="form-group">
             <label class="required-field">ЄДРПОУ</label>
-            <input type="text" class="form-control" formControlName="edrpou" (change) = "setEdrpou($event)" autocomplete="off" />
+            <input type="text" class="form-control" formControlName="edrpou" autocomplete="off" />
           </div>
           <div class="form-group">
             <label>Країна</label>
@@ -29,8 +29,7 @@
               [items] = "countries"
               bindLabel = "name"
               placeholder = "Виберіть Країну"
-              notFoundText = "Не знайдено"
-              (change) = "setCountry($event)">
+              notFoundText = "Не знайдено">
             </ng-select>
           </div>
           <div class="form-group">
@@ -40,15 +39,14 @@
               [items] = "currencies"
               bindLabel = "fullName"
               placeholder = "Виберіть Валюту"
-              notFoundText = "Не знайдено"
-              (change) = "setCurrency($event)">
+              notFoundText = "Не знайдено">
             </ng-select>
           </div>
         </form>
       </div>
       <div class="modal-footer">
         <button #close type="button" class="btn btn-secondary" data-dismiss="modal" (click)="resetForm()">Скасувати</button>
-        <button type="button" class="btn btn-primary" (click)="updateData()">Зберегти</button>
+        <button type="button" class="btn btn-primary" (click)="updateData()" [disabled]="supplierForm.invalid">Зберегти</button>
       </div>
     </div>
   </div>

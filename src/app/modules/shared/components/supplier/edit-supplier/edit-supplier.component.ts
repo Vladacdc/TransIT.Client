@@ -15,7 +15,6 @@ import { isNull } from '@angular/compiler/src/output/output_ast';
   styleUrls: ['./edit-supplier.component.scss']
 })
 export class EditSupplierComponent implements OnInit {
-  oldSupplier: Supplier;
   selectedSupplier: Supplier;
   countries: Array<Country>;
   currencies: Array<Currency>;
@@ -28,7 +27,6 @@ export class EditSupplierComponent implements OnInit {
     if (!supplier) {
       return;
     }
-    this.oldSupplier = new Supplier(supplier);
     this.selectedSupplier = new Supplier(supplier);
     this.supplierForm.patchValue(this.selectedSupplier);
   }
@@ -69,14 +67,14 @@ export class EditSupplierComponent implements OnInit {
     if (this.supplierForm.invalid) {
       return;
     }
-
+    const form = this.supplierForm.value;
     const supplier: Supplier = {
-      id: this.selectedSupplier.id,
-      name: this.selectedSupplier.name,
-      fullName: this.selectedSupplier.fullName,
-      edrpou: this.selectedSupplier.edrpou,
-      currency: this.selectedSupplier.currency,
-      country: this.selectedSupplier.country
+      id: form.id as number,
+      name: form.name as string,
+      fullName: form.fullName as string,
+      edrpou: form.edrpou as string,
+      currency: form.currency as Currency,
+      country: form.country as Country
     };
 
     this.service.updateEntity(supplier).subscribe(
@@ -89,27 +87,7 @@ export class EditSupplierComponent implements OnInit {
     this.closeDiv.nativeElement.click();
   }
 
-  setCountry(value: Country) {
-    this.selectedSupplier.country = value;
-  }
-
-  setCurrency(value: Currency) {
-    this.selectedSupplier.currency = value;
-  }
-
-  setName(event) {
-    this.selectedSupplier.name = event.target.value;
-  }
-
-  setFullName(event) {
-    this.selectedSupplier.fullName = event.target.value;
-  }
-
-  setEdrpou(event) {
-    this.selectedSupplier.edrpou = event.target.value;
-  }
-
   resetForm() {
-    this.supplierForm.patchValue(this.oldSupplier);
+    this.supplierForm.patchValue(this.selectedSupplier);
   }
 }
