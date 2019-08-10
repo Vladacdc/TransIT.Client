@@ -74,7 +74,6 @@ export class ReportComponent implements OnInit {
       malfuncGroups.forEach(malfuncGroup => { 
         this.statisticsService.GetMalfunctionGroupStatistics(malfuncGroup.name).subscribe(statistics => {
           $('#group-table').DataTable().row.add([malfuncGroup.name].concat(statistics)).draw();
-          $('#group-table').DataTable().draw();
         });       
       });
     });
@@ -89,12 +88,12 @@ export class ReportComponent implements OnInit {
 
         if (parentRow.child.isShown()) {
           parentRow.child.hide();
-          tr.removeClass('shown');
+          tr.removeClass('shown-subgroups');
         } 
         else {
           parentRow.child(component.formatSubgroupTable()).show();
-          tr.addClass('shown');
-          let groupName = $("#group-table").DataTable().row(tr).data()[0];///
+          tr.addClass('shown-subgroups');
+          let groupName = $("#group-table").DataTable().row(tr).data()[0];
 
           component.dtOption.retrieve = true;
           component.dtOption.paging = false;
@@ -107,26 +106,9 @@ export class ReportComponent implements OnInit {
             malfunctionSubgroups.forEach(malfuncSubgroup => {
               component.statisticsService.GetMalfunctionSubGroupStatistics(malfuncSubgroup.name).subscribe(row => {
                 $('#subgroup-table').DataTable().row.add([malfuncSubgroup.name].concat(row)).draw();
-                $('#subgroup-table').DataTable().draw();
               });
             });
           });
-
-          /*
-          //malfuncSubgroups is not defined
-          component.malfunctionSubgroupService.getEntities().subscribe(malfuncSubgroups => {     
-            let filteredData = malfuncSubgroups.filter(malfuncSubgroup => {
-
-              malfuncSubgroup.malfunctionGroup !== null && malfuncSubgroup.malfunctionGroup.id === (row.data()[0]).id;
-
-            })
-            filteredData.forEach(malfuncSubgroup => {
-              component.statisticsService.GetMalfunctionSubGroupStatistics(malfuncSubgroup.name).subscribe(row => {
-                $('#subgroup-table').DataTable().row.add([malfuncSubgroup.name].concat(row)).draw();
-                $('#subgroup-table').DataTable().draw();
-              });
-            });
-          });*/
         }
       } 
       else {
@@ -141,39 +123,60 @@ export class ReportComponent implements OnInit {
   
   private showMalfunctions(component: ReportComponent) {
     return function() {
-      /*component.clickAllowCheck = false;
-      component.iteratorCheck = false;
-      const tr = $(this).closest('tr');
-      const row = component.tableSubGroup.row(tr);
-      component.selectedMalfunctionSubGroup = row.data();
-      if (row.child.isShown()) {
-        row.child.hide();
-        tr.removeClass('shownsub');
-      } else {
-        row.child(component.formatMalfunctionTable()).show();
-        tr.addClass('shownsub');
-      }
+      if (component.clickAllowCheck) {
+        const tr = $(this).closest('tr');
+        const parentRow = $("#subgroup-table").DataTable().row(tr);
 
-      $('#malfunction-table').DataTable(component.dtOption);
-      $('#malfunction-table').DataTable().rows.add(component.filterMalfunction);
-      $('#malfunction-table').DataTable().draw();*/
+        if (parentRow.child.isShown()) {
+          parentRow.child.hide();
+          tr.removeClass('shown-malfuncs');
+        } 
+        else {
+          parentRow.child(component.formatMalfunctionTable()).show();
+          tr.addClass('shown-malfuncs');
+          let subgroupName = $("#subgroup-table").DataTable().row(tr).data()[0];
+
+          component.dtOption.retrieve = true;
+          component.dtOption.paging = false;
+          component.dtOption.columns[0].title = "Несправність";
+
+          $('#malfunction-table').DataTable(component.dtOption);
+                    
+          component.malfunctionService.getBySubgroupName(subgroupName).subscribe(malfunctions => {     
+            malfunctions.forEach(malfunc => {
+              //go into subscribe only from second time
+              component.statisticsService.GetMalfunctionStatistics(malfunc.name).subscribe(row => {
+                $('malfunction-table').DataTable(component.dtOption).row.add([malfunc.name].concat(row)).draw();
+              });
+            });
+          });
+        }
+      } 
+      else {
+        if (component.iteratorCheck) {
+          component.clickAllowCheck = true;
+        }
+        component.iteratorCheck = true;
+      }
     };
   } 
 
   formatSubgroupTable() {
     return `
     <div style ="background-color : #E4FBE2;">
-    <table id="subgroup-table"  class="table table-bordered table-hover table-condensed" style="width:100%; background-color:rgba(0, 0, 0, 0.5);">
+    <table id="subgroup-table"  class="display" style="width:100%; background-color:rgba(0, 0, 0, 0.5);">
         </table>
     </div>`;
+    //table table-bordered table-hover table-condensed
   }
 
   formatMalfunctionTable() {
     return `
     <div style = "background-color : #DFF2FD;">
-    <table id="malfunction-table"  class="table table-bordered table-hover" style="width:100%; background-color: rgb(221, 195, 220)">
+    <table id="malfunction-table"  class="display" style="width:100%; background-color: rgb(221, 195, 220)">
         </table>
-      </div>`;
+    </div>`;
+    //table table-bordered table-hover
   }
 
 }
