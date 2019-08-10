@@ -12,7 +12,7 @@ export class MalfunctionSubgroupService extends CrudService<MalfunctionSubgroup>
   protected readonly serviceUrl = `${environment.apiUrl}/malfunctionSubgroup`;
   protected readonly datatableUrl = `${environment.apiUrl}/datatable/malfunctionSubgroup`;
 
-  getByGroupName(groupName: string): Observable<MalfunctionSubgroup[]> {
+  getByGroupName(groupName: any): Observable<MalfunctionSubgroup[]> {
     this.spinner.show();
     return this.http.get<MalfunctionSubgroup[]>(`${this.serviceUrl}/getbygroupname/?groupname=${groupName}`).pipe(
       map(entities => entities),

@@ -67,7 +67,7 @@ export class StatisticsService {
   GetMalfunctionSubGroupStatistics(malfunctionSubGroup: string): Observable<string[]> {
     this.spinner.show();
     return this.http.get<string[]>(
-      `${this.serviceUrl}/malfunctionsubstatistics/?malfunctionSubGroupName=${malfunctionSubGroup}`)
+      `${this.serviceUrl}/malfunctionsubgroupstatistics/?malfunctionSubGroupName=${malfunctionSubGroup}`)
       .pipe( map(entity => entity),
         tap(data => this.handleSuccess('fetched data', data)),
         catchError(this.handleError())

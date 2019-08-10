@@ -85,15 +85,16 @@ export class ReportComponent implements OnInit {
     return function() {
       if (component.clickAllowCheck) {
         const tr = $(this).closest('tr');
-        const row = $("#group-table").DataTable().row(tr);
+        const parentRow = $("#group-table").DataTable().row(tr);
 
-        if (row.child.isShown()) {
-          row.child.hide();
+        if (parentRow.child.isShown()) {
+          parentRow.child.hide();
           tr.removeClass('shown');
         } 
         else {
-          row.child(component.formatSubgroupTable()).show();
+          parentRow.child(component.formatSubgroupTable()).show();
           tr.addClass('shown');
+          let groupName = $("#group-table").DataTable().row(tr).data()[0];///
 
           component.dtOption.retrieve = true;
           component.dtOption.paging = false;
@@ -102,6 +103,16 @@ export class ReportComponent implements OnInit {
           $('#subgroup-table').DataTable(component.dtOption);
           $('#subgroup-table tbody').on('click', 'td', component.showMalfunctions(component));
           
+          component.malfunctionSubgroupService.getByGroupName(groupName).subscribe(malfunctionSubgroups => {     
+            malfunctionSubgroups.forEach(malfuncSubgroup => {
+              component.statisticsService.GetMalfunctionSubGroupStatistics(malfuncSubgroup.name).subscribe(row => {
+                $('#subgroup-table').DataTable().row.add([malfuncSubgroup.name].concat(row)).draw();
+                $('#subgroup-table').DataTable().draw();
+              });
+            });
+          });
+
+          /*
           //malfuncSubgroups is not defined
           component.malfunctionSubgroupService.getEntities().subscribe(malfuncSubgroups => {     
             let filteredData = malfuncSubgroups.filter(malfuncSubgroup => {
@@ -115,7 +126,7 @@ export class ReportComponent implements OnInit {
                 $('#subgroup-table').DataTable().draw();
               });
             });
-          });
+          });*/
         }
       } 
       else {
@@ -147,30 +158,7 @@ export class ReportComponent implements OnInit {
       $('#malfunction-table').DataTable().rows.add(component.filterMalfunction);
       $('#malfunction-table').DataTable().draw();*/
     };
-  }
-
-  
-  private getMalfunctionSubgroupsByGroup(group: any): MalfunctionSubgroup[] {
-    //needs to move filtering to backend
-    throw "TODO or delete";
-    /*
-    this.malfunctionSubgroupService.getEntities().subscribe(malfuncSubgroups => {
-      return malfuncSubgroups.filter(malfuncSubgroup => {
-        return malfuncSubgroup.malfunctionGroup !== null && malfuncSubgroup.malfunctionGroup.id === group.id;
-      });
-    });
-    */
-  }
-
-  private getMalfunctionsBySubgroup(subgroup: MalfunctionSubgroup): Malfunction[] {
-    //needs to move filtering to backend
-    throw "TODO or delete";    
-    /*
-    this.malfunctionService.getEntities
-    return this.malfunc.filter(x => {
-      return x.malfunctionSubgroup !== null && x.malfunctionSubgroup.id === this.selectedMalfunctionSubGroup.id;
-    });*/
-  }
+  } 
 
   formatSubgroupTable() {
     return `
