@@ -14,25 +14,23 @@ import { StatisticsService } from 'src/app/modules/shared/services/statistics.se
   styleUrls: ['./report.component.scss']
 })
 export class ReportComponent implements OnInit {
-  malfunc: Malfunction[] = [];
-  malfuncGroups: Array<MalfunctionGroup>;
-  malfuncSubgroups: MalfunctionSubgroup[] = [];
+  malfunctionGroups: MalfunctionGroup[] = [];
+  malfunctionSubgroups: MalfunctionSubgroup[] = [];
+  malfunctions: Malfunction[] = [];
 
-  selectedMalfunction: Malfunction;
-  selectedMalfunctionGroup: MalfunctionGroup;
-  selectedMalfunctionSubGroup: MalfunctionSubgroup;
-
-  //tableGroup: any;
-  tableSubGroup: any;
-  tableSubSubGroup: any;
+  
+  groupsTable: DataTables.Api;
+  subgroupTable: DataTables.Api;
+  malfunctionsTable: DataTables.Api;
+  
 
   clickAllowCheck: boolean;
   iteratorCheck: boolean;
 
   constructor(
-    private malfuncService: MalfunctionService,
-    private malfuncGroupService: MalfunctionGroupService,
-    private malfuncSubGroupService: MalfunctionSubgroupService,
+    private malfunctionService: MalfunctionService,
+    private malfunctionGroupService: MalfunctionGroupService,
+    private malfunctionSubgroupService: MalfunctionSubgroupService,
     private vechicleTypeService: VehicleTypeService,
     private statisticsService: StatisticsService
   ) {
@@ -40,9 +38,9 @@ export class ReportComponent implements OnInit {
     this.iteratorCheck = true;
   }
 
-  tdOption: any = {
-    responsive: true,
+  dtOption: DataTables.Settings = {
     columns: [],
+    responsive: true,
     scrollX: true,
     paging: true,
     language: {
@@ -51,85 +49,74 @@ export class ReportComponent implements OnInit {
   };
 
   ngOnInit() {
-    this.malfuncSubGroupService.getEntities().subscribe(malfuncSubgroups => {
-      this.malfuncSubgroups = malfuncSubgroups;
-    });
 
-    this.malfuncService.getEntities().subscribe(malfunc => {
-      this.malfunc = malfunc;
-    });
-
-    this.tdOption.columns = [
+    this.dtOption.columns = [
       {
         title: 'Група',
         className: 'table-cell-edit',
         defaultContent: 'x'
       }
     ];
-    this.vechicleTypeService.getEntities().subscribe(VehicleType => {
-      VehicleType.forEach(a => {
-        this.tdOption.columns.push({
-          title: a.name,
+
+    this.vechicleTypeService.getEntities().subscribe(vehicleTypes => {
+      vehicleTypes.forEach(vType => {
+        this.dtOption.columns.push({
+          title: vType.name,
           defaultContent: 'x'
         });
       });
 
-
-      $('#example').DataTable(this.tdOption);
-
-      $('#example tbody').on('click', 'td', this.showSubGroups(this));
+      $('#group-table').DataTable(this.dtOption);
+      $('#group-table tbody').on('click', 'td', this.showSubGroups(this));
     });
 
-    this.malfuncGroupService.getEntities().subscribe(malfuncGroups => {
-      this.malfuncGroups = malfuncGroups;
+    this.malfunctionGroupService.getEntities().subscribe(malfuncGroups => {
       malfuncGroups.forEach(malfuncGroup => { 
         this.statisticsService.GetMalfunctionGroupStatistics(malfuncGroup.name).subscribe(statistics => {
-          $('#example').DataTable().row.add([malfuncGroup.name].concat(statistics)).draw();
-          $('#example').DataTable().draw();
+          $('#group-table').DataTable().row.add([malfuncGroup.name].concat(statistics)).draw();
+          $('#group-table').DataTable().draw();
         });       
       });
     });
   }
 
-  formatTable() {
-    return `
-    <div style ="background-color : #E4FBE2;">
-    <table id="example2"  class="table table-bordered table-hover table-condensed" style="width:100%; background-color:rgba(0, 0, 0, 0.5);">
-        </table>
-    </div>`;
-  }
 
-  formatSubTable() {
-    return `
-    <div style = "background-color : #DFF2FD;">
-    <table id="example3"  class="table table-bordered table-hover" style="width:100%; background-color: rgb(221, 195, 220)">
-        </table>
-      </div>`;
-  }
-
-  private showSubGroups(component: any) {
+  private showSubGroups(component: ReportComponent) {
     return function() {
       if (component.clickAllowCheck) {
         const tr = $(this).closest('tr');
-        const row = $("#example").DataTable().row(tr);
-        component.selectedMalfunctionGroup = row.data();
+        const row = $("#group-table").DataTable().row(tr);
 
         if (row.child.isShown()) {
           row.child.hide();
           tr.removeClass('shown');
         } 
         else {
-          row.child(component.formatTable()).show();
+          row.child(component.formatSubgroupTable()).show();
           tr.addClass('shown');
-        }
-        component.tdOption.retrieve = true;
-        component.tdOption.paging = false;
-        
-        component.tableSubGroup = $('#example2').DataTable(component.tdOption);
-        $('#example2 tbody').on('click', 'td', component.showSubRow(component));
 
-        component.tableSubGroup.rows.add(component.filterMalfunctionSubGroup);
-        component.tableSubGroup.draw();
+          component.dtOption.retrieve = true;
+          component.dtOption.paging = false;
+          component.dtOption.columns[0].title = "Підгрупа";
+
+          $('#subgroup-table').DataTable(component.dtOption);
+          $('#subgroup-table tbody').on('click', 'td', component.showMalfunctions(component));
+          
+          //malfuncSubgroups is not defined
+          component.malfunctionSubgroupService.getEntities().subscribe(malfuncSubgroups => {     
+            let filteredData = malfuncSubgroups.filter(malfuncSubgroup => {
+
+              malfuncSubgroup.malfunctionGroup !== null && malfuncSubgroup.malfunctionGroup.id === (row.data()[0]).id;
+
+            })
+            filteredData.forEach(malfuncSubgroup => {
+              component.statisticsService.GetMalfunctionSubGroupStatistics(malfuncSubgroup.name).subscribe(row => {
+                $('#subgroup-table').DataTable().row.add([malfuncSubgroup.name].concat(row)).draw();
+                $('#subgroup-table').DataTable().draw();
+              });
+            });
+          });
+        }
       } 
       else {
         if (component.iteratorCheck) {
@@ -140,9 +127,10 @@ export class ReportComponent implements OnInit {
     };
   }
 
-  private showSubRow(component: any) {
+  
+  private showMalfunctions(component: ReportComponent) {
     return function() {
-      component.clickAllowCheck = false;
+      /*component.clickAllowCheck = false;
       component.iteratorCheck = false;
       const tr = $(this).closest('tr');
       const row = component.tableSubGroup.row(tr);
@@ -151,25 +139,53 @@ export class ReportComponent implements OnInit {
         row.child.hide();
         tr.removeClass('shownsub');
       } else {
-        row.child(component.formatSubTable()).show();
+        row.child(component.formatMalfunctionTable()).show();
         tr.addClass('shownsub');
       }
 
-      component.tableSubSubGroup = $('#example3').DataTable(component.tdOption);
-      component.tableSubSubGroup.rows.add(component.filterMalfunction);
-      component.tableSubSubGroup.draw();
+      $('#malfunction-table').DataTable(component.dtOption);
+      $('#malfunction-table').DataTable().rows.add(component.filterMalfunction);
+      $('#malfunction-table').DataTable().draw();*/
     };
   }
 
-  get filterMalfunctionSubGroup(): Array<MalfunctionSubgroup> {
-    return this.malfuncSubgroups.filter(x => {
-      return x.malfunctionGroup !== null && x.malfunctionGroup.id === this.selectedMalfunctionGroup.id;
+  
+  private getMalfunctionSubgroupsByGroup(group: any): MalfunctionSubgroup[] {
+    //needs to move filtering to backend
+    throw "TODO or delete";
+    /*
+    this.malfunctionSubgroupService.getEntities().subscribe(malfuncSubgroups => {
+      return malfuncSubgroups.filter(malfuncSubgroup => {
+        return malfuncSubgroup.malfunctionGroup !== null && malfuncSubgroup.malfunctionGroup.id === group.id;
+      });
     });
+    */
   }
 
-  get filterMalfunction(): Array<Malfunction> {
+  private getMalfunctionsBySubgroup(subgroup: MalfunctionSubgroup): Malfunction[] {
+    //needs to move filtering to backend
+    throw "TODO or delete";    
+    /*
+    this.malfunctionService.getEntities
     return this.malfunc.filter(x => {
       return x.malfunctionSubgroup !== null && x.malfunctionSubgroup.id === this.selectedMalfunctionSubGroup.id;
-    });
+    });*/
   }
+
+  formatSubgroupTable() {
+    return `
+    <div style ="background-color : #E4FBE2;">
+    <table id="subgroup-table"  class="table table-bordered table-hover table-condensed" style="width:100%; background-color:rgba(0, 0, 0, 0.5);">
+        </table>
+    </div>`;
+  }
+
+  formatMalfunctionTable() {
+    return `
+    <div style = "background-color : #DFF2FD;">
+    <table id="malfunction-table"  class="table table-bordered table-hover" style="width:100%; background-color: rgb(221, 195, 220)">
+        </table>
+      </div>`;
+  }
+
 }
