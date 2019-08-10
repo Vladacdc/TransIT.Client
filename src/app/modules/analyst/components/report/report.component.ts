@@ -6,7 +6,6 @@ import { MalfunctionSubgroupService } from 'src/app/modules/shared/services/malf
 import { VehicleTypeService } from 'src/app/modules/shared/services/vehicle-type.service';
 import { Malfunction } from 'src/app/modules/shared/models/malfunction';
 import { MalfunctionService } from 'src/app/modules/shared/services/malfunction.service';
-import { DatatableSettings } from 'src/app/modules/shared/helpers/datatable-settings';
 
 @Component({
   selector: 'app-report',
@@ -39,20 +38,21 @@ export class ReportComponent implements OnInit {
     this.iteratorCheck = true;
   }
 
-  tdOption = new DatatableSettings({
+  tdOption: any = {
+    drawCallback: function(settings) {
+      let pagination = $(this).closest('.dataTables_wrapper').find('.dataTables_paginate');
+      let pagelength = $(this).closest('.dataTables_wrapper').find('.dataTables_length');
+      pagination.toggle(this.api().page.info().pages > 1);
+      pagelength.toggle(this.api().data().length > 10);
+    },
     responsive: true,
-    columns: [
-      {
-        title: 'Група',
-        className: 'table-cell-edit',
-        data: 'name',
-        defaultContent: ''
-      }
-    ],
+    columns: [],
+    scrollX: true,
+    paging: true,
     language: {
       url: 'assets/language.json'
     }
-  });
+  };
 
   ngOnInit() {
     this.malfuncSubGroupService.getEntities().subscribe(malfuncSubgroups => {
@@ -63,6 +63,14 @@ export class ReportComponent implements OnInit {
       this.malfunc = malfunc;
     });
 
+    this.tdOption.columns = [
+      {
+        title: 'Група',
+        className: 'table-cell-edit',
+        data: 'name',
+        defaultContent: ''
+      }
+    ];
     this.vechicleTypeService.getEntities().subscribe(VehicleType => {
       VehicleType.forEach(a => {
         this.tdOption.columns.push({
