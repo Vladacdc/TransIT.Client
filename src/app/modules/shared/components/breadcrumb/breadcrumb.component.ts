@@ -9,21 +9,37 @@ import { TestBed } from '@angular/core/testing';
     styleUrls: ['./breadcrumb.component.scss']
 })
 export class BreadcrumbComponent implements OnInit {
-    // name, route, children[]
-    breadcrumbs;
+    // name, route
+    breadcrumbs: Array<any> = [];
+    menu: Array<any> = [{name: 'admin', path: './admin', children: [
+        {name: 'users', path: './users', children: []}
+    ]}];
 
     constructor(
-        private activatedRoute: ActivatedRoute,
         private router: Router,
         private location: Location
-    ) { }
+    ) {}
 
     ngOnInit() {
-        const test = {name: 'Test', route: '#test', children: [] };
-        this.breadcrumbs = [
-            ...this.breadcrumbs,
-            test
-        ];
+        this.listenRouting();
+    }
+
+    listenRouting() {
+        this.router.events.subscribe(this.createBreadcrumb);
+        this.createBreadcrumb();
+    }
+
+    createBreadcrumb() {
+        this.breadcrumbs = [];
+        let route = this.location.path().slice(1).split('/');
+        while (route.length !== 0) {
+                let tempRoute = '';
+                route.forEach(element => {
+                    tempRoute += '/' + element;
+                });
+                this.breadcrumbs = [{name: route[route.length - 1], path: tempRoute }, ...this.breadcrumbs];
+                route.pop();
+            }
     }
 
     goBack(): void {

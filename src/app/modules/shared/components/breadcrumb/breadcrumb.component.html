@@ -7,11 +7,13 @@
           <i class="fas fa-arrow-left"></i>
       </button>
     </li>
-    <li *ngFor="let item of breadcrumbs" class="breadcrumb-item">
-      <a href="{{item.route}}" disabled >{{item.name}}</a>
+    <li 
+      *ngFor="let item of breadcrumbs; last as isLast;"
+      [class.active]="isLast"
+      class="breadcrumb-item">
+      
+      <a href="{{item.path}}" *ngIf="!isLast">{{item.name}}</a>
+      <span *ngIf="isLast">{{item.name}}</span>
     </li>
-    <li class="breadcrumb-item"><a href="#">Home</a></li>
-    <li class="breadcrumb-item"><a href="#">Library</a></li>
-    <li class="breadcrumb-item active" aria-current="page">Data</li>
   </ol>
 </nav>
