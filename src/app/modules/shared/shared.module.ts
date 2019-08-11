@@ -44,6 +44,7 @@ import { SupplierService } from './services/supplier.service';
 import { TransitionService } from './services/transition.service';
 import { CountryService } from './services/country.service';
 import { UniqueFieldValidator } from './validators/unique-field-validator';
+import { StatisticsService } from './services/statistics.service';
 // Materials
 import { MatDatepickerModule,
          MatNativeDateModule,
@@ -120,7 +121,8 @@ import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.componen
     TransitionService,
     UserService,
     VehicleTypeService,
-    VehicleService
+    VehicleService,
+    StatisticsService
   ]
 })
 export class SharedModule {}
