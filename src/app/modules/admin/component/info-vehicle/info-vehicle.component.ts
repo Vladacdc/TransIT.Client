@@ -9,14 +9,15 @@ import { DatePipe } from '@angular/common';
 import { NUM_FIELD_ERRORS, LET_NUM_FIELD_ERRORS } from 'src/app/custom-errors';
 import { LocationService } from 'src/app/modules/shared/services/location.service';
 import { Location } from 'src/app/modules/shared/models/location';
+import { IssueLog } from 'src/app/modules/shared/models/issuelog';
 
 @Component({
-  selector: 'app-edit-vehicle',
-  templateUrl: './edit-vehicle.component.html',
-  styleUrls: ['./edit-vehicle.component.scss'],
+  selector: 'app-info-vehicle',
+  templateUrl: './info-vehicle.component.html',
+  styleUrls: ['./info-vehicle.component.scss'],
   providers: [DatePipe]
 })
-export class EditVehicleComponent implements OnInit {
+export class InfoVehicleComponent implements OnInit {
   @Input()
   set vehicle(vehicle: Vehicle) {
     if (!vehicle) {
@@ -38,7 +39,8 @@ export class EditVehicleComponent implements OnInit {
     private serviceVehicle: VehicleService,
     private serviceLocation: LocationService,
     private datePipe: DatePipe,
-    private toast: ToastrService
+    private toast: ToastrService,
+    private issueLog: IssueLog
   ) { }
   @ViewChild('close') closeDiv: ElementRef;
   @Output() updateVehicle = new EventEmitter<Vehicle>();
@@ -52,7 +54,7 @@ export class EditVehicleComponent implements OnInit {
   CustomLetNumErrorMessages = LET_NUM_FIELD_ERRORS;
 
   ngOnInit() {
-    $('#editVehicle').on('hidden.bs.modal', () => {
+    $('#infoVehicle').on('hidden.bs.modal', () => {
       this.vehicleForm.patchValue({
         ...this.selectedVehicle,
         vehicleType: this.selectedVehicle.vehicleType.name,
@@ -62,7 +64,7 @@ export class EditVehicleComponent implements OnInit {
       });
       $(this).find('form').trigger('reset');
     });
-
+    console.log("info-vehicle-hello2");
     this.vehicleForm = this.formBuilder.group({
       id: '',
       vehicleType: new FormControl('', Validators.required),
@@ -77,36 +79,6 @@ export class EditVehicleComponent implements OnInit {
     });
     this.serviceVehicleType.getEntities().subscribe(data => (this.vehicleTypeList = data.sort((a, b) => a.name.localeCompare(b.name))));
     this.serviceLocation.getEntities().subscribe(data => (this.locationList = data));
-  }
-
-  updateData() {
-    if (this.vehicleForm.invalid) {
-      return;
-    }
-    const form = this.vehicleForm.value;
-    const vehicle: Vehicle = new Vehicle({
-      id: form.id as number,
-      vehicleType: this.vehicleTypeList.find(t => t.name === form.vehicleType),
-      vincode: form.vincode as string,
-      inventoryId: form.inventoryId as string,
-      regNum: form.regNum as string,
-      brand: form.brand as string,
-      model: form.model as string,
-      commissioningDate: form.commissioningDate as Date,
-      warrantyEndDate: form.warrantyEndDate as Date,
-      location: this.locationList.find(t => t.name === form.location)
-    });
-    this.serviceVehicle
-      .updateEntity(vehicle)
-      .subscribe(
-        () => {
-          this.updateVehicle.next(vehicle);
-        },
-        _ => this.toast.error('Транспорт з таким vin-кодом або інвентарним номером вже існує', 'Помилка редагування даних'),
-        () => {
-          this.closeDiv.nativeElement.click();
-          this.toast.success('Транспорт оновлено');
-        }
-      );
+    console.log("info-vehicle-hello3");
   }
 }

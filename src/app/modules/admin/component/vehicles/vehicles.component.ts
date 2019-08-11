@@ -53,7 +53,8 @@ export class VehiclesComponent implements OnInit {
         targets: -1,
         data: null,
         defaultContent: `<button class="edit btn" data-toggle="modal" data-target="#editVehicle"><i class="fas fa-edit"></i></button>
-           <button class="delete btn" data-toggle="modal" data-target="#deleteVehicle"><i class="fas fas fa-trash-alt"></i></button>`
+           <button class="delete btn" data-toggle="modal" data-target="#deleteVehicle"><i class="fas fas fa-trash-alt"></i></button>
+           <button class="info btn" data-toggle="modal" data-target="#infoVehicle"><i class="fas fa-info-circle"></i></button>`
       }
     ],
     language: {
@@ -65,6 +66,7 @@ export class VehiclesComponent implements OnInit {
     this.table = $('#vehicles').DataTable(this.tableConfig);
     $('#vehicles tbody').on('click', '.edit', this.selectEditItem(this));
     $('#vehicles tbody').on('click', '.delete', this.selectDeleteItem(this));
+    $('#vehicles tbody').on('click', '.info', this.selectInfoItem(this));
   }
 
   private ajaxCallback(dataTablesParameters: any, callback): void {
@@ -82,7 +84,15 @@ export class VehiclesComponent implements OnInit {
 
   selectDeleteItem(component: any) {
     return function() {
-      component.selectedVehicle = component.table.row($(this).parents('tr')).data(); ;
+      component.selectedVehicle = component.table.row($(this).parents('tr')).data();
+    };
+  }
+
+  selectInfoItem(component: any) {
+    return function() {
+      const data = component.table.row($(this).parents('tr')).data();
+      component.selectedVehicle = data;
+      console.log("selectInfoItem hello");
     };
   }
 

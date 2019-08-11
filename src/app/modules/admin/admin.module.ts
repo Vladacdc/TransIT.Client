@@ -14,6 +14,7 @@ import { MalfunSubgroupComponent } from './component/malfunctions/malfun-subgrou
 import { CoreModule } from '../core/core.module';
 import { AdminNavbarComponent } from './component/admin-navbar/admin-navbar.component';
 import { CreateVehicleComponent } from './component/create-vehicle/create-vehicle.component';
+import {InfoVehicleComponent} from './component/info-vehicle/info-vehicle.component';
 import { EditVehicleComponent } from './component/edit-vehicle/edit-vehicle.component';
 import { DeleteVehicleComponent } from './component/delete-vehicle/delete-vehicle.component';
 import { CreateMalfuncGroupComponent } from './component/create-malfunc-group/create-malfunc-group.component';
@@ -89,6 +90,7 @@ import { DeleteLocationComponent } from './component/locations/delete-location/d
     CreateVehicleComponent,
     EditVehicleComponent,
     DeleteVehicleComponent,
+    InfoVehicleComponent,
     // ====VehiclesType===
     DeleteVehicleTypeComponent,
     VehicleTypeComponent,
