@@ -50,9 +50,11 @@ import { MatDatepickerModule,
          MatNativeDateModule,
          MatInputModule} from '@angular/material';
 
+import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 
 @NgModule({
   declarations: [
+    BreadcrumbComponent,
     GlobalIssueComponent,
     SupplierComponent,
     CreateSupplierComponent,
@@ -88,6 +90,7 @@ import { MatDatepickerModule,
     NgBootstrapFormValidationModule,
   ],
   exports: [
+    BreadcrumbComponent,
     SupplierComponent,
     CreateSupplierComponent,
     EditSupplierComponent,
