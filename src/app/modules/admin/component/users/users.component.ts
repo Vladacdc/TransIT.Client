@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/modules/shared/models/user';
 import { UserService } from 'src/app/modules/shared/services/user.service';
 import { AuthenticationService } from 'src/app/modules/core/services/authentication.service';
+import { DatatableSettings } from 'src/app/modules/shared/helpers/datatable-settings';
 
 @Component({
   selector: 'app-users',
@@ -13,8 +14,7 @@ export class UsersComponent implements OnInit {
   user: User;
   dataTable: any;
 
-  private readonly tableParams: any = {
-    scrollX: true,
+  readonly options = new DatatableSettings({
     language: {
       url: 'assets/language.json'
     },
@@ -49,7 +49,7 @@ export class UsersComponent implements OnInit {
         orderable: false
       }
     ]
-  };
+  });
 
   constructor(private service: UserService, private authService: AuthenticationService) {}
 
@@ -57,7 +57,7 @@ export class UsersComponent implements OnInit {
     $(document).on('preInit.dt', function() {
       $('.dataTables_filter input[type=\'search\']').attr('maxlength', 255);
     });
-    $('#userTable').DataTable(this.tableParams);
+    $('#userTable').DataTable(this.options);
     this.service.getEntities().subscribe(users => {
       this.addTableData(users);
     });

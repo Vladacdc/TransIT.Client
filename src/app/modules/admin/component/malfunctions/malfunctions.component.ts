@@ -41,11 +41,16 @@ export class MalfunctionsComponent implements OnInit {
 
   ngOnInit() {
     this.tableGroup = $('#group-table').DataTable({
+      drawCallback: function(settings) {
+        let pagination = $(this).closest('.dataTables_wrapper').find('.dataTables_paginate');
+        let pagelength = $(this).closest('.dataTables_wrapper').find('.dataTables_length');
+        pagination.toggle(this.api().page.info().pages > 1);
+        pagelength.toggle(this.api().data().length > 10);
+      },
       responsive: true,
       select: {
         style: 'single'
       },
-
       columns: [{ data: 'id', bVisible: false }, { title: 'Група', data: 'name', defaultContent: '' }],
       paging: true,
       language: {
@@ -53,6 +58,12 @@ export class MalfunctionsComponent implements OnInit {
       }
     });
     this.tableSubGroup = $('#subgroup-table').DataTable({
+      drawCallback: function(settings) {
+        let pagination = $(this).closest('.dataTables_wrapper').find('.dataTables_paginate');
+        let pagelength = $(this).closest('.dataTables_wrapper').find('.dataTables_length');
+        pagination.toggle(this.api().page.info().pages > 1);
+        pagelength.toggle(this.api().data().length > 10);
+      },
       responsive: true,
       select: {
         style: 'single'
@@ -64,6 +75,12 @@ export class MalfunctionsComponent implements OnInit {
       }
     });
     this.tableMalfunction = $('#malfunc-table').DataTable({
+      drawCallback: function(settings) {
+        let pagination = $(this).closest('.dataTables_wrapper').find('.dataTables_paginate');
+        let pagelength = $(this).closest('.dataTables_wrapper').find('.dataTables_length');
+        pagination.toggle(this.api().page.info().pages > 1);
+        pagelength.toggle(this.api().data().length > 10);
+      },
       responsive: true,
       select: {
         style: 'single'

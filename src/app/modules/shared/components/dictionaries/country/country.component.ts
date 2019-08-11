@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Country } from '../../../models/country';
 import { CountryService } from '../../../services/country.service';
+import { DatatableSettings } from '../../../helpers/datatable-settings';
 
 @Component({
   selector: 'app-country',
@@ -14,23 +15,22 @@ export class CountryComponent implements OnInit {
   @Input() isVisible: boolean;
   constructor(private service: CountryService) {}
 
-  ngOnInit() {
-    $('#countryTable').DataTable({
-      scrollX: true,
-      language: {
-        url: 'assets/language.json'
+  readonly options = new DatatableSettings({
+    columns: [
+      {
+        title: 'Назва країни'
       },
-      columns: [
-        {
-          title: 'Назва країни'
-        },
-        {
-          title: 'Дії',
-          orderable: false,
-          visible: this.isVisible
-        }
-      ]
-    });
+      {
+        title: 'Дії',
+        orderable: false,
+        visible: this.isVisible
+      }
+    ],
+    language: { url: 'assets/language.json'}
+  });
+
+  ngOnInit() {
+    $('#countryTable').DataTable(this.options);
     this.service.getEntities().subscribe(countries => {
       this.addTableData(countries);
     });

@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Currency } from '../../../models/currency';
 import { CurrencyService } from '../../../services/currency.service';
+import { DatatableSettings } from '../../../helpers/datatable-settings';
 
 @Component({
   selector: 'app-currency',
@@ -12,28 +13,29 @@ export class CurrencyComponent implements OnInit {
   currencies: Currency[];
   currency: Currency;
   @Input() isVisible: boolean;
+  
   constructor(private service: CurrencyService) {}
 
-  ngOnInit() {
-    $('#currencyTable').DataTable({
-      scrollX: true,
-      language: {
-        url: 'assets/language.json'
+  readonly options = new DatatableSettings({
+    language: {
+      url: 'assets/language.json'
+    },
+    columns: [
+      {
+        title: 'Абреавіатура'
       },
-      columns: [
-        {
-          title: 'Абреавіатура'
-        },
-        {
-          title: 'Повна назва'
-        },
-        {
-          title: 'Дії',
-          orderable: false,
-          visible: this.isVisible
-        }
-      ]
-    });
+      {
+        title: 'Повна назва'
+      },
+      {
+        title: 'Дії',
+        orderable: false,
+        visible: this.isVisible
+      }
+    ]
+  });
+  ngOnInit() {
+    $('#currencyTable').DataTable(this.options);
     this.service.getEntities().subscribe(currencies => {
       this.addTableData(currencies);
     });

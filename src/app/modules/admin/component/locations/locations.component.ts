@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LocationService } from 'src/app/modules/shared/services/location.service';
 import { Location } from 'src/app/modules/shared/models/location';
+import { DatatableSettings } from 'src/app/modules/shared/helpers/datatable-settings';
 
 @Component({
   selector: 'app-locations',
@@ -11,9 +12,10 @@ export class LocationsComponent implements OnInit {
   locations: Location[] = [];
   table: DataTables.Api;
   selectedLocation: Location;
+
   constructor(private locationService: LocationService) { }
-  private readonly tableConfig: any = {
-    responsive: true,
+
+  readonly options = new DatatableSettings({
     columns: [
       { title: 'Назва', data: 'name', defaultContent: '' },
       { title: 'Опис', data: 'description', defaultContent: '' },
@@ -21,6 +23,7 @@ export class LocationsComponent implements OnInit {
     ],
     processing: true,
     serverSide: true,
+    responsive: true,
     ajax: this.ajaxCallback.bind(this),
     columnDefs: [
       {
@@ -31,14 +34,11 @@ export class LocationsComponent implements OnInit {
       }
     ],
     paging: true,
-    scrollX: true,
-    language: {
-      url: '//cdn.datatables.net/plug-ins/1.10.19/i18n/Ukrainian.json'
-    }
-  };
+    language: { url: 'assets/language.json'}
+  });
 
   ngOnInit() {
-    this.table = $('#locations').DataTable(this.tableConfig);
+    this.table = $('#locations').DataTable(this.options);
     $('#locations tbody').on('click', '.edit', this.selectEditItem(this));
     $('#locations tbody').on('click', '.delete', this.selectDeleteItem(this));
   }

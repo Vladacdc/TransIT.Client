@@ -13,8 +13,7 @@ import { StatisticsService } from 'src/app/modules/shared/services/statistics.se
   templateUrl: './report.component.html',
   styleUrls: ['./report.component.scss']
 })
-export class ReportComponent implements OnInit {
-  
+export class ReportComponent implements OnInit {  
   dtOption: DataTables.Settings = {
     columns: [],
     responsive: true,

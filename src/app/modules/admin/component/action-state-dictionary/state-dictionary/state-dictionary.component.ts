@@ -21,7 +21,6 @@ export class StateDictionaryComponent implements OnInit {
   constructor(private stateService: StateService, private router: Router, private toast: ToastrService) {}
 
   private readonly tableConfig = new DatatableSettings({
-    responsive: true,
     columns: [
       { title: 'Назва', data: 'transName', defaultContent: '' },
       { data: 'id', visible: false },
@@ -49,15 +48,6 @@ export class StateDictionaryComponent implements OnInit {
 
   private ajaxCallback(dataTablesParameters: any, callback): void {
     this.stateService.getFilteredEntities(dataTablesParameters).subscribe(x => {
-      if (x.recordsTotal < 11) {
-        $('#state-table_wrapper')
-          .find('.dataTables_paginate')
-          .hide();
-
-        $('#state-table_wrapper')
-          .find('.dataTables_length')
-          .hide();
-      }
       callback(x);
     });
   }

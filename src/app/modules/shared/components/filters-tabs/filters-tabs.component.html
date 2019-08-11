@@ -66,6 +66,7 @@
         placeholder = "*Підгрупа несправності"
         notFoundText = "Не знайдено"
         (change) = "selectMalfunctionSubGroupType($event)"
+        [disabled] = "malfunctionSubGroupDisabled"
       ></ng-select>
       <ng-select
         [items] = "malfunctionFilteredList"
@@ -74,6 +75,7 @@
         placeholder = "*Несправність"
         notFoundText = "Не знайдено"
         (change) = "selectMalfunctionType($event)"
+        [disabled] = "malfunctionDisabled"
       ></ng-select>
     </div>
   </div>
