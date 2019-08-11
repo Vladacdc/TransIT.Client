@@ -25,13 +25,13 @@ export class BreadcrumbComponent implements OnInit {
     }
 
     listenRouting() {
-        this.router.events.subscribe(this.createBreadcrumb);
         this.createBreadcrumb();
+        this.router.events.subscribe(router => this.createBreadcrumb());
     }
 
     createBreadcrumb() {
         this.breadcrumbs = [];
-        let route = this.location.path().slice(1).split('/');
+        let route = this.location.path().split('?')[0].slice(1).split('/');
         while (route.length !== 0) {
                 let tempRoute = '';
                 route.forEach(element => {
@@ -43,6 +43,8 @@ export class BreadcrumbComponent implements OnInit {
     }
 
     goBack(): void {
-        this.location.back();
+        // this.location.back();
+        this.location.go(this.breadcrumbs[this.breadcrumbs.length - 2].path);
+        this.router.navigateByUrl(this.router.url);
     }
 }
