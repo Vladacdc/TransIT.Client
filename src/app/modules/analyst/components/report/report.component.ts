@@ -127,7 +127,7 @@ export class ReportComponent implements OnInit {
         component.malfunctionService.getBySubgroupName(subgroupName).subscribe(malfunctions => {     
           malfunctions.forEach(malfunc => {
             component.statisticsService.GetMalfunctionStatistics(malfunc.name).subscribe(row => {
-              $('malfunction-table').DataTable(component.dtOption).row.add([malfunc.name].concat(row)).draw();
+              $('#malfunction-table').DataTable(component.dtOption).row.add([malfunc.name].concat(row)).draw();
             });
           });
         });
