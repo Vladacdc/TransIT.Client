@@ -14,10 +14,6 @@ export class PostsComponent implements AfterViewInit, OnDestroy {
   readonly options = new DatatableSettings({
     ajax: (dataTablesParameters: any, callback) => {
       this.postService.getFilteredEntities(dataTablesParameters).subscribe(response => {
-        if (response.recordsTotal < 11) {
-          $('.dataTables_paginate').hide();
-          $('.dataTables_length').hide();
-        }
         this.posts = response.data;
         callback({ ...response, data: [] });
         this.adjustColumns();
