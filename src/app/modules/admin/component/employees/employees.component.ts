@@ -26,6 +26,7 @@ export class EmployeesComponent implements AfterViewInit, OnDestroy {
       { data: 'middleName' },
       { data: 'shortName' },
       { data: 'post.name' },
+      { data: 'attachedUser.userName' },
       { data: null, orderable: false }
     ],
     language: { url: 'assets/language.json' },
