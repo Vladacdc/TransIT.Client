@@ -75,6 +75,7 @@ export class AttachUserComponent implements OnInit {
                 updatedEmployee => {
                     this.progress.hide();
                     this.completed.next(updatedEmployee);
+                    this.toast.success('Успішно видалено прив\'язаного користувача');
                 },
                 (error: HttpErrorResponse) => {
                     this.progress.hide();
@@ -88,7 +89,12 @@ export class AttachUserComponent implements OnInit {
             {
                 search: {
                     value: searchTerm
-                }
+                },
+                filters: [{
+                    entityPropertyPath: 'employees.count',
+                    value: '0',
+                    operator: '=='
+                }]
             }
         ).pipe(
             map(responseObj => responseObj.data),

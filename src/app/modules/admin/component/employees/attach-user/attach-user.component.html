@@ -20,10 +20,10 @@
                     placeholder="Пошук..."
                     notFoundText="Нічого не знайдено">
                     <ng-template ng-label-tmp let-item="item">
-                        <p>{{item.firstName}} {{item.middleName}} {{item.lastName}}</p>
+                        <p>{{item.firstName}} {{item.middleName}} {{item.lastName}}, {{item.userName}}</p>
                     </ng-template>
                     <ng-template ng-option-tmp let-item="item">
-                        <p>{{item.firstName}} {{item.middleName}} {{item.lastName}}</p>
+                        <p>{{item.firstName}} {{item.middleName}} {{item.lastName}}, {{item.userName}}</p>
                     </ng-template>
                 </ng-select>
             </div>
