@@ -110,4 +110,10 @@ export class VehiclesComponent implements OnInit {
     this.vehicles[this.vehicles.findIndex(i => i.id === vehicle.id)] = vehicle;
     this.table.draw();
   }
+
+  infoVehicle(vehicle: Vehicle)
+  {
+    this.vehicles[this.vehicles.findIndex(i => i.id === vehicle.id)] = vehicle;
+    this.table.draw();
+  }
 }

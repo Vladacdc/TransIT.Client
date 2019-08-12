@@ -1,10 +1,11 @@
 <div class="border">
-  <app-create-vehicle (createVehicle)="addVehicle($event)"></app-create-vehicle>
-  <app-edit-vehicle [vehicle]="selectedVehicle" (updateVehicle)="updateVehicle($event)"></app-edit-vehicle>
-  <app-delete-vehicle [vehicle]="selectedVehicle" (deleteVehicle)="deleteVehicle($event)"></app-delete-vehicle>
-  <br />
-  <p> </p>
+    <app-create-vehicle (createVehicle)="addVehicle($event)"></app-create-vehicle>
+    <app-edit-vehicle [vehicle]="selectedVehicle" (updateVehicle)="updateVehicle($event)"></app-edit-vehicle>
+    <app-delete-vehicle [vehicle]="selectedVehicle" (deleteVehicle)="deleteVehicle($event)"></app-delete-vehicle>
+    <app-info-vehicle [vehicle]="selectedVehicle" (infoVehicle)="infoVehicle($event)"></app-info-vehicle>
+    <br />
+    <p> </p>
 
-  <table id="vehicles" class="table table-bordered  table-hover" style="width:100%;" cellspacing="0">
-  </table>
+    <table id="vehicles" class="table table-bordered  table-hover" style="width:100%;" cellspacing="0">
+    </table>
 </div>
