@@ -14,14 +14,6 @@ export class TransitionDictionaryComponent implements OnDestroy, AfterViewInit {
   readonly options = new DatatableSettings({
     ajax: (dataTablesParameters: any, callback) => {
       this.transitionService.getFilteredEntities(dataTablesParameters).subscribe(response => {
-        if (response.recordsTotal < 11) {
-          $('#transitions_wrapper')
-            .find('.dataTables_paginate')
-            .hide();
-          $('#transitions_wrapper')
-            .find('.dataTables_length')
-            .hide();
-        }
         this.transitions = response.data;
         callback({ ...response, data: [] });
         this.adjustColumns();
