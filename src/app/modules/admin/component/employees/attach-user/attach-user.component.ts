@@ -85,19 +85,26 @@ export class AttachUserComponent implements OnInit {
     }
 
     filterUsers(searchTerm: string): Observable<User[]> {
-        return this.userService.getFilteredEntities(
-            {
-                search: {
-                    value: searchTerm
-                },
-                filters: [{
-                    entityPropertyPath: 'employees.count',
-                    value: '0',
-                    operator: '=='
-                }]
-            }
-        ).pipe(
-            map(responseObj => responseObj.data),
+        let request: Observable<User[]>;
+        if (searchTerm !== '') {
+            request = this.userService.getFilteredEntities(
+                {
+                    search: {
+                        value: searchTerm
+                    },
+                    filters: [{
+                        entityPropertyPath: 'employees.count',
+                        value: '0',
+                        operator: '=='
+                    }]
+                })
+                .pipe(
+                    map(responseObj => responseObj.data)
+                );
+        } else {
+            request = this.employeeService.getAvailableUsersToAttach();
+        }
+        return request.pipe(
             catchError(error => {
                 this.toast.error('Не вдалось виконати пошук', 'Повторіть пошук');
                 return throwError(error);
