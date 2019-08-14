@@ -38,7 +38,7 @@ export class CreateUserComponent implements OnInit, OnDestroy {
     private serviceUser: UserService,
     private formBuilder: FormBuilder,
     private toast: ToastrService,
-    private progress: SpinnerService
+    private spinnerService: SpinnerService
   ) {}
 
   ngOnDestroy(): void {
@@ -101,18 +101,18 @@ export class CreateUserComponent implements OnInit, OnDestroy {
     this.formChanges = this.userForm.get('boardNumber').valueChanges.subscribe(
       newValue => {
         if (newValue) {
-          this.progress.show();
+          this.spinnerService.show();
           this.employeeService.getByBoardNumber(parseInt(newValue, 10)).subscribe(
             response => {
               this.attachedEmployee = response;
-              this.progress.hide();
+              this.spinnerService.hide();
               controls.forEach(control => {
                 this.userForm.get(control).patchValue(this.attachedEmployee[control]);
                 this.userForm.get(control).disable();
               });
             },
             error => {
-              this.progress.hide();
+              this.spinnerService.hide();
               return this.toast.error('Сталася помилка', 'Повторіть спробу');
             }
           );

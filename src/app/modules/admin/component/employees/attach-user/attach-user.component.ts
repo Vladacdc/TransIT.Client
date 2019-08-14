@@ -23,7 +23,7 @@ import { Observable, throwError } from 'rxjs';
 export class AttachUserComponent implements OnInit {
 
     constructor(
-        protected progress: SpinnerService,
+        protected spinnerService: SpinnerService,
         private employeeService: EmployeeService,
         private userService: UserService,
         private toast: ToastrService
@@ -53,32 +53,32 @@ export class AttachUserComponent implements OnInit {
     }
 
     saveUser(user: User) {
-        this.progress.show();
+        this.spinnerService.show();
         this.employeeService.attachUser(this.selectedEmployee.id, user.id)
             .subscribe(
                updatedEmployee => {
-                   this.progress.hide();
+                   this.spinnerService.hide();
                    this.completed.next(updatedEmployee);
                    this.toast.success('Успішно прив\'язано користувача');
                },
                (error: HttpErrorResponse) => {
-                   this.progress.hide();
+                   this.spinnerService.hide();
                    this.toast.error('Не вдалось оновити працівника', 'Помилка оновлення працівника');
                }
             );
     }
 
     removeUser() {
-        this.progress.show();
+        this.spinnerService.show();
         this.employeeService.removeUser(this.selectedEmployee.id)
             .subscribe(
                 updatedEmployee => {
-                    this.progress.hide();
+                    this.spinnerService.hide();
                     this.completed.next(updatedEmployee);
                     this.toast.success('Успішно видалено прив\'язаного користувача');
                 },
                 (error: HttpErrorResponse) => {
-                    this.progress.hide();
+                    this.spinnerService.hide();
                     this.toast.error('Не вдалось оновити працівника', 'Помилка оновлення працівника');
                 }
             );
