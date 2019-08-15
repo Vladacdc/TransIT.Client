@@ -18,7 +18,7 @@ export class UsersComponent implements OnInit {
     language: {
       url: 'assets/language.json'
     },
-    scrollX: false,
+    scrollX: true,
     columns: [
       {
         title: 'Прізвище'

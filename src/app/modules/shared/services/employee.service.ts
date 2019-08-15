@@ -10,6 +10,10 @@ export class EmployeeService extends CrudService<Employee> {
   protected readonly serviceUrl = `${environment.apiUrl}/employee`;
   protected readonly datatableUrl = `${environment.apiUrl}/datatable/employee`;
 
+  getByUserId(id: string | number) {
+    return this.http.get<Employee>(`${this.serviceUrl}/attach/${id}`);
+  }
+
   getByBoardNumber(boardNumber: number): Observable<Employee> {
     return this.http.get<Employee>(`${this.serviceUrl}/boardnumber/${boardNumber}`);
   }

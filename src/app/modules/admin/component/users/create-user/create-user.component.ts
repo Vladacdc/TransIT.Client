@@ -10,7 +10,7 @@ import { RoleService } from 'src/app/modules/shared/services/role.service';
 import { EmployeeService } from 'src/app/modules/shared/services/employee.service';
 import { SpinnerService } from 'src/app/modules/core/services/spinner.service';
 import { Employee } from 'src/app/modules/shared/models/employee';
-import { flatMap, map } from 'rxjs/operators';
+import { flatMap, map, tap, switchMap } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 
 @Component({
@@ -22,7 +22,7 @@ export class CreateUserComponent implements OnInit, OnDestroy {
   @ViewChild('modalContainer') modalContainer: ElementRef;
   @Output() createUser = new EventEmitter<User>();
 
-  formChanges: Subscription;
+  boardNumberChanged: Subscription;
   userForm: FormGroup;
 
   roleList: Role[] = [];
@@ -34,20 +34,23 @@ export class CreateUserComponent implements OnInit, OnDestroy {
 
   constructor(
     private employeeService: EmployeeService,
-    private serviceRole: RoleService,
-    private serviceUser: UserService,
+    private roleService: RoleService,
+    private userService: UserService,
     private formBuilder: FormBuilder,
-    private toast: ToastrService,
+    private toastrService: ToastrService,
     private spinnerService: SpinnerService
   ) {}
 
   ngOnDestroy(): void {
-    this.formChanges.unsubscribe();
+    this.boardNumberChanged.unsubscribe();
   }
 
   ngOnInit() {
     this.setupForm();
     this.listenBoardNumberChanges();
+    this.roleService
+    .getEntities()
+    .subscribe(data => (this.roleList = data.sort((a, b) => a.transName.localeCompare(b.transName))));
   }
 
   setupForm() {
@@ -98,7 +101,7 @@ export class CreateUserComponent implements OnInit, OnDestroy {
 
     // subscribing to board number changes
     const controls = ['firstName', 'middleName', 'lastName'];
-    this.formChanges = this.userForm.get('boardNumber').valueChanges.subscribe(
+    this.boardNumberChanged = this.userForm.get('boardNumber').valueChanges.subscribe(
       newValue => {
         if (newValue) {
           this.spinnerService.show();
@@ -113,7 +116,7 @@ export class CreateUserComponent implements OnInit, OnDestroy {
             },
             error => {
               this.spinnerService.hide();
-              return this.toast.error('Сталася помилка', 'Повторіть спробу');
+              return this.toastrService.error('Сталася помилка', 'Повторіть спробу');
             }
           );
         } else {
@@ -125,10 +128,6 @@ export class CreateUserComponent implements OnInit, OnDestroy {
         }
       }
     );
-
-    this.serviceRole
-      .getEntities()
-      .subscribe(data => (this.roleList = data.sort((a, b) => a.transName.localeCompare(b.transName))));
   }
 
   resetValues() {
@@ -152,7 +151,6 @@ export class CreateUserComponent implements OnInit, OnDestroy {
   }
 
   clickSubmit() {
-    this.formChanges.unsubscribe();
     if (this.userForm.invalid) {
       return;
     }
@@ -169,28 +167,33 @@ export class CreateUserComponent implements OnInit, OnDestroy {
       isActive: true
     });
 
-    const request = this.attachedEmployee ?
-        this.serviceUser.addEntity(user)
+    let request = this.attachedEmployee ?
+        this.userService.addEntity(user)
         .pipe(
-          flatMap((newUser) => {
+          tap((newUser) => {
             user = newUser;
-            return this.employeeService.attachUser(this.attachedEmployee.id, newUser.id);
+            return newUser;
           }),
-          map((employee) => user)
+          switchMap((newUser) => this.employeeService.attachUser(this.attachedEmployee.id, newUser.id)),
+          map(() => user)
         )
-        : this.serviceUser.addEntity(user);
+        : this.userService.addEntity(user);
+
+    // Close modal dialog after all
+    request = request
+      .pipe(
+        tap(() => this.modalContainer.nativeElement.click())
+      );
 
     request.subscribe(
       success => {
         this.createUser.next(success);
-        this.toast.success('', 'Користувача створено');
+        this.toastrService.success('', 'Користувача створено');
       },
       error => {
-        this.toast.error('Помилка', 'Користувач з таким логіном існує');
+        this.toastrService.error('Помилка', 'Користувач з таким логіном існує');
       }
     );
-
-    this.modalContainer.nativeElement.click();
   }
 
   get roleName(): string[] {
