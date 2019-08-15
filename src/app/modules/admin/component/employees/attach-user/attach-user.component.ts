@@ -26,7 +26,7 @@ export class AttachUserComponent implements OnInit {
         protected spinnerService: SpinnerService,
         private employeeService: EmployeeService,
         private userService: UserService,
-        private toast: ToastrService
+        private toastrService: ToastrService
     ) {}
 
     selectedUser: User;
@@ -59,11 +59,11 @@ export class AttachUserComponent implements OnInit {
                updatedEmployee => {
                    this.spinnerService.hide();
                    this.completed.next(updatedEmployee);
-                   this.toast.success('Успішно прив\'язано користувача');
+                   this.toastrService.success('Успішно прив\'язано користувача');
                },
                (error: HttpErrorResponse) => {
                    this.spinnerService.hide();
-                   this.toast.error('Не вдалось оновити працівника', 'Помилка оновлення працівника');
+                   this.toastrService.error('Не вдалось оновити працівника', 'Помилка оновлення працівника');
                }
             );
     }
@@ -75,11 +75,11 @@ export class AttachUserComponent implements OnInit {
                 updatedEmployee => {
                     this.spinnerService.hide();
                     this.completed.next(updatedEmployee);
-                    this.toast.success('Успішно видалено прив\'язаного користувача');
+                    this.toastrService.success('Успішно видалено прив\'язаного користувача');
                 },
                 (error: HttpErrorResponse) => {
                     this.spinnerService.hide();
-                    this.toast.error('Не вдалось оновити працівника', 'Помилка оновлення працівника');
+                    this.toastrService.error('Не вдалось оновити працівника', 'Помилка оновлення працівника');
                 }
             );
     }
@@ -106,7 +106,7 @@ export class AttachUserComponent implements OnInit {
         }
         return request.pipe(
             catchError(error => {
-                this.toast.error('Не вдалось виконати пошук', 'Повторіть пошук');
+                this.toastrService.error('Не вдалось виконати пошук', 'Повторіть пошук');
                 return throwError(error);
             })
         );
