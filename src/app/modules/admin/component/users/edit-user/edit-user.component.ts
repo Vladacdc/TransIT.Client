@@ -41,14 +41,14 @@ export class EditUserComponent implements OnInit, OnDestroy {
   }
 
   private subscriptions: Subscription[] = [];
-  private userForm: FormGroup;
-
-  private selectedUser = new User({});
-  private roles: Role[] = [];
   private attachedEmployee: Employee;
 
+  userForm: FormGroup;
+  selectedUser = new User({});
+  roles: Role[] = [];
   allBoardNumbers: number[];
   formUnchanged: boolean;
+
   CustomNameErrorMessages = NAME_FIELD_ERRORS;
 
   constructor(
