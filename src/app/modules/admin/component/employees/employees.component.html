@@ -5,6 +5,7 @@
   <app-create-employee (addEmployee)="reloadTable()"></app-create-employee>
   <app-edit-employee [employee]="selectedEmployee" (editEmployee)="reloadTable()"></app-edit-employee>
   <app-delete-employee [employee]="selectedEmployee" (deleteEmployee)="reloadTable()"></app-delete-employee>
+  <app-attach-user [selectedEmployee]="selectedEmployee" (completed)="reloadTable()" ></app-attach-user>
   <table id="employee" datatable [dtOptions]="options" [dtTrigger]="renderTrigger" class="table table-bordered">
     <thead>
       <tr>
@@ -14,6 +15,7 @@
         <th>По батькові</th>
         <th>Коротке ім'я</th>
         <th>Посада</th>
+        <th>Ім'я користувача</th>
         <th>Дії</th>
       </tr>
     </thead>
@@ -25,6 +27,7 @@
         <td>{{ employee.middleName }}</td>
         <td>{{ employee.shortName }}</td>
         <td>{{ employee.post?.name }}</td>
+        <td>{{ employee.attachedUser?.userName || "немає"}}</td>
         <td>
           <div class="d-flex flex-nowrap">
             <button (click)="selectPost(employee)" class="btn" data-toggle="modal" data-target="#editEmployee">
@@ -32,6 +35,9 @@
             </button>
             <button (click)="selectPost(employee)" class="btn" data-toggle="modal" data-target="#deleteModal">
               <i class="fas fa-trash-alt"></i>
+            </button>
+            <button (click)="selectPost(employee)" class="btn" data-toggle="modal" data-target="#attachUser">
+              <i class="fas fa-user-circle"></i>
             </button>
           </div>
         </td>
