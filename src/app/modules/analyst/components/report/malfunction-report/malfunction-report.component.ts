@@ -31,12 +31,19 @@ const MY_ROWS: Statistics[] = [
   },
 ]
 
-const MY_COLS: string[] = [
+/*const MY_COLS: string[] = [
   "Malfunction",
   "Troleibus",
   "Tramvai",
   "Electrobus",
   "Avtobus"
+]*/
+const MY_COLS: string[] = [
+  "Несправність",
+  "Тролейбус T3L",
+  "Трамвай",
+  "Електробус",
+  "Автобус"
 ]
 
 @Component({
@@ -50,7 +57,7 @@ export class MalfunctionReportComponent implements OnInit {
   dataSource: MatTableDataSource<Statistics>;
   vehicleTypes: VehicleType[];
   
-  @Input("subgroup") malfunctionSubgroupName: string;
+  @Input("subgroupName") malfunctionSubgroupName: string;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -64,21 +71,27 @@ export class MalfunctionReportComponent implements OnInit {
   }
 
   ngOnInit() {
-    /*this.vehicleTypeService.getEntities().subscribe(data => {
+    this.vehicleTypeService.getEntities().subscribe(data => {
       this.vehicleTypes = data;
-      this.displayedColumns = ["malfunction"];
+      this.displayedColumns = ["Несправність"];
       data.forEach(vType => {
         this.displayedColumns.push(vType.name);
       });
-    });*/
-    this.displayedColumns = MY_COLS;
-    /*this.statisticsService.GetAllMalfunctionsStatistics("Поручні").subscribe(data => {
-      this.dataSource = new MatTableDataSource(data);
+    });
+    //this.displayedColumns = MY_COLS;
+    this.statisticsService.GetAllMalfunctionsStatistics(this.malfunctionSubgroupName).subscribe(data => {
+      let rows = [];
+
+      data.forEach(row => {
+        rows.push(CreateMatTableRowFromStatistics(row, this.displayedColumns));
+      });
+
+      this.dataSource = new MatTableDataSource(rows);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     });
-    */
-    let rows = [];
+    
+    /*let rows = [];
 
     MY_ROWS.forEach(row => {
       rows.push(CreateMatTableRowFromStatistics(row, this.displayedColumns));
@@ -86,7 +99,7 @@ export class MalfunctionReportComponent implements OnInit {
 
     this.dataSource = new MatTableDataSource(rows);
     this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+    this.dataSource.sort = this.sort;*/
   }
 
   applyFilter(filterValue: string) {
