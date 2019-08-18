@@ -120,3 +120,17 @@ export class StatisticsService {
     };
   }
 }
+
+export function CreateMatTableRowFromStatistics(statistics: Statistics, columns: string[]): {}
+{
+  let dict = {};
+  let i = 0;
+  dict[columns[i]] = statistics.fieldName;
+  statistics.statistics.forEach(num => {
+    i += 1;
+    dict[columns[i]] = num;
+  });
+
+  return dict;
+}
+
