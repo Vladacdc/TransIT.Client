@@ -5,14 +5,15 @@
   <div class="mat-elevation-z8">
     <table mat-table [dataSource]="dataSource" matSort>
   
+      <!--
       <ng-container matColumnDef="malfunction">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Несправність </th>
         <td mat-cell *matCellDef="let row"> {{row.fieldName}} </td>
       </ng-container>
-  
-      <ng-container *ngFor="let vehicleType of vehicleTypes; let i = index" [matColumnDef] = "vehicleType.name">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> {{vehicleType.name}} </th>
-        <td mat-cell *matCellDef="let row"> {{row.statistics[i]}} </td>
+      -->
+      <ng-container *ngFor="let columnName of displayedColumns; let i = index" [matColumnDef] = "columnName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> {{columnName}} </th>
+        <td mat-cell *matCellDef="let row"> {{row[columnName]}} </td>
       </ng-container>
   
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
