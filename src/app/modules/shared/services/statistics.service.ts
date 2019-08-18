@@ -4,6 +4,7 @@ import { environment } from '../../../../environments/environment';
 import { tap, catchError, map } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { SpinnerService } from '../../core/services/spinner.service';
+import { Statistics } from '../models/statistics';
 
 @Injectable()
 export class StatisticsService {
@@ -68,6 +69,36 @@ export class StatisticsService {
     this.spinner.show();
     return this.http.get<string[]>(
       `${this.serviceUrl}/malfunctionsubgroupstatistics/?malfunctionSubGroupName=${malfunctionSubGroup}`)
+      .pipe( map(entity => entity),
+        tap(data => this.handleSuccess('fetched data', data)),
+        catchError(this.handleError())
+      );
+  }
+
+  GetAllMalfunctionsStatistics(malfunctionSubgroupName: string): Observable<Statistics[]> {
+    this.spinner.show();
+    return this.http.get<Statistics[]>(
+      `${this.serviceUrl}/allmalfunctionsstatistics/?malfunctionSubgroupName=${malfunctionSubgroupName}`)
+      .pipe( map(entity => entity),
+        tap(data => this.handleSuccess('fetched data', data)),
+        catchError(this.handleError())
+      );
+  }
+
+  GetAllMalfunctionGroupsStatistics(): Observable<Statistics[]> {
+    this.spinner.show();
+    return this.http.get<Statistics[]>(
+      `${this.serviceUrl}/allmalfunctiongroupsstatistics/`)
+      .pipe( map(entity => entity),
+        tap(data => this.handleSuccess('fetched data', data)),
+        catchError(this.handleError())
+      );
+  }
+
+  GetAllMalfunctionSubgroupStatistics(malfunctionGroupName: string): Observable<Statistics[]> {
+    this.spinner.show();
+    return this.http.get<Statistics[]>(
+      `${this.serviceUrl}/allmalfunctionsubgroupsstatistics/?malfunctionGroupName=${malfunctionGroupName}`)
       .pipe( map(entity => entity),
         tap(data => this.handleSuccess('fetched data', data)),
         catchError(this.handleError())

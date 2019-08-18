@@ -7,6 +7,8 @@ import { VehicleTypeService } from 'src/app/modules/shared/services/vehicle-type
 import { Malfunction } from 'src/app/modules/shared/models/malfunction';
 import { MalfunctionService } from 'src/app/modules/shared/services/malfunction.service';
 import { StatisticsService } from 'src/app/modules/shared/services/statistics.service';
+import { Statistics } from 'src/app/modules/shared/models/statistics';
+
 
 @Component({
   selector: 'app-report',

@@ -7,10 +7,31 @@ import { CoreModule } from '../core/core.module';
 import { WebDataRocksPivot } from 'src/types/webdatarocks/webdatarocks.angular4';
 import { ReportComponent } from './components/report/report.component';
 import { SharedModule } from '../shared/shared.module';
+import { MalfunctionReportComponent } from './components/report/malfunction-report/malfunction-report.component';
+import { MatPaginatorModule, MatSortModule, MatFormFieldModule, MatTableModule, MatInputModule } from '@angular/material';
+import { MalfunctionGroupReportComponent } from './components/report/malfunction-group-report/malfunction-group-report.component';
 
 @NgModule({
-  declarations: [AnalystComponent, IssueAnalystComponent, WebDataRocksPivot, ReportComponent],
+  declarations: [
+    AnalystComponent,
+    IssueAnalystComponent,
+    WebDataRocksPivot,
+    ReportComponent,
+    MalfunctionReportComponent,
+    MalfunctionGroupReportComponent
+  ],
+
   exports: [],
-  imports: [CommonModule, AnalystRoutingModule, CoreModule, SharedModule]
+  imports: [
+    CommonModule,
+    AnalystRoutingModule,
+    CoreModule,
+    SharedModule,
+    MatTableModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatPaginatorModule,
+    MatSortModule
+  ]
 })
 export class AnalystModule {}
