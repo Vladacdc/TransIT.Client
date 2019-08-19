@@ -8,24 +8,6 @@ import { Statistics } from 'src/app/modules/shared/models/statistics';
 import { VehicleType } from 'src/app/modules/shared/models/vehicleType';
 import { trigger, style, state, transition, animate } from '@angular/animations';
 
-const MY_ROWS: Statistics[] = [
-  {
-    fieldName: "Поручні",
-    statistics: [1,2,3,4]
-  },
-  {
-    fieldName: "Скління",
-    statistics: [4,3,2,1]
-  },
-]
-
-const MY_COLS: string[] = [
-  "Група несправності",
-  "Тролейбус",
-  "Трамвай",
-  "Електробус",
-  "Автобус"
-]
 
 @Component({
   selector: 'malfunction-subgroup-report',
@@ -80,17 +62,6 @@ export class MalfunctionSubgroupReportComponent implements OnInit {
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     });
-/*
-    this.displayedColumns=MY_COLS;
-    let rows = [];
-    MY_ROWS.forEach(row => {
-      rows.push(CreateMatTableRowFromStatistics(row, this.displayedColumns));
-    });
-
-    this.dataSource = new MatTableDataSource(rows);
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
-    */
   }
 
   applyFilter(filterValue: string) {

@@ -1,21 +1,30 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { VehicleTypeService } from 'src/app/modules/shared/services/vehicle-type.service';
-import { StatisticsService } from 'src/app/modules/shared/services/statistics.service';
+import { StatisticsService, CreateMatTableRowFromStatistics } from 'src/app/modules/shared/services/statistics.service';
 import { Statistics } from 'src/app/modules/shared/models/statistics';
-import { MatTableDataSource, MatPaginator, MatSort } from '@angular/material';
 import { VehicleType } from 'src/app/modules/shared/models/vehicleType';
-import { trigger, state, style, animate, transition } from '@angular/animations';
+import { trigger, style, state, transition, animate } from '@angular/animations';
 
-
-const MY_DATA: Statistics[] = [
+const MY_ROWS: Statistics[] = [
   {
-    fieldName: "Мій кузов",
+    fieldName: "Поручні",
     statistics: [1,2,3,4]
   },
   {
-    fieldName: "Мій двигун",
-    statistics: [1,2,3,4]
+    fieldName: "Скління",
+    statistics: [4,3,2,1]
   },
+]
+
+const MY_COLS: string[] = [
+  "Група несправності",
+  "Тролейбус",
+  "Трамвай",
+  "Електробус",
+  "Автобус"
 ]
 
 @Component({
@@ -35,38 +44,39 @@ export class MalfunctionGroupReportComponent implements OnInit {
   displayedColumns: string[];
   dataSource: MatTableDataSource<Statistics>;
   vehicleTypes: VehicleType[];
-  expandedElement: Statistics | null;
 
- 
+  expandedElement: any | null;
+
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-
+  
 
   constructor(
       private statisticsService: StatisticsService,
       private vehicleTypeService: VehicleTypeService
   ) {
-    
+    this.dataSource = null;
   }
 
   ngOnInit() {
     this.vehicleTypeService.getEntities().subscribe(data => {
       this.vehicleTypes = data;
-      this.displayedColumns = ["group"];
+      this.displayedColumns = ["Група несправності"];
       data.forEach(vType => {
         this.displayedColumns.push(vType.name);
       });
-      /*this.statisticsService.GetAllMalfunctionGroupsStatistics().subscribe(data => {
-        this.dataSource = new MatTableDataSource(data);
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
-      });*/
-      this.dataSource = new MatTableDataSource(MY_DATA);
+    });
+
+    this.statisticsService.GetAllMalfunctionGroupsStatistics().subscribe(data => {
+      let rows = [];
+      data.forEach(row => {
+        rows.push(CreateMatTableRowFromStatistics(row, this.displayedColumns));
+      });
+
+      this.dataSource = new MatTableDataSource(rows);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     });
-
-
   }
 
   applyFilter(filterValue: string) {
@@ -75,5 +85,10 @@ export class MalfunctionGroupReportComponent implements OnInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  getCurrentGroup(element: any)
+  {
+    return element[this.displayedColumns[0]];
   }
 }
