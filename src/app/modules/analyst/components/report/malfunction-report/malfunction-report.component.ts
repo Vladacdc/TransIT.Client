@@ -28,6 +28,7 @@ export class MalfunctionReportComponent implements OnInit {
       private statisticsService: StatisticsService,
       private vehicleTypeService: VehicleTypeService
   ) {
+    this.dataSource = null;
   }
 
   ngOnInit() {

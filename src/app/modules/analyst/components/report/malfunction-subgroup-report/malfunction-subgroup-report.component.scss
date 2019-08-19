@@ -1,17 +1,10 @@
-/*table {
-    width: 100%;
-  }
-
-.mat-form-field {
-  font-size: 14px;
-  width: 100%;
+mat-paginator {
+  background: #efefef79;
 }
-  
-td, th {
-    width: 20%;
-}*/
+
 table {
   width: 100%;
+  background: #efefef79;
 }
 
 tr.example-detail-row {
@@ -19,7 +12,7 @@ tr.example-detail-row {
 }
 
 tr.example-element-row:not(.example-expanded-row):hover {
-  background: rgba(119, 119, 119, 0.932);
+  background: rgba(255, 255, 255, 0.63)
 }
 
 tr.example-element-row:not(.example-expanded-row):active {
@@ -32,28 +25,15 @@ tr.example-element-row:not(.example-expanded-row):active {
 
 .example-element-detail {
   overflow: hidden;
-  display: flex;
+  width: 100%;
 }
 
-.example-element-diagram {
-  min-width: 80px;
-  border: 2px solid black;
-  padding: 8px;
-  font-weight: lighter;
-  margin: 8px 0;
-  height: 104px;
+.mat-column-expandedDetail {
+  padding: 0%;
+  margin: 0%;
 }
 
-.example-element-symbol {
-  font-weight: bold;
-  font-size: 40px;
-  line-height: normal;
-}
-
-.example-element-description {
-  padding: 16px;
-}
-
-.example-element-description-attribution {
-  opacity: 0.5;
+td.mat-cell.cdk-column-expandedDetail.mat-column-expandedDetail.ng-tns-c6-0.ng-star-inserted {
+  padding: 0%;
+  margin: 0%;
 }

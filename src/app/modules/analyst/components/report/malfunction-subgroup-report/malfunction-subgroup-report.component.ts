@@ -10,11 +10,11 @@ import { trigger, style, state, transition, animate } from '@angular/animations'
 
 const MY_ROWS: Statistics[] = [
   {
-    fieldName: "Мої поручні",
+    fieldName: "Поручні",
     statistics: [1,2,3,4]
   },
   {
-    fieldName: "Моє скління",
+    fieldName: "Скління",
     statistics: [4,3,2,1]
   },
 ]
@@ -58,10 +58,11 @@ export class MalfunctionSubgroupReportComponent implements OnInit {
       private statisticsService: StatisticsService,
       private vehicleTypeService: VehicleTypeService
   ) {
+    this.dataSource = null;
   }
 
   ngOnInit() {
-    /*this.vehicleTypeService.getEntities().subscribe(data => {
+    this.vehicleTypeService.getEntities().subscribe(data => {
       this.vehicleTypes = data;
       this.displayedColumns = ["Підгрупа несправності"];
       data.forEach(vType => {
@@ -78,7 +79,8 @@ export class MalfunctionSubgroupReportComponent implements OnInit {
       this.dataSource = new MatTableDataSource(rows);
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
-    });*/
+    });
+/*
     this.displayedColumns=MY_COLS;
     let rows = [];
     MY_ROWS.forEach(row => {
@@ -86,8 +88,9 @@ export class MalfunctionSubgroupReportComponent implements OnInit {
     });
 
     this.dataSource = new MatTableDataSource(rows);
-    //this.dataSource.paginator = this.paginator;
-    //this.dataSource.sort = this.sort;
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+    */
   }
 
   applyFilter(filterValue: string) {
@@ -96,5 +99,10 @@ export class MalfunctionSubgroupReportComponent implements OnInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  getCurrentSubgroup(element: any)
+  {
+    return element[this.displayedColumns[0]];
   }
 }
