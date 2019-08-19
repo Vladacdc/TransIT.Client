@@ -27,17 +27,15 @@ export class EditUserComponent implements OnInit, OnDestroy {
       return;
     }
     this.selectedUser = user;
+    this.attachedEmployee = user.employee;
     this.userForm.patchValue({ ...this.selectedUser, role: this.selectedUser.role.transName });
-    this.employeeService.getByUserId(user.id).subscribe(
-      employee => {
-        if (employee) {
-          this.attachedEmployee = employee;
-          this.userForm.get('boardNumber').patchValue(employee.boardNumber);
-        } else {
-          this.userForm.get('boardNumber').reset();
-        }
-      }
-    );
+    // set original value for board number, as it's not a part of User dto
+    if (user.employee) {
+       this.userForm.get('boardNumber')
+                    .patchValue(user.employee.boardNumber, {emitEvent: false, onlySelf: true});
+    } else {
+       this.userForm.get('boardNumber').reset({emitEvent: false, onlySelf: true});
+    }
   }
 
   private subscriptions: Subscription[] = [];
@@ -61,6 +59,7 @@ export class EditUserComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnDestroy(): void {
+    // remove all value changes subscriptions if we navigate to other component
     this.subscriptions.forEach(subscription => {
       subscription.unsubscribe();
     });
@@ -68,9 +67,8 @@ export class EditUserComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     $('#editUser').on('hidden.bs.modal', () => {
-      this.attachedEmployee = null;
+      this.selectedUser.employee = null;
       this.userForm.reset();
-      this.userForm.patchValue({ ...this.selectedUser, role: this.selectedUser.role.transName });
     });
 
     this.userForm = this.formBuilder.group({
@@ -111,11 +109,15 @@ export class EditUserComponent implements OnInit, OnDestroy {
       this.userForm.valueChanges.subscribe((newForm) => {
         let unchanged = true;
         Object.keys(newForm)
-          .filter((value) => value !== 'boardNumber')
           .forEach(key => {
-            const originalValue = key === 'role'
-              ? this.selectedUser[key].transName
-              : this.selectedUser[key];
+            let originalValue: string | number;
+            if (key === 'role') {
+              originalValue = this.selectedUser[key].transName;
+            } else if (key === 'boardNumber') {
+              originalValue = this.selectedUser.employee ? this.selectedUser.employee.boardNumber : null;
+            } else {
+              originalValue = this.selectedUser[key];
+            }
             unchanged = unchanged &&
               (newForm[key] === originalValue || (newForm[key] === '' && !originalValue));
         });
@@ -175,13 +177,10 @@ export class EditUserComponent implements OnInit, OnDestroy {
   }
 
   updateUserChangeActive(user: User) {
-    this.employeeService.getByUserId(user.id)
-      .subscribe(
-        success => this.attachedEmployee = success
-      );
     this.updateUser.next(user);
   }
 
+  // subscribing to board number changes
   listenBoardNumberChanges() {
     this.employeeService.getBoardNumbers().subscribe(
       values => {
@@ -189,16 +188,19 @@ export class EditUserComponent implements OnInit, OnDestroy {
       }
     );
 
-    // subscribing to board number changes
     const controls = ['firstName', 'middleName', 'lastName'];
     this.subscriptions.push(this.userForm.get('boardNumber').valueChanges.subscribe(
       newValue => {
-        if (newValue) {
+        const parsed = parseInt(newValue, 10);
+        if (newValue && !isNaN(parsed)) {
           this.spinnerService.show();
-          this.employeeService.getByBoardNumber(parseInt(newValue, 10)).subscribe(
+          // update selected employee
+          this.employeeService.getByBoardNumber(parsed).subscribe(
             response => {
               this.attachedEmployee = response;
               this.spinnerService.hide();
+              // set values of a few controls based on that employee
+              // and disable them
               controls.forEach(control => {
                 this.userForm.get(control).patchValue(this.attachedEmployee[control]);
                 this.userForm.get(control).disable();
@@ -210,10 +212,15 @@ export class EditUserComponent implements OnInit, OnDestroy {
             }
           );
         } else {
-          controls.forEach(control => {
-            this.userForm.get(control).enable();
-            this.userForm.get(control).patchValue(this.selectedUser[control]);
+          // if we cleared the board number field..
+          controls.forEach(name => {
+            this.userForm.get(name).enable();
+            this.userForm.get(name).patchValue(this.selectedUser[name]);
           });
+          // reset board number value to original
+          if (this.selectedUser.employee) {
+            this.userForm.get('boardNumber').patchValue(this.user.employee.boardNumber, {emitEvent: false});
+          }
         }
       }
     ));
