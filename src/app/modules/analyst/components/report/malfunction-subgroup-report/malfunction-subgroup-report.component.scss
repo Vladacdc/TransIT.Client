@@ -2,6 +2,10 @@ mat-paginator {
   background: #efefef79;
 }
 
+td, th {
+  width: 20%;
+}
+
 table {
   width: 100%;
   background: #efefef79;
@@ -33,7 +37,7 @@ tr.example-element-row:not(.example-expanded-row):active {
   margin: 0%;
 }
 
-.mat-cell.cdk-column-expandedDetail.mat-column-expandedDetail {
+.mat-cell.cdk-column-expandedDetail.mat-column-expandedDetail.ng-tns-c10-9.ng-star-inserted {
   padding: 0%;
   margin: 0%;
 }

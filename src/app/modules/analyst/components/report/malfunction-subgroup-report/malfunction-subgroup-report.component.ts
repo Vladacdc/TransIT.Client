@@ -25,7 +25,6 @@ export class MalfunctionSubgroupReportComponent implements OnInit {
  
   displayedColumns: string[];
   dataSource: MatTableDataSource<Statistics>;
-  vehicleTypes: VehicleType[];
 
   expandedElement: any | null;
   
@@ -45,7 +44,6 @@ export class MalfunctionSubgroupReportComponent implements OnInit {
 
   ngOnInit() {
     this.vehicleTypeService.getEntities().subscribe(data => {
-      this.vehicleTypes = data;
       this.displayedColumns = ["Підгрупа несправності"];
       data.forEach(vType => {
         this.displayedColumns.push(vType.name);
