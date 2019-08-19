@@ -5,7 +5,6 @@ import { MatTableDataSource } from '@angular/material/table';
 import { VehicleTypeService } from 'src/app/modules/shared/services/vehicle-type.service';
 import { StatisticsService, CreateMatTableRowFromStatistics } from 'src/app/modules/shared/services/statistics.service';
 import { Statistics } from 'src/app/modules/shared/models/statistics';
-import { VehicleType } from 'src/app/modules/shared/models/vehicleType';
 
 @Component({
   selector: 'malfunction-report',

@@ -5,27 +5,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { VehicleTypeService } from 'src/app/modules/shared/services/vehicle-type.service';
 import { StatisticsService, CreateMatTableRowFromStatistics } from 'src/app/modules/shared/services/statistics.service';
 import { Statistics } from 'src/app/modules/shared/models/statistics';
-import { VehicleType } from 'src/app/modules/shared/models/vehicleType';
 import { trigger, style, state, transition, animate } from '@angular/animations';
-
-const MY_ROWS: Statistics[] = [
-  {
-    fieldName: "Поручні",
-    statistics: [1,2,3,4]
-  },
-  {
-    fieldName: "Скління",
-    statistics: [4,3,2,1]
-  },
-]
-
-const MY_COLS: string[] = [
-  "Група несправності",
-  "Тролейбус",
-  "Трамвай",
-  "Електробус",
-  "Автобус"
-]
 
 @Component({
   selector: 'malfunction-group-report',
