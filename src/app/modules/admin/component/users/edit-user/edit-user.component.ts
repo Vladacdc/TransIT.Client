@@ -39,9 +39,9 @@ export class EditUserComponent implements OnInit, OnDestroy {
   }
 
   private subscriptions: Subscription[] = [];
+  private attachedEmployee: Employee;
 
   userForm: FormGroup;
-  attachedEmployee: Employee;
   selectedUser = new User({});
   roles: Role[] = [];
   allBoardNumbers: number[];
