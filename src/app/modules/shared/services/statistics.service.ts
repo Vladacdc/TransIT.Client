@@ -4,6 +4,7 @@ import { environment } from '../../../../environments/environment';
 import { tap, catchError, map } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { SpinnerService } from '../../core/services/spinner.service';
+import { Statistics } from '../models/statistics';
 
 @Injectable()
 export class StatisticsService {
@@ -74,6 +75,36 @@ export class StatisticsService {
       );
   }
 
+  GetAllMalfunctionsStatistics(malfunctionSubgroupName: string): Observable<Statistics[]> {
+    this.spinner.show();
+    return this.http.get<Statistics[]>(
+      `${this.serviceUrl}/allmalfunctionsstatistics/?malfunctionSubgroupName=${malfunctionSubgroupName}`)
+      .pipe( map(entity => entity),
+        tap(data => this.handleSuccess('fetched data', data)),
+        catchError(this.handleError())
+      );
+  }
+
+  GetAllMalfunctionGroupsStatistics(): Observable<Statistics[]> {
+    this.spinner.show();
+    return this.http.get<Statistics[]>(
+      `${this.serviceUrl}/allmalfunctiongroupsstatistics/`)
+      .pipe( map(entity => entity),
+        tap(data => this.handleSuccess('fetched data', data)),
+        catchError(this.handleError())
+      );
+  }
+
+  GetAllMalfunctionSubgroupsStatistics(malfunctionGroupName: string): Observable<Statistics[]> {
+    this.spinner.show();
+    return this.http.get<Statistics[]>(
+      `${this.serviceUrl}/allmalfunctionsubgroupsstatistics/?malfunctionGroupName=${malfunctionGroupName}`)
+      .pipe( map(entity => entity),
+        tap(data => this.handleSuccess('fetched data', data)),
+        catchError(this.handleError())
+      );
+  }
+
   protected mapEntity(entity: number): number {
     return entity;
   }
@@ -89,3 +120,17 @@ export class StatisticsService {
     };
   }
 }
+
+export function CreateMatTableRowFromStatistics(statistics: Statistics, columns: string[]): {}
+{
+  let dict = {};
+  let i = 0;
+  dict[columns[i]] = statistics.fieldName;
+  statistics.statistics.forEach(num => {
+    i += 1;
+    dict[columns[i]] = num;
+  });
+
+  return dict;
+}
+
