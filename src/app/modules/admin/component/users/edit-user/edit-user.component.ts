@@ -27,23 +27,20 @@ export class EditUserComponent implements OnInit, OnDestroy {
       return;
     }
     this.selectedUser = user;
+    this.attachedEmployee = user.employee;
     this.userForm.patchValue({ ...this.selectedUser, role: this.selectedUser.role.transName });
-    this.employeeService.getByUserId(user.id).subscribe(
-      employee => {
-        if (employee) {
-          this.attachedEmployee = employee;
-          this.userForm.get('boardNumber').patchValue(employee.boardNumber);
-        } else {
-          this.userForm.get('boardNumber').reset();
-        }
-      }
-    );
+    if (user.employee) {
+       this.userForm.get('boardNumber')
+                    .patchValue(user.employee.boardNumber, {emitEvent: false, onlySelf: true});
+    } else {
+       this.userForm.get('boardNumber').reset({emitEvent: false, onlySelf: true});
+    }
   }
 
   private subscriptions: Subscription[] = [];
-  private attachedEmployee: Employee;
 
   userForm: FormGroup;
+  attachedEmployee: Employee;
   selectedUser = new User({});
   roles: Role[] = [];
   allBoardNumbers: number[];
@@ -68,7 +65,7 @@ export class EditUserComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     $('#editUser').on('hidden.bs.modal', () => {
-      this.attachedEmployee = null;
+      this.selectedUser.employee = null;
       this.userForm.reset();
       this.userForm.patchValue({ ...this.selectedUser, role: this.selectedUser.role.transName });
     });
@@ -111,11 +108,15 @@ export class EditUserComponent implements OnInit, OnDestroy {
       this.userForm.valueChanges.subscribe((newForm) => {
         let unchanged = true;
         Object.keys(newForm)
-          .filter((value) => value !== 'boardNumber')
           .forEach(key => {
-            const originalValue = key === 'role'
-              ? this.selectedUser[key].transName
-              : this.selectedUser[key];
+            let originalValue: string | number;
+            if (key === 'role') {
+              originalValue = this.selectedUser[key].transName;
+            } else if (key === 'boardNumber') {
+              originalValue = this.selectedUser.employee ? this.selectedUser.employee.boardNumber : null;
+            } else {
+              originalValue = this.selectedUser[key];
+            }
             unchanged = unchanged &&
               (newForm[key] === originalValue || (newForm[key] === '' && !originalValue));
         });
@@ -175,10 +176,6 @@ export class EditUserComponent implements OnInit, OnDestroy {
   }
 
   updateUserChangeActive(user: User) {
-    this.employeeService.getByUserId(user.id)
-      .subscribe(
-        success => this.attachedEmployee = success
-      );
     this.updateUser.next(user);
   }
 
@@ -193,9 +190,10 @@ export class EditUserComponent implements OnInit, OnDestroy {
     const controls = ['firstName', 'middleName', 'lastName'];
     this.subscriptions.push(this.userForm.get('boardNumber').valueChanges.subscribe(
       newValue => {
-        if (newValue) {
+        const parsed = parseInt(newValue, 10);
+        if (newValue && !isNaN(parsed)) {
           this.spinnerService.show();
-          this.employeeService.getByBoardNumber(parseInt(newValue, 10)).subscribe(
+          this.employeeService.getByBoardNumber(parsed).subscribe(
             response => {
               this.attachedEmployee = response;
               this.spinnerService.hide();
@@ -210,10 +208,13 @@ export class EditUserComponent implements OnInit, OnDestroy {
             }
           );
         } else {
-          controls.forEach(control => {
-            this.userForm.get(control).enable();
-            this.userForm.get(control).patchValue(this.selectedUser[control]);
+          controls.forEach(name => {
+            this.userForm.get(name).enable();
+            this.userForm.get(name).patchValue(this.selectedUser[name]);
           });
+          if (this.selectedUser.employee) {
+            this.userForm.get('boardNumber').patchValue(this.user.employee.boardNumber, {emitEvent: false});
+          }
         }
       }
     ));
