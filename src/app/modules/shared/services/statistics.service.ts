@@ -95,7 +95,7 @@ export class StatisticsService {
       );
   }
 
-  GetAllMalfunctionSubgroupStatistics(malfunctionGroupName: string): Observable<Statistics[]> {
+  GetAllMalfunctionSubgroupsStatistics(malfunctionGroupName: string): Observable<Statistics[]> {
     this.spinner.show();
     return this.http.get<Statistics[]>(
       `${this.serviceUrl}/allmalfunctionsubgroupsstatistics/?malfunctionGroupName=${malfunctionGroupName}`)

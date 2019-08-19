@@ -10,6 +10,7 @@ import { SharedModule } from '../shared/shared.module';
 import { MalfunctionReportComponent } from './components/report/malfunction-report/malfunction-report.component';
 import { MatPaginatorModule, MatSortModule, MatFormFieldModule, MatTableModule, MatInputModule } from '@angular/material';
 import { MalfunctionGroupReportComponent } from './components/report/malfunction-group-report/malfunction-group-report.component';
+import { MalfunctionSubgroupReportComponent } from './components/report/malfunction-subgroup-report/malfunction-subgroup-report.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { MalfunctionGroupReportComponent } from './components/report/malfunction
     WebDataRocksPivot,
     ReportComponent,
     MalfunctionReportComponent,
-    MalfunctionGroupReportComponent
+    MalfunctionGroupReportComponent,
+    MalfunctionSubgroupReportComponent,
   ],
 
   exports: [],

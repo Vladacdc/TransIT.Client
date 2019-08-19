@@ -5,10 +5,7 @@
   <div class="mat-elevation-z8">
     <table mat-table [dataSource]="dataSource" matSort>
   
-      <ng-container matColumnDef="group">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Група несправності </th>
-        <td mat-cell *matCellDef="let row"> {{row.fieldName}} </td>
-      </ng-container>
+
   
       <ng-container *ngFor="let vehicleType of vehicleTypes; let i = index" [matColumnDef] = "vehicleType.name">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> {{vehicleType.name}} </th>
