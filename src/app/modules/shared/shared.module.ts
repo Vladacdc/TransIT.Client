@@ -51,6 +51,7 @@ import { MatDatepickerModule,
          MatInputModule} from '@angular/material';
 
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
+import { PartsInComponent } from './components/dictionaries/parts-in/parts-in.component';
 
 @NgModule({
   declarations: [
@@ -74,7 +75,8 @@ import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.componen
     DeleteDocumentComponent,
     EditDocumentComponent,
     NestedDocumentComponent,
-    IssueLogComponent
+    IssueLogComponent,
+    PartsInComponent
   ],
   imports: [
     MatDatepickerModule,
