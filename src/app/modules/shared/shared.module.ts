@@ -43,14 +43,16 @@ import { VehicleService } from './services/vehicle.service';
 import { SupplierService } from './services/supplier.service';
 import { TransitionService } from './services/transition.service';
 import { CountryService } from './services/country.service';
-import { UniqueFieldValidator } from './validators/unique-field-validator';
 import { StatisticsService } from './services/statistics.service';
 // Materials
 import { MatDatepickerModule,
          MatNativeDateModule,
-         MatInputModule} from '@angular/material';
+         MatInputModule,
+         MatTableModule,
+         MatPaginatorModule} from '@angular/material';
 
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
+import { MatFspTableComponent } from './components/tables/mat-fsp-table/mat-fsp-table.component';
 
 @NgModule({
   declarations: [
@@ -74,12 +76,15 @@ import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.componen
     DeleteDocumentComponent,
     EditDocumentComponent,
     NestedDocumentComponent,
-    IssueLogComponent
+    IssueLogComponent,
+    MatFspTableComponent,
   ],
   imports: [
     MatDatepickerModule,
     MatNativeDateModule,
     MatInputModule,
+    MatTableModule,
+    MatPaginatorModule,
     CommonModule,
     ReactiveFormsModule,
     CommonModule,
@@ -101,7 +106,8 @@ import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.componen
     GlobalIssueComponent,
     FiltersTabsComponent,
     CreateDocumentComponent,
-    DocumentComponent
+    DocumentComponent,
+    MatFspTableComponent,
   ],
   providers: [
     ActionTypeService,
