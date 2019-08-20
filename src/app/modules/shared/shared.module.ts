@@ -49,7 +49,8 @@ import { MatDatepickerModule,
          MatNativeDateModule,
          MatInputModule,
          MatTableModule,
-         MatPaginatorModule} from '@angular/material';
+         MatPaginatorModule,
+         MatSortModule} from '@angular/material';
 
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 import { MatFspTableComponent } from './components/tables/mat-fsp-table/mat-fsp-table.component';
@@ -85,6 +86,7 @@ import { MatFspTableComponent } from './components/tables/mat-fsp-table/mat-fsp-
     MatInputModule,
     MatTableModule,
     MatPaginatorModule,
+    MatSortModule,
     CommonModule,
     ReactiveFormsModule,
     CommonModule,

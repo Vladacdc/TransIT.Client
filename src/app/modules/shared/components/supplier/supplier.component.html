@@ -1,10 +1,14 @@
 <div class="table-background border">
-  <app-create-supplier (createSupplier)="addItem($event)" *ngIf="isVisible"></app-create-supplier>
+  <app-create-supplier (createSupplier)="addSupplier($event)" *ngIf="isVisible"></app-create-supplier>
   <app-delete-supplier [supplier]="supplier" (deleteSupplier)="deleteSupplier($event)" *ngIf="isVisible"></app-delete-supplier>
   <app-edit-supplier [supplier]="supplier" (updateSupplier)="updateSupplier($event)" *ngIf="isVisible"></app-edit-supplier>
   <p></p>
   <div>
-    <table id="supplier-table" class="table table-bordered  table-hover" style="width:100%;"></table>
+    <mat-fsp-table 
+      [columnDefinitions]="columnDefinitions"
+      [columnNames]="columnNames"
+      [observableData]="observableData">
+    </mat-fsp-table>
   </div>
 </div>
 
