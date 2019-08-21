@@ -55,7 +55,8 @@ import { MatDatepickerModule,
 
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 import { MatFspTableComponent } from './components/tables/mat-fsp-table/mat-fsp-table.component';
-import { SuppliersDataSource } from './data-sources/suppliers-data-sourse';
+import { EntitiesDataSource } from './data-sources/entities-data-sourse';
+
 
 @NgModule({
   declarations: [
@@ -134,7 +135,7 @@ import { SuppliersDataSource } from './data-sources/suppliers-data-sourse';
     VehicleTypeService,
     VehicleService,
     StatisticsService,
-    SuppliersDataSource,
+    EntitiesDataSource,
   ]
 })
 export class SharedModule {}

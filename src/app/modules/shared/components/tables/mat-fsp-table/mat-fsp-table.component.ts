@@ -3,6 +3,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Observable } from 'rxjs';
+import { EntitiesDataSource } from '../../../data-sources/entities-data-sourse';
 
 @Component({
   selector: 'mat-fsp-table',
@@ -10,11 +11,10 @@ import { Observable } from 'rxjs';
   styleUrls: ['./mat-fsp-table.component.scss']
 })
 export class MatFspTableComponent implements OnInit {
-  dataSource: MatTableDataSource<any>;
-  
+    
   @Input() columnDefinitions: string[];
   @Input() columnNames: string[];
-  @Input() observableData: Observable<any>;
+  @Input() dataSource: EntitiesDataSource<any>;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;

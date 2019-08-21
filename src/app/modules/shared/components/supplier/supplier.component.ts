@@ -2,10 +2,10 @@ import { Component, OnInit, Input, AfterViewInit, ViewChild, ElementRef } from '
 import { SupplierService } from 'src/app/modules/shared/services/supplier.service';
 import { Supplier } from 'src/app/modules/shared/models/supplier';
 import { Observable, fromEvent, merge } from 'rxjs';
-import { SuppliersDataSource } from '../../data-sources/suppliers-data-sourse';
 import { MatPaginator } from '@angular/material/paginator';
 import { tap, debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { MatSort } from '@angular/material/sort';
+import { EntitiesDataSource } from '../../data-sources/entities-data-sourse';
 
 
 @Component({
@@ -30,7 +30,7 @@ export class SupplierComponent implements AfterViewInit, OnInit {
     'ЄДРПОУ'
   ];
 
-  dataSource: SuppliersDataSource;
+  dataSource: EntitiesDataSource<Supplier>;
   numberOfRows: number = 5;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -42,9 +42,9 @@ export class SupplierComponent implements AfterViewInit, OnInit {
 
 
   ngOnInit() {
-    this.dataSource = new SuppliersDataSource(this.supplierService);
+    this.dataSource = new EntitiesDataSource<Supplier>(this.supplierService);
 
-    this.dataSource.loadSuppliers('','none',0,1);
+    this.dataSource.loadEntities('','none',0,1);
   }
 
 
@@ -71,7 +71,7 @@ export class SupplierComponent implements AfterViewInit, OnInit {
   }
 
   loadSuppliersPage() {
-    this.dataSource.loadSuppliers(
+    this.dataSource.loadEntities(
       this.input.nativeElement.value,
       this.sort.direction,
       this.paginator.pageIndex,
