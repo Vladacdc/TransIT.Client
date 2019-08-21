@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Issue } from '../../../shared/models/issue';
-import { IssueService } from '../../../shared/services/issue.service';
+import { Issue } from '../../../../shared/models/issue';
+import { IssueService } from '../../../../shared/services/issue.service';
 import { ToastrService } from 'ngx-toastr';
 import { MalfunctionGroup } from 'src/app/modules/shared/models/malfunction-group';
 import { MalfunctionSubgroup } from 'src/app/modules/shared/models/malfunction-subgroup';
