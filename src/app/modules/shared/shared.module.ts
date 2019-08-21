@@ -51,7 +51,8 @@ import { MatDatepickerModule,
          MatTableModule,
          MatPaginatorModule,
          MatSortModule,
-         MatProgressSpinnerModule} from '@angular/material';
+         MatProgressSpinnerModule,
+         MatButtonModule} from '@angular/material';
 
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 import { MatFspTableComponent } from './components/tables/mat-fsp-table/mat-fsp-table.component';
@@ -91,6 +92,7 @@ import { EntitiesDataSource } from './data-sources/entities-data-sourse';
     MatPaginatorModule,
     MatSortModule,
     MatProgressSpinnerModule,
+    MatButtonModule,
     CommonModule,
     ReactiveFormsModule,
     CommonModule,

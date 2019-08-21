@@ -11,6 +11,7 @@ import { debounceTime, distinctUntilChanged, tap } from 'rxjs/operators';
   styleUrls: ['./mat-fsp-table.component.scss']
 })
 export class MatFspTableComponent implements OnInit {
+  columnsToDisplay: string[];
 
   @Input() columnDefinitions: string[];
   @Input() columnNames: string[];
@@ -25,6 +26,12 @@ export class MatFspTableComponent implements OnInit {
   }
 
   ngOnInit() {
+    /*
+    var t = 0 < 1;
+    if(t.toString()=="true") {
+      this.columnsToDisplay = this.columnDefinitions.concat("buttonsColumn");
+    }*/
+    this.columnsToDisplay = this.columnDefinitions.concat("buttonsColumn");
     this.dataSource.loadEntities('', null, 0, 3);
   }
   
@@ -36,16 +43,16 @@ export class MatFspTableComponent implements OnInit {
       distinctUntilChanged(),
       tap(() => {
         this.paginator.pageIndex = 0;
-        this.loadSuppliersPage();
+        this.loadEntitiesPage();
       })
     ).subscribe();
 
     merge(this.sort.sortChange, this.paginator.page).pipe(
-      tap(() => this.loadSuppliersPage())
+      tap(() => this.loadEntitiesPage())
     ).subscribe();
   }
 
-  loadSuppliersPage() {
+  loadEntitiesPage() {
     this.dataSource.loadEntities(
       this.input.nativeElement.value,
       this.sort.direction,
