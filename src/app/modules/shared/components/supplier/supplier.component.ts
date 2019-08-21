@@ -13,7 +13,7 @@ import { EntitiesDataSource } from '../../data-sources/entities-data-sourse';
   templateUrl: './supplier.component.html',
   styleUrls: ['./supplier.component.scss']
 })
-export class SupplierComponent implements AfterViewInit, OnInit {
+export class SupplierComponent implements OnInit {
  
   columnDefinitions: string[] = [
     'name',
@@ -31,11 +31,14 @@ export class SupplierComponent implements AfterViewInit, OnInit {
   ];
 
   dataSource: EntitiesDataSource<Supplier>;
-  numberOfRows: number = 5;
+  numberOfRows: number = 100;
+/*
+  dataSource: EntitiesDataSource<Supplier>;
+  
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  @ViewChild('input') input: ElementRef;
+  @ViewChild('input') input: ElementRef;*/
 
   constructor(private supplierService: SupplierService) {
   }
@@ -43,11 +46,9 @@ export class SupplierComponent implements AfterViewInit, OnInit {
 
   ngOnInit() {
     this.dataSource = new EntitiesDataSource<Supplier>(this.supplierService);
-
-    this.dataSource.loadEntities('','none',0,1);
   }
 
-
+/*
   ngAfterViewInit() {
     this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
 
@@ -63,11 +64,6 @@ export class SupplierComponent implements AfterViewInit, OnInit {
     merge(this.sort.sortChange, this.paginator.page).pipe(
       tap(() => this.loadSuppliersPage())
     ).subscribe();
-    /*this.paginator.page
-        .pipe(
-            tap(() => this.loadSuppliersPage())
-        )
-        .subscribe();*/
   }
 
   loadSuppliersPage() {
@@ -77,7 +73,7 @@ export class SupplierComponent implements AfterViewInit, OnInit {
       this.paginator.pageIndex,
       this.paginator.pageSize
     );
-  }
+  }*/
 
 
   addSupplier(supplier: Supplier) {

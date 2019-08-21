@@ -4,15 +4,15 @@
   <app-edit-supplier [supplier]="supplier" (updateSupplier)="updateSupplier($event)" ></app-edit-supplier>
   <p></p>
   <div>
-
+<!--
     <mat-form-field>
       <input matInput placeholder="Filter" #input>
     </mat-form-field>
 
     <div class="mat-elevation-z8">
-        <!--<div class="spinner-container" *ngIf="dataSource.loading$ | async">
-            <mat-spinner></mat-spinner>
-        </div>-->
+        //<div class="spinner-container" *ngIf="dataSource.loading$ | async">
+          //  <mat-spinner></mat-spinner>
+        //</div>
 
       <table mat-table [dataSource]="dataSource" matSort>
     
@@ -30,7 +30,13 @@
         [pageSize] = "1" 
         [pageSizeOptions]="[1, 3, 5, 10, 25, 100]">
       </mat-paginator>
-    </div>
+    </div>-->
+    <mat-fsp-table
+      [columnDefinitions]="columnDefinitions"
+      [columnNames]="columnNames"
+      [dataSource]="dataSource"
+      [numberOfRows]="numberOfRows">
+    </mat-fsp-table>
   </div>
 </div>
 
