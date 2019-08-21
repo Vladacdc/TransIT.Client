@@ -15,7 +15,6 @@ import { MalfunctionSubgroupReportComponent } from './components/report/malfunct
 @NgModule({
   declarations: [
     AnalystComponent,
-    GlobalIssueComponent,
     WebDataRocksPivot,
     ReportComponent,
     MalfunctionReportComponent,
