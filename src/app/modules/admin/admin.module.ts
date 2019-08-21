@@ -41,6 +41,8 @@ import { DeleteVehicleTypeComponent } from './component/vehicle-type/delete-vehi
 
 import { NgBootstrapFormValidationModule } from 'ng-bootstrap-form-validation';
 
+import { IssueLogComponent } from './component/issue-log/issue-log.component';
+
 import { SharedModule } from '../shared/shared.module';
 
 import { PostsComponent } from './component/posts/posts.component';
@@ -107,6 +109,8 @@ import { DeleteLocationComponent } from './component/locations/delete-location/d
     DeleteMalfuncGroupComponent,
     EditMalfuncComponent,
     DeleteMalfuncComponent,
+    // ====Issue===
+    IssueLogComponent,
     // ====Post===
     PostsComponent,
     CreatePostComponent,
