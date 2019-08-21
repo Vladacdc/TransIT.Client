@@ -50,10 +50,12 @@ import { MatDatepickerModule,
          MatInputModule,
          MatTableModule,
          MatPaginatorModule,
-         MatSortModule} from '@angular/material';
+         MatSortModule,
+         MatProgressSpinnerModule} from '@angular/material';
 
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 import { MatFspTableComponent } from './components/tables/mat-fsp-table/mat-fsp-table.component';
+import { SuppliersDataSource } from './data-sources/suppliers-data-sourse';
 
 @NgModule({
   declarations: [
@@ -87,6 +89,7 @@ import { MatFspTableComponent } from './components/tables/mat-fsp-table/mat-fsp-
     MatTableModule,
     MatPaginatorModule,
     MatSortModule,
+    MatProgressSpinnerModule,
     CommonModule,
     ReactiveFormsModule,
     CommonModule,
@@ -130,7 +133,8 @@ import { MatFspTableComponent } from './components/tables/mat-fsp-table/mat-fsp-
     UserService,
     VehicleTypeService,
     VehicleService,
-    StatisticsService
+    StatisticsService,
+    SuppliersDataSource,
   ]
 })
 export class SharedModule {}

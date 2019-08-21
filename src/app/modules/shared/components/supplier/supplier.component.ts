@@ -1,54 +1,84 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { SupplierService } from 'src/app/modules/shared/services/supplier.service';
 import { Supplier } from 'src/app/modules/shared/models/supplier';
-import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
+import { Observable, fromEvent, merge } from 'rxjs';
+import { SuppliersDataSource } from '../../data-sources/suppliers-data-sourse';
+import { MatPaginator } from '@angular/material/paginator';
+import { tap, debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { MatSort } from '@angular/material/sort';
+
 
 @Component({
   selector: 'app-supplier',
   templateUrl: './supplier.component.html',
   styleUrls: ['./supplier.component.scss']
 })
-export class SupplierComponent implements OnInit {
-  suppliers: Supplier[];
-  supplier: Supplier;
-  
-  protected country: string;
-  protected currency: string;
-  @Input() isVisible: boolean;
-
-  constructor(private service: SupplierService, private router: Router) {}
-  _url = this.router.url.substring(1, this.router.url.length - 1);
-
+export class SupplierComponent implements AfterViewInit, OnInit {
+ 
   columnDefinitions: string[] = [
     'name',
     'fullName',
-    'country.name',
-    'currency.fullName',
+    //'country.name',
+    //'currency.fullName',
     'edrpou'
   ];
-
   columnNames: string[] = [
     'Коротка назва',
     'Повна назва',
-    'Країна',
-    'Валюта',
+    //'Країна',
+    //'Валюта',
     'ЄДРПОУ'
   ];
 
-  observableData: Observable<Supplier[]>;
+  dataSource: SuppliersDataSource;
+  numberOfRows: number = 5;
 
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild('input') input: ElementRef;
+
+  constructor(private supplierService: SupplierService) {
+  }
 
 
   ngOnInit() {
-    this._url = this._url.substring(0, this._url.indexOf('/'));
-    this.isVisibleCheck();
-    if (this._url === 'admin') {
-      //add buttons
-    }
+    this.dataSource = new SuppliersDataSource(this.supplierService);
 
-    this.observableData = this.service.getEntities();
+    this.dataSource.loadSuppliers('','none',0,1);
   }
+
+
+  ngAfterViewInit() {
+    this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
+
+    fromEvent(this.input.nativeElement,'keyup').pipe(
+      debounceTime(150),
+      distinctUntilChanged(),
+      tap(() => {
+        this.paginator.pageIndex = 0;
+        this.loadSuppliersPage();
+      })
+    ).subscribe();
+
+    merge(this.sort.sortChange, this.paginator.page).pipe(
+      tap(() => this.loadSuppliersPage())
+    ).subscribe();
+    /*this.paginator.page
+        .pipe(
+            tap(() => this.loadSuppliersPage())
+        )
+        .subscribe();*/
+  }
+
+  loadSuppliersPage() {
+    this.dataSource.loadSuppliers(
+      this.input.nativeElement.value,
+      this.sort.direction,
+      this.paginator.pageIndex,
+      this.paginator.pageSize
+    );
+  }
+
 
   addSupplier(supplier: Supplier) {
     
@@ -63,6 +93,6 @@ export class SupplierComponent implements OnInit {
   }
 
   isVisibleCheck() {
-    this.isVisible = this._url === 'admin';
+    
   }
 }
