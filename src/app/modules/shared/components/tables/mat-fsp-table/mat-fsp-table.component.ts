@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Input, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, ElementRef, ContentChildren } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { EntitiesDataSource } from '../../../data-sources/entities-data-sourse';
@@ -18,6 +18,8 @@ export class MatFspTableComponent implements OnInit {
   @Input() dataSource: EntitiesDataSource<any>;
   @Input() numberOfRows: number = 100;
 
+  @ContentChildren('button') buttons: any;
+
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild('input') input: ElementRef;
@@ -31,11 +33,19 @@ export class MatFspTableComponent implements OnInit {
     if(t.toString()=="true") {
       this.columnsToDisplay = this.columnDefinitions.concat("buttonsColumn");
     }*/
-    this.columnsToDisplay = this.columnDefinitions.concat("buttonsColumn");
+    //this.columnsToDisplay = this.columnDefinitions.concat("buttonsColumn");
+    this.columnsToDisplay = this.columnDefinitions;
     this.dataSource.loadEntities('', null, 0, 3);
   }
   
   ngAfterViewInit() {
+    
+    setTimeout(() => {
+      if(this.buttons.length > 0) {
+        this.columnsToDisplay = this.columnsToDisplay.concat("buttonsColumn");
+      }
+    });
+
     this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
 
     fromEvent(this.input.nativeElement,'keyup').pipe(

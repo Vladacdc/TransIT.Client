@@ -5,8 +5,6 @@
       <input matInput placeholder="Filter" #input>
     </mat-form-field>
 
-    <button mat-flat-button>Create</button>
-
     <table mat-table [dataSource]="dataSource" matSort>
 
       <ng-container *ngFor="let colDef of columnDefinitions; let i = index" [matColumnDef] = "colDef">
