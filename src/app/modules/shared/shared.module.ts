@@ -92,6 +92,7 @@ import { PartsInComponent } from './components/dictionaries/parts-in/parts-in.co
     NgBootstrapFormValidationModule,
   ],
   exports: [
+    PartsInComponent,
     BreadcrumbComponent,
     SupplierComponent,
     CreateSupplierComponent,

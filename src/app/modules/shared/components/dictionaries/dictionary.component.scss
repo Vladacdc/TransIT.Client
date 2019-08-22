@@ -1,9 +1,18 @@
-.caption {
-  caption-side: bottom;
-  align-items: center;
-  color: black;
-  font-size: 2rem;
-}
-.captBox {
-  width: 100%;
+.container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  flex-basis: 49%;
+  align-items: stretch;
+  justify-content: stretch;
+
+  app-country{
+    min-height: 50%;
+  }
+  app-currency{
+    min-height: 50%;
+  }
+  app-parts-in{
+    min-height: 50%;
+  }
 }
