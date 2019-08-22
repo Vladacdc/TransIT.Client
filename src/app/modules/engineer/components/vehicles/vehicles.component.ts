@@ -1,8 +1,9 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, Input } from '@angular/core';
 import { Vehicle } from 'src/app/modules/shared/models/vehicle';
 import { VehicleService } from 'src/app/modules/shared/services/vehicle.service';
 import * as moment from 'moment';
 import { DatatableSettings } from 'src/app/modules/shared/helpers/datatable-settings';
+import { IssueService } from 'src/app/modules/shared/services/issue.service';
 import { Router } from '@angular/router';
 
 declare const $;
@@ -13,13 +14,11 @@ declare const $;
   styleUrls: ['./vehicles.component.scss']
 })
 export class VehiclesComponent implements OnInit {
+  @Input()
   vehicles: Vehicle[] = [];
   table: DataTables.Api;
   selectedVehicle: Vehicle;
-
-  constructor(private vehicleService: VehicleService, private router: Router, ) {}
-
-  private readonly tableConfig = new DatatableSettings({
+  tableConfig = new DatatableSettings({
     columns: [
       { title: 'Тип транспорту', data: 'vehicleType.name', defaultContent: '' },
       { title: 'Vin-код', data: 'vincode', defaultContent: '' },
@@ -53,9 +52,7 @@ export class VehiclesComponent implements OnInit {
       {
         targets: -1,
         data: null,
-        defaultContent: `<button class="edit btn" data-toggle="modal" data-target="#editVehicle"><i class="fas fa-edit"></i></button>
-           <button class="delete btn" data-toggle="modal" data-target="#deleteVehicle"><i class="fas fas fa-trash-alt"></i></button>
-           <button class="info btn" data-target="#infoVehicle"><i class="fas fa-info-circle"></i></button>`
+        defaultContent: `<button class="info btn"><i class="fas fa-info-circle"></i></button>`
       }
     ],
     language: {
@@ -63,10 +60,14 @@ export class VehiclesComponent implements OnInit {
     }
   });
 
+  constructor(
+    private vehicleService: VehicleService,
+    private issueService: IssueService,
+    private router: Router,
+    ) {}
+
   ngOnInit() {
     this.table = $('#vehicles').DataTable(this.tableConfig);
-    $('#vehicles tbody').on('click', '.edit', this.selectEditItem(this));
-    $('#vehicles tbody').on('click', '.delete', this.selectDeleteItem(this));
     $('#vehicles tbody').on('click', '.info', this.selectInfoItem(this));
   }
 
@@ -76,43 +77,14 @@ export class VehiclesComponent implements OnInit {
     });
   }
 
-  selectEditItem(component: any) {
-    return function() {
-      const data = component.table.row($(this).parents('tr')).data();
-      component.selectedVehicle = data;
-    };
-  }
-
-  selectDeleteItem(component: any) {
-    return function() {
-      component.selectedVehicle = component.table.row($(this).parents('tr')).data();
-    };
-  }
-
   selectInfoItem(component: VehiclesComponent) {
     return function() {
-      component.router.navigate(['/admin/info-vehicle']);
+      component.router.navigate(['/engineer/info-vehicle']);
     };
   }
 
-  addVehicle(vehicle: Vehicle) {
-    this.vehicles.push(vehicle);
-    this.table.draw();
-  }
-
-  deleteVehicle(vehicle: Vehicle) {
-    this.vehicles = this.vehicles.filter(v => v.id !== vehicle.id);
-    this.table.draw();
-  }
-
-  updateVehicle(vehicle: Vehicle) {
+  infoVehicle(vehicle: Vehicle) {
     this.vehicles[this.vehicles.findIndex(i => i.id === vehicle.id)] = vehicle;
     this.table.draw();
   }
-
-  // infoVehicle(vehicle: Vehicle)
-  // {
-  //   this.vehicles[this.vehicles.findIndex(i => i.id === vehicle.id)] = vehicle;
-  //   this.table.draw();
-  // }
 }

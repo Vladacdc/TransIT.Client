@@ -73,6 +73,7 @@ import { LocationsComponent } from './component/locations/locations.component';
 import { CreateLocationComponent } from './component/locations/create-location/create-location.component';
 import { EditLocationComponent } from './component/locations/edit-location/edit-location.component';
 import { DeleteLocationComponent } from './component/locations/delete-location/delete-location.component';
+import { MatTableModule, MatInputModule, MatFormFieldModule, MatPaginatorModule, MatSortModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -148,6 +149,11 @@ import { DeleteLocationComponent } from './component/locations/delete-location/d
     FormsModule,
     DataTablesModule,
     HttpClientModule,
+    MatTableModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatPaginatorModule,
+    MatSortModule,
     ReactiveFormsModule,
     NgxMaskModule.forRoot(),
     NgBootstrapFormValidationModule,

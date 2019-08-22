@@ -7,7 +7,23 @@ import { DatePipe } from '@angular/common';
 import { NUM_FIELD_ERRORS, LET_NUM_FIELD_ERRORS } from 'src/app/custom-errors';
 import { LocationService } from 'src/app/modules/shared/services/location.service';
 import { Location } from 'src/app/modules/shared/models/location';
+import { MalfunctionService } from 'src/app/modules/shared/services/malfunction.service';
+import { MalfunctionGroupService } from 'src/app/modules/shared/services/malfunction-group.service';
+import { MalfunctionSubgroupService } from 'src/app/modules/shared/services/malfunction-subgroup.service';
+import { StatisticsService } from 'src/app/modules/shared/services/statistics.service';
 
+const ELEMENT_DATA: any[] = [
+  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
+  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
+  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
+  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
+  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
+  {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
+  {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
+  {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
+  {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
+  {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
+];
 
 @Component({
   selector: 'app-info-vehicle',
@@ -21,44 +37,21 @@ export class InfoVehicleComponent implements OnInit {
     if (!vehicle) {
       return;
     }
-    this.vehicleForm.patchValue({
-      ...vehicle,
-      vehicleType: vehicle.vehicleType.name,
-      location: vehicle.location && vehicle.location.name,
-      commissioningDate: this.datePipe.transform(vehicle.commissioningDate, 'yyyy-MM-dd'),
-      warrantyEndDate: this.datePipe.transform(vehicle.warrantyEndDate, 'yyyy-MM-dd')
-    });
     this.selectedVehicle = vehicle;
-  }
+  };
+  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
+  dataSource = ELEMENT_DATA;
 
   constructor(
-    private formBuilder: FormBuilder,
-    private serviceVehicleType: VehicleTypeService,
-    private serviceLocation: LocationService,
-    private datePipe: DatePipe,
-  ) { }
-  @ViewChild('close') closeDiv: ElementRef;
-  @Output() infoVehicle = new EventEmitter<Vehicle>();
-
+    private malfunctionService: MalfunctionService,
+    private malfunctionGroupService: MalfunctionGroupService,
+    private malfunctionSubgroupService: MalfunctionSubgroupService,
+    private vechicleTypeService: VehicleTypeService,
+    private statisticsService: StatisticsService
+  ) {
+  }
   selectedVehicle = new Vehicle({});
-  vehicleForm: FormGroup;
-  vehicleTypeList: VehicleType[] = [];
-  locationList: Location[] = [];
-
-  CustomNumErrorMessages = NUM_FIELD_ERRORS;
-  CustomLetNumErrorMessages = LET_NUM_FIELD_ERRORS;
 
   ngOnInit() {
-    $('#infoVehicle').on('hidden.bs.modal', () => {
-      this.vehicleForm.patchValue({
-        ...this.selectedVehicle,
-        vehicleType: this.selectedVehicle.vehicleType.name,
-        location: this.selectedVehicle.location && this.selectedVehicle.location.name,
-        commissioningDate: this.datePipe.transform(this.selectedVehicle.commissioningDate, 'yyyy-MM-dd'),
-        warrantyEndDate: this.datePipe.transform(this.selectedVehicle.warrantyEndDate, 'yyyy-MM-dd')
-      });
-      $(this).find('form').trigger('reset');
-    });
-    console.log("info-vehicle-hello2");
-  }
+  };
 }
