@@ -1,10 +1,6 @@
 import { Component, OnInit, Input, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { SupplierService } from 'src/app/modules/shared/services/supplier.service';
 import { Supplier } from 'src/app/modules/shared/models/supplier';
-import { Observable, fromEvent, merge } from 'rxjs';
-import { MatPaginator } from '@angular/material/paginator';
-import { tap, debounceTime, distinctUntilChanged } from 'rxjs/operators';
-import { MatSort } from '@angular/material/sort';
 import { EntitiesDataSource } from '../../data-sources/entities-data-sourse';
 
 
@@ -31,14 +27,7 @@ export class SupplierComponent implements OnInit {
   ];
 
   dataSource: EntitiesDataSource<Supplier>;
-  numberOfRows: number = 100;
-/*
-  dataSource: EntitiesDataSource<Supplier>;
-  
-
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
-  @ViewChild('input') input: ElementRef;*/
+  numberOfRows: number = 100;  //needs to replace with getting data from backend
 
   constructor(private supplierService: SupplierService) {
   }
@@ -47,34 +36,6 @@ export class SupplierComponent implements OnInit {
   ngOnInit() {
     this.dataSource = new EntitiesDataSource<Supplier>(this.supplierService);
   }
-
-/*
-  ngAfterViewInit() {
-    this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
-
-    fromEvent(this.input.nativeElement,'keyup').pipe(
-      debounceTime(150),
-      distinctUntilChanged(),
-      tap(() => {
-        this.paginator.pageIndex = 0;
-        this.loadSuppliersPage();
-      })
-    ).subscribe();
-
-    merge(this.sort.sortChange, this.paginator.page).pipe(
-      tap(() => this.loadSuppliersPage())
-    ).subscribe();
-  }
-
-  loadSuppliersPage() {
-    this.dataSource.loadEntities(
-      this.input.nativeElement.value,
-      this.sort.direction,
-      this.paginator.pageIndex,
-      this.paginator.pageSize
-    );
-  }*/
-
 
   addSupplier(supplier: Supplier) {
     

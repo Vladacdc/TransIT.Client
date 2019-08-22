@@ -4,6 +4,7 @@ import { MatSort } from '@angular/material/sort';
 import { EntitiesDataSource } from '../../../data-sources/entities-data-sourse';
 import { fromEvent, merge } from 'rxjs';
 import { debounceTime, distinctUntilChanged, tap } from 'rxjs/operators';
+import { EditSupplierComponent } from '../../supplier/edit-supplier/edit-supplier.component';
 
 @Component({
   selector: 'mat-fsp-table',
@@ -18,22 +19,23 @@ export class MatFspTableComponent implements OnInit {
   @Input() dataSource: EntitiesDataSource<any>;
   @Input() numberOfRows: number = 100;
 
-  @ContentChildren('button') buttons: any;
+  //@ContentChildren('button') buttons: any;
+  @ContentChildren('info') info: any;
+  @ContentChildren('edit') edit: any;
+  @ContentChildren('delete') delete: any;
+  //@ContentChildren('btn') btn: any;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild('input') input: ElementRef;
+  //@ViewChild('thisbtn') thisbtn: any;
+
+  //@ViewChild('editsupplier') editsupplier : EditSupplierComponent;
 
   constructor() {
   }
 
   ngOnInit() {
-    /*
-    var t = 0 < 1;
-    if(t.toString()=="true") {
-      this.columnsToDisplay = this.columnDefinitions.concat("buttonsColumn");
-    }*/
-    //this.columnsToDisplay = this.columnDefinitions.concat("buttonsColumn");
     this.columnsToDisplay = this.columnDefinitions;
     this.dataSource.loadEntities('', null, 0, 3);
   }
@@ -41,7 +43,10 @@ export class MatFspTableComponent implements OnInit {
   ngAfterViewInit() {
     
     setTimeout(() => {
-      if(this.buttons.length > 0) {
+      //this.editsupplier=this.edit;
+      //this.thisbtn=this.btn.first;
+      //if(this.buttons.length > 0) {
+      if(this.info.length + this.edit.length + this.delete.length > 0) {
         this.columnsToDisplay = this.columnsToDisplay.concat("buttonsColumn");
       }
     });

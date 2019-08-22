@@ -1,42 +1,15 @@
 <div class="table-background border">
-  <app-create-supplier (createSupplier)="addSupplier($event)" ></app-create-supplier>
-  <app-delete-supplier [supplier]="supplier" (deleteSupplier)="deleteSupplier($event)" ></app-delete-supplier>
-  <app-edit-supplier [supplier]="supplier" (updateSupplier)="updateSupplier($event)" ></app-edit-supplier>
   <p></p>
   <div>
-<!--
-    <mat-form-field>
-      <input matInput placeholder="Filter" #input>
-    </mat-form-field>
-
-    <div class="mat-elevation-z8">
-        //<div class="spinner-container" *ngIf="dataSource.loading$ | async">
-          //  <mat-spinner></mat-spinner>
-        //</div>
-
-      <table mat-table [dataSource]="dataSource" matSort>
-    
-        <ng-container *ngFor="let colDef of columnDefinitions; let i = index" [matColumnDef] = "colDef">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header> {{columnNames[i]}} </th>
-          <td mat-cell *matCellDef="let row"> {{row[colDef]}} </td>
-        </ng-container>
-      
-        <tr mat-header-row *matHeaderRowDef="columnDefinitions"></tr>
-        <tr mat-row *matRowDef="let row; columns: columnDefinitions;"></tr>
-      </table>
-      
-      <mat-paginator 
-        [length] = "numberOfRows"
-        [pageSize] = "1" 
-        [pageSizeOptions]="[1, 3, 5, 10, 25, 100]">
-      </mat-paginator>
-    </div>-->
     <mat-fsp-table
       [columnDefinitions]="columnDefinitions"
       [columnNames]="columnNames"
       [dataSource]="dataSource"
       [numberOfRows]="numberOfRows">
-      <button mat-flat-button #button>Info</button>           
+        <!--<app-create-supplier (createSupplier)="addSupplier($event)" #create></app-create-supplier>
+        <app-delete-supplier [supplier]="supplier" (deleteSupplier)="deleteSupplier($event)" #delete></app-delete-supplier>
+        <button mat-flat-button #btn>Info</button>
+        <app-edit-supplier [supplier]="supplier" (updateSupplier)="updateSupplier($event)" #edit></app-edit-supplier>   -->    
     </mat-fsp-table>
   </div>
 </div>
