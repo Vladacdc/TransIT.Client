@@ -1,0 +1,43 @@
+mat-paginator {
+  background: #efefef79;
+}
+
+td, th {
+  width: 20%;
+}
+
+table {
+  width: 100%;
+  background: #efefef79;
+}
+
+tr.example-detail-row {
+  height: 0;
+}
+
+tr.example-element-row:not(.example-expanded-row):hover {
+  background: rgba(255, 255, 255, 0.63)
+}
+
+tr.example-element-row:not(.example-expanded-row):active {
+  background: #efefef;
+}
+
+.example-element-row td {
+  border-bottom-width: 0;
+}
+
+.example-element-detail {
+  overflow: hidden;
+  width: 100%;
+}
+
+.mat-column-expandedDetail {
+  padding: 0%;
+  margin: 0%;
+}
+
+.mat-cell.cdk-column-expandedDetail.mat-column-expandedDetail.ng-tns-c10-9.ng-star-inserted {
+  padding: 0%;
+  margin: 0%;
+}

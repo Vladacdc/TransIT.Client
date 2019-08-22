@@ -1,0 +1,90 @@
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createVehicle">
+  <i class="fas fa-plus"></i> Cтворити транспорт
+</button>
+
+<div class="modal fade" id="createVehicle" tabindex="-1" vehicleType="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-lg" vehicleType="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Створити транспорт</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]=vehicleForm>
+          <div class="row">
+            <div class="form-group col-md-6 ">
+              <label class="required-field">Тип транспорту:</label>
+              <select formControlName="vehicleType" class="form-control">
+                <option hidden value="" disabled selected>Оберіть тип транспорту</option>
+                <option *ngFor="let item of vehicleTypeList" [value]="item.name">{{ item.name }}</option>
+              </select>
+            </div>
+
+            <div class="form-group col-md-6 " [customErrorMessages]="CustomLetNumErrorMessages">
+              <label class="required-field">Vin-код:</label>
+              <input type="text" class="form-control" formControlName="vincode" placeholder="WP0CA29863U153381"
+                autocomplete="off" />
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="form-group col-md-6 " [customErrorMessages]="CustomNumErrorMessages">
+              <label>Інвентарний номер:</label>
+              <input type="text" class="form-control" formControlName="inventoryId"
+                placeholder="Введіть інвентарний номер" autocomplete="off" />
+            </div>
+            <div class="form-group col-md-6 " [customErrorMessages]="CustomLetNumErrorMessages">
+              <label class="required-field">Реєстраційний номер:</label>
+              <input type="text" class="form-control" formControlName="regNum" placeholder="AA1234AA"
+                autocomplete="off" />
+            </div>
+          </div>
+
+
+          <div class="row">
+            <div class="form-group col-md-6 " [customErrorMessages]="CustomLetNumErrorMessages">
+              <label class="required-field">Бренд:</label>
+              <input type="text" class="form-control" formControlName="brand" placeholder="Введіть бренд"
+                autocomplete="off" />
+            </div>
+
+            <div class="form-group col-md-6 ">
+              <label>Модель:</label>
+              <input type="text" class="form-control" formControlName="model" placeholder="Введіть модель"
+                autocomplete="off" />
+            </div>
+          </div>
+
+          <div class="form-group ">
+            <label>Місцезнаходження:</label>
+            <select formControlName="location" class="form-control">
+              <option hidden value="" disabled selected>Оберіть місцезнаходження</option>
+              <option *ngFor="let item of locationList" [value]="item.name">{{ item.name }}</option>
+            </select>
+          </div>
+
+          <div class="row">
+            <div class="form-group col-md-6 ">
+              <label class="required-field">Дата введення в експлуатацію:</label>
+              <input type="date" class="form-control" formControlName="commissioningDate" placeholder="Введіть модель"
+                autocomplete="off" />
+            </div>
+
+            <div class="form-group col-md-6 ">
+              <label class="required-field">Дата закінчення гарантії:</label>
+              <input type="date" class="form-control" formControlName="warrantyEndDate" placeholder="Введіть модель"
+                autocomplete="off" />
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button #close type="button" class="btn btn-secondary" data-dismiss="modal">Скасувати</button>
+        <button type="button" class="btn btn-primary" (click)="clickSubmit()">Зберегти</button>
+      </div>
+    </div>
+  </div>
+</div>

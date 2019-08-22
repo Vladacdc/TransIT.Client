@@ -1,0 +1,102 @@
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#createIssue">
+  <i class="fas fa-plus"></i> Створити заявку
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="createIssue" tabindex="-1" role="dialog" aria-labelledby="CreateIssue" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Створити заявку</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="issueForm" (validSubmit)="onSubmit()">
+          <div class="form-group">
+            <label class="required-field">Дата заявки</label>
+            <input type="date" class="form-control" formControlName="date" placeholder="Дата заявки" />
+          </div>
+          <div class="form-group">
+            <label class="required-field">Вид транспорту</label>
+            <ng-select
+              [items]="vehicleTypes"
+              bindLabel="name"
+              formControlName="vehicleType"
+              placeholder="Виберіть вид транспорт"
+              notFoundText="Не знайдено"
+              (change)="reload()"
+              (clear)="reload()"
+            ></ng-select>
+          </div>
+          <div class="form-group">
+            <label class="required-field">Транспорт</label>
+            <ng-select
+              [items]="vehiclesFilteredByTypes"
+              bindLabel="name"
+              formControlName="vehicle"
+              placeholder="Виберіть транспорт"
+              notFoundText="Не знайдено"
+            ></ng-select>
+          </div>
+          <div class="form-group">
+            <label>Група несправності</label>
+            <ng-select
+              [items]="malfunctionGroups"
+              bindLabel="name"
+              formControlName="malfunctionGroup"
+              placeholder="Виберіть групу несправності"
+              notFoundText="не знайдено"
+              (change)="reload()"
+              (clear)="reload()"
+            ></ng-select>
+          </div>
+          <div class="form-group">
+            <label>Підгрупа несправності</label>
+            <ng-select
+              [items]="malfunctionSubgroupsFilteredByGroup"
+              bindLabel="name"
+              formControlName="malfunctionSubgroup"
+              placeholder="Виберіть підгрупу несправності"
+              notFoundText="не знайдено"
+              (change)="reload()"
+              (clear)="reload()"
+            ></ng-select>
+          </div>
+          <div class="form-group">
+            <label>Несправність</label>
+            <ng-select
+              [items]="malfunctionsFilteredByGroup"
+              bindLabel="name"
+              formControlName="malfunction"
+              placeholder="Виберіть несправність"
+              notFoundText="не знайдено"
+              (change)="reload()"
+              (clear)="reload()"
+            ></ng-select>
+          </div>
+
+          <div class="form-group">
+            <label class="required-field">Опис несправності</label>
+            <textarea class="form-control" formControlName="summary" placeholder="Опишіть вашу поломку"></textarea>
+          </div>
+          <button hidden type="submit" #submit data-toggle="modal" data-target="#createIssue"></button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="closeModal()" data-dismiss="modal">Скасувати</button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          (click)="clickSubmit(submit)"
+          form="issueForm"
+          [disabled]="issueForm.invalid"
+        >
+          Створити
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
