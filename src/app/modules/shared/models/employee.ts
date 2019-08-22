@@ -1,5 +1,6 @@
 import { TEntity } from '../../core/models/entity/entity';
 import { Post } from './post';
+import { User } from './user';
 
 export class Employee extends TEntity<Employee> {
   firstName: string;
@@ -8,6 +9,7 @@ export class Employee extends TEntity<Employee> {
   shortName: string;
   boardNumber: number;
   post: Post;
+  attachedUser: User;
 
   constructor(employee: Partial<Employee>) {
     super(employee);

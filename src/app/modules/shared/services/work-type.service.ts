@@ -7,7 +7,7 @@ import { WorkType } from '../models/work-type' ;
     providedIn: 'root'
 })
 export class WorkTypeService extends CrudService<WorkType> {
-    protected readonly serviceUrl= `${environment.apiUrl}/workType`;
+    protected readonly serviceUrl = `${environment.apiUrl}/workType`;
     protected readonly datatableUrl = `${environment.apiUrl}/datatable/workType`;
 
     protected mapEntity(entity: WorkType): WorkType {

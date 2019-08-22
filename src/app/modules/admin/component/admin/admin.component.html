@@ -1,68 +1,43 @@
 <app-navbar>
-  <app-admin-navbar></app-admin-navbar>
+    <app-admin-navbar></app-admin-navbar>
 </app-navbar>
 <div class="container page">
-  <div class="border d-none d-md-flex ">
-    <nav class="nav nav-tabs " id="nav-tab" role="tablist">
-      <a class="nav-item nav-link" routerLink="/admin/users" routerLinkActive="active" data-toggle="tab" role="tab">
-        <i class="fas fa-users"></i> Користувачі</a
-      >
-      <a class="nav-item nav-link" routerLink="/admin/vehicles" routerLinkActive="active" data-toggle="tab" role="tab">
-        <i class="fas fa-bus"></i> Транспорт</a
-      >
-      <a
-        class="nav-item nav-link"
-        routerLink="/admin/vehicle-types"
-        routerLinkActive="active"
-        data-toggle="tab"
-        role="tab"
-      >
-        <i class="fas fa-truck-monster"></i> Типи транспорту</a
-      >
-      <a
-        class="nav-item nav-link"
-        routerLink="/admin/malfunctions"
-        routerLinkActive="active"
-        data-toggle="tab"
-        role="tab"
-      >
-        <i class="fas fa-exclamation-triangle"></i> Несправності</a
-      >
-      <a class="nav-item nav-link" routerLink="/admin/actions" routerLinkActive="active" data-toggle="tab" role="tab">
-        <i class="fas fa-file-contract"></i> Дії</a
-      >
-      <a class="nav-item nav-link" routerLink="/admin/supplier" routerLinkActive="active" data-toggle="tab" role="tab">
-        <i class="fas fa-people-carry"></i> Постачальники</a
-      >
-      <a class="nav-item nav-link" routerLink="/admin/documents" routerLinkActive="active" data-toggle="tab" role="tab">
-        <i class="fa fa-folder-open"></i> Документи</a
-      >
-      <a
-        class="nav-item nav-link"
-        routerLink="/admin/dictionary"
-        routerLinkActive="active"
-        data-toggle="tab"
-        role="tab"
-      >
-        <i class="fas fa-book"></i> Довідники</a
-      >
-      <a class="nav-item nav-link" routerLink="/admin/employees" routerLinkActive="active" data-toggle="tab" role="tab">
-        <i class="fas fa-user-cog"></i> Працівники</a
-      >
-      <a class="nav-item nav-link" routerLink="/admin/posts" routerLinkActive="active" data-toggle="tab" role="tab">
-        <i class="fas fa-address-card"></i>Посади</a
-      >
-      <a class="nav-item nav-link" routerLink="/admin/locations" routerLinkActive="active" data-toggle="tab" role="tab">
-        <i class="fas fa-map-marked-alt"></i> Місцезнаходження</a
-      >
-    </nav>
-  </div>
+    <div class="border d-none d-md-flex ">
+        <nav class="nav nav-tabs " id="nav-tab" role="tablist">
+            <a class="nav-item nav-link" routerLink="/admin/users" routerLinkActive="active" data-toggle="tab" role="tab">
+                <i class="fas fa-users"></i> Користувачі</a>
+            <a class="nav-item nav-link" routerLink="/admin/vehicles" routerLinkActive="active" data-toggle="tab" role="tab">
+                <i class="fas fa-bus"></i> Транспорт</a>
+            <a class="nav-item nav-link" routerLink="/admin/vehicle-types" routerLinkActive="active" data-toggle="tab" role="tab">
+                <i class="fas fa-truck-monster"></i> Типи транспорту</a>
+            <a class="nav-item nav-link" routerLink="/admin/malfunctions" routerLinkActive="active" data-toggle="tab" role="tab">
+                <i class="fas fa-exclamation-triangle"></i> Несправності</a>
+            <a class="nav-item nav-link" routerLink="/shared/workTypes" routerLinkActive="active" data-toggle="tab" role="tab">
+                <i class="fa fa-wrench"></i>Типи робіт
+            </a>
 
-  <app-breadcrumb></app-breadcrumb>
-
-  <div class="tab-content mb-5">
-    <div class="tab-pane fade show active" role="tabpanel" aria-labelledby="nav-home-tab">
-      <router-outlet></router-outlet>
+            <a class="nav-item nav-link" routerLink="/admin/actions" routerLinkActive="active" data-toggle="tab" role="tab">
+                <i class="fas fa-file-contract"></i> Дії</a>
+            <a class="nav-item nav-link" routerLink="/admin/supplier" routerLinkActive="active" data-toggle="tab" role="tab">
+                <i class="fas fa-people-carry"></i> Постачальники</a>
+            <a class="nav-item nav-link" routerLink="/admin/documents" routerLinkActive="active" data-toggle="tab" role="tab">
+                <i class="fa fa-folder-open"></i> Документи</a>
+            <a class="nav-item nav-link" routerLink="/admin/dictionary" routerLinkActive="active" data-toggle="tab" role="tab">
+                <i class="fas fa-book"></i> Довідники</a>
+            <a class="nav-item nav-link" routerLink="/admin/employees" routerLinkActive="active" data-toggle="tab" role="tab">
+                <i class="fas fa-user-cog"></i> Працівники</a>
+            <a class="nav-item nav-link" routerLink="/admin/posts" routerLinkActive="active" data-toggle="tab" role="tab">
+                <i class="fas fa-address-card"></i>Посади</a>
+            <a class="nav-item nav-link" routerLink="/admin/locations" routerLinkActive="active" data-toggle="tab" role="tab">
+                <i class="fas fa-map-marked-alt"></i> Місцезнаходження</a>
+        </nav>
     </div>
-  </div>
+
+    <app-breadcrumb></app-breadcrumb>
+
+    <div class="tab-content mb-5">
+        <div class="tab-pane fade show active" role="tabpanel" aria-labelledby="nav-home-tab">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
 </div>

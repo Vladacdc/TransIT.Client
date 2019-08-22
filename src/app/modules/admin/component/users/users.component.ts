@@ -18,6 +18,7 @@ export class UsersComponent implements OnInit {
     language: {
       url: 'assets/language.json'
     },
+    scrollX: true,
     columns: [
       {
         title: 'Прізвище'
@@ -43,6 +44,9 @@ export class UsersComponent implements OnInit {
       },
       {
         title: 'Статус'
+      },
+      {
+        title: 'Працівник'
       },
       {
         title: 'Дії',
@@ -76,6 +80,7 @@ export class UsersComponent implements OnInit {
       i.phoneNumber,
       i.role.transName,
       i.isActive ? 'активний' : 'неактивний',
+      i.employee !== null ? i.employee.boardNumber : 'немає',
       i.userName !== this.userLogin
         ? `<button id="find-user-${
             i.id

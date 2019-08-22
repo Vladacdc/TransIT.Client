@@ -10,9 +10,9 @@ import { FormsModule } from '@angular/forms';
 
 import { RegisterComponent } from './components/register/register.component';
 import { IssuesComponent } from './components/issues/issues.component';
-import { CreateIssueComponent } from './components/create-issue/create-issue.component';
-import { IssueDetailsComponent } from './components/issue-details/issue-details.component';
-import { DeleteIssueComponent } from './components/delete-issue/delete-issue.component';
+import { CreateIssueComponent } from './components/issues/create-issue/create-issue.component';
+import { IssueDetailsComponent } from './components/issues/issue-details/issue-details.component';
+import { DeleteIssueComponent } from './components/issues/delete-issue/delete-issue.component';
 import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
