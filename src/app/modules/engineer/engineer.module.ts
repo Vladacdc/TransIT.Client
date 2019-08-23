@@ -7,7 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { CoreModule } from '../core/core.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DataTablesModule } from 'angular-datatables';
-import { EditIssueComponent } from './components/edit-issue/edit-issue.component';
+import { EditIssueComponent } from './components/issues/edit-issue/edit-issue.component';
 import { SharedModule } from '../shared/shared.module';
 import { GlobalDocumentComponent } from '../shared/components/global-document/global-document.component';
 import { IssueLogComponent } from '../shared/components/issue-log/issue-log.component';
@@ -19,7 +19,6 @@ import { IssueLogDocumentsComponent } from './components/issue-log-components/is
 import { DocumentComponent } from '../shared/components/global-document/document/document.component';
 import { SupplierComponent } from '../shared/components/supplier/supplier.component';
 import { CreateDocumentComponent } from './components/create-document/create-document.component';
-import { InfoVehicleComponent } from './components/info-vehicle/info-vehicle.component';
 import { VehiclesComponent } from './components/vehicles/vehicles.component';
 import { MatTableModule, MatInputModule, MatFormFieldModule, MatPaginatorModule, MatSortModule } from '@angular/material';
 
@@ -36,7 +35,6 @@ const routes: Routes = [
       { path: 'documents', component: GlobalDocumentComponent },
       { path: 'supplier', component: SupplierComponent},
       { path: 'issue-log', component: IssueLogComponent },
-      { path: 'info-vehicle', component: InfoVehicleComponent},
       { path: 'vehicles', component: VehiclesComponent},
       { path: '**', redirectTo: 'issues' }
     ]
@@ -64,7 +62,6 @@ const routes: Routes = [
     NestedIssueLogsComponent,
     IssueLogDocumentsComponent,
     CreateDocumentComponent,
-    InfoVehicleComponent,
     VehiclesComponent
   ]
 })

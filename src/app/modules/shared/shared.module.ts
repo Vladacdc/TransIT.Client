@@ -57,6 +57,11 @@ import { MatDatepickerModule,
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 import { MatFspTableComponent } from './components/tables/mat-fsp-table/mat-fsp-table.component';
 import { EntitiesDataSource } from './data-sources/entities-data-sourse';
+import { WorkTypeComponent } from './components/dictionaries/workType/work-type.component';
+import { WorkTypeService } from './services/work-type.service';
+import { CreateWorkTypeComponent } from './components/dictionaries/workType/create-work-type/create-work-type.component';
+import { EditWorkTypeComponent } from './components/dictionaries/workType/edit-work-type/edit-work-type.component';
+import { DeleteWorkTypeComponent } from './components/dictionaries/workType/delete-work-type/delete-work-type.component';
 
 
 @NgModule({
@@ -83,6 +88,10 @@ import { EntitiesDataSource } from './data-sources/entities-data-sourse';
     NestedDocumentComponent,
     IssueLogComponent,
     MatFspTableComponent,
+    WorkTypeComponent,
+    CreateWorkTypeComponent,
+    EditWorkTypeComponent,
+    DeleteWorkTypeComponent
   ],
   imports: [
     MatDatepickerModule,
@@ -116,6 +125,7 @@ import { EntitiesDataSource } from './data-sources/entities-data-sourse';
     CreateDocumentComponent,
     DocumentComponent,
     MatFspTableComponent,
+    WorkTypeComponent
   ],
   providers: [
     ActionTypeService,
@@ -138,6 +148,7 @@ import { EntitiesDataSource } from './data-sources/entities-data-sourse';
     VehicleService,
     StatisticsService,
     EntitiesDataSource,
+    WorkTypeService
   ]
 })
 export class SharedModule {}

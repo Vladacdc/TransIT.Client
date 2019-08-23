@@ -12,21 +12,20 @@ import { MalfuncComponent } from './component/malfunctions/malfunc/malfunc.compo
 import { MalfuncGroupComponent } from './component/malfunctions/malfunc-group/malfunc-group.component';
 import { MalfunSubgroupComponent } from './component/malfunctions/malfun-subgroup/malfun-subgroup.component';
 import { CoreModule } from '../core/core.module';
-import { AdminNavbarComponent } from './component/admin-navbar/admin-navbar.component';
-import { CreateVehicleComponent } from './component/create-vehicle/create-vehicle.component';
-import {InfoVehicleComponent} from './component/info-vehicle/info-vehicle.component';
-import { EditVehicleComponent } from './component/edit-vehicle/edit-vehicle.component';
-import { DeleteVehicleComponent } from './component/delete-vehicle/delete-vehicle.component';
-import { CreateMalfuncGroupComponent } from './component/create-malfunc-group/create-malfunc-group.component';
-import { CreateMalfuncComponent } from './component/create-malfunc/create-malfunc.component';
-import { CreateMalfuncSubgroupComponent } from './component/create-malfunc-subgroup/create-malfunc-subgroup.component';
-import { EditMalfuncSubgroupComponent } from './component/edit-malfunc-subgroup/edit-malfunc-subgroup.component';
-import { DeleteMalfuncSubgroupComponent } from './component/delete-malfunc-subgroup/delete-malfunc-subgroup.component';
-import { EditMalfuncGroupComponent } from './component/edit-malfunc-group/edit-malfunc-group.component';
-import { DeleteMalfuncGroupComponent } from './component/delete-malfunc-group/delete-malfunc-group.component';
+import { AdminNavbarComponent } from './component/admin/admin-navbar/admin-navbar.component';
+import { CreateVehicleComponent } from './component/vehicles/create-vehicle/create-vehicle.component';
+import { EditVehicleComponent } from './component/vehicles/edit-vehicle/edit-vehicle.component';
+import { DeleteVehicleComponent } from './component/vehicles/delete-vehicle/delete-vehicle.component';
+import { CreateMalfuncComponent } from './component/malfunctions/malfunc/create-malfunc/create-malfunc.component';
+import { EditMalfuncComponent } from './component/malfunctions/malfunc/edit-malfunc/edit-malfunc.component';
+import { DeleteMalfuncComponent } from './component/malfunctions/malfunc/delete-malfunc/delete-malfunc.component';
+import { CreateMalfuncGroupComponent } from './component/malfunctions/malfunc-group/create-malfunc-group/create-malfunc-group.component';
+import { EditMalfuncGroupComponent } from './component/malfunctions/malfunc-group/edit-malfunc-group/edit-malfunc-group.component';
+import { DeleteMalfuncGroupComponent } from './component/malfunctions/malfunc-group/delete-malfunc-group/delete-malfunc-group.component';
+import { CreateMalfuncSubgroupComponent } from './component/malfunctions/malfun-subgroup/create-malfunc-subgroup/create-malfunc-subgroup.component';
+import { EditMalfuncSubgroupComponent } from './component/malfunctions/malfun-subgroup/edit-malfunc-subgroup/edit-malfunc-subgroup.component';
+import { DeleteMalfuncSubgroupComponent } from './component/malfunctions/malfun-subgroup/delete-malfunc-subgroup/delete-malfunc-subgroup.component';
 import { NgxMaskModule } from 'ngx-mask';
-import { EditMalfuncComponent } from './component/edit-malfunc/edit-malfunc.component';
-import { DeleteMalfuncComponent } from './component/delete-malfunc/delete-malfunc.component';
 // ====User===
 import { UsersComponent } from './component/users/users.component';
 import { CreateUserComponent } from './component/users/create-user/create-user.component';
@@ -36,13 +35,11 @@ import { RestoreUserPasswordComponent } from './component/users/restore-user-pas
 import { IsActiveModalComponent } from './component/users/is-active-modal/is-active-modal.component';
 // =====VechicleType====
 import { VehicleTypeComponent } from './component/vehicle-type/vehicle-type.component';
-import { CreateVehicleTypeComponent } from './component/create-vehicle-type/create-vehicle-type.component';
-import { EditVehicleTypeComponent } from './component/edit-vehicle-type/edit-vehicle-type.component';
-import { DeleteVehicleTypeComponent } from './component/delete-vehicle-type/delete-vehicle-type.component';
+import { CreateVehicleTypeComponent } from './component/vehicle-type/create-vehicle-type/create-vehicle-type.component';
+import { EditVehicleTypeComponent } from './component/vehicle-type/edit-vehicle-type/edit-vehicle-type.component';
+import { DeleteVehicleTypeComponent } from './component/vehicle-type/delete-vehicle-type/delete-vehicle-type.component';
 
 import { NgBootstrapFormValidationModule } from 'ng-bootstrap-form-validation';
-
-import { IssueLogComponent } from './component/issue-log/issue-log.component';
 
 import { SharedModule } from '../shared/shared.module';
 
@@ -92,7 +89,6 @@ import { MatTableModule, MatInputModule, MatFormFieldModule, MatPaginatorModule,
     CreateVehicleComponent,
     EditVehicleComponent,
     DeleteVehicleComponent,
-    InfoVehicleComponent,
     // ====VehiclesType===
     DeleteVehicleTypeComponent,
     VehicleTypeComponent,
@@ -112,8 +108,6 @@ import { MatTableModule, MatInputModule, MatFormFieldModule, MatPaginatorModule,
     DeleteMalfuncGroupComponent,
     EditMalfuncComponent,
     DeleteMalfuncComponent,
-    // ====Issue===
-    IssueLogComponent,
     // ====Post===
     PostsComponent,
     CreatePostComponent,
