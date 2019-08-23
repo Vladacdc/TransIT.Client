@@ -1,7 +1,14 @@
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createUser">
   <i class="fas fa-user-plus"></i> Створити користувача
 </button>
-<div class="modal fade" id="createUser" tabindex="-1" role="dialog" aria-labelledby="CreateUser" aria-hidden="true">
+<div #modalContainer
+     class="modal fade"
+     id="createUser" 
+     (click)="clearForm($event)"
+     tabindex="-1"
+     role="dialog" 
+     aria-labelledby="CreateUser"
+     aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header color">
@@ -13,6 +20,17 @@
       <div class="modal-body">
         <form [formGroup]="userForm">
           <div class="row">
+            <div class="form-group col-md-6 " [customErrorMessages]="CustomNameErrorMessages">
+              <label>Табельний номер</label>
+              <ng-select
+                  [items]="allBoardNumbers"
+                  placeholder="Введіть табельний номер..."
+                  notFoundText="Більше немає працівників"
+                  formControlName="boardNumber"
+                  autofocus>
+              </ng-select>
+            </div>
+
             <div class="form-group col-md-6 " [customErrorMessages]="CustomNameErrorMessages">
               <label>Прізвище</label>
               <input type="text" class="form-control" formControlName="lastName" placeholder="Введіть Прізвище" />
@@ -76,7 +94,7 @@
       </div>
 
       <div class="modal-footer">
-        <button #close type="button" class="btn btn-secondary" data-dismiss="modal">Скасувати</button>
+        <button type="button" class="btn btn-secondary" (click)="cancel($event)">Скасувати</button>
         <button type="button" class="btn btn-primary" (click)="clickSubmit()" [disabled]="userForm.invalid">
           Зберегти
         </button>

@@ -51,6 +51,7 @@ import { CreatePostComponent } from './component/posts/create-post/create-post.c
 import { EditPostComponent } from './component/posts/edit-post/edit-post.component';
 import { DeletePostComponent } from './component/posts/delete-post/delete-post.component';
 
+import { AttachUserComponent } from './component/employees/attach-user/attach-user.component';
 import { EmployeesComponent } from './component/employees/employees.component';
 import { CreateEmployeeComponent } from './component/employees/create-employee/create-employee.component';
 import { EditEmployeeComponent } from './component/employees/edit-employee/edit-employee.component';
@@ -122,6 +123,7 @@ import { MatTableModule, MatInputModule, MatFormFieldModule, MatPaginatorModule,
     CreateEmployeeComponent,
     EditEmployeeComponent,
     DeleteEmployeeComponent,
+    AttachUserComponent,
     ActionStateDictionaryComponent,
     StateDictionaryComponent,
     ActionDictionaryComponent,

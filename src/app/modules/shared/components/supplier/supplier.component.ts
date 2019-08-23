@@ -1,11 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, AfterViewInit, ViewChild, ElementRef } from '@angular/core';
 import { SupplierService } from 'src/app/modules/shared/services/supplier.service';
 import { Supplier } from 'src/app/modules/shared/models/supplier';
-import { Router } from '@angular/router';
-import { isRootView } from '@angular/core/src/render3/util';
-import { DatatableSettings } from '../../helpers/datatable-settings';
+import { EntitiesDataSource } from '../../data-sources/entities-data-sourse';
 
-declare const $;
 
 @Component({
   selector: 'app-supplier',
@@ -13,113 +10,46 @@ declare const $;
   styleUrls: ['./supplier.component.scss']
 })
 export class SupplierComponent implements OnInit {
-  suppliers: Supplier[];
-  supplier: Supplier;
-  dataTable: any;
-  protected country: string;
-  protected currency: string;
-  @Input() isVisible: boolean;
+ 
+  columnDefinitions: string[] = [
+    'name',
+    'fullName',
+    //'country.name',
+    //'currency.fullName',
+    'edrpou'
+  ];
+  columnNames: string[] = [
+    'Коротка назва',
+    'Повна назва',
+    //'Країна',
+    //'Валюта',
+    'ЄДРПОУ'
+  ];
 
-  constructor(private service: SupplierService, private router: Router) {}
-  _url = this.router.url.substring(1, this.router.url.length - 1);
+  dataSource: EntitiesDataSource<Supplier>;
+  numberOfRows: number = 100;  //needs to replace with getting data from backend
 
-  private readonly tableConfig = new DatatableSettings({
-    columns: [
-      {
-        title: 'Коротка назва',
-        data: 'name',
-        defaultContent: ''
-      },
-      {
-        title: 'Повна назва',
-        data: 'fullName',
-        defaultContent: ''
-      },
-      {
-        title: 'Країна',
-        data: 'country.name',
-        defaultContent: ''
-      },
-      {
-        title: 'Валюта',
-        data: 'currency.fullName',
-        defaultContent: ''
-      },
-      {
-        title: 'ЄДРПОУ',
-        data: 'edrpou',
-        defaultContent: ''
-      },
-      {
-        data: 'id',
-        visible: false
-      }
-    ],
-    processing: true,
-    serverSide: true,
-    ajax: this.ajaxCallback.bind(this),
-    language: {
-      url: 'assets/language.json'
-    }
-  });
+  constructor(private supplierService: SupplierService) {
+  }
+
 
   ngOnInit() {
-    this._url = this._url.substring(0, this._url.indexOf('/'));
-    this.isVisibleCheck();
-    if (this._url === 'admin') {
-      this.tableConfig.columns = [
-        ...this.tableConfig.columns,
-        {
-          title: 'Дії',
-          orderable: false,
-          bVisible: this.isVisible,
-          data: null,
-          defaultContent: `<button class="first btn" data-toggle="modal" data-target="#editSupplier"><i class="fas fa-edit"></i></button>
-  <button class="second btn" data-toggle="modal" data-target="#deleteSupplier"><i class="fas fas fa-trash-alt"></i></button>`
-        }
-      ];
-    }
-    this.dataTable = $('#supplier-table').DataTable(this.tableConfig);
-    $('#supplier-table tbody').on('click', '.first', this.selectFirstItem(this));
-    $('#supplier-table tbody').on('click', '.second', this.selectSecondItem(this));
+    this.dataSource = new EntitiesDataSource<Supplier>(this.supplierService);
   }
 
-  private ajaxCallback(dataTablesParameters: any, callback): void {
-    this.service.getFilteredEntities(dataTablesParameters).subscribe(x => {
-      callback(x);
-    });
-  }
-
-  selectFirstItem(component: any) {
-    return function() {
-      const data = component.dataTable.row($(this).parents('tr')).data();
-      component.supplier = data;
-    };
-  }
-
-  selectSecondItem(component: any) {
-    return function() {
-      const data = component.dataTable.row($(this).parents('tr')).data();
-      component.supplier = data;
-    };
-  }
-
-  addItem(supplier: Supplier) {
-    this.dataTable.draw();
+  addSupplier(supplier: Supplier) {
+    
   }
 
   deleteSupplier(supplier: Supplier) {
-    this.dataTable = $('#supplier-table').DataTable({
-      ...this.tableConfig,
-      destroy: true
-    });
+
   }
 
   updateSupplier(supplier: Supplier) {
-    this.dataTable.draw();
+
   }
 
   isVisibleCheck() {
-    this.isVisible = this._url === 'admin';
+    
   }
 }

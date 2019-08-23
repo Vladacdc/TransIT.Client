@@ -17,7 +17,9 @@ export class EditMalfuncComponent implements OnInit {
   malfunction: Malfunction;
   @Input() set setMalfunction(malfunction: Malfunction) {
     this.malfunction = malfunction;
-    this.malfunctionForm.patchValue(malfunction);
+    if (this.malfunctionForm) {
+      this.malfunctionForm.patchValue(malfunction);
+    }
   }
 
   @Output() editedMalfunction = new EventEmitter<Malfunction>();
