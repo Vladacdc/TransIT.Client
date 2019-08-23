@@ -1,3 +1,7 @@
+<app-create-supplier (createSupplier)="addItem($event)"></app-create-supplier>
+<app-delete-supplier [supplier]="supplier" (deleteSupplier)="deleteSupplier($event)" ></app-delete-supplier>
+ <app-edit-supplier [supplier]="supplier" (updateSupplier)="updateSupplier($event)" ></app-edit-supplier>
+
 <div class="table-background border">
   <p></p>
   <div>
@@ -6,10 +10,12 @@
       [columnNames]="columnNames"
       [dataSource]="dataSource"
       [numberOfRows]="numberOfRows">
-        <!--<app-create-supplier (createSupplier)="addSupplier($event)" #create></app-create-supplier>
+        <button>It is victory!</button>
+        <button class="first btn" data-toggle="modal" data-target="#addItem">modal btn</button>
+        <!--mat-flat-button #edit <app-create-supplier (createSupplier)="addSupplier($event)" #create></app-create-supplier>
         <app-delete-supplier [supplier]="supplier" (deleteSupplier)="deleteSupplier($event)" #delete></app-delete-supplier>
-        <button mat-flat-button #btn>Info</button>
-        <app-edit-supplier [supplier]="supplier" (updateSupplier)="updateSupplier($event)" #edit></app-edit-supplier>   -->    
+        
+        <app-edit-supplier [supplier]="supplier" (updateSupplier)="updateSupplier($event)" #edit></app-edit-supplier>   -->   
     </mat-fsp-table>
   </div>
 </div>

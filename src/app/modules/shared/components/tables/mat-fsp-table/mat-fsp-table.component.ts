@@ -1,10 +1,11 @@
-import { Component, OnInit, ViewChild, Input, ElementRef, ContentChildren } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, ElementRef, ContentChildren, ContentChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { EntitiesDataSource } from '../../../data-sources/entities-data-sourse';
 import { fromEvent, merge } from 'rxjs';
 import { debounceTime, distinctUntilChanged, tap } from 'rxjs/operators';
 import { EditSupplierComponent } from '../../supplier/edit-supplier/edit-supplier.component';
+import { MatButton } from '@angular/material';
 
 @Component({
   selector: 'mat-fsp-table',
@@ -17,12 +18,12 @@ export class MatFspTableComponent implements OnInit {
   @Input() columnDefinitions: string[];
   @Input() columnNames: string[];
   @Input() dataSource: EntitiesDataSource<any>;
-  @Input() numberOfRows: number = 100;
-
-  //@ContentChildren('button') buttons: any;
-  @ContentChildren('info') info: any;
-  @ContentChildren('edit') edit: any;
-  @ContentChildren('delete') delete: any;
+  @Input() numberOfRows: number = 100;//todo
+  @Input() enableActions: boolean; //todo
+  //@ContentChild(MatButton) buttons: MatButton;
+  //@ContentChildren('info') info: any;
+  //@ContentChildren('edit') edit: any;
+  //@ContentChildren('delete') delete: any;
   //@ContentChildren('btn') btn: any;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -45,10 +46,10 @@ export class MatFspTableComponent implements OnInit {
     setTimeout(() => {
       //this.editsupplier=this.edit;
       //this.thisbtn=this.btn.first;
-      //if(this.buttons.length > 0) {
-      if(this.info.length + this.edit.length + this.delete.length > 0) {
+      //if(this.buttons) {
+      //if(this.enableActions) {//this.info.length + this.edit.length + this.delete.length > 0) {
         this.columnsToDisplay = this.columnsToDisplay.concat("buttonsColumn");
-      }
+      //}
     });
 
     this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
