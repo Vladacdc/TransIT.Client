@@ -1,0 +1,45 @@
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#globalModal">
+    <i class="fas fa-user-plus"></i> Modal
+  </button>
+<div
+  class="modal fade"
+  id="globalModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="globalModal"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header color">
+        <h5 class="modal-title"><i class="fas fa-user-plus"></i> Modal </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="generalForm">
+          <div *ngFor="let item of controls" [ngSwitch]="item.conteinerType">
+              <div class="form-group" *ngSwitchCase="'input'" >
+                <label [class.required-field]="item.required" >{{item.labelName}}</label>
+                <input type="text" class="form-control" formControlName="{{item.fCName}}" placeholder="{{item.placeHolder}}" />
+              </div>
+              <div  class="form-group" *ngSwitchCase="'select'">
+                <label [class.required-field]="item.required">{{item.labelName}}</label>
+                <ng-select
+                  
+                >
+                </ng-select>
+              </div>
+              <div  class="form-group" *ngSwitchCase="'date'">
+                <label [class.required-field]="item.required"></label>
+                <input type="date" class="form-control" formControlName="{{item.fCName}}" placeholder="{{item.placeHolder}}"  />
+              </div>
+           </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+      </div>
+    </div>
+  </div>
+</div>

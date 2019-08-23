@@ -1,4 +1,7 @@
 <div class="table-background border">
+
+  <app-global-modal  ></app-global-modal>
+  <app-global-modal  ></app-global-modal>
   <app-create-user (createUser)="addUser($event)"></app-create-user>
   <app-edit-user [user]="user" (updateUser)="updateUser($event)"></app-edit-user>
   <app-delete-user [user]="user" (deleteUser)="deleteUser($event)"></app-delete-user>

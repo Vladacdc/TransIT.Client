@@ -1,14 +1,13 @@
 import { Component, OnInit, EventEmitter, Output, Input, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
 import { Supplier } from 'src/app/modules/shared/models/supplier';
 import { SupplierService } from 'src/app/modules/shared/services/supplier.service';
 import { ToastrService } from 'ngx-toastr';
 import { CountryService } from '../../../services/country.service';
 import { Country } from '../../../models/country';
-import { computeStyle } from '@angular/animations/browser/src/util';
 import { Currency } from '../../../models/currency';
 import { CurrencyService } from '../../../services/currency.service';
+
 
 @Component({
   selector: 'app-create-supplier',
@@ -18,13 +17,12 @@ import { CurrencyService } from '../../../services/currency.service';
 export class CreateSupplierComponent implements OnInit {
   supplierForm: FormGroup;
   countries: Array<Country>;
-  currencies: Array<Currency>;
-  currentCountry: Country;
+  currencies:Array<Currency>;
   @ViewChild('close') closeCreateModal: ElementRef;
   @Output() createSupplier = new EventEmitter<Supplier>();
 
   constructor(
-    private currencyService: CurrencyService,
+    private currencyService:CurrencyService,
     private countryService: CountryService,
     private service: SupplierService,
     private formBuilder: FormBuilder,
@@ -38,9 +36,9 @@ export class CreateSupplierComponent implements OnInit {
         .trigger('reset');
     });
     this.supplierForm = this.formBuilder.group({
-      name: new FormControl('', Validators.compose([Validators.required, Validators.maxLength(30)])),
-      fullName: new FormControl('', Validators.compose([Validators.required, Validators.maxLength(60)])),
-      edrpou: new FormControl('', Validators.compose([Validators.required, Validators.maxLength(14)])),
+      name: ['', Validators.required],
+      fullName: ['', Validators.required],
+      edrpou: [''],
       country: [''],
       currency: [''],
     });
@@ -50,13 +48,6 @@ export class CreateSupplierComponent implements OnInit {
     this.currencyService.getEntities().subscribe(data => {
       this.currencies = data;
     });
-  }
-
-  get Countries(): string[] {
-    return this.countries.map(e => e.name);
-  }
-  get Currencies(): string[] {
-    return this.currencies.map(e => e.fullName);
   }
 
   clickSubmit() {
@@ -72,7 +63,7 @@ export class CreateSupplierComponent implements OnInit {
       currency: form.currency as Currency,
       country: form.country as Country,
     };
-
+    
     this.service.addEntity(supplier).subscribe(newGroup => this.createSupplier.next(newGroup));
     this.closeCreateModal.nativeElement.click();
   }

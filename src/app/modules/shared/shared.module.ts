@@ -51,6 +51,7 @@ import { MatDatepickerModule,
          MatInputModule} from '@angular/material';
 
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
+import { GlobalModalComponent } from './components/global-modal/global-modal.component';
 
 @NgModule({
   declarations: [
@@ -74,7 +75,8 @@ import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.componen
     DeleteDocumentComponent,
     EditDocumentComponent,
     NestedDocumentComponent,
-    IssueLogComponent
+    IssueLogComponent,
+    GlobalModalComponent
   ],
   imports: [
     MatDatepickerModule,
@@ -101,7 +103,9 @@ import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.componen
     GlobalIssueComponent,
     FiltersTabsComponent,
     CreateDocumentComponent,
-    DocumentComponent
+    DocumentComponent,
+    GlobalModalComponent
+
   ],
   providers: [
     ActionTypeService,
