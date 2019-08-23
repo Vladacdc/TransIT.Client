@@ -2,7 +2,7 @@
  <button mat-flat-button #thisbtn>Hello</button>-->
  
  
- <ng-template #contentTpl><ng-content></ng-content></ng-template>
+  <ng-template #contentTpl><ng-content></ng-content></ng-template>
 
   <div class="mat-elevation-z8">
     <mat-form-field>
@@ -42,8 +42,7 @@
       <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
     </table>
     
-    <mat-paginator 
-      [length] = "numberOfRows"
+    <mat-paginator
       [pageSize] = "3" 
       [pageSizeOptions]="[3, 5, 10, 25, 100]">
     </mat-paginator>

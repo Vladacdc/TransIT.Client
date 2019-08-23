@@ -3,6 +3,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { CrudService } from '../../core/services/crud.service';
 import { TEntity } from '../../core/models/entity/entity';
+import { MatPaginator } from '@angular/material';
 
 @Injectable()
 export class EntitiesDataSource<Entity extends TEntity<Entity>> implements DataSource<Entity> {
@@ -25,14 +26,19 @@ export class EntitiesDataSource<Entity extends TEntity<Entity>> implements DataS
       //this.loadingSubject.complete();
     }
   
-    loadEntities(filter: string = '', sorting: string = null, pageIndex: number = 0, pageSize: number = 3) {
-      //this.crudService.getEntitiesSmart(filter, sorting, pageIndex, pageSize)
+    loadEntities(
+      filter: string = '',
+      sorting: string = null,
+      pageIndex: number = 0,
+      pageSize: number = 3,
+      paginator: MatPaginator = null) {
+      
       this.crudService.getFilteredEntities({//this strange format needs on backend
-          start: pageSize*pageIndex,
-          length: pageSize,
-          search: {value: filter},
+        start: pageSize*pageIndex,
+        length: pageSize,
+        search: {value: filter},
 
-          order: [{column:0, dir: "desc"}],
+        order: [{column:0, dir: "desc"}],
           /*draw: 1,
           
           columns: [
@@ -41,9 +47,11 @@ export class EntitiesDataSource<Entity extends TEntity<Entity>> implements DataS
             {data: 'edrpou',name:"",orderable: true},
           ],
           */
-        }
-      ).subscribe(entities => {
+      }).subscribe(entities => {
         this.entitySubject.next(entities.data);
+        if(paginator) {
+          paginator.length = entities.recordsTotal; //recordsFiltered
+        }
       });
     }  
 }

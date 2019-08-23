@@ -18,7 +18,6 @@ export class MatFspTableComponent implements OnInit {
   @Input() columnDefinitions: string[];
   @Input() columnNames: string[];
   @Input() dataSource: EntitiesDataSource<any>;
-  @Input() numberOfRows: number = 100;//todo
   @Input() enableActions: boolean; //todo
   //@ContentChild(MatButton) buttons: MatButton;
   //@ContentChildren('info') info: any;
@@ -38,7 +37,7 @@ export class MatFspTableComponent implements OnInit {
 
   ngOnInit() {
     this.columnsToDisplay = this.columnDefinitions;
-    this.dataSource.loadEntities('', null, 0, 3);
+    this.dataSource.loadEntities('', null, 0, 3, this.paginator);
   }
   
   ngAfterViewInit() {
@@ -73,7 +72,8 @@ export class MatFspTableComponent implements OnInit {
       this.input.nativeElement.value,
       this.sort.direction,
       this.paginator.pageIndex,
-      this.paginator.pageSize
+      this.paginator.pageSize,
+      //this.paginator
     );
   }
 
