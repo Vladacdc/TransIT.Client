@@ -1,12 +1,9 @@
- <!--<app-edit-supplier #editsupplier></app-edit-supplier>
- <button mat-flat-button #thisbtn>Hello</button>-->
- 
  
   <ng-template #contentTpl><ng-content></ng-content></ng-template>
 
   <div class="mat-elevation-z8">
     <mat-form-field>
-      <input matInput placeholder="Filter" #input>
+      <input matInput placeholder="Пошук:" #input>
     </mat-form-field>
 
     <table mat-table [dataSource]="dataSource" matSort>
@@ -19,21 +16,10 @@
       <ng-container matColumnDef = "buttonsColumn">
         <th mat-header-cell *matHeaderCellDef> ДіЇ </th>
         <td mat-cell *matCellDef="let row"> 
-          <!--<ng-container *ngFor="let button of buttons">
-            <button [widget]="button"></button>
-          </ng-container>
-        <ng-content></ng-content>
-
-        <ng-container *ngTemplateOutlet="contentTpl">
-            <ng-content></ng-content>
-          </ng-container>
-        -->
 
           <button mat-flat-button >Info</button>
           
-          <ng-container *ngTemplateOutlet="contentTpl">
-            
-          </ng-container>
+          <ng-container *ngTemplateOutlet="contentTpl"></ng-container>
           
         </td>
       </ng-container>
