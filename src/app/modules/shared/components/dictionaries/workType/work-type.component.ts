@@ -22,7 +22,7 @@ export class WorkTypeComponent implements OnInit {
   ];
 
   dataSource: EntitiesDataSource<WorkType>;
-  numberOfRows: number = 100;  //needs to replace with getting data from backend
+  numberOfRows = 100;  // needs to replace with getting data from backend
 
   constructor(private workTypeService: WorkTypeService) {
   }
