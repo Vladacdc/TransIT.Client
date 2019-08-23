@@ -32,8 +32,9 @@ export class EntitiesDataSource<Entity extends TEntity<Entity>> implements DataS
           length: pageSize,
           search: {value: filter},
 
+          order: [{column:0, dir: "desc"}],
           /*draw: 1,
-          order: [{column:0, dir: sorting}],
+          
           columns: [
             {data: 'name',name:"",orderable: true},
             {data: 'fullName',name:"",orderable: true},

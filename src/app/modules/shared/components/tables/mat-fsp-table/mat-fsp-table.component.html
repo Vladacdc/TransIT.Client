@@ -1,7 +1,7 @@
  <!--<app-edit-supplier #editsupplier></app-edit-supplier>
  <button mat-flat-button #thisbtn>Hello</button>-->
  
- <!--<ng-container *ngTemplateOutlet="edit"></ng-container>-->
+ 
  <ng-template #contentTpl><ng-content></ng-content></ng-template>
 
   <div class="mat-elevation-z8">
@@ -30,8 +30,10 @@
         -->
 
           <button mat-flat-button >Info</button>
-          <ng-content></ng-content>
           
+          <ng-container *ngTemplateOutlet="contentTpl">
+            
+          </ng-container>
           
         </td>
       </ng-container>

@@ -12,18 +12,6 @@ export class CrudService<T extends TEntity<T>> {
 
   constructor(protected http: HttpClient, protected spinner: SpinnerService) {}
 
-  getEntitiesSmart(filter: string = '', sorting: string = 'none', pageNumber = 0, pageSize = 3): Observable<T[]> {
-    return this.http.get<T[]>(this.serviceUrl, {
-      params: new HttpParams()
-          .set('filter', filter)
-          .set('sorting', sorting)
-          .set('pageNumber', pageNumber.toString())
-          .set('pageSize', pageSize.toString())
-    }).pipe(
-      //map(res =>  res["payload"])
-    );
-  }
-
   getFilteredEntities(params: any): Observable<any> {
     return this.http.post<any>(this.datatableUrl, params, {}).pipe(
       map(response => ({ ...response, data: response.data.map(d => this.mapEntity(d)) })),
