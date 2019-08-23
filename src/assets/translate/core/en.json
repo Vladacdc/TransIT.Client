@@ -1,0 +1,13 @@
+{
+    "CORE": {
+        "LOGIN": {
+            "LOGIN_NAME": "Login",
+            "PASSWORD": "Password",
+            "ENTER": "Enter"
+        },
+        "NAVBAR": 
+        {
+            "LOGOUT": "Log Out"
+        }
+    }
+}

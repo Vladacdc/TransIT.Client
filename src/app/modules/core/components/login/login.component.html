@@ -1,16 +1,17 @@
 <app-navbar></app-navbar>
+<app-localization></app-localization>
 <div class="login-page d-flex flex-column">
   <div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2 col-10 offset-1 my-auto">
     <form [formGroup]="loginForm" (validSubmit)="onSubmit()" class="clearfix">
       <div class="form-group" [customErrorMessages]="CustomLoginErrorMessages">
-        <label class="required-field">Логін</label>
+        <label class="required-field">{{'CORE.LOGIN.LOGIN_NAME' | translate}}</label>
         <input type="text" class="form-control" formControlName="login" />
       </div>
       <div class="form-group">
-        <label class="required-field">Пароль</label>
+        <label class="required-field">{{'CORE.LOGIN.PASSWORD' | translate}}</label>
         <input type="password" class="form-control" formControlName="password" />
       </div>
-      <button class="btn btn-primary float-right" type="submit">Увійти</button>
+      <button class="btn btn-primary float-right" type="submit">{{'CORE.LOGIN.ENTER' | translate}}</button>
     </form>
   </div>
 </div>

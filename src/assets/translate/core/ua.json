@@ -1,0 +1,13 @@
+{
+    "CORE": {
+        "LOGIN": {
+            "LOGIN_NAME": "Логін",
+            "PASSWORD": "Пароль",
+            "ENTER": "Увійти"
+        },
+        "NAVBAR": 
+        {
+            "LOGOUT": "Вихід"
+        }
+    }
+}
