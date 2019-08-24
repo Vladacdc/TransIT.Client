@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 import { SpinnerService } from './spinner.service';
 import { TokenStore } from '../helpers/token-store';
 import { Role } from '../models/role/role';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +20,8 @@ export class AuthenticationService {
     private http: HttpClient,
     private toast: ToastrService,
     private tokenStore: TokenStore,
-    private spinner: SpinnerService
+    private spinner: SpinnerService,
+    private translate: TranslateService
   ) {}
 
   login(login: string, password: string): Observable<Token> {
@@ -43,7 +45,10 @@ export class AuthenticationService {
 
   private handleError(httpResponse: HttpErrorResponse): Observable<any> {
     if (httpResponse.status !== 0) {
-      this.toast.error('Неправильно введений логін або пароль', 'Помилка логування');
+      this.toast.error(
+        this.translate.instant('Core.Error.SignInError.Text'),
+        this.translate.instant('Core.Error.SignInError.Title')
+      );
     }
     return throwError(httpResponse);
   }

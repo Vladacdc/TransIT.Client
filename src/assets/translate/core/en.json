@@ -1,13 +1,27 @@
 {
-    "CORE": {
-        "LOGIN": {
-            "LOGIN_NAME": "Login",
-            "PASSWORD": "Password",
-            "ENTER": "Enter"
+    "Core": {
+        "Login": {
+            "Login": "Login",
+            "Password": "Password",
+            "Enter": "Enter"
         },
-        "NAVBAR": 
+        "Navbar": 
         {
-            "LOGOUT": "Log Out"
+            "SignOut": "Sign out"
+        },
+        "Error": {
+            "ConnectionError": {
+                "Title": "Connection Error",
+                "Text": "Can't connect to the server"
+            },
+            "ServerError": {
+                "Title": "Server Error",
+                "Text": "Could not process request. An error occurred on the server"
+            },
+            "SignInError": {
+                "Title": "Sign In Error",
+                "Text": "Invalid Login or Password"
+            }
         }
     }
 }

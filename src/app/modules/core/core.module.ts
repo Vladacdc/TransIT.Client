@@ -12,9 +12,11 @@ import { HttpAuthInterceptor } from './interceptors/http-auth.interceptor';
 import { CrudService } from './services/crud.service';
 import { SpinnerService } from './services/spinner.service';
 import { TruncatePipe } from './pipes/truncate.pipe';
+
 import { LocalizationComponent } from './components/localization/localization.component';
 import { TranslateModule, TranslateLoader, TranslateService } from '@ngx-translate/core';
 import { MultiTranslateHttpLoader } from 'ngx-translate-multi-http-loader';
+import {MatSelectModule} from '@angular/material/select';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new MultiTranslateHttpLoader(httpClient, [
@@ -24,8 +26,19 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
 }
 
 @NgModule({
-  declarations: [NavbarComponent, LoginComponent, TruncatePipe, LocalizationComponent],
-  imports: [CommonModule, ReactiveFormsModule, RouterModule, NgBootstrapFormValidationModule, HttpClientModule,
+  declarations: [
+    NavbarComponent,
+    LoginComponent,
+    TruncatePipe,
+    LocalizationComponent
+  ],
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    RouterModule,
+    NgBootstrapFormValidationModule,
+    HttpClientModule,
+    MatSelectModule,
     TranslateModule.forChild({
       loader: {
         provide: TranslateLoader,
@@ -34,7 +47,12 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
       }
     })
   ],
-  exports: [NavbarComponent, LoginComponent, TruncatePipe, LocalizationComponent],
+  exports: [
+    NavbarComponent,
+    LoginComponent,
+    TruncatePipe,
+    LocalizationComponent
+  ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: HttpAuthInterceptor, multi: true },
