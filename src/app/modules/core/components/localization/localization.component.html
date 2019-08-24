@@ -1,9 +1,5 @@
 <mat-form-field>
-    <mat-select #langSelect [(value)]="language" (selectionChange)="changeLanguage()">
+    <mat-select #langSelect [(value)]="language" (selectionChange)="translate.use(language)">
         <mat-option *ngFor="let lang of translate.getLangs()" [value]="lang">{{ lang }}</mat-option>
     </mat-select>
 </mat-form-field>
-
-<select #langSelect class="form-control" (change)="changeLanguage(langSelect.value)">
-    <option *ngFor="let lang of translate.getLangs()" [value]="lang" [selected]="lang === translate.currentLang">{{ lang }}</option>
-</select>

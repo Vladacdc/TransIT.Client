@@ -14,7 +14,7 @@ import { SpinnerService } from './services/spinner.service';
 import { TruncatePipe } from './pipes/truncate.pipe';
 
 import { LocalizationComponent } from './components/localization/localization.component';
-import { TranslateModule, TranslateLoader, TranslateService } from '@ngx-translate/core';
+import { TranslateModule, TranslateLoader, TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { MultiTranslateHttpLoader } from 'ngx-translate-multi-http-loader';
 import {MatSelectModule} from '@angular/material/select';
 
@@ -62,16 +62,23 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
 })
 export class CoreModule {
   constructor(public translate: TranslateService) {
-    translate.addLangs(['en', 'ua']);
-    translate.setDefaultLang('ua');
-    let language = translate.getDefaultLang();
+    this.ConfigureTranslation();
+  }
+
+  private ConfigureTranslation() {
+    this.translate.addLangs(['en', 'ua']);
+    this.translate.setDefaultLang('ua');
+    this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
+      localStorage.setItem('language', event.lang);
+    });
+
+    let language = this.translate.getDefaultLang();
     if (localStorage.getItem('language').match(/en|ua/)) {
       language = localStorage.getItem('language');
-    } else if (translate.getBrowserLang().match(/en|ua/)) {
-      language = translate.getBrowserLang();
+    } else if (this.translate.getBrowserLang().match(/en|ua/)) {
+      language = this.translate.getBrowserLang();
     }
 
-    translate.use(language);
-    localStorage.setItem('language', language);
+    this.translate.use(language);
   }
 }

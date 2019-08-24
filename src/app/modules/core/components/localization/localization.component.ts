@@ -9,10 +9,4 @@ import { TranslateService } from '@ngx-translate/core';
 export class LocalizationComponent {
   language = this.translate.currentLang;
   constructor(private translate: TranslateService) {}
-
-  changeLanguage(lang?: string) {
-    this.language = lang ? lang : this.language;
-    this.translate.use(this.language);
-    localStorage.setItem('language', this.language);
-  }
 }
