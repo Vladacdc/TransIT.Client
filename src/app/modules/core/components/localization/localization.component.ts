@@ -7,6 +7,11 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./localization.component.scss']
 })
 export class LocalizationComponent {
-    constructor(public translate: TranslateService) {
+    constructor(private translate: TranslateService) {
+    }
+
+    setLanguage(lang: string) {
+      this.translate.use(lang);
+      localStorage.setItem('language', lang);
     }
 }

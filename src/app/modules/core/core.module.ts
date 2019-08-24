@@ -46,8 +46,14 @@ export class CoreModule {
   constructor(public translate: TranslateService) {
     translate.addLangs(['en', 'ua']);
     translate.setDefaultLang('ua');
-    const browserLang = translate.getBrowserLang();
-    translate.use(browserLang.match(/en|ua/) ? browserLang : 'ua');
-    // TODO: Make translator remember selected language using localstorage.
+    let language = translate.getDefaultLang();
+    if (localStorage.getItem('language').match(/en|ua/)) {
+      language = localStorage.getItem('language');
+    } else if (translate.getBrowserLang().match(/en|ua/)) {
+      language = translate.getBrowserLang();
+    }
+
+    translate.use(language);
+    localStorage.setItem('language', language);
   }
 }
