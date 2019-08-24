@@ -73,10 +73,12 @@ export class CoreModule {
     });
 
     let language = this.translate.getDefaultLang();
-    if (localStorage.getItem('language').match(/en|ua/)) {
-      language = localStorage.getItem('language');
-    } else if (this.translate.getBrowserLang().match(/en|ua/)) {
-      language = this.translate.getBrowserLang();
+    const storedLanguage = localStorage.getItem('language');
+    const browserLanguage = this.translate.getBrowserLang();
+    if (storedLanguage != null && storedLanguage.match(/en|ua/)) {
+      language = storedLanguage;
+    } else if (browserLanguage.match(/en|ua/)) {
+      language = browserLanguage;
     }
 
     this.translate.use(language);
