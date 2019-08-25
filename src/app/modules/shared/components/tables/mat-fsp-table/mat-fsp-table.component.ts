@@ -13,11 +13,13 @@ import { MatPaginatorIntlUkr } from '../../../paginator-extentions/mat-paginator
 })
 export class MatFspTableComponent implements OnInit {
   columnsToDisplay: string[];
+  showEdit=false;
 
   @Input() columnDefinitions: string[];
   @Input() columnNames: string[];
   @Input() dataSource: EntitiesDataSource<any>;
   @Input() enableActions: boolean; //todo
+  
   //@ContentChild(MatButton) buttons: MatButton;
   //@ContentChildren('info') info: any;
   //@ContentChildren('edit') edit: any;
@@ -74,5 +76,10 @@ export class MatFspTableComponent implements OnInit {
       this.paginator.pageIndex,
       this.paginator.pageSize,
     );
+  }
+
+  editEntity(entity:any) {
+    this.showEdit=!this.showEdit;
+    //this.button.label="hi";
   }
 }
