@@ -18,7 +18,7 @@ import { TranslateModule, TranslateLoader, TranslateService, LangChangeEvent } f
 import { MultiTranslateHttpLoader } from 'ngx-translate-multi-http-loader';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
-import {MatButtonModule} from '@angular/material/button'; 
+import {MatButtonModule} from '@angular/material/button';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new MultiTranslateHttpLoader(httpClient, [
