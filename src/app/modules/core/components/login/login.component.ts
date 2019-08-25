@@ -14,10 +14,28 @@ export class LoginComponent implements OnInit {
 
   constructor(private authService: AuthenticationService) {}
 
+  private constraints = {
+    login: {
+      minlength: 3
+    },
+    password: {
+      minlength: 8,
+      maxlength: 30
+    }
+  };
+
   ngOnInit() {
     this.loginForm = new FormGroup({
-      login: new FormControl('', [Validators.required, Validators.minLength(3), Validators.pattern('^[A-Za-z0-9]+$')]),
-      password: new FormControl('', [Validators.required, Validators.minLength(8), Validators.maxLength(30)])
+      login: new FormControl('', [
+        Validators.required,
+        Validators.minLength(this.constraints.login.minlength),
+        Validators.pattern('^[A-Za-z0-9]+$')
+      ]),
+      password: new FormControl('', [
+        Validators.required,
+        Validators.minLength(this.constraints.password.minlength),
+        Validators.maxLength(this.constraints.password.maxlength)
+      ])
     });
   }
 
