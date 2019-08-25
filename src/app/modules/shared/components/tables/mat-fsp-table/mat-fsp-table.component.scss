@@ -1,6 +1,11 @@
 table {
     width: 100%;
 }
+
+.scroll-container {
+    overflow: auto;
+}
+
 .mat-form-field {
     margin-left: 2%;
 }

@@ -18,6 +18,7 @@
       <input matInput placeholder="Пошук:" #input>
     </mat-form-field>
 
+    <div class="scroll-container">
     <table mat-table [dataSource]="dataSource" matSort>
 
       <ng-container *ngFor="let colDef of columnDefinitions; let i = index" [matColumnDef] = "colDef">
@@ -39,12 +40,14 @@
       <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
       <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
     </table>
-    
+    </div>
+
+
     <mat-paginator
       [pageSize] = "3" 
       [pageSizeOptions]="[3, 5, 10, 25, 100]">
     </mat-paginator>
-    
+
   </div>
-  
+
   
