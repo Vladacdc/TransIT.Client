@@ -1,6 +1,3 @@
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#globalModal">
-    <i class="fas fa-user-plus"></i> Modal
-  </button>
 <div
   class="modal fade"
   id="globalModal"
@@ -12,33 +9,86 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header color">
-        <h5 class="modal-title"><i class="fas fa-user-plus"></i> Modal </h5>
+        <h5 class="modal-title"><i class="fas fa-user-plus"></i> {{message}} </h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
+   
       <div class="modal-body">
-        <form [formGroup]="generalForm">
-          <div *ngFor="let item of controls" [ngSwitch]="item.conteinerType">
+       <div *ngFor="let item of modalTypes" [ngSwitch]="item.type">
+       <div *ngSwitchCase ="'create'">
+        <form [formGroup]="generalFormBody">
+          <div *ngFor="let item of controlsForBody" [ngSwitch]="item.containerType">
               <div class="form-group" *ngSwitchCase="'input'" >
                 <label [class.required-field]="item.required" >{{item.labelName}}</label>
-                <input type="text" class="form-control" formControlName="{{item.fCName}}" placeholder="{{item.placeHolder}}" />
+                <input type="text" class="form-control" formControlName="{{item.formControlName}}" placeholder="{{item.placeHolder}}" />
               </div>
               <div  class="form-group" *ngSwitchCase="'select'">
                 <label [class.required-field]="item.required">{{item.labelName}}</label>
-                <ng-select
-                  
+                <ng-select  
+                formControlName="{{item.formControlName}}" 
+                placeholder="{{item.placeHolder}}"
+                bindLabel="{{item.bindLabel}}"
+                notFoundText = "Не знайдено"
+                [items]= "item.items"
                 >
                 </ng-select>
               </div>
               <div  class="form-group" *ngSwitchCase="'date'">
-                <label [class.required-field]="item.required"></label>
-                <input type="date" class="form-control" formControlName="{{item.fCName}}" placeholder="{{item.placeHolder}}"  />
+                <label [class.required-field]="item.required">{{item.labelName}}</label>
+                <input type="date" class="form-control" formControlName="{{item.formControlName}}" placeholder="{{item.placeHolder}}"  />
               </div>
            </div>
         </form>
       </div>
+      <div *ngSwitchCase ="'edit'">
+          <form [formGroup]="generalFormBody">
+            <div *ngFor="let item of controlsForBody" [ngSwitch]="item.containerType">
+                <div class="form-group" *ngSwitchCase="'input'" >
+                  <label [class.required-field]="item.required" >{{item.labelName}}</label>
+                  <input type="text" class="form-control" formControlName="{{item.formControlName}}"/>
+                </div>
+                <div  class="form-group" *ngSwitchCase="'select'">
+                  <label [class.required-field]="item.required">{{item.labelName}}</label>
+                  <ng-select  
+                  formControlName="{{item.formControlName}}" 
+                  placeholder="{{item.placeHolder}}"
+                  bindLabel="{{item.bindLabel}}"
+                  notFoundText = "Не знайдено"
+                  [items]= "item.items"
+                  >
+                  </ng-select>
+                </div>
+                <div  class="form-group" *ngSwitchCase="'date'">
+                  <label [class.required-field]="item.required">{{item.labelName}}</label>
+                  <input type="date" class="form-control" formControlName="{{item.formControlName}}" placeholder="{{item.placeHolder}}"  />
+                </div>
+             </div>
+          </form>
+        </div>
+      <div *ngSwitchCase ="'delete'">
+         Видалені дані не підлягають відновленню!
+      </div>
+    </div>
+  </div>
       <div class="modal-footer">
+          <form [formGroup]="generalFormFooter">
+              <div *ngFor="let item of modalTypes" [ngSwitch]="item.type">
+                  <div class="form-group" *ngSwitchCase="'delete'" >
+                      <button #close type="button" class="btn btn-secondary" data-dismiss="modal">Скасувати</button>
+                      <button type="button" class="btn btn-danger" (click)="delete()">Видалити</button>
+                  </div>
+                  <div  class="form-group" *ngSwitchCase="'create'">
+                      <button #close type="button" class="btn btn-secondary" data-dismiss="modal">Скасувати</button>
+                      <button type="button" class="btn btn-primary" (click)="create()" [disabled]="generalFormBody.invalid">Створити</button>
+                  </div>
+                  <div  class="form-group" *ngSwitchCase="'edit'">
+                      <button #close type="button" class="btn btn-secondary" data-dismiss="modal" (click)="resetForm()">Скасувати</button>
+                      <button type="button" class="btn btn-primary" (click)="updateData()" [disabled]="generalFormBody.invalid">Зберегти</button>                 
+                  </div>
+                </div>
+            </form>
       </div>
     </div>
   </div>

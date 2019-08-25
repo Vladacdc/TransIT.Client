@@ -1,7 +1,10 @@
 <div class="table-background border">
-  <app-create-supplier (createSupplier)="addItem($event)" *ngIf="isVisible"></app-create-supplier>
-  <app-delete-supplier [supplier]="supplier" (deleteSupplier)="deleteSupplier($event)" *ngIf="isVisible"></app-delete-supplier>
-  <app-edit-supplier [supplier]="supplier" (updateSupplier)="updateSupplier($event)" *ngIf="isVisible"></app-edit-supplier>
+  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#globalModal">
+    <i class="fas fa-user-plus"></i> Створити постачальника
+  </button>
+  <app-global-modal (outputEntity)="addItem($event)" *ngIf="isVisible"></app-global-modal>
+  <app-global-modal [entity]="supplier" (outputEntity)="deleteSupplier($event)" *ngIf="isVisible"></app-global-modal>
+  <app-global-modal [entity]="supplier" (outputEntity)="updateSupplier($event)" *ngIf="isVisible"></app-global-modal>
   <p></p>
   <div>
     <table id="supplier-table" class="table table-bordered  table-hover" style="width:100%;"></table>

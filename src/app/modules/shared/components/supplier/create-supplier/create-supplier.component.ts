@@ -26,7 +26,6 @@ export class CreateSupplierComponent implements OnInit {
     private countryService: CountryService,
     private service: SupplierService,
     private formBuilder: FormBuilder,
-    private toast: ToastrService
   ) {}
 
   ngOnInit() {

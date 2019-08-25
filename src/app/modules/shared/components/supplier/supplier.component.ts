@@ -74,8 +74,8 @@ export class SupplierComponent implements OnInit {
           orderable: false,
           bVisible: this.isVisible,
           data: null,
-          defaultContent: `<button class="first btn" data-toggle="modal" data-target="#editSupplier"><i class="fas fa-edit"></i></button>
-  <button class="second btn" data-toggle="modal" data-target="#deleteSupplier"><i class="fas fas fa-trash-alt"></i></button>`
+          defaultContent: `<button class="first btn" data-toggle="modal" data-target="#globalModal"><i class="fas fa-edit"></i></button>
+  <button class="second btn" data-toggle="modal" data-target="#globalModal"><i class="fas fas fa-trash-alt"></i></button>`
         }
       ];
     }
