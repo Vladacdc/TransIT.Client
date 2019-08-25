@@ -51,6 +51,9 @@ import { MatDatepickerModule,
          MatInputModule} from '@angular/material';
 
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
+import { PartService } from './services/part.service';
+import { ManufacturerService } from './services/manufacturer.service';
+import { UnitService } from './services/unit.service';
 
 @NgModule({
   declarations: [
@@ -122,7 +125,10 @@ import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.componen
     UserService,
     VehicleTypeService,
     VehicleService,
-    StatisticsService
+    StatisticsService,
+    PartService,
+    ManufacturerService,
+    UnitService
   ]
 })
 export class SharedModule {}

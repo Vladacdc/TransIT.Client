@@ -72,6 +72,11 @@ import { CreateLocationComponent } from './component/locations/create-location/c
 import { EditLocationComponent } from './component/locations/edit-location/edit-location.component';
 import { DeleteLocationComponent } from './component/locations/delete-location/delete-location.component';
 
+import { PartsComponent } from './component/parts/parts.component';
+import { CreatePartComponent } from './component/parts/create-part/create-part.component';
+import { EditPartComponent } from './component/parts/edit-part/edit-part.component';
+import { DeletePartComponent } from './component/parts/delete-part/delete-part.component';
+
 @NgModule({
   declarations: [
     AdminComponent,
@@ -133,7 +138,12 @@ import { DeleteLocationComponent } from './component/locations/delete-location/d
     LocationsComponent,
     CreateLocationComponent,
     EditLocationComponent,
-    DeleteLocationComponent
+    DeleteLocationComponent,
+    // ====Post===
+    PartsComponent,
+    CreatePartComponent,
+    EditPartComponent,
+    DeletePartComponent
   ],
   exports: [AdminComponent],
   imports: [

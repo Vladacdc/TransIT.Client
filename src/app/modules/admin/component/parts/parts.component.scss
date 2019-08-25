@@ -1,0 +1,14 @@
+.table-caption {
+    text-align: center;
+    color: black;
+    font-size: 2rem;
+  }
+  
+  .table {
+    width: 100% !important;
+  }
+  
+  :host ::ng-deep .dataTables_empty {
+    display: none;
+  }
+  

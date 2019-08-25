@@ -1,0 +1,73 @@
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#createPart">
+  <i class="fas fa-plus"></i> Створити запчастину
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="createPart" tabindex="-1" role="dialog" aria-labelledby="createPart" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Створення запчастини</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="partForm" (submit)="onSubmit()">
+          <div class="form-group" [customErrorMessages]="customFieldErrors">
+            <label>Назва</label>
+            <input type="text" placeholder="Введіть назву" class="form-control" formControlName="name" />
+          </div>
+          <div class="form-group" [customErrorMessages]="customFieldErrors">
+            <label>Код</label>
+            <input type="text" placeholder="Введіть код" class="form-control" formControlName="code" />
+          </div>
+          <div class="form-group">
+            <label>Виробник</label>
+            <ng-select
+              formControlName="manufacturer"
+              [items] = "manufacturers"
+              bindLabel = "name"
+              placeholder = "Виберіть Виробника"
+              notFoundText = "Не знайдено">
+            </ng-select>
+          </div>
+          <div class="form-group">
+            <label>Одиниці вимірювання</label>
+            <ng-select
+              formControlName="unit"
+              [items] = "units"
+              bindLabel = "name"
+              placeholder = "Виберіть Одиницю Вимірювання"
+              notFoundText = "Не знайдено">
+            </ng-select>
+          </div>
+          <button hidden type="submit" #submit></button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          (click)="closeModal()"
+          data-toggle="modal"
+          data-target="#createPart"
+        >
+          Скасувати
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          (click)="clickSubmit(submit)"
+          form="partForm"
+          [disabled]="partForm.invalid"
+          data-toggle="modal"
+          data-target="#createPart"
+        >
+          Створити
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
