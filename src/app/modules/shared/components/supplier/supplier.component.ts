@@ -10,7 +10,9 @@ import { EntitiesDataSource } from '../../data-sources/entities-data-sourse';
   styleUrls: ['./supplier.component.scss']
 })
 export class SupplierComponent implements OnInit {
- 
+  
+  supplier: Supplier;
+
   columnDefinitions: string[] = [
     'name',
     'fullName',
@@ -27,11 +29,9 @@ export class SupplierComponent implements OnInit {
   ];
 
   dataSource: EntitiesDataSource<Supplier>;
-  numberOfRows: number = 100;  //needs to replace with getting data from backend
 
   constructor(private supplierService: SupplierService) {
   }
-
 
   ngOnInit() {
     this.dataSource = new EntitiesDataSource<Supplier>(this.supplierService);
