@@ -43,15 +43,22 @@ import { VehicleService } from './services/vehicle.service';
 import { SupplierService } from './services/supplier.service';
 import { TransitionService } from './services/transition.service';
 import { CountryService } from './services/country.service';
-import { UniqueFieldValidator } from './validators/unique-field-validator';
 import { StatisticsService } from './services/statistics.service';
 // Materials
 import { MatDatepickerModule,
          MatNativeDateModule,
-         MatInputModule} from '@angular/material';
+         MatInputModule,
+         MatTableModule,
+         MatPaginatorModule,
+         MatSortModule,
+         MatProgressSpinnerModule,
+         MatButtonModule} from '@angular/material';
 
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 import { PartsInComponent } from './components/dictionaries/parts-in/parts-in.component';
+import { MatFspTableComponent } from './components/tables/mat-fsp-table/mat-fsp-table.component';
+import { EntitiesDataSource } from './data-sources/entities-data-sourse';
+
 
 @NgModule({
   declarations: [
@@ -76,12 +83,18 @@ import { PartsInComponent } from './components/dictionaries/parts-in/parts-in.co
     EditDocumentComponent,
     NestedDocumentComponent,
     IssueLogComponent,
-    PartsInComponent
+    PartsInComponent,
+    MatFspTableComponent,
   ],
   imports: [
     MatDatepickerModule,
     MatNativeDateModule,
     MatInputModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatProgressSpinnerModule,
+    MatButtonModule,
     CommonModule,
     ReactiveFormsModule,
     CommonModule,
@@ -104,7 +117,8 @@ import { PartsInComponent } from './components/dictionaries/parts-in/parts-in.co
     GlobalIssueComponent,
     FiltersTabsComponent,
     CreateDocumentComponent,
-    DocumentComponent
+    DocumentComponent,
+    MatFspTableComponent,
   ],
   providers: [
     ActionTypeService,
@@ -125,7 +139,8 @@ import { PartsInComponent } from './components/dictionaries/parts-in/parts-in.co
     UserService,
     VehicleTypeService,
     VehicleService,
-    StatisticsService
+    StatisticsService,
+    EntitiesDataSource,
   ]
 })
 export class SharedModule {}

@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { TEntity } from '../models/entity/entity';
 import { tap, catchError, map } from 'rxjs/operators';
@@ -11,6 +11,18 @@ export class CrudService<T extends TEntity<T>> {
   protected readonly datatableUrl: string;
 
   constructor(protected http: HttpClient, protected spinner: SpinnerService) {}
+
+  getEntitiesSmart(filter: string = '', sorting: string = 'none', pageNumber = 0, pageSize = 3): Observable<T[]> {
+    return this.http.get<T[]>(this.serviceUrl, {
+      params: new HttpParams()
+          .set('filter', filter)
+          .set('sorting', sorting)
+          .set('pageNumber', pageNumber.toString())
+          .set('pageSize', pageSize.toString())
+    }).pipe(
+      //map(res =>  res["payload"])
+    );
+  }
 
   getFilteredEntities(params: any): Observable<any> {
     return this.http.post<any>(this.datatableUrl, params, {}).pipe(

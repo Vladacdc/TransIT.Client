@@ -32,7 +32,7 @@ import { MalfunctionSubgroupReportComponent } from './components/report/malfunct
     MatInputModule,
     MatFormFieldModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
   ]
 })
 export class AnalystModule {}
