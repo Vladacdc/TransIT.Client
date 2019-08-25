@@ -16,7 +16,9 @@ import { TruncatePipe } from './pipes/truncate.pipe';
 import { LocalizationComponent } from './components/localization/localization.component';
 import { TranslateModule, TranslateLoader, TranslateService, LangChangeEvent } from '@ngx-translate/core';
 import { MultiTranslateHttpLoader } from 'ngx-translate-multi-http-loader';
-import {MatSelectModule} from '@angular/material/select';
+import { MatSelectModule } from '@angular/material/select';
+import { MatInputModule } from '@angular/material/input';
+import {MatButtonModule} from '@angular/material/button'; 
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new MultiTranslateHttpLoader(httpClient, [
@@ -34,6 +36,8 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
   ],
   imports: [
     CommonModule,
+    MatButtonModule,
+    MatInputModule,
     ReactiveFormsModule,
     RouterModule,
     NgBootstrapFormValidationModule,
