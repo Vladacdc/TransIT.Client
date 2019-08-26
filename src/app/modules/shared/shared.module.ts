@@ -48,7 +48,11 @@ import { StatisticsService } from './services/statistics.service';
 // Materials
 import { MatDatepickerModule,
          MatNativeDateModule,
-         MatInputModule} from '@angular/material';
+         MatInputModule,
+         MatIconModule} from '@angular/material';
+
+import {MatSelectModule} from '@angular/material/select';
+import {MatButtonModule} from '@angular/material/button';
 
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 
@@ -77,6 +81,9 @@ import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.componen
     IssueLogComponent
   ],
   imports: [
+    MatButtonModule,
+    MatIconModule,
+    MatSelectModule,
     MatDatepickerModule,
     MatNativeDateModule,
     MatInputModule,

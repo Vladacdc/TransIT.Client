@@ -136,20 +136,6 @@ export class FiltersTabsComponent implements OnInit {
       this.selectedMalfunction = '';
     }
   }
-  selectVechicleType(value: VehicleType) {
-    if (value) {
-      this.selectedType = value.name;
-    } else {
-      this.selectedType = '';
-    }
-  }
-  selectState(value: State) {
-    if (value) {
-      this.selectedState = value.transName;
-    } else {
-      this.selectedState = '';
-    }
-  }
   selectPriority(value: string) {
     if (value) {
       this.selectedPriority = convertPriorityToInt(value).toString();
@@ -157,27 +143,7 @@ export class FiltersTabsComponent implements OnInit {
       this.selectedPriority = '';
     }
   }
-  selectLocation(value: Location) {
-    if (value) {
-      this.selectedLocation = value.name;
-    } else {
-      this.selectedLocation = '';
-    }
-  }
-  selectMalfunctionGroup(value: MalfunctionGroup) {
-    if (value) {
-      this.selectedMalfunctionGroup = value.name;
-    } else {
-      this.selectedMalfunctionGroup = '';
-    }
-  }
-  selectMalfunctionSubGroup(value: MalfunctionSubgroup) {
-    if (value) {
-      this.selectedMalfunctionSubGroup = value.name;
-    } else {
-      this.selectedMalfunctionSubGroup = '';
-    }
-  }
+
   selectFilter() {
     this.EndDateValue.emit(
       this.selectedMaxDate === null || this.selectedMaxDate === undefined ? '' : this.selectedMaxDate.toDateString()
