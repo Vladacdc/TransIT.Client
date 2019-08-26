@@ -89,10 +89,15 @@
             </button>
         </mat-form-field>
     </div>
+    <div class="buttons">
+        <button class="btn buttoncheck" mat-fab (click)="selectFilter()" >
+            <mat-icon>check</mat-icon>
+        </button>
+        <button class="btn buttonclose" mat-fab (click)="selectedPriority1=undefined; selectedGroup=undefined; selectedSubGroup=undefined; selectedMalf=undefined; clearFilter()">
+            <mat-icon>close</mat-icon>
+          </button>
+    </div>
   </div>
-  <button href="#" class="right btn btn-info" (click)="selectFilter()">
-    <i class="fas fa-filter"></i> Фільтрувати
-  </button>
 </div>
 
 

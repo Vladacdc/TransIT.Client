@@ -1,11 +1,11 @@
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
 
 .column {
-  width: 1/3*100%;
+  width: 30%;
   padding: 1%;
 }
 .selection {
-  width: 80%;
+  width: 90%;
   align-self: auto;
 
   input {
@@ -18,24 +18,43 @@
 }
 
 .borderFilterTab {
+  width: 100%;
   background: #f8f9fa;
   border-radius: 0.7rem;
-  padding: 0.3rem;
-  padding-right: 1.5rem;
+  padding-left: 1.5rem;
   border: 1px solid;
   margin-bottom: 0.5rem;
   color: #dee2e6 !important;
 }
 .block {
+  width: 100%;
   display: inline-flex;
   justify-content: space-between;
 }
 .right {
-  float: right;
+  align-self: auto;
+  border: 10%;
 }
 .grey {
   background-color: rgba(201, 201, 223, 0.342);
 }
 .right.btn.btn-info{
- margin-right: 0.5rem;
+ margin-right: 0.5rem;  
+}
+
+.buttons{
+  width: 10%;
+}
+
+.btn{
+  top: 20%;
+  margin: 0.25rem;
+  background-color: #ffffff;
+}
+
+.buttoncheck{
+  color: green;
+}
+.buttonclose{
+  color: red;
 }

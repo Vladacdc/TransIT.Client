@@ -160,4 +160,16 @@ export class FiltersTabsComponent implements OnInit {
     this.MalfunctionValue.emit(this.selectedMalfunction);
     this.Filter.emit();
   }
+  clearFilter() {
+    this.selectedMinDate = undefined;
+    this.selectedMaxDate = undefined;
+    this.selectedType = undefined;
+    this.selectedState = undefined;
+    this.selectedPriority = undefined;
+    this.selectedMalfunctionGroup = undefined;
+    this.selectedMalfunctionSubGroup = undefined;
+    this.selectedMalfunction = undefined;
+    this.selectedLocation = undefined;
+    this.selectFilter();
+  }
 }
