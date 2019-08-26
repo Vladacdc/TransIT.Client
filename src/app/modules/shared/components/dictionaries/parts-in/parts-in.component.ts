@@ -20,15 +20,6 @@ export class PartsInComponent implements OnInit {
     'unitName',
     'currencyName',
   ];
-  columnNames: string[] = [
-    'Ціна',
-    'Кількість',
-    'Номер партії',
-    'Запчастина',
-    'Дата прибуття',
-    'Одиниці виміру',
-    'Валюта',
-  ];
 
   dataSource: EntitiesDataSource<PartIn>;
 

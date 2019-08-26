@@ -61,6 +61,10 @@ export class PartsInService extends CrudService<PartIn> {
         unitName: 'Шт.'
       })
     ];
-    return of(values);
+    return of(
+    {
+      data: values,
+      recordsTotal: values.length
+    });
   }
 }

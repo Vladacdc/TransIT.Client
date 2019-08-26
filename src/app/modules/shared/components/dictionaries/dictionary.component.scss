@@ -1,18 +1,4 @@
-.container {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  flex-basis: 49%;
-  align-items: stretch;
-  justify-content: stretch;
-
-  app-country{
-    min-height: 50%;
-  }
-  app-currency{
-    min-height: 50%;
-  }
-  app-parts-in{
-    min-height: 50%;
-  }
+.parts-in-container{
+  width: 97%;
+  margin: 1% auto 0 auto;
 }
