@@ -1,10 +1,10 @@
 import { Component, OnInit, ViewChild, Input, ElementRef, ContentChildren, ContentChild } from '@angular/core';
-import { MatPaginator, MatPaginatorIntl } from '@angular/material/paginator';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { EntitiesDataSource } from '../../../data-sources/entities-data-sourse';
 import { fromEvent, merge } from 'rxjs';
 import { debounceTime, distinctUntilChanged, tap } from 'rxjs/operators';
-import { MatPaginatorIntlUkr } from '../../../paginator-extentions/mat-paginator-intl-ukr';
+import { MatPaginatorIntlCustom } from '../../../paginator-extentions/mat-paginator-intl-custom';
 
 @Component({
   selector: 'mat-fsp-table',
@@ -13,11 +13,13 @@ import { MatPaginatorIntlUkr } from '../../../paginator-extentions/mat-paginator
 })
 export class MatFspTableComponent implements OnInit {
   columnsToDisplay: string[];
+  showEdit=false;
 
   @Input() columnDefinitions: string[];
   @Input() columnNames: string[];
   @Input() dataSource: EntitiesDataSource<any>;
   @Input() enableActions: boolean; //todo
+  
   //@ContentChild(MatButton) buttons: MatButton;
   //@ContentChildren('info') info: any;
   //@ContentChildren('edit') edit: any;
@@ -36,7 +38,7 @@ export class MatFspTableComponent implements OnInit {
 
   ngOnInit() {
     this.columnsToDisplay = this.columnDefinitions;
-    this.paginator._intl = new MatPaginatorIntlUkr();
+    this.paginator._intl = new MatPaginatorIntlCustom();
     this.dataSource.loadEntities('', null, 0, 3, this.paginator);
   }
   
@@ -74,5 +76,10 @@ export class MatFspTableComponent implements OnInit {
       this.paginator.pageIndex,
       this.paginator.pageSize,
     );
+  }
+
+  editEntity(entity:any) {
+    this.showEdit=!this.showEdit;
+    //this.button.label="hi";
   }
 }
