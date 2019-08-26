@@ -49,7 +49,8 @@ import { StatisticsService } from './services/statistics.service';
 import { MatDatepickerModule,
          MatNativeDateModule,
          MatInputModule,
-         MatIconModule} from '@angular/material';
+         MatIconModule,
+         MAT_DATE_LOCALE} from '@angular/material';
 
 import {MatSelectModule} from '@angular/material/select';
 import {MatButtonModule} from '@angular/material/button';
@@ -129,7 +130,8 @@ import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.componen
     UserService,
     VehicleTypeService,
     VehicleService,
-    StatisticsService
+    StatisticsService,
+    {provide: MAT_DATE_LOCALE, useValue: 'en-GB'}
   ]
 })
 export class SharedModule {}

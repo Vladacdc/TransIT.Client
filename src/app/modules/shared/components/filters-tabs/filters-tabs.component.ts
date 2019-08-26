@@ -12,11 +12,13 @@ import { MalfunctionSubgroupService } from '../../services/malfunction-subgroup.
 import { VehicleTypeService } from '../../services/vehicle-type.service';
 import { Location } from '../../models/location';
 import { LocationService } from '../../services/location.service';
+import { MAT_DATE_LOCALE } from '@angular/material';
 
 @Component({
   selector: 'app-filters-tabs',
   templateUrl: './filters-tabs.component.html',
-  styleUrls: ['./filters-tabs.component.scss']
+  styleUrls: ['./filters-tabs.component.scss'],
+  providers: [{provide: MAT_DATE_LOCALE, useValue: 'en-GB'}]
 })
 export class FiltersTabsComponent implements OnInit {
   vehicleTypeList: VehicleType[] = [];
