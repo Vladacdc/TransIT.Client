@@ -55,6 +55,11 @@ export class FiltersTabsComponent implements OnInit {
   malfunctionSubGroupDisabled = true;
   malfunctionDisabled = true;
 
+  selectedPriority1: string;
+  selectedGroup: string;
+  selectedSubGroup: string;
+  selectedMalf: string;
+
   constructor(
     private vehicleTypeService: VehicleTypeService,
     private stateService: StateService,
@@ -170,6 +175,10 @@ export class FiltersTabsComponent implements OnInit {
     this.selectedMalfunctionSubGroup = undefined;
     this.selectedMalfunction = undefined;
     this.selectedLocation = undefined;
+    this.selectedPriority1 = undefined;
+    this.selectedGroup = undefined;
+    this.selectedSubGroup = undefined;
+    this.selectedMalf = undefined;
     this.malfunctionDisabled = true;
     this.malfunctionSubGroupDisabled = true;
     this.selectFilter();

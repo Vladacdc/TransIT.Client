@@ -2,7 +2,7 @@
   <div class="block">
     <div class="column">  
       <mat-form-field class="selection">
-         <input matInput [matDatepicker]="pickerStartDate" placeholder="Початкова дата" [max]="maxDate" [(ngModel)]="selectedMinDate">
+         <input matInput [matDatepicker]="pickerStartDate" placeholder="Початкова дата" [max]="maxDate" [(ngModel)]="selectedMinDate" >
          <mat-datepicker-toggle matSuffix [for]="pickerStartDate"></mat-datepicker-toggle>
          <mat-datepicker #pickerStartDate></mat-datepicker> 
       </mat-form-field> 
@@ -93,7 +93,7 @@
         <button class="btn buttoncheck" mat-fab (click)="selectFilter()" >
             <mat-icon>check</mat-icon>
         </button>
-        <button class="btn buttonclose" mat-fab (click)="selectedPriority1=undefined; selectedGroup=undefined; selectedSubGroup=undefined; selectedMalf=undefined; clearFilter()">
+        <button class="btn buttonclose" mat-fab (click)="clearFilter()">
             <mat-icon>close</mat-icon>
           </button>
     </div>
