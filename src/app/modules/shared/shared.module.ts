@@ -58,10 +58,6 @@ import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.componen
 import { PartsInComponent } from './components/dictionaries/parts-in/parts-in.component';
 import { MatFspTableComponent } from './components/tables/mat-fsp-table/mat-fsp-table.component';
 import { EntitiesDataSource } from './data-sources/entities-data-sourse';
-import { AddPartInComponent } from './components/dictionaries/parts-in/add/add.component';
-import { EditPartInComponent } from './components/dictionaries/parts-in/edit/edit.component';
-import { DeletePartInComponent } from './components/dictionaries/parts-in/delete/delete.component';
-
 
 @NgModule({
   declarations: [

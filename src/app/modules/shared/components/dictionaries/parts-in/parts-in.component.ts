@@ -2,10 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { EntitiesDataSource } from '../../../data-sources/entities-data-sourse';
 import { PartIn } from '../../../models/part-in';
 import { PartsInService } from '../../../services/parts-in.service';
-import { Observable, of, throwError } from 'rxjs';
+import { Observable } from 'rxjs';
 import { SpinnerService } from 'src/app/modules/core/services/spinner.service';
 import { ToastrService } from 'ngx-toastr';
-import { tap, map, catchError } from 'rxjs/operators';
+import { tap, map } from 'rxjs/operators';
 import { Currency } from '../../../models/currency';
 import { CurrencyService } from '../../../services/currency.service';
 
@@ -28,6 +28,8 @@ export class PartsInComponent implements OnInit {
 
   dataSource: EntitiesDataSource<PartIn>;
   currencies: Currency[];
+  // units: Unit[];
+  // parts: Part[];
 
   constructor(
     private partsInService: PartsInService,
@@ -42,9 +44,16 @@ export class PartsInComponent implements OnInit {
     this.currencyService.getEntities().subscribe(data => {
       this.currencies = data;
     });
+    // TODO: uncomment when these services will be implemented
+    // this.unitService.getEntities().subscribe(data => {
+    //   this.units = data;
+    // });
+    // this.partService.getEntities().subscribe(data => {
+    //   this.parts = data;
+    // });
   }
 
-  private decorateRequest(request: Observable<PartIn>): Observable<PartIn> {
+  private withSpinner(request: Observable<PartIn>): Observable<PartIn> {
     return request.pipe(
       tap(() => this.spinnerService.show()),
       map(data => data),
@@ -53,26 +62,26 @@ export class PartsInComponent implements OnInit {
   }
 
   addEntity(entity: PartIn) {
-    this.decorateRequest(this.partsInService.addEntity(entity))
+    this.withSpinner(this.partsInService.addEntity(entity))
       .subscribe(
-        ok => this.toastrService.success(),
-        error => this.toastrService.error('TODO: Error adding entity')
+        () => this.toastrService.success(),
+        () => this.toastrService.error('TODO: Error adding entity')
       );
   }
 
   editEntity(entity: PartIn) {
-    this.decorateRequest(this.partsInService.updateEntity(entity))
+    this.withSpinner(this.partsInService.updateEntity(entity))
       .subscribe(
-        ok => this.toastrService.success('TODO: Successfully edited'),
-        error => this.toastrService.error('TODO: General Error')
+        () => this.toastrService.success('TODO: Successfully edited'),
+        () => this.toastrService.error('TODO: General Error')
       );
   }
 
   deleteEntity(entity: PartIn) {
-    this.decorateRequest(this.partsInService.deleteEntity(entity.id))
+    this.withSpinner(this.partsInService.deleteEntity(entity.id))
       .subscribe(
-        ok => this.toastrService.success('TODO: Succesfully deleted'),
-        error => this.toastrService.error('TODO: General Error')
+        () => this.toastrService.success('TODO: Succesfully deleted'),
+        () => this.toastrService.error('TODO: General Error')
       );
   }
 }

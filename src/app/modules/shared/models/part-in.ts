@@ -4,7 +4,7 @@ import { Currency } from './currency';
 export class PartIn extends TEntity<PartIn> {
   createdDate: Date;
   updatedDate: Date;
-  arrivalDate: Date;
+  arrivalDate: string;
   amount: number;
   price: number;
   batch: string;
