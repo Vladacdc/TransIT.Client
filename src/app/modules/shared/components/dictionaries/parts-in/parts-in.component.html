@@ -13,6 +13,6 @@
   [actionContentTemplate]="actionsTemplate">
 </mat-fsp-table>
 
-<ng-template #actionsTemplate let-item="data">
-  <app-part-actions></app-part-actions>
+<ng-template #actionsTemplate let-data="templateData">
+  <app-part-in-actions [partIn]="data"></app-part-in-actions>
 </ng-template> 

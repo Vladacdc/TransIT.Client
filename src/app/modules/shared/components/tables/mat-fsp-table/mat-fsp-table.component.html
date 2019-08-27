@@ -32,7 +32,10 @@
 
           <ng-container *ngIf="actionContentTemplate"
                         [ngTemplateOutlet]="actionContentTemplate"
-                        [ngTemplateOutletContext]="{data: row}">
+                        [ngTemplateOutletContext]="
+                        {
+                          templateData: row
+                        }">
           </ng-container>
           <!-- <button mat-flat-button >Info</button>
           <button mat-flat-button (click)="showEdit=!showEdit">Edit</button>
