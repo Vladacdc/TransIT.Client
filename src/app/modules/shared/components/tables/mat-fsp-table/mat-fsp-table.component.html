@@ -1,14 +1,24 @@
- <!--<app-edit-supplier #editsupplier></app-edit-supplier>
- <button mat-flat-button #thisbtn>Hello</button>-->
  
- <!--<ng-container *ngTemplateOutlet="edit"></ng-container>-->
- <ng-template #contentTpl><ng-content></ng-content></ng-template>
+  <!--
+  <ng-template #contentMy></ng-template>
+  <ng-content select="deleteEntity" *ngIf="true"></ng-content>
+  -->
 
+
+  <ng-container *ngIf="showEdit">
+    hi
+    <ng-content select="button"></ng-content>
+  </ng-container>
+
+
+
+  <!---------------------------------------------------------------------------------------->
   <div class="mat-elevation-z8">
     <mat-form-field>
-      <input matInput placeholder="Filter" #input>
+      <input matInput placeholder="Пошук:" #input>
     </mat-form-field>
 
+    <div class="scroll-container">
     <table mat-table [dataSource]="dataSource" matSort>
 
       <ng-container *ngFor="let colDef of columnDefinitions; let i = index" [matColumnDef] = "colDef">
@@ -19,19 +29,10 @@
       <ng-container matColumnDef = "buttonsColumn">
         <th mat-header-cell *matHeaderCellDef> ДіЇ </th>
         <td mat-cell *matCellDef="let row"> 
-          <!--<ng-container *ngFor="let button of buttons">
-            <button [widget]="button"></button>
-          </ng-container>
-        <ng-content></ng-content>
-
-        <ng-container *ngTemplateOutlet="contentTpl">
-            <ng-content></ng-content>
-          </ng-container>
-        -->
 
           <button mat-flat-button >Info</button>
-          <ng-content></ng-content>
-          
+          <button mat-flat-button (click)="showEdit=!showEdit">Edit</button>
+          <button mat-flat-button data-target="#deleteSupplier">Delete</button>         
           
         </td>
       </ng-container>
@@ -39,13 +40,14 @@
       <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
       <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
     </table>
-    
-    <mat-paginator 
-      [length] = "numberOfRows"
+    </div>
+
+
+    <mat-paginator
       [pageSize] = "3" 
       [pageSizeOptions]="[3, 5, 10, 25, 100]">
     </mat-paginator>
-    
+
   </div>
-  
+
   
