@@ -9,5 +9,10 @@
     'Одиниці виміру',
     'Валюта'
   ]"
-  [dataSource]="dataSource">
+  [dataSource]="dataSource"
+  [actionContentTemplate]="actionsTemplate">
 </mat-fsp-table>
+
+<ng-template #actionsTemplate let-item="data">
+  <app-part-actions></app-part-actions>
+</ng-template> 

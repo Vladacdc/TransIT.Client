@@ -30,10 +30,14 @@
         <th mat-header-cell *matHeaderCellDef> ДіЇ </th>
         <td mat-cell *matCellDef="let row"> 
 
-          <button mat-flat-button >Info</button>
+          <ng-container *ngIf="actionContentTemplate"
+                        [ngTemplateOutlet]="actionContentTemplate"
+                        [ngTemplateOutletContext]="{data: row}">
+          </ng-container>
+          <!-- <button mat-flat-button >Info</button>
           <button mat-flat-button (click)="showEdit=!showEdit">Edit</button>
           <button mat-flat-button data-target="#deleteSupplier">Delete</button>         
-          
+           -->
         </td>
       </ng-container>
 

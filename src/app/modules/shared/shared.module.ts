@@ -58,6 +58,7 @@ import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.componen
 import { PartsInComponent } from './components/dictionaries/parts-in/parts-in.component';
 import { MatFspTableComponent } from './components/tables/mat-fsp-table/mat-fsp-table.component';
 import { EntitiesDataSource } from './data-sources/entities-data-sourse';
+import { PartInActionsComponent } from './components/dictionaries/parts-in/part-in-actions/part-in-actions.component';
 
 @NgModule({
   declarations: [
@@ -84,9 +85,7 @@ import { EntitiesDataSource } from './data-sources/entities-data-sourse';
     IssueLogComponent,
     PartsInComponent,
     MatFspTableComponent,
-    AddPartInComponent,
-    EditPartInComponent,
-    DeletePartInComponent,
+    PartInActionsComponent,
   ],
   imports: [
     MatDatepickerModule,

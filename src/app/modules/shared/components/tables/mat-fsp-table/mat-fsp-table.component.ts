@@ -13,25 +13,26 @@ import { MatPaginatorIntlCustom } from '../../../paginator-extentions/mat-pagina
 })
 export class MatFspTableComponent implements OnInit {
   columnsToDisplay: string[];
-  showEdit=false;
+  showEdit = false;
 
+  @Input() actionContentTemplate;
   @Input() columnDefinitions: string[];
   @Input() columnNames: string[];
   @Input() dataSource: EntitiesDataSource<any>;
-  @Input() enableActions: boolean; //todo
-  
-  //@ContentChild(MatButton) buttons: MatButton;
-  //@ContentChildren('info') info: any;
-  //@ContentChildren('edit') edit: any;
-  //@ContentChildren('delete') delete: any;
-  //@ContentChildren('btn') btn: any;
+  @Input() enableActions: boolean; // todo
+
+  // @ContentChild(MatButton) buttons: MatButton;
+  // @ContentChildren('info') info: any;
+  // @ContentChildren('edit') edit: any;
+  // @ContentChildren('delete') delete: any;
+  // @ContentChildren('btn') btn: any;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild('input') input: ElementRef;
-  //@ViewChild('thisbtn') thisbtn: any;
+  // @ViewChild('thisbtn') thisbtn: any;
 
-  //@ViewChild('editsupplier') editsupplier : EditSupplierComponent;
+  // @ViewChild('editsupplier') editsupplier : EditSupplierComponent;
 
   constructor() {
   }
@@ -41,21 +42,21 @@ export class MatFspTableComponent implements OnInit {
     this.paginator._intl = new MatPaginatorIntlCustom();
     this.dataSource.loadEntities('', null, 0, 3, this.paginator);
   }
-  
+
   ngAfterViewInit() {
-    
+
     setTimeout(() => {
-      //this.editsupplier=this.edit;
-      //this.thisbtn=this.btn.first;
-      //if(this.buttons) {
-      //if(this.enableActions) {//this.info.length + this.edit.length + this.delete.length > 0) {
-        this.columnsToDisplay = this.columnsToDisplay.concat("buttonsColumn");
-      //}
+      // this.editsupplier=this.edit;
+      // this.thisbtn=this.btn.first;
+      // if(this.buttons) {
+      // if(this.enableActions) {//this.info.length + this.edit.length + this.delete.length > 0) {
+        this.columnsToDisplay = this.columnsToDisplay.concat('buttonsColumn');
+      // }
     });
 
     this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
 
-    fromEvent(this.input.nativeElement,'keyup').pipe(
+    fromEvent(this.input.nativeElement, 'keyup').pipe(
       debounceTime(150),
       distinctUntilChanged(),
       tap(() => {
@@ -78,8 +79,8 @@ export class MatFspTableComponent implements OnInit {
     );
   }
 
-  editEntity(entity:any) {
-    this.showEdit=!this.showEdit;
-    //this.button.label="hi";
+  editEntity(entity: any) {
+    this.showEdit = !this.showEdit;
+    // this.button.label="hi";
   }
 }
