@@ -52,7 +52,12 @@ import { MatDatepickerModule,
          MatPaginatorModule,
          MatSortModule,
          MatProgressSpinnerModule,
-         MatButtonModule} from '@angular/material';
+         MatIconModule,
+         MAT_DATE_LOCALE} from '@angular/material';
+
+import {MatSelectModule} from '@angular/material/select';
+import {MatButtonModule} from '@angular/material/button';
+
 
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 import { MatFspTableComponent } from './components/tables/mat-fsp-table/mat-fsp-table.component';
@@ -85,6 +90,9 @@ import { EntitiesDataSource } from './data-sources/entities-data-sourse';
     MatFspTableComponent,
   ],
   imports: [
+    MatButtonModule,
+    MatIconModule,
+    MatSelectModule,
     MatDatepickerModule,
     MatNativeDateModule,
     MatInputModule,
@@ -138,6 +146,7 @@ import { EntitiesDataSource } from './data-sources/entities-data-sourse';
     VehicleService,
     StatisticsService,
     EntitiesDataSource,
+    {provide: MAT_DATE_LOCALE, useValue: 'uk-UA'}
   ]
 })
 export class SharedModule {}
