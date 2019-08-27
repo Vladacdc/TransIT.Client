@@ -28,7 +28,6 @@ export class EditSupplierComponent implements OnInit {
       return;
     }
     this.selectedSupplier = new Supplier(supplier);
-    this.supplierForm.patchValue(this.selectedSupplier);
   }
 
   constructor(
@@ -48,6 +47,8 @@ export class EditSupplierComponent implements OnInit {
       country: [''],
       currency: ['']
     });
+    this.supplierForm.patchValue(this.selectedSupplier);
+    
     this.countryService.getEntities().subscribe(data => {
       this.countries = data;
     });

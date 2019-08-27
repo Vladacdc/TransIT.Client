@@ -21,6 +21,7 @@ export class CreateSupplierComponent implements OnInit {
   currencies: Array<Currency>;
   currentCountry: Country;
   @ViewChild('close') closeCreateModal: ElementRef;
+  @Input() testInput;
   @Output() createSupplier = new EventEmitter<Supplier>();
 
   constructor(
