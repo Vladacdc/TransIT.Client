@@ -131,7 +131,7 @@ import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.componen
     VehicleTypeService,
     VehicleService,
     StatisticsService,
-    {provide: MAT_DATE_LOCALE, useValue: 'en-GB'}
+    {provide: MAT_DATE_LOCALE, useValue: 'uk-UA'}
   ]
 })
 export class SharedModule {}
