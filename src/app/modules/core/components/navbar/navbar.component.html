@@ -1,8 +1,9 @@
-<nav class="navbar fixed-top navbar-expand-md navbar-light bg-light">
+<nav class="navbar navbar-expand-md navbar-light bg-light">
   <a class="navbar-brand" routerLink="/">
     <img src="../../../../../assets/img/logo.png" width="30" height="30" alt="" />
     TransIT
   </a>
+  <app-localization></app-localization>
   <button
     #navbarToggler
     class="navbar-toggler navbar-toggler-right"
@@ -23,9 +24,8 @@
       </div>
       <ng-container *ngIf="isLoggedIn">
         <span class="nav-item nav-link login">{{ userLogin }}</span>
-        <a class="nav-item nav-link" routerLink="logout" (click)="logout()">Вихід</a>
+        <a class="nav-item nav-link" routerLink="logout" (click)="logout()">{{ 'Core.Navbar.SignOut' | translate }}</a>
       </ng-container>
     </div>
   </div>
 </nav>
-<div class="prepend"></div>
