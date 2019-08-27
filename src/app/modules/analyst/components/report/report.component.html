@@ -1,1 +1,34 @@
+  
+<!--       
+<input class="form-control"
+    placeholder="Start Date" 
+    [max]="maxDate"
+    [(ngModel)]="selectedMinDate"
+    [matDatepicker]="pickerStartDate" />
+<mat-datepicker-toggle matSuffix [for]="pickerStartDate"></mat-datepicker-toggle>
+<mat-datepicker #pickerStartDate></mat-datepicker> 
+
+<input class="form-control"
+    placeholder="End Date" 
+    [max]="maxDate"
+    [(ngModel)]="selectedMaxDate"
+    [matDatepicker]="pickerEndDate" />
+<mat-datepicker-toggle matSuffix [for]="pickerEndDate"></mat-datepicker-toggle> 
+<mat-datepicker #pickerEndDate></mat-datepicker>
+-->
+
+<mat-form-field>
+    <input matInput [matDatepicker]="startDatePicker"
+        placeholder="Початкова дата"/>
+    <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
+    <mat-datepicker #startDatePicker></mat-datepicker>
+</mat-form-field>
+
+<mat-form-field>
+    <input matInput [matDatepicker]="endDatePicker"
+        placeholder="Кінцева дата"/>
+    <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+    <mat-datepicker #endDatePicker></mat-datepicker>
+</mat-form-field>
+
 <malfunction-group-report></malfunction-group-report>

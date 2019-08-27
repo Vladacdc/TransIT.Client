@@ -6,6 +6,7 @@ import { DictionaryComponent } from '../shared/components/dictionaries/dictionar
 import { GlobalDocumentComponent } from '../shared/components/global-document/global-document.component';
 import { SupplierComponent } from '../shared/components/supplier/supplier.component';
 import { GlobalIssueComponent } from '../shared/components/global-issue/global-issue.component';
+import { ChartsComponent } from './components/charts/charts.component';
 
 const routes: Routes = [
   {
@@ -14,9 +15,10 @@ const routes: Routes = [
     children: [
       { path: 'issues', component: GlobalIssueComponent },
       { path: 'report', component: ReportComponent },
+      { path: 'charts', component: ChartsComponent },
       { path: 'dictionary', component: DictionaryComponent },
-      { path: 'document', component:GlobalDocumentComponent},      
-      { path: 'supplier', component:SupplierComponent},
+      { path: 'document', component: GlobalDocumentComponent},      
+      { path: 'supplier', component: SupplierComponent},
       { path: '**', redirectTo: 'issues' }
     ]
   }
