@@ -1,17 +1,12 @@
 <app-create-supplier (createSupplier)="addSupplier($event)"></app-create-supplier>
 
 <ng-template #actionsTemplate let-data="templateData">
-  
-  
-
-  <!--
-    <app-create-supplier [testInput]="data" (createSupplier)="addSupplier($event)"></app-create-supplier>
 
   <app-delete-supplier 
     [supplier]="data"
     (deleteSupplier)="deleteSupplier(data)" 
   ></app-delete-supplier>
-  -->
+
   <app-edit-supplier
     [supplier]="data"
     (updateSupplier)="updateSupplier(data)"
