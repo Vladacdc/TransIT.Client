@@ -5,10 +5,15 @@
 <div class="table-background border">
   <p></p>
   <div>
+    <ng-template #actionsTemplate let-data="templateData">
+        <app-create-supplier (createSupplier)="addSupplier(data)"></app-create-supplier>
+    </ng-template>
+
     <mat-fsp-table
       [columnDefinitions]="columnDefinitions"
       [columnNames]="columnNames"
-      [dataSource]="dataSource">
+      [dataSource]="dataSource"
+      [actionContentTemplate]="actionsTemplate">
         <button #infoEntity>It is victory!</button>
         <button #editEntity>It is editEntity!</button>
         <app-delete-supplier [supplier]="supplier" (deleteSupplier)="deleteSupplier($event)" class="deleteEntity"></app-delete-supplier>

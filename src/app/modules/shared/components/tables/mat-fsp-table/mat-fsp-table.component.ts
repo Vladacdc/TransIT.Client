@@ -15,6 +15,7 @@ export class MatFspTableComponent implements OnInit {
   columnsToDisplay: string[];
   showEdit=false;
 
+  @Input() actionContentTemplate: any;
   @Input() columnDefinitions: string[];
   @Input() columnNames: string[];
   @Input() dataSource: EntitiesDataSource<any>;
