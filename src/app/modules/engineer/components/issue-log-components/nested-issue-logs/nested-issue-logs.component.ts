@@ -12,9 +12,9 @@ declare const $;
 export class NestedIssueLogsComponent extends IssueLogsComponent implements OnInit {
   @Input() issue: Issue = null;
 
-  protected ajaxCallback(dataTablesParameters: any, callback): void {
-    this.issueLogService.getFilteredEntitiesByIssueId(this.issue.id, dataTablesParameters).subscribe(callback);
-  }
+  // protected ajaxCallback(dataTablesParameters: any, callback): void {
+  //   this.issueLogService.getFilteredEntitiesByIssueId(this.issue.id, dataTablesParameters).subscribe(callback);
+  // }
 
   ngOnInit() {
     this.initTable(this.tableConfig);

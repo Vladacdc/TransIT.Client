@@ -55,7 +55,7 @@ export class VehiclesComponent implements OnInit {
         data: null,
         defaultContent: `<button class="edit btn" data-toggle="modal" data-target="#editVehicle"><i class="fas fa-edit"></i></button>
            <button class="delete btn" data-toggle="modal" data-target="#deleteVehicle"><i class="fas fas fa-trash-alt"></i></button>
-           <button class="info btn" data-target="#infoVehicle"><i class="fas fa-info-circle"></i></button>`
+           <button class="info btn" data-toggle="tab" data-target="#infoVehicle"><i class="fas fa-info-circle"></i></button>`
       }
     ],
     language: {
@@ -91,7 +91,7 @@ export class VehiclesComponent implements OnInit {
 
   selectInfoItem(component: VehiclesComponent) {
     return function() {
-      component.router.navigate(['/admin/info-vehicle']);
+      component.router.navigate(['admin/info-vehicle']);
     };
   }
 

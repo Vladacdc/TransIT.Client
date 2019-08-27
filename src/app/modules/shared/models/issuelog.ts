@@ -4,11 +4,13 @@ import { ActionType } from './action-type';
 import { Supplier } from './supplier';
 import { Document } from './document';
 import { TEntity } from '../../core/models/entity/entity';
+import { WorkType } from './work-type';
 
 export class IssueLog extends TEntity<IssueLog> {
   description: string;
   expenses: number;
   actionType: ActionType;
+  workType: WorkType;
   issue: Issue;
   newState: State;
   oldState: State;

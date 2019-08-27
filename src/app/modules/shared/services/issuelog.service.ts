@@ -18,12 +18,12 @@ export class IssuelogService extends CrudService<IssueLog> {
     );
   }
 
-  getFilteredEntitiesByIssueId(id: number | string, params: any): Observable<Array<IssueLog>> {
-    return this.http.post<any>(`${environment.apiUrl}/datatable/issue/${id}/issuelog`, params, {}).pipe(
-      map(response => ({ ...response, data: response.data.map(d => this.mapEntity(d)) })),
-      catchError(this.handleError())
-    );
-  }
+  // getFilteredEntitiesByIssueId(id: number | string, params: any): Observable<Array<IssueLog>> {
+  //   return this.http.post<any>(`${environment.apiUrl}/datatable/issue/${id}/issuelog`, params, {}).pipe(
+  //     map(response => ({ ...response, data: response.data.map(d => this.mapEntity(d)) })),
+  //     catchError(this.handleError())
+  //   );
+  // }
 
   protected mapEntity(entity: IssueLog): IssueLog {
     return new IssueLog(entity);

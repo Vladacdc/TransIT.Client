@@ -72,6 +72,7 @@ import { CreateLocationComponent } from './component/locations/create-location/c
 import { EditLocationComponent } from './component/locations/edit-location/edit-location.component';
 import { DeleteLocationComponent } from './component/locations/delete-location/delete-location.component';
 import { MatTableModule, MatInputModule, MatFormFieldModule, MatPaginatorModule, MatSortModule } from '@angular/material';
+import { InfoVehicleComponent } from './component/vehicles/info-vehicle/info-vehicle.component';
 
 @NgModule({
   declarations: [
@@ -94,6 +95,7 @@ import { MatTableModule, MatInputModule, MatFormFieldModule, MatPaginatorModule,
     VehicleTypeComponent,
     CreateVehicleTypeComponent,
     EditVehicleTypeComponent,
+    InfoVehicleComponent,
     // ====Mulfunction===
     MalfuncComponent,
     MalfuncGroupComponent,
