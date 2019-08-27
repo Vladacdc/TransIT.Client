@@ -19,6 +19,7 @@ import { MultiTranslateHttpLoader } from 'ngx-translate-multi-http-loader';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
+import { ValidatorComponent } from './components/validator/validator.component';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new MultiTranslateHttpLoader(httpClient, [
@@ -30,6 +31,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
 @NgModule({
   declarations: [
     NavbarComponent,
+    ValidatorComponent,
     LoginComponent,
     TruncatePipe,
     LocalizationComponent
@@ -53,6 +55,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
   ],
   exports: [
     NavbarComponent,
+    ValidatorComponent,
     LoginComponent,
     TruncatePipe,
     LocalizationComponent
