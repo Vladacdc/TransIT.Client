@@ -1,0 +1,14 @@
+.inputs {
+  display: flex;
+  flex-direction: column;
+  overflow: scroll;
+}
+.form-container {
+  max-height: auto;
+}
+
+.selects-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}

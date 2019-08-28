@@ -1,0 +1,61 @@
+<div class="form-container">
+  <h1 mat-dialog-title>TODO: create part supply</h1>
+  <form [formGroup]="form">
+    <div mat-dialog-content class="inputs">
+      <mat-form-field class="selection">
+        <input matInput
+          formControlName="arrivalDate"
+          [matDatepicker]="pickerArrivalDate" 
+          placeholder="Arrival" 
+          [max]="maxDate">
+        <mat-datepicker-toggle matSuffix [for]="pickerArrivalDate"></mat-datepicker-toggle>
+        <mat-datepicker #pickerArrivalDate></mat-datepicker>
+      </mat-form-field>
+  
+      <mat-form-field>
+        <input matInput formControlName="batch" placeholder="batch number">
+        <mat-error *ngIf="form.controls['batch'].hasError('required')">
+          TODO: required
+        </mat-error>
+      </mat-form-field>
+  
+      <mat-form-field>
+        <input matInput type="number" formControlName="price" placeholder="price">
+        <mat-error *ngIf="form.controls['price'].hasError('required')">
+          TODO: required
+        </mat-error>
+      </mat-form-field>
+  
+      <mat-form-field>
+        <input matInput type="number" formControlName="amount" placeholder="amount">
+        <mat-error *ngIf="form.controls['amount'].hasError('required')">
+          TODO: required
+        </mat-error>
+      </mat-form-field>
+      <div class="selects-container">
+        <ng-select formControlName="currency"
+                 placeholder="TODO: Currency type"
+                 [items]="currencyList"
+                 bindLabel="fullName">
+        </ng-select> 
+  
+        <ng-select formControlName="unit"
+                   placeholder="TODO: Unit type"
+                   [items]="unitList"
+                   bindLabel="shortName">
+        </ng-select> 
+    
+        <ng-select formControlName="part"
+                   placeholder="Хммм, що ж вибрати?"
+                   [items]="partList"
+                   bindLabel="name">
+        </ng-select>
+      </div>
+    </div>
+  </form>
+  <div>
+    <button mat-button (click)="log()">TODO: Log</button>
+    <button mat-button (click)="onNoClick()">TODO: Cancel</button>
+    <button mat-button (click)="onSubmit()" mat-dialog-close [disabled]="form.invalid">TODO: Ok</button>
+  </div>
+</div>

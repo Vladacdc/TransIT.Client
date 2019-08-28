@@ -17,10 +17,6 @@ export class PartInActionsComponent implements OnInit {
 
   @Input() partIn: PartIn;
 
-  currencies: Currency[];
-  // units: Unit[];
-  // parts: Part[];
-
   constructor(
     private partsInService: PartsInService,
     private currencyService: CurrencyService,
@@ -29,9 +25,6 @@ export class PartInActionsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.currencyService.getEntities().subscribe(data => {
-      this.currencies = data;
-    });
     // TODO: uncomment when these services will be implemented
     // this.unitService.getEntities().subscribe(data => {
     //   this.units = data;
@@ -47,14 +40,6 @@ export class PartInActionsComponent implements OnInit {
       map(data => data),
       tap(() => this.spinnerService.hide())
     );
-  }
-
-  finishAddItem(item: PartIn) {
-    this.withSpinner(this.partsInService.addEntity(item))
-      .subscribe(
-        () => this.toastrService.success(),
-        () => this.toastrService.error('TODO: Error adding entity')
-      );
   }
 
   finishEditItem(item: PartIn) {

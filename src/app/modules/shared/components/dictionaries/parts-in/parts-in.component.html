@@ -1,17 +1,32 @@
-<mat-fsp-table
-  [columnDefinitions]="columnDefinitions"
-  [columnNames]="[
-    'Ціна',
-    'Кількість',
-    'Номер партії',
-    'Запчастина',
-    'Дата прибуття',
-    'Одиниці виміру',
-    'Валюта'
-  ]"
-  [dataSource]="dataSource"
-  [actionContentTemplate]="actionsTemplate">
-</mat-fsp-table>
+<div class="table-container">
+  <mat-card>
+    <div class="captBox col-md-4 offset-5">
+      <caption class="caption">
+        Поставки
+      </caption>
+    </div>
+      
+    <mat-fsp-table
+      [columnDefinitions]="columnDefinitions"
+      [columnNames]="[
+        'Ціна',
+        'Кількість',
+        'Номер партії',
+        'Запчастина',
+        'Дата прибуття',
+        'Одиниці виміру',
+        'Валюта'
+      ]"
+      [dataSource]="dataSource"
+      [actionContentTemplate]="actionsTemplate">
+    </mat-fsp-table>
+  
+    <button type="button" class="btn btn-primary" (click)="openAdd()">
+      <i class="fas fa-money-bill-alt"></i> Додати поставку
+    </button>
+      
+  </mat-card>
+</div>
 
 <ng-template #actionsTemplate let-data="templateData">
   <app-part-in-actions [partIn]="data"></app-part-in-actions>

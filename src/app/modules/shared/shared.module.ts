@@ -54,14 +54,18 @@ import { MatDatepickerModule,
          MatProgressSpinnerModule,
          MatIconModule,
          MAT_DATE_LOCALE} from '@angular/material';
-
+import {MatDialogModule} from '@angular/material/dialog';
 import {MatSelectModule} from '@angular/material/select';
 import {MatButtonModule} from '@angular/material/button';
+import {MatCardModule} from '@angular/material/card';
 
 import { PartInActionsComponent } from './components/dictionaries/parts-in/part-in-actions/part-in-actions.component';
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 import { MatFspTableComponent } from './components/tables/mat-fsp-table/mat-fsp-table.component';
 import { EntitiesDataSource } from './data-sources/entities-data-sourse';
+import { PartsInComponent } from './components/dictionaries/parts-in/parts-in.component';
+import { AddPartInComponent } from './components/dictionaries/parts-in/dialogs/add-part-in/add-part-in.component';
+import { EditPartInComponent } from './components/dictionaries/parts-in/dialogs/edit-part-in/edit-part-in.component';
 
 
 @NgModule({
@@ -87,15 +91,15 @@ import { EntitiesDataSource } from './data-sources/entities-data-sourse';
     EditDocumentComponent,
     NestedDocumentComponent,
     IssueLogComponent,
-<<<<<<< HEAD
     PartsInComponent,
-    MatFspTableComponent,
     PartInActionsComponent,
-=======
-    MatFspTableComponent
->>>>>>> dev
+    MatFspTableComponent,
+    AddPartInComponent,
+    EditPartInComponent,
   ],
   imports: [
+    MatCardModule,
+    MatDialogModule,
     MatButtonModule,
     MatIconModule,
     MatSelectModule,
@@ -116,7 +120,11 @@ import { EntitiesDataSource } from './data-sources/entities-data-sourse';
     FormsModule,
     NgBootstrapFormValidationModule
   ],
+  entryComponents: [
+    AddPartInComponent
+  ],
   exports: [
+    AddPartInComponent,
     PartsInComponent,
     BreadcrumbComponent,
     SupplierComponent,
@@ -130,11 +138,7 @@ import { EntitiesDataSource } from './data-sources/entities-data-sourse';
     FiltersTabsComponent,
     CreateDocumentComponent,
     DocumentComponent,
-<<<<<<< HEAD
     MatFspTableComponent,
-=======
-    MatFspTableComponent
->>>>>>> dev
   ],
   providers: [
     ActionTypeService,
@@ -157,10 +161,7 @@ import { EntitiesDataSource } from './data-sources/entities-data-sourse';
     VehicleService,
     StatisticsService,
     EntitiesDataSource,
-<<<<<<< HEAD
-=======
     {provide: MAT_DATE_LOCALE, useValue: 'uk-UA'}
->>>>>>> dev
   ]
 })
 export class SharedModule {}
