@@ -9,6 +9,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CoreModule } from './modules/core/core.module';
 import { CUSTOM_ERRORS } from './custom-errors';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { HttpClient } from '@angular/common/http';
+import { HttpLoaderFactory } from './modules/localization/localization.module';
 
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 
@@ -26,9 +29,12 @@ import { HttpLoaderFactory } from './modules/localization/localization.module';
     NgBootstrapFormValidationModule.forRoot(),
     ToastrModule.forRoot(),
     NgxSpinnerModule,
+<<<<<<< HEAD
 
     MatMomentDateModule,
 
+=======
+>>>>>>> 9c7042b2b288635d4ba26d778982cd8dbdbe405a
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,

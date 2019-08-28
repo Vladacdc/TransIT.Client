@@ -20,7 +20,6 @@ import {MatButtonModule} from '@angular/material/button';
 import { ValidatorComponent } from './components/validator/validator.component';
 import { LocalizationModule } from '../localization/localization.module';
 
-
 @NgModule({
   declarations: [
     NavbarComponent,

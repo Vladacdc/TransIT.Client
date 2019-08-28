@@ -58,3 +58,7 @@
 .buttonclose{
   color: red;
 }
+
+::ng-deep datepicker-value-example .mat-form-field-label{
+  color:red;
+}
