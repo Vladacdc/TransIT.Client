@@ -7,6 +7,6 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./language-select.component.scss']
 })
 export class LanguageSelectComponent {
+  constructor(public translate: TranslateService) {}
   language = this.translate.currentLang;
-  constructor(private translate: TranslateService) {}
 }
