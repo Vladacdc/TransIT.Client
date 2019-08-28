@@ -73,6 +73,7 @@ import { EditLocationComponent } from './component/locations/edit-location/edit-
 import { DeleteLocationComponent } from './component/locations/delete-location/delete-location.component';
 import { MatTableModule, MatInputModule, MatFormFieldModule, MatPaginatorModule, MatSortModule } from '@angular/material';
 import { InfoVehicleComponent } from './component/vehicles/info-vehicle/info-vehicle.component';
+import { MatFspTableComponent } from '../shared/components/tables/mat-fsp-table/mat-fsp-table.component';
 
 @NgModule({
   declarations: [

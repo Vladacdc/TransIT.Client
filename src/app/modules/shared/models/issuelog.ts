@@ -18,6 +18,12 @@ export class IssueLog extends TEntity<IssueLog> {
   updatedDate: Date;
   createdDate: Date;
   documents: Array<Document>;
+  actionTypeName: string;
+  workTypeName: string;
+  issueName: string;
+  newStateName: string;
+  oldStateName: string;
+  supplierName: string;
 
   constructor(issueLog: Partial<IssueLog>) {
     super(issueLog);
@@ -25,5 +31,11 @@ export class IssueLog extends TEntity<IssueLog> {
     this.newState = new State(this.newState);
     this.actionType = new ActionType(this.actionType);
     this.supplier = new Supplier(this.supplier);
+    this.actionTypeName = this.actionType.name;
+    this.workTypeName = this.workType.name;
+    this.issueName = this.issue.summary;
+    this.newStateName = this.newState.name;
+    this.oldStateName = this.oldState.name;
+    this.supplierName = this.supplier.name;
   }
 }

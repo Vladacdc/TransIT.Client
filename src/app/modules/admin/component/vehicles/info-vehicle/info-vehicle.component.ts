@@ -15,15 +15,15 @@ export class InfoVehicleComponent implements OnInit {
   columnDefinitions: string[] = [
     'description',
     'expenses',
-    'actionType',
-    'issue',
-    'workType',
-    'newState',
-    'oldState',
-    'supplier',
+    'actionTypeName',
+    'issueName',
+    'workTypeName',
+    'newStateName',
+    'oldStateName',
+    'supplierName',
     'updatedDate',
     'createdDate',
-    'documents'
+    // 'documents'
   ];
   columnNames: string[] = [
     'Опис',
@@ -36,11 +36,10 @@ export class InfoVehicleComponent implements OnInit {
     'Постачальник',
     'Дата зміни',
     'Дата створення',
-    'Документи'
+    // 'Документи'
   ];
 
   dataSource: EntitiesDataSource<IssueLog>;
-  numberOfRows: number = 100;  //needs to replace with getting data from backend
 
   constructor(private issueLogService: IssuelogService) {
   }

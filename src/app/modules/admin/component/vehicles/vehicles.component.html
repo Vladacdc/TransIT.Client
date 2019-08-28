@@ -1,10 +1,14 @@
-<div class="border">
-    <app-create-vehicle (createVehicle)="addVehicle($event)"></app-create-vehicle>
-    <app-edit-vehicle [vehicle]="selectedVehicle" (updateVehicle)="updateVehicle($event)"></app-edit-vehicle>
-    <app-delete-vehicle [vehicle]="selectedVehicle" (deleteVehicle)="deleteVehicle($event)"></app-delete-vehicle>
-    <br />
-    <p> </p>
+<!-- <app-create-vehicle (createVehicle)=="addVehicle($event)"></app-create-vehicle>
+<app-delete-vehicle [vehicle]=="vehicle" (deleteVehicle)=="deleteVehicle($event)"></app-delete-vehicle>
+<app-edit-vehicle [vehicle]=="vehicle" (updateVehicle)=="updateVehicle($event)"></app-edit-vehicle> -->
 
-    <table id="vehicles" class="table table-bordered  table-hover" style="width:100%;" cellspacing="0">
-    </table>
+<div class="table-background border">
+    <p></p>
+    <div>
+        <mat-fsp-table [columnDefinitions]="columnDefinitions" [columnNames]="columnNames" [dataSource]="dataSource">
+            <button #infoEntity>It is victory!</button>
+            <button #editEntity>It is editEntity!</button>
+            <!-- <app-delete-vehicle [vehicle]=="vehicle" (deleteVehicle)=="deleteVehicle($event)" class="deleteEntity"></app-delete-vehicle> -->
+        </mat-fsp-table>
+    </div>
 </div>
