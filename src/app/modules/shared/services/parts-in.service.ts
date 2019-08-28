@@ -13,58 +13,11 @@ export class PartsInService extends CrudService<PartIn> {
   protected readonly serviceUrl = `${environment.apiUrl}/partsin`;
   protected readonly datatableUrl = `${environment.apiUrl}/datatable/partsin`;
 
-  /**
-   *
-   */
   constructor(http: HttpClient, spinner: SpinnerService) {
     super(http, spinner);
-    PartsInService.prototype.getFilteredEntities = this.getFilteredEntities;
   }
 
   protected mapEntity(entity: PartIn): PartIn {
     return new PartIn(entity);
-  }
-
-  getFilteredEntities(params: any): Observable<any> {
-    const values = [
-      new PartIn({
-         amount: 5,
-         price: 15,
-         createdDate: new Date(),
-         updatedDate: new Date(),
-         arrivalDate: new Date().toDateString(),
-         batch: '8021324352',
-         currencyName: 'Австралійский долар',
-         partName: 'Aртек Шоколадний',
-         unitName: 'Шт.'
-      }),
-      new PartIn({
-        amount: 5,
-        price: 15,
-        createdDate: new Date(),
-        updatedDate: new Date(),
-        arrivalDate: new Date().toDateString(),
-        batch: '8021324352',
-        currencyName: 'Австралійский долар',
-        partName: 'Aртек Горіховий',
-        unitName: 'Шт.'
-      }),
-      new PartIn({
-        amount: 5,
-        price: 15,
-        createdDate: new Date(),
-        updatedDate: new Date(),
-        arrivalDate: new Date().toDateString(),
-        batch: '8021324352',
-        currencyName: 'Австралійский долар',
-        partName: 'Aртек Класичний',
-        unitName: 'Шт.'
-      })
-    ];
-    return of(
-    {
-      data: values,
-      recordsTotal: values.length
-    });
   }
 }
