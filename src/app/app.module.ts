@@ -7,10 +7,11 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { CoreModule, HttpLoaderFactory } from './modules/core/core.module';
+import { CoreModule } from './modules/core/core.module';
 import { CUSTOM_ERRORS } from './custom-errors';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { HttpClient } from '@angular/common/http';
+import { HttpLoaderFactory } from './modules/localization/localization.module';
 
 @NgModule({
   declarations: [AppComponent],
