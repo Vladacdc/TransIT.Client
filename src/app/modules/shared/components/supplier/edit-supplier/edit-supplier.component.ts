@@ -7,7 +7,6 @@ import { SupplierService } from '../../../services/supplier.service';
 import { ToastrService } from 'ngx-toastr';
 import { CurrencyService } from '../../../services/currency.service';
 import { CountryService } from '../../../services/country.service';
-import { isNull } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-edit-supplier',

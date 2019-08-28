@@ -1,12 +1,10 @@
 import { Component, OnInit, EventEmitter, Output, Input, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
 import { Supplier } from 'src/app/modules/shared/models/supplier';
 import { SupplierService } from 'src/app/modules/shared/services/supplier.service';
 import { ToastrService } from 'ngx-toastr';
 import { CountryService } from '../../../services/country.service';
 import { Country } from '../../../models/country';
-import { computeStyle } from '@angular/animations/browser/src/util';
 import { Currency } from '../../../models/currency';
 import { CurrencyService } from '../../../services/currency.service';
 
@@ -21,7 +19,6 @@ export class CreateSupplierComponent implements OnInit {
   currencies: Array<Currency>;
   currentCountry: Country;
   @ViewChild('close') closeCreateModal: ElementRef;
-  @Input() testInput;
   @Output() createSupplier = new EventEmitter<Supplier>();
 
   constructor(
