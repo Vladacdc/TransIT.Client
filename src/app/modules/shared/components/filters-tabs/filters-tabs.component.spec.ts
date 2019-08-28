@@ -1,4 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import {MatSelectModule} from '@angular/material/select';
 
 import { FiltersTabsComponent } from './filters-tabs.component';
 
@@ -8,7 +9,8 @@ describe('FiltersTabsComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FiltersTabsComponent ]
+      declarations: [ FiltersTabsComponent ],
+      imports: [MatSelectModule]
     })
     .compileComponents();
   }));

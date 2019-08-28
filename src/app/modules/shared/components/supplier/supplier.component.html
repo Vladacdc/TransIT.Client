@@ -1,4 +1,5 @@
 <app-create-supplier (createSupplier)="addSupplier($event)"></app-create-supplier>
+<<<<<<< HEAD
 <app-delete-supplier [supplier]="supplier" (deleteSupplier)="deleteSupplier($event)"></app-delete-supplier>
 <app-edit-supplier [supplier]="supplier" (updateSupplier)="updateSupplier($event)"></app-edit-supplier>
 
@@ -9,6 +10,31 @@
             <button #infoEntity>It is victory!</button>
             <button #editEntity>It is editEntity!</button>
             <app-delete-supplier [supplier]="supplier" (deleteSupplier)="deleteSupplier($event)" class="deleteEntity"></app-delete-supplier>
+=======
+
+<ng-template #actionsTemplate let-data="templateData">
+
+  <app-delete-supplier 
+    [supplier]="data"
+    (deleteSupplier)="deleteSupplier(data)" 
+  ></app-delete-supplier>
+
+  <app-edit-supplier
+    [supplier]="data"
+    (updateSupplier)="updateSupplier(data)"
+  ></app-edit-supplier>
+ 
+</ng-template>
+
+<div>
+  <mat-fsp-table #table
+    [columnDefinitions]="columnDefinitions"
+    [columnNames]="columnNames"
+    [dataSource]="dataSource"
+    [actionContentTemplate]="actionsTemplate">   
+  </mat-fsp-table>
+</div>
+>>>>>>> d3031ea957133e23a1d56f536cbffb53f9b627e4
 
             <!--
         <button class="first btn" data-toggle="modal" data-target="#addSupplier">modal btn</button>

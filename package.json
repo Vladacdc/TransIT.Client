@@ -55,7 +55,7 @@
     "@types/jasminewd2": "~2.0.3",
     "@types/jquery": "^3.3.31",
     "@types/jwt-decode": "^2.2.1",
-    "@types/node": "^8.10.51",
+    "@types/node": "^8.10.52",
     "codelyzer": "~4.5.0",
     "jasmine-core": "~2.99.1",
     "jasmine-spec-reporter": "~4.2.1",

@@ -52,7 +52,12 @@ import { MatDatepickerModule,
          MatPaginatorModule,
          MatSortModule,
          MatProgressSpinnerModule,
-         MatButtonModule} from '@angular/material';
+         MatIconModule,
+         MAT_DATE_LOCALE} from '@angular/material';
+
+import {MatSelectModule} from '@angular/material/select';
+import {MatButtonModule} from '@angular/material/button';
+
 
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 import { MatFspTableComponent } from './components/tables/mat-fsp-table/mat-fsp-table.component';
@@ -91,9 +96,13 @@ import { DeleteWorkTypeComponent } from './components/dictionaries/workType/dele
     WorkTypeComponent,
     CreateWorkTypeComponent,
     EditWorkTypeComponent,
-    DeleteWorkTypeComponent
+    DeleteWorkTypeComponent,
+    MatFspTableComponent
   ],
   imports: [
+    MatButtonModule,
+    MatIconModule,
+    MatSelectModule,
     MatDatepickerModule,
     MatNativeDateModule,
     MatInputModule,
@@ -109,7 +118,7 @@ import { DeleteWorkTypeComponent } from './components/dictionaries/workType/dele
     ReactiveFormsModule,
     NgSelectModule,
     FormsModule,
-    NgBootstrapFormValidationModule,
+    NgBootstrapFormValidationModule
   ],
   exports: [
     BreadcrumbComponent,
@@ -148,7 +157,8 @@ import { DeleteWorkTypeComponent } from './components/dictionaries/workType/dele
     VehicleService,
     StatisticsService,
     EntitiesDataSource,
-    WorkTypeService
+    WorkTypeService,
+    {provide: MAT_DATE_LOCALE, useValue: 'uk-UA'}
   ]
 })
 export class SharedModule {}
