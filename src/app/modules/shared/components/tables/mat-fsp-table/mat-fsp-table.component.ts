@@ -18,7 +18,6 @@ export class MatFspTableComponent implements OnInit {
   @Input() columnDefinitions: string[];
   @Input() columnNames: string[];
   @Input() dataSource: EntitiesDataSource<any>;
-  
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -30,11 +29,16 @@ export class MatFspTableComponent implements OnInit {
   ngOnInit() {
     this.columnsToDisplay = this.columnDefinitions;
     this.paginator._intl = new MatPaginatorIntlCustom();
-    this.dataSource.loadEntities('', null, 0, 3, this.paginator);
+    this.dataSource.loadEntities(
+      '',
+      null,
+      this.paginator.pageIndex,
+      this.paginator.pageSize,
+      this.paginator
+    );
   }
   
   ngAfterViewInit() {
-    
     setTimeout(() => {
       if(this.actionContentTemplate) {
         this.columnsToDisplay = this.columnsToDisplay.concat("buttonsColumn");

@@ -19,7 +19,7 @@ import { MalfunctionSubgroupReportComponent } from './components/report/malfunct
     ReportComponent,
     MalfunctionReportComponent,
     MalfunctionGroupReportComponent,
-    MalfunctionSubgroupReportComponent,
+    MalfunctionSubgroupReportComponent
   ],
 
   exports: [],
@@ -32,7 +32,7 @@ import { MalfunctionSubgroupReportComponent } from './components/report/malfunct
     MatInputModule,
     MatFormFieldModule,
     MatPaginatorModule,
-    MatSortModule,
+    MatSortModule
   ]
 })
 export class AnalystModule {}

@@ -87,7 +87,7 @@ import { EntitiesDataSource } from './data-sources/entities-data-sourse';
     EditDocumentComponent,
     NestedDocumentComponent,
     IssueLogComponent,
-    MatFspTableComponent,
+    MatFspTableComponent
   ],
   imports: [
     MatButtonModule,
@@ -108,7 +108,7 @@ import { EntitiesDataSource } from './data-sources/entities-data-sourse';
     ReactiveFormsModule,
     NgSelectModule,
     FormsModule,
-    NgBootstrapFormValidationModule,
+    NgBootstrapFormValidationModule
   ],
   exports: [
     BreadcrumbComponent,
@@ -123,7 +123,7 @@ import { EntitiesDataSource } from './data-sources/entities-data-sourse';
     FiltersTabsComponent,
     CreateDocumentComponent,
     DocumentComponent,
-    MatFspTableComponent,
+    MatFspTableComponent
   ],
   providers: [
     ActionTypeService,
