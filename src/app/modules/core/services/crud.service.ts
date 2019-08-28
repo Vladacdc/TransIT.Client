@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { TEntity } from '../models/entity/entity';
 import { tap, catchError, map } from 'rxjs/operators';

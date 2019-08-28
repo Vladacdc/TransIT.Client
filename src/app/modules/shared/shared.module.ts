@@ -43,19 +43,26 @@ import { VehicleService } from './services/vehicle.service';
 import { SupplierService } from './services/supplier.service';
 import { TransitionService } from './services/transition.service';
 import { CountryService } from './services/country.service';
-import { UniqueFieldValidator } from './validators/unique-field-validator';
 import { StatisticsService } from './services/statistics.service';
 // Materials
 import { MatDatepickerModule,
          MatNativeDateModule,
          MatInputModule,
+         MatTableModule,
+         MatPaginatorModule,
+         MatSortModule,
+         MatProgressSpinnerModule,
          MatIconModule,
          MAT_DATE_LOCALE} from '@angular/material';
 
 import {MatSelectModule} from '@angular/material/select';
 import {MatButtonModule} from '@angular/material/button';
 
+
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
+import { MatFspTableComponent } from './components/tables/mat-fsp-table/mat-fsp-table.component';
+import { EntitiesDataSource } from './data-sources/entities-data-sourse';
+
 
 @NgModule({
   declarations: [
@@ -79,7 +86,8 @@ import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.componen
     DeleteDocumentComponent,
     EditDocumentComponent,
     NestedDocumentComponent,
-    IssueLogComponent
+    IssueLogComponent,
+    MatFspTableComponent
   ],
   imports: [
     MatButtonModule,
@@ -88,6 +96,11 @@ import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.componen
     MatDatepickerModule,
     MatNativeDateModule,
     MatInputModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatProgressSpinnerModule,
+    MatButtonModule,
     CommonModule,
     ReactiveFormsModule,
     CommonModule,
@@ -95,7 +108,7 @@ import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.componen
     ReactiveFormsModule,
     NgSelectModule,
     FormsModule,
-    NgBootstrapFormValidationModule,
+    NgBootstrapFormValidationModule
   ],
   exports: [
     BreadcrumbComponent,
@@ -109,7 +122,8 @@ import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.componen
     GlobalIssueComponent,
     FiltersTabsComponent,
     CreateDocumentComponent,
-    DocumentComponent
+    DocumentComponent,
+    MatFspTableComponent
   ],
   providers: [
     ActionTypeService,
@@ -131,6 +145,7 @@ import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.componen
     VehicleTypeService,
     VehicleService,
     StatisticsService,
+    EntitiesDataSource,
     {provide: MAT_DATE_LOCALE, useValue: 'uk-UA'}
   ]
 })
