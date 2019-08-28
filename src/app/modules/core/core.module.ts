@@ -19,6 +19,7 @@ import { MultiTranslateHttpLoader } from 'ngx-translate-multi-http-loader';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
+import { DateAdapter } from '@angular/material';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
   return new MultiTranslateHttpLoader(httpClient, [
@@ -65,8 +66,10 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
   ]
 })
 export class CoreModule {
-  constructor(public translate: TranslateService) {
-    this.ConfigureTranslation();
+  constructor(
+    public translate: TranslateService,
+    private _adapter: DateAdapter<any>) {
+      this.ConfigureTranslation();
   }
 
   private ConfigureTranslation() {
@@ -74,6 +77,7 @@ export class CoreModule {
     this.translate.setDefaultLang('ua');
     this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
       localStorage.setItem('language', event.lang);
+      this._adapter.setLocale(event.lang);
     });
 
     let language = this.translate.getDefaultLang();

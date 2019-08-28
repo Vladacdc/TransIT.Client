@@ -6,7 +6,7 @@
       <mat-form-field class="selection">
         <input matInput 
           [matDatepicker]="pickerStartDate" 
-          placeholder="Початкова дата" 
+          placeholder= "{{'Core.StartDate' | translate}}"
           [max]="maxDate"
           [(ngModel)]="selectedMinDate">
         <mat-datepicker-toggle matSuffix [for]="pickerStartDate"></mat-datepicker-toggle>

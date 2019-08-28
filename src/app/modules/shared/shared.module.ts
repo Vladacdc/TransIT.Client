@@ -135,7 +135,7 @@ import { lang } from 'moment';
     VehicleTypeService,
     VehicleService,
     StatisticsService,
-    {provide: MAT_DATE_LOCALE, useValue: localStorage.getItem('language')},
+    {provide: MAT_DATE_LOCALE, useValue: "uk-UA"},
     {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
     {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS},
   ]
