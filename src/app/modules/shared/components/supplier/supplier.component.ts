@@ -25,7 +25,7 @@ export class SupplierComponent implements OnInit {
     'ЄДРПОУ'
   ];
 
-  @ViewChild("mat-fsp-table") table: MatFspTableComponent;
+  @ViewChild("table") table: MatFspTableComponent;
 
   dataSource: EntitiesDataSource<Supplier>;
 
@@ -34,10 +34,6 @@ export class SupplierComponent implements OnInit {
 
   ngOnInit() {
     this.dataSource = new EntitiesDataSource<Supplier>(this.supplierService);
-  }
-
-  refreshTable() {
-
   }
 
   addSupplier(supplier: Supplier) {
