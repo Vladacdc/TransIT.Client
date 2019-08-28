@@ -4,21 +4,25 @@
     <form [formGroup]="loginForm" (validSubmit)="onSubmit()" class="clearfix">
 
         <mat-form-field class="w-100 mb-3" appearance="outline">
+
           <mat-label translate>Core.Login.Login</mat-label>
           <input matInput type="text" formControlName="login" required/>
 
-          <mat-error *ngIf="loginForm.controls.login.hasError('required')" translate>ValidationErrors.Required</mat-error>
-          <mat-error *ngIf="loginForm.controls.login.hasError('minlength')" translate [translateParams]="constraints.login">ValidationErrors.MinLength</mat-error>
-          <mat-error *ngIf="loginForm.controls.login.hasError('pattern')" translate>ValidationErrors.IncorrectFormat</mat-error>
+          <mat-error>
+            <app-validator [control]="loginForm.get('login')"></app-validator>
+          </mat-error>
+
         </mat-form-field>
 
         <mat-form-field class="w-100 mb-3" appearance="outline">
+
           <mat-label translate>Core.Login.Password</mat-label>
           <input matInput type="password" formControlName="password" required/>
 
-          <mat-error *ngIf="loginForm.controls.password.hasError('required')" translate>ValidationErrors.Required</mat-error>
-          <mat-error *ngIf="loginForm.controls.password.hasError('minlength')" translate [translateParams]="constraints.password">ValidationErrors.MinLength</mat-error>
-          <mat-error *ngIf="loginForm.controls.password.hasError('maxlength')" translate [translateParams]="constraints.password">ValidationErrors.MaxLength</mat-error>
+          <mat-error>
+            <app-validator [control]="loginForm.get('password')"></app-validator>
+          </mat-error>
+
         </mat-form-field>
 
         <button class="btn btn-primary float-right" type="submit" translate>Core.Login.Enter</button>
