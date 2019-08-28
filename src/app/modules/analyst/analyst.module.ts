@@ -19,7 +19,7 @@ import { MalfunctionSubgroupReportComponent } from './components/report/malfunct
     ReportComponent,
     MalfunctionReportComponent,
     MalfunctionGroupReportComponent,
-    MalfunctionSubgroupReportComponent,
+    MalfunctionSubgroupReportComponent
   ],
 
   exports: [],

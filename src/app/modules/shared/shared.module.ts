@@ -52,13 +52,17 @@ import { MatDatepickerModule,
          MatPaginatorModule,
          MatSortModule,
          MatProgressSpinnerModule,
-         MatButtonModule} from '@angular/material';
+         MatIconModule,
+         MAT_DATE_LOCALE} from '@angular/material';
 
+import {MatSelectModule} from '@angular/material/select';
+import {MatButtonModule} from '@angular/material/button';
+
+import { PartInActionsComponent } from './components/dictionaries/parts-in/part-in-actions/part-in-actions.component';
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
-import { PartsInComponent } from './components/dictionaries/parts-in/parts-in.component';
 import { MatFspTableComponent } from './components/tables/mat-fsp-table/mat-fsp-table.component';
 import { EntitiesDataSource } from './data-sources/entities-data-sourse';
-import { PartInActionsComponent } from './components/dictionaries/parts-in/part-in-actions/part-in-actions.component';
+
 
 @NgModule({
   declarations: [
@@ -83,11 +87,18 @@ import { PartInActionsComponent } from './components/dictionaries/parts-in/part-
     EditDocumentComponent,
     NestedDocumentComponent,
     IssueLogComponent,
+<<<<<<< HEAD
     PartsInComponent,
     MatFspTableComponent,
     PartInActionsComponent,
+=======
+    MatFspTableComponent
+>>>>>>> dev
   ],
   imports: [
+    MatButtonModule,
+    MatIconModule,
+    MatSelectModule,
     MatDatepickerModule,
     MatNativeDateModule,
     MatInputModule,
@@ -103,7 +114,7 @@ import { PartInActionsComponent } from './components/dictionaries/parts-in/part-
     ReactiveFormsModule,
     NgSelectModule,
     FormsModule,
-    NgBootstrapFormValidationModule,
+    NgBootstrapFormValidationModule
   ],
   exports: [
     PartsInComponent,
@@ -119,7 +130,11 @@ import { PartInActionsComponent } from './components/dictionaries/parts-in/part-
     FiltersTabsComponent,
     CreateDocumentComponent,
     DocumentComponent,
+<<<<<<< HEAD
     MatFspTableComponent,
+=======
+    MatFspTableComponent
+>>>>>>> dev
   ],
   providers: [
     ActionTypeService,
@@ -142,6 +157,10 @@ import { PartInActionsComponent } from './components/dictionaries/parts-in/part-
     VehicleService,
     StatisticsService,
     EntitiesDataSource,
+<<<<<<< HEAD
+=======
+    {provide: MAT_DATE_LOCALE, useValue: 'uk-UA'}
+>>>>>>> dev
   ]
 })
 export class SharedModule {}

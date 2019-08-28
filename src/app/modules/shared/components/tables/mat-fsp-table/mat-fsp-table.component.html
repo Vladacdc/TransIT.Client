@@ -1,19 +1,4 @@
- 
-  <!--
-  <ng-template #contentMy></ng-template>
-  <ng-content select="deleteEntity" *ngIf="true"></ng-content>
-  -->
-
-
-  <ng-container *ngIf="showEdit">
-    hi
-    <ng-content select="button"></ng-content>
-  </ng-container>
-
-
-
-  <!---------------------------------------------------------------------------------------->
-  <div class="mat-elevation-z8">
+<div class="mat-elevation-z8">
     <mat-form-field>
       <input matInput placeholder="Пошук:" #input>
     </mat-form-field>
@@ -32,15 +17,9 @@
 
           <ng-container *ngIf="actionContentTemplate"
                         [ngTemplateOutlet]="actionContentTemplate"
-                        [ngTemplateOutletContext]="
-                        {
-                          templateData: row
-                        }">
-          </ng-container>
-          <!-- <button mat-flat-button >Info</button>
-          <button mat-flat-button (click)="showEdit=!showEdit">Edit</button>
-          <button mat-flat-button data-target="#deleteSupplier">Delete</button>         
-           -->
+                        [ngTemplateOutletContext]="{ templateData: row }">
+          </ng-container>         
+          
         </td>
       </ng-container>
 
@@ -49,12 +28,9 @@
     </table>
     </div>
 
-
     <mat-paginator
       [pageSize] = "3" 
       [pageSizeOptions]="[3, 5, 10, 25, 100]">
     </mat-paginator>
 
   </div>
-
-  
