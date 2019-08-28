@@ -9,15 +9,13 @@ import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CoreModule } from './modules/core/core.module';
 import { CUSTOM_ERRORS } from './custom-errors';
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { HttpClient } from '@angular/common/http';
-import { HttpLoaderFactory } from './modules/localization/localization.module';
 
-import { MatMomentDateModule } from '@angular/material-moment-adapter';
+import { MatMomentDateModule, MomentDateAdapter, MAT_MOMENT_DATE_FORMATS } from '@angular/material-moment-adapter';
 
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { HttpClient } from '@angular/common/http';
 import { HttpLoaderFactory } from './modules/localization/localization.module';
+import { MAT_DATE_LOCALE, DateAdapter, MAT_DATE_FORMATS } from '@angular/material';
 
 @NgModule({
   declarations: [AppComponent],
@@ -29,12 +27,8 @@ import { HttpLoaderFactory } from './modules/localization/localization.module';
     NgBootstrapFormValidationModule.forRoot(),
     ToastrModule.forRoot(),
     NgxSpinnerModule,
-<<<<<<< HEAD
-
     MatMomentDateModule,
 
-=======
->>>>>>> 9c7042b2b288635d4ba26d778982cd8dbdbe405a
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -47,8 +41,11 @@ import { HttpLoaderFactory } from './modules/localization/localization.module';
     {
       provide: CUSTOM_ERROR_MESSAGES,
       useValue: CUSTOM_ERRORS,
-      multi: true
-    }
+      multi: true,
+    },
+    {provide: MAT_DATE_LOCALE, useValue: localStorage.getItem("language")},
+    {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
+    {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS}
   ],
   bootstrap: [AppComponent]
 })
