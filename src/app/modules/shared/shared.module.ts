@@ -43,17 +43,28 @@ import { VehicleService } from './services/vehicle.service';
 import { SupplierService } from './services/supplier.service';
 import { TransitionService } from './services/transition.service';
 import { CountryService } from './services/country.service';
-import { UniqueFieldValidator } from './validators/unique-field-validator';
 import { StatisticsService } from './services/statistics.service';
 // Materials
 import { MatDatepickerModule,
          MatNativeDateModule,
-         MatInputModule} from '@angular/material';
+         MatInputModule,
+         MatTableModule,
+         MatPaginatorModule,
+         MatSortModule,
+         MatProgressSpinnerModule,
+         MatIconModule,
+         MAT_DATE_LOCALE} from '@angular/material';
+
+import {MatSelectModule} from '@angular/material/select';
+import {MatButtonModule} from '@angular/material/button';
 
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 import { PartService } from './services/part.service';
 import { ManufacturerService } from './services/manufacturer.service';
 import { UnitService } from './services/unit.service';
+import { MatFspTableComponent } from './components/tables/mat-fsp-table/mat-fsp-table.component';
+import { EntitiesDataSource } from './data-sources/entities-data-sourse';
+
 
 @NgModule({
   declarations: [
@@ -77,12 +88,21 @@ import { UnitService } from './services/unit.service';
     DeleteDocumentComponent,
     EditDocumentComponent,
     NestedDocumentComponent,
-    IssueLogComponent
+    IssueLogComponent,
+    MatFspTableComponent
   ],
   imports: [
+    MatButtonModule,
+    MatIconModule,
+    MatSelectModule,
     MatDatepickerModule,
     MatNativeDateModule,
     MatInputModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatProgressSpinnerModule,
+    MatButtonModule,
     CommonModule,
     ReactiveFormsModule,
     CommonModule,
@@ -90,7 +110,7 @@ import { UnitService } from './services/unit.service';
     ReactiveFormsModule,
     NgSelectModule,
     FormsModule,
-    NgBootstrapFormValidationModule,
+    NgBootstrapFormValidationModule
   ],
   exports: [
     BreadcrumbComponent,
@@ -104,7 +124,8 @@ import { UnitService } from './services/unit.service';
     GlobalIssueComponent,
     FiltersTabsComponent,
     CreateDocumentComponent,
-    DocumentComponent
+    DocumentComponent,
+    MatFspTableComponent
   ],
   providers: [
     ActionTypeService,
@@ -128,7 +149,8 @@ import { UnitService } from './services/unit.service';
     StatisticsService,
     PartService,
     ManufacturerService,
-    UnitService
+    UnitService,
+    EntitiesDataSource
   ]
 })
 export class SharedModule {}
