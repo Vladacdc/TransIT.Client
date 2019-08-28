@@ -52,14 +52,14 @@ import { MatDatepickerModule,
          MatIconModule,
          MAT_DATE_LOCALE,
          DateAdapter,
-         MAT_DATE_FORMATS} from '@angular/material';
+         MAT_DATE_FORMATS
+        } from '@angular/material';
 
 import {MatSelectModule} from '@angular/material/select';
 import {MatButtonModule} from '@angular/material/button';
 
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 import { MomentDateAdapter, MAT_MOMENT_DATE_FORMATS } from '@angular/material-moment-adapter';
-import { lang } from 'moment';
 
 @NgModule({
   declarations: [
@@ -135,7 +135,7 @@ import { lang } from 'moment';
     VehicleTypeService,
     VehicleService,
     StatisticsService,
-    {provide: MAT_DATE_LOCALE, useValue: "uk-UA"},
+    {provide: MAT_DATE_LOCALE, useValue: localStorage.getItem("language")},
     {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
     {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS},
   ]
