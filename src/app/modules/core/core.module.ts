@@ -16,6 +16,7 @@ import { TruncatePipe } from './pipes/truncate.pipe';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import {MatButtonModule} from '@angular/material/button';
+
 import { ValidatorComponent } from './components/validator/validator.component';
 import { LocalizationModule } from '../localization/localization.module';
 
