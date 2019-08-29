@@ -1,16 +1,19 @@
 import { Component, OnInit, ViewChild, ElementRef, Output, EventEmitter, Input } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { Document } from 'src/app/modules/shared/models/document';
 import { IssueLog } from 'src/app/modules/shared/models/issuelog';
 import { IssuelogService } from 'src/app/modules/shared/services/issuelog.service';
 import { DocumentService } from 'src/app/modules/shared/services/document.service';
+import { PDF_FILE_ERRORS } from 'src/app/custom-errors';
+import { CustomValidators } from 'src/app/custom-validators';
 
 @Component({
   selector: 'app-create-document',
   templateUrl: './create-document.component.html',
   styleUrls: ['./create-document.component.scss']
 })
+
 export class CreateDocumentComponent implements OnInit {
   @ViewChild('close') closeDiv: ElementRef;
   @ViewChild('fileInput') fileInput;
@@ -27,6 +30,8 @@ export class CreateDocumentComponent implements OnInit {
     private toast: ToastrService
   ) {}
 
+  CustomPDFErrorMessages = PDF_FILE_ERRORS;
+
   ngOnInit() {
     $('#createDocument').on('hidden.bs.modal', function() {
       $(this)
@@ -36,8 +41,8 @@ export class CreateDocumentComponent implements OnInit {
     this.documentForm = this.formBuilder.group({
       name: ['', Validators.required],
       description: ['', Validators.required],
-      file: ['', Validators.required],
-      newDate:['', Validators.required]
+      file: ['', [Validators.required, CustomValidators.isPDF]],
+      newDate: ['', Validators.required]
     });
     this.serviceIssueLog.getEntities().subscribe(issuelog => {
       this.issueLogList = issuelog;
@@ -65,7 +70,7 @@ export class CreateDocumentComponent implements OnInit {
     this.serviceDocument.addDocument(document as Document).subscribe(
       newGroup => {
         this.createDocument.next(newGroup);
-        this.toast.success('Документ збеорежено');
+        this.toast.success('Документ збережено');
       },
         error => this.toast.error('Помилка створення', 'Помилка')
     );
