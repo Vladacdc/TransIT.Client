@@ -1,38 +1,24 @@
-<div class="table-background border mt-3">
-    <h2 class="table-caption">
-      Запчастини
-    </h2>
-    <app-create-part (addPart)="reloadTable()"></app-create-part>
-    <app-edit-part [part]="selectedPart" (editPart)="reloadTable()"></app-edit-part>
-    <app-delete-part [part]="selectedPart" (deletePart)="reloadTable()"></app-delete-part>
-    <table id="part" datatable [dtOptions]="options" [dtTrigger]="renderTrigger" class="table table-bordered">
-      <thead>
-        <tr>
-          <th>Назва</th>
-          <th>Код</th>
-          <th>Виробник</th>
-          <th>Одиниці вимірювання</th>
-          <th>Дії</th>
-        </tr>
-      </thead>
-      <tbody *ngIf="parts?.length !== 0">
-        <tr *ngFor="let part of parts">
-          <td>{{ part.name }}</td>
-          <td>{{ part.code }}</td>
-          <td>{{ part.manufacturer.name }}</td>
-          <td>{{ part.unit.name }}</td>
-          <td>
-            <div class="d-flex flex-nowrap">
-              <button (click)="selectPart(part)" class="btn" data-toggle="modal" data-target="#editPart">
-                <i class="fas fa-edit"></i>
-              </button>
-              <button (click)="selectPart(part)" class="btn" data-toggle="modal" data-target="#deleteModal">
-                <i class="fas fa-trash-alt"></i>
-              </button>
-            </div>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-  
+<app-create-part (createPart)="addPart($event)"></app-create-part>
+
+<ng-template #actionsTemplate let-data="templateData">
+
+  <app-delete-part 
+    [part]="data"
+    (deletePart)="deletePart(data)" 
+  ></app-delete-part>
+
+  <app-edit-part
+    [part]="data"
+    (updatePart)="updatePart(data)"
+  ></app-edit-part>
+ 
+</ng-template>
+
+<div>
+  <mat-fsp-table #table
+    [columnDefinitions]="columnDefinitions"
+    [columnNames]="columnNames"
+    [dataSource]="dataSource"
+    [actionContentTemplate]="actionsTemplate">   
+  </mat-fsp-table>
+</div>

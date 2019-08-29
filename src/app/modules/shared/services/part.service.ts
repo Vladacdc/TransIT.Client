@@ -9,6 +9,13 @@ export class PartService extends CrudService<Part> {
   protected readonly datatableUrl = `${environment.apiUrl}/datatable/Part`;
 
   protected mapEntity(entity: Part): Part {
-    return new Part(entity);
+    let part = new Part(entity);
+    if(part.manufacturer){
+        part.manufacturerName = entity.manufacturer.name;
+    }
+    if(part.unit){
+        part.unitName=entity.unit.name;
+    }
+    return part;
   }
 }

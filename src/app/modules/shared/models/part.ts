@@ -3,10 +3,12 @@ import { Unit } from './unit';
 import { Manufacturer } from './manufacturer';
 
 export class Part extends TEntity<Part> {
-  name: string;
-  code: string;
-  manufacturer: Manufacturer;
-  unit: Unit;
+    name: string;
+    code: string;
+    manufacturer: Manufacturer;
+    unit: Unit;
+    manufacturerName?: string;
+    unitName?: string;
 
   constructor(part: Partial<Part>) {
     super(part);

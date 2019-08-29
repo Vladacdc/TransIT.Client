@@ -53,7 +53,9 @@ import { MatDatepickerModule,
          MatSortModule,
          MatProgressSpinnerModule,
          MatIconModule,
-         MAT_DATE_LOCALE} from '@angular/material';
+         MAT_DATE_LOCALE,
+         DateAdapter,
+         MAT_DATE_FORMATS} from '@angular/material';
 
 import {MatSelectModule} from '@angular/material/select';
 import {MatButtonModule} from '@angular/material/button';
@@ -64,7 +66,7 @@ import { ManufacturerService } from './services/manufacturer.service';
 import { UnitService } from './services/unit.service';
 import { MatFspTableComponent } from './components/tables/mat-fsp-table/mat-fsp-table.component';
 import { EntitiesDataSource } from './data-sources/entities-data-sourse';
-
+import { MomentDateAdapter, MAT_MOMENT_DATE_FORMATS } from '@angular/material-moment-adapter';
 
 @NgModule({
   declarations: [
@@ -150,7 +152,11 @@ import { EntitiesDataSource } from './data-sources/entities-data-sourse';
     PartService,
     ManufacturerService,
     UnitService,
+    {provide: MAT_DATE_LOCALE, useValue: localStorage.getItem("language")},
+    {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
+    {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS},
     EntitiesDataSource
   ]
 })
-export class SharedModule {}
+export class SharedModule {
+}

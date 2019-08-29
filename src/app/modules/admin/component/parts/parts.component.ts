@@ -1,63 +1,48 @@
-import { Component, ViewChild, AfterViewInit, OnDestroy } from '@angular/core';
-import { Subject } from 'rxjs';
-import { DataTableDirective } from 'angular-datatables';
-import { Part } from 'src/app/modules/shared/models/part';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { PartService } from 'src/app/modules/shared/services/part.service';
-import { DatatableSettings } from 'src/app/modules/shared/helpers/datatable-settings';
+import { Part } from 'src/app/modules/shared/models/part';
+import { EntitiesDataSource } from '../../../shared/data-sources/entities-data-sourse';
+import { MatFspTableComponent } from '../../../shared/components/tables/mat-fsp-table/mat-fsp-table.component';
 
 @Component({
   selector: 'app-parts',
   templateUrl: './parts.component.html',
   styleUrls: ['./parts.component.scss']
 })
-export class PartsComponent implements AfterViewInit, OnDestroy {
-  readonly options = new DatatableSettings({
-    ajax: (dataTablesParameters: any, callback) => {
-      this.partService.getFilteredEntities(dataTablesParameters).subscribe(response => {
-        this.parts = response.data;
-        callback({ ...response, data: [] });
-        this.adjustColumns();
-      });
-    },
-    columns: [
-        { data: 'name' }, 
-        { data: 'code' }, 
-        { data: 'manufacturer.name' }, 
-        { data: 'unit.name' }, 
-        { data: null, orderable: false }
-    ],
-    language: { url: 'assets/language.json'},
-    serverSide: true,
-    processing: true
-  });
+export class PartsComponent implements OnInit {
+  columnDefinitions: string[] = [
+    'name',
+    'code',
+    'manufacturerName',
+    'unitName'
+  ];
+  columnNames: string[] = [
+    'Назва',
+    'Код',
+    'Виробник',
+    'Одиниці вимірювання'
+  ];
 
-  parts: Part[] = [];
-  selectedPart: Part;
-  renderTrigger: Subject<any> = new Subject();
-  @ViewChild(DataTableDirective) datatableElement: DataTableDirective;
+  @ViewChild("table") table: MatFspTableComponent;
 
-  constructor(private partService: PartService) {}
+  dataSource: EntitiesDataSource<Part>;
 
-  ngAfterViewInit(): void {
-    this.renderTrigger.next();
+  constructor(private partService: PartService) {
   }
 
-  ngOnDestroy(): void {
-    this.renderTrigger.unsubscribe();
+  ngOnInit() {
+    this.dataSource = new EntitiesDataSource<Part>(this.partService);
   }
 
-  reloadTable(): void {
-    this.datatableElement.dtInstance.then((dtInstance: DataTables.Api) => {
-      dtInstance.destroy();
-      this.renderTrigger.next();
-    });
+  addPart(part: Part) {
+    this.table.loadEntitiesPage();
   }
 
-  selectPart(part: Part) {
-    this.selectedPart = { ...part };
+  deletePart(part: Part) {
+    this.table.loadEntitiesPage();
   }
 
-  private adjustColumns() {
-    setTimeout(() => $(window).trigger('resize'), 0);
+  updatePart(part: Part) {
+    this.table.loadEntitiesPage();
   }
 }
