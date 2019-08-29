@@ -1,36 +1,17 @@
-<p>
-  charts works!
-</p>
+<div>
+  <canvas baseChart
+          [data]="pieChartData"
+          [labels]="pieChartLabels"
+          [chartType]="pieChartType"></canvas>
+</div>
 
-<!--
-<div class="container">
-    <ul class="nav nav-tabs">
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/bar-chart">Bar Chart</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/doughnut-chart">Doughnut Chart</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/radar-chart">Radar Chart</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/pie-chart">Pie Chart</a>
-      </li>
-    </ul>
-    <div>
-        <router-outlet></router-outlet>
-    </div>
-  </div>
-  -->
-  <div>
-      <div style="display: block">
-        <canvas baseChart
-                [datasets]="barChartData"
-                [labels]="barChartLabels"
-                [options]="barChartOptions"
-                [legend]="barChartLegend"
-                [chartType]="barChartType">
-        </canvas>
-      </div>
-  </div>
+<div>
+  <canvas baseChart
+    [datasets]="barChartData"
+    [labels]="barChartLabels"
+    [options]="barChartOptions"
+    [legend]="barChartLegend"
+    [chartType]="barChartType">
+  </canvas>
+</div>
+  
