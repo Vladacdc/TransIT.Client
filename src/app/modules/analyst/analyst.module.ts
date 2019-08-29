@@ -8,9 +8,11 @@ import { WebDataRocksPivot } from 'src/types/webdatarocks/webdatarocks.angular4'
 import { ReportComponent } from './components/report/report.component';
 import { SharedModule } from '../shared/shared.module';
 import { MalfunctionReportComponent } from './components/report/malfunction-report/malfunction-report.component';
-import { MatPaginatorModule, MatSortModule, MatFormFieldModule, MatTableModule, MatInputModule } from '@angular/material';
+import { MatPaginatorModule, MatSortModule, MatFormFieldModule, MatTableModule, MatInputModule, MatDatepickerModule } from '@angular/material';
 import { MalfunctionGroupReportComponent } from './components/report/malfunction-group-report/malfunction-group-report.component';
 import { MalfunctionSubgroupReportComponent } from './components/report/malfunction-subgroup-report/malfunction-subgroup-report.component';
+import { ChartsComponent } from './components/charts/charts.component';
+import { ChartsModule } from 'ng2-charts';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,8 @@ import { MalfunctionSubgroupReportComponent } from './components/report/malfunct
     ReportComponent,
     MalfunctionReportComponent,
     MalfunctionGroupReportComponent,
-    MalfunctionSubgroupReportComponent
+    MalfunctionSubgroupReportComponent,
+    ChartsComponent
   ],
 
   exports: [],
@@ -32,7 +35,9 @@ import { MalfunctionSubgroupReportComponent } from './components/report/malfunct
     MatInputModule,
     MatFormFieldModule,
     MatPaginatorModule,
-    MatSortModule
+    MatSortModule,
+    MatDatepickerModule,
+    ChartsModule
   ]
 })
 export class AnalystModule {}
