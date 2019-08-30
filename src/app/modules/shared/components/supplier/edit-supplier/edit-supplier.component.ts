@@ -7,7 +7,6 @@ import { SupplierService } from '../../../services/supplier.service';
 import { ToastrService } from 'ngx-toastr';
 import { CurrencyService } from '../../../services/currency.service';
 import { CountryService } from '../../../services/country.service';
-import { isNull } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-edit-supplier',
@@ -28,7 +27,6 @@ export class EditSupplierComponent implements OnInit {
       return;
     }
     this.selectedSupplier = new Supplier(supplier);
-    this.supplierForm.patchValue(this.selectedSupplier);
   }
 
   constructor(
@@ -48,6 +46,8 @@ export class EditSupplierComponent implements OnInit {
       country: [''],
       currency: ['']
     });
+    this.supplierForm.patchValue(this.selectedSupplier);
+    
     this.countryService.getEntities().subscribe(data => {
       this.countries = data;
     });

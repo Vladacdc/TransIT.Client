@@ -13,10 +13,38 @@ import { CrudService } from './services/crud.service';
 import { SpinnerService } from './services/spinner.service';
 import { TruncatePipe } from './pipes/truncate.pipe';
 
+import { MatSelectModule } from '@angular/material/select';
+import { MatInputModule } from '@angular/material/input';
+import {MatButtonModule} from '@angular/material/button';
+
+import { ValidatorComponent } from './components/validator/validator.component';
+import { LocalizationModule } from '../localization/localization.module';
+
 @NgModule({
-  declarations: [NavbarComponent, LoginComponent, TruncatePipe],
-  imports: [CommonModule, ReactiveFormsModule, RouterModule, NgBootstrapFormValidationModule, HttpClientModule],
-  exports: [NavbarComponent, LoginComponent, TruncatePipe],
+  declarations: [
+    NavbarComponent,
+    ValidatorComponent,
+    LoginComponent,
+    TruncatePipe,
+  ],
+  imports: [
+    CommonModule,
+    MatButtonModule,
+    MatInputModule,
+    ReactiveFormsModule,
+    RouterModule,
+    NgBootstrapFormValidationModule,
+    HttpClientModule,
+    MatSelectModule,
+    LocalizationModule
+  ],
+  exports: [
+    NavbarComponent,
+    ValidatorComponent,
+    LoginComponent,
+    TruncatePipe,
+    LocalizationModule
+  ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: HttpErrorInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: HttpAuthInterceptor, multi: true },
@@ -24,4 +52,7 @@ import { TruncatePipe } from './pipes/truncate.pipe';
     SpinnerService
   ]
 })
-export class CoreModule {}
+export class CoreModule {
+  constructor() {
+  }
+}
