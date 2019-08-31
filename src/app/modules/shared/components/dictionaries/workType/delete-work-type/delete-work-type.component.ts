@@ -1,4 +1,5 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Input } from "@angular/core";
+import { WorkType } from 'src/app/modules/shared/models/work-type';
 
 @Component({
     selector: 'app-work-type-delete',
@@ -6,6 +7,7 @@ import { Component, OnInit } from "@angular/core";
     styleUrls: ['./delete-work-type.component.scss']
   })
 export class DeleteWorkTypeComponent implements OnInit {
+    @Input() workType: WorkType;
     ngOnInit() {
     }
 }

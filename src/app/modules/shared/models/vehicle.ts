@@ -19,15 +19,6 @@ export class Vehicle extends TEntity<Vehicle> {
     super(vehicle);
     this.vehicleType = new VehicleType(this.vehicleType);
     this.location = this.location && new Location(this.location);
-    this.vehicleTypeName = this.vehicleType.name;
-    if(this.location)
-    {
-      this.locationName = this.location.name;
-    }
-    else
-    {
-      this.locationName = '';
-    }
   }
 
   get name(): string {

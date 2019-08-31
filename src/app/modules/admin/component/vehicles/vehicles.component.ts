@@ -1,7 +1,9 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit, ViewChild} from '@angular/core';
 import { EntitiesDataSource } from '../../../shared/data-sources/entities-data-sourse';
 import { Vehicle } from 'src/app/modules/shared/models/vehicle';
 import { VehicleService } from 'src/app/modules/shared/services/vehicle.service';
+import { MatFspTableComponent } from 'src/app/modules/shared/components/tables/mat-fsp-table/mat-fsp-table.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-vehicles',
@@ -34,24 +36,32 @@ export class VehiclesComponent implements OnInit {
     'Закінчення гарантійного терміну'
   ];
 
+  @ViewChild('table') table: MatFspTableComponent;
+
   dataSource: EntitiesDataSource<Vehicle>;
 
-  constructor(private vehicleService: VehicleService) {
+
+  constructor(private router: Router, private vehicleService: VehicleService) {
   }
 
   ngOnInit() {
     this.dataSource = new EntitiesDataSource<Vehicle>(this.vehicleService);
   }
 
-  addSupplier(supplier: Vehicle) {
+  addVehicle(vehicle: Vehicle) {
+    this.table.loadEntitiesPage();
   }
 
-  deleteSupplier(supplier: Vehicle) {
+  deleteVehicle(vehicle: Vehicle) {
+    this.table.loadEntitiesPage();
   }
 
-  updateSupplier(supplier: Vehicle) {
+  updateVehicle(vehicle: Vehicle) {
+    this.table.loadEntitiesPage();
   }
-
-  isVisibleCheck() {
+  
+  infoVehicle(vehicle: Vehicle) {
+    this.table.loadEntitiesPage();
+    this.router.navigate(['/admin/info-vehicle']);
   }
 }

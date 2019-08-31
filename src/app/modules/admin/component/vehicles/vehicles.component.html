@@ -1,14 +1,11 @@
-<!-- <app-create-vehicle (createVehicle)=="addVehicle($event)"></app-create-vehicle>
-<app-delete-vehicle [vehicle]=="vehicle" (deleteVehicle)=="deleteVehicle($event)"></app-delete-vehicle>
-<app-edit-vehicle [vehicle]=="vehicle" (updateVehicle)=="updateVehicle($event)"></app-edit-vehicle> -->
+<app-create-vehicle (createVehicle)="addVehicle($event)"></app-create-vehicle>
+<ng-template #actionsTemplate let-data="templateData">
+    <button (click)=deleteVehicle(data)>Delete</button>
+    <button (click)="updateVehicle(data)">Edit</button>
+    <button (click)="infoVehicle(data)">Info</button>
+</ng-template>
 
-<div class="table-background border">
-    <p></p>
-    <div>
-        <mat-fsp-table [columnDefinitions]="columnDefinitions" [columnNames]="columnNames" [dataSource]="dataSource">
-            <button #infoEntity>It is victory!</button>
-            <button #editEntity>It is editEntity!</button>
-            <!-- <app-delete-vehicle [vehicle]=="vehicle" (deleteVehicle)=="deleteVehicle($event)" class="deleteEntity"></app-delete-vehicle> -->
-        </mat-fsp-table>
-    </div>
+<div>
+    <mat-fsp-table #table [columnDefinitions]="columnDefinitions" [columnNames]="columnNames" [dataSource]="dataSource" [actionContentTemplate]="actionsTemplate">
+    </mat-fsp-table>
 </div>

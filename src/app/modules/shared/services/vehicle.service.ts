@@ -11,6 +11,13 @@ export class VehicleService extends CrudService<Vehicle> {
   protected readonly datatableUrl = `${environment.apiUrl}/datatable/vehicle`;
 
   protected mapEntity(entity: Vehicle): Vehicle {
-    return new Vehicle(entity);
+    let vehicle = new Vehicle(entity);
+    if (entity.location) {
+      vehicle.locationName = entity.location.name;
+    }
+    if (entity.vehicleType) {
+      vehicle.vehicleTypeName = entity.vehicleType.name;
+    }
+    return vehicle;
   }
 }

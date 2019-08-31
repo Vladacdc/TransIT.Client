@@ -1,8 +1,9 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit, ViewChild, Input} from '@angular/core';
 import { IssuelogService } from 'src/app/modules/shared/services/issuelog.service';
 import { EntitiesDataSource } from 'src/app/modules/shared/data-sources/entities-data-sourse';
 import { Vehicle } from 'src/app/modules/shared/models/vehicle';
 import { IssueLog } from 'src/app/modules/shared/models/issuelog';
+import { MatFspTableComponent } from 'src/app/modules/shared/components/tables/mat-fsp-table/mat-fsp-table.component';
 
 
 @Component({
@@ -11,7 +12,7 @@ import { IssueLog } from 'src/app/modules/shared/models/issuelog';
   styleUrls: ['./info-vehicle.component.scss']
 })
 export class InfoVehicleComponent implements OnInit {
- 
+  @Input() vehicle: Vehicle;
   columnDefinitions: string[] = [
     'description',
     'expenses',
@@ -39,16 +40,14 @@ export class InfoVehicleComponent implements OnInit {
     // 'Документи'
   ];
 
+  @ViewChild('table') table: MatFspTableComponent;
+
   dataSource: EntitiesDataSource<IssueLog>;
 
   constructor(private issueLogService: IssuelogService) {
   }
 
-
   ngOnInit() {
     this.dataSource = new EntitiesDataSource<IssueLog>(this.issueLogService);
-  }
-
-  isVisibleCheck() {
   }
 }

@@ -52,6 +52,7 @@ export class EditVehicleComponent implements OnInit {
   CustomLetNumErrorMessages = LET_NUM_FIELD_ERRORS;
 
   ngOnInit() {
+    console.log('edit');
     $('#editVehicle').on('hidden.bs.modal', () => {
       this.vehicleForm.patchValue({
         ...this.selectedVehicle,

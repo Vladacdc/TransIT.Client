@@ -17,6 +17,9 @@ import { IssueLogComponent } from '../shared/components/issue-log/issue-log.comp
 import { SupplierComponent } from '../shared/components/supplier/supplier.component';
 import { LocationsComponent } from './component/locations/locations.component';
 import { InfoVehicleComponent } from './component/vehicles/info-vehicle/info-vehicle.component';
+import { WorkTypeComponent } from '../shared/components/dictionaries/workType/work-type.component';
+import { EditVehicleComponent } from './component/vehicles/edit-vehicle/edit-vehicle.component';
+import { DeleteVehicleComponent } from './component/vehicles/delete-vehicle/delete-vehicle.component';
 
 const routes: Routes = [
   {
@@ -24,7 +27,8 @@ const routes: Routes = [
     component: AdminComponent,
     children: [
       { path: 'users', component: UsersComponent },
-      { path: 'vehicles', component: VehiclesComponent },
+      { path: 'vehicles', component: VehiclesComponent},
+      { path: 'info-vehicle', component: InfoVehicleComponent},
       {
         path: 'malfunctions',
         component: MalfunctionsComponent,
@@ -41,9 +45,9 @@ const routes: Routes = [
       { path: 'issue-log', component: IssueLogComponent },
       { path: 'dictionary', component: DictionaryComponent },
       { path: 'posts', component: PostsComponent },
-      { path: 'info-vehicle', component: InfoVehicleComponent},
       { path: 'employees', component: EmployeesComponent },
       { path: 'locations', component: LocationsComponent},
+      { path: 'workTypes', component: WorkTypeComponent},
       { path: '**', redirectTo: 'users' }
     ]
   }

@@ -1,9 +1,7 @@
-<div class="table-background border">
-    <p></p>
-    <div>
-        <mat-fsp-table [columnDefinitions]="columnDefinitions" [columnNames]="columnNames" [dataSource]="dataSource">
-            <button>It is victory!</button>
-            <!-- <button class="first btn" data-toggle="modal" data-target="#addItem">modal btn</button> -->
-        </mat-fsp-table>
-    </div>
+<ng-template #actionsTemplate let-data="templateData">
+</ng-template>
+
+<div>
+    <mat-fsp-table #table [columnDefinitions]="columnDefinitions" [columnNames]="columnNames" [dataSource]="dataSource" [actionContentTemplate]="actionsTemplate">
+    </mat-fsp-table>
 </div>
