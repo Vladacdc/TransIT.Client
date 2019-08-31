@@ -1,11 +1,10 @@
 import { Component, OnInit, ViewChild, Input, ElementRef } from '@angular/core';
-import { MatPaginator, MatPaginatorIntl } from '@angular/material/paginator';
+import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { EntitiesDataSource } from '../../../data-sources/entities-data-sourse';
 import { fromEvent, merge } from 'rxjs';
 import { debounceTime, distinctUntilChanged, tap } from 'rxjs/operators';
 import { MatPaginatorIntlCustom } from '../../../paginator-extentions/mat-paginator-intl-custom';
-import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 
 @Component({
   selector: 'mat-fsp-table',
@@ -24,25 +23,12 @@ export class MatFspTableComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild('input') input: ElementRef;
 
-  constructor(private translate: TranslateService ) {
-    this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
-      if (this.translate.currentLang === 'uk') {
-        this.paginator._intl = new MatPaginatorIntlCustom();
-      } else if (this.translate.currentLang === 'en') {
-        this.paginator._intl = new MatPaginatorIntl();
-      }
-    });
+  constructor() {
   }
 
   ngOnInit() {
     this.columnsToDisplay = this.columnDefinitions;
-    this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
-      if (this.translate.currentLang === 'uk') {
-        this.paginator._intl = new MatPaginatorIntlCustom();
-      } else if (this.translate.currentLang === 'en') {
-        this.paginator._intl = new MatPaginatorIntl();
-      }
-    });
+    this.paginator._intl = new MatPaginatorIntlCustom();
     this.dataSource.loadEntities(
       '',
       null,

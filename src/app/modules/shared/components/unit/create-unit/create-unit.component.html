@@ -1,3 +1,65 @@
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createUnit">
     <i class="fas fa-ruler-combined"></i> {{'Unit.Create.Title' | translate}}
 </button>
+
+<div
+  class="modal fade"
+  id="createUnit"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="createUnit"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header color">
+        <h5 class="modal-title"><i class="fas fa-user-plus"></i> Створити постачальника</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="unitForm">
+          <div class="form-group">
+            <label class="required-field">Коротка назва</label>
+            <input type="text" class="form-control" formControlName="name" placeholder="Введіть скорочену назву" />
+          </div>
+          <div class="form-group">
+            <label class="required-field">Повна назва</label>
+            <input type="text" class="form-control" formControlName="fullName" placeholder="Введіть повну назву" />
+          </div>
+          <div class="form-group">
+            <label class="required-field">ЄДРПОУ</label>
+            <input type="text" class="form-control" formControlName="edrpou" placeholder="Введіть ЄДРПОУ" />
+          </div>
+          <div class="form-group">
+            <label>Країна</label>
+            <ng-select
+              formControlName="country"
+              [items] = "countries"
+              bindLabel = "name"
+              placeholder = "Виберіть Країну"
+              notFoundText = "Не знайдено">
+            </ng-select>
+          </div>
+          <div class="form-group">
+            <label>Валюта</label>
+            <ng-select
+              formControlName="currency"
+              [items] = "currencies"
+              bindLabel = "name"
+              placeholder = "Виберіть Валюту"
+              notFoundText = "Не знайдено">
+            </ng-select>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button #close type="button" class="btn btn-secondary" data-dismiss="modal">Скасувати</button>
+        <button type="button" class="btn btn-primary" (click)="clickSubmit()" [disabled]="unitForm.invalid">
+          Створити
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
