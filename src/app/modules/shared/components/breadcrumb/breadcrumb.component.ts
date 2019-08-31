@@ -26,7 +26,7 @@ export class BreadcrumbComponent implements OnInit {
     createBreadcrumb() {
         this.breadcrumbs = [];
         const route = this.location.path().split('?')[0].slice(1).split('/');
-        const starturl = route.shift();
+        route.shift();
 
         while (route.length !== 0) {
                 let tempRoute = '';
