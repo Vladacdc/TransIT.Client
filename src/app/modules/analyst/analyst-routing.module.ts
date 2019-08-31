@@ -15,8 +15,8 @@ const routes: Routes = [
       { path: 'issues', component: GlobalIssueComponent },
       { path: 'report', component: ReportComponent },
       { path: 'dictionary', component: DictionaryComponent },
-      { path: 'document', component:GlobalDocumentComponent},      
-      { path: 'supplier', component:SupplierComponent},
+      { path: 'documents', component: GlobalDocumentComponent},
+      { path: 'supplier', component: SupplierComponent},
       { path: '**', redirectTo: 'issues' }
     ]
   }

@@ -12,7 +12,6 @@ import { MalfuncComponent } from './component/malfunctions/malfunc/malfunc.compo
 import { MalfuncGroupComponent } from './component/malfunctions/malfunc-group/malfunc-group.component';
 import { MalfunSubgroupComponent } from './component/malfunctions/malfun-subgroup/malfun-subgroup.component';
 import { CoreModule } from '../core/core.module';
-import { AdminNavbarComponent } from './component/admin/admin-navbar/admin-navbar.component';
 import { CreateVehicleComponent } from './component/vehicles/create-vehicle/create-vehicle.component';
 import { EditVehicleComponent } from './component/vehicles/edit-vehicle/edit-vehicle.component';
 import { DeleteVehicleComponent } from './component/vehicles/delete-vehicle/delete-vehicle.component';
@@ -80,7 +79,6 @@ import { DeletePartComponent } from './component/parts/delete-part/delete-part.c
 @NgModule({
   declarations: [
     AdminComponent,
-    AdminNavbarComponent,
     // ====User===
     UsersComponent,
     CreateUserComponent,
