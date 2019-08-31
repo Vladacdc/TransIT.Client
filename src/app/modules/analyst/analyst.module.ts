@@ -13,6 +13,7 @@ import { MalfunctionGroupReportComponent } from './components/report/malfunction
 import { MalfunctionSubgroupReportComponent } from './components/report/malfunction-subgroup-report/malfunction-subgroup-report.component';
 import { ChartsComponent } from './components/charts/charts.component';
 import { ChartsModule } from 'ng2-charts';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { ChartsModule } from 'ng2-charts';
     MatPaginatorModule,
     MatSortModule,
     MatDatepickerModule,
-    ChartsModule
+    ChartsModule,
+    FormsModule
   ]
 })
 export class AnalystModule {}

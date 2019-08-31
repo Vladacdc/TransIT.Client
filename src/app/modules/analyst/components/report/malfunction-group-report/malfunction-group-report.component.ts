@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
@@ -26,6 +26,9 @@ export class MalfunctionGroupReportComponent implements OnInit {
 
   expandedElement: any | null;
 
+  @Input("startDate") startDate: Date;
+  @Input("endDate") endDate: Date;
+
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   
@@ -45,7 +48,7 @@ export class MalfunctionGroupReportComponent implements OnInit {
       });
     });
 
-    this.statisticsService.GetAllMalfunctionGroupsStatistics().subscribe(data => {
+    this.statisticsService.GetAllMalfunctionGroupsStatistics(this.startDate, this.endDate).subscribe(data => {
       let rows = [];
       data.forEach(row => {
         rows.push(CreateMatTableRowFromStatistics(row, this.displayedColumns));

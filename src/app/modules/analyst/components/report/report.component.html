@@ -18,17 +18,28 @@
 -->
 
 <mat-form-field>
-    <input matInput [matDatepicker]="startDatePicker"
-        placeholder="Початкова дата"/>
+    <input matInput
+        [matDatepicker]="startDatePicker"
+        placeholder="Початкова дата"
+        (change)="selectedStartDate=value"/>
     <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
     <mat-datepicker #startDatePicker></mat-datepicker>
 </mat-form-field>
 
 <mat-form-field>
-    <input matInput [matDatepicker]="endDatePicker"
-        placeholder="Кінцева дата"/>
+    <input matInput
+        [matDatepicker]="endDatePicker"
+        placeholder="Кінцева дата"
+        (change)="selectedEndDate=value"/>
     <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
     <mat-datepicker #endDatePicker></mat-datepicker>
 </mat-form-field>
 
-<malfunction-group-report></malfunction-group-report>
+<button (click)="reportVisibility=false;reportVisibility=true"> Завантажити звіт </button>
+
+<ng-container  *ngIf="reportVisibility">
+<malfunction-group-report
+    [startDate]="selectedStartDate"
+    [endDate]="selectedEndDate"
+></malfunction-group-report>
+</ng-container>

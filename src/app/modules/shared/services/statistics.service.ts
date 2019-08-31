@@ -45,23 +45,30 @@ export class StatisticsService {
       );
   }
 
-  GetMalfunctionStatistics(malfunction: string, startDate: Date, endDate: Date): Observable<string[]> {
+  GetMalfunctionStatistics(malfunction: string, startDate: Date = null, endDate: Date = null): Observable<number[]> {
     this.spinner.show();
-    return this.http.get<string[]>(
+
+    let httpParams = new HttpParams().set("malfunctionName", malfunction);
+    
+    if(startDate) {
+      httpParams = httpParams.set("startDate", startDate.toString());
+    }
+    if(endDate) {
+      httpParams = httpParams.set("endDate", endDate.toString());
+    }
+
+    return this.http.get<number[]>(
       `${this.serviceUrl}/malfunctionstatistics`, { 
-        params: new HttpParams()
-          .set("malfunctionName", malfunction)
-          .set("startDate", startDate.toDateString()) 
-          .set("endDate", endDate.toDateString())
+        params: httpParams
       }).pipe( map(entity => entity),
         tap(data => this.handleSuccess('fetched data', data)),
         catchError(this.handleError())
       );
   }
 
-  GetMalfunctionGroupStatistics(malfunctionGroup: string, startDate: Date, endDate: Date): Observable<string[]> {
+  GetMalfunctionGroupStatistics(malfunctionGroup: string, startDate: Date, endDate: Date): Observable<number[]> {
     this.spinner.show();
-    return this.http.get<string[]>(
+    return this.http.get<number[]>(
       `${this.serviceUrl}/malfunctiongroupstatistics`, { 
         params: new HttpParams()
           .set("malfunctionGroupName", malfunctionGroup)
@@ -73,9 +80,9 @@ export class StatisticsService {
       );
   }
 
-  GetMalfunctionSubGroupStatistics(malfunctionSubGroup: string, startDate: Date, endDate: Date): Observable<string[]> {
+  GetMalfunctionSubGroupStatistics(malfunctionSubGroup: string, startDate: Date, endDate: Date): Observable<number[]> {
     this.spinner.show();
-    return this.http.get<string[]>(
+    return this.http.get<number[]>(
       `${this.serviceUrl}/malfunctionsubgroupstatistics`, { 
         params: new HttpParams()
           .set("malfunctionSubGroupName", malfunctionSubGroup)

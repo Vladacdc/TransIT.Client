@@ -1,11 +1,11 @@
-<div>
+<div *ngIf="pieChartReady">
   <canvas baseChart
           [data]="pieChartData"
           [labels]="pieChartLabels"
           [chartType]="pieChartType"></canvas>
 </div>
 
-<div>
+<div *ngIf="barChartReady">
   <canvas baseChart
     [datasets]="barChartData"
     [labels]="barChartLabels"
