@@ -3,6 +3,6 @@
         "itemsPerPage": "Записів на сторінці",
         "nextPage": "Наступна сторінка",
         "previousPage": "Попередня сторінка",
-        "range": "{{startIndex}} — {{endIndex}} з {{length}}"
+        "range": "{{startIndex}} - {{endIndex}} з {{length}}"
     }
 }
