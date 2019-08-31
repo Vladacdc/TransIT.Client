@@ -1,6 +1,5 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { EditPostComponent } from './edit-post.component';
+import { EditPostComponent } from '../../posts/edit-post/edit-post.component';
 
 describe('EditPostComponent', () => {
   let component: EditPostComponent;

@@ -9,10 +9,4 @@ export class Part extends TEntity<Part> {
     unit: Unit;
     manufacturerName?: string;
     unitName?: string;
-
-  constructor(part: Partial<Part>) {
-    super(part);
-    this.manufacturer = new Manufacturer(this.manufacturer);
-    this.unit = new Unit(this.unit);
-  }
 }

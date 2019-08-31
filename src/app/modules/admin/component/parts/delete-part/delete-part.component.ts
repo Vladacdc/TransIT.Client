@@ -1,4 +1,4 @@
-import { Component, Input, EventEmitter, Output } from '@angular/core';
+import { Component, ViewChild, ElementRef, Input, Output, EventEmitter } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { Part } from 'src/app/modules/shared/models/part';
 import { PartService } from 'src/app/modules/shared/services/part.service';
@@ -9,18 +9,22 @@ import { PartService } from 'src/app/modules/shared/services/part.service';
   styleUrls: ['./delete-part.component.scss']
 })
 export class DeletePartComponent {
+  @ViewChild('close') closeDeleteModal: ElementRef;
   @Input() part: Part;
   @Output() deletePart = new EventEmitter<Part>();
 
-  constructor(private partService: PartService, private toast: ToastrService) {}
+  constructor(private service: PartService, private toast: ToastrService) {}
 
-  delete(): void {
-    this.partService.deleteEntity(this.part.id).subscribe(
-      () => {
-        this.deletePart.next(this.part);
+  ngOnInit() {}
+  
+  delete() {
+    this.closeDeleteModal.nativeElement.click();
+    this.service.deleteEntity(this.part.id).subscribe(
+      data => {
         this.toast.success('', 'Запчастину видалено');
+        this.deletePart.next(this.part);        
       },
-      () => this.toast.error('Не вдалось видалити запчастину', 'Помилка видалення')
+      error => this.toast.error('Помилка видалення')
     );
   }
 }
