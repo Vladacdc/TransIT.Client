@@ -1,0 +1,25 @@
+<app-create-unit (createSupplier)="addUnit($event)"></app-create-unit>
+
+<!-- <ng-template #actionsTemplate let-data="templateData">
+
+<app-delete-supplier 
+    [supplier]="data"
+    (deleteSupplier)="deleteUnit(data)" 
+></app-delete-supplier>
+
+<app-edit-supplier
+    [supplier]="data"
+    (updateSupplier)="updateUnit(data)"
+></app-edit-supplier>
+
+</ng-template> -->
+
+<div>
+    <mat-fsp-table #table
+        [columnDefinitions]="columnDefinitions"
+        [columnNames]="columnNames"
+        [dataSource]="dataSource"
+        [actionContentTemplate]="actionsTemplate">   
+    </mat-fsp-table>
+</div>
+

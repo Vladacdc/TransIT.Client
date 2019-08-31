@@ -25,7 +25,7 @@ export class SupplierComponent implements OnInit {
     'ЄДРПОУ'
   ];
 
-  @ViewChild("table") table: MatFspTableComponent;
+  @ViewChild('table') table: MatFspTableComponent;
 
   dataSource: EntitiesDataSource<Supplier>;
 

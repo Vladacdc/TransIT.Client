@@ -1,10 +1,11 @@
 import { Component, OnInit, ViewChild, Input, ElementRef } from '@angular/core';
-import { MatPaginator } from '@angular/material/paginator';
+import { MatPaginator, MatPaginatorIntl } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { EntitiesDataSource } from '../../../data-sources/entities-data-sourse';
 import { fromEvent, merge } from 'rxjs';
 import { debounceTime, distinctUntilChanged, tap } from 'rxjs/operators';
 import { MatPaginatorIntlCustom } from '../../../paginator-extentions/mat-paginator-intl-custom';
+import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 
 @Component({
   selector: 'mat-fsp-table',
@@ -23,12 +24,25 @@ export class MatFspTableComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild('input') input: ElementRef;
 
-  constructor() {
+  constructor(private translate: TranslateService ) {
+    this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
+      if (this.translate.currentLang === 'uk') {
+        this.paginator._intl = new MatPaginatorIntlCustom();
+      } else if (this.translate.currentLang === 'en') {
+        this.paginator._intl = new MatPaginatorIntl();
+      }
+    });
   }
 
   ngOnInit() {
     this.columnsToDisplay = this.columnDefinitions;
-    this.paginator._intl = new MatPaginatorIntlCustom();
+    this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
+      if (this.translate.currentLang === 'uk') {
+        this.paginator._intl = new MatPaginatorIntlCustom();
+      } else if (this.translate.currentLang === 'en') {
+        this.paginator._intl = new MatPaginatorIntl();
+      }
+    });
     this.dataSource.loadEntities(
       '',
       null,
@@ -37,17 +51,17 @@ export class MatFspTableComponent implements OnInit {
       this.paginator
     );
   }
-  
+
   ngAfterViewInit() {
     setTimeout(() => {
-      if(this.actionContentTemplate) {
-        this.columnsToDisplay = this.columnsToDisplay.concat("buttonsColumn");
+      if (this.actionContentTemplate) {
+        this.columnsToDisplay = this.columnsToDisplay.concat('buttonsColumn');
       }
     });
 
     this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
 
-    fromEvent(this.input.nativeElement,'keyup').pipe(
+    fromEvent(this.input.nativeElement, 'keyup').pipe(
       debounceTime(150),
       distinctUntilChanged(),
       tap(() => {

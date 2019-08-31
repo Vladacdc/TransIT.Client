@@ -1,0 +1,12 @@
+{
+    "Unit": {
+        "name": "Назва",
+        "shortname": "Коротка назва",
+        "Create": {
+            "Title": "Створити одиницю вимірювання"
+        }
+    },
+    "Table": {
+        "itemsPerPageLabel": "Items per page"
+    }
+}

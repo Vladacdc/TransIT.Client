@@ -44,6 +44,7 @@ import { SupplierService } from './services/supplier.service';
 import { TransitionService } from './services/transition.service';
 import { CountryService } from './services/country.service';
 import { StatisticsService } from './services/statistics.service';
+import { UnitService } from './services/unit.service';
 // Materials
 import { MatDatepickerModule,
          MatNativeDateModule,
@@ -65,6 +66,8 @@ import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.componen
 import { MatFspTableComponent } from './components/tables/mat-fsp-table/mat-fsp-table.component';
 import { EntitiesDataSource } from './data-sources/entities-data-sourse';
 import { MomentDateAdapter, MAT_MOMENT_DATE_FORMATS } from '@angular/material-moment-adapter';
+import { UnitComponent } from './components/unit/unit.component';
+import { CreateUnitComponent } from './components/unit/create-unit/create-unit.component';
 
 @NgModule({
   declarations: [
@@ -89,6 +92,8 @@ import { MomentDateAdapter, MAT_MOMENT_DATE_FORMATS } from '@angular/material-mo
     EditDocumentComponent,
     NestedDocumentComponent,
     IssueLogComponent,
+    UnitComponent,
+    CreateUnitComponent,
     MatFspTableComponent
   ],
   imports: [
@@ -125,6 +130,8 @@ import { MomentDateAdapter, MAT_MOMENT_DATE_FORMATS } from '@angular/material-mo
     FiltersTabsComponent,
     CreateDocumentComponent,
     DocumentComponent,
+    UnitComponent,
+    CreateUnitComponent,
     MatFspTableComponent
   ],
   providers: [
@@ -147,7 +154,8 @@ import { MomentDateAdapter, MAT_MOMENT_DATE_FORMATS } from '@angular/material-mo
     VehicleTypeService,
     VehicleService,
     StatisticsService,
-    {provide: MAT_DATE_LOCALE, useValue: localStorage.getItem("language")},
+    UnitService,
+    {provide: MAT_DATE_LOCALE, useValue: localStorage.getItem('language')},
     {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
     {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS},
     EntitiesDataSource
