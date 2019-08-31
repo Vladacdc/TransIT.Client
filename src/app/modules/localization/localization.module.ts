@@ -10,8 +10,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     return new MultiTranslateHttpLoader(httpClient, [
         {prefix: './assets/translate/core/', suffix: '.json'},
         {prefix: './assets/translate/', suffix: '.json'},
-        {prefix: './assets/translate/routing/', suffix: '.json'},
-        {prefix: './assets/translate/shared/filter-tab/', suffix: '.json'}
+        {prefix: './assets/translate/shared/filter-tab/', suffix: '.json'}       
     ]);
   }
 
@@ -34,7 +33,7 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
 export class LocalizationModule {
     constructor(
       public translate: TranslateService,
-      private adapter: DateAdapter<any>) {
+      private _adapter: DateAdapter<any>) {
         this.ConfigureTranslation();
     }
     private ConfigureTranslation() {
@@ -42,7 +41,7 @@ export class LocalizationModule {
         this.translate.setDefaultLang('uk');
         this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
           localStorage.setItem('language', event.lang);
-          this.adapter.setLocale(event.lang);
+          this._adapter.setLocale(event.lang);
         });
 
         let language = this.translate.getDefaultLang();
