@@ -1,0 +1,19 @@
+{
+    "Routing": {
+        "users": "Користувачі",
+        "vehicles": "Транспорт",
+        "vehicle-types": "Типи транспорту",
+        "malfunctions": "Несправності",
+        "actions": "Дії",
+        "supplier": "Постачальники",
+        "documents": "Документи",
+        "dictionary": "Довідники",
+        "employees": "Працівники",
+        "posts": "Посади",
+        "locations": "Місцезнаходження",
+        "edit": "Редагування",
+        "issue-logs": "Історія",
+        "issues": "Заявки",
+        "report": "Звіт"
+    }
+}
