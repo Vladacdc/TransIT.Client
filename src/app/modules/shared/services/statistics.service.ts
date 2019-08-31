@@ -49,7 +49,6 @@ export class StatisticsService {
     this.spinner.show();
 
     let httpParams = new HttpParams().set("malfunctionName", malfunction);
-    
     if(startDate) {
       httpParams = httpParams.set("startDate", startDate.toString());
     }
@@ -94,39 +93,58 @@ export class StatisticsService {
       );
   }
 
-  GetAllMalfunctionsStatistics(malfunctionSubgroupName: string, startDate: Date, endDate: Date): Observable<Statistics[]> {
+  GetAllMalfunctionsStatistics(malfunctionSubgroupName: string, startDate: Date = null, endDate: Date = null): Observable<Statistics[]> {
     this.spinner.show();
+
+    let httpParams = new HttpParams().set("malfunctionSubgroupName", malfunctionSubgroupName);
+    if(startDate) {
+      httpParams = httpParams.set("startDate", startDate.toString());
+    }
+    if(endDate) {
+      httpParams = httpParams.set("endDate", endDate.toString());
+    }
+    
     return this.http.get<Statistics[]>(
       `${this.serviceUrl}/allmalfunctionsstatistics`, { 
-        params: new HttpParams()
-          .set("malfunctionSubgroupName", malfunctionSubgroupName)
-          .set("startDate", startDate.toDateString())
-          .set("endDate", endDate.toDateString())
+        params: httpParams
       }).pipe( map(entity => entity),
         tap(data => this.handleSuccess('fetched data', data)),
         catchError(this.handleError())
       );
   }
 
-  GetAllMalfunctionGroupsStatistics(startDate: Date, endDate: Date): Observable<Statistics[]> {
+  GetAllMalfunctionGroupsStatistics(startDate: Date = null, endDate: Date = null): Observable<Statistics[]> {
     this.spinner.show();
+
+    let httpParams = new HttpParams();
+    if(startDate) {
+      httpParams = httpParams.set("startDate", startDate.toString());
+    }
+    if(endDate) {
+      httpParams = httpParams.set("endDate", endDate.toString());
+    }
+
     return this.http.get<Statistics[]>(`${this.serviceUrl}/allmalfunctiongroupsstatistics`, { 
-        params: new HttpParams()
-          .set("startDate", startDate.toDateString())
-          .set("endDate", endDate.toDateString())
+        params: httpParams
       }).pipe( map(entity => entity),
         tap(data => this.handleSuccess('fetched data', data)),
         catchError(this.handleError())
       );
   }
   
-  GetAllMalfunctionSubgroupsStatistics(malfunctionGroupName: string, startDate: Date, endDate: Date): Observable<Statistics[]> {
+  GetAllMalfunctionSubgroupsStatistics(malfunctionGroupName: string, startDate: Date = null, endDate: Date = null): Observable<Statistics[]> {
     this.spinner.show();
+
+    let httpParams = new HttpParams().set("malfunctionGroupName", malfunctionGroupName);
+    if(startDate) {
+      httpParams = httpParams.set("startDate", startDate.toString());
+    }
+    if(endDate) {
+      httpParams = httpParams.set("endDate", endDate.toString());
+    }
+
     return this.http.get<Statistics[]>(`${this.serviceUrl}/allmalfunctionsubgroupsstatistics`, { 
-        params: new HttpParams()
-          .set("malfunctionGroupName", malfunctionGroupName)
-          .set("startDate", startDate.toDateString())
-          .set("endDate", endDate.toDateString())
+        params: httpParams
       }).pipe( map(entity => entity),
         tap(data => this.handleSuccess('fetched data', data)),
         catchError(this.handleError())

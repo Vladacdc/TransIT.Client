@@ -35,7 +35,12 @@
     <mat-datepicker #endDatePicker></mat-datepicker>
 </mat-form-field>
 
-<button (click)="reportVisibility=false;reportVisibility=true"> Завантажити звіт </button>
+<button 
+    type="button" 
+    class="btn btn-primary"
+    (click)="reportVisibility=false;reportVisibility=true">
+        Завантажити звіт
+</button>
 
 <ng-container  *ngIf="reportVisibility">
 <malfunction-group-report
