@@ -12,9 +12,9 @@ import { Malfunction } from 'src/app/modules/shared/models/malfunction';
 })
 export class ChartsComponent implements OnInit {
 
-  private pieChartReady: boolean;
+  public pieChartReady: boolean;
 
-  private malfunctions: Malfunction[];
+  public malfunctions: Malfunction[];
   public currentMalfunction: Malfunction;
 
   public pieChartLabels: string[];
