@@ -2,6 +2,10 @@ mat-paginator {
   background: #fffefee7;
 }
 
+.scroll-container {
+  overflow: auto;
+}
+
 td, th {
   width: 20%;
 }

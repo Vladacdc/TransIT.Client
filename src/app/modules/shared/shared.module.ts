@@ -75,6 +75,7 @@ import { ManufacturerComponent } from './components/manufacturer/manufacturer.co
 import { CreateManufacturerComponent } from './components/manufacturer/create-manufacturer/create-manufacturer.component';
 import { DeleteManufacturerComponent } from './components/manufacturer/delete-manufacturer/delete-manufacturer.component';
 import { EditManufacturerComponent } from './components/manufacturer/edit-manufacturer/edit-manufacturer.component';
+import { PartService } from './services/part.service';
 
 @NgModule({
   declarations: [
@@ -175,6 +176,7 @@ import { EditManufacturerComponent } from './components/manufacturer/edit-manufa
     StatisticsService,
     UnitService,
     ManufacturerService,
+    PartService,
     {provide: MAT_DATE_LOCALE, useValue: localStorage.getItem('language')},
     {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
     {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS},
