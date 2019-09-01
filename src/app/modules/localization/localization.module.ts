@@ -11,7 +11,9 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
         {prefix: './assets/translate/core/', suffix: '.json'},
         {prefix: './assets/translate/', suffix: '.json'},
         {prefix: './assets/translate/routing/', suffix: '.json'},
-        {prefix: './assets/translate/shared/filter-tab/', suffix: '.json'}
+        {prefix: './assets/translate/shared/filter-tab/', suffix: '.json'},
+        {prefix: './assets/translate/shared/paginator-extentions/mat-paginator-intl-custom/', suffix: '.json'},
+        {prefix: './assets/translate/shared/components/tables/mat-fsp-table/', suffix: '.json'}
     ]);
   }
 
