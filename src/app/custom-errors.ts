@@ -68,6 +68,15 @@ export const LET_NUM_FIELD_ERRORS: ErrorMessage[] = [
   }
 ];
 
+export const PDF_FILE_ERRORS: ErrorMessage[] =
+[
+  ...CUSTOM_ERRORS,
+  {
+    error: 'PDFFormat',
+    format: PDFFormat
+  }
+];
+
 export function requiredFormat(label: string, error: any): string {
   return `Поле "${label}" є обов'язковим`;
 }
@@ -118,6 +127,10 @@ export function emailFormat(label: string, error: any): string {
 
 export function uniqueViolationFormat(label: string, error: any): string {
   return `Таке значення поля "${label}" вже існує. Спробуйте інше`;
+}
+
+export function PDFFormat(label: string, error: any): string {
+  return 'Потрібно вибрати файл типу PDF';
 }
 
 export function matchPassword(form: FormGroup) {
