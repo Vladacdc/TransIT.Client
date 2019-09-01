@@ -53,11 +53,11 @@ import { MatDatepickerModule,
          MatSortModule,
          MatProgressSpinnerModule,
          MatIconModule,
-         MAT_DATE_LOCALE
          DateAdapter,
+         MAT_DATE_LOCALE,
          MAT_DATE_FORMATS } from '@angular/material';
-import {MatDialogModule} from '@angular/material/dialog';
 
+import {MatDialogModule} from '@angular/material/dialog';
 import {MatSelectModule} from '@angular/material/select';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
@@ -72,9 +72,10 @@ import { MomentDateAdapter, MAT_MOMENT_DATE_FORMATS } from '@angular/material-mo
 import { PartService } from './services/part.service';
 import { ManufacturerService } from './services/manufacturer.service';
 import { UnitService } from './services/unit.service';
+import { PartsInComponent } from './components/dictionaries/parts-in/parts-in.component';
 
-import { MomentDateAdapter, MAT_MOMENT_DATE_FORMATS } from '@angular/material-moment-adapter';
 @NgModule({
+  declarations: [
     BreadcrumbComponent,
     GlobalIssueComponent,
     SupplierComponent,
@@ -100,7 +101,7 @@ import { MomentDateAdapter, MAT_MOMENT_DATE_FORMATS } from '@angular/material-mo
     PartInActionsComponent,
     MatFspTableComponent,
     AddPartInComponent,
-    EditPartInComponent,
+    EditPartInComponent
   ],
   imports: [
     MatCardModule,

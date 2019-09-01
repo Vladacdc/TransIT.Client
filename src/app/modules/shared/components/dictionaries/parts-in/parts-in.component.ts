@@ -46,7 +46,10 @@ export class PartsInComponent implements OnInit {
       if (dialogResult) {
         this.withSpinner(this.partsInService.addEntity(dialogResult)).subscribe(
           () => this.toastrService.success('TODO: Ok'),
-          () => this.toastrService.error('TODO: Error adding entity')
+          (error) => {
+            console.log(error);
+            return this.toastrService.error('TODO: Error adding entity');
+          }
         );
       }
     });

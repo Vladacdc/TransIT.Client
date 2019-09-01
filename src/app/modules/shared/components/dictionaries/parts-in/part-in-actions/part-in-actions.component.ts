@@ -9,6 +9,8 @@ import { Observable } from 'rxjs';
 import { tap, map } from 'rxjs/operators';
 import { MatDialog } from '@angular/material';
 import { EditPartInComponent } from '../dialogs/edit-part-in/edit-part-in.component';
+import { EntitiesDataSource } from 'src/app/modules/shared/data-sources/entities-data-sourse';
+import { DataSource } from '@angular/cdk/table';
 
 @Component({
   selector: 'app-part-in-actions',
@@ -34,6 +36,7 @@ export class PartInActionsComponent implements OnInit {
     dialogRef.afterClosed().subscribe(dialogResult => {
       if (dialogResult) {
         this.finishEditItem(dialogResult);
+
       }
     });
   }
@@ -60,7 +63,9 @@ export class PartInActionsComponent implements OnInit {
   removeItem() {
     this.withSpinner(this.partsInService.deleteEntity(this.partIn.id))
       .subscribe(
-        () => this.toastrService.success('TODO: Succesfully deleted'),
+        () => {
+          return this.toastrService.success('TODO: Succesfully deleted');
+        },
         () => this.toastrService.error('TODO: General Error')
       );
   }

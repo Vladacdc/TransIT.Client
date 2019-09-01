@@ -1,5 +1,7 @@
 import { TEntity } from '../../core/models/entity/entity';
 import { Currency } from './currency';
+import { Part } from './part';
+import { Unit } from './unit';
 
 export class PartIn extends TEntity<PartIn> {
   createdDate: Date;
@@ -10,8 +12,8 @@ export class PartIn extends TEntity<PartIn> {
   batch: string;
 
   currency: Currency;
-  part: any;
-  unit: any;
+  part: Part;
+  unit: Unit;
 
   partName: string;
   unitName: string;
@@ -24,6 +26,6 @@ export class PartIn extends TEntity<PartIn> {
     this.currency = new Currency(partIn.currency);
     this.currencyName = this.currency.fullName;
     this.partName = partIn.part.name;
-    this.unitName = partIn.unit.shortName;
+    this.unitName = partIn.unit.name;
   }
 }
