@@ -36,6 +36,7 @@ export class InfoVehicleComponent implements OnInit {
   @ViewChild('table') table: MatFspTableComponent;
 
   dataSource: EntitiesDataSourceForVehicle;
+  ds = new EntitiesDataSourceForVehicle(this.issueLogService);
 
   constructor(private issueLogService: IssuelogService,private route: ActivatedRoute) {
   }
@@ -44,8 +45,8 @@ export class InfoVehicleComponent implements OnInit {
     this.sub = this.route.params.subscribe(params => {
       this.selectedVehicleId = params['id'];
       });
-    let ds = new EntitiesDataSourceForVehicle(this.issueLogService);
-    ds.selectedVehicleId = this.selectedVehicleId;
-    this.dataSource = ds;
+    
+    this.ds.selectedVehicleId = this.selectedVehicleId;
+    this.dataSource = this.ds;
   }
 }
