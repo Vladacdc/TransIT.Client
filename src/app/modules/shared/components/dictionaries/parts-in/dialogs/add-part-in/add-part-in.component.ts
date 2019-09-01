@@ -4,19 +4,25 @@ import { PartIn } from 'src/app/modules/shared/models/part-in';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { CurrencyService } from 'src/app/modules/shared/services/currency.service';
 import { Currency } from 'src/app/modules/shared/models/currency';
+import { PartInFormGroup } from '../../common/part-in-formgroup';
 
 @Component({
   selector: 'app-add-part-in',
   templateUrl: './add-part-in.component.html',
-  styleUrls: ['./add-part-in.component.scss']
+  styleUrls: ['../dialogs.scss']
 })
 export class AddPartInComponent implements OnInit {
 
   form: FormGroup;
   maxDate = new Date();
   // TODO: replace this with a service call, when it will be implemented
-  unitList = [{ shortName: 'Шт.'}, { shortName: 'М.' }];
-  partList = [{ name: 'Артек Шоколадний' }, { name: 'Артек Горіховий' }, { name: 'Артек Класичний' }];
+  unitList = [{ id: 2, shortName: 'шт'},
+              { id: 1, shortName: 'м2' },
+              { id: 3, shortName: 'м'},
+              { id: 4, shortName: 'кг'}];
+  partList = [{ id: 1, name: 'Артек Шоколадний' },
+              { id: 2, name: 'Артек Горіховий' },
+              { id: 3, name: 'Артек Класичний' }];
   currencyList: Currency[] = [];
 
   constructor(
@@ -30,15 +36,7 @@ export class AddPartInComponent implements OnInit {
       this.currencyList = data;
     });
 
-    this.form = this.builder.group({
-      arrivalDate: new FormControl(null, [Validators.required]),
-      batch: new FormControl('', [Validators.required, Validators.pattern('^[0-9A-Za-zА-Яа-яїієЇІЯЄ]+$')]),
-      price: new FormControl(null, [Validators.required, Validators.min(0.0000001)]),
-      amount: new FormControl(null, [Validators.required, Validators.min(1)]),
-      unit: new FormControl(null, [Validators.required]),
-      part: new FormControl(null, [Validators.required]),
-      currency: new FormControl(null, [Validators.required]),
-    });
+    this.form = new PartInFormGroup();
   }
 
   onSubmit() {

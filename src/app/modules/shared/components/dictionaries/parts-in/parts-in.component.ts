@@ -31,7 +31,6 @@ export class PartsInComponent implements OnInit {
 
   constructor(
     private partsInService: PartsInService,
-    private currencyService: CurrencyService,
     private spinnerService: SpinnerService,
     private toastrService: ToastrService,
     public dialog: MatDialog) {
@@ -42,11 +41,11 @@ export class PartsInComponent implements OnInit {
   }
 
   openAdd() {
-    const dialogRef = this.dialog.open(AddPartInComponent, { width: '450px', data: {} });
+    const dialogRef = this.dialog.open(AddPartInComponent, { width: '500px', data: {} });
     dialogRef.afterClosed().subscribe(dialogResult => {
       if (dialogResult) {
         this.withSpinner(this.partsInService.addEntity(dialogResult)).subscribe(
-          () => this.toastrService.success(),
+          () => this.toastrService.success('TODO: Ok'),
           () => this.toastrService.error('TODO: Error adding entity')
         );
       }

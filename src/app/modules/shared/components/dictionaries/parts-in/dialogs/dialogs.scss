@@ -1,0 +1,15 @@
+.inputs {
+  display: flex;
+  flex-direction: column;
+  overflow: scroll;
+}
+.form-container {
+  max-height: 100vh;
+}
+
+.selects-container {
+  ng-select {
+    margin-bottom: 1.25em; // this is value from angular material
+  }
+  margin-bottom: 1.25em;
+}

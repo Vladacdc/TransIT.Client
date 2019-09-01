@@ -7,6 +7,8 @@ import { ToastrService } from 'ngx-toastr';
 import { Currency } from 'src/app/modules/shared/models/currency';
 import { Observable } from 'rxjs';
 import { tap, map } from 'rxjs/operators';
+import { MatDialog } from '@angular/material';
+import { EditPartInComponent } from '../dialogs/edit-part-in/edit-part-in.component';
 
 @Component({
   selector: 'app-part-in-actions',
@@ -19,19 +21,21 @@ export class PartInActionsComponent implements OnInit {
 
   constructor(
     private partsInService: PartsInService,
-    private currencyService: CurrencyService,
     private spinnerService: SpinnerService,
-    private toastrService: ToastrService) {
+    private toastrService: ToastrService,
+    public dialog: MatDialog) {
   }
 
   ngOnInit() {
-    // TODO: uncomment when these services will be implemented
-    // this.unitService.getEntities().subscribe(data => {
-    //   this.units = data;
-    // });
-    // this.partService.getEntities().subscribe(data => {
-    //   this.parts = data;
-    // });
+  }
+
+  editItem() {
+    const dialogRef = this.dialog.open(EditPartInComponent, { width: '500px', data: this.partIn });
+    dialogRef.afterClosed().subscribe(dialogResult => {
+      if (dialogResult) {
+        this.finishEditItem(dialogResult);
+      }
+    });
   }
 
   private withSpinner(request: Observable<PartIn>): Observable<PartIn> {
@@ -43,14 +47,17 @@ export class PartInActionsComponent implements OnInit {
   }
 
   finishEditItem(item: PartIn) {
-    this.withSpinner(this.partsInService.updateEntity(this.partIn))
+    this.withSpinner(this.partsInService.updateEntity(item))
       .subscribe(
         () => this.toastrService.success('TODO: Successfully edited'),
-        () => this.toastrService.error('TODO: General Error')
+        (error) => {
+          console.log(error);
+          this.toastrService.error('TODO: General Error');
+        }
       );
   }
 
-  removeItem(entity: PartIn) {
+  removeItem() {
     this.withSpinner(this.partsInService.deleteEntity(this.partIn.id))
       .subscribe(
         () => this.toastrService.success('TODO: Succesfully deleted'),

@@ -10,6 +10,8 @@ export class PartIn extends TEntity<PartIn> {
   batch: string;
 
   currency: Currency;
+  part: any;
+  unit: any;
 
   partName: string;
   unitName: string;
@@ -17,9 +19,11 @@ export class PartIn extends TEntity<PartIn> {
 
   constructor(partIn: Partial<PartIn>) {
     super(partIn);
+    this.part = partIn.part;
+    this.unit = partIn.unit;
     this.currency = new Currency(partIn.currency);
     this.currencyName = this.currency.fullName;
-    this.partName = 'TODO: назва запчастини';
-    this.unitName = 'TODO: одиниці вимірювання';
+    this.partName = partIn.part.name;
+    this.unitName = partIn.unit.shortName;
   }
 }

@@ -121,7 +121,8 @@ import { EditPartInComponent } from './components/dictionaries/parts-in/dialogs/
     NgBootstrapFormValidationModule
   ],
   entryComponents: [
-    AddPartInComponent
+    AddPartInComponent,
+    EditPartInComponent
   ],
   exports: [
     AddPartInComponent,

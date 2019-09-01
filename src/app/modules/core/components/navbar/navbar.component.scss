@@ -2,6 +2,11 @@
   height: 60px;
 }
 
+// This is because mat-dialogs were not showing
+nav {
+  z-index: 1 !important;
+}
+
 .nav-link.login {
   color: rgba(0, 0, 0, 0.7);
 }
