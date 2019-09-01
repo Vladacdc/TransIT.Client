@@ -19,6 +19,9 @@ import { IssueLogDocumentsComponent } from './components/issue-log-components/is
 import { DocumentComponent } from '../shared/components/global-document/document/document.component';
 import { SupplierComponent } from '../shared/components/supplier/supplier.component';
 import { CreateDocumentComponent } from './components/create-document/create-document.component';
+import { VehiclesComponent } from './components/vehicles/vehicles.component';
+import { MatTableModule, MatInputModule, MatFormFieldModule, MatPaginatorModule, MatSortModule } from '@angular/material';
+import { InfoVehicleComponent } from './components/vehicles/info-vehicle/info-vehicle.component';
 
 const routes: Routes = [
   {
@@ -33,7 +36,8 @@ const routes: Routes = [
       { path: 'documents', component: GlobalDocumentComponent },
       { path: 'supplier', component: SupplierComponent},
       { path: 'issue-log', component: IssueLogComponent },
-
+      { path: 'vehicles', component: VehiclesComponent},
+      { path: 'info-vehicle', component: InfoVehicleComponent},
       { path: '**', redirectTo: 'issues' }
     ]
   }
@@ -45,6 +49,11 @@ const routes: Routes = [
     FormsModule,
     CommonModule,
     ReactiveFormsModule,
+    MatTableModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatPaginatorModule,
+    MatSortModule,
     SharedModule,
     NgSelectModule
   ],
@@ -54,7 +63,9 @@ const routes: Routes = [
     EditIssueLogComponent,
     NestedIssueLogsComponent,
     IssueLogDocumentsComponent,
-    CreateDocumentComponent
+    CreateDocumentComponent,
+    VehiclesComponent,
+    InfoVehicleComponent
   ]
 })
 export class EngineerRoutingModule {}

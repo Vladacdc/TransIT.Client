@@ -1,0 +1,15 @@
+{
+    "Manufacturer": {
+        "name": "Name",
+        "Create": {
+            "Title": "Create manufacturer"
+        },
+        "Delete": {
+            "Title": "Are you sure you want to delete manufacturer?",
+            "Text": "Deleted data is non-recoverable!"       
+        },
+        "Edit": {
+            "Title": "Edit manufacturer"
+        }  
+    }
+}

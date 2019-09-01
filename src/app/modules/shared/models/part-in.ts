@@ -24,8 +24,14 @@ export class PartIn extends TEntity<PartIn> {
     this.part = partIn.part;
     this.unit = partIn.unit;
     this.currency = new Currency(partIn.currency);
-    this.currencyName = this.currency.fullName;
-    this.partName = partIn.part.name;
-    this.unitName = partIn.unit.name;
+    if (this.currency) {
+      this.currencyName = this.currency.fullName;
+    }
+    if (this.part) {
+      this.partName = partIn.part.name;
+    }
+    if (this.unit) {
+      this.unitName = partIn.unit.name;
+    }
   }
 }
