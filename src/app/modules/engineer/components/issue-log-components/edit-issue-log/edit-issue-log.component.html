@@ -1,96 +1,58 @@
 <form class="container" [formGroup]="issueLogForm" (submit)="onSubmit()">
-  <div class="form-group">
-    <app-add-document class="badge-head" (addExistingDocument)="assignExistingDocument($event)" (createDocument)="assignDocument($event)"></app-add-document>
-  </div>
-  <div class="form-group">
-    <ul>
-      <li *ngFor="let item of shownDocuments">
-        <span class="badge badge-info">
+    <div class="form-group">
+        <app-add-document class="badge-head" (addExistingDocument)="assignExistingDocument($event)" (createDocument)="assignDocument($event)"></app-add-document>
+    </div>
+    <div class="form-group">
+        <ul>
+            <li *ngFor="let item of shownDocuments">
+                <span class="badge badge-info">
           <h5>{{ item.name }}</h5>
           <button class="badge badge-danger" (click)="deleteDocument(item)">&times;</button>
         </span>
-      </li>
-    </ul>
-  </div>
-  <br><br>
-  <div class="form-group">
-    <label class="required-field">Дії</label>
-    <ng-select
-      formControlName="actionType"
-      [items]="actionTypes"
-      (change)="assignActionType()"
-      bindLabel="name"
-      placeholder="Виберіть дію"
-      notFoundText="Не знайдено"
-    ></ng-select>
-  </div>
-  <div class="form-group">
-    <div class="form-group">
-      <label class="required-field">Статус</label>
-      <ng-select
-        formControlName="newState"
-        [disabled]="isStatesDisabled"
-        [items]="states"
-        bindLabel="transName"
-        placeholder="Виберіть статус"
-        notFoundText="Не знайдено"
-      ></ng-select>
+            </li>
+        </ul>
     </div>
-  </div>
-  <div formGroupName="issue">
+    <br><br>
     <div class="form-group">
-      <label>Відповідальний</label>
-      <ng-select
-        (change)="assignAssignee($event)"
-        formControllName="assignedTo"
-        [items]="users"
-        bindLabel="shortName"
-        placeholder="Виберіть працівника"
-        notFoundText="Не знайдено"
-      ></ng-select>
+        <label class="required-field">Дії</label>
+        <ng-select formControlName="actionType" [items]="actionTypes" (change)="assignActionType()" bindLabel="name" placeholder="Виберіть дію" notFoundText="Не знайдено"></ng-select>
     </div>
     <div class="form-group">
-      <label class="col-form-label">Дедлайн</label>
-      <input
-        type="date"
-        formControlName="deadLine"
-        name="deadLine"
-        class="form-control datepicker"
-      />
+        <div class="form-group">
+            <label class="required-field">Статус</label>
+            <ng-select formControlName="newState" [disabled]="isStatesDisabled" [items]="states" bindLabel="transName" placeholder="Виберіть статус" notFoundText="Не знайдено"></ng-select>
+        </div>
     </div>
-  </div>
-  <div class="form-group">
-    <label class="col-form-label">Витрати:</label>
-    <input
-      type="number"
-      formControlName="expenses"
-      name="expenses"
-      class="form-control"
-    />
-  </div>
-  <div class="form-group">
-    <label>Постачальник</label>
-    <ng-select
-      formControlName="supplier"
-      [items]="suppliers"
-      bindLabel="name"
-      placeholder="Виберіть постачальника"
-      notFoundText="Не знайдено"
-    ></ng-select>
-  </div>
-  <div class="form-group">
-    <label for="summary" class="col-form-label">Опис:</label>
-    <textarea
-      class="form-control"
-      formControlName="description"
-      id="summary"
-      placeholder="Введіть опис"
-    >
+    <div class="form-group">
+        <label class="col-form-label">Тип роботи:</label>
+        <ng-select formControlName="workType" [items]="workTypes" bindLabel="name" placeholder="Виберіть тип роботи" notFoundText="Не знайдено"></ng-select>
+    </div>
+    <div formGroupName="issue">
+        <div class="form-group">
+            <label>Відповідальний</label>
+            <ng-select (change)="assignAssignee($event)" formControllName="assignedTo" [items]="users" bindLabel="shortName" placeholder="Виберіть працівника" notFoundText="Не знайдено"></ng-select>
+        </div>
+        <div class="form-group">
+            <label class="col-form-label">Дедлайн</label>
+            <input type="date" formControlName="deadLine" name="deadLine" class="form-control datepicker" />
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-form-label">Витрати:</label>
+        <input type="number" formControlName="expenses" name="expenses" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>Постачальник</label>
+        <ng-select formControlName="supplier" [items]="suppliers" bindLabel="name" placeholder="Виберіть постачальника" notFoundText="Не знайдено"></ng-select>
+    </div>
+    <div class="form-group">
+        <label for="summary" class="col-form-label">Опис:</label>
+        <textarea class="form-control" formControlName="description" id="summary" placeholder="Введіть опис">
     </textarea>
-  </div>
-  <div class="form-group">
-    <button type="submit" id="submit" class="btn btn-primary" [disabled]="issueLogForm.invalid">
+    </div>
+    <div class="form-group">
+        <button type="submit" id="submit" class="btn btn-primary" [disabled]="issueLogForm.invalid">
       Підтвердити
     </button>
-  </div>
+    </div>
 </form>

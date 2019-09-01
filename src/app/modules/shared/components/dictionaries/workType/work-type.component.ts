@@ -1,0 +1,48 @@
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { EntitiesDataSource } from '../../../data-sources/entities-data-sourse';
+import { MatFspTableComponent } from '../../tables/mat-fsp-table/mat-fsp-table.component';
+import { WorkType } from '../../../models/work-type';
+import { WorkTypeService } from '../../../services/work-type.service';
+
+@Component({
+  selector: 'app-work-type',
+  templateUrl: './work-type.component.html',
+  styleUrls: ['./work-type.component.scss']
+})
+export class WorkTypeComponent implements OnInit {
+
+  columnDefinitions: string[] = [
+    'name',
+    'estimatedTime',
+    'estimatedCost'
+  ];
+  columnNames: string[] = [
+    'Тип роботи',
+    'Орієнтовний час',
+    'Орієнтовна вартість'
+  ];
+
+  @ViewChild('table') table: MatFspTableComponent;
+
+  dataSource: EntitiesDataSource<WorkType>;
+
+  constructor(private workTypeService: WorkTypeService) {
+  }
+
+  ngOnInit() {
+    this.dataSource = new EntitiesDataSource<WorkType>(this.workTypeService);
+  }
+
+  addWorkType(workType: WorkType) {
+
+    this.table.loadEntitiesPage();
+  }
+
+  deleteWorkType(workType: WorkType) {
+    this.table.loadEntitiesPage();
+  }
+
+  updateWorkType(workType: WorkType) {
+    this.table.loadEntitiesPage();
+  }
+}

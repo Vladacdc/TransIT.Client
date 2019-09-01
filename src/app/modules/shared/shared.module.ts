@@ -64,10 +64,16 @@ import {MatButtonModule} from '@angular/material/button';
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 import { MatFspTableComponent } from './components/tables/mat-fsp-table/mat-fsp-table.component';
 import { EntitiesDataSource } from './data-sources/entities-data-sourse';
-import { MomentDateAdapter, MAT_MOMENT_DATE_FORMATS } from '@angular/material-moment-adapter';
+import { WorkTypeComponent } from './components/dictionaries/workType/work-type.component';
+import { WorkTypeService } from './services/work-type.service';
+import { CreateWorkTypeComponent } from './components/dictionaries/workType/create-work-type/create-work-type.component';
+import { EditWorkTypeComponent } from './components/dictionaries/workType/edit-work-type/edit-work-type.component';
+import { DeleteWorkTypeComponent } from './components/dictionaries/workType/delete-work-type/delete-work-type.component';
+import { EntitiesDataSourceForVehicle } from './data-sources/entities-data-source-for-vehicle';
 import { PartService } from './services/part.service';
 import { ManufacturerService } from './services/manufacturer.service';
 import { UnitService } from './services/unit.service';
+import { MomentDateAdapter, MAT_MOMENT_DATE_FORMATS } from '@angular/material-moment-adapter';
 
 @NgModule({
   declarations: [
@@ -92,6 +98,11 @@ import { UnitService } from './services/unit.service';
     EditDocumentComponent,
     NestedDocumentComponent,
     IssueLogComponent,
+    MatFspTableComponent,
+    WorkTypeComponent,
+    CreateWorkTypeComponent,
+    EditWorkTypeComponent,
+    DeleteWorkTypeComponent,
     MatFspTableComponent
   ],
   imports: [
@@ -128,7 +139,8 @@ import { UnitService } from './services/unit.service';
     FiltersTabsComponent,
     CreateDocumentComponent,
     DocumentComponent,
-    MatFspTableComponent
+    MatFspTableComponent,
+    WorkTypeComponent
   ],
   providers: [
     ActionTypeService,
@@ -150,13 +162,16 @@ import { UnitService } from './services/unit.service';
     VehicleTypeService,
     VehicleService,
     StatisticsService,
+    EntitiesDataSource,
+    EntitiesDataSourceForVehicle,
+    WorkTypeService,
     PartService,
     ManufacturerService,
     UnitService,
     {provide: MAT_DATE_LOCALE, useValue: localStorage.getItem('language')},
     {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
     {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS},
-    EntitiesDataSource
+
   ]
 })
 export class SharedModule {
