@@ -2,24 +2,36 @@
     <i class="fas fa-user-plus"></i> Створити тип роботи
   </button>
 
-<div class="modal fade" id="createSupplier" tabindex="-1" role="dialog" aria-labelledby="createSupplier" aria-hidden="true">
+<div class="modal fade" id="createWorkType" tabindex="-1" role="dialog" aria-labelledby="createWorkType" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header color">
-                <h5 class="modal-title"><i class="fas fa-user-plus"></i> Створити постачальника</h5>
+                <h5 class="modal-title"><i class="fas fa-user-plus"></i> Створити тип роботи</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
+                    <span aria-hidden="true">&times;</span>
+                </button>
             </div>
             <div class="modal-body">
-                <form>
+                <form [formGroup]="workTypeForm">
+                    <div class="form-group">
+                        <label class="required-field">Назва</label>
+                        <input type="text" class="form-control" formControlName="name" placeholder="Введіть назву" />
+                    </div>
+                    <div class="form-group">
+                        <label class="required-field">Орієнтовний час (в годинах)</label>
+                        <input type="text" class="form-control" formControlName="estimatedTime" placeholder="Введіть орієнтовний час" />
+                    </div>
+                    <div class="form-group">
+                        <label class="required-field">Орієнтовна вартість</label>
+                        <input type="text" class="form-control" formControlName="estimatedCost" placeholder="Введіть орієнтовну вартість" />
+                    </div>
                 </form>
             </div>
-            <div class="modal-footer">
-                <button #close type="button" class="btn btn-secondary" data-dismiss="modal">Скасувати</button>
-                <button type="button" class="btn btn-primary">
-          Створити
-        </button>
+            <div class=" modal-footer ">
+                <button #close type="button " class="btn btn-secondary " data-dismiss="modal">Скасувати</button>
+                <button type="button " class="btn btn-primary" (click)="clickSubmit()" [disabled]="workTypeForm.invalid">
+            Створити
+          </button>
             </div>
         </div>
     </div>

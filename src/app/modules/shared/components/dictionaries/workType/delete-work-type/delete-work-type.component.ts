@@ -1,5 +1,7 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, Input, ViewChild, ElementRef, Output, EventEmitter } from "@angular/core";
 import { WorkType } from 'src/app/modules/shared/models/work-type';
+import { WorkTypeService } from 'src/app/modules/shared/services/work-type.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
     selector: 'app-work-type-delete',
@@ -7,7 +9,22 @@ import { WorkType } from 'src/app/modules/shared/models/work-type';
     styleUrls: ['./delete-work-type.component.scss']
   })
 export class DeleteWorkTypeComponent implements OnInit {
-    @Input() workType: WorkType;
-    ngOnInit() {
-    }
+  @ViewChild('close') closeDeleteModal: ElementRef;
+  @Input() workType: WorkType;
+  @Output() deleteWorkType = new EventEmitter<WorkType>();
+
+  constructor(private workTypeService: WorkTypeService, private toast: ToastrService) {}
+
+  ngOnInit() {}
+
+  delete() {
+    this.closeDeleteModal.nativeElement.click();
+    this.workTypeService.deleteEntity(this.workType.id).subscribe(
+      data => {
+        this.toast.success('', 'Тип роботи видалено');
+        this.deleteWorkType.next(this.workType);
+      },
+      error => this.toast.error('Помилка видалення')
+    );
+  }
 }
