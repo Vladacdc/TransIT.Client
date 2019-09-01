@@ -1,12 +1,28 @@
 {
     "Unit": {
         "name": "Name",
-        "shortname": "Short Name",
+        "shortName": "Short Name",
         "Create": {
             "Title": "Create unit of measurement"
+        },
+        "Delete": {
+            "Title": "Are you sure you want to delete unit of measerement?",
+            "Text": "Deleted data is non-recoverable!"
+        },
+        "Edit": {
+            "Title": "Edit unit of measurement"
+        },
+        "Form": {
+            "Cancel": "Cancel",
+            "Create": "Create",
+            "Delete": "Delete",
+            "Save": "Save"
+        },
+        "Toasts": {
+            "Deleted": "Видалено",
+            "Created": "Створено",
+            "Error": "Помилка",
+            "Updated": "Оновлено" 
         }
-    },
-    "Table": {
-        "itemsPerPageLabel": "Items per page"
     }
 }

@@ -13,51 +13,38 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header color">
-        <h5 class="modal-title"><i class="fas fa-user-plus"></i> Створити постачальника</h5>
+        <h5 class="modal-title"><i class="fas fa-ruler-combined"></i> {{'Unit.Create.Title' | translate}}</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
         <form [formGroup]="unitForm">
-          <div class="form-group">
-            <label class="required-field">Коротка назва</label>
-            <input type="text" class="form-control" formControlName="name" placeholder="Введіть скорочену назву" />
-          </div>
-          <div class="form-group">
-            <label class="required-field">Повна назва</label>
-            <input type="text" class="form-control" formControlName="fullName" placeholder="Введіть повну назву" />
-          </div>
-          <div class="form-group">
-            <label class="required-field">ЄДРПОУ</label>
-            <input type="text" class="form-control" formControlName="edrpou" placeholder="Введіть ЄДРПОУ" />
-          </div>
-          <div class="form-group">
-            <label>Країна</label>
-            <ng-select
-              formControlName="country"
-              [items] = "countries"
-              bindLabel = "name"
-              placeholder = "Виберіть Країну"
-              notFoundText = "Не знайдено">
-            </ng-select>
-          </div>
-          <div class="form-group">
-            <label>Валюта</label>
-            <ng-select
-              formControlName="currency"
-              [items] = "currencies"
-              bindLabel = "name"
-              placeholder = "Виберіть Валюту"
-              notFoundText = "Не знайдено">
-            </ng-select>
-          </div>
+            <mat-form-field class="w-100 mb-3">
+              <mat-label>{{'Unit.name' | translate}}</mat-label>
+              <input matInput type="text" formControlName="name" required/>
+
+              <mat-error>
+                <app-validator [control]="unitForm.get('name')"></app-validator>
+              </mat-error>
+
+            </mat-form-field>           
+
+          <mat-form-field class="w-100 mb-3">
+            <mat-label>{{'Unit.shortName' | translate}}</mat-label>
+            <input matInput type="text"formControlName="shortName" required/>
+
+            <mat-error>
+              <app-validator [control]="unitForm.get('shortName')"></app-validator>
+            </mat-error>
+
+          </mat-form-field>
         </form>
       </div>
       <div class="modal-footer">
-        <button #close type="button" class="btn btn-secondary" data-dismiss="modal">Скасувати</button>
+        <button #close type="button" class="btn btn-secondary" (click)="unitForm.reset()" data-dismiss="modal">{{'Unit.Form.Cancel' | translate}}</button>
         <button type="button" class="btn btn-primary" (click)="clickSubmit()" [disabled]="unitForm.invalid">
-          Створити
+            {{'Unit.Form.Create' | translate}}
         </button>
       </div>
     </div>

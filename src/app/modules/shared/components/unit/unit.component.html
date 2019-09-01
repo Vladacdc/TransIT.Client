@@ -1,18 +1,18 @@
-<app-create-unit (createSupplier)="addUnit($event)"></app-create-unit>
+<app-create-unit (createUnit)="addUnit($event)"></app-create-unit>
 
-<!-- <ng-template #actionsTemplate let-data="templateData">
+<ng-template #actionsTemplate let-data="templateData">
 
-<app-delete-supplier 
-    [supplier]="data"
-    (deleteSupplier)="deleteUnit(data)" 
-></app-delete-supplier>
+<app-delete-unit
+    [unit]="data"
+    (deleteUnit)="deleteUnit($event)" 
+></app-delete-unit>
 
-<app-edit-supplier
-    [supplier]="data"
-    (updateSupplier)="updateUnit(data)"
-></app-edit-supplier>
+<app-edit-unit
+    [unit]="data"
+    (updateUnit)="updateUnit($event)"
+></app-edit-unit>
 
-</ng-template> -->
+</ng-template>
 
 <div>
     <mat-fsp-table #table

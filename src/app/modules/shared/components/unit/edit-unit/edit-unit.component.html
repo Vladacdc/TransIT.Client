@@ -1,0 +1,34 @@
+<button class="first btn" data-toggle="modal" data-target="#editUnit">
+  <i class="fas fa-edit"></i>
+</button>
+
+<div class="modal fade" id="editUnit" tabindex="-1" vehicleType="dialog" aria-labelledby="editUnit" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" vehicleType="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">{{'Unit.Edit.Title' | translate}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]=unitForm>
+          <div class="form-group">
+            <label class="required-field">{{'Unit.name' | translate}}</label>
+            <input type="text" class="form-control" formControlName="name" autocomplete="off" />
+          </div>
+          <div class="form-group">
+            <label class="required-field">{{'Unit.shortName' | translate}}</label>
+            <input type="text" class="form-control" formControlName="shortName" autocomplete="off" />
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button #close type="button" class="btn btn-secondary" data-dismiss="modal"
+          (click)="resetForm()">{{'Unit.Form.Cancel' | translate}}</button>
+        <button type="button" class="btn btn-primary" (click)="updateData()"
+          [disabled]="unitForm.invalid">{{'Unit.Form.Save' | translate}}</button>
+      </div>
+    </div>
+  </div>
+</div>

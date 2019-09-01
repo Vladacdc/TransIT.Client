@@ -68,6 +68,8 @@ import { EntitiesDataSource } from './data-sources/entities-data-sourse';
 import { MomentDateAdapter, MAT_MOMENT_DATE_FORMATS } from '@angular/material-moment-adapter';
 import { UnitComponent } from './components/unit/unit.component';
 import { CreateUnitComponent } from './components/unit/create-unit/create-unit.component';
+import { DeleteUnitComponent } from './components/unit/delete-unit/delete-unit.component';
+import { EditUnitComponent } from './components/unit/edit-unit/edit-unit.component';
 
 @NgModule({
   declarations: [
@@ -93,6 +95,8 @@ import { CreateUnitComponent } from './components/unit/create-unit/create-unit.c
     NestedDocumentComponent,
     IssueLogComponent,
     UnitComponent,
+    DeleteUnitComponent,
+    EditUnitComponent,
     CreateUnitComponent,
     MatFspTableComponent
   ],
@@ -131,6 +135,8 @@ import { CreateUnitComponent } from './components/unit/create-unit/create-unit.c
     CreateDocumentComponent,
     DocumentComponent,
     UnitComponent,
+    DeleteUnitComponent,
+    EditUnitComponent,
     CreateUnitComponent,
     MatFspTableComponent
   ],

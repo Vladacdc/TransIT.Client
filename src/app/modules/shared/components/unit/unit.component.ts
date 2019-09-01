@@ -3,7 +3,6 @@ import { UnitService } from 'src/app/modules/shared/services/unit.service';
 import { Unit } from 'src/app/modules/shared/models/unit';
 import { EntitiesDataSource } from '../../data-sources/entities-data-sourse';
 import { MatFspTableComponent } from '../tables/mat-fsp-table/mat-fsp-table.component';
-import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-unit',
@@ -13,19 +12,18 @@ import { TranslateService, LangChangeEvent } from '@ngx-translate/core';
 export class UnitComponent implements OnInit {
   columnDefinitions: string[] = [
     'name',
-    'shortname',
+    'shortName',
   ];
   columnNames: string[] = [
       'Unit.name',
-      'Unit.shortname'
+      'Unit.shortName'
   ];
-
 
   @ViewChild('table') table: MatFspTableComponent;
 
   dataSource: EntitiesDataSource<Unit>;
 
-  constructor(private unitService: UnitService, private translate: TranslateService) {
+  constructor(private unitService: UnitService) {
   }
 
   ngOnInit() {
