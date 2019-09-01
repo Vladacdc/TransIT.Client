@@ -47,6 +47,10 @@ export class CreateUnitComponent implements OnInit {
     error => {
       this.toast.error('', this.translate.instant('Core.Toasts.Error'));
     });
+    this.close();
+  }
+
+  close() {
     this.closeCreateModal.nativeElement.click();
   }
 }
