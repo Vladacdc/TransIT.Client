@@ -1,0 +1,9 @@
+<div>
+    <ng-template #actionsTemplate let-data="templateData">
+    </ng-template>
+
+    <div id="infoVehicle">
+        <mat-fsp-table #table [columnDefinitions]="columnDefinitions" [columnNames]="columnNames" [dataSource]="dataSource" [actionContentTemplate]="actionsTemplate">
+        </mat-fsp-table>
+    </div>
+</div>

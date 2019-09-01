@@ -12,6 +12,8 @@ export class Vehicle extends TEntity<Vehicle> {
   location: Location;
   commissioningDate: Date;
   warrantyEndDate: Date;
+  vehicleTypeName: string;
+  locationName: string;
 
   constructor(vehicle: Partial<Vehicle>) {
     super(vehicle);

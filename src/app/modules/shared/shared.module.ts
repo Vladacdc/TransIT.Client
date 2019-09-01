@@ -65,17 +65,23 @@ import {MatButtonModule} from '@angular/material/button';
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 import { MatFspTableComponent } from './components/tables/mat-fsp-table/mat-fsp-table.component';
 import { EntitiesDataSource } from './data-sources/entities-data-sourse';
-import { MomentDateAdapter, MAT_MOMENT_DATE_FORMATS } from '@angular/material-moment-adapter';
 import { UnitComponent } from './components/unit/unit.component';
 import { CreateUnitComponent } from './components/unit/create-unit/create-unit.component';
 import { DeleteUnitComponent } from './components/unit/delete-unit/delete-unit.component';
 import { EditUnitComponent } from './components/unit/edit-unit/edit-unit.component';
-import { ManufacturerService } from './services/manufacturer.service';
 import { ManufacturerComponent } from './components/manufacturer/manufacturer.component';
 import { CreateManufacturerComponent } from './components/manufacturer/create-manufacturer/create-manufacturer.component';
 import { DeleteManufacturerComponent } from './components/manufacturer/delete-manufacturer/delete-manufacturer.component';
 import { EditManufacturerComponent } from './components/manufacturer/edit-manufacturer/edit-manufacturer.component';
+import { WorkTypeComponent } from './components/dictionaries/workType/work-type.component';
+import { WorkTypeService } from './services/work-type.service';
+import { CreateWorkTypeComponent } from './components/dictionaries/workType/create-work-type/create-work-type.component';
+import { EditWorkTypeComponent } from './components/dictionaries/workType/edit-work-type/edit-work-type.component';
+import { DeleteWorkTypeComponent } from './components/dictionaries/workType/delete-work-type/delete-work-type.component';
+import { EntitiesDataSourceForVehicle } from './data-sources/entities-data-source-for-vehicle';
 import { PartService } from './services/part.service';
+import { ManufacturerService } from './services/manufacturer.service';
+import { MomentDateAdapter, MAT_MOMENT_DATE_FORMATS } from '@angular/material-moment-adapter';
 
 @NgModule({
   declarations: [
@@ -108,7 +114,11 @@ import { PartService } from './services/part.service';
     CreateManufacturerComponent,
     DeleteManufacturerComponent,
     EditManufacturerComponent,
-    MatFspTableComponent
+    MatFspTableComponent,
+    WorkTypeComponent,
+    CreateWorkTypeComponent,
+    EditWorkTypeComponent,
+    DeleteWorkTypeComponent,
   ],
   imports: [
     MatButtonModule,
@@ -152,7 +162,8 @@ import { PartService } from './services/part.service';
     CreateManufacturerComponent,
     DeleteManufacturerComponent,
     EditManufacturerComponent,
-    MatFspTableComponent
+    MatFspTableComponent,
+    WorkTypeComponent
   ],
   providers: [
     ActionTypeService,
@@ -174,13 +185,18 @@ import { PartService } from './services/part.service';
     VehicleTypeService,
     VehicleService,
     StatisticsService,
+    EntitiesDataSource,
+    EntitiesDataSourceForVehicle,
+    WorkTypeService,
+    PartService,
+    ManufacturerService,
     UnitService,
     ManufacturerService,
     PartService,
     {provide: MAT_DATE_LOCALE, useValue: localStorage.getItem('language')},
     {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
     {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS},
-    EntitiesDataSource
+
   ]
 })
 export class SharedModule {

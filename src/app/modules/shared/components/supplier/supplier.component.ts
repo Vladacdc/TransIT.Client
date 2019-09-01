@@ -10,6 +10,7 @@ import { MatFspTableComponent } from '../tables/mat-fsp-table/mat-fsp-table.comp
   styleUrls: ['./supplier.component.scss']
 })
 export class SupplierComponent implements OnInit {
+
   columnDefinitions: string[] = [
     'name',
     'fullName',
@@ -37,6 +38,7 @@ export class SupplierComponent implements OnInit {
   }
 
   addSupplier(supplier: Supplier) {
+
     this.table.loadEntitiesPage();
   }
 
