@@ -6,6 +6,9 @@
     <div class="col-sm-12 col-xl-6">
       <app-currency [isVisible]="isVisible"></app-currency>
     </div>
+    <div class="parts-in-container">
+      <app-parts-in *ngIf="isVisible"></app-parts-in>
+    </div>
   </div>
   <div class="row">
     <div class="col-sm-12 col-xl-6">

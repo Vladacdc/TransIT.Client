@@ -1,0 +1,13 @@
+.actions-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    
+    button {
+        margin-right: 1%;
+    }
+    
+    button:last-child {
+        margin-right: 0;
+    }
+}

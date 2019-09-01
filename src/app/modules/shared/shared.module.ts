@@ -54,17 +54,22 @@ import { MatDatepickerModule,
          MatSortModule,
          MatProgressSpinnerModule,
          MatIconModule,
-         MAT_DATE_LOCALE,
          DateAdapter,
-         MAT_DATE_FORMATS} from '@angular/material';
+         MAT_DATE_LOCALE,
+         MAT_DATE_FORMATS } from '@angular/material';
 
+import {MatDialogModule} from '@angular/material/dialog';
 import {MatSelectModule} from '@angular/material/select';
 import {MatButtonModule} from '@angular/material/button';
+import {MatCardModule} from '@angular/material/card';
 
-
+import { PartInActionsComponent } from './components/dictionaries/parts-in/part-in-actions/part-in-actions.component';
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 import { MatFspTableComponent } from './components/tables/mat-fsp-table/mat-fsp-table.component';
 import { EntitiesDataSource } from './data-sources/entities-data-sourse';
+import { AddPartInComponent } from './components/dictionaries/parts-in/dialogs/add-part-in/add-part-in.component';
+import { EditPartInComponent } from './components/dictionaries/parts-in/dialogs/edit-part-in/edit-part-in.component';
+import { PartsInComponent } from './components/dictionaries/parts-in/parts-in.component';
 import { UnitComponent } from './components/unit/unit.component';
 import { CreateUnitComponent } from './components/unit/create-unit/create-unit.component';
 import { DeleteUnitComponent } from './components/unit/delete-unit/delete-unit.component';
@@ -106,6 +111,11 @@ import { MomentDateAdapter, MAT_MOMENT_DATE_FORMATS } from '@angular/material-mo
     EditDocumentComponent,
     NestedDocumentComponent,
     IssueLogComponent,
+    PartsInComponent,
+    PartInActionsComponent,
+    MatFspTableComponent,
+    AddPartInComponent,
+    EditPartInComponent,
     UnitComponent,
     DeleteUnitComponent,
     EditUnitComponent,
@@ -121,6 +131,8 @@ import { MomentDateAdapter, MAT_MOMENT_DATE_FORMATS } from '@angular/material-mo
     DeleteWorkTypeComponent,
   ],
   imports: [
+    MatCardModule,
+    MatDialogModule,
     MatButtonModule,
     MatIconModule,
     MatSelectModule,
@@ -141,7 +153,13 @@ import { MomentDateAdapter, MAT_MOMENT_DATE_FORMATS } from '@angular/material-mo
     FormsModule,
     NgBootstrapFormValidationModule
   ],
+  entryComponents: [
+    AddPartInComponent,
+    EditPartInComponent
+  ],
   exports: [
+    AddPartInComponent,
+    PartsInComponent,
     BreadcrumbComponent,
     SupplierComponent,
     CreateSupplierComponent,
@@ -154,6 +172,7 @@ import { MomentDateAdapter, MAT_MOMENT_DATE_FORMATS } from '@angular/material-mo
     FiltersTabsComponent,
     CreateDocumentComponent,
     DocumentComponent,
+    MatFspTableComponent,
     UnitComponent,
     DeleteUnitComponent,
     EditUnitComponent,
