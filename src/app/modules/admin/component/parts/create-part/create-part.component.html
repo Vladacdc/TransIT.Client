@@ -1,0 +1,61 @@
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createPart">
+  <i class="fas fa-user-plus"></i>{{'Admin.Parts.Create' | translate}}
+</button>
+
+<div
+  class="modal fade"
+  id="createPart"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="createPart"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header color">
+        <h5 class="modal-title"><i class="fas fa-user-plus"></i>{{'Admin.Parts.Create' | translate}}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="partForm">
+          <div class="form-group">
+            <label translate>Admin.Parts.Name</label>
+            <input type="text" placeholder="{{'Admin.Parts.EnterName' | translate}}" class="form-control" formControlName="name" />
+          </div>
+          <div class="form-group">
+            <label translate>Admin.Parts.Code</label>
+            <input type="text" placeholder="{{'Admin.Parts.EnterCode' | translate}}" class="form-control" formControlName="code" />
+          </div>
+          <div class="form-group">
+            <label translate>Admin.Parts.Manufacturer</label>
+            <ng-select
+              formControlName="manufacturer"
+              [items] = "manufacturers"
+              bindLabel = "name"
+              placeholder = "{{'Admin.Parts.SelectManufacturer'  | translate}}"
+              notFoundText = "{{'Admin.Parts.NotFound' | translate}}">
+            </ng-select>
+          </div>
+          <div class="form-group">
+            <label translate>Admin.Parts.Units</label>
+            <ng-select
+              formControlName="unit"
+              [items] = "units"
+              bindLabel = "name"
+              placeholder = "{{'Admin.Parts.SelectUnit'  | translate}}"
+              notFoundText = "{{'Admin.Parts.NotFound'  | translate}}">
+            </ng-select>  
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button #close type="button" class="btn btn-secondary" data-dismiss="modal">{{'Admin.Parts.Cancel' | translate}}</button>
+        <button type="button" class="btn btn-primary" (click)="clickSubmit()" [disabled]="partForm.invalid">
+          {{'Admin.Parts.CreateBtn' | translate}}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

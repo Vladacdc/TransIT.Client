@@ -68,6 +68,10 @@ import { MatFspTableComponent } from './components/tables/mat-fsp-table/mat-fsp-
 import { EntitiesDataSource } from './data-sources/entities-data-sourse';
 import { AddPartInComponent } from './components/dictionaries/parts-in/dialogs/add-part-in/add-part-in.component';
 import { EditPartInComponent } from './components/dictionaries/parts-in/dialogs/edit-part-in/edit-part-in.component';
+import { MomentDateAdapter, MAT_MOMENT_DATE_FORMATS } from '@angular/material-moment-adapter';
+import { PartService } from './services/part.service';
+import { ManufacturerService } from './services/manufacturer.service';
+import { UnitService } from './services/unit.service';
 
 import { MomentDateAdapter, MAT_MOMENT_DATE_FORMATS } from '@angular/material-moment-adapter';
 @NgModule({
@@ -162,7 +166,10 @@ import { MomentDateAdapter, MAT_MOMENT_DATE_FORMATS } from '@angular/material-mo
     VehicleTypeService,
     VehicleService,
     StatisticsService,
-    {provide: MAT_DATE_LOCALE, useValue: localStorage.getItem("language")},
+    PartService,
+    ManufacturerService,
+    UnitService,
+    {provide: MAT_DATE_LOCALE, useValue: localStorage.getItem('language')},
     {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
     {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS},
     EntitiesDataSource
