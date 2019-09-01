@@ -1,17 +1,15 @@
 import { Injectable } from '@angular/core';
 import { MatPaginator } from '@angular/material';
 import { EntitiesDataSource } from './entities-data-sourse';
-import { Vehicle } from '../models/vehicle';
 import { IssuelogService } from '../services/issuelog.service';
 import { IssueLog } from '../models/issuelog';
-import { BehaviorSubject } from 'rxjs';
 
 @Injectable()
 export class EntitiesDataSourceForVehicle extends EntitiesDataSource<IssueLog> {
 
     private vehicleId: number;
 
-    constructor(private issueLogService: IssuelogService, private selectedVehicleId: number) {
+    constructor(private issueLogService: IssuelogService, selectedVehicleId: number) {
         super(issueLogService);
         this.vehicleId = selectedVehicleId;
     }
@@ -38,7 +36,7 @@ export class EntitiesDataSourceForVehicle extends EntitiesDataSource<IssueLog> {
             */
         })
         .subscribe(entities => {
-          let issueLogs = new Array<IssueLog>();
+          const issueLogs = new Array<IssueLog>();
           entities.data.forEach(issueLog => {
               if (issueLog.issue.vehicle.id == this.vehicleId) {
                 issueLogs.push(issueLog);
@@ -46,8 +44,10 @@ export class EntitiesDataSourceForVehicle extends EntitiesDataSource<IssueLog> {
             }
           );
           this.entitySubject.next(issueLogs);
-          if (paginator) {
-            paginator.length = entities.recordsTotal; // recordsFiltered
+          if (filter == '') {
+            paginator.length = entities.recordsTotal;
+          } else {
+            paginator.length = entities.recordsFiltered;
           }
         });
       }

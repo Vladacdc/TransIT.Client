@@ -51,8 +51,7 @@ export class EntitiesDataSource<Entity extends TEntity<Entity>> implements DataS
         if (paginator) {
           if (filter == '') {
             paginator.length = entities.recordsTotal;
-          }
-          else {
+          } else {
             paginator.length = entities.recordsFiltered;
           }
         }
