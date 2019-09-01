@@ -1,3 +1,4 @@
+// tslint:disable: max-line-length
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
@@ -70,6 +71,10 @@ import { LocationsComponent } from './component/locations/locations.component';
 import { CreateLocationComponent } from './component/locations/create-location/create-location.component';
 import { EditLocationComponent } from './component/locations/edit-location/edit-location.component';
 import { DeleteLocationComponent } from './component/locations/delete-location/delete-location.component';
+import { PartsComponent } from './component/parts/parts.component';
+import { CreatePartComponent } from './component/parts/create-part/create-part.component';
+import { EditPartComponent } from './component/parts/edit-part/edit-part.component';
+import { DeletePartComponent } from './component/parts/delete-part/delete-part.component';
 
 @NgModule({
   declarations: [
@@ -131,7 +136,11 @@ import { DeleteLocationComponent } from './component/locations/delete-location/d
     LocationsComponent,
     CreateLocationComponent,
     EditLocationComponent,
-    DeleteLocationComponent
+    DeleteLocationComponent,
+    PartsComponent,
+    CreatePartComponent,
+    EditPartComponent,
+    DeletePartComponent
   ],
   exports: [AdminComponent],
   imports: [
