@@ -23,10 +23,10 @@ export class DeleteUnitComponent {
   clickSubmit() {
     this.service.deleteEntity(this.unit.id).subscribe(
       data => {
-        this.toast.success('', this.translate.instant('Unit.Toasts.Deleted'));
+        this.toast.success('', this.translate.instant('Core.Toasts.Deleted'));
         this.deleteUnit.next(this.unit);
       },
-      error => this.toast.error(this.translate.instant('Unit.Toasts.Error'))
+      error => this.toast.error(this.translate.instant('Core.Toasts.Error'))
     );
     this.closeDeleteModal.nativeElement.click();
   }

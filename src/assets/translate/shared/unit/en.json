@@ -11,18 +11,6 @@
         },
         "Edit": {
             "Title": "Edit unit of measurement"
-        },
-        "Form": {
-            "Cancel": "Cancel",
-            "Create": "Create",
-            "Delete": "Delete",
-            "Save": "Save"
-        },
-        "Toasts": {
-            "Deleted": "Видалено",
-            "Created": "Створено",
-            "Error": "Помилка",
-            "Updated": "Оновлено" 
         }
     }
 }

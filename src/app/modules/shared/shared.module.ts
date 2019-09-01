@@ -70,6 +70,11 @@ import { UnitComponent } from './components/unit/unit.component';
 import { CreateUnitComponent } from './components/unit/create-unit/create-unit.component';
 import { DeleteUnitComponent } from './components/unit/delete-unit/delete-unit.component';
 import { EditUnitComponent } from './components/unit/edit-unit/edit-unit.component';
+import { ManufacturerService } from './services/manufacturer.service';
+import { ManufacturerComponent } from './components/manufacturer/manufacturer.component';
+import { CreateManufacturerComponent } from './components/manufacturer/create-manufacturer/create-manufacturer.component';
+import { DeleteManufacturerComponent } from './components/manufacturer/delete-manufacturer/delete-manufacturer.component';
+import { EditManufacturerComponent } from './components/manufacturer/edit-manufacturer/edit-manufacturer.component';
 
 @NgModule({
   declarations: [
@@ -98,6 +103,10 @@ import { EditUnitComponent } from './components/unit/edit-unit/edit-unit.compone
     DeleteUnitComponent,
     EditUnitComponent,
     CreateUnitComponent,
+    ManufacturerComponent,
+    CreateManufacturerComponent,
+    DeleteManufacturerComponent,
+    EditManufacturerComponent,
     MatFspTableComponent
   ],
   imports: [
@@ -138,6 +147,10 @@ import { EditUnitComponent } from './components/unit/edit-unit/edit-unit.compone
     DeleteUnitComponent,
     EditUnitComponent,
     CreateUnitComponent,
+    ManufacturerComponent,
+    CreateManufacturerComponent,
+    DeleteManufacturerComponent,
+    EditManufacturerComponent,
     MatFspTableComponent
   ],
   providers: [
@@ -161,6 +174,7 @@ import { EditUnitComponent } from './components/unit/edit-unit/edit-unit.compone
     VehicleService,
     StatisticsService,
     UnitService,
+    ManufacturerService,
     {provide: MAT_DATE_LOCALE, useValue: localStorage.getItem('language')},
     {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
     {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS},

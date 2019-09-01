@@ -1,47 +1,45 @@
 import { Component, OnInit, ViewChild, Output, EventEmitter, ElementRef } from '@angular/core';
-import { UnitService } from 'src/app/modules/shared/services/unit.service';
-import { Unit } from 'src/app/modules/shared/models/unit';
+import { ManufacturerService } from 'src/app/modules/shared/services/manufacturer.service';
+import { Manufacturer } from 'src/app/modules/shared/models/manufacturer';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
-  selector: 'app-create-unit',
-  templateUrl: './create-unit.component.html',
-  styleUrls: ['./create-unit.component.scss']
+  selector: 'app-create-manufacturer',
+  templateUrl: './create-manufacturer.component.html',
+  styleUrls: ['./create-manufacturer.component.scss']
 })
-export class CreateUnitComponent implements OnInit {
-  unitForm: FormGroup;
+export class CreateManufacturerComponent implements OnInit {
+  manufacturerForm: FormGroup;
   @ViewChild('close') closeCreateModal: ElementRef;
-  @Output() createUnit = new EventEmitter<Unit>();
+  @Output() createManufacturer = new EventEmitter<Manufacturer>();
 
   constructor(
-    private unitService: UnitService,
+    private manufacturerService: ManufacturerService,
     private formBuilder: FormBuilder,
     private toast: ToastrService,
     private translate: TranslateService
   ) {}
 
   ngOnInit() {
-    this.unitForm = this.formBuilder.group({
+    this.manufacturerForm = this.formBuilder.group({
       name: new FormControl('', Validators.compose([Validators.required, Validators.maxLength(60)])),
-      shortName: new FormControl('', Validators.compose([Validators.required, Validators.maxLength(30)])),
     });
   }
 
   clickSubmit() {
-    if (this.unitForm.invalid) {
+    if (this.manufacturerForm.invalid) {
       return;
     }
-    const form = this.unitForm.value;
-    const unit: Unit = {
+    const form = this.manufacturerForm.value;
+    const manufacturer: Manufacturer = {
       id: 0,
       name: form.name as string,
-      shortName: form.shortName as string,
     };
 
-    this.unitService.addEntity(unit).subscribe(newGroup => {
-      this.createUnit.next(newGroup);
+    this.manufacturerService.addEntity(manufacturer).subscribe(newGroup => {
+      this.createManufacturer.next(newGroup);
       this.toast.success('', this.translate.instant('Core.Toasts.Created'));
     },
     error => {

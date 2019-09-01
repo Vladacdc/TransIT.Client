@@ -54,10 +54,10 @@ export class EditUnitComponent implements OnInit {
 
     this.service.updateEntity(unit).subscribe(
       _ => {
-        this.toast.success('', this.translate.instant('Unit.Toasts.Updated'));
+        this.toast.success('', this.translate.instant('Core.Toasts.Updated'));
         this.updateUnit.next(unit);
       },
-      error => this.toast.error(this.translate.instant('Unit.Toasts.Error'))
+      error => this.toast.error(this.translate.instant('Core.Toasts.Error'))
     );
     this.closeDiv.nativeElement.click();
   }
