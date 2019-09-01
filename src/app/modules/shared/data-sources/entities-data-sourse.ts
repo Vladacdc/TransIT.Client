@@ -50,7 +50,12 @@ export class EntitiesDataSource<Entity extends TEntity<Entity>> implements DataS
       }).subscribe(entities => {
         this.entitySubject.next(entities.data);
         if(paginator) {
-          paginator.length = entities.recordsTotal; //recordsFiltered
+          if(filter=='') {
+            paginator.length = entities.recordsTotal;
+          }
+          else {
+            paginator.length = entities.recordsFiltered;
+          }
         }
       });
     }  
