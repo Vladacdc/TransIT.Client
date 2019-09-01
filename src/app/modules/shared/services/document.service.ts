@@ -36,10 +36,6 @@ export class DocumentService extends CrudService<Document> {
       catchError(this.handleError())
     );
   }
-  downloadFile1(document: Document) {
-    this.spinner.show();
-    return this.http.get(`${this.serviceUrl}/${document.id}/file`).pipe(catchError(this.handleError()));
-  }
   public downloadFile(document: Document) {
     this.http.get(`${this.serviceUrl}/${document.id}/file`, { responseType: 'blob' }).subscribe(blob => {
       saveAs(blob, document.path.replace(/^.*[\\\/]/, ''));
