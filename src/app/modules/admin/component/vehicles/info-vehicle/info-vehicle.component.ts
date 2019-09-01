@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild} from '@angular/core';
 import { IssuelogService } from 'src/app/modules/shared/services/issuelog.service';
 import { MatFspTableComponent } from 'src/app/modules/shared/components/tables/mat-fsp-table/mat-fsp-table.component';
 import { EntitiesDataSourceForVehicle } from 'src/app/modules/shared/data-sources/entities-data-source-for-vehicle';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute} from '@angular/router';
 
 
 @Component({
@@ -44,6 +44,8 @@ export class InfoVehicleComponent implements OnInit {
     this.sub = this.route.params.subscribe(params => {
       this.selectedVehicleId = params['id'];
       });
-    this.dataSource = new EntitiesDataSourceForVehicle(this.issueLogService, this.selectedVehicleId);
+    let ds = new EntitiesDataSourceForVehicle(this.issueLogService);
+    ds.selectedVehicleId = this.selectedVehicleId;
+    this.dataSource = ds;
   }
 }

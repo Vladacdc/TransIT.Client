@@ -4,13 +4,13 @@ import { IssuelogService } from '../services/issuelog.service';
 import { IssueLog } from '../models/issuelog';
 import { Injectable } from '@angular/core';
 
+@Injectable()
 export class EntitiesDataSourceForVehicle extends EntitiesDataSource<IssueLog> {
 
-    private vehicleId: number;
+    selectedVehicleId: number;
 
-    constructor(@Injectable() private issueLogService: IssuelogService, selectedVehicleId: number) {
+    constructor(private issueLogService: IssuelogService) {
         super(issueLogService);
-        this.vehicleId = selectedVehicleId;
     }
 
     loadEntities(
@@ -37,7 +37,7 @@ export class EntitiesDataSourceForVehicle extends EntitiesDataSource<IssueLog> {
         .subscribe(entities => {
           const issueLogs = new Array<IssueLog>();
           entities.data.forEach(issueLog => {
-              if (issueLog.issue.vehicle.id == this.vehicleId) {
+              if (issueLog.issue.vehicle.id == this.selectedVehicleId) {
                 issueLogs.push(issueLog);
               }
             }
