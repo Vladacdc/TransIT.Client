@@ -14,6 +14,7 @@ import { MalfunctionSubgroupReportComponent } from './components/report/malfunct
 import { ChartsComponent } from './components/charts/charts.component';
 import { ChartsModule } from 'ng2-charts';
 import { FormsModule } from '@angular/forms';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { FormsModule } from '@angular/forms';
     MatSortModule,
     MatDatepickerModule,
     ChartsModule,
-    FormsModule
+    FormsModule,
+    NgSelectModule
   ]
 })
 export class AnalystModule {}

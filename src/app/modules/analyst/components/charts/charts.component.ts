@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ChartsModule } from 'ng2-charts';
 import { VehicleTypeService } from 'src/app/modules/shared/services/vehicle-type.service';
 import { StatisticsService } from 'src/app/modules/shared/services/statistics.service';
+import { MalfunctionService } from 'src/app/modules/shared/services/malfunction.service';
+import { Malfunction } from 'src/app/modules/shared/models/malfunction';
 
 
 @Component({
@@ -10,12 +12,11 @@ import { StatisticsService } from 'src/app/modules/shared/services/statistics.se
   styleUrls: ['./charts.component.scss']
 })
 export class ChartsComponent implements OnInit {
-  private barChartReady: boolean;
+  //private barChartReady: boolean;
   private pieChartReady: boolean;
 
-  public currentMalfunction: string = "зникли поручні";
-
-  //public chartColors: string[];
+  private malfunctions: Malfunction[];
+  public currentMalfunction: Malfunction;
 
   public pieChartLabels: string[];
   public pieChartData: number[];
@@ -23,17 +24,16 @@ export class ChartsComponent implements OnInit {
   
   constructor(
     private vehicleTypeService: VehicleTypeService,
+    private malfunctionService: MalfunctionService,
     private statisticsService: StatisticsService) {
-      //this.chartColors=[];
-      this.barChartReady=false;
+      //this.barChartReady=false;
       this.pieChartReady=false;
-      this.pieChartLabels=[];// = ['Sales Q1', 'Sales Q2', 'Sales Q3', 'Sales Q4'];
+      this.pieChartLabels=[];
       this.pieChartData=[];
       this.pieChartType='pie';
   }
   
-
-  public barChartOptions = {
+  /*public barChartOptions = {
     scaleShowVerticalLines: false,
     responsive: true
   };
@@ -43,42 +43,34 @@ export class ChartsComponent implements OnInit {
   public barChartData = [
     {data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A'},
     {data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B'}
-  ];
-
-  
+  ];*/
 
   ngOnInit() {
+    this.malfunctionService.getEntities().subscribe(data => {
+      this.malfunctions = data;
+    })
+  }
+
+  selectMalfunction(value: Malfunction): void {
+    this.currentMalfunction = value;
     this.loadPieChartData();
   }
 
-  loadPieChartData() {
+  loadPieChartData(): void {
+    this.pieChartLabels=[];
     this.vehicleTypeService.getEntities().subscribe(vehicleTypes => {
       vehicleTypes.forEach(vType => {
         this.pieChartLabels.push(vType.name);
       });
-      
     });
 
-    this.statisticsService.GetMalfunctionStatistics(this.currentMalfunction).subscribe(data => {
+    this.statisticsService.GetMalfunctionStatistics(this.currentMalfunction.name).subscribe(data => {
       this.pieChartData = data;
-      //this.generateColors(this.pieChartLabels.length);
       this.pieChartReady = true;
     });
   }
 
-  /*
-  private generateColors(amount: number) {
-    for(let i=0; i<amount; i++) {
-      this.chartColors.push(this.getRandomColor());
-    }
+  pieChartHasNotData(): boolean {
+    return this.pieChartReady && this.pieChartData.filter(function(x) { return x != 0; }).length == 0;
   }
-  
-  private getRandomColor() {
-    var letters = '0123456789ABCDEF'.split('');
-    var color = '#';
-    for (var i = 0; i < 6; i++ ) {
-        color += letters[Math.floor(Math.random() * 16)];
-    }
-    return color;
-  }*/
 }
