@@ -38,17 +38,17 @@ export class MatFspTableComponent implements OnInit {
       this.paginator
     );
   }
-  
+
   ngAfterViewInit() {
     setTimeout(() => {
-      if(this.actionContentTemplate) {
-        this.columnsToDisplay = this.columnsToDisplay.concat("buttonsColumn");
+      if (this.actionContentTemplate) {
+        this.columnsToDisplay = this.columnsToDisplay.concat('buttonsColumn');
       }
     });
 
     this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
 
-    fromEvent(this.input.nativeElement,'keyup').pipe(
+    fromEvent(this.input.nativeElement, 'keyup').pipe(
       debounceTime(150),
       distinctUntilChanged(),
       tap(() => {
