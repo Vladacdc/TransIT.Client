@@ -1,8 +1,12 @@
 <app-create-vehicle (createVehicle)="addVehicle($event)"></app-create-vehicle>
 <ng-template #actionsTemplate let-data="templateData">
-    <button (click)=deleteVehicle(data)>Delete</button>
-    <button (click)="updateVehicle(data)">Edit</button>
-    <button (click)="infoVehicle(data)">Info</button>
+
+    <app-delete-vehicle [vehicle]="data" (deleteVehicle)="deleteVehicle(data)"></app-delete-vehicle>
+
+    <app-edit-vehicle [vehicle]="data" (updateVehicle)="updateVehicle(data)"></app-edit-vehicle>
+
+    <button class="first btn" (click)="infoVehicle(data)"><i class="fas fa-info"></i></button>
+
 </ng-template>
 
 <div>

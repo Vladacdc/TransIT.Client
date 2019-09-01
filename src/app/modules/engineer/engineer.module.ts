@@ -21,6 +21,7 @@ import { SupplierComponent } from '../shared/components/supplier/supplier.compon
 import { CreateDocumentComponent } from './components/create-document/create-document.component';
 import { VehiclesComponent } from './components/vehicles/vehicles.component';
 import { MatTableModule, MatInputModule, MatFormFieldModule, MatPaginatorModule, MatSortModule } from '@angular/material';
+import { InfoVehicleComponent } from './components/vehicles/info-vehicle/info-vehicle.component';
 
 const routes: Routes = [
   {
@@ -36,6 +37,7 @@ const routes: Routes = [
       { path: 'supplier', component: SupplierComponent},
       { path: 'issue-log', component: IssueLogComponent },
       { path: 'vehicles', component: VehiclesComponent},
+      { path: 'info-vehicle', component: InfoVehicleComponent},
       { path: '**', redirectTo: 'issues' }
     ]
   }
@@ -62,7 +64,8 @@ const routes: Routes = [
     NestedIssueLogsComponent,
     IssueLogDocumentsComponent,
     CreateDocumentComponent,
-    VehiclesComponent
+    VehiclesComponent,
+    InfoVehicleComponent
   ]
 })
 export class EngineerRoutingModule {}

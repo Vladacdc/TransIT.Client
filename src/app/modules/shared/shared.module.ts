@@ -67,6 +67,7 @@ import { WorkTypeService } from './services/work-type.service';
 import { CreateWorkTypeComponent } from './components/dictionaries/workType/create-work-type/create-work-type.component';
 import { EditWorkTypeComponent } from './components/dictionaries/workType/edit-work-type/edit-work-type.component';
 import { DeleteWorkTypeComponent } from './components/dictionaries/workType/delete-work-type/delete-work-type.component';
+import { EntitiesDataSourceForVehicle } from './data-sources/entities-data-source-for-vehicle';
 
 
 @NgModule({
@@ -157,6 +158,7 @@ import { DeleteWorkTypeComponent } from './components/dictionaries/workType/dele
     VehicleService,
     StatisticsService,
     EntitiesDataSource,
+    EntitiesDataSourceForVehicle,
     WorkTypeService,
     {provide: MAT_DATE_LOCALE, useValue: 'uk-UA'}
   ]

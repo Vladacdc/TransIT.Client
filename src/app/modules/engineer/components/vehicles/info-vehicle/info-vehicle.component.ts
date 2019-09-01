@@ -4,9 +4,6 @@ import { EntitiesDataSource } from 'src/app/modules/shared/data-sources/entities
 import { Vehicle } from 'src/app/modules/shared/models/vehicle';
 import { IssueLog } from 'src/app/modules/shared/models/issuelog';
 import { MatFspTableComponent } from 'src/app/modules/shared/components/tables/mat-fsp-table/mat-fsp-table.component';
-import { EntitiesDataSourceForVehicle } from 'src/app/modules/shared/data-sources/entities-data-source-for-vehicle';
-import { ActivatedRoute, Router, ParamMap } from '@angular/router';
-import { switchMap } from 'rxjs/operators';
 
 
 @Component({
@@ -15,45 +12,42 @@ import { switchMap } from 'rxjs/operators';
   styleUrls: ['./info-vehicle.component.scss']
 })
 export class InfoVehicleComponent implements OnInit {
-  selectedVehicleId: number;
-  value:any;
-  sub: any;
+  @Input() vehicle: Vehicle;
   columnDefinitions: string[] = [
     'description',
     'expenses',
+    'actionTypeName',
     'issueName',
     'workTypeName',
     'newStateName',
     'oldStateName',
     'supplierName',
     'updatedDate',
-    'createdDate'
+    'createdDate',
+    // 'documents'
   ];
   columnNames: string[] = [
     'Опис',
-    'Витрати',
+    'expenses',
+    'екшн тайп',
     'Поломка',
     'Тип роботи',
     'Стан',
     'Cтарий стан',
     'Постачальник',
     'Дата зміни',
-    'Дата створення'
+    'Дата створення',
+    // 'Документи'
   ];
 
   @ViewChild('table') table: MatFspTableComponent;
 
-  dataSource: EntitiesDataSourceForVehicle;
+  dataSource: EntitiesDataSource<IssueLog>;
 
-  constructor(private issueLogService: IssuelogService,private route: ActivatedRoute,
-    private router: Router) {
+  constructor(private issueLogService: IssuelogService) {
   }
 
   ngOnInit() {
-    this.sub = this.route.params.subscribe(params => {
-      this.selectedVehicleId = params['id'];
-      });
-      console.log(this.selectedVehicleId);
-    this.dataSource = new EntitiesDataSourceForVehicle(this.issueLogService, this.selectedVehicleId);
+    this.dataSource = new EntitiesDataSource<IssueLog>(this.issueLogService);
   }
 }

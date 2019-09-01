@@ -1,12 +1,9 @@
-import { Component, OnInit, ChangeDetectorRef, Input } from '@angular/core';
+import { Component, OnInit, ViewChild} from '@angular/core';
+import { EntitiesDataSource } from '../../../shared/data-sources/entities-data-sourse';
 import { Vehicle } from 'src/app/modules/shared/models/vehicle';
 import { VehicleService } from 'src/app/modules/shared/services/vehicle.service';
-import * as moment from 'moment';
-import { DatatableSettings } from 'src/app/modules/shared/helpers/datatable-settings';
-import { IssueService } from 'src/app/modules/shared/services/issue.service';
+import { MatFspTableComponent } from 'src/app/modules/shared/components/tables/mat-fsp-table/mat-fsp-table.component';
 import { Router } from '@angular/router';
-
-declare const $;
 
 @Component({
   selector: 'app-vehicles',
@@ -14,77 +11,57 @@ declare const $;
   styleUrls: ['./vehicles.component.scss']
 })
 export class VehiclesComponent implements OnInit {
-  @Input()
-  vehicles: Vehicle[] = [];
-  table: DataTables.Api;
-  selectedVehicle: Vehicle;
-  tableConfig = new DatatableSettings({
-    columns: [
-      { title: 'Тип транспорту', data: 'vehicleType.name', defaultContent: '' },
-      { title: 'Vin-код', data: 'vincode', defaultContent: '' },
-      { title: 'Інвентарний номер', data: 'inventoryId', defaultContent: '' },
-      { title: 'Реєстраційний номер', data: 'regNum', defaultContent: '' },
-      { title: 'Бренд', data: 'brand', defaultContent: '' },
-      { title: 'Модель', data: 'model', defaultContent: '' },
-      { title: 'Місцезнаходження', data: 'location.name', defaultContent: '' },
-      {
-        title: 'Дата введення в експлуатацію',
-        data: 'commissioningDate',
-        defaultContent: '',
-        render(data) {
-          return moment(data).format('DD.MM.YYYY');
-        }
-      },
-      {
-        title: 'Дата закінчення гарантії',
-        data: 'warrantyEndDate',
-        defaultContent: '',
-        render(data) {
-          return moment(data).format('DD.MM.YYYY');
-        }
-      },
-      { title: 'Дії', orderable: false }
-    ],
-    processing: true,
-    serverSide: true,
-    ajax: this.ajaxCallback.bind(this),
-    columnDefs: [
-      {
-        targets: -1,
-        data: null,
-        defaultContent: `<button class="info btn"><i class="fas fa-info-circle"></i></button>`
-      }
-    ],
-    language: {
-      url: 'assets/language.json'
-    }
-  });
+  vehicle: Vehicle;
 
-  constructor(
-    private vehicleService: VehicleService,
-    private issueService: IssueService,
-    private router: Router,
-    ) {}
+  columnDefinitions: string[] = [
+    'vehicleTypeName',
+    'vincode',
+    'inventoryId',
+    'regNum',
+    'brand',
+    'model',
+    'locationName',
+    'commissioningDate',
+    'warrantyEndDate'
+  ];
+  columnNames: string[] = [
+    'Тип транспорту',
+    'Вінкод',
+    'Інвентарний номер',
+    'Реєстраційний номер',
+    'Бренд',
+    'Модель',
+    'Місцезнаходження',
+    'Дата введення в експлуатацію',
+    'Закінчення гарантійного терміну'
+  ];
+
+  @ViewChild('table') table: MatFspTableComponent;
+
+  dataSource: EntitiesDataSource<Vehicle>;
+
+
+  constructor(private router: Router, private vehicleService: VehicleService) {
+  }
 
   ngOnInit() {
-    this.table = $('#vehicles').DataTable(this.tableConfig);
-    $('#vehicles tbody').on('click', '.info', this.selectInfoItem(this));
+    this.dataSource = new EntitiesDataSource<Vehicle>(this.vehicleService);
   }
 
-  private ajaxCallback(dataTablesParameters: any, callback): void {
-    this.vehicleService.getFilteredEntities(dataTablesParameters).subscribe(x => {
-      callback(x);
-    });
+  addVehicle(vehicle: Vehicle) {
+    this.table.loadEntitiesPage();
   }
 
-  selectInfoItem(component: VehiclesComponent) {
-    return function() {
-      component.router.navigate(['/engineer/info-vehicle']);
-    };
+  deleteVehicle(vehicle: Vehicle) {
+    this.table.loadEntitiesPage();
   }
 
+  updateVehicle(vehicle: Vehicle) {
+    this.table.loadEntitiesPage();
+  }
+  
   infoVehicle(vehicle: Vehicle) {
-    this.vehicles[this.vehicles.findIndex(i => i.id === vehicle.id)] = vehicle;
-    this.table.draw();
+    this.table.loadEntitiesPage();
+    this.router.navigate(['/engineer/info-vehicle']);
   }
 }
