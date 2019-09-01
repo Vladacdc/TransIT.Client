@@ -35,27 +35,21 @@ export class IssuelogService extends CrudService<IssueLog> {
   protected mapEntity(entity: IssueLog): IssueLog {
     const issuelog = new IssueLog(entity);
     if (entity.actionType) {
-      console.log(entity.actionType.name);
       issuelog.actionTypeName = entity.actionType.name;
     }
     if (entity.workType) {
-      console.log(entity.workType.name);
       issuelog.workTypeName = entity.workType.name;
     }
     if (entity.issue) {
-      console.log(entity.issue.summary);
       issuelog.issueName = entity.issue.summary;
     }
     if (entity.newState) {
-      console.log(entity.newState.name);
       issuelog.newStateName = entity.newState.transName;
     }
     if (entity.oldState) {
-      console.log(entity.oldState.name);
       issuelog.oldStateName = entity.oldState.transName;
     }
     if (entity.supplier) {
-      console.log(entity.supplier.name);
       issuelog.supplierName = entity.supplier.name;
     }
     return issuelog;

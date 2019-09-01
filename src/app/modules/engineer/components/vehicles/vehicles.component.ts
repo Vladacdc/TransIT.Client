@@ -62,6 +62,6 @@ export class VehiclesComponent implements OnInit {
   
   infoVehicle(vehicle: Vehicle) {
     this.table.loadEntitiesPage();
-    this.router.navigate(['/engineer/info-vehicle']);
+    this.router.navigate(['engineer/info-vehicle', {id: vehicle.id}]);
   }
 }

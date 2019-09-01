@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewChild, Input} from '@angular/core';
 import { IssuelogService } from 'src/app/modules/shared/services/issuelog.service';
-import { EntitiesDataSource } from 'src/app/modules/shared/data-sources/entities-data-sourse';
 import { Vehicle } from 'src/app/modules/shared/models/vehicle';
-import { IssueLog } from 'src/app/modules/shared/models/issuelog';
 import { MatFspTableComponent } from 'src/app/modules/shared/components/tables/mat-fsp-table/mat-fsp-table.component';
+import { EntitiesDataSourceForVehicle } from 'src/app/modules/shared/data-sources/entities-data-source-for-vehicle';
+import { ActivatedRoute, Router } from '@angular/router';
 
 
 @Component({
@@ -16,38 +16,35 @@ export class InfoVehicleComponent implements OnInit {
   columnDefinitions: string[] = [
     'description',
     'expenses',
-    'actionTypeName',
     'issueName',
     'workTypeName',
     'newStateName',
     'oldStateName',
-    'supplierName',
-    'updatedDate',
-    'createdDate',
-    // 'documents'
+    'supplierName'
   ];
   columnNames: string[] = [
     'Опис',
-    'expenses',
-    'екшн тайп',
+    'Витрати',
     'Поломка',
     'Тип роботи',
     'Стан',
     'Cтарий стан',
-    'Постачальник',
-    'Дата зміни',
-    'Дата створення',
-    // 'Документи'
+    'Постачальник'
   ];
 
   @ViewChild('table') table: MatFspTableComponent;
 
-  dataSource: EntitiesDataSource<IssueLog>;
+  dataSource: EntitiesDataSourceForVehicle;
+  sub: any;
+  selectedVehicleId: number;
 
-  constructor(private issueLogService: IssuelogService) {
+  constructor(private issueLogService: IssuelogService,private route: ActivatedRoute) {
   }
 
   ngOnInit() {
-    this.dataSource = new EntitiesDataSource<IssueLog>(this.issueLogService);
+    this.sub = this.route.params.subscribe(params => {
+      this.selectedVehicleId = params['id'];
+      });
+    this.dataSource = new EntitiesDataSourceForVehicle(this.issueLogService, this.selectedVehicleId);
   }
 }

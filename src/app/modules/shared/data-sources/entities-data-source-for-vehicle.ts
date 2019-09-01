@@ -38,15 +38,17 @@ export class EntitiesDataSourceForVehicle extends EntitiesDataSource<IssueLog> {
             */
         })
         .subscribe(entities => {
+          let issueLogs = new Array<IssueLog>();
           entities.data.forEach(issueLog => {
               if (issueLog.issue.vehicle.id == this.vehicleId) {
-                this.entitySubject.next(entities.data);
-                if (paginator) {
-                  paginator.length = entities.recordsTotal; // recordsFiltered
-                }
+                issueLogs.push(issueLog);
               }
             }
           );
+          this.entitySubject.next(issueLogs);
+          if (paginator) {
+            paginator.length = entities.recordsTotal; // recordsFiltered
+          }
         });
       }
 }
