@@ -8,7 +8,7 @@ import { MatPaginator } from '@angular/material';
 @Injectable()
 export class EntitiesDataSource<Entity extends TEntity<Entity>> implements DataSource<Entity> {
 
-  private entitySubject = new BehaviorSubject<Entity[]>([]);
+  protected entitySubject = new BehaviorSubject<Entity[]>([]);
 
   constructor(private crudService: CrudService<Entity>) {
   }
