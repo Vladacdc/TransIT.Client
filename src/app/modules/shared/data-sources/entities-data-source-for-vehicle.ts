@@ -1,10 +1,9 @@
-import { Injectable } from '@angular/core';
 import { MatPaginator } from '@angular/material';
 import { EntitiesDataSource } from './entities-data-sourse';
 import { IssuelogService } from '../services/issuelog.service';
 import { IssueLog } from '../models/issuelog';
 
-@Injectable()
+
 export class EntitiesDataSourceForVehicle extends EntitiesDataSource<IssueLog> {
 
     private vehicleId: number;
