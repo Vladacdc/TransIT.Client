@@ -1,22 +1,3 @@
-  
-<!--       
-<input class="form-control"
-    placeholder="Start Date" 
-    [max]="maxDate"
-    [(ngModel)]="selectedMinDate"
-    [matDatepicker]="pickerStartDate" />
-<mat-datepicker-toggle matSuffix [for]="pickerStartDate"></mat-datepicker-toggle>
-<mat-datepicker #pickerStartDate></mat-datepicker> 
-
-<input class="form-control"
-    placeholder="End Date" 
-    [max]="maxDate"
-    [(ngModel)]="selectedMaxDate"
-    [matDatepicker]="pickerEndDate" />
-<mat-datepicker-toggle matSuffix [for]="pickerEndDate"></mat-datepicker-toggle> 
-<mat-datepicker #pickerEndDate></mat-datepicker>
--->
-
 <mat-form-field>
     <input matInput
         [matDatepicker]="startDatePicker"
@@ -38,13 +19,13 @@
 <button 
     type="button" 
     class="btn btn-primary"
-    (click)="reportVisibility=false;reportVisibility=true">
+    (click)="reportVisibility=true">
         Завантажити звіт
 </button>
 
-<ng-container  *ngIf="reportVisibility">
-<malfunction-group-report
-    [startDate]="getDate(selectedStartDate)"
-    [endDate]="getDate(selectedEndDate)"
-></malfunction-group-report>
+<ng-container *ngIf="reportVisibility">
+    <malfunction-group-report
+        [startDate]="getDate(selectedStartDate)"
+        [endDate]="getDate(selectedEndDate)">
+    </malfunction-group-report>
 </ng-container>
