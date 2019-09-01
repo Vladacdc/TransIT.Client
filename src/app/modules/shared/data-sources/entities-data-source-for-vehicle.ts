@@ -4,12 +4,11 @@ import { IssuelogService } from '../services/issuelog.service';
 import { IssueLog } from '../models/issuelog';
 import { Injectable } from '@angular/core';
 
-@Injectable()
 export class EntitiesDataSourceForVehicle extends EntitiesDataSource<IssueLog> {
 
     private vehicleId: number;
 
-    constructor(private issueLogService: IssuelogService, selectedVehicleId: number) {
+    constructor(@Injectable() private issueLogService: IssuelogService, selectedVehicleId: number) {
         super(issueLogService);
         this.vehicleId = selectedVehicleId;
     }
