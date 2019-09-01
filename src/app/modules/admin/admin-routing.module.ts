@@ -16,6 +16,7 @@ import { GlobalDocumentComponent } from '../shared/components/global-document/gl
 import { IssueLogComponent } from '../shared/components/issue-log/issue-log.component';
 import { SupplierComponent } from '../shared/components/supplier/supplier.component';
 import { LocationsComponent } from './component/locations/locations.component';
+import { PartsComponent } from './component/parts/parts.component';
 
 const routes: Routes = [
   {
@@ -42,6 +43,7 @@ const routes: Routes = [
       { path: 'posts', component: PostsComponent },
       { path: 'employees', component: EmployeesComponent },
       { path: 'locations', component: LocationsComponent},
+      { path: 'parts', component: PartsComponent },
       { path: '**', redirectTo: 'users' }
     ]
   }

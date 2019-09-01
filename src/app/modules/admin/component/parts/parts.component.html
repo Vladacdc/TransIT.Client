@@ -1,0 +1,24 @@
+<app-create-part (createPart)="addPart($event)"></app-create-part>
+
+<ng-template #actionsTemplate let-data="templateData">
+
+  <app-delete-part 
+   [part]="data"
+   (deletePart)="deletePart(data)" 
+ ></app-delete-part>
+
+  <app-edit-part
+   [part]="data"
+   (updatePart)="updatePart(data)"
+ ></app-edit-part>
+
+</ng-template>
+
+<div>
+ <mat-fsp-table #table
+   [columnDefinitions]="columnDefinitions"
+   [columnNames]="columnNames"
+   [dataSource]="dataSource"
+   [actionContentTemplate]="actionsTemplate">   
+ </mat-fsp-table>
+</div> 
