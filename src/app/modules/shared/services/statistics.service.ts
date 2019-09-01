@@ -50,10 +50,10 @@ export class StatisticsService {
 
     let httpParams = new HttpParams().set("malfunctionName", malfunction);
     if(startDate) {
-      httpParams = httpParams.set("startDate", startDate.toString());
+      httpParams = httpParams.set("startDate", startDate.toDateString());
     }
     if(endDate) {
-      httpParams = httpParams.set("endDate", endDate.toString());
+      httpParams = httpParams.set("endDate", endDate.toDateString());
     }
 
     return this.http.get<number[]>(
@@ -98,10 +98,10 @@ export class StatisticsService {
 
     let httpParams = new HttpParams().set("malfunctionSubgroupName", malfunctionSubgroupName);
     if(startDate) {
-      httpParams = httpParams.set("startDate", startDate.toString());
+      httpParams = httpParams.set("startDate", startDate.toDateString());
     }
     if(endDate) {
-      httpParams = httpParams.set("endDate", endDate.toString());
+      httpParams = httpParams.set("endDate", endDate.toDateString());
     }
     
     return this.http.get<Statistics[]>(
@@ -118,10 +118,10 @@ export class StatisticsService {
 
     let httpParams = new HttpParams();
     if(startDate) {
-      httpParams = httpParams.set("startDate", startDate.toString());
+      httpParams = httpParams.set("startDate", startDate.toDateString());
     }
     if(endDate) {
-      httpParams = httpParams.set("endDate", endDate.toString());
+      httpParams = httpParams.set("endDate", endDate.toDateString());
     }
 
     return this.http.get<Statistics[]>(`${this.serviceUrl}/allmalfunctiongroupsstatistics`, { 
@@ -137,10 +137,10 @@ export class StatisticsService {
 
     let httpParams = new HttpParams().set("malfunctionGroupName", malfunctionGroupName);
     if(startDate) {
-      httpParams = httpParams.set("startDate", startDate.toString());
+      httpParams = httpParams.set("startDate", startDate.toDateString());
     }
     if(endDate) {
-      httpParams = httpParams.set("endDate", endDate.toString());
+      httpParams = httpParams.set("endDate", endDate.toDateString());
     }
 
     return this.http.get<Statistics[]>(`${this.serviceUrl}/allmalfunctionsubgroupsstatistics`, { 

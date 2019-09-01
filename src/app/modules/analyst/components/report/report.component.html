@@ -21,7 +21,7 @@
     <input matInput
         [matDatepicker]="startDatePicker"
         placeholder="Початкова дата"
-        (change)="selectedStartDate=value"/>
+        [(ngModel)]="selectedStartDate"/>
     <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
     <mat-datepicker #startDatePicker></mat-datepicker>
 </mat-form-field>
@@ -30,7 +30,7 @@
     <input matInput
         [matDatepicker]="endDatePicker"
         placeholder="Кінцева дата"
-        (change)="selectedEndDate=value"/>
+        [(ngModel)]="selectedEndDate"/>
     <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
     <mat-datepicker #endDatePicker></mat-datepicker>
 </mat-form-field>
@@ -44,7 +44,7 @@
 
 <ng-container  *ngIf="reportVisibility">
 <malfunction-group-report
-    [startDate]="selectedStartDate"
-    [endDate]="selectedEndDate"
+    [startDate]="getDate(selectedStartDate)"
+    [endDate]="getDate(selectedEndDate)"
 ></malfunction-group-report>
 </ng-container>

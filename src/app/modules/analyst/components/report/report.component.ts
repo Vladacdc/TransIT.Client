@@ -16,4 +16,14 @@ export class ReportComponent {
     //this.selectedEndDate=new Date();
     //this.selectedStartDate=new Date("01.01.0001");
   }
+
+  getDate(value) {
+    if(value) {
+      return new Date(value);
+    }
+    else {
+      return null;
+    }
+  }
+
 }
