@@ -1,0 +1,29 @@
+<div [ngClass]="{show: control?.dirty || control?.touched}" class="validator">
+    <mat-error *ngIf="control.hasError('required')">
+        {{ 'ValidationErrors.required' | translate: {field: name} }}
+    </mat-error>
+
+    <mat-error *ngIf="control.hasError('email')">
+        {{ 'ValidationErrors.email' | translate: {field: name} }}
+    </mat-error>
+
+    <mat-error *ngIf="control.hasError('min')">
+        {{ 'ValidationErrors.min' | translate: {field: name, value: control?.getError('min')?.min} }}
+    </mat-error>
+
+    <mat-error *ngIf="control.hasError('max')">
+        {{ 'ValidationErrors.max' | translate: {field: name, value: control?.getError('max')?.max} }}
+    </mat-error>
+
+    <mat-error *ngIf="control.hasError('minlength')">
+        {{ 'ValidationErrors.minlength' | translate: {field: name, length: control?.getError('minlength')?.requiredLength} }}
+    </mat-error>
+
+    <mat-error *ngIf="control.hasError('maxlength')">
+        {{ 'ValidationErrors.maxlength' | translate: {field: name, length: control?.getError('maxlength')?.requiredLength} }}
+    </mat-error>
+
+    <mat-error *ngIf="control.hasError('pattern')">
+        {{ 'ValidationErrors.pattern' | translate: {field: name} }}
+    </mat-error>
+</div>

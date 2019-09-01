@@ -1,0 +1,27 @@
+{
+    "Core": {
+        "Login": {
+            "Login": "Login",
+            "Password": "Password",
+            "Enter": "Enter"
+        },
+        "Navbar": 
+        {
+            "SignOut": "Sign out"
+        },
+        "Error": {
+            "ConnectionError": {
+                "Title": "Connection Error",
+                "Text": "Can't connect to the server"
+            },
+            "ServerError": {
+                "Title": "Server Error",
+                "Text": "Could not process request. An error occurred on the server"
+            },
+            "SignInError": {
+                "Title": "Sign In Error",
+                "Text": "Invalid Login or Password"
+            }
+        }
+    }
+}
