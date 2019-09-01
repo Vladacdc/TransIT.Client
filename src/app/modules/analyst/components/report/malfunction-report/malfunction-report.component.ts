@@ -17,6 +17,9 @@ export class MalfunctionReportComponent implements OnInit {
   dataSource: MatTableDataSource<Statistics>;
   
   @Input("subgroupName") malfunctionSubgroupName: string;
+  @Input("startDate") startDate: Date;
+  @Input("endDate") endDate: Date;
+
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
@@ -37,7 +40,8 @@ export class MalfunctionReportComponent implements OnInit {
       });
     });
 
-    this.statisticsService.GetAllMalfunctionsStatistics(this.malfunctionSubgroupName).subscribe(data => {
+    this.statisticsService.GetAllMalfunctionsStatistics(this.malfunctionSubgroupName, this.startDate, this.endDate)
+    .subscribe(data => {
       let rows = [];
       data.forEach(row => {
         rows.push(CreateMatTableRowFromStatistics(row, this.displayedColumns));

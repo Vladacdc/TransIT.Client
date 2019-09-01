@@ -68,6 +68,7 @@ export class MatFspTableComponent implements OnInit {
       this.sort.direction,
       this.paginator.pageIndex,
       this.paginator.pageSize,
+      this.paginator
     );
   }
 }

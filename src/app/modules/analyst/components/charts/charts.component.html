@@ -1,0 +1,36 @@
+<ng-select
+  [items] = "malfunctions"
+  [clearable]="false"
+  bindLabel = "name"
+  placeholder = "Несправність"
+  notFoundText = "Не знайдено"
+  (change) = "selectMalfunction($event)">
+</ng-select>
+
+<div class="alert alert-warning" role="alert" *ngIf="!pieChartReady">
+  Виберіть несправність!
+</div>
+
+<div *ngIf="pieChartReady&&!pieChartHasNotData()">
+  <canvas baseChart
+    [data]="pieChartData"
+    [labels]="pieChartLabels"
+    [chartType]="pieChartType">
+  </canvas>
+</div>
+
+<div class="alert alert-warning" role="alert" *ngIf="pieChartHasNotData()">
+  Немає даних про такі несправності
+</div>
+
+<!--
+<div *ngIf="barChartReady">
+  <canvas baseChart
+    [datasets]="barChartData"
+    [labels]="barChartLabels"
+    [options]="barChartOptions"
+    [legend]="barChartLegend"
+    [chartType]="barChartType">
+  </canvas>
+</div>
+--> 

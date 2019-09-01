@@ -1,1 +1,31 @@
-<malfunction-group-report></malfunction-group-report>
+<mat-form-field>
+    <input matInput
+        [matDatepicker]="startDatePicker"
+        placeholder="Початкова дата"
+        [(ngModel)]="selectedStartDate"/>
+    <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
+    <mat-datepicker #startDatePicker></mat-datepicker>
+</mat-form-field>
+
+<mat-form-field>
+    <input matInput
+        [matDatepicker]="endDatePicker"
+        placeholder="Кінцева дата"
+        [(ngModel)]="selectedEndDate"/>
+    <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+    <mat-datepicker #endDatePicker></mat-datepicker>
+</mat-form-field>
+
+<button 
+    type="button" 
+    class="btn btn-primary"
+    (click)="reportVisibility=true">
+        Завантажити звіт
+</button>
+
+<ng-container *ngIf="reportVisibility">
+    <malfunction-group-report
+        [startDate]="getDate(selectedStartDate)"
+        [endDate]="getDate(selectedEndDate)">
+    </malfunction-group-report>
+</ng-container>
