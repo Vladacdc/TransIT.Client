@@ -24,6 +24,18 @@
       >
         <i class="fas fa-clipboard"></i> Звіт</a
       >
+      
+      <a
+        class="nav-item nav-link"
+        routerLinkActive="active"
+        routerLink="/analyst/charts"
+        routerLinkActive="active"
+        data-toggle="tab"
+        role="tab"
+        aria-selected="false"
+      >
+        <i class="fas fa-chart-pie"></i> Діаграми </a
+      >
 
       <a
         class="nav-item nav-link"
@@ -38,7 +50,7 @@
 
       <a
         class="nav-item nav-link"
-        routerLink="/analyst/document"
+        routerLink="/analyst/documents"
         routerLinkActive="active"
         data-toggle="tab"
         role="tab"
@@ -61,7 +73,7 @@
 
   <app-breadcrumb></app-breadcrumb>
 
-  <div class="tab-content ">
+  <div class="tab-content">
     <div class="tab-pane fade show active " role="tabpanel" aria-labelledby="nav-home-tab">
       <router-outlet></router-outlet>
     </div>

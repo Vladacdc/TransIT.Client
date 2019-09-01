@@ -7,6 +7,7 @@
 .selection {
   width: 90%;
   align-self: auto;
+  color: black;
 
   input {
     width: 100%;
@@ -58,6 +59,7 @@
 .buttonclose{
   color: red;
 }
+
 ::ng-deep datepicker-value-example .mat-form-field-label{
   color:red;
 }

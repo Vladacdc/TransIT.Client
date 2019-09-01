@@ -4,12 +4,17 @@ import { MultiTranslateHttpLoader } from 'ngx-translate-multi-http-loader';
 import { HttpClient } from '@angular/common/http';
 import { LanguageSelectComponent } from './language-select/language-select.component';
 import { CommonModule } from '@angular/common';
-import { MatSelectModule } from '@angular/material';
+import { MatSelectModule, DateAdapter } from '@angular/material';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
     return new MultiTranslateHttpLoader(httpClient, [
         {prefix: './assets/translate/core/', suffix: '.json'},
-        {prefix: './assets/translate/', suffix: '.json'}
+        {prefix: './assets/translate/', suffix: '.json'},
+        {prefix: './assets/translate/routing/', suffix: '.json'},
+        {prefix: './assets/translate/shared/filter-tab/', suffix: '.json'},
+        {prefix: './assets/translate/admin/parts/', suffix: '.json'},
+        {prefix: './assets/translate/shared/paginator-extentions/mat-paginator-intl-custom/', suffix: '.json'},
+        {prefix: './assets/translate/shared/components/tables/mat-fsp-table/', suffix: '.json'}
     ]);
   }
 
@@ -30,7 +35,9 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
 })
 
 export class LocalizationModule {
-    constructor(public translate: TranslateService) {
+    constructor(
+      public translate: TranslateService,
+      private adapter: DateAdapter<any>) {
         this.ConfigureTranslation();
     }
     private ConfigureTranslation() {
@@ -38,6 +45,7 @@ export class LocalizationModule {
         this.translate.setDefaultLang('uk');
         this.translate.onLangChange.subscribe((event: LangChangeEvent) => {
           localStorage.setItem('language', event.lang);
+          this.adapter.setLocale(event.lang);
         });
 
         let language = this.translate.getDefaultLang();

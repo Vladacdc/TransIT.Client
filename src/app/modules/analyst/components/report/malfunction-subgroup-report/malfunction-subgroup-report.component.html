@@ -13,9 +13,12 @@
     <ng-container matColumnDef="expandedDetail">
       <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
         <div class="example-element-detail"
-             [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
-            <malfunction-report [subgroupName] = "getCurrentSubgroup(element)"></malfunction-report>
-
+            [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+            <malfunction-report 
+              [subgroupName]="getCurrentSubgroup(element)"
+              [startDate]="startDate"
+              [endDate]="endDate">
+            </malfunction-report>
         </div>
       </td>
     </ng-container>

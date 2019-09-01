@@ -53,7 +53,9 @@ import { MatDatepickerModule,
          MatSortModule,
          MatProgressSpinnerModule,
          MatIconModule,
-         MAT_DATE_LOCALE} from '@angular/material';
+         MAT_DATE_LOCALE,
+         DateAdapter,
+         MAT_DATE_FORMATS} from '@angular/material';
 
 import {MatSelectModule} from '@angular/material/select';
 import {MatButtonModule} from '@angular/material/button';
@@ -68,7 +70,10 @@ import { CreateWorkTypeComponent } from './components/dictionaries/workType/crea
 import { EditWorkTypeComponent } from './components/dictionaries/workType/edit-work-type/edit-work-type.component';
 import { DeleteWorkTypeComponent } from './components/dictionaries/workType/delete-work-type/delete-work-type.component';
 import { EntitiesDataSourceForVehicle } from './data-sources/entities-data-source-for-vehicle';
-
+import { PartService } from './services/part.service';
+import { ManufacturerService } from './services/manufacturer.service';
+import { UnitService } from './services/unit.service';
+import { MomentDateAdapter, MAT_MOMENT_DATE_FORMATS } from '@angular/material-moment-adapter';
 
 @NgModule({
   declarations: [
@@ -160,7 +165,14 @@ import { EntitiesDataSourceForVehicle } from './data-sources/entities-data-sourc
     EntitiesDataSource,
     EntitiesDataSourceForVehicle,
     WorkTypeService,
-    {provide: MAT_DATE_LOCALE, useValue: 'uk-UA'}
+    PartService,
+    ManufacturerService,
+    UnitService,
+    {provide: MAT_DATE_LOCALE, useValue: localStorage.getItem('language')},
+    {provide: DateAdapter, useClass: MomentDateAdapter, deps: [MAT_DATE_LOCALE]},
+    {provide: MAT_DATE_FORMATS, useValue: MAT_MOMENT_DATE_FORMATS},
+
   ]
 })
-export class SharedModule {}
+export class SharedModule {
+}

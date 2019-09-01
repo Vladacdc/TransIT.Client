@@ -1,3 +1,4 @@
+// tslint:disable: max-line-length
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
@@ -12,7 +13,6 @@ import { MalfuncComponent } from './component/malfunctions/malfunc/malfunc.compo
 import { MalfuncGroupComponent } from './component/malfunctions/malfunc-group/malfunc-group.component';
 import { MalfunSubgroupComponent } from './component/malfunctions/malfun-subgroup/malfun-subgroup.component';
 import { CoreModule } from '../core/core.module';
-import { AdminNavbarComponent } from './component/admin/admin-navbar/admin-navbar.component';
 import { CreateVehicleComponent } from './component/vehicles/create-vehicle/create-vehicle.component';
 import { EditVehicleComponent } from './component/vehicles/edit-vehicle/edit-vehicle.component';
 import { DeleteVehicleComponent } from './component/vehicles/delete-vehicle/delete-vehicle.component';
@@ -74,11 +74,14 @@ import { DeleteLocationComponent } from './component/locations/delete-location/d
 import { MatTableModule, MatInputModule, MatFormFieldModule, MatPaginatorModule, MatSortModule } from '@angular/material';
 import { InfoVehicleComponent } from './component/vehicles/info-vehicle/info-vehicle.component';
 import { MatFspTableComponent } from '../shared/components/tables/mat-fsp-table/mat-fsp-table.component';
+import { PartsComponent } from './component/parts/parts.component';
+import { CreatePartComponent } from './component/parts/create-part/create-part.component';
+import { EditPartComponent } from './component/parts/edit-part/edit-part.component';
+import { DeletePartComponent } from './component/parts/delete-part/delete-part.component';
 
 @NgModule({
   declarations: [
     AdminComponent,
-    AdminNavbarComponent,
     // ====User===
     UsersComponent,
     CreateUserComponent,
@@ -137,7 +140,11 @@ import { MatFspTableComponent } from '../shared/components/tables/mat-fsp-table/
     LocationsComponent,
     CreateLocationComponent,
     EditLocationComponent,
-    DeleteLocationComponent
+    DeleteLocationComponent,
+    PartsComponent,
+    CreatePartComponent,
+    EditPartComponent,
+    DeletePartComponent
   ],
   exports: [AdminComponent],
   imports: [

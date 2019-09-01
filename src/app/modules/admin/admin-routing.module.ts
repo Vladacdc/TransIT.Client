@@ -20,6 +20,7 @@ import { InfoVehicleComponent } from './component/vehicles/info-vehicle/info-veh
 import { WorkTypeComponent } from '../shared/components/dictionaries/workType/work-type.component';
 import { EditVehicleComponent } from './component/vehicles/edit-vehicle/edit-vehicle.component';
 import { DeleteVehicleComponent } from './component/vehicles/delete-vehicle/delete-vehicle.component';
+import { PartsComponent } from './component/parts/parts.component';
 
 const routes: Routes = [
   {
@@ -48,6 +49,7 @@ const routes: Routes = [
       { path: 'employees', component: EmployeesComponent },
       { path: 'locations', component: LocationsComponent},
       { path: 'workTypes', component: WorkTypeComponent},
+      { path: 'parts', component: PartsComponent },
       { path: '**', redirectTo: 'users' }
     ]
   }

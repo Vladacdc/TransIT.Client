@@ -7,7 +7,6 @@ import { StatisticsService, CreateMatTableRowFromStatistics } from 'src/app/modu
 import { Statistics } from 'src/app/modules/shared/models/statistics';
 import { trigger, style, state, transition, animate } from '@angular/animations';
 
-
 @Component({
   selector: 'malfunction-subgroup-report',
   templateUrl: './malfunction-subgroup-report.component.html',
@@ -28,11 +27,11 @@ export class MalfunctionSubgroupReportComponent implements OnInit {
   expandedElement: any | null;
   
   @Input("groupName") malfunctionGroupName: string;
+  @Input("startDate") startDate: Date;
+  @Input("endDate") endDate: Date;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
-  
-  
 
   constructor(
       private statisticsService: StatisticsService,
@@ -49,7 +48,8 @@ export class MalfunctionSubgroupReportComponent implements OnInit {
       });
     });
 
-    this.statisticsService.GetAllMalfunctionSubgroupsStatistics(this.malfunctionGroupName).subscribe(data => {
+    this.statisticsService.GetAllMalfunctionSubgroupsStatistics(this.malfunctionGroupName, this.startDate, this.endDate)
+    .subscribe(data => {
       let rows = [];
       data.forEach(row => {
         rows.push(CreateMatTableRowFromStatistics(row, this.displayedColumns));

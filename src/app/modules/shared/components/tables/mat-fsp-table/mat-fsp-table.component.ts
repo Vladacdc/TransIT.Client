@@ -5,6 +5,7 @@ import { EntitiesDataSource } from '../../../data-sources/entities-data-sourse';
 import { fromEvent, merge } from 'rxjs';
 import { debounceTime, distinctUntilChanged, tap } from 'rxjs/operators';
 import { MatPaginatorIntlCustom } from '../../../paginator-extentions/mat-paginator-intl-custom';
+import { TranslateService, TranslateDefaultParser } from '@ngx-translate/core';
 
 @Component({
   selector: 'mat-fsp-table',
@@ -23,12 +24,12 @@ export class MatFspTableComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild('input') input: ElementRef;
 
-  constructor() {
+  constructor(private translate: TranslateService) {
   }
 
   ngOnInit() {
     this.columnsToDisplay = this.columnDefinitions;
-    this.paginator._intl = new MatPaginatorIntlCustom();
+    this.paginator._intl = new MatPaginatorIntlCustom(this.translate, new TranslateDefaultParser());
     this.dataSource.loadEntities(
       '',
       null,
@@ -67,6 +68,7 @@ export class MatFspTableComponent implements OnInit {
       this.sort.direction,
       this.paginator.pageIndex,
       this.paginator.pageSize,
+      this.paginator
     );
   }
 }
