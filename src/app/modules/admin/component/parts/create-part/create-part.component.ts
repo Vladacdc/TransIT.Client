@@ -71,6 +71,10 @@ export class CreatePartComponent implements OnInit {
     };
 
     this.service.addEntity(part).subscribe(newGroup => this.createPart.next(newGroup));
+    this.closeCreateModalClick();
+  }
+
+  private closeCreateModalClick() {
     this.closeCreateModal.nativeElement.click();
   }
 }

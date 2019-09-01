@@ -19,7 +19,7 @@ export class EditPartComponent implements OnInit {
   units: Array<Unit>;
   partForm: FormGroup;
 
-   @ViewChild('close') closeDiv: ElementRef;
+  @ViewChild('close') closeDiv: ElementRef;
   @Output() updatePart = new EventEmitter<Part>();
   @Input()
   set part(part: Part) {
@@ -82,6 +82,10 @@ export class EditPartComponent implements OnInit {
       },
       error => this.toast.error('Помилка редагування')
     );
+    this.closeDivClick();
+  }
+
+  private closeDivClick() {
     this.closeDiv.nativeElement.click();
   }
 
