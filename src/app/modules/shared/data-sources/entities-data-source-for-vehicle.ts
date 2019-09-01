@@ -2,7 +2,7 @@ import { MatPaginator } from '@angular/material';
 import { EntitiesDataSource } from './entities-data-sourse';
 import { IssuelogService } from '../services/issuelog.service';
 import { IssueLog } from '../models/issuelog';
-import { Injectable } from '@angular/core/src/di/injectable';
+import { Injectable } from '@angular/core';
 
 @Injectable()
 export class EntitiesDataSourceForVehicle extends EntitiesDataSource<IssueLog> {
