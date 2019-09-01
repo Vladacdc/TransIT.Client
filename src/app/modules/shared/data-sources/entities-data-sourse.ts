@@ -8,53 +8,47 @@ import { MatPaginator } from '@angular/material';
 @Injectable()
 export class EntitiesDataSource<Entity extends TEntity<Entity>> implements DataSource<Entity> {
 
-    protected entitySubject = new BehaviorSubject<Entity[]>([]);
-    // private loadingSubject = new BehaviorSubject<boolean>(false);
+  private entitySubject = new BehaviorSubject<Entity[]>([]);
 
-    // public loading$ = this.loadingSubject.asObservable();
+  constructor(private crudService: CrudService<Entity>) {
+  }
 
+  connect(collectionViewer: CollectionViewer): Observable<Entity[]> {
+    return this.entitySubject.asObservable();
+  }
 
-    constructor(private crudService: CrudService<Entity>) {
-    }
+  disconnect(collectionViewer: CollectionViewer): void {
+    this.entitySubject.complete();
+  }
 
-    connect(collectionViewer: CollectionViewer): Observable<Entity[]> {
-      return this.entitySubject.asObservable();
-    }
+  loadEntities(
+    filter: string = '',
+    sorting: string = null,
+    pageIndex: number = 0,
+    pageSize: number = 5,
+    paginator: MatPaginator = null) {
 
-    disconnect(collectionViewer: CollectionViewer): void {
-      this.entitySubject.complete();
-      // this.loadingSubject.complete();
-    }
-
-    loadEntities(
-      filter: string = '',
-      sorting: string = null,
-      pageIndex: number = 0,
-      pageSize: number = 3,
-      paginator: MatPaginator = null) {
-
-      this.crudService.getFilteredEntities({// this strange format needs on backend
-        start: pageSize * pageIndex,
-        length: pageSize,
-        search: {value: filter},
-
-        order: [{column: 0, dir: 'desc'}],
-          /*draw: 1,
-          columns: [
-            {data: 'name',name:"",orderable: true},
-            {data: 'fullName',name:"",orderable: true},
-            {data: 'edrpou',name:"",orderable: true},
-          ],
-          */
-      }).subscribe(entities => {
-        this.entitySubject.next(entities.data);
-        if (paginator) {
-          if (filter == '') {
-            paginator.length = entities.recordsTotal;
-          } else {
-            paginator.length = entities.recordsFiltered;
-          }
+    this.crudService.getFilteredEntities({
+      start: pageSize * pageIndex,
+      length: pageSize,
+      search: {value: filter},
+      order: [{column: 0, dir: "desc"}],
+        /*draw: 1,
+        columns: [
+          {data: 'name',name:"",orderable: true},
+          {data: 'fullName',name:"",orderable: true},
+          {data: 'edrpou',name:"",orderable: true},
+        ],
+        */
+    }).subscribe(entities => {
+      this.entitySubject.next(entities.data);
+      if (paginator) {
+        if (filter == '') {
+          paginator.length = entities.recordsTotal;
+        } else {
+          paginator.length = entities.recordsFiltered;
         }
-      });
-    }
+      }
+    });
+  }
 }
