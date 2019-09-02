@@ -1,0 +1,27 @@
+<button class="btn" data-toggle="modal" data-target="#deleteUnit">
+  <i class="fas fas fa-trash-alt"></i>
+</button>
+
+<div class="modal fade" id="deleteUnit" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">
+          <i class="fas fa-exclamation-triangle color-red"></i> {{'Unit.Delete.Title'| translate}}
+        </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        {{'Unit.Delete.Text'| translate}}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal"
+          #close>{{'Core.FormButtons.Cancel' | translate}}</button>
+        <button type="button" class="btn btn-danger" (click)="clickSubmit()">{{'Core.FormButtons.Delete' | translate}}</button>
+      </div>
+    </div>
+  </div>
+</div>

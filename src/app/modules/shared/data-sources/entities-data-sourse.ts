@@ -1,4 +1,4 @@
-import {CollectionViewer, DataSource} from "@angular/cdk/collections";
+import {CollectionViewer, DataSource} from '@angular/cdk/collections';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { CrudService } from '../../core/services/crud.service';
@@ -8,8 +8,8 @@ import { MatPaginator } from '@angular/material';
 @Injectable()
 export class EntitiesDataSource<Entity extends TEntity<Entity>> implements DataSource<Entity> {
 
-  private entitySubject = new BehaviorSubject<Entity[]>([]);
-  
+  protected entitySubject = new BehaviorSubject<Entity[]>([]);
+
   constructor(private crudService: CrudService<Entity>) {
   }
 

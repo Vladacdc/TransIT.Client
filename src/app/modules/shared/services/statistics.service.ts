@@ -11,7 +11,7 @@ export class StatisticsService {
   protected readonly serviceUrl = `${environment.apiUrl}/statistics`;
   protected readonly datatableUrl = `${environment.apiUrl}/datatable/statistics`;
 
-  
+
   constructor(protected http: HttpClient, protected spinner: SpinnerService) {}
 
   countMalfunctionGroup(malfunction: string, vehicle: string): Observable<number> {
@@ -22,7 +22,7 @@ export class StatisticsService {
           tap(data => this.handleSuccess('fetched data', data)),
           catchError(this.handleError())
       );
-    
+
   }
 
   countMalfunctionSubGroup(malfunction: string, vehicle: string): Observable<number> {
@@ -34,7 +34,7 @@ export class StatisticsService {
         catchError(this.handleError())
       );
   }
-  
+
   countMalfunction(malfunction: string, vehicle: string): Observable<number> {
     this.spinner.show();
     return this.http.get<number>(
@@ -167,9 +167,8 @@ export class StatisticsService {
   }
 }
 
-export function CreateMatTableRowFromStatistics(statistics: Statistics, columns: string[]): {}
-{
-  let dict = {};
+export function CreateMatTableRowFromStatistics(statistics: Statistics, columns: string[]): {} {
+  const dict = {};
   let i = 0;
   dict[columns[i]] = statistics.fieldName;
   statistics.statistics.forEach(num => {

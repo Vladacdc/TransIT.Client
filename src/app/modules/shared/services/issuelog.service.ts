@@ -25,7 +25,33 @@ export class IssuelogService extends CrudService<IssueLog> {
     );
   }
 
+  // getFilteredEntitiesByVehicleId(id: number | string, params: any): Observable<Array<IssueLog>> {
+  //   return this.http.post<any>(`${environment.apiUrl}/datatable/issue/${id}/issuelog`, params, {}).pipe(
+  //     map(response => ({ ...response, data: response.data.map(d => this.mapEntity(d)) })),
+  //     catchError(this.handleError())
+  //   );
+  // }
+
   protected mapEntity(entity: IssueLog): IssueLog {
-    return new IssueLog(entity);
+    const issuelog = new IssueLog(entity);
+    if (entity.actionType) {
+      issuelog.actionTypeName = entity.actionType.name;
+    }
+    if (entity.workType) {
+      issuelog.workTypeName = entity.workType.name;
+    }
+    if (entity.issue) {
+      issuelog.issueName = entity.issue.summary;
+    }
+    if (entity.newState) {
+      issuelog.newStateName = entity.newState.transName;
+    }
+    if (entity.oldState) {
+      issuelog.oldStateName = entity.oldState.transName;
+    }
+    if (entity.supplier) {
+      issuelog.supplierName = entity.supplier.name;
+    }
+    return issuelog;
   }
 }

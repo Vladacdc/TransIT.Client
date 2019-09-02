@@ -1,0 +1,13 @@
+<app-work-type-create (createWorkType)="addWorkType($event)"></app-work-type-create>
+<ng-template #actionsTemplate let-data="templateData">
+
+    <app-work-type-delete [workType]="data" (deleteWorkType)="deleteWorkType(data)"></app-work-type-delete>
+
+    <app-work-type-edit [workType]="data" (updateWorkType)="updateWorkType(data)"></app-work-type-edit>
+
+</ng-template>
+
+<div>
+    <mat-fsp-table #table [columnDefinitions]="columnDefinitions" [columnNames]="columnNames" [dataSource]="dataSource" [actionContentTemplate]="actionsTemplate">
+    </mat-fsp-table>
+</div>

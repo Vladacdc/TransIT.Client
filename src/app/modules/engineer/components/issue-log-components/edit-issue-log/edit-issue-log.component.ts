@@ -14,6 +14,8 @@ import { Document } from 'src/app/modules/shared/models/document';
 import { TransitionService } from 'src/app/modules/shared/services/transition.service';
 import { Issue } from 'src/app/modules/shared/models/issue';
 import { EmployeeService } from 'src/app/modules/shared/services/employee.service';
+import { WorkTypeService } from 'src/app/modules/shared/services/work-type.service';
+import { WorkType } from 'src/app/modules/shared/models/work-type';
 
 @Component({
   selector: 'app-edit-issue-log',
@@ -26,6 +28,7 @@ export class EditIssueLogComponent implements OnInit {
   suppliers: Array<Supplier>;
   users: Array<Employee>;
   issueLogForm: FormGroup;
+  workTypes: Array<WorkType>;
 
   documents: Array<Document> = new Array<Document>();
   existingDocuments: Array<Document> = new Array<Document>();
@@ -45,6 +48,7 @@ export class EditIssueLogComponent implements OnInit {
     private supplierService: SupplierService,
     private documentService: DocumentService,
     private employeeService: EmployeeService,
+    private workTypeService: WorkTypeService,
     private toast: ToastrService
   ) {
     this.documents = new Array<Document>();
@@ -60,7 +64,8 @@ export class EditIssueLogComponent implements OnInit {
         state: new FormControl(null),
         deadLine: new FormControl(null),
         assignedTo: new FormControl(null)
-      })
+      }),
+      workType: new FormControl(null,Validators.required)
     });
   }
 
@@ -76,6 +81,7 @@ export class EditIssueLogComponent implements OnInit {
     }
     this.supplierService.getEntities().subscribe(suppliers => this.suppliers = suppliers);
     this.employeeService.getEntities().subscribe(employees => this.users = employees);
+    this.workTypeService.getEntities().subscribe(workTypes => this.workTypes = workTypes);
     this.loadActionTypes();
   }
 
