@@ -1,6 +1,9 @@
 .prepend {
   height: 60px;
 }
+nav {
+  z-index: 1 !important;
+}
 
 .nav-link.login {
   color: rgba(0, 0, 0, 0.7);

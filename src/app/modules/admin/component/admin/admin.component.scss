@@ -3,14 +3,67 @@
 //   padding-bottom: 2rem;
 // }
 
-@media screen and (min-width: 768px) {
-  .page {
-    margin-top: 1rem;
-  }
-}
+// @media screen and (min-width: 768px) {
+//   .page {
+//     margin-top: 1rem;
+//   }
+// }
 .border {
   background: #f8f9fa;
   padding: 1rem 1rem;
   border-top-left-radius: 0.7rem;
   border-top-right-radius: 0.7rem;
+}
+
+.page-wrapper {
+
+  .page-content {
+    display: inline-block;
+    width: 100%;
+    padding-top: 0px;
+    transition: padding-left .3s ease;
+
+    @media screen and (min-width: 768px) {
+      padding-left: 300px;
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 998;
+      background: #000;
+      opacity: .5;
+      display: none;
+
+      &.show {
+
+        @media screen and (max-width: 768px) {
+          display: block;
+        }
+      }
+    }
+  }
+
+  .sidebar {
+    left: 0px;
+  }
+
+  &.toggled {
+
+    .page-content {
+      padding-left: 0;
+    }
+  }
+
+  .attribution{
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    padding: 5px;
+    margin: 5px;
+    letter-spacing: 1px;
+  }
 }

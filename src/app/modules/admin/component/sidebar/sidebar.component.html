@@ -1,0 +1,83 @@
+<nav id="sidebar" class="sidebar" [style.left]="value" [ngClass]="{'sidebar-bg' : hasBackgroundImage()}">
+  <div class="sidebar-content">
+    <perfect-scrollbar>
+      <div class="sidebar-profile">
+        <!-- <div class="user-pic">
+          <img class="img-responsive img-rounded" src="assets/img/user.jpg" alt="User picture">
+        </div> -->
+        <div class="user-info">
+          <span class="user-name">
+            {{ userLogin }}
+          </span>
+          <span class="user-role">Administrator</span>
+          <span class="user-status">
+            <i class="fa fa-circle"></i>
+            <span>Online</span>
+          </span>
+        </div>
+      </div>
+      <div class="sidebar-menu" style="padding-bottom: 0px;">
+          <div class="d-md-flex" style="padding-left: 20px;">
+              <app-language-select></app-language-select>
+          </div>
+      </div>
+      <div class="sidebar-menu">
+          <div class="d-md-flex ">
+              <nav class="nav flex-column " id="nav-tab" role="tablist">
+                <a class="nav-item nav-link" routerLink="/admin/users" routerLinkActive="active" data-toggle="tab" role="tab">
+                  <i class="fas fa-users"></i> Користувачі
+                </a>
+                <a class="nav-item nav-link" routerLink="/admin/vehicles" routerLinkActive="active" data-toggle="tab" role="tab">
+                  <i class="fas fa-bus"></i> Транспорт
+                </a>
+                <a class="nav-item nav-link"
+                   routerLink="/admin/vehicle-types"
+                   routerLinkActive="active"
+                   data-toggle="tab"
+                   role="tab">
+                  <i class="fas fa-truck-monster column"></i> Типи транспорту
+                </a>
+                <a class="nav-item nav-link"
+                   routerLink="/admin/malfunctions"
+                   routerLinkActive="active"
+                   data-toggle="tab"
+                   role="tab">
+                  <i class="fas fa-exclamation-triangle"></i> Несправності
+                </a>
+                <a class="nav-item nav-link" routerLink="/admin/actions" routerLinkActive="active" data-toggle="tab" role="tab">
+                  <i class="fas fa-file-contract"></i>  Дії
+                </a>
+                <a class="nav-item nav-link" routerLink="/admin/supplier" routerLinkActive="active" data-toggle="tab" role="tab">
+                  <i class="fas fa-people-carry"></i> Постачальники
+                </a>
+                <a class="nav-item nav-link" routerLink="/admin/documents" routerLinkActive="active" data-toggle="tab" role="tab">
+                  <i class="fa fa-folder-open"></i> Документи
+                </a>
+                <a class="nav-item nav-link"
+                   routerLink="/admin/dictionary"
+                   routerLinkActive="active"
+                   data-toggle="tab"
+                   role="tab">
+                  <i class="fas fa-book"></i> Довідники
+                </a>
+                <a class="nav-item nav-link" routerLink="/admin/employees" routerLinkActive="active" data-toggle="tab" role="tab">
+                  <i class="fas fa-user-cog"></i> Працівники
+                </a>
+                <a class="nav-item nav-link" routerLink="/admin/posts" routerLinkActive="active" data-toggle="tab" role="tab">
+                  <i class="fas fa-address-card"></i> Посади
+                </a>
+                <a class="nav-item nav-link" routerLink="/admin/locations" routerLinkActive="active" data-toggle="tab" role="tab">
+                  <i class="fas fa-map-marked-alt"></i> Місцезнаходження
+                </a>
+                <a class="nav-item nav-link" routerLink="/admin/parts" routerLinkActive="active" data-toggle="tab" role="tab">
+                  <i class="fas fa-cogs"></i> Запчастини
+                </a>
+              </nav>
+            </div>
+      </div>
+    </perfect-scrollbar>
+  </div>
+  <div class="sidebar-footer">
+    <div></div>
+  </div>
+</nav>

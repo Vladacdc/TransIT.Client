@@ -7,7 +7,8 @@
         },
         "Navbar": 
         {
-            "SignOut": "Вихід"
+            "SignOut": "Вихід",
+            "Collapse": "Згорнути"
         },
         "Error": {
             "ConnectionError": {
