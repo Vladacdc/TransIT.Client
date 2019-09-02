@@ -24,6 +24,18 @@
                 "Title": "Sign In Error",
                 "Text": "Invalid Login or Password"
             }
+        },
+        "FormButtons": {
+            "Cancel": "Cancel",
+            "Create": "Create",
+            "Delete": "Delete",
+            "Save": "Save"
+        },
+        "Toasts": {
+            "Deleted": "Deleted",
+            "Created": "Created",
+            "Error": "Error",
+            "Updated": "Updated"
         }
     }
 }

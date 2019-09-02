@@ -13,7 +13,7 @@ export class CurrencyComponent implements OnInit {
   currencies: Currency[];
   currency: Currency;
   @Input() isVisible: boolean;
-  
+
   constructor(private service: CurrencyService) {}
 
   readonly options = new DatatableSettings({

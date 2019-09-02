@@ -1,0 +1,37 @@
+<button class="first btn" data-toggle="modal" data-target="#editWorkType">
+    <i class="fas fa-edit"></i>
+  </button>
+
+
+<div class="modal fade" id="editWorkType" tabindex="-1" vehicleType="dialog" aria-labelledby="editWorkType" aria-hidden="true">
+    <div class="modal-dialog" vehicleType="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Редагувати тип роботи</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="workTypeForm">
+                    <div class="form-group">
+                        <label class="required-field">Коротка назва</label>
+                        <input type="text" class="form-control" formControlName="name" autocomplete="off" />
+                    </div>
+                    <div class="form-group">
+                        <label class="required-field">Орієнтовний час (в годинах)</label>
+                        <input type="text" class="form-control" formControlName="estimatedTime" autocomplete="off" />
+                    </div>
+                    <div class="form-group">
+                        <label class="required-field">Орієнтовна вартість</label>
+                        <input type="text" class="form-control" formControlName="estimatedCost" autocomplete="off" />
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button #close type="button" class="btn btn-secondary" data-dismiss="modal" (click)="resetForm()">Скасувати</button>
+                <button type="button" class="btn btn-primary" (click)="updateData()" [disabled]="workTypeForm.invalid">Зберегти</button>
+            </div>
+        </div>
+    </div>
+</div>

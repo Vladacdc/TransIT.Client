@@ -1,0 +1,25 @@
+<app-create-manufacturer (createManufacturer)="addManufacturer($event)"></app-create-manufacturer>
+
+<ng-template #actionsTemplate let-data="templateData">
+
+<app-delete-manufacturer
+    [manufacturer]="data"
+    (deleteManufacturer)="deleteManufacturer($event)" 
+></app-delete-manufacturer>
+
+<app-edit-manufacturer
+    [manufacturer]="data"
+    (updateManufacturer)="updateManufacturer($event)"
+></app-edit-manufacturer>
+
+</ng-template>
+
+<div>
+    <mat-fsp-table #table
+        [columnDefinitions]="columnDefinitions"
+        [columnNames]="columnNames"
+        [dataSource]="dataSource"
+        [actionContentTemplate]="actionsTemplate">   
+    </mat-fsp-table>
+</div>
+
