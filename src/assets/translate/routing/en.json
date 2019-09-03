@@ -1,0 +1,20 @@
+{
+    "Routing": {
+        "users": "Users",
+        "vehicles": "Vehicles",
+        "vehicle-types": "Vehicle Types",
+        "malfunctions": "Malfunctions",
+        "actions": "Actions",
+        "supplier": "Suppliers",
+        "documents": "Documents",
+        "dictionary": "Dictionary",
+        "employees": "Employees",
+        "posts": "Posts",
+        "locations": "Locations",
+        "edit": "Edit",
+        "issue-logs": "History",
+        "issues": "Issues",
+        "report": "Report",
+        "workTypes": "Work Types"
+    }
+}

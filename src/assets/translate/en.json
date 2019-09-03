@@ -1,0 +1,18 @@
+{
+    "Loading": "Loading",
+    "ValidationErrors": {
+        "required": "This field is required.",
+        "minlength": "Minimum length - {{length}}",
+        "maxlength": "Maximum length - {{length}}",
+        "minvalue": "Minimum value - {{value}}",
+        "maxvalue": "Maximum value - {{value}}",
+        "matchPassword": "Passwords are not equal.",
+        "pattern": "Incorrect input format",
+        "OnlyLatinAndNumbers": "Only latin letters and numbers allowed",
+        "OnlyNumbers": "Only numbers allowed",
+        "OnlyLettersAndNumbers": "Only letters and numbers allowed",
+        "NameFieldFormat": "Only letters (hyphens and apostrophes only inside) are allowed",
+        "email": "Incorrect email format",
+        "uniqueViolation": "This value alredy exist {{value}}. Try another"
+    }
+}

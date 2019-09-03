@@ -1,0 +1,13 @@
+{
+    "FilterTab": {
+        "StartDate": "Start Date",
+        "EndDate": "End Date",
+        "Priority": "Priority",
+        "VehicleType": "Vehicle Type",
+        "Location": "Location",
+        "Status": "Status",
+        "Group": "Malfunction Group",
+        "Subgroup": "Malfuction Subgroup",
+        "Malfunction": "Malfunction"
+    }
+}

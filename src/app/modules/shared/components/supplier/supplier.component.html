@@ -1,13 +1,13 @@
-<div class="table-background border">
-  <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#globalModal">
-    <i class="fas fa-user-plus"></i> Створити постачальника
-  </button>
-  <app-global-modal (outputEntity)="addItem($event)" *ngIf="isVisible"></app-global-modal>
-  <app-global-modal [entity]="supplier" (outputEntity)="deleteSupplier($event)" *ngIf="isVisible"></app-global-modal>
-  <app-global-modal [entity]="supplier" (outputEntity)="updateSupplier($event)" *ngIf="isVisible"></app-global-modal>
-  <p></p>
-  <div>
-    <table id="supplier-table" class="table table-bordered  table-hover" style="width:100%;"></table>
-  </div>
-</div>
+<app-create-supplier (createSupplier)="addSupplier($event)"></app-create-supplier>
+<ng-template #actionsTemplate let-data="templateData">
 
+    <app-delete-supplier [supplier]="data" (deleteSupplier)="deleteSupplier(data)"></app-delete-supplier>
+
+    <app-edit-supplier [supplier]="data" (updateSupplier)="updateSupplier(data)"></app-edit-supplier>
+
+</ng-template>
+
+<div>
+    <mat-fsp-table #table [columnDefinitions]="columnDefinitions" [columnNames]="columnNames" [dataSource]="dataSource" [actionContentTemplate]="actionsTemplate">
+    </mat-fsp-table>
+</div>

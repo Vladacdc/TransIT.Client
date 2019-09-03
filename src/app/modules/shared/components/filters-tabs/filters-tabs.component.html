@@ -1,87 +1,144 @@
 <div class="borderFilterTab">
+
   <div class="block">
-    <div>  
-       <div class="date-selection">
-         <input class="form-control"
-                placeholder="Start Date" 
-                [max]="maxDate"
-                [(ngModel)]="selectedMinDate"
-                [matDatepicker]="pickerStartDate" />
-         <mat-datepicker-toggle matSuffix [for]="pickerStartDate"></mat-datepicker-toggle>
-         <mat-datepicker #pickerStartDate></mat-datepicker> 
-       </div>
 
-       <div class="date-selection">
-         <input class="form-control"
-                placeholder="End Date" 
-                [max]="maxDate"
-                [(ngModel)]="selectedMaxDate"
-                [matDatepicker]="pickerEndDate" />
-         <mat-datepicker-toggle matSuffix [for]="pickerEndDate"></mat-datepicker-toggle> 
-         <mat-datepicker #pickerEndDate></mat-datepicker>
-       </div>
-      <ng-select
-        [items] = "priorityList"
-        placeholder = "Виберіть пріорітет"
-        notFoundText = "Не знайдено"
-        (change) = "selectPriority($event)"
-      ></ng-select>
+    <div class="column">
+      <mat-form-field class="selection">
+        <input matInput 
+          [matDatepicker]="pickerStartDate" 
+          placeholder= "{{'FilterTab.StartDate' | translate}}"
+          [max]="maxDate"
+          [(ngModel)]="selectedMinDate">
+        <mat-datepicker-toggle matSuffix [for]="pickerStartDate"></mat-datepicker-toggle>
+        <mat-datepicker #pickerStartDate></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field class="selection">
+        <input matInput 
+          [matDatepicker]="pickerEndDate" 
+          placeholder="{{'FilterTab.EndDate' | translate}}"
+          [max]="maxDate"
+          [(ngModel)]="selectedMaxDate">
+        <mat-datepicker-toggle matSuffix [for]="pickerEndDate"></mat-datepicker-toggle>
+        <mat-datepicker #pickerEndDate></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field class="selection">
+        <mat-select 
+          placeholder="{{'FilterTab.Priority' | translate}}"
+          [(value)]="selectedPriority1"
+          (selectionChange)="selectPriority($event.value);">
+          <mat-option *ngFor="let priority of priorityList" [value]="priority">{{priority}}</mat-option>
+        </mat-select>
+        <button mat-button *ngIf="selectedPriority1" matSuffix mat-icon-button aria-label="Clear" 
+          (click)="selectedPriority1=undefined; 
+          selectPriority('');
+          $event.stopPropagation()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+
     </div>
-    <div>
-      <ng-select
-        [items] = "vehicleTypeList"
-        bindLabel = "name"
-        placeholder = "Виберіть тип транспорту"
-        notFoundText = "Не знайдено"
-        (change) = "selectVechicleType($event)"
-      ></ng-select>
-      <ng-select
-        [items] = "locationList"
-        bindLabel = "name"
-        placeholder = "Виберіть місцезнаходження"
-        notFoundText = "Не знайдено"
-        (change) = "selectLocation($event)"
-      ></ng-select>
-      <ng-select
-        [items] = "stateList"
-        bindLabel = "transName"
-        placeholder = "Виберіть статус"
-        notFoundText = "Не знайдено"
-        (change) = "selectState($event)"
-      ></ng-select>
+
+    <div class="column">
+      <mat-form-field class="selection">
+        <mat-select 
+        placeholder="{{'FilterTab.VehicleType' | translate}}"
+        [(value)]="selectedType">
+          <mat-option *ngFor="let vehicleType of vehicleTypeList" [value]="vehicleType.name">{{vehicleType.name}}
+          </mat-option>
+        </mat-select>
+        <button mat-button *ngIf="selectedType" matSuffix mat-icon-button aria-label="Clear"
+          (click)="selectedType=undefined;  
+          $event.stopPropagation()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+
+      <mat-form-field class="selection">
+        <mat-select placeholder="{{'FilterTab.Location' | translate}}" [(value)]="selectedLocation">
+          <mat-option *ngFor="let location of locationList" [value]="location.name">{{location.name}}</mat-option>
+        </mat-select>
+        <button mat-button *ngIf="selectedLocation" matSuffix mat-icon-button aria-label="Clear"
+          (click)="selectedLocation=undefined;  
+          $event.stopPropagation()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+
+      <mat-form-field class="selection">
+        <mat-select placeholder="{{'FilterTab.Status' | translate}}" [(value)]="selectedState">
+          <mat-option *ngFor="let state of stateList" [value]="state.transName">{{state.transName}}</mat-option>
+        </mat-select>
+        <button mat-button *ngIf="selectedState" matSuffix mat-icon-button aria-label="Clear"
+          (click)="selectedState=undefined;  
+          $event.stopPropagation()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+
     </div>
-    <div>
-      <ng-select
-        [items] = "malfunctionGroupList"
-        bindLabel = "name"
-        clearAllText = ""
-        placeholder = "*Група несправності"
-        notFoundText = "Не знайдено"
-        (change) = "selectMalfunctionGroupType($event)"
-      ></ng-select>
-      <ng-select
-        [items] = "malfunctionSubGroupFilteredList"
-        [(ngModel)] = "currentMalfunctionSubgroup"
-        bindLabel = "name"
-        placeholder = "*Підгрупа несправності"
-        notFoundText = "Не знайдено"
-        (change) = "selectMalfunctionSubGroupType($event)"
-        [disabled] = "malfunctionSubGroupDisabled"
-      ></ng-select>
-      <ng-select
-        [items] = "malfunctionFilteredList"
-        [(ngModel)] = "currentMalfunction"
-        bindLabel = "name"
-        placeholder = "*Несправність"
-        notFoundText = "Не знайдено"
-        (change) = "selectMalfunctionType($event)"
-        [disabled] = "malfunctionDisabled"
-      ></ng-select>
+
+    <div class="column">
+
+      <mat-form-field class="selection">
+        <mat-select placeholder="{{'FilterTab.Group' | translate}}" [(value)]="selectedGroup"
+          (selectionChange)="selectMalfunctionGroupType($event.value);">
+          <mat-option *ngFor="let group of malfunctionGroupList" [value]="group">{{group.name}}</mat-option>
+        </mat-select>
+        <button mat-button *ngIf="selectedGroup" matSuffix mat-icon-button aria-label="Clear"
+          (click)="selectedGroup=undefined; 
+          selectedSubGroup=undefined; 
+          selectedMalf=undefined; 
+          selectMalfunctionGroupType(''); 
+          selectMalfunctionSubGroupType(''); 
+          selectMalfunctionType(''); 
+          $event.stopPropagation()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+
+      <mat-form-field class="selection">
+        <mat-select placeholder="{{'FilterTab.Subgroup' | translate}}" [(value)]="selectedSubGroup"
+          (selectionChange)="selectMalfunctionSubGroupType($event.value);" [disabled]="malfunctionSubGroupDisabled">
+          <mat-option *ngFor="let subgroup of malfunctionSubGroupFilteredList" [value]="subgroup">{{subgroup.name}}
+          </mat-option>
+        </mat-select>
+        <button mat-button *ngIf="selectedSubGroup" matSuffix mat-icon-button aria-label="Clear"
+          (click)="selectedSubGroup=undefined; 
+          selectedMalf=undefined;  
+          selectMalfunctionSubGroupType(''); 
+          selectMalfunctionType(''); 
+          $event.stopPropagation()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+
+      <mat-form-field class="selection">
+        <mat-select placeholder="{{'FilterTab.Malfunction' | translate}}" [(value)]="selectedMalf"
+          (selectionChange)="selectMalfunctionType($event.value);" [disabled]="malfunctionDisabled">
+          <mat-option *ngFor="let malfunction of malfunctionFilteredList" [value]="malfunction">{{malfunction.name}}
+          </mat-option>
+        </mat-select>
+        <button mat-button *ngIf="selectedMalf" matSuffix mat-icon-button aria-label="Clear"
+          (click)="selectedMalf=undefined; 
+          selectMalfunctionType(''); 
+          $event.stopPropagation()">
+          <mat-icon>close</mat-icon>
+        </button>
+      </mat-form-field>
+
     </div>
+
+    <div class="buttons">
+      <button class="btn buttoncheck" mat-fab (click)="selectFilter()">
+        <mat-icon>check</mat-icon>
+      </button>
+      <button class="btn buttonclose" mat-fab (click)="clearFilter()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+
   </div>
-  <button href="#" class="right btn btn-info" (click)="selectFilter()">
-    <i class="fas fa-filter"></i> Фільтрувати
-  </button>
+
 </div>
-
-

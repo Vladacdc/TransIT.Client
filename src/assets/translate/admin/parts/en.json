@@ -1,0 +1,23 @@
+{
+    "Admin" : {
+        "Parts" : {
+            "Name" : "Name",
+            "Code" : "Code",
+            "Manufacturer" : "Manufacturer",
+            "Units" : "Unit of Measurement",
+            "Edit" : "Edit part", 
+            "EnterName" : "Enter a Name",
+            "EnterCode" : "Enter a Code",
+            "SelectManufacturer" : "Select Manufacturer",
+            "SelectUnit" : " Select Unit of Measurement",
+            "Cancel" : "Cancel",
+            "Save" : "Save",
+            "NotFound" : "Not Found",
+            "Create" : " Create part",
+            "CreateBtn" : "Create",
+            "Delete" : "Delete",
+            "Message" : "Deleted data is non-recoverable!",
+            "Sure" : "Do you really want to remove the part?"
+        }
+    }
+}
