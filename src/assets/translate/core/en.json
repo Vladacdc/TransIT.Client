@@ -7,7 +7,9 @@
         },
         "Navbar": 
         {
-            "SignOut": "Sign out"
+            "SignOut": "Sign out",
+            "Collapse": "Collapse"
+        
         },
         "Error": {
             "ConnectionError": {

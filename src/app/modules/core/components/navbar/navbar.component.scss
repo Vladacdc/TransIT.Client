@@ -1,6 +1,9 @@
 .prepend {
   height: 60px;
 }
+nav {
+  z-index: 1 !important;
+}
 
 // This is because mat-dialogs were not showing
 nav {

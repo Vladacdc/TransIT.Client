@@ -79,9 +79,22 @@ import { CreatePartComponent } from './component/parts/create-part/create-part.c
 import { EditPartComponent } from './component/parts/edit-part/edit-part.component';
 import { DeletePartComponent } from './component/parts/delete-part/delete-part.component';
 
+import { SidebarComponent } from './component/sidebar/sidebar.component';
+import { BsDropdownModule } from 'ngx-bootstrap';
+import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
+import { PERFECT_SCROLLBAR_CONFIG } from 'ngx-perfect-scrollbar';
+import { PerfectScrollbarConfigInterface } from 'ngx-perfect-scrollbar';
+import { SidebarService } from './component/sidebar/sidebar.service';
+
+
+const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
+  suppressScrollX: true
+};
+
 @NgModule({
   declarations: [
     AdminComponent,
+    SidebarComponent,
     // ====User===
     UsersComponent,
     CreateUserComponent,
@@ -144,10 +157,12 @@ import { DeletePartComponent } from './component/parts/delete-part/delete-part.c
     PartsComponent,
     CreatePartComponent,
     EditPartComponent,
-    DeletePartComponent
+    DeletePartComponent,
   ],
   exports: [AdminComponent],
   imports: [
+    PerfectScrollbarModule,
+    BsDropdownModule.forRoot(),
     CommonModule,
     CoreModule,
     SharedModule,
@@ -164,6 +179,12 @@ import { DeletePartComponent } from './component/parts/delete-part/delete-part.c
     NgxMaskModule.forRoot(),
     NgBootstrapFormValidationModule,
     NgSelectModule
-  ]
+  ],
+  providers: [
+    SidebarService,
+    {
+    provide: PERFECT_SCROLLBAR_CONFIG,
+    useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG
+  } ]
 })
 export class AdminModule {}
