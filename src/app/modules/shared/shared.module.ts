@@ -52,6 +52,7 @@ import { MatDatepickerModule,
 
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 import { GlobalModalComponent } from './components/global-modal/global-modal.component';
+import { MatDialogComponent } from './components/mat-dialog/mat-dialog.component';
 
 @NgModule({
   declarations: [
@@ -76,7 +77,8 @@ import { GlobalModalComponent } from './components/global-modal/global-modal.com
     EditDocumentComponent,
     NestedDocumentComponent,
     IssueLogComponent,
-    GlobalModalComponent
+    GlobalModalComponent,
+    MatDialogComponent
   ],
   imports: [
     MatDatepickerModule,
@@ -104,8 +106,8 @@ import { GlobalModalComponent } from './components/global-modal/global-modal.com
     FiltersTabsComponent,
     CreateDocumentComponent,
     DocumentComponent,
-    GlobalModalComponent
-
+    GlobalModalComponent,
+    MatDialogComponent    
   ],
   providers: [
     ActionTypeService,
