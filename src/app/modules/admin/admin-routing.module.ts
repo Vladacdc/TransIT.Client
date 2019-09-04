@@ -18,8 +18,6 @@ import { SupplierComponent } from '../shared/components/supplier/supplier.compon
 import { LocationsComponent } from './component/locations/locations.component';
 import { InfoVehicleComponent } from './component/vehicles/info-vehicle/info-vehicle.component';
 import { WorkTypeComponent } from '../shared/components/dictionaries/workType/work-type.component';
-import { EditVehicleComponent } from './component/vehicles/edit-vehicle/edit-vehicle.component';
-import { DeleteVehicleComponent } from './component/vehicles/delete-vehicle/delete-vehicle.component';
 import { PartsComponent } from './component/parts/parts.component';
 
 const routes: Routes = [

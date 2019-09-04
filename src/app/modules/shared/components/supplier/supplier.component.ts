@@ -3,6 +3,7 @@ import { SupplierService } from 'src/app/modules/shared/services/supplier.servic
 import { Supplier } from 'src/app/modules/shared/models/supplier';
 import { EntitiesDataSource } from '../../data-sources/entities-data-sourse';
 import { MatFspTableComponent } from '../tables/mat-fsp-table/mat-fsp-table.component';
+import { AuthenticationService } from 'src/app/modules/core/services/authentication.service';
 
 @Component({
   selector: 'app-supplier',
@@ -27,14 +28,21 @@ export class SupplierComponent implements OnInit {
   ];
 
   @ViewChild('table') table: MatFspTableComponent;
+  @ViewChild('actionsTemplate') template: any;
 
   dataSource: EntitiesDataSource<Supplier>;
 
-  constructor(private supplierService: SupplierService) {
+  constructor(
+    private supplierService: SupplierService,
+    private authenticationService: AuthenticationService
+  ) {
   }
 
   ngOnInit() {
     this.dataSource = new EntitiesDataSource<Supplier>(this.supplierService);
+    if (this.authenticationService.getRole() === 'ADMIN') {
+      this.table.actionContentTemplate = this.template;
+    }
   }
 
   addSupplier(supplier: Supplier) {
