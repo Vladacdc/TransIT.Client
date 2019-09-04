@@ -32,16 +32,7 @@ export class MatFspTableComponent implements OnInit, OnDestroy, AfterViewInit {
   constructor(private translate: TranslateService) {
   }
 
-  ngOnDestroy(): void {
-    console.log('destroy');
-
-    if (this.refresh) {
-      this.subsription.unsubscribe();
-    }
-  }
-
   ngOnInit() {
-    console.log('init');
     this.columnsToDisplay = this.columnDefinitions;
     this.paginator._intl = new MatPaginatorIntlCustom(this.translate, new TranslateDefaultParser());
     if (this.refresh) {
@@ -56,6 +47,12 @@ export class MatFspTableComponent implements OnInit, OnDestroy, AfterViewInit {
       this.paginator.pageSize,
       this.paginator
     );
+  }
+
+  ngOnDestroy(): void {
+    if (this.refresh) {
+      this.subsription.unsubscribe();
+    }
   }
 
   ngAfterViewInit() {
