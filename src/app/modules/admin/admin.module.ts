@@ -71,7 +71,7 @@ import { LocationsComponent } from './component/locations/locations.component';
 import { CreateLocationComponent } from './component/locations/create-location/create-location.component';
 import { EditLocationComponent } from './component/locations/edit-location/edit-location.component';
 import { DeleteLocationComponent } from './component/locations/delete-location/delete-location.component';
-import { MatTableModule, MatInputModule, MatFormFieldModule, MatPaginatorModule, MatSortModule } from '@angular/material';
+import { MatTableModule, MatInputModule, MatFormFieldModule, MatPaginatorModule, MatSortModule, MatCardModule } from '@angular/material';
 import { InfoVehicleComponent } from './component/vehicles/info-vehicle/info-vehicle.component';
 import { MatFspTableComponent } from '../shared/components/tables/mat-fsp-table/mat-fsp-table.component';
 import { PartsComponent } from './component/parts/parts.component';
@@ -155,11 +155,13 @@ import { DeletePartComponent } from './component/parts/delete-part/delete-part.c
     FormsModule,
     DataTablesModule,
     HttpClientModule,
+    // Materials
     MatTableModule,
     MatInputModule,
     MatFormFieldModule,
     MatPaginatorModule,
     MatSortModule,
+    MatCardModule,
     ReactiveFormsModule,
     NgxMaskModule.forRoot(),
     NgBootstrapFormValidationModule,

@@ -158,7 +158,6 @@ import { MomentDateAdapter, MAT_MOMENT_DATE_FORMATS } from '@angular/material-mo
     EditPartInComponent
   ],
   exports: [
-    AddPartInComponent,
     PartsInComponent,
     BreadcrumbComponent,
     SupplierComponent,
