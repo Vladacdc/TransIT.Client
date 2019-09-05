@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, EventEmitter, Output, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, ElementRef, EventEmitter, Output, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
 import { IssueLog } from 'src/app/modules/shared/models/issuelog';

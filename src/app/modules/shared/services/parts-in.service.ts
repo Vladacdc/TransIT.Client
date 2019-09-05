@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { CrudService } from '../../core/services/crud.service';
 import { environment } from '../../../../environments/environment';
 import { PartIn } from '../models/part-in';
-import { Observable, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { SpinnerService } from '../../core/services/spinner.service';
 

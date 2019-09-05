@@ -1,6 +1,5 @@
-import { OnInit, Inject, Input } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
-import { PartIn } from 'src/app/modules/shared/models/part-in';
+import { OnInit} from '@angular/core';
+import { MatDialogRef} from '@angular/material';
 import { FormGroup } from '@angular/forms';
 import { CurrencyService } from 'src/app/modules/shared/services/currency.service';
 import { Currency } from 'src/app/modules/shared/models/currency';
@@ -9,7 +8,6 @@ import { Unit } from 'src/app/modules/shared/models/unit';
 import { Part } from 'src/app/modules/shared/models/part';
 import { UnitService } from 'src/app/modules/shared/services/unit.service';
 import { PartService } from 'src/app/modules/shared/services/part.service';
-import { EntitiesDataSource } from 'src/app/modules/shared/data-sources/entities-data-sourse';
 
 export class BaseDialogComponent<TComponent> implements OnInit {
 

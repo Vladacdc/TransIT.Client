@@ -1,8 +1,8 @@
-import { Component, OnInit, ViewChild, Input, ElementRef, Output, AfterViewInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, ElementRef, AfterViewInit, OnDestroy } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { EntitiesDataSource } from '../../../data-sources/entities-data-sourse';
-import { fromEvent, merge, BehaviorSubject, Subscription, Subscribable, Unsubscribable } from 'rxjs';
+import { fromEvent, merge, Subscribable, Unsubscribable } from 'rxjs';
 import { debounceTime, distinctUntilChanged, tap } from 'rxjs/operators';
 import { MatPaginatorIntlCustom } from '../../../paginator-extentions/mat-paginator-intl-custom';
 import { TranslateService, TranslateDefaultParser } from '@ngx-translate/core';
