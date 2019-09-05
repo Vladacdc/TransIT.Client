@@ -1,5 +1,12 @@
-<div class="table-background bg-white border">
-  <app-create-unit *ngIf="isAdmin" (createUnit)="addUnit($event)"></app-create-unit>
+<mat-card>
+
+  <div>
+    <h2 class="text-center py-3 m-0">Одиниці вимірювання</h2>
+  </div>
+
+  <div>
+    <app-create-unit *ngIf="isAdmin" (createUnit)="addUnit($event)"></app-create-unit>
+  </div>
 
   <ng-template #actionsTemplate let-data="templateData">
 
@@ -14,4 +21,5 @@
       [actionContentTemplate]="actionsTemplate">
     </mat-fsp-table>
   </div>
-</div>
+
+</mat-card>

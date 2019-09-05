@@ -1,11 +1,12 @@
-<div class="table-background bg-white border">
+<mat-card>
+
   <div>
-    <h3 class="text-center">Виробник</h3>
+    <h2 class="text-center py-3 m-0">Виробники</h2>
   </div>
+
   <div>
     <app-create-manufacturer *ngIf="isAdmin" (createManufacturer)="addManufacturer($event)"></app-create-manufacturer>
   </div>
-
 
   <ng-template #actionsTemplate let-data="templateData">
 
@@ -22,4 +23,5 @@
       [actionContentTemplate]="actionsTemplate">
     </mat-fsp-table>
   </div>
-</div>
+
+</mat-card>
