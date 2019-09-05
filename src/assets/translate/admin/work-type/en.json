@@ -1,0 +1,19 @@
+{
+    "Admin": {
+        "WorkType": {
+            "Name": "Work type name",
+            "EstimatedTime": "Estimated time",
+            "EstimatedCost": "Estimated cost",
+            "Create": {
+                "Title": "Create work type"
+            },
+            "Delete": {
+                "Title": "Are you sure you want to delete work type?",
+                "Text": "Deleted data is non-recoverable!"
+            },
+            "Edit": {
+                "Title": "Edit work type"
+            }
+        }
+    }
+}
