@@ -17,9 +17,9 @@ export class WorkTypeComponent implements OnInit {
     'estimatedCost'
   ];
   columnNames: string[] = [
-    'Тип роботи',
-    'Орієнтовний час',
-    'Орієнтовна вартість'
+    'Admin.WorkType.Name',
+    'Admin.WorkType.EstimatedTime',
+    'Admin.WorkType.EstimatedCost'
   ];
 
   @ViewChild('table') table: MatFspTableComponent;

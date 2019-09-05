@@ -23,13 +23,13 @@ export class InfoVehicleComponent implements OnInit {
     'supplierName'
   ];
   columnNames: string[] = [
-    'Опис',
-    'Витрати',
-    'Поломка',
-    'Тип роботи',
-    'Стан',
-    'Cтарий стан',
-    'Постачальник'
+    'Shared.Vehicles.InfoVehicle.Description',
+    'Shared.Vehicles.InfoVehicle.Expenses',
+    'Shared.Vehicles.InfoVehicle.Issue',
+    'Shared.Vehicles.InfoVehicle.WorkType',
+    'Shared.Vehicles.InfoVehicle.State',
+    'Shared.Vehicles.InfoVehicle.OldState',
+    'Shared.Vehicles.InfoVehicle.Supplier',
   ];
 
   @ViewChild('table') table: MatFspTableComponent;
