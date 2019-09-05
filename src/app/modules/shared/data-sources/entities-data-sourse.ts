@@ -27,13 +27,14 @@ export class EntitiesDataSource<Entity extends TEntity<Entity>> implements DataS
     pageIndex: number = 0,
     pageSize: number = 5,
     paginator: MatPaginator = null) {
-
+    
     this.crudService.getFilteredEntities({
-      start: pageSize * pageIndex,
+      start: pageSize*pageIndex,
       length: pageSize,
       search: {value: filter},
-      order: [{column: 0, dir: "desc"}],
+      order: [{column:0, dir: "desc"}],
         /*draw: 1,
+        
         columns: [
           {data: 'name',name:"",orderable: true},
           {data: 'fullName',name:"",orderable: true},
@@ -42,13 +43,14 @@ export class EntitiesDataSource<Entity extends TEntity<Entity>> implements DataS
         */
     }).subscribe(entities => {
       this.entitySubject.next(entities.data);
-      if (paginator) {
-        if (filter == '') {
+      if(paginator) {
+        if(filter=='') {
           paginator.length = entities.recordsTotal;
-        } else {
+        }
+        else {
           paginator.length = entities.recordsFiltered;
         }
       }
     });
-  }
+  }  
 }
