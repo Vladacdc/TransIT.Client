@@ -1,6 +1,10 @@
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#createIssue">
+<button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#createIssue" (click)="openDialog()">
   <i class="fas fa-plus"></i> Створити заявку
+</button>
+
+<button type="button" class="btn btn-primary mb-2"  (click)="openDialog()">
+  <i class="fas fa-plus"></i> Modal
 </button>
 
 <!-- Modal -->

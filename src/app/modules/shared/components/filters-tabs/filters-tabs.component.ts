@@ -151,10 +151,12 @@ export class FiltersTabsComponent implements OnInit {
 
   selectFilter() {
     this.EndDateValue.emit(
-      this.selectedMaxDate === null || this.selectedMaxDate === undefined ? '' : new Date(this.selectedMaxDate).toDateString()
+      this.selectedMaxDate === null || this.selectedMaxDate === undefined ?
+       '' : new Date(this.selectedMaxDate).toDateString()
     );
     this.StartDateValue.emit(
-      this.selectedMinDate === null || this.selectedMinDate === undefined ? '' : new Date(this.selectedMinDate).toDateString()
+      this.selectedMinDate === null || this.selectedMinDate === undefined ?
+      '' : new Date(this.selectedMinDate).toDateString()
     );
     this.VechicleTypeValue.emit(this.selectedType);
     this.LocationValue.emit(this.selectedLocation);

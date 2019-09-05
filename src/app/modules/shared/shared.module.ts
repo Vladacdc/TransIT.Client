@@ -87,9 +87,11 @@ import { EntitiesDataSourceForVehicle } from './data-sources/entities-data-sourc
 import { PartService } from './services/part.service';
 import { ManufacturerService } from './services/manufacturer.service';
 import { MomentDateAdapter, MAT_MOMENT_DATE_FORMATS } from '@angular/material-moment-adapter';
+import { MatDialogComponent } from './components/mat-dialog/mat-dialog.component';
 
 @NgModule({
   declarations: [
+    MatDialogComponent,
     BreadcrumbComponent,
     GlobalIssueComponent,
     SupplierComponent,
@@ -155,7 +157,8 @@ import { MomentDateAdapter, MAT_MOMENT_DATE_FORMATS } from '@angular/material-mo
   ],
   entryComponents: [
     AddPartInComponent,
-    EditPartInComponent
+    EditPartInComponent,
+    MatDialogComponent
   ],
   exports: [
     AddPartInComponent,

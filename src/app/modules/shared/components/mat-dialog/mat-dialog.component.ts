@@ -1,5 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import {MatDialogModule, MatDialogRef, MAT_DIALOG_DATA, MatDialog} from '@angular/material/dialog';
+import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-mat-dialog',
@@ -8,23 +9,29 @@ import {MatDialogModule, MatDialogRef, MAT_DIALOG_DATA, MatDialog} from '@angula
 })
 export class MatDialogComponent implements OnInit {
 
-  message: string = "Are you sure?"
-  confirmButtonText = "Yes"
-  cancelButtonText = "Cancel"
+  form: FormGroup;
+  description: string;
+
+
   constructor(
-    @Inject(MAT_DIALOG_DATA) private data: any,
+    private formBuilder: FormBuilder, @Inject (MAT_DIALOG_DATA) private data: any,
     private dialogRef: MatDialogRef<MatDialogComponent>) {
-      if(data){
-    this.message = data.message || this.message;
-    if (data.buttonText) {
-      this.confirmButtonText = data.buttonText.ok || this.confirmButtonText;
-      this.cancelButtonText = data.buttonText.cancel || this.cancelButtonText;
+      this.form = data.group;
     }
-      }
+
+  ngOnInit() {
+         this.form = this.formBuilder.group({
+            description: ['', this.description, []],
+        });
+  }
+  save() {
+    this.dialogRef.close(this.form);
   }
 
-  ngOnInit(){
-    
+  close() {
+    this.dialogRef.close();
   }
- 
+  formGroupParsing(form: FormGroup) {
+    let array = [form];
+  }
 }
