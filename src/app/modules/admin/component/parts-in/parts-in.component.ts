@@ -1,14 +1,13 @@
-import { Component, Inject, OnInit } from '@angular/core';
-import { EntitiesDataSource } from '../../../data-sources/entities-data-sourse';
-import { PartIn } from '../../../models/part-in';
-import { PartsInService } from '../../../services/parts-in.service';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { AddPartInComponent } from './dialogs/add-part-in/add-part-in.component';
-import { Observable, empty, of } from 'rxjs';
-import { tap, map, switchMap } from 'rxjs/operators';
-import { CurrencyService } from '../../../services/currency.service';
-import { SpinnerService } from 'src/app/modules/core/services/spinner.service';
+import { PartsInService } from '../../../shared/services/parts-in.service';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
 import { ToastrService } from 'ngx-toastr';
+import { EntitiesDataSource } from '../../../shared/data-sources/entities-data-sourse';
+import { PartIn } from '../../../shared/models/part-in';
+import { Component, OnInit } from '@angular/core';
+import { SpinnerService } from '../../../core/services/spinner.service';
+import { MatDialog } from '@angular/material';
+import { AddPartInComponent } from './dialogs/add-part-in/add-part-in.component';
 
 @Component({
   selector: 'app-parts-in',
@@ -28,6 +27,7 @@ export class PartsInComponent implements OnInit {
   ];
 
   dataSource: EntitiesDataSource<PartIn>;
+  completed = new BehaviorSubject<void>(null);
 
   constructor(
     private partsInService: PartsInService,
@@ -40,15 +40,21 @@ export class PartsInComponent implements OnInit {
     this.dataSource = new EntitiesDataSource<PartIn>(this.partsInService);
   }
 
+  onCompleted() {
+    this.completed.next();
+  }
+
   openAdd() {
     const dialogRef = this.dialog.open(AddPartInComponent, { width: '500px', data: {} });
     dialogRef.afterClosed().subscribe(dialogResult => {
       if (dialogResult) {
         this.withSpinner(this.partsInService.addEntity(dialogResult)).subscribe(
-          () => this.toastrService.success('TODO: Ok'),
-          (error) => {
-            console.log(error);
-            return this.toastrService.error('TODO: Error adding entity');
+          () => {
+            this.onCompleted();
+            // return this.toastrService.success('TODO: Ok');
+          },
+          () => {
+            this.toastrService.error('TODO: Error adding entity');
           }
         );
       }

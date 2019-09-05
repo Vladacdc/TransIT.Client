@@ -1,11 +1,11 @@
-import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { PartIn } from 'src/app/modules/shared/models/part-in';
 import { PartsInService } from 'src/app/modules/shared/services/parts-in.service';
 import { CurrencyService } from 'src/app/modules/shared/services/currency.service';
 import { SpinnerService } from 'src/app/modules/core/services/spinner.service';
 import { ToastrService } from 'ngx-toastr';
 import { Currency } from 'src/app/modules/shared/models/currency';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { tap, map } from 'rxjs/operators';
 import { MatDialog } from '@angular/material';
 import { EditPartInComponent } from '../dialogs/edit-part-in/edit-part-in.component';
@@ -20,6 +20,7 @@ import { DataSource } from '@angular/cdk/table';
 export class PartInActionsComponent implements OnInit {
 
   @Input() partIn: PartIn;
+  @Output() completed = new EventEmitter<void>();
 
   constructor(
     private partsInService: PartsInService,
@@ -36,7 +37,6 @@ export class PartInActionsComponent implements OnInit {
     dialogRef.afterClosed().subscribe(dialogResult => {
       if (dialogResult) {
         this.finishEditItem(dialogResult);
-
       }
     });
   }
@@ -52,7 +52,10 @@ export class PartInActionsComponent implements OnInit {
   finishEditItem(item: PartIn) {
     this.withSpinner(this.partsInService.updateEntity(item))
       .subscribe(
-        () => this.toastrService.success('TODO: Successfully edited'),
+        () => {
+          this.completed.next();
+          // this.toastrService.success('TODO: Successfully edited');
+        },
         (error) => {
           console.log(error);
           this.toastrService.error('TODO: General Error');
@@ -64,7 +67,8 @@ export class PartInActionsComponent implements OnInit {
     this.withSpinner(this.partsInService.deleteEntity(this.partIn.id))
       .subscribe(
         () => {
-          return this.toastrService.success('TODO: Succesfully deleted');
+          this.completed.next();
+          // this.toastrService.success('TODO: Succesfully deleted');
         },
         () => this.toastrService.error('TODO: General Error')
       );

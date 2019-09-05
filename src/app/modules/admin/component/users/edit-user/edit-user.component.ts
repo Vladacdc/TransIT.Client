@@ -10,7 +10,7 @@ import { Subscription } from 'rxjs';
 import { Employee } from 'src/app/modules/shared/models/employee';
 import { SpinnerService } from 'src/app/modules/core/services/spinner.service';
 import { EmployeeService } from 'src/app/modules/shared/services/employee.service';
-import { flatMap, map, tap, switchMap } from 'rxjs/operators';
+import { map, tap, switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-edit-user',

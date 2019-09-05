@@ -1,5 +1,5 @@
-import { Component, OnInit, Inject } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { Component, OnInit} from '@angular/core';
+import { MatDialogRef} from '@angular/material';
 import { PartIn } from 'src/app/modules/shared/models/part-in';
 import { CurrencyService } from 'src/app/modules/shared/services/currency.service';
 import { UnitService } from 'src/app/modules/shared/services/unit.service';
