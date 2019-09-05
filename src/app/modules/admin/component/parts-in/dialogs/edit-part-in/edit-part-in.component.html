@@ -1,29 +1,30 @@
 <div class="form-container">
-  <h1 mat-dialog-title>TODO: Edit part supply</h1>
+  <h1 mat-dialog-title> {{ 'PartIn.EditSupply' | translate }} </h1>
   <form [formGroup]="form">
     <div mat-dialog-content class="inputs">
       <mat-form-field>
         <input matInput
           formControlName="arrivalDate"
-          [matDatepicker]="pickerArrivalDate" 
-          placeholder="Arrival">
+          [matDatepicker]="pickerArrivalDate"
+          placeholder="{{ 'PartIn.Arrival' | translate }}">
         <mat-datepicker-toggle matSuffix [for]="pickerArrivalDate"></mat-datepicker-toggle>
         <mat-datepicker #pickerArrivalDate></mat-datepicker>
       </mat-form-field>
-  
+
       <mat-form-field>
-        <input matInput formControlName="batch" placeholder="batch number">
-      </mat-form-field>
-  
-      <mat-form-field>
-        <input matInput type="number" formControlName="price" placeholder="price">
-      </mat-form-field>
-  
-      <mat-form-field>
-        <input matInput type="number" formControlName="amount" placeholder="amount">
+        <input matInput formControlName="batch" placeholder="{{ 'PartIn.Batch' | translate }}">
       </mat-form-field>
 
       <mat-form-field>
+        <input matInput type="number" formControlName="price" placeholder="{{ 'PartIn.Price' | translate }}">
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput type="number" formControlName="amount" placeholder="{{ 'PartIn.Amount' | translate }}">
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label> {{ 'PartIn.SelectCurrency' | translate }} </mat-label>
         <mat-select [compareWith]="comparer" [value]="data.currency" formControlName="currency">
           <mat-option *ngFor="let currency of currencyList" [value]="currency">
             {{currency.fullName}}
@@ -32,14 +33,16 @@
       </mat-form-field>
 
       <mat-form-field>
+        <mat-label> {{ 'PartIn.SelectUnit' | translate }} </mat-label>
         <mat-select [compareWith]="comparer" [value]="data.unit" formControlName="unit">
           <mat-option *ngFor="let unit of unitList" [value]="unit">
             {{unit.shortName}}
           </mat-option>
         </mat-select>
       </mat-form-field>
-  
+
       <mat-form-field>
+        <mat-label> {{ 'PartIn.SelectPart' | translate }} </mat-label>
         <mat-select [compareWith]="comparer" [(value)]="data.part" formControlName="part">
           <mat-option *ngFor="let part of partList" [value]="part">
             {{part.name}}
@@ -49,14 +52,14 @@
     </div>
   </form>
   <mat-dialog-actions>
-    <button mat-button (click)="onNoClick()">TODO: Cancel</button>
+    <button mat-button (click)="onNoClick()">{{ 'Core.FormButtons.Cancel' | translate }}</button>
     <button mat-button
             (click)="onSubmit()"
-            color="primary" 
+            color="primary"
             mat-dialog-close
             [disabled]="form.invalid">
-        TODO: Ok
+      {{ 'Core.FormButtons.Save' | translate }}
     </button>
-    
+
   </mat-dialog-actions>
 </div>
