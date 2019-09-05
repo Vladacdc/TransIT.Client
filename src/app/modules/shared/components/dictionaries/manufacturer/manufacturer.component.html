@@ -1,0 +1,25 @@
+<div class="table-background bg-white border">
+  <div>
+    <h3 class="text-center">Виробник</h3>
+  </div>
+  <div>
+    <app-create-manufacturer *ngIf="isAdmin" (createManufacturer)="addManufacturer($event)"></app-create-manufacturer>
+  </div>
+
+
+  <ng-template #actionsTemplate let-data="templateData">
+
+    <app-delete-manufacturer *ngIf="isAdmin" [manufacturer]="data" (deleteManufacturer)="deleteManufacturer($event)">
+    </app-delete-manufacturer>
+
+    <app-edit-manufacturer *ngIf="isAdmin" [manufacturer]="data" (updateManufacturer)="updateManufacturer($event)">
+    </app-edit-manufacturer>
+
+  </ng-template>
+
+  <div>
+    <mat-fsp-table #table [columnDefinitions]="columnDefinitions" [columnNames]="columnNames" [dataSource]="dataSource"
+      [actionContentTemplate]="actionsTemplate">
+    </mat-fsp-table>
+  </div>
+</div>
