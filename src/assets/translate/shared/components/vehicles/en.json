@@ -1,0 +1,27 @@
+{
+    "Shared": {
+        "Vehicles": {
+            "VehicleType": "Vehicle type",
+            "VinCode": "Vin Code",
+            "InventoryId": "Inventory id",
+            "RegNum": "Registration number",
+            "Brand": "Brand",
+            "Model": "Model",
+            "Location": "Location",
+            "CommissioningDate": "Commissioning date",
+            "WarrantyEndDate": "Warranty end date",
+            "Create": {
+                "Title": "Create vehicle",
+                "SelectLocation": "Select location"
+            },
+            "Delete": {
+                "Title": "Are you sure you want to delete vehicle?",
+                "Text": "Deleted data is non-recoverable!"
+            },
+            "Edit": {
+                "Title": "Edit vehicle",
+                "SelectVehicleType": "Select vehicle type"
+            }
+        }
+    }
+}

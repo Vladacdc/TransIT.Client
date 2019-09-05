@@ -1,0 +1,15 @@
+{
+    "Shared": {
+        "Vehicles": {
+            "InfoVehicle": {
+                "Description": "Description",
+                "Expenses": "Expenses",
+                "WorkType": "WorkType",
+                "Issue": "Issue",
+                "State": "State",
+                "OldState": "Old State",
+                "Supplier": "Supplier"
+            }
+        }
+    }
+}
