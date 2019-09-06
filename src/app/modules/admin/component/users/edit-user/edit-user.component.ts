@@ -21,7 +21,7 @@ import { map, tap, switchMap } from 'rxjs/operators';
 export class EditUserComponent implements OnInit, OnDestroy {
 
   @ViewChild('close') closeEditModal: ElementRef;
-  @Output() updateUser = new EventEmitter<User>();
+  @Output() editUser = new EventEmitter<User>();
   @Input() set user(user: User) {
     if (!user) {
       return;
@@ -166,7 +166,7 @@ export class EditUserComponent implements OnInit, OnDestroy {
 
     request.subscribe(
       _ => {
-        this.updateUser.next(user);
+        this.editUser.next(user);
         this.toastrService.success('', 'Користувача змінено');
       },
       error => {
@@ -177,7 +177,7 @@ export class EditUserComponent implements OnInit, OnDestroy {
   }
 
   updateUserChangeActive(user: User) {
-    this.updateUser.next(user);
+    this.editUser.next(user);
   }
 
   // subscribing to board number changes

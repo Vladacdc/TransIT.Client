@@ -1,9 +1,21 @@
 <div class="table-background border">
-  <app-create-user (createUser)="addUser($event)"></app-create-user>
-  <app-edit-user [user]="user" (updateUser)="updateUser($event)"></app-edit-user>
-  <app-delete-user [user]="user" (deleteUser)="deleteUser($event)"></app-delete-user>
-  <p></p>
-  <div>
-    <table id="userTable" class="table table-bordered  table-hover" style="width:100%;"></table>
+  <app-create-user *ngIf="ableToCreate" (createUser)="addUser($event)"></app-create-user>
+
+  <ng-template #actionsTemplate let-data="templateData">
+    <app-delete-user [user]="data" (deleteUser)="deleteUser($event)"></app-delete-user>
+    <app-edit-user [user]="data" (editUser)="editUser($event)"></app-edit-user>
+  </ng-template>
+
+  <div class="captBox col-md-4 offset-5">
+    <caption class="caption">
+      Користувачі
+    </caption>
   </div>
+
+  <mat-fsp-table #table
+    [columnDefinitions]="columnDefinitions"
+    [columnNames]="columnNames"
+    [dataSource]="dataSource">
+  </mat-fsp-table>
+
 </div>
