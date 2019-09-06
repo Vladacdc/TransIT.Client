@@ -116,7 +116,6 @@ import { MomentDateAdapter, MAT_MOMENT_DATE_FORMATS } from '@angular/material-mo
     CreateManufacturerComponent,
     DeleteManufacturerComponent,
     EditManufacturerComponent,
-    MatFspTableComponent,
     WorkTypeComponent,
     CreateWorkTypeComponent,
     EditWorkTypeComponent,
@@ -167,7 +166,6 @@ import { MomentDateAdapter, MAT_MOMENT_DATE_FORMATS } from '@angular/material-mo
     CreateManufacturerComponent,
     DeleteManufacturerComponent,
     EditManufacturerComponent,
-    MatFspTableComponent,
     WorkTypeComponent
   ],
   providers: [

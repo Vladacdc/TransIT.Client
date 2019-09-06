@@ -1,21 +1,15 @@
-<div class="table-background border">
-  
+<mat-card>
   <app-create-currency *ngIf="ableToCreate" (createCurrency)="addCurrency($event)"></app-create-currency>
 
   <ng-template #actionsTemplate let-data="templateData">
     <app-delete-currency [currency]="data" (deleteCurrency)="deleteCurrency($event)"></app-delete-currency>
   </ng-template>
-  
-  <div class="captBox col-md-4 offset-5">
-    <caption class="caption">
-      Валюта
-    </caption>
+
+  <div>
+    <h2 class="text-center py-3 m-0">Валюти</h2>
   </div>
-  
-  <mat-fsp-table #table
-    [columnDefinitions]="columnDefinitions" 
-    [columnNames]="columnNames" 
-    [dataSource]="dataSource">
+
+  <mat-fsp-table #table [columnDefinitions]="columnDefinitions" [columnNames]="columnNames" [dataSource]="dataSource">
   </mat-fsp-table>
 
-</div>
+</mat-card>
