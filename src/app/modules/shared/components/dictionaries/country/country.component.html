@@ -1,17 +1,15 @@
-<div class="table-background border">
+<mat-card>
   <app-create-country *ngIf="ableToCreate" (createCountry)="addCountry($event)"></app-create-country>
 
   <ng-template #actionsTemplate let-data="templateData">
     <app-delete-country [country]="data" (deleteCountry)="deleteCountry($event)"></app-delete-country>
   </ng-template>
 
-  <div class="captBox col-md-4 offset-5">
-    <caption class="caption">
-      Країна
-    </caption>
+  <div>
+    <h2 class="text-center py-3 m-0">Країни</h2>
   </div>
 
   <mat-fsp-table #table [columnDefinitions]="columnDefinitions" [columnNames]="columnNames" [dataSource]="dataSource">
   </mat-fsp-table>
 
-</div>
+</mat-card>

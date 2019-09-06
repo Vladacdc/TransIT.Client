@@ -1,8 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { UnitService } from 'src/app/modules/shared/services/unit.service';
 import { Unit } from 'src/app/modules/shared/models/unit';
-import { EntitiesDataSource } from '../../data-sources/entities-data-sourse';
-import { MatFspTableComponent } from '../tables/mat-fsp-table/mat-fsp-table.component';
+import { EntitiesDataSource } from '../../../data-sources/entities-data-sourse';
+import { MatFspTableComponent } from '../../tables/mat-fsp-table/mat-fsp-table.component';
+import { AuthenticationService } from 'src/app/modules/core/services/authentication.service';
 
 @Component({
   selector: 'app-unit',
@@ -10,6 +11,7 @@ import { MatFspTableComponent } from '../tables/mat-fsp-table/mat-fsp-table.comp
   styleUrls: ['./unit.component.scss']
 })
 export class UnitComponent implements OnInit {
+  isAdmin: boolean;
   columnDefinitions: string[] = [
     'name',
     'shortName',
@@ -23,11 +25,12 @@ export class UnitComponent implements OnInit {
 
   dataSource: EntitiesDataSource<Unit>;
 
-  constructor(private unitService: UnitService) {
+  constructor(private unitService: UnitService, private authenticationService: AuthenticationService) {
   }
 
   ngOnInit() {
     this.dataSource = new EntitiesDataSource<Unit>(this.unitService);
+    this.isAdmin = this.authenticationService.getRole() === 'ADMIN' ? true : false;
   }
 
   addUnit(unit: Unit) {

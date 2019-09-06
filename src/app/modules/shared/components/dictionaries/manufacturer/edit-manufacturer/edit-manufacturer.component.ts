@@ -1,8 +1,8 @@
 import { Component, OnInit, ElementRef, ViewChild, Input, Output, EventEmitter } from '@angular/core';
-import { Manufacturer } from '../../../models/manufacturer';
+import { Manufacturer } from '../../../../models/manufacturer';
 
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
-import { ManufacturerService } from '../../../services/manufacturer.service';
+import { ManufacturerService } from '../../../../services/manufacturer.service';
 import { ToastrService } from 'ngx-toastr';
 import { TranslateService } from '@ngx-translate/core';
 
