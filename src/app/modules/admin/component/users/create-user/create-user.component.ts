@@ -10,7 +10,7 @@ import { RoleService } from 'src/app/modules/shared/services/role.service';
 import { EmployeeService } from 'src/app/modules/shared/services/employee.service';
 import { SpinnerService } from 'src/app/modules/core/services/spinner.service';
 import { Employee } from 'src/app/modules/shared/models/employee';
-import { flatMap, map, tap, switchMap } from 'rxjs/operators';
+import { map, tap, switchMap } from 'rxjs/operators';
 import { Subscription } from 'rxjs';
 
 @Component({
