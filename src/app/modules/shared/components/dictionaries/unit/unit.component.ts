@@ -21,6 +21,7 @@ export class UnitComponent implements OnInit {
       'Unit.shortName'
   ];
 
+  @ViewChild('actionsTemplate') actionsTemplate: any;
   @ViewChild('table') table: MatFspTableComponent;
 
   dataSource: EntitiesDataSource<Unit>;
@@ -31,6 +32,9 @@ export class UnitComponent implements OnInit {
   ngOnInit() {
     this.dataSource = new EntitiesDataSource<Unit>(this.unitService);
     this.isAdmin = this.authenticationService.getRole() === 'ADMIN' ? true : false;
+    if (this.isAdmin) {
+      this.table.actionContentTemplate = this.actionsTemplate;
+    }
   }
 
   addUnit(unit: Unit) {

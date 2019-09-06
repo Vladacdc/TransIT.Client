@@ -19,6 +19,7 @@ export class ManufacturerComponent implements OnInit {
       'Manufacturer.name',
   ];
 
+  @ViewChild('actionsTemplate') actionsTemplate: any;
   @ViewChild('table') table: MatFspTableComponent;
 
   dataSource: EntitiesDataSource<Manufacturer>;
@@ -29,6 +30,9 @@ export class ManufacturerComponent implements OnInit {
   ngOnInit() {
     this.dataSource = new EntitiesDataSource<Manufacturer>(this.manufacturerService);
     this.isAdmin = this.authenticationService.getRole() === 'ADMIN' ? true : false;
+    if (this.isAdmin) {
+      this.table.actionContentTemplate = this.actionsTemplate;
+    }
   }
 
   addManufacturer(manufacturer: Manufacturer) {
