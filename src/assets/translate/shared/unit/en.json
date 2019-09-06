@@ -3,7 +3,7 @@
         "name": "Name",
         "shortName": "Short Name",
         "Create": {
-            "Title": "Create unit of measurement"
+            "Title": "Add unit of measurement"
         },
         "Delete": {
             "Title": "Are you sure you want to delete unit of measerement?",

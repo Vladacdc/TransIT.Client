@@ -2,7 +2,7 @@
     "Manufacturer": {
         "name": "Name",
         "Create": {
-            "Title": "Create manufacturer"
+            "Title": "Add manufacturer"
         },
         "Delete": {
             "Title": "Are you sure you want to delete manufacturer?",

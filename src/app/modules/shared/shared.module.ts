@@ -66,14 +66,14 @@ import {MatCardModule} from '@angular/material/card';
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 import { MatFspTableComponent } from './components/tables/mat-fsp-table/mat-fsp-table.component';
 import { EntitiesDataSource } from './data-sources/entities-data-sourse';
-import { UnitComponent } from './components/unit/unit.component';
-import { CreateUnitComponent } from './components/unit/create-unit/create-unit.component';
-import { DeleteUnitComponent } from './components/unit/delete-unit/delete-unit.component';
-import { EditUnitComponent } from './components/unit/edit-unit/edit-unit.component';
-import { ManufacturerComponent } from './components/manufacturer/manufacturer.component';
-import { CreateManufacturerComponent } from './components/manufacturer/create-manufacturer/create-manufacturer.component';
-import { DeleteManufacturerComponent } from './components/manufacturer/delete-manufacturer/delete-manufacturer.component';
-import { EditManufacturerComponent } from './components/manufacturer/edit-manufacturer/edit-manufacturer.component';
+import { UnitComponent } from './components/dictionaries/unit/unit.component';
+import { CreateUnitComponent } from './components/dictionaries/unit/create-unit/create-unit.component';
+import { DeleteUnitComponent } from './components/dictionaries/unit/delete-unit/delete-unit.component';
+import { EditUnitComponent } from './components/dictionaries/unit/edit-unit/edit-unit.component';
+import { ManufacturerComponent } from './components/dictionaries/manufacturer/manufacturer.component';
+import { CreateManufacturerComponent } from './components/dictionaries/manufacturer/create-manufacturer/create-manufacturer.component';
+import { DeleteManufacturerComponent } from './components/dictionaries/manufacturer/delete-manufacturer/delete-manufacturer.component';
+import { EditManufacturerComponent } from './components/dictionaries/manufacturer/edit-manufacturer/edit-manufacturer.component';
 import { WorkTypeComponent } from './components/dictionaries/workType/work-type.component';
 import { WorkTypeService } from './services/work-type.service';
 import { CreateWorkTypeComponent } from './components/dictionaries/workType/create-work-type/create-work-type.component';
@@ -116,7 +116,6 @@ import { MomentDateAdapter, MAT_MOMENT_DATE_FORMATS } from '@angular/material-mo
     CreateManufacturerComponent,
     DeleteManufacturerComponent,
     EditManufacturerComponent,
-    MatFspTableComponent,
     WorkTypeComponent,
     CreateWorkTypeComponent,
     EditWorkTypeComponent,
@@ -167,7 +166,6 @@ import { MomentDateAdapter, MAT_MOMENT_DATE_FORMATS } from '@angular/material-mo
     CreateManufacturerComponent,
     DeleteManufacturerComponent,
     EditManufacturerComponent,
-    MatFspTableComponent,
     WorkTypeComponent
   ],
   providers: [
