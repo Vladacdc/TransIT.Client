@@ -63,13 +63,9 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 
-import { PartInActionsComponent } from './components/dictionaries/parts-in/part-in-actions/part-in-actions.component';
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 import { MatFspTableComponent } from './components/tables/mat-fsp-table/mat-fsp-table.component';
 import { EntitiesDataSource } from './data-sources/entities-data-sourse';
-import { AddPartInComponent } from './components/dictionaries/parts-in/dialogs/add-part-in/add-part-in.component';
-import { EditPartInComponent } from './components/dictionaries/parts-in/dialogs/edit-part-in/edit-part-in.component';
-import { PartsInComponent } from './components/dictionaries/parts-in/parts-in.component';
 import { UnitComponent } from './components/dictionaries/unit/unit.component';
 import { CreateUnitComponent } from './components/dictionaries/unit/create-unit/create-unit.component';
 import { DeleteUnitComponent } from './components/dictionaries/unit/delete-unit/delete-unit.component';
@@ -111,11 +107,7 @@ import { MomentDateAdapter, MAT_MOMENT_DATE_FORMATS } from '@angular/material-mo
     EditDocumentComponent,
     NestedDocumentComponent,
     IssueLogComponent,
-    PartsInComponent,
-    PartInActionsComponent,
     MatFspTableComponent,
-    AddPartInComponent,
-    EditPartInComponent,
     UnitComponent,
     DeleteUnitComponent,
     EditUnitComponent,
@@ -153,13 +145,7 @@ import { MomentDateAdapter, MAT_MOMENT_DATE_FORMATS } from '@angular/material-mo
     FormsModule,
     NgBootstrapFormValidationModule
   ],
-  entryComponents: [
-    AddPartInComponent,
-    EditPartInComponent
-  ],
   exports: [
-    AddPartInComponent,
-    PartsInComponent,
     BreadcrumbComponent,
     SupplierComponent,
     CreateSupplierComponent,

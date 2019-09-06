@@ -2,32 +2,34 @@
   <mat-card>
     <div class="captBox col-md-4 offset-5">
       <caption class="caption">
-        Поставки
+        {{ 'PartIn.SuppliesCaption' | translate }}
       </caption>
     </div>
-      
+
     <mat-fsp-table
+      [refresh]="completed"
       [columnDefinitions]="columnDefinitions"
       [columnNames]="[
-        'Ціна',
-        'Кількість',
-        'Номер партії',
-        'Запчастина',
-        'Дата прибуття',
-        'Одиниці виміру',
-        'Валюта'
+        'PartIn.Price',
+        'PartIn.Amount',
+        'PartIn.Batch',
+        'PartIn.Part',
+        'PartIn.Arrival',
+        'PartIn.Unit',
+        'PartIn.Currency'
       ]"
       [dataSource]="dataSource"
       [actionContentTemplate]="actionsTemplate">
     </mat-fsp-table>
-  
+
     <button type="button" class="btn btn-primary" (click)="openAdd()">
-      <i class="fas fa-money-bill-alt"></i> Додати поставку
+      <i class="fas fa-money-bill-alt"></i>
+      {{ 'PartIn.AddSupply' | translate }}
     </button>
-      
+
   </mat-card>
 </div>
 
 <ng-template #actionsTemplate let-data="templateData">
-  <app-part-in-actions [partIn]="data"></app-part-in-actions>
-</ng-template> 
+  <app-part-in-actions [partIn]="data" (completed)="onCompleted()"></app-part-in-actions>
+</ng-template>
