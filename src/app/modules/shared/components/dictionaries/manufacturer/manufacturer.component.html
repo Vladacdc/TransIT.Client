@@ -1,0 +1,26 @@
+<mat-card>
+
+  <div>
+    <h2 class="text-center py-3 m-0">Виробники</h2>
+  </div>
+
+  <div>
+    <app-create-manufacturer *ngIf="isAdmin" (createManufacturer)="addManufacturer($event)"></app-create-manufacturer>
+  </div>
+
+  <ng-template #actionsTemplate let-data="templateData">
+
+    <app-delete-manufacturer *ngIf="isAdmin" [manufacturer]="data" (deleteManufacturer)="deleteManufacturer($event)">
+    </app-delete-manufacturer>
+
+    <app-edit-manufacturer *ngIf="isAdmin" [manufacturer]="data" (updateManufacturer)="updateManufacturer($event)">
+    </app-edit-manufacturer>
+
+  </ng-template>
+
+  <div>
+    <mat-fsp-table #table [columnDefinitions]="columnDefinitions" [columnNames]="columnNames" [dataSource]="dataSource">
+    </mat-fsp-table>
+  </div>
+
+</mat-card>

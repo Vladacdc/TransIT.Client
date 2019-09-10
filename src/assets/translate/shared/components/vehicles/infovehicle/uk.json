@@ -1,0 +1,15 @@
+{
+    "Shared": {
+        "Vehicles": {
+            "InfoVehicle": {
+                "Description": "Опис",
+                "Expenses": "Витрати",
+                "WorkType": "Тип роботи",
+                "Issue": "Поломка",
+                "State": "Стан",
+                "OldState": "Старий стан",
+                "Supplier": "Постачальник"
+            }
+        }
+    }
+}

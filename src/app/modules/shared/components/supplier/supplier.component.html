@@ -1,13 +1,20 @@
-<app-create-supplier (createSupplier)="addSupplier($event)"></app-create-supplier>
-<ng-template #actionsTemplate let-data="templateData">
+<div class="table-background border">
+  
+  <app-create-supplier *ngIf="ableToCreate" (createSupplier)="addSupplier($event)" style="right: 0%"></app-create-supplier>
+
+  <ng-template #actionsTemplate let-data="templateData">
 
     <app-delete-supplier [supplier]="data" (deleteSupplier)="deleteSupplier(data)"></app-delete-supplier>
 
     <app-edit-supplier [supplier]="data" (updateSupplier)="updateSupplier(data)"></app-edit-supplier>
 
-</ng-template>
+  </ng-template>
 
-<div>
-    <mat-fsp-table #table [columnDefinitions]="columnDefinitions" [columnNames]="columnNames" [dataSource]="dataSource" [actionContentTemplate]="actionsTemplate">
+  <div>
+    <mat-fsp-table #table 
+      [columnDefinitions]="columnDefinitions" 
+      [columnNames]="columnNames" 
+      [dataSource]="dataSource">
     </mat-fsp-table>
+  </div>
 </div>

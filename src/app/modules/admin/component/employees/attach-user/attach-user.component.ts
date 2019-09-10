@@ -1,12 +1,7 @@
 import { Component, EventEmitter, Output, OnInit, Input } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { NAME_FIELD_ERRORS } from 'src/app/custom-errors';
 import { Employee } from 'src/app/modules/shared/models/employee';
-import { Post } from 'src/app/modules/shared/models/post';
 import { EmployeeService } from 'src/app/modules/shared/services/employee.service';
-import { PostService } from 'src/app/modules/shared/services/post.service';
-import { UniqueFieldValidator } from 'src/app/modules/shared/validators/unique-field-validator';
 import { UserService } from 'src/app/modules/shared/services/user.service';
 import { User } from 'src/app/modules/shared/models/user';
 import { HttpErrorResponse } from '@angular/common/http';

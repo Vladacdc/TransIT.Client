@@ -1,0 +1,18 @@
+{
+    "PartIn": {
+        "SelectPart": "Виберіть запчастину",
+        "SelectUnit": "Одиниці вимірювання",
+        "SelectCurrency": "Валюта",
+        "SuppliesCaption": "Поставки",
+        "AddSupply": "Додати поставку",
+        "EditSupply": "Редагувати поставку",
+        "CreateSupply": "Додати поставку",
+        "Price": "Ціна",
+        "Amount": "Кількість",
+        "Batch": "Номер партії",
+        "Part": "Запчастина",
+        "Arrival": "Прибуття",
+        "Unit": "Одиниці виміру",
+        "Currency": "Валюта"
+    }
+}

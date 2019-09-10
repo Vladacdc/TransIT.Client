@@ -11,7 +11,6 @@ import { Issue } from 'src/app/modules/shared/models/issue';
 import { MalfunctionService } from 'src/app/modules/shared/services/malfunction.service';
 import { IssueService } from 'src/app/modules/shared/services/issue.service';
 import { VehicleService } from 'src/app/modules/shared/services/vehicle.service';
-import { VehicleTypeService } from 'src/app/modules/shared/services/vehicle-type.service';
 import { VehicleType } from 'src/app/modules/shared/models/vehicleType';
 
 @Component({

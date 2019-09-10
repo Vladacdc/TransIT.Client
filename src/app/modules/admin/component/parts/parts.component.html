@@ -14,11 +14,15 @@
 
 </ng-template>
 
-<div>
- <mat-fsp-table #table
-   [columnDefinitions]="columnDefinitions"
-   [columnNames]="columnNames"
-   [dataSource]="dataSource"
-   [actionContentTemplate]="actionsTemplate">   
- </mat-fsp-table>
+<div class="container">
+ <mat-card> 
+   <mat-fsp-table #table
+    [columnDefinitions]="columnDefinitions"
+    [columnNames]="columnNames"
+    [dataSource]="dataSource"
+    [actionContentTemplate]="actionsTemplate">   
+  </mat-fsp-table>
+ </mat-card>
+ <app-parts-in></app-parts-in>
 </div> 
+

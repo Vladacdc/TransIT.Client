@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, ViewChild, Output, EventEmitter, ɵConsole } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, Output, EventEmitter} from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MalfunctionGroup } from 'src/app/modules/shared/models/malfunction-group';
 import { MalfunctionGroupService } from 'src/app/modules/shared/services/malfunction-group.service';
