@@ -1,15 +1,23 @@
-<app-create-vehicle (createVehicle)="addVehicle($event)"></app-create-vehicle>
+<ng-template #generalTemplate>
+  <app-create-vehicle (createVehicle)="refreshTable()"></app-create-vehicle>
+</ng-template>
+
 <ng-template #actionsTemplate let-data="templateData">
 
-    <app-delete-vehicle [vehicle]="data" (deleteVehicle)="deleteVehicle(data)"></app-delete-vehicle>
+    <app-delete-vehicle [vehicle]="data" (deleteVehicle)="refreshTable()"></app-delete-vehicle>
 
-    <app-edit-vehicle [vehicle]="data" (updateVehicle)="updateVehicle(data)"></app-edit-vehicle>
+    <app-edit-vehicle [vehicle]="data" (updateVehicle)="refreshTable()"></app-edit-vehicle>
 
     <button class="first btn" (click)="infoVehicle(data)"><i class="fas fa-info"></i></button>
 
 </ng-template>
 
 <div>
-    <mat-fsp-table #table [columnDefinitions]="columnDefinitions" [columnNames]="columnNames" [dataSource]="dataSource" [actionContentTemplate]="actionsTemplate">
+    <mat-fsp-table #table 
+      [columnDefinitions]="columnDefinitions" 
+      [columnNames]="columnNames" 
+      [dataSource]="dataSource" 
+      [actionContentTemplate]="actionsTemplate"
+      [generalContentTemplate]="generalTemplate">
     </mat-fsp-table>
 </div>
