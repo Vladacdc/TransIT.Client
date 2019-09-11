@@ -1,6 +1,13 @@
-<mat-form-field>
-  <input matInput placeholder="{{'MatFspTable.search' | translate}}:" #input>
-</mat-form-field>
+<div class="top-container">
+  <mat-form-field>
+    <input matInput placeholder="{{'MatFspTable.search' | translate}}:" #input>
+  </mat-form-field>
+
+  <div class="general-content-container">
+    <ng-container *ngIf="generalContentTemplate" [ngTemplateOutlet]="generalContentTemplate">
+    </ng-container>
+  </div>
+</div>
 
 <div class="scroll-container">
   <table mat-table [dataSource]="dataSource" matSort>

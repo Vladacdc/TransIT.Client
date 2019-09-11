@@ -1,8 +1,10 @@
 <mat-card>
-  <app-create-currency *ngIf="ableToCreate" (createCurrency)="addCurrency($event)"></app-create-currency>
-
+  <ng-template #generalTemplate>
+    <app-create-currency (createCurrency)="refreshTable()"></app-create-currency>
+  </ng-template>
+  
   <ng-template #actionsTemplate let-data="templateData">
-    <app-delete-currency [currency]="data" (deleteCurrency)="deleteCurrency($event)"></app-delete-currency>
+    <app-delete-currency [currency]="data" (deleteCurrency)="refreshTable()"></app-delete-currency>
   </ng-template>
 
   <div>

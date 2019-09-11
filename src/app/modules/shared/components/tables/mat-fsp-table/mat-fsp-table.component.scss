@@ -1,22 +1,25 @@
 table {
-    width: 100%;
+  width: 100%;
+}
+
+.top-container {
+  display: flow-root;
+}
+
+.general-content-container {
+  padding: 7px 0px;
+  position: relative;
+  float: right;
 }
 
 .mat-cell {
-    padding: 6px;
+  padding: 6px;
 }
 
 .scroll-container {
-    overflow: auto;
+  overflow: auto;
 }
 
 .mat-form-field {
-    margin-left: 2%;
-}
-.mat-flat-button {
-    background: #007bff
-}
-.mat-button-wrapper {
-    color: #fff;
-    font: 16px -apple-system;
+  margin-left: 2%;
 }
