@@ -20,6 +20,7 @@ export class ManufacturerComponent implements OnInit {
   ];
 
   @ViewChild('actionsTemplate') actionsTemplate: any;
+  @ViewChild('generalTemplate') generalTemplate: any;
   @ViewChild('table') table: MatFspTableComponent;
 
   dataSource: EntitiesDataSource<Manufacturer>;
@@ -32,18 +33,11 @@ export class ManufacturerComponent implements OnInit {
     this.isAdmin = this.authenticationService.getRole() === 'ADMIN' ? true : false;
     if (this.isAdmin) {
       this.table.actionContentTemplate = this.actionsTemplate;
+      this.table.generalContentTemplate = this.generalTemplate;
     }
   }
 
-  addManufacturer(manufacturer: Manufacturer) {
-    this.table.loadEntitiesPage();
-  }
-
-  deleteManufacturer(manufacturer: Manufacturer) {
-    this.table.loadEntitiesPage();
-  }
-
-  updateManufacturer(manufacturer: Manufacturer) {
+  refreshTable() { 
     this.table.loadEntitiesPage();
   }
 }

@@ -22,6 +22,7 @@ export class UnitComponent implements OnInit {
   ];
 
   @ViewChild('actionsTemplate') actionsTemplate: any;
+  @ViewChild('generalTemplate') generalTemplate: any;
   @ViewChild('table') table: MatFspTableComponent;
 
   dataSource: EntitiesDataSource<Unit>;
@@ -34,18 +35,11 @@ export class UnitComponent implements OnInit {
     this.isAdmin = this.authenticationService.getRole() === 'ADMIN' ? true : false;
     if (this.isAdmin) {
       this.table.actionContentTemplate = this.actionsTemplate;
+      this.table.generalContentTemplate = this.generalTemplate;
     }
   }
 
-  addUnit(unit: Unit) {
-    this.table.loadEntitiesPage();
-  }
-
-  deleteUnit(unit: Unit) {
-    this.table.loadEntitiesPage();
-  }
-
-  updateUnit(unit: Unit) {
+  refreshTable() { 
     this.table.loadEntitiesPage();
   }
 }
