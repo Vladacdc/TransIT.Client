@@ -34,12 +34,9 @@ export class UsersComponent implements OnInit {
     'Статус',
     'Працівник'
   ]
-    
-  ableToCreate = false;
 
   @ViewChild('table') table: MatFspTableComponent;
-  @ViewChild('actionsTemplate') template: any;
-
+  
   dataSource: EntitiesDataSource<User>;
 
   constructor(
@@ -50,21 +47,9 @@ export class UsersComponent implements OnInit {
 
   ngOnInit() {
     this.dataSource = new EntitiesDataSource<User>(this.userService);
-    if (this.authenticationService.getRole() === 'ADMIN') {
-      this.ableToCreate = true;
-      this.table.actionContentTemplate = this.template;
-    }
   }
 
-  addUser(user: User) {
-    this.table.loadEntitiesPage();
-  }
-
-  editUser(user: User) {
-    this.table.loadEntitiesPage();
-  }
-
-  deleteUser(user: User) {
+  refreshTable() {
     this.table.loadEntitiesPage();
   }
 }

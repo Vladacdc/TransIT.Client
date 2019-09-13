@@ -1,21 +1,22 @@
 <div class="table-background border">
-  <app-create-user *ngIf="ableToCreate" (createUser)="addUser($event)"></app-create-user>
 
-  <ng-template #actionsTemplate let-data="templateData">
-    <app-delete-user [user]="data" (deleteUser)="deleteUser($event)"></app-delete-user>
-    <app-edit-user [user]="data" (editUser)="editUser($event)"></app-edit-user>
+  <ng-template #generalTemplate>
+    <app-create-user (createUser)="refreshTable()"></app-create-user>
   </ng-template>
 
-  <div class="captBox col-md-4 offset-5">
-    <caption class="caption">
-      Користувачі
-    </caption>
-  </div>
+  <ng-template #actionsTemplate let-data="templateData">
+    <app-delete-user [user]="data" (deleteUser)="refreshTable()"></app-delete-user>
+    <app-edit-user [user]="data" (editUser)="refreshTable()"></app-edit-user>
+  </ng-template>
+
+  <h2 class="text-center py-3 m-0">Користувачі</h2>
 
   <mat-fsp-table #table
     [columnDefinitions]="columnDefinitions"
     [columnNames]="columnNames"
-    [dataSource]="dataSource">
+    [dataSource]="dataSource"
+    [actionsContentTemplate]="actionsTemplate"
+    [generalContenttemplate]="generalTemplate">
   </mat-fsp-table>
 
 </div>
