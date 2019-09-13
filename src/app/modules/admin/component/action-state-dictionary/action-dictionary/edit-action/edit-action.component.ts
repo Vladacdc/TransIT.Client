@@ -12,15 +12,8 @@ import { ToastrService } from 'ngx-toastr';
 export class EditActionComponent implements OnInit {
   selectedAction: ActionType;
   @ViewChild('close') closeDiv: ElementRef;
-  @Input()
-  set action(action: ActionType) {
-    if (!action) {
-      return;
-    }
-    this.selectedAction = action;
-    action = new ActionType(action);
-    this.actionFrom.patchValue(action);
-  }
+  @Input() action: ActionType;
+  
   @Output() editAction = new EventEmitter<ActionType>();
 
   actionFrom: FormGroup;
@@ -32,6 +25,16 @@ export class EditActionComponent implements OnInit {
       id: '',
       name: ''
     });
+    this.setAction();
+  }
+
+  setAction() {
+    if (!this.action) {
+      return;
+    }
+    this.selectedAction = this.action;
+    this.action = new ActionType(this.action);
+    this.actionFrom.patchValue(this.action);
   }
 
   updateData() {

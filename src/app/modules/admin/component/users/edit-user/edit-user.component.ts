@@ -21,23 +21,10 @@ import { map, tap, switchMap } from 'rxjs/operators';
 export class EditUserComponent implements OnInit, OnDestroy {
 
   @ViewChild('close') closeEditModal: ElementRef;
-  @Output() updateUser = new EventEmitter<User>();
-  @Input() set user(user: User) {
-    if (!user) {
-      return;
-    }
-    this.selectedUser = user;
-    this.attachedEmployee = user.employee;
-    this.userForm.patchValue({ ...this.selectedUser, role: this.selectedUser.role.transName });
-    // set original value for board number, as it's not a part of User dto
-    if (user.employee) {
-       this.userForm.get('boardNumber')
-                    .patchValue(user.employee.boardNumber, {emitEvent: false, onlySelf: true});
-    } else {
-       this.userForm.get('boardNumber').reset({emitEvent: false, onlySelf: true});
-    }
-  }
+  @Output() editUser = new EventEmitter<User>();
+  @Input() user: User;
 
+  
   private subscriptions: Subscription[] = [];
   private attachedEmployee: Employee;
 
@@ -96,12 +83,30 @@ export class EditUserComponent implements OnInit, OnDestroy {
       isActive: true
     });
 
+    this.setUser();
+
     this.listenBoardNumberChanges();
     this.listenWholeFormChanges();
 
     this.roleService
       .getEntities()
       .subscribe(data => (this.roles = data.sort((a, b) => a.transName.localeCompare(b.transName))));
+  }
+
+  setUser(): void {
+    if (!this.user) {
+      return;
+    }
+    this.selectedUser = this.user;
+    this.attachedEmployee = this.user.employee;
+    this.userForm.patchValue({ ...this.selectedUser, role: this.selectedUser.role.transName });
+    // set original value for board number, as it's not a part of User dto
+    if (this.user.employee) {
+      this.userForm.get('boardNumber')
+        .patchValue(this.user.employee.boardNumber, { emitEvent: false, onlySelf: true });
+    } else {
+      this.userForm.get('boardNumber').reset({ emitEvent: false, onlySelf: true });
+    }
   }
 
   listenWholeFormChanges() {
@@ -166,7 +171,7 @@ export class EditUserComponent implements OnInit, OnDestroy {
 
     request.subscribe(
       _ => {
-        this.updateUser.next(user);
+        this.editUser.next(user);
         this.toastrService.success('', 'Користувача змінено');
       },
       error => {
@@ -177,7 +182,7 @@ export class EditUserComponent implements OnInit, OnDestroy {
   }
 
   updateUserChangeActive(user: User) {
-    this.updateUser.next(user);
+    this.editUser.next(user);
   }
 
   // subscribing to board number changes
