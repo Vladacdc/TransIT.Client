@@ -26,10 +26,10 @@ export class SupplierComponent implements OnInit {
     'Валюта',
     'ЄДРПОУ'
   ];
-  ableToCreate = false;
 
   @ViewChild('table') table: MatFspTableComponent;
-  @ViewChild('actionsTemplate') template: any;
+  @ViewChild('actionsTemplate') actionsTemplate: any;
+  @ViewChild('generalTemplate') generalTemplate: any;
 
   dataSource: EntitiesDataSource<Supplier>;
 
@@ -41,21 +41,14 @@ export class SupplierComponent implements OnInit {
 
   ngOnInit() {
     this.dataSource = new EntitiesDataSource<Supplier>(this.supplierService);
+
     if (this.authenticationService.getRole() === 'ADMIN') {
-      this.ableToCreate = true;
-      this.table.actionContentTemplate = this.template;
+      this.table.actionContentTemplate = this.actionsTemplate;
+      this.table.generalContentTemplate = this.generalTemplate;
     }
   }
 
-  addSupplier(supplier: Supplier) {
-    this.table.loadEntitiesPage();
-  }
-
-  deleteSupplier(supplier: Supplier) {
-    this.table.loadEntitiesPage();
-  }
-
-  updateSupplier(supplier: Supplier) {
+  refreshTable() {
     this.table.loadEntitiesPage();
   }
 }

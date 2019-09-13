@@ -1,8 +1,10 @@
 <mat-card>
-  <app-create-country *ngIf="ableToCreate" (createCountry)="addCountry($event)"></app-create-country>
-
+  <ng-template #generalTemplate>
+    <app-create-country (createCountry)="refreshTable()"></app-create-country>
+  </ng-template>
+  
   <ng-template #actionsTemplate let-data="templateData">
-    <app-delete-country [country]="data" (deleteCountry)="deleteCountry($event)"></app-delete-country>
+    <app-delete-country [country]="data" (deleteCountry)="refreshTable()"></app-delete-country>
   </ng-template>
 
   <div>

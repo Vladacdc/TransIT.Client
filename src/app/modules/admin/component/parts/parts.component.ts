@@ -34,15 +34,7 @@ export class PartsComponent implements OnInit {
     this.dataSource = new EntitiesDataSource<Part>(this.partService);
   }
 
-  addPart(part: Part) {
-    this.table.loadEntitiesPage();
-  }
-
-  deletePart(part: Part) {
-    this.table.loadEntitiesPage();
-  }
-
-  updatePart(part: Part) {
+  refreshTable() {
     this.table.loadEntitiesPage();
   }
 }
