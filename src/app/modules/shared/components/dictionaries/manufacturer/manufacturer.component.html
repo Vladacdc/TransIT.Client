@@ -4,16 +4,16 @@
     <h2 class="text-center py-3 m-0">Виробники</h2>
   </div>
 
-  <div>
-    <app-create-manufacturer *ngIf="isAdmin" (createManufacturer)="addManufacturer($event)"></app-create-manufacturer>
-  </div>
+  <ng-template #generalTemplate>
+    <app-create-manufacturer (createManufacturer)="refreshTable()"></app-create-manufacturer>
+  </ng-template>
 
   <ng-template #actionsTemplate let-data="templateData">
 
-    <app-delete-manufacturer *ngIf="isAdmin" [manufacturer]="data" (deleteManufacturer)="deleteManufacturer($event)">
+    <app-delete-manufacturer [manufacturer]="data" (deleteManufacturer)="refreshTable()">
     </app-delete-manufacturer>
 
-    <app-edit-manufacturer *ngIf="isAdmin" [manufacturer]="data" (updateManufacturer)="updateManufacturer($event)">
+    <app-edit-manufacturer [manufacturer]="data" (updateManufacturer)="refreshTable()">
     </app-edit-manufacturer>
 
   </ng-template>

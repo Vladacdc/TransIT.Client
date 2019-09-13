@@ -4,15 +4,15 @@
     <h2 class="text-center py-3 m-0">Одиниці вимірювання</h2>
   </div>
 
-  <div>
-    <app-create-unit *ngIf="isAdmin" (createUnit)="addUnit($event)"></app-create-unit>
-  </div>
+  <ng-template #generalTemplate>
+    <app-create-unit (createUnit)="refreshTable()"></app-create-unit>
+  </ng-template>
 
   <ng-template #actionsTemplate let-data="templateData">
 
-    <app-delete-unit *ngIf="isAdmin" [unit]="data" (deleteUnit)="deleteUnit($event)"></app-delete-unit>
+    <app-delete-unit [unit]="data" (deleteUnit)="refreshTable()"></app-delete-unit>
 
-    <app-edit-unit *ngIf="isAdmin" [unit]="data" (updateUnit)="updateUnit($event)"></app-edit-unit>
+    <app-edit-unit [unit]="data" (updateUnit)="refreshTable()"></app-edit-unit>
 
   </ng-template>
 
