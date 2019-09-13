@@ -21,5 +21,27 @@ table {
 }
 
 .mat-form-field {
-  margin-left: 2%;
+    margin-left: 2%;
+}
+.mat-flat-button {
+    background: #007bff
+}
+.mat-button-wrapper {
+    color: #fff;
+    font: 16px -apple-system;
+}
+
+.mat-table{
+    background-color: transparent;
+    border: 1px solid #dee2e6!important;
+    border-radius: 0.7rem;
+}
+
+.mat-paginator{
+    background-color: #dee2e610;
+    border: 1px solid #dee2e650!important;
+}
+
+.mat-header-row{
+    background-color: #dee2e680;
 }
