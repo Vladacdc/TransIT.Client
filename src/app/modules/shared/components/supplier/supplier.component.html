@@ -1,13 +1,16 @@
 <div class="table-background border">
   
-  <app-create-supplier *ngIf="ableToCreate" (createSupplier)="addSupplier($event)" style="right: 0%"></app-create-supplier>
+  <ng-template #generalTemplate>
+    <app-create-supplier (createSupplier)="refreshTable()">
+    </app-create-supplier>
+  </ng-template>
 
   <ng-template #actionsTemplate let-data="templateData">
+    <app-delete-supplier [supplier]="data" (deleteSupplier)="refreshTable()">
+    </app-delete-supplier>
 
-    <app-delete-supplier [supplier]="data" (deleteSupplier)="deleteSupplier(data)"></app-delete-supplier>
-
-    <app-edit-supplier [supplier]="data" (updateSupplier)="updateSupplier(data)"></app-edit-supplier>
-
+    <app-edit-supplier [supplier]="data" (updateSupplier)="refreshTable()">
+    </app-edit-supplier>
   </ng-template>
 
   <div>

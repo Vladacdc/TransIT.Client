@@ -18,10 +18,10 @@ export class CountryComponent implements OnInit {
   columnNames: string[] = [
     'Назва країни'
   ];
-  ableToCreate = false;
 
   @ViewChild('table') table: MatFspTableComponent;
-  @ViewChild('actionsTemplate') template: any;
+  @ViewChild('actionsTemplate') actionsTemplate: any;
+  @ViewChild('generalTemplate') generalTemplate: any;
 
   dataSource: EntitiesDataSource<Country>;
 
@@ -34,15 +34,12 @@ export class CountryComponent implements OnInit {
   ngOnInit() {
     this.dataSource = new EntitiesDataSource<Country>(this.countryService);
     if (this.authenticationService.getRole() === 'ADMIN') {
-      this.ableToCreate = true;
-      this.table.actionContentTemplate = this.template;
+      this.table.actionContentTemplate = this.actionsTemplate;
+      this.table.generalContentTemplate = this.generalTemplate;
     }
   }
 
-  addСountry(country: Country) {
-    this.table.loadEntitiesPage();
-  }
-  deleteСountry(country: Country) {
+  refreshTable() {
     this.table.loadEntitiesPage();
   }
 }

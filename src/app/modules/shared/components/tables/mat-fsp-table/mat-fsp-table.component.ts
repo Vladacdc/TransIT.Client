@@ -18,6 +18,7 @@ export class MatFspTableComponent implements OnInit, OnDestroy, AfterViewInit {
   columnsToDisplay: string[];
 
   @Input() actionContentTemplate: any;
+  @Input() generalContentTemplate: any;
   @Input() columnDefinitions: string[];
   @Input() columnNames: string[];
   @Input() dataSource: EntitiesDataSource<any>;

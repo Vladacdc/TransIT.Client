@@ -1,12 +1,22 @@
 <div class="table-background border">
-  <h1 style="text-align:center">Стани</h1>
-  <span><app-create-state (createState)="addState($event)"></app-create-state></span>
-  <span class="second">
-    <app-edit-state [state]="selectedState" (editState)="editState($event)"></app-edit-state>
-  </span>
-  <span class="third">
-    <app-delete-state [state]="selectedState" (deleteState)="deleteState($event)"></app-delete-state>
-  </span>
-  <p></p>
-  <table id="state-table" class="table table-bordered  table-hover" style="width:100%;" cellspacing="0"></table>
+
+  <ng-template #generalTemplate>
+    <app-create-state (createState)="refreshTable()"></app-create-state>
+  </ng-template>
+
+  <ng-template #actionsTemplate let-data="templateData">
+    <app-delete-state [state]="data" (deleteState)="refreshTable()"></app-delete-state>
+    <app-edit-state [state]="data" (editState)="refreshTable()"></app-edit-state>
+  </ng-template>
+
+  <h2 class="text-center py-3 m-0">Стани</h2>
+
+  <mat-fsp-table #table
+    [columnDefinitions]="columnDefinitions"
+    [columnNames]="columnNames"
+    [dataSource]="dataSource"
+    [actionContentTemplate]="actionsTemplate"
+    [generalContentTemplate]="generalTemplate">
+  </mat-fsp-table>
+
 </div>

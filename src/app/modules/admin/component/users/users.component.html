@@ -1,9 +1,22 @@
 <div class="table-background border">
-  <app-create-user (createUser)="addUser($event)"></app-create-user>
-  <app-edit-user [user]="user" (updateUser)="updateUser($event)"></app-edit-user>
-  <app-delete-user [user]="user" (deleteUser)="deleteUser($event)"></app-delete-user>
-  <p></p>
-  <div>
-    <table id="userTable" class="table table-bordered  table-hover" style="width:100%;"></table>
-  </div>
+
+  <ng-template #generalTemplate>
+    <app-create-user (createUser)="refreshTable()"></app-create-user>
+  </ng-template>
+
+  <ng-template #actionsTemplate let-data="templateData">
+    <app-delete-user [user]="data" (deleteUser)="refreshTable()"></app-delete-user>
+    <app-edit-user [user]="data" (editUser)="refreshTable()"></app-edit-user>
+  </ng-template>
+
+  <h2 class="text-center py-3 m-0">Користувачі</h2>
+
+  <mat-fsp-table #table
+    [columnDefinitions]="columnDefinitions"
+    [columnNames]="columnNames"
+    [dataSource]="dataSource"
+    [actionContentTemplate]="actionsTemplate"
+    [generalContentTemplate]="generalTemplate">
+  </mat-fsp-table>
+
 </div>

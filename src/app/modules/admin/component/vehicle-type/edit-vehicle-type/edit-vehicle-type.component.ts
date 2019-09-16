@@ -11,13 +11,9 @@ import { VehicleTypeService } from 'src/app/modules/shared/services/vehicle-type
 })
 export class EditVehicleTypeComponent implements OnInit {
   @ViewChild('close') closeDiv: ElementRef;
-  @Input()
-  set vehicleType(vehicleType: VehicleType) {
-    if (!vehicleType) {
-      return;
-    }
-    this.vehicleTypeForm.patchValue({ ...vehicleType });
-  }
+  @Input() vehicleType: VehicleType;
+
+  
   @Output() updateVehicleType = new EventEmitter<VehicleType>();
 
   vehicleTypeForm: FormGroup;
@@ -33,8 +29,17 @@ export class EditVehicleTypeComponent implements OnInit {
       id: '',
       name: ''
     });
+
+    this.setVehicleType();
   }
 
+  setVehicleType() {
+    if (!this.vehicleType) {
+      return;
+    }
+    this.vehicleTypeForm.patchValue({ ...this.vehicleType });
+  }
+  
   updateData() {
     if (this.vehicleTypeForm.invalid) {
       return;

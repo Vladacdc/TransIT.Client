@@ -48,15 +48,7 @@ export class VehiclesComponent implements OnInit {
     this.dataSource = new EntitiesDataSource<Vehicle>(this.vehicleService);
   }
 
-  addVehicle(vehicle: Vehicle) {
-    this.table.loadEntitiesPage();
-  }
-
-  deleteVehicle(vehicle: Vehicle) {
-    this.table.loadEntitiesPage();
-  }
-
-  updateVehicle(vehicle: Vehicle) {
+  refreshTable() { 
     this.table.loadEntitiesPage();
   }
 
