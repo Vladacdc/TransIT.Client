@@ -22,6 +22,7 @@ export class PartsComponent implements OnInit {
     'Admin.Parts.Manufacturer',
     'Admin.Parts.Units'
   ];
+  tableName: string = 'Запчастини';
 
   @ViewChild('table') table: MatFspTableComponent;
 
