@@ -27,6 +27,7 @@ export class EditSupplierComponent implements OnInit {
       return;
     }
     this.selectedSupplier = new Supplier(supplier);
+    this.setUpForm();
   }
 
   constructor(
@@ -38,6 +39,16 @@ export class EditSupplierComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.setUpForm();
+    this.countryService.getEntities().subscribe(data => {
+      this.countries = data;
+    });
+    this.currencyService.getEntities().subscribe(data => {
+      this.currencies = data;
+    });
+  }
+
+  setUpForm() { 
     this.supplierForm = this.formBuilder.group({
       id: [''],
       name: new FormControl('', Validators.compose([Validators.required, Validators.maxLength(30)])),
@@ -47,13 +58,6 @@ export class EditSupplierComponent implements OnInit {
       currency: ['']
     });
     this.supplierForm.patchValue(this.selectedSupplier);
-    
-    this.countryService.getEntities().subscribe(data => {
-      this.countries = data;
-    });
-    this.currencyService.getEntities().subscribe(data => {
-      this.currencies = data;
-    });
   }
 
   get Countries(): string[] {
@@ -76,7 +80,7 @@ export class EditSupplierComponent implements OnInit {
       currency: form.currency as Currency,
       country: form.country as Country
     };
-
+    this.setUpForm();
     this.service.updateEntity(supplier).subscribe(
       _ => {
         this.toast.success('', 'Постачальника оновлено');
@@ -84,6 +88,7 @@ export class EditSupplierComponent implements OnInit {
       },
       error => this.toast.error('Помилка редагування')
     );
+    
     this.closeDiv.nativeElement.click();
   }
 
