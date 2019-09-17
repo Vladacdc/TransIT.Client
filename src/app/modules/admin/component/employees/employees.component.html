@@ -1,47 +1,19 @@
 <div class="table-background border">
-  <h2 class="table-caption">
-    Працівники
-  </h2>
-  <app-create-employee (addEmployee)="reloadTable()"></app-create-employee>
-  <app-edit-employee [employee]="selectedEmployee" (editEmployee)="reloadTable()"></app-edit-employee>
-  <app-delete-employee [employee]="selectedEmployee" (deleteEmployee)="reloadTable()"></app-delete-employee>
-  <app-attach-user [selectedEmployee]="selectedEmployee" (completed)="reloadTable()" ></app-attach-user>
-  <table id="employee" datatable [dtOptions]="options" [dtTrigger]="renderTrigger" class="table table-bordered">
-    <thead>
-      <tr>
-        <th>Табельний номер</th>
-        <th>Прізвище</th>
-        <th>Ім'я</th>
-        <th>По батькові</th>
-        <th>Коротке ім'я</th>
-        <th>Посада</th>
-        <th>Ім'я користувача</th>
-        <th>Дії</th>
-      </tr>
-    </thead>
-    <tbody *ngIf="employees?.length !== 0">
-      <tr *ngFor="let employee of employees">
-        <td>{{ employee.boardNumber }}</td>
-        <td>{{ employee.lastName }}</td>
-        <td>{{ employee.firstName }}</td>
-        <td>{{ employee.middleName }}</td>
-        <td>{{ employee.shortName }}</td>
-        <td>{{ employee.post?.name }}</td>
-        <td>{{ employee.attachedUser?.userName || "немає"}}</td>
-        <td>
-          <div class="d-flex flex-nowrap">
-            <button (click)="selectPost(employee)" class="btn" data-toggle="modal" data-target="#editEmployee">
-              <i class="fas fa-edit"></i>
-            </button>
-            <button (click)="selectPost(employee)" class="btn" data-toggle="modal" data-target="#deleteModal">
-              <i class="fas fa-trash-alt"></i>
-            </button>
-            <button (click)="selectPost(employee)" class="btn" data-toggle="modal" data-target="#attachUser">
-              <i class="fas fa-user-circle"></i>
-            </button>
-          </div>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+
+    <ng-template #generalTemplate>
+        <app-create-employee (createEmployee)="refreshTable()"></app-create-employee>
+    </ng-template>
+
+    <ng-template #actionsTemplate let-data="templateData">
+
+        <app-delete-employee [employee]="data" (deleteEmployee)="refreshTable()"></app-delete-employee>
+
+        <app-edit-employee [employee]="data" (updateEmployee)="refreshTable()"></app-edit-employee>
+
+    </ng-template>
+    <h2 class="text-center py-3 m-0">{{ 'Routing.employees' | translate }}</h2>
+    <div>
+        <mat-fsp-table #table [columnDefinitions]="columnDefinitions" [columnNames]="columnNames" [dataSource]="dataSource" [actionContentTemplate]="actionsTemplate" [generalContentTemplate]="generalTemplate">
+        </mat-fsp-table>
+    </div>
 </div>

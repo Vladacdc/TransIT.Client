@@ -53,7 +53,7 @@ export class EditWorkTypeComponent implements OnInit {
 
     this.workTypeService.updateEntity(workType).subscribe(
       _ => {
-        this.toast.success('', 'Постачальника оновлено');
+        this.toast.success('', 'Тип роботи оновлено');
         this.updateWorkType.next(workType);
       },
       error => this.toast.error('Помилка редагування')

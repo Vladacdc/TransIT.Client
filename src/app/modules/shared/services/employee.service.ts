@@ -34,7 +34,14 @@ export class EmployeeService extends CrudService<Employee> {
     return this.http.delete<Employee>(`${this.serviceUrl}/attach/${employeeid}`, {});
   }
 
-  protected mapEntity(employee: Employee): Employee {
-    return new Employee(employee);
+  protected mapEntity(entity: Employee): Employee {
+    const employee = new Employee(entity);
+    if (entity.post) {
+      employee.postName = entity.post.name;
+    }
+    if (entity.attachedUser) {
+      employee.attachedUserName = entity.attachedUser.userName;
+    }
+    return employee;
   }
 }
