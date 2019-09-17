@@ -1,11 +1,6 @@
 <div class="table-container">
   <mat-card>
-    <div class="captBox col-md-4 offset-5">
-      <caption class="caption">
-        {{ 'PartIn.SuppliesCaption' | translate }}
-      </caption>
-    </div>
-
+    <h2 class="text-center py-3 m-0">{{ 'PartIn.SuppliesCaption' | translate }}</h2>
     <mat-fsp-table
       [refresh]="completed"
       [columnDefinitions]="columnDefinitions"

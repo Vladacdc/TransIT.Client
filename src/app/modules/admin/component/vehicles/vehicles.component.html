@@ -1,3 +1,5 @@
+<div class="table-background border">
+
 <ng-template #generalTemplate>
   <app-create-vehicle (createVehicle)="refreshTable()"></app-create-vehicle>
 </ng-template>
@@ -11,7 +13,7 @@
     <button class="first btn" (click)="infoVehicle(data)"><i class="fas fa-info"></i></button>
 
 </ng-template>
-
+<h2 class="text-center py-3 m-0">{{ 'Routing.vehicles' | translate }}</h2>
 <div>
     <mat-fsp-table #table 
       [columnDefinitions]="columnDefinitions" 
@@ -20,4 +22,5 @@
       [actionContentTemplate]="actionsTemplate"
       [generalContentTemplate]="generalTemplate">
     </mat-fsp-table>
+</div>
 </div>
