@@ -20,15 +20,26 @@ import {MatButtonModule} from '@angular/material/button';
 import { ValidatorComponent } from './components/validator/validator.component';
 import { LocalizationModule } from '../localization/localization.module';
 
+import {MatSidenavModule} from '@angular/material/sidenav';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
+import {MatIconModule} from '@angular/material/icon';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatExpansionModule} from '@angular/material/expansion';
+
 @NgModule({
   declarations: [
     NavbarComponent,
+    SidebarComponent,
     ValidatorComponent,
     LoginComponent,
     TruncatePipe,
   ],
   imports: [
     CommonModule,
+    MatIconModule,
+    MatExpansionModule,
+    MatToolbarModule,
+    MatSidenavModule,
     MatButtonModule,
     MatInputModule,
     ReactiveFormsModule,
@@ -40,6 +51,7 @@ import { LocalizationModule } from '../localization/localization.module';
   ],
   exports: [
     NavbarComponent,
+    SidebarComponent,
     ValidatorComponent,
     LoginComponent,
     TruncatePipe,

@@ -1,0 +1,66 @@
+<mat-toolbar>
+  <button mat-icon-button class="ml-0 mr-2" (click)="drawer.toggle()">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <a class="text-decoration-none text-reset" routerLink="/">
+    <img src="../../../../../assets/img/logo.png" width="30" height="30" alt="" />
+    TransIT
+  </a>
+
+  <div class="mr-auto"></div>
+
+  <!-- <ng-container *ngIf="isLoggedIn">
+    <span class="small login">{{ userLogin }}</span>
+    <a class="ml-2 text-muted small text-decoration-none" routerLink="logout"
+      (click)="logout()">{{ 'Core.Navbar.SignOut' | translate }}</a>
+  </ng-container> -->
+</mat-toolbar>
+
+<!-- <nav class="navbar navbar-expand navbar-light bg-light border-bottom">
+  <button mat-icon-button class="ml-0 mr-2" (click)="drawer.toggle()">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <a class="navbar-brand" routerLink="/">
+    <img src="../../../../../assets/img/logo.png" width="30" height="30" alt="" />
+    TransIT
+  </a>
+  <app-language-select></app-language-select>
+  <div class="navbar-nav mr-auto"></div>
+  <div class="navbar-nav">
+    <div class="d-md-none">
+      <ng-content class="d-md-none"></ng-content>
+    </div>
+    <ng-container *ngIf="isLoggedIn">
+      <span class="nav-item nav-link login">{{ userLogin }}</span>
+      <a class="nav-item nav-link" routerLink="logout" (click)="logout()">{{ 'Core.Navbar.SignOut' | translate }}</a>
+    </ng-container>
+  </div>
+</nav> -->
+
+<mat-drawer-container hasBackdrop="false">
+  <mat-drawer class="drawer bg-dark p-3" #drawer [mode]="mode">
+    <mat-accordion>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Personal data
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <small>Test</small>
+        
+      </mat-expansion-panel>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Self aware panel
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <p>I'm visible because I am open</p>
+      </mat-expansion-panel>
+    </mat-accordion>
+
+  </mat-drawer>
+  <mat-drawer-content>
+    <ng-content *ngIf="pageTemplate!=null && pageTemplate!=undefined then pageTemplate"></ng-content>
+  </mat-drawer-content>
+</mat-drawer-container>

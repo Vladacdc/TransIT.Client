@@ -1,0 +1,21 @@
+.nav-link.login {
+  color: rgba(0, 0, 0, 0.7);
+}
+
+button {
+  outline: none;
+}
+
+button::-moz-focus-inner {
+  border: 0;
+}
+
+.drawer {
+    width: 100%;
+}
+
+@media (min-width: 768px) {
+  .drawer {
+    width: 300px;
+  }
+}
