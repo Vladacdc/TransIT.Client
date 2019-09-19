@@ -16,6 +16,7 @@ export class MatFspTableComponent implements OnInit, OnDestroy, AfterViewInit {
   private subsription: Unsubscribable;
 
   columnsToDisplay: string[];
+  sortedColumn: string;
 
   @Input() actionContentTemplate: any;
   @Input() generalContentTemplate: any;
@@ -43,7 +44,7 @@ export class MatFspTableComponent implements OnInit, OnDestroy, AfterViewInit {
     }
     this.dataSource.loadEntities(
       '',
-      null,
+      {direction: "desc", columnDef: null},
       this.paginator.pageIndex,
       this.paginator.pageSize,
       this.paginator
@@ -73,16 +74,16 @@ export class MatFspTableComponent implements OnInit, OnDestroy, AfterViewInit {
         this.loadEntitiesPage();
       })
     ).subscribe();
-
+    
     merge(this.sort.sortChange, this.paginator.page).pipe(
-      tap(() => this.loadEntitiesPage())
+      tap(() => this.loadEntitiesPage(this.sort.active))
     ).subscribe();
   }
 
-  loadEntitiesPage() {
+  loadEntitiesPage(columnToSort: string = null) {
     this.dataSource.loadEntities(
       this.input.nativeElement.value,
-      this.sort.direction,
+      { direction: this.sort.direction, columnDef: columnToSort },
       this.paginator.pageIndex,
       this.paginator.pageSize,
       this.paginator
