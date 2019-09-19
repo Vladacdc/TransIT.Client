@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { GlobalModalComponent } from './global-modal.component';
+import { CreateModalComponent } from './create-modal.component';
 
-describe('GlobalModalComponent', () => {
-  let component: GlobalModalComponent;
-  let fixture: ComponentFixture<GlobalModalComponent>;
+describe('CreateModalComponent', () => {
+  let component: CreateModalComponent;
+  let fixture: ComponentFixture<CreateModalComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ GlobalModalComponent ]
+      declarations: [ CreateModalComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(GlobalModalComponent);
+    fixture = TestBed.createComponent(CreateModalComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

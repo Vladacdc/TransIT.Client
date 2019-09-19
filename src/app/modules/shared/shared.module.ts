@@ -88,6 +88,7 @@ import { PartService } from './services/part.service';
 import { ManufacturerService } from './services/manufacturer.service';
 import { MomentDateAdapter, MAT_MOMENT_DATE_FORMATS } from '@angular/material-moment-adapter';
 import { MatDialogComponent } from './components/mat-dialog/mat-dialog.component';
+import { CreateModalComponent } from './components/global-modal/create-modal/create-modal.component';
 
 @NgModule({
   declarations: [
@@ -131,6 +132,7 @@ import { MatDialogComponent } from './components/mat-dialog/mat-dialog.component
     CreateWorkTypeComponent,
     EditWorkTypeComponent,
     DeleteWorkTypeComponent,
+    CreateModalComponent
   ],
   imports: [
     MatCardModule,
@@ -185,7 +187,8 @@ import { MatDialogComponent } from './components/mat-dialog/mat-dialog.component
     DeleteManufacturerComponent,
     EditManufacturerComponent,
     MatFspTableComponent,
-    WorkTypeComponent
+    WorkTypeComponent,
+    CreateModalComponent
   ],
   providers: [
     ActionTypeService,

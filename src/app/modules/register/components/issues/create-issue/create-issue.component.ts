@@ -41,8 +41,7 @@ export class CreateIssueComponent implements OnInit {
     private vehicleService: VehicleService,
     private malfunctionService: MalfunctionService,
     private issueService: IssueService,
-    private toast: ToastrService,
-    private dialog: MatDialog
+    private toast: ToastrService
   ) {}
 
   ngOnInit() {
@@ -51,75 +50,6 @@ export class CreateIssueComponent implements OnInit {
     this.configureMalfunctionControls();
   }
 
-  openDialog() {
-
-    const dialogConfig = new MatDialogConfig();
-
-    dialogConfig. disableClose = true;
-    dialogConfig.autoFocus = true;
-
-    dialogConfig.data = {
-      group: this.fb.group( {
-        boardNumber: new FormControl(
-          '',
-          [Validators.maxLength(10), Validators.pattern('^[A-Za-zА-Яа-я0-9їієЇІЯЄ/\'/`-]+$'),]
-        ),
-        lastName: new FormControl(
-          '',
-          Validators.compose([Validators.maxLength(30), Validators.pattern('^[A-Za-zА-Яа-яїієЇІЯЄ/\'/`-]+$'),]
-          )
-        ),
-        firstName: new FormControl(
-          '',
-          Validators.compose([Validators.maxLength(30), Validators.pattern('^[A-Za-zА-Яа-яїієЇІЯЄ/\'/`-]+$')]),
-        ),
-        middleName: new FormControl(
-          '',
-          Validators.compose([Validators.maxLength(30), Validators.pattern('^[A-Za-zА-Яа-яїієЇІЯЄ/\'/`-]+$')]),
-        ),
-        phoneNumber: new FormControl(
-          '',
-          Validators.minLength(12),
-        ),
-        userName: new FormControl(
-          '',
-          Validators.compose([Validators.required, Validators.minLength(3), Validators.pattern('^[A-Za-z0-9]+$')]),
-        ),
-        password: new FormControl(
-          '',
-          Validators.compose([Validators.required, Validators.minLength(8), Validators.maxLength(30)]),
-        ),
-        confirmPassword: new FormControl(
-          '',
-          Validators.compose([Validators.required, Validators.minLength(8), Validators.maxLength(30)]),
-        ),
-        email: new FormControl(
-          '',
-          Validators.compose([Validators.email, Validators.maxLength(30)])
-        ),
-        role: new FormControl('', Validators.required, )
-      }),
-    buttons: {
-      cancel: 'Cancel',
-      submit: 'Create'
-    }};
-    const dialogRef = this.dialog.open(MatDialogComponent, dialogConfig);
-
-    dialogRef.afterClosed().subscribe(x => {
-    if (x !== undefined) {
-      this.testMethod(x);
-    }
-    });
-}
-testMethod(form: FormGroup) {
-  Object.keys(form.controls).forEach((key: string) => {
-    const control = form.get(key);
-    if (control instanceof FormGroup) {
-      console.log(control.value);
-    }
-  });
-}
-//////////////////////////////////////////////////////
   onSubmit() {
     if (this.issueForm.invalid) {
       return;

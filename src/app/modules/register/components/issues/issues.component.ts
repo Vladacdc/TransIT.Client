@@ -1,11 +1,12 @@
-import { Component, ViewChild, OnDestroy, AfterViewInit } from '@angular/core';
+import { Component, ViewChild, OnDestroy, AfterViewInit, OnInit } from '@angular/core';
 import { DataTableDirective } from 'angular-datatables';
 import { Subject } from 'rxjs';
 import { Issue } from 'src/app/modules/shared/models/issue';
 import { IssueService } from 'src/app/modules/shared/services/issue.service';
 import { Priority } from '../../models/priority/priority';
 import { DatatableSettings } from 'src/app/modules/shared/helpers/datatable-settings';
-
+import { FormGroup, FormBuilder, Validators, FormControl, AbstractControl } from '@angular/forms';
+import { malfunctionSelectedValidator } from 'src/app/custom-errors';
 @Component({
   selector: 'app-issues',
   templateUrl: './issues.component.html',
@@ -37,12 +38,72 @@ export class IssuesComponent implements OnDestroy, AfterViewInit {
     processing: true
   });
 
+
+
+  controls: any[] = [
+    {
+      containerType: "date",
+      formControlName: "date",
+      placeHolder: "Дата заявки",
+      labelName: "Дата заявки",
+      required: true
+    },
+    {
+      containerType: "select",
+      formControlName: "vehicleType",
+      placeHolder: "Виберіть вид транспорту",
+      labelName: "Вид транспорту",
+      required: true
+    },
+    {
+      containerType: "select",
+      formControlName: "vehicle",
+      placeHolder: "Виберіть транспорт",
+      labelName: "Транспорт",
+      required: false
+    },
+
+    {
+      containerType: "select",
+      formControlName: "malfunctionGroup",
+      placeHolder: "Виберіть групу несправності",
+      labelName: "Група несправності",
+      required: false
+    },
+    {
+      containerType: "select",
+      formControlName: "malfunction",
+      placeHolder: "Виберіть несправність",
+      labelName: "Несправність",
+      required: false
+    },
+    {
+      containerType: "select",
+      formControlName: "summary",
+      placeHolder: "Опишіть вашу поломку",
+      labelName: "Опис несправності",
+      required: true
+    },
+    {
+      containerType: "textarea",
+      formControlName: "date",
+      placeHolder: "Дата заявки",
+      labelName: "Дата заявки",
+      required: true
+    },
+  ];
+  issueForm: FormGroup;
   issues: Issue[] = [];
   selectedIssue: Issue;
   renderTrigger: Subject<any> = new Subject();
   @ViewChild(DataTableDirective) datatableElement: DataTableDirective;
 
-  constructor(private issueService: IssueService) {}
+  constructor(private fb: FormBuilder,
+              private issueService: IssueService) {}
+
+  ngOnOnit() {
+    this.setUpForm();
+  }
 
   ngAfterViewInit(): void {
     this.renderTrigger.next();
@@ -69,5 +130,20 @@ export class IssuesComponent implements OnDestroy, AfterViewInit {
 
   private adjustColumns() {
     setTimeout(() => $(window).trigger('resize'), 0);
+  }
+
+  private setUpForm() {
+    this.issueForm = this.fb.group(
+      {
+        vehicleType: [null, Validators.required],
+        vehicle: [{ value: null, disabled: true }, Validators.required],
+        malfunctionGroup: null,
+        malfunctionSubgroup: [{ value: null, disabled: true }],
+        malfunction: [{ value: null, disabled: true }],
+        date: [new Date(), Validators.required],
+        summary: ['', Validators.required]
+      },
+      { validators: malfunctionSelectedValidator }
+    );
   }
 }

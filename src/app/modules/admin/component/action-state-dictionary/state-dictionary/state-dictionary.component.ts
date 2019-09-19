@@ -31,8 +31,10 @@ export class StateDictionaryComponent implements OnInit {
       {
         targets: -1,
         data: null,
-        defaultContent: `<button class="first btn" data-toggle="modal" data-target="#editState"><i class="fas fa-edit"></i></button>
-         <button class="second btn" data-toggle="modal" data-target="#deleteState"><i class="fas fas fa-trash-alt"></i></button>`
+        defaultContent: `<button class="first btn" data-toggle="modal" data-target="#editState">
+        <i class="fas fa-edit"></i></button>
+         <button class="second btn" data-toggle="modal" data-target="#deleteState">
+         <i class="fas fas fa-trash-alt"></i></button>`
       }
     ],
     language: {
