@@ -23,7 +23,7 @@ export class EntitiesDataSource<Entity extends TEntity<Entity>> implements DataS
 
   loadEntities(
     filter: string = '',
-    sorting: any,//string = null, //{direction: string, columnDef: string}
+    sorting: any, //{direction: string, columnDef: string}
     pageIndex: number = 0,
     pageSize: number = 5,
     paginator: MatPaginator = null) {
