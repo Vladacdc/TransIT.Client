@@ -41,10 +41,7 @@ export class CurrencyComponent implements OnInit {
     }
   }
 
-  addCurrency(currency: Currency) {
-    this.table.loadEntitiesPage();
-  }
-  deleteCurrency(currency: Currency) {
+  refreshTable() {
     this.table.loadEntitiesPage();
   }
 }

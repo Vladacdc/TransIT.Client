@@ -12,6 +12,8 @@ import { AuthenticationService } from 'src/app/modules/core/services/authenticat
 })
 export class SupplierComponent implements OnInit {
 
+  supplier: Supplier;
+
   columnDefinitions: string[] = [
     'name',
     'fullName',
