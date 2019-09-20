@@ -1,16 +1,26 @@
 <div class="table-background border">
-  
+
+  <ng-container *ngIf="supplier">
+    <app-delete-supplier [supplier]="supplier" (deleteSupplier)="refreshTable()">
+    </app-delete-supplier>
+
+    <app-edit-supplier [supplier]="supplier" (updateSupplier)="refreshTable()">
+    </app-edit-supplier>
+  </ng-container>
+
   <ng-template #generalTemplate>
     <app-create-supplier (createSupplier)="refreshTable()">
     </app-create-supplier>
   </ng-template>
 
   <ng-template #actionsTemplate let-data="templateData">
-    <app-delete-supplier [supplier]="data" (deleteSupplier)="refreshTable()">
-    </app-delete-supplier>
+    <button class="btn" (click)="supplier=data" data-toggle="modal" data-target="#editSupplier">
+      <i class="fas fa-edit"></i>
+    </button>
 
-    <app-edit-supplier [supplier]="data" (updateSupplier)="refreshTable()">
-    </app-edit-supplier>
+    <button class="btn" (click)="supplier=data" data-toggle="modal" data-target="#deleteSupplier">
+      <i class="fas fas fa-trash-alt"></i>
+    </button>
   </ng-template>
 
   <div>
