@@ -5,9 +5,19 @@
   </ng-template>
 
   <ng-template #actionsTemplate let-data="templateData">
-    <app-delete-state [state]="data" (deleteState)="refreshTable()"></app-delete-state>
-    <app-edit-state [state]="data" (editState)="refreshTable()"></app-edit-state>
+    <button class="btn" (click)="state=data" data-toggle="modal" data-target="#deleteState">
+      <i class="fas fa-trash-alt"></i>
+    </button>
+
+    <button class="btn" (click)="state=data" data-toggle="modal" data-target="#editState">
+      <i class="fas fa-edit"></i>
+    </button>
   </ng-template>
+
+  <ng-container *ngIf="state">
+    <app-delete-state [state]="state" (deleteState)="refreshTable()"></app-delete-state>
+    <app-edit-state [state]="state" (editState)="refreshTable()"></app-edit-state>
+  </ng-container>
 
   <h2 class="text-center py-3 m-0">Стани</h2>
 
