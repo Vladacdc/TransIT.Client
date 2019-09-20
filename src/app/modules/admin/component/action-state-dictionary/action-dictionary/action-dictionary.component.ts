@@ -3,6 +3,7 @@ import { ActionType } from 'src/app/modules/shared/models/action-type';
 import { MatFspTableComponent } from 'src/app/modules/shared/components/tables/mat-fsp-table/mat-fsp-table.component';
 import { EntitiesDataSource } from 'src/app/modules/shared/data-sources/entities-data-sourse';
 import { ActionTypeService } from 'src/app/modules/shared/services/action-type.service';
+import { Action } from 'rxjs/internal/scheduler/Action';
 
 @Component({
   selector: 'app-action-dictionary',
@@ -10,6 +11,8 @@ import { ActionTypeService } from 'src/app/modules/shared/services/action-type.s
   styleUrls: ['./action-dictionary.component.scss']
 })
 export class ActionDictionaryComponent implements OnInit {
+  action: ActionType;
+
   columnDefinitions: string[] = [
     'name'
   ];

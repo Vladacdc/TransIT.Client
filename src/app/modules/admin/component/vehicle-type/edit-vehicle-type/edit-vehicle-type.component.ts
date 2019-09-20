@@ -11,11 +11,21 @@ import { VehicleTypeService } from 'src/app/modules/shared/services/vehicle-type
 })
 export class EditVehicleTypeComponent implements OnInit {
   @ViewChild('close') closeDiv: ElementRef;
-  @Input() vehicleType: VehicleType;
+  @Input()
+  set vehicleType(vehicleType: VehicleType) {
+    if (!vehicleType) {
+      return;
+    }
+    this.selectedVehicleType = new VehicleType(vehicleType);
+    if (this.vehicleTypeForm) {
+      this.resetForm(); 
+    }
+  }
 
   
-  @Output() updateVehicleType = new EventEmitter<VehicleType>();
+  @Output() editVehicleType = new EventEmitter<VehicleType>();
 
+  selectedVehicleType: VehicleType;
   vehicleTypeForm: FormGroup;
 
   constructor(
@@ -29,15 +39,7 @@ export class EditVehicleTypeComponent implements OnInit {
       id: '',
       name: ''
     });
-
-    this.setVehicleType();
-  }
-
-  setVehicleType() {
-    if (!this.vehicleType) {
-      return;
-    }
-    this.vehicleTypeForm.patchValue({ ...this.vehicleType });
+    this.resetForm();
   }
   
   updateData() {
@@ -53,8 +55,14 @@ export class EditVehicleTypeComponent implements OnInit {
     this.serviceVehicleType
       .updateEntity(vehicleType)
       .subscribe(
-        data => this.updateVehicleType.next(vehicleType),
+        _ => {
+          this.editVehicleType.next(vehicleType);
+        },
         _ => this.toast.error('Не вдалось редагувати дані про тип транспорту', 'Помилка редагування даних')
       );
+  }
+
+  resetForm() { 
+    this.vehicleTypeForm.patchValue(this.selectedVehicleType);
   }
 }

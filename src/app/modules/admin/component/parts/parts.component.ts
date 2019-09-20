@@ -10,6 +10,8 @@ import { MatFspTableComponent } from '../../../shared/components/tables/mat-fsp-
   styleUrls: ['./parts.component.scss']
 })
 export class PartsComponent implements OnInit {
+  part: Part;
+
   columnDefinitions: string[] = [
     'name',
     'code',
