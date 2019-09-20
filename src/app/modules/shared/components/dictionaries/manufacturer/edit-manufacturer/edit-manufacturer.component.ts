@@ -23,6 +23,9 @@ export class EditManufacturerComponent implements OnInit {
       return;
     }
     this.selectedManufacturer = new Manufacturer(manufacturer);
+    if (this.manufacturerForm) {
+      this.resetForm();
+    }
   }
 
   constructor(
