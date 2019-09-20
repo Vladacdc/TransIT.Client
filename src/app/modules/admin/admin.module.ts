@@ -33,7 +33,7 @@ import { EditUserComponent } from './component/users/edit-user/edit-user.compone
 import { DeleteUserComponent } from './component/users/delete-user/delete-user.component';
 import { RestoreUserPasswordComponent } from './component/users/restore-user-password/restore-user-password.component';
 import { IsActiveModalComponent } from './component/users/is-active-modal/is-active-modal.component';
-// =====VechicleType====
+// =====VehicleType====
 import { VehicleTypeComponent } from './component/vehicle-type/vehicle-type.component';
 import { CreateVehicleTypeComponent } from './component/vehicle-type/create-vehicle-type/create-vehicle-type.component';
 import { EditVehicleTypeComponent } from './component/vehicle-type/edit-vehicle-type/edit-vehicle-type.component';
@@ -71,13 +71,30 @@ import { LocationsComponent } from './component/locations/locations.component';
 import { CreateLocationComponent } from './component/locations/create-location/create-location.component';
 import { EditLocationComponent } from './component/locations/edit-location/edit-location.component';
 import { DeleteLocationComponent } from './component/locations/delete-location/delete-location.component';
-import { MatTableModule, MatInputModule, MatFormFieldModule, MatPaginatorModule, MatSortModule } from '@angular/material';
+import {
+  MatTableModule,
+  MatInputModule,
+  MatFormFieldModule,
+  MatPaginatorModule,
+  MatSortModule,
+  MatCardModule,
+  MatDialogModule,
+  MatButtonModule,
+  MatIconModule,
+  MatSelectModule,
+  MatDatepickerModule,
+  MatNativeDateModule,
+  MatProgressSpinnerModule
+} from '@angular/material';
 import { InfoVehicleComponent } from './component/vehicles/info-vehicle/info-vehicle.component';
-import { MatFspTableComponent } from '../shared/components/tables/mat-fsp-table/mat-fsp-table.component';
 import { PartsComponent } from './component/parts/parts.component';
 import { CreatePartComponent } from './component/parts/create-part/create-part.component';
 import { EditPartComponent } from './component/parts/edit-part/edit-part.component';
 import { DeletePartComponent } from './component/parts/delete-part/delete-part.component';
+import { PartsInComponent } from './component/parts-in/parts-in.component';
+import { PartInActionsComponent } from './component/parts-in/part-in-actions/part-in-actions.component';
+import { AddPartInComponent } from './component/parts-in/dialogs/add-part-in/add-part-in.component';
+import { EditPartInComponent } from './component/parts-in/dialogs/edit-part-in/edit-part-in.component';
 
 import { SidebarComponent } from './component/sidebar/sidebar.component';
 import { BsDropdownModule } from 'ngx-bootstrap';
@@ -158,6 +175,15 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     CreatePartComponent,
     EditPartComponent,
     DeletePartComponent,
+    // ==Parts-in==
+    PartsInComponent,
+    PartInActionsComponent,
+    AddPartInComponent,
+    EditPartInComponent,
+  ],
+  entryComponents: [
+    AddPartInComponent,
+    EditPartInComponent
   ],
   exports: [AdminComponent],
   imports: [
@@ -170,11 +196,20 @@ const DEFAULT_PERFECT_SCROLLBAR_CONFIG: PerfectScrollbarConfigInterface = {
     FormsModule,
     DataTablesModule,
     HttpClientModule,
-    MatTableModule,
+    // Materials
+    MatCardModule,
+    MatDialogModule,
+    MatButtonModule,
+    MatIconModule,
+    MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
     MatInputModule,
-    MatFormFieldModule,
+    MatTableModule,
     MatPaginatorModule,
     MatSortModule,
+    MatProgressSpinnerModule,
+    MatFormFieldModule,
     ReactiveFormsModule,
     NgxMaskModule.forRoot(),
     NgBootstrapFormValidationModule,

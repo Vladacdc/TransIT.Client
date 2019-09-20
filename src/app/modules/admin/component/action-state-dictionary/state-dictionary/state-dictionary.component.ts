@@ -1,11 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { ToastrService } from 'ngx-toastr';
-import { Router } from '@angular/router';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { State } from 'src/app/modules/shared/models/state';
 import { StateService } from 'src/app/modules/shared/services/state.service';
-import { DatatableSettings } from 'src/app/modules/shared/helpers/datatable-settings';
-
-declare const $;
+import { EntitiesDataSource } from 'src/app/modules/shared/data-sources/entities-data-sourse';
+import { MatFspTableComponent } from 'src/app/modules/shared/components/tables/mat-fsp-table/mat-fsp-table.component';
 
 @Component({
   selector: 'app-state-dictionary',
@@ -13,74 +10,24 @@ declare const $;
   styleUrls: ['./state-dictionary.component.scss']
 })
 export class StateDictionaryComponent implements OnInit {
-  states: State[] = [];
-  tableState: DataTables.Api;
-  selectedState: State;
-  tost: ToastrService;
+  columnDefinitions: string[] = [
+    'transName'
+  ];
+  columnNames: string[] = [
+    'Назва'
+  ];
 
-  constructor(private stateService: StateService, private router: Router, private toast: ToastrService) {}
+  @ViewChild('table') table: MatFspTableComponent;
 
-  private readonly tableConfig = new DatatableSettings({
-    columns: [
-      { title: 'Назва', data: 'transName', defaultContent: '' },
-      { data: 'id', visible: false },
-      { title: 'Дії⠀', orderable: false }
-    ],
-    ajax: this.ajaxCallback.bind(this),
-    columnDefs: [
-      {
-        targets: -1,
-        data: null,
-        defaultContent: `<button class="first btn" data-toggle="modal" data-target="#editState">
-        <i class="fas fa-edit"></i></button>
-         <button class="second btn" data-toggle="modal" data-target="#deleteState">
-         <i class="fas fas fa-trash-alt"></i></button>`
-      }
-    ],
-    language: {
-      url: 'assets/language.json'
-    }
-  });
+  dataSource: EntitiesDataSource<State>;
+
+  constructor(private stateService: StateService) { }
 
   ngOnInit() {
-    this.tableState = $('#state-table').DataTable(this.tableConfig);
-    $('#state-table tbody').on('click', '.first', this.selectFirstItem(this));
-    $('#state-table tbody').on('click', '.second', this.selectSecondItem(this));
+    this.dataSource = new EntitiesDataSource<State>(this.stateService);
   }
 
-  private ajaxCallback(dataTablesParameters: any, callback): void {
-    this.stateService.getFilteredEntities(dataTablesParameters).subscribe(x => {
-      callback(x);
-    });
-  }
-
-  selectFirstItem(component: any) {
-    return function() {
-      const data = component.tableState.row($(this).parents('tr')).data();
-      component.selectedState = data;
-      console.dir(data);
-    };
-  }
-
-  selectSecondItem(component: any) {
-    return function() {
-      const data = component.tableState.row($(this).parents('tr')).data();
-      component.selectedState = data;
-    };
-  }
-
-  addState(state: State) {
-    this.states.push(state);
-    this.tableState.draw();
-  }
-
-  deleteState(state: State) {
-    this.states = this.states.filter(v => v.id !== state.id);
-    this.tableState.draw();
-  }
-
-  editState(state: State) {
-    this.states[this.states.findIndex(i => i.id === state.id)] = state;
-    this.tableState.draw();
+  refreshTable() {
+    this.table.loadEntitiesPage();
   }
 }

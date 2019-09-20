@@ -1,0 +1,33 @@
+<div class="table-container">
+  <mat-card>
+    <h2 class="text-center py-3 m-0">{{ 'PartIn.SuppliesCaption' | translate }}</h2>
+    <mat-fsp-table
+      [refresh]="completed"
+      [columnDefinitions]="columnDefinitions"
+      [columnNames]="[
+        'PartIn.Price',
+        'PartIn.Amount',
+        'PartIn.Batch',
+        'PartIn.Part',
+        'PartIn.Arrival',
+        'PartIn.Unit',
+        'PartIn.Currency'
+      ]"
+      [dataSource]="dataSource"
+      [actionContentTemplate]="actionsTemplate"
+      [generalContentTemplate]="generalTemplate">
+    </mat-fsp-table>
+
+  </mat-card>
+</div>
+
+<ng-template #generalTemplate>
+  <button type="button" class="btn btn-primary" (click)="openAdd()">
+    <i class="fas fa-money-bill-alt"></i>
+    {{ 'PartIn.AddSupply' | translate }}
+  </button>
+</ng-template>
+
+<ng-template #actionsTemplate let-data="templateData">
+  <app-part-in-actions [partIn]="data" (completed)="onCompleted()"></app-part-in-actions>
+</ng-template>

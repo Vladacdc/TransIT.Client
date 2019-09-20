@@ -1,6 +1,6 @@
 <!-- Button trigger modal -->
-<button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#createEmployee">
-  <i class="fas fa-plus"></i> Створити працівника
+<button class="btn btn-primary" data-toggle="modal" data-target="#createEmployee">
+  <i class="fas fa-plus"></i> {{'Admin.Employee.Create.Title' | translate}}
 </button>
 
 <!-- Modal -->
@@ -8,7 +8,7 @@
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Створити працівника</h5>
+                <h5 class="modal-title" id="exampleModalLongTitle">{{'Admin.Employee.Create.Title' | translate}}</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -16,29 +16,29 @@
             <div class="modal-body">
                 <form [formGroup]="employeeForm" (submit)="onSubmit()">
                     <div class="form-group" [customErrorMessages]="customFieldErrors">
-                        <label class="required-field">Табельний номер</label>
+                        <label class="required-field">{{'Admin.Employee.BoardNumber' | translate}}</label>
                         <input type="number" min="1" max="1000000000" placeholder="Введіть табельний номер" class="form-control" formControlName="boardNumber" />
                     </div>
                     <div class="form-group" [customErrorMessages]="customFieldErrors">
-                        <label class="required-field">Прізвище</label>
-                        <input type="text" placeholder="Введіть прізвище" class="form-control" formControlName="lastName" />
+                        <label class="required-field">{{'Admin.Employee.LastName' | translate}}</label>
+                        <input type="text" class="form-control" formControlName="lastName" />
                     </div>
                     <div class="form-group" [customErrorMessages]="customFieldErrors">
-                        <label class="required-field">Ім'я</label>
-                        <input type="text" placeholder="Введіть ім'я" class="form-control" formControlName="firstName" />
+                        <label class="required-field">{{'Admin.Employee.FirstName' | translate}}</label>
+                        <input type="text" class="form-control" formControlName="firstName" />
                     </div>
                     <div class="form-group" [customErrorMessages]="customFieldErrors">
-                        <label class="required-field">По батькові</label>
-                        <input type="text" placeholder="Введіть ім'я батька" class="form-control" formControlName="middleName" />
+                        <label class="required-field">{{'Admin.Employee.MiddleName' | translate}}</label>
+                        <input type="text" class="form-control" formControlName="middleName" />
                     </div>
                     <div class="form-group" [customErrorMessages]="customFieldErrors">
-                        <label class="required-field">Коротке ім'я</label>
-                        <input type="text" placeholder="Введіть коротке ім'я" class="form-control" formControlName="shortName" />
+                        <label class="required-field">{{'Admin.Employee.ShortName' | translate}}</label>
+                        <input type="text" class="form-control" formControlName="shortName" />
                     </div>
                     <div>
-                        <label class="required-field">Посада</label>
+                        <label class="required-field">{{'Admin.Employee.Post' | translate}}</label>
                         <select class="form-control" formControlName="post">
-              <option value="" selected>Виберіть посаду</option>
+              <option value="" selected>{{'Admin.Employee.Create.ChoosePost' | translate}}</option>
               <option *ngFor="let post of posts" [ngValue]="post">{{ post.name }}</option>
             </select>
                     </div>
@@ -47,10 +47,10 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" (click)="closeModal()" data-toggle="modal" data-target="#createEmployee">
-          Скасувати
+                    {{'Core.FormButtons.Cancel' | translate}}
         </button>
                 <button type="button" class="btn btn-primary" (click)="clickSubmit(submit)" form="employeeForm" [disabled]="employeeForm.invalid" data-toggle="modal" data-target="#createEmployee">
-          Створити
+                    {{'Core.FormButtons.Create' | translate}}
         </button>
             </div>
         </div>

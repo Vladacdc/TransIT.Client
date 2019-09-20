@@ -1,0 +1,24 @@
+<mat-card>
+
+  <div>
+    <h2 class="text-center py-3 m-0">Одиниці вимірювання</h2>
+  </div>
+
+  <ng-template #generalTemplate>
+    <app-create-unit (createUnit)="refreshTable()"></app-create-unit>
+  </ng-template>
+
+  <ng-template #actionsTemplate let-data="templateData">
+
+    <app-delete-unit [unit]="data" (deleteUnit)="refreshTable()"></app-delete-unit>
+
+    <app-edit-unit [unit]="data" (updateUnit)="refreshTable()"></app-edit-unit>
+
+  </ng-template>
+
+  <div>
+    <mat-fsp-table #table [columnDefinitions]="columnDefinitions" [columnNames]="columnNames" [dataSource]="dataSource">
+    </mat-fsp-table>
+  </div>
+
+</mat-card>

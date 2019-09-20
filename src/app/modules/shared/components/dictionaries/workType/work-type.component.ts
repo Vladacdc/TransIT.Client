@@ -17,9 +17,9 @@ export class WorkTypeComponent implements OnInit {
     'estimatedCost'
   ];
   columnNames: string[] = [
-    'Тип роботи',
-    'Орієнтовний час',
-    'Орієнтовна вартість'
+    'Admin.WorkType.Name',
+    'Admin.WorkType.EstimatedTime',
+    'Admin.WorkType.EstimatedCost'
   ];
 
   @ViewChild('table') table: MatFspTableComponent;
@@ -33,16 +33,7 @@ export class WorkTypeComponent implements OnInit {
     this.dataSource = new EntitiesDataSource<WorkType>(this.workTypeService);
   }
 
-  addWorkType(workType: WorkType) {
-
-    this.table.loadEntitiesPage();
-  }
-
-  deleteWorkType(workType: WorkType) {
-    this.table.loadEntitiesPage();
-  }
-
-  updateWorkType(workType: WorkType) {
+  refreshTable() {
     this.table.loadEntitiesPage();
   }
 }

@@ -1,0 +1,24 @@
+{
+    "Admin": {
+        "Employee": {
+            "FirstName": "First Name",
+            "MiddleName": "Middle Name",
+            "LastName": "Last Name",
+            "ShortName": "Short Name",
+            "BoardNumber": "Board Number",
+            "Post": "Post",
+            "AttachedUser": "User",
+            "Create": {
+                "Title": "Create employee",
+                "ChoosePost": "Choose post"
+            },
+            "Delete": {
+                "Title": "Are you sure you want to delete employee?",
+                "Text": "Deleted data is non-recoverable!"
+            },
+            "Edit": {
+                "Title": "Edit employee"
+            }
+        }
+    }
+}

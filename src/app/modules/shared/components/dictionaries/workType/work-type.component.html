@@ -1,13 +1,26 @@
-<app-work-type-create (createWorkType)="addWorkType($event)"></app-work-type-create>
+<div class="table-background border">
+
+<ng-template #generalTemplate>
+    <app-work-type-create (createWorkType)="refreshTable()"></app-work-type-create>
+</ng-template>
+
 <ng-template #actionsTemplate let-data="templateData">
 
-    <app-work-type-delete [workType]="data" (deleteWorkType)="deleteWorkType(data)"></app-work-type-delete>
+    <app-work-type-delete [workType]="data" (deleteWorkType)="refreshTable()"></app-work-type-delete>
 
-    <app-work-type-edit [workType]="data" (updateWorkType)="updateWorkType(data)"></app-work-type-edit>
+    <app-work-type-edit [workType]="data" (updateWorkType)="refreshTable()"></app-work-type-edit>
 
 </ng-template>
 
+<h2 class="text-center py-3 m-0">{{ 'Routing.workTypes' | translate }}</h2>
 <div>
-    <mat-fsp-table #table [columnDefinitions]="columnDefinitions" [columnNames]="columnNames" [dataSource]="dataSource" [actionContentTemplate]="actionsTemplate">
+    <mat-fsp-table #table 
+      [columnDefinitions]="columnDefinitions"
+      [columnNames]="columnNames"
+      [dataSource]="dataSource"
+      [actionContentTemplate]="actionsTemplate"
+      [generalContentTemplate]="generalTemplate">
     </mat-fsp-table>
+</div>
+
 </div>

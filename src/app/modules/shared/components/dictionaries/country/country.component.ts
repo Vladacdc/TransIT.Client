@@ -1,7 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Country } from '../../../models/country';
 import { CountryService } from '../../../services/country.service';
-import { DatatableSettings } from '../../../helpers/datatable-settings';
+import { AuthenticationService } from 'src/app/modules/core/services/authentication.service';
+import { MatFspTableComponent } from '../../tables/mat-fsp-table/mat-fsp-table.component';
+import { EntitiesDataSource } from '../../../data-sources/entities-data-sourse';
 
 @Component({
   selector: 'app-country',
@@ -9,62 +11,35 @@ import { DatatableSettings } from '../../../helpers/datatable-settings';
   styleUrls: ['./country.component.scss']
 })
 export class CountryComponent implements OnInit {
-  countries: Country[];
-  country: Country;
-  dataTable: any;
-  @Input() isVisible: boolean;
-  constructor(private service: CountryService) {}
 
-  readonly options = new DatatableSettings({
-    columns: [
-      {
-        title: 'Назва країни'
-      },
-      {
-        title: 'Дії',
-        orderable: false,
-        visible: this.isVisible
-      }
-    ],
-    language: { url: 'assets/language.json'}
-  });
+  columnDefinitions: string[] = [
+    'name'
+  ];
+  columnNames: string[] = [
+    'Назва країни'
+  ];
+
+  @ViewChild('table') table: MatFspTableComponent;
+  @ViewChild('actionsTemplate') actionsTemplate: any;
+  @ViewChild('generalTemplate') generalTemplate: any;
+
+  dataSource: EntitiesDataSource<Country>;
+
+  constructor(
+    private countryService: CountryService,
+    private authenticationService: AuthenticationService
+  ) {
+  }
 
   ngOnInit() {
-    $('#countryTable').DataTable(this.options);
-    this.service.getEntities().subscribe(countries => {
-      this.addTableData(countries);
-    });
+    this.dataSource = new EntitiesDataSource<Country>(this.countryService);
+    if (this.authenticationService.getRole() === 'ADMIN') {
+      this.table.actionContentTemplate = this.actionsTemplate;
+      this.table.generalContentTemplate = this.generalTemplate;
+    }
   }
 
-  addTableData(newCountries: Country[]) {
-    this.countries = [...newCountries];
-    const view = newCountries.map(i => [
-      i.name,
-      `<button id="find-country-${
-        i.id
-      }" class="btn" data-toggle="modal" data-target="#deleteCountry"><i class="fas fa-trash-alt"></i>
-      </button>`
-    ]);
-
-    this.dataTable = $('#countryTable')
-      .dataTable()
-      .api()
-      .clear()
-      .rows.add(view)
-      .draw();
-
-    $('#countryTable tbody').on('click', 'button', event => {
-      const idTokens = event.currentTarget.id.split('-');
-      const id = parseInt(idTokens[idTokens.length - 1], 10);
-      this.country = this.countries.find(i => i.id === id);
-    });
-  }
-  addCountry(country: Country) {
-    this.countries.push(country);
-    this.addTableData(this.countries);
-  }
-  deleteCountry(country: Country) {
-    this.countries.splice(this.countries.findIndex(i => i.id === country.id), 1);
-    this.addTableData(this.countries);
+  refreshTable() {
+    this.table.loadEntitiesPage();
   }
 }

@@ -13,6 +13,9 @@ export class User extends TEntity<User> {
   role: Role;
   isActive: boolean;
   employee: Employee;
+  roleTransName: string;
+  status: string;
+  isEmployeeString: string;
 
   constructor(user: Partial<User>) {
     super(user);

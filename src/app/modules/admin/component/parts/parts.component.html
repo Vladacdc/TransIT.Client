@@ -1,24 +1,34 @@
-<app-create-part (createPart)="addPart($event)"></app-create-part>
+<ng-template #generalTemplate>
+  <app-create-part (createPart)="refreshTable()"></app-create-part>
+</ng-template>
 
 <ng-template #actionsTemplate let-data="templateData">
 
   <app-delete-part 
    [part]="data"
-   (deletePart)="deletePart(data)" 
+   (deletePart)="refreshTable()" 
  ></app-delete-part>
 
   <app-edit-part
    [part]="data"
-   (updatePart)="updatePart(data)"
+   (updatePart)="refreshTable()"
  ></app-edit-part>
 
 </ng-template>
-
-<div>
- <mat-fsp-table #table
-   [columnDefinitions]="columnDefinitions"
-   [columnNames]="columnNames"
-   [dataSource]="dataSource"
-   [actionContentTemplate]="actionsTemplate">   
- </mat-fsp-table>
+<div class="table-background border">
+  <mat-card> 
+    <h2 class="text-center py-3 m-0">{{ 'Routing.parts' | translate }}</h2>
+  
+    <mat-fsp-table #table
+      [columnDefinitions]="columnDefinitions"
+      [columnNames]="columnNames"
+      [dataSource]="dataSource"
+      [actionContentTemplate]="actionsTemplate"
+      [generalContentTemplate]="generalTemplate">   
+    </mat-fsp-table>
+  </mat-card>
+  
+  <div class="parts-in-container">
+    <app-parts-in></app-parts-in>
+  </div>
 </div> 

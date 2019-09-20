@@ -63,21 +63,17 @@ import {MatSelectModule} from '@angular/material/select';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 
-import { PartInActionsComponent } from './components/dictionaries/parts-in/part-in-actions/part-in-actions.component';
 import { BreadcrumbComponent } from './components/breadcrumb/breadcrumb.component';
 import { MatFspTableComponent } from './components/tables/mat-fsp-table/mat-fsp-table.component';
 import { EntitiesDataSource } from './data-sources/entities-data-sourse';
-import { AddPartInComponent } from './components/dictionaries/parts-in/dialogs/add-part-in/add-part-in.component';
-import { EditPartInComponent } from './components/dictionaries/parts-in/dialogs/edit-part-in/edit-part-in.component';
-import { PartsInComponent } from './components/dictionaries/parts-in/parts-in.component';
-import { UnitComponent } from './components/unit/unit.component';
-import { CreateUnitComponent } from './components/unit/create-unit/create-unit.component';
-import { DeleteUnitComponent } from './components/unit/delete-unit/delete-unit.component';
-import { EditUnitComponent } from './components/unit/edit-unit/edit-unit.component';
-import { ManufacturerComponent } from './components/manufacturer/manufacturer.component';
-import { CreateManufacturerComponent } from './components/manufacturer/create-manufacturer/create-manufacturer.component';
-import { DeleteManufacturerComponent } from './components/manufacturer/delete-manufacturer/delete-manufacturer.component';
-import { EditManufacturerComponent } from './components/manufacturer/edit-manufacturer/edit-manufacturer.component';
+import { UnitComponent } from './components/dictionaries/unit/unit.component';
+import { CreateUnitComponent } from './components/dictionaries/unit/create-unit/create-unit.component';
+import { DeleteUnitComponent } from './components/dictionaries/unit/delete-unit/delete-unit.component';
+import { EditUnitComponent } from './components/dictionaries/unit/edit-unit/edit-unit.component';
+import { ManufacturerComponent } from './components/dictionaries/manufacturer/manufacturer.component';
+import { CreateManufacturerComponent } from './components/dictionaries/manufacturer/create-manufacturer/create-manufacturer.component';
+import { DeleteManufacturerComponent } from './components/dictionaries/manufacturer/delete-manufacturer/delete-manufacturer.component';
+import { EditManufacturerComponent } from './components/dictionaries/manufacturer/edit-manufacturer/edit-manufacturer.component';
 import { WorkTypeComponent } from './components/dictionaries/workType/work-type.component';
 import { WorkTypeService } from './services/work-type.service';
 import { CreateWorkTypeComponent } from './components/dictionaries/workType/create-work-type/create-work-type.component';
@@ -114,11 +110,7 @@ import { CreateModalComponent } from './components/global-modal/create-modal/cre
     EditDocumentComponent,
     NestedDocumentComponent,
     IssueLogComponent,
-    PartsInComponent,
-    PartInActionsComponent,
     MatFspTableComponent,
-    AddPartInComponent,
-    EditPartInComponent,
     UnitComponent,
     DeleteUnitComponent,
     EditUnitComponent,
@@ -127,7 +119,6 @@ import { CreateModalComponent } from './components/global-modal/create-modal/cre
     CreateManufacturerComponent,
     DeleteManufacturerComponent,
     EditManufacturerComponent,
-    MatFspTableComponent,
     WorkTypeComponent,
     CreateWorkTypeComponent,
     EditWorkTypeComponent,
@@ -157,14 +148,7 @@ import { CreateModalComponent } from './components/global-modal/create-modal/cre
     FormsModule,
     NgBootstrapFormValidationModule
   ],
-  entryComponents: [
-    AddPartInComponent,
-    EditPartInComponent,
-    MatDialogComponent
-  ],
   exports: [
-    AddPartInComponent,
-    PartsInComponent,
     BreadcrumbComponent,
     SupplierComponent,
     CreateSupplierComponent,
@@ -186,9 +170,7 @@ import { CreateModalComponent } from './components/global-modal/create-modal/cre
     CreateManufacturerComponent,
     DeleteManufacturerComponent,
     EditManufacturerComponent,
-    MatFspTableComponent,
-    WorkTypeComponent,
-    CreateModalComponent
+    WorkTypeComponent
   ],
   providers: [
     ActionTypeService,

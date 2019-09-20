@@ -1,12 +1,12 @@
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createWorkType">
-    <i class="fas fa-user-plus"></i> Створити тип роботи
+    <i class="fas fa-plus"></i> {{'Admin.WorkType.Create.Title' | translate}}
   </button>
 
 <div class="modal fade" id="createWorkType" tabindex="-1" role="dialog" aria-labelledby="createWorkType" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
             <div class="modal-header color">
-                <h5 class="modal-title"><i class="fas fa-user-plus"></i> Створити тип роботи</h5>
+                <h5 class="modal-title"><i class="fas fa-user-plus"></i> {{'Admin.WorkType.Create.Title' | translate}} </h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -14,23 +14,23 @@
             <div class="modal-body">
                 <form [formGroup]="workTypeForm">
                     <div class="form-group">
-                        <label class="required-field">Назва</label>
+                        <label class="required-field">{{'Admin.WorkType.Name' | translate}}</label>
                         <input type="text" class="form-control" formControlName="name" placeholder="Введіть назву" />
                     </div>
                     <div class="form-group">
-                        <label class="required-field">Орієнтовний час (в годинах)</label>
+                        <label class="required-field">{{'Admin.WorkType.EstimatedTime' | translate}}</label>
                         <input type="text" class="form-control" formControlName="estimatedTime" placeholder="Введіть орієнтовний час" />
                     </div>
                     <div class="form-group">
-                        <label class="required-field">Орієнтовна вартість</label>
+                        <label class="required-field">{{'Admin.WorkType.EstimatedCost' | translate}}</label>
                         <input type="text" class="form-control" formControlName="estimatedCost" placeholder="Введіть орієнтовну вартість" />
                     </div>
                 </form>
             </div>
             <div class=" modal-footer ">
-                <button #close type="button " class="btn btn-secondary " data-dismiss="modal">Скасувати</button>
+                <button #close type="button " class="btn btn-secondary " data-dismiss="modal">{{'Core.FormButtons.Cancel' | translate}}</button>
                 <button type="button " class="btn btn-primary" (click)="clickSubmit()" [disabled]="workTypeForm.invalid">
-            Створити
+                    {{'Core.FormButtons.Create' | translate}}
           </button>
             </div>
         </div>

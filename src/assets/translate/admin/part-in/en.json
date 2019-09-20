@@ -1,0 +1,18 @@
+{
+    "PartIn": {
+        "SelectPart": "Please select a part",
+        "SelectUnit": "Select unit type",
+        "SelectCurrency": "Select currency",
+        "SuppliesCaption": "Part supplies",
+        "AddSupply": "Add supply",
+        "EditSupply": "Edit supply",
+        "CreateSupply": "Create a supply",
+        "Price": "Price",
+        "Amount": "Amount",
+        "Batch": "Batch number",
+        "Part": "Part",
+        "Arrival": "Arrival date",
+        "Unit": "Unit",
+        "Currency": "Currency"
+    }
+}

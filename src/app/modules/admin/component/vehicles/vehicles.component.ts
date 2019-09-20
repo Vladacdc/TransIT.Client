@@ -25,15 +25,15 @@ export class VehiclesComponent implements OnInit {
     'warrantyEndDate'
   ];
   columnNames: string[] = [
-    'Тип транспорту',
-    'Вінкод',
-    'Інвентарний номер',
-    'Реєстраційний номер',
-    'Бренд',
-    'Модель',
-    'Місцезнаходження',
-    'Дата введення в експлуатацію',
-    'Закінчення гарантійного терміну'
+    'Shared.Vehicles.VehicleType',
+    'Shared.Vehicles.VinCode',
+    'Shared.Vehicles.InventoryId',
+    'Shared.Vehicles.RegNum',
+    'Shared.Vehicles.Brand',
+    'Shared.Vehicles.Model',
+    'Shared.Vehicles.Location',
+    'Shared.Vehicles.CommissioningDate',
+    'Shared.Vehicles.WarrantyEndDate'
   ];
 
   @ViewChild('table') table: MatFspTableComponent;
@@ -48,15 +48,7 @@ export class VehiclesComponent implements OnInit {
     this.dataSource = new EntitiesDataSource<Vehicle>(this.vehicleService);
   }
 
-  addVehicle(vehicle: Vehicle) {
-    this.table.loadEntitiesPage();
-  }
-
-  deleteVehicle(vehicle: Vehicle) {
-    this.table.loadEntitiesPage();
-  }
-
-  updateVehicle(vehicle: Vehicle) {
+  refreshTable() {
     this.table.loadEntitiesPage();
   }
 

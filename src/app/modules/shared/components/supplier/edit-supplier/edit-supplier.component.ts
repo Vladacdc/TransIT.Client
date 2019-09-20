@@ -27,6 +27,9 @@ export class EditSupplierComponent implements OnInit {
       return;
     }
     this.selectedSupplier = new Supplier(supplier);
+    if (this.supplierForm) {
+      this.resetForm();
+    }
   }
 
   constructor(
@@ -47,7 +50,7 @@ export class EditSupplierComponent implements OnInit {
       currency: ['']
     });
     this.supplierForm.patchValue(this.selectedSupplier);
-    
+
     this.countryService.getEntities().subscribe(data => {
       this.countries = data;
     });
@@ -76,7 +79,7 @@ export class EditSupplierComponent implements OnInit {
       currency: form.currency as Currency,
       country: form.country as Country
     };
-
+    
     this.service.updateEntity(supplier).subscribe(
       _ => {
         this.toast.success('', 'Постачальника оновлено');
@@ -84,6 +87,7 @@ export class EditSupplierComponent implements OnInit {
       },
       error => this.toast.error('Помилка редагування')
     );
+    
     this.closeDiv.nativeElement.click();
   }
 

@@ -12,15 +12,8 @@ import { ToastrService } from 'ngx-toastr';
 export class EditStateComponent implements OnInit {
   selectedState: State;
   @ViewChild('close') closeDiv: ElementRef;
-  @Input()
-  set state(state: State) {
-    if (!state) {
-      return;
-    }
-    this.selectedState = state;
-    state = new State(state);
-    this.stateFrom.patchValue(state);
-  }
+  @Input() state: State;
+  
   @Output() editState = new EventEmitter<State>();
 
   stateFrom: FormGroup;
@@ -32,6 +25,16 @@ export class EditStateComponent implements OnInit {
       id: '',
       transName: ''
     });
+    this.setState();
+  }
+
+  setState() {
+    if (!this.state) {
+      return;
+    }
+    this.selectedState = this.state;
+    this.state = new State(this.state);
+    this.stateFrom.patchValue(this.state);
   }
 
   updateData() {

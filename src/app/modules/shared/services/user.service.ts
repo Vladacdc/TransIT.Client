@@ -12,7 +12,15 @@ export class UserService extends CrudService<User> {
   protected readonly datatableUrl = `${environment.apiUrl}/datatable/user`;
 
   protected mapEntity(entity: User): User {
-    return new User(entity);
+    let user = new User(entity);
+
+    user.roleTransName = entity.role.transName;
+    user.status = user.isActive ? 'активний' : 'неактивний';
+    user.isEmployeeString = entity.employee !== null ? entity.employee.boardNumber.toString() : 'немає';
+    // TODO
+
+
+    return user;
   }
 
   updateUserPassword(id: number, password: string) {

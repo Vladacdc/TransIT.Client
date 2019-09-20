@@ -1,0 +1,64 @@
+<div class="form-container">
+  <h1 mat-dialog-title> {{ 'PartIn.CreateSupply' | translate }} </h1>
+  <form [formGroup]="form">
+    <div mat-dialog-content class="inputs">
+      <mat-form-field>
+        <input matInput
+          formControlName="arrivalDate"
+          [matDatepicker]="pickerArrivalDate"
+          placeholder="{{ 'PartIn.Arrival' | translate }}">
+        <mat-datepicker-toggle matSuffix [for]="pickerArrivalDate"></mat-datepicker-toggle>
+        <mat-datepicker #pickerArrivalDate></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput formControlName="batch" placeholder="{{ 'PartIn.Batch' | translate }}">
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput type="number" formControlName="price" placeholder="{{ 'PartIn.Price' | translate }}">
+      </mat-form-field>
+
+      <mat-form-field>
+        <input matInput type="number" formControlName="amount" placeholder="{{ 'PartIn.Amount' | translate }}">
+      </mat-form-field>
+        <mat-form-field>
+          <mat-label> {{ 'PartIn.SelectCurrency' | translate }} </mat-label>
+          <mat-select formControlName="currency">
+            <mat-option *ngFor="let currency of currencyList" [value]="currency">
+              {{currency.fullName}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label> {{ 'PartIn.SelectUnit' | translate }} </mat-label>
+          <mat-select formControlName="unit">
+            <mat-option *ngFor="let unit of unitList" [value]="unit">
+              {{unit.shortName}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field>
+          <mat-label> {{ 'PartIn.SelectPart' | translate }} </mat-label>
+          <mat-select formControlName="part">
+            <mat-option *ngFor="let part of partList" [value]="part">
+              {{part.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+    </div>
+  </form>
+  <mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">{{ 'Core.FormButtons.Cancel' | translate }}</button>
+    <button mat-button
+            (click)="onSubmit()"
+            color="primary"
+            mat-dialog-close
+            [disabled]="form.invalid">
+        {{ 'Core.FormButtons.Save' | translate }}
+    </button>
+
+  </mat-dialog-actions>
+</div>

@@ -1,67 +1,52 @@
 <div class="modal fade" id="editEmployee" tabindex="-1" role="dialog" aria-labelledby="editEmployee" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="editEmployee">Редагувати працівника</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editEmployee">{{'Admin.Employee.Edit.Title' | translate}}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
-      </div>
-      <div class="modal-body">
-        <form [formGroup]="employeeForm" (validSubmit)="onSubmit()">
-          <div class="form-group" [customErrorMessages]="customFieldErrors">
-            <label class="required-field">Табельний номер</label>
-            <input
-              type="number"
-              min="1"
-              max="1000000000"
-              placeholder="Введіть табельний номер"
-              class="form-control"
-              formControlName="boardNumber"
-            />
-          </div>
-          <div class="form-group">
-            <label>Прізвище</label>
-            <input type="text" placeholder="Введіть прізвище" class="form-control" formControlName="lastName" />
-          </div>
-          <div class="form-group" [customErrorMessages]="customFieldErrors">
-            <label>Ім'я</label>
-            <input type="text" placeholder="Введіть ім'я" class="form-control" formControlName="firstName" />
-          </div>
-          <div class="form-group" [customErrorMessages]="customFieldErrors">
-            <label>По батькові</label>
-            <input type="text" placeholder="Введіть ім'я батька" class="form-control" formControlName="middleName" />
-          </div>
-          <div class="form-group" [customErrorMessages]="customFieldErrors">
-            <label class="required-field">Коротке ім'я</label>
-            <input type="text" placeholder="Введіть коротке ім'я" class="form-control" formControlName="shortName" />
-          </div>
-          <div>
-            <label class="required-field">Посада</label>
-            <select class="form-control" formControlName="post" [compareWith]="comparePosts">
-              <option value="">Виберіть посаду</option>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="employeeForm" (validSubmit)="onSubmit()">
+                    <div class="form-group" [customErrorMessages]="customFieldErrors">
+                        <label class="required-field">{{'Admin.Employee.BoardNumber' | translate}}</label>
+                        <input type="number" min="1" max="1000000000" placeholder="Введіть табельний номер" class="form-control" formControlName="boardNumber" />
+                    </div>
+                    <div class="form-group">
+                        <label>{{'Admin.Employee.LastName' | translate}}</label>
+                        <input type="text" placeholder="Введіть прізвище" class="form-control" formControlName="lastName" />
+                    </div>
+                    <div class="form-group" [customErrorMessages]="customFieldErrors">
+                        <label>{{'Admin.Employee.FirstName' | translate}}</label>
+                        <input type="text" placeholder="Введіть ім'я" class="form-control" formControlName="firstName" />
+                    </div>
+                    <div class="form-group" [customErrorMessages]="customFieldErrors">
+                        <label>{{'Admin.Employee.MiddleName' | translate}}</label>
+                        <input type="text" placeholder="Введіть ім'я батька" class="form-control" formControlName="middleName" />
+                    </div>
+                    <div class="form-group" [customErrorMessages]="customFieldErrors">
+                        <label class="required-field">{{'Admin.Employee.ShortName' | translate}}</label>
+                        <input type="text" placeholder="Введіть коротке ім'я" class="form-control" formControlName="shortName" />
+                    </div>
+                    <div>
+                        <label class="required-field">{{'Admin.Employee.Post' | translate}}</label>
+                        <select class="form-control" formControlName="post" [compareWith]="comparePosts">
+              <option value="">{{'Admin.Employee.Create.ChoosePost' | translate}}у</option>
               <option *ngFor="let post of posts" [ngValue]="post">{{ post.name }}</option>
             </select>
-          </div>
-          <button hidden type="submit" #submit data-toggle="modal" data-target="#editEmployee"></button>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#editEmployee">
-          Скасувати
+                    </div>
+                    <button hidden type="submit" #submit data-toggle="modal" data-target="#editEmployee"></button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#editEmployee">
+                    {{'Core.FormButtons.Cancel' | translate}}
         </button>
-        <button
-          type="button"
-          class="btn btn-primary"
-          (click)="clickSubmit(submit)"
-          form="employeeForm"
-          [disabled]="employeeForm.invalid"
-          data-toggle="modal"
-          data-target="#editEmployee"
-        >
-          Зберегти
+                <button type="button" class="btn btn-primary" (click)="clickSubmit(submit)" form="employeeForm" [disabled]="employeeForm.invalid" data-toggle="modal" data-target="#editEmployee">
+                    {{'Core.FormButtons.Save' | translate}}
         </button>
-      </div>
+            </div>
+        </div>
     </div>
-  </div>
 </div>

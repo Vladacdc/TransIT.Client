@@ -23,32 +23,30 @@ export class EntitiesDataSource<Entity extends TEntity<Entity>> implements DataS
 
   loadEntities(
     filter: string = '',
-    sorting: string = null,
+    sorting: any, //{direction: string, columnDef: string}
     pageIndex: number = 0,
     pageSize: number = 5,
     paginator: MatPaginator = null) {
-
+    
     this.crudService.getFilteredEntities({
-      start: pageSize * pageIndex,
+      start: pageSize*pageIndex,
       length: pageSize,
       search: {value: filter},
-      order: [{column: 0, dir: "desc"}],
-        /*draw: 1,
-        columns: [
-          {data: 'name',name:"",orderable: true},
-          {data: 'fullName',name:"",orderable: true},
-          {data: 'edrpou',name:"",orderable: true},
-        ],
-        */
+      order: [{column:0, dir: sorting.direction}],
+      
+      columns: [
+        {data: sorting.columnDef,name:"",orderable: true}
+      ],
     }).subscribe(entities => {
       this.entitySubject.next(entities.data);
-      if (paginator) {
-        if (filter == '') {
+      if(paginator) {
+        if(filter=='') {
           paginator.length = entities.recordsTotal;
-        } else {
+        }
+        else {
           paginator.length = entities.recordsFiltered;
         }
       }
     });
-  }
+  }  
 }
