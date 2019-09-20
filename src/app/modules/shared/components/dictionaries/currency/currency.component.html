@@ -1,10 +1,16 @@
 <mat-card>
+  <ng-container *ngIf="currency">
+    <app-delete-currency [currency]="currency" (deleteCurrency)="refreshTable()"></app-delete-currency>
+  </ng-container>
+
   <ng-template #generalTemplate>
     <app-create-currency (createCurrency)="refreshTable()"></app-create-currency>
   </ng-template>
   
   <ng-template #actionsTemplate let-data="templateData">
-    <app-delete-currency [currency]="data" (deleteCurrency)="refreshTable()"></app-delete-currency>
+    <button class="btn" (click)="currency=data" data-toggle="modal" data-target="#deleteCurrency">
+      <i class="fas fa-trash-alt"></i>
+    </button>
   </ng-template>
 
   <div>
