@@ -23,6 +23,9 @@ export class EditUnitComponent implements OnInit {
       return;
     }
     this.selectedUnit = new Unit(unit);
+    if (this.unitForm) {
+      this.resetForm();
+    }
   }
 
   constructor(
