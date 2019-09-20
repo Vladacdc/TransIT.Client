@@ -10,6 +10,8 @@ import { MatFspTableComponent } from 'src/app/modules/shared/components/tables/m
   styleUrls: ['./employees.component.scss']
 })
 export class EmployeesComponent implements OnInit {
+  employee:Employee;
+
   columnDefinitions: string[] = [
     'firstName',
     'middleName',

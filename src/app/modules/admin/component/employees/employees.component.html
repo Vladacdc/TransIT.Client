@@ -1,14 +1,24 @@
 <div class="table-background border">
 
+    <ng-container *ngIf="employee">
+        <app-delete-employee [employee]="employee" (deleteEmployee)="refreshTable"></app-delete-employee>
+
+        <app-edit-employee [employee]="employee" (updateEmployee)="refreshTable"></app-edit-employee>
+    </ng-container>
+
     <ng-template #generalTemplate>
-        <app-create-employee (createEmployee)="refreshTable()"></app-create-employee>
+        <app-create-employee (createEmployee)="refreshTable"></app-create-employee>
     </ng-template>
 
     <ng-template #actionsTemplate let-data="templateData">
 
-        <app-delete-employee [employee]="data" (deleteEmployee)="refreshTable()"></app-delete-employee>
+        <button class="btn" (click)="employee=data" data-toggle="modal" data-target="#editEmployee">
+            <i class="fas fa-edit"></i>
+            </button>
 
-        <app-edit-employee [employee]="data" (updateEmployee)="refreshTable()"></app-edit-employee>
+        <button class="btn" (click)="employee=data" data-toggle="modal" data-target="#deleteEmployee">
+            <i class="fas fas fa-trash-alt"></i>
+        </button>
 
     </ng-template>
     <h2 class="text-center py-3 m-0">{{ 'Routing.employees' | translate }}</h2>
