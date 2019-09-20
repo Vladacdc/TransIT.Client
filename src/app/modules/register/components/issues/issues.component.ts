@@ -92,6 +92,7 @@ export class IssuesComponent implements OnDestroy, AfterViewInit {
       required: true
     },
   ];
+  
   issueForm: FormGroup;
   issues: Issue[] = [];
   selectedIssue: Issue;

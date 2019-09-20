@@ -1,6 +1,4 @@
-<button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#createModal">
-  <i class="fas fa-plus"></i> Створити заявку
-</button>
+
 
 
 <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="createModal" aria-hidden="true">
@@ -14,7 +12,7 @@
       </div>
 
       <div class="modal-body">        
-            <div [formGroup]="generalForm">
+            <div [formGroup]="myGroup">
               <div *ngFor="let item of controls" [ngSwitch]="item.containerType">
                 <div class="form-group" *ngSwitchCase="'input'">
                   <label [class.required-field]="item.required">{{item.labelName}}</label>
@@ -39,14 +37,14 @@
                     </div>
               </div>
             </div>
-        </div>          
-      </div>
+        </div>               
       <div class="modal-footer">       
             <div class="form-group">
               <button #close type="button" class="btn btn-secondary" data-dismiss="modal">Скасувати</button>
               <button type="button" class="btn btn-primary" 
-                [disabled]="generalForm.invalid">Створити</button>
+                [disabled]="myGroup.invalid">Створити</button>
             </div>          
+      </div>
       </div>
     </div>
   </div>

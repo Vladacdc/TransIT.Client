@@ -1,5 +1,6 @@
 import { Component, ViewChild, ElementRef, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl, AbstractControl } from '@angular/forms';
+import { malfunctionSelectedValidator } from 'src/app/custom-errors';
 
 @Component({
   selector: 'app-create-modal',
@@ -10,7 +11,14 @@ export class CreateModalComponent implements OnInit {
 
   @Input() controls: any[];
 
-  @Input() generalForm: FormGroup;
+  @Input() set generalForm(form: FormGroup)
+  {
+    if (form == null) {
+      console.log( 'Form empty!' );
+    } else {
+this.myGroup = form;
+    }
+  };
 
   myGroup: FormGroup;
 
@@ -19,6 +27,5 @@ export class CreateModalComponent implements OnInit {
   constructor(private fb: FormBuilder) { }
 
   ngOnInit() {
-this.myGroup = this.fb.group(this.generalForm);
-  }
+}
 }
