@@ -10,6 +10,7 @@ import { EntitiesDataSource } from 'src/app/modules/shared/data-sources/entities
   styleUrls: ['./vehicle-type.component.scss']
 })
 export class VehicleTypeComponent implements OnInit {
+  vehicleType: VehicleType;
 
   columnDefinitions: string[] = [
     'name'
