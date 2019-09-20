@@ -1,3 +1,5 @@
+<div class="table-background border">
+
 <ng-template #generalTemplate>
     <app-work-type-create (createWorkType)="refreshTable()"></app-work-type-create>
 </ng-template>
@@ -10,6 +12,7 @@
 
 </ng-template>
 
+<h2 class="text-center py-3 m-0">{{ 'Routing.workTypes' | translate }}</h2>
 <div>
     <mat-fsp-table #table 
       [columnDefinitions]="columnDefinitions"
@@ -18,4 +21,6 @@
       [actionContentTemplate]="actionsTemplate"
       [generalContentTemplate]="generalTemplate">
     </mat-fsp-table>
+</div>
+
 </div>

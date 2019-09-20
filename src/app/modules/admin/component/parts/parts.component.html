@@ -15,10 +15,9 @@
  ></app-edit-part>
 
 </ng-template>
-
 <div class="table-background border">
   <mat-card> 
-    <h2 class="text-center py-3 m-0">Запчастини</h2>
+    <h2 class="text-center py-3 m-0">{{ 'Routing.parts' | translate }}</h2>
   
     <mat-fsp-table #table
       [columnDefinitions]="columnDefinitions"
@@ -33,4 +32,3 @@
     <app-parts-in></app-parts-in>
   </div>
 </div> 
-
