@@ -21,6 +21,9 @@ export class EditWorkTypeComponent implements OnInit {
       return;
     }
     this.selectedWorkType = new WorkType(workType);
+    if (this.workTypeForm) { 
+      this.resetForm();
+    }
   }
 
   constructor(
