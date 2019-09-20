@@ -28,6 +28,9 @@ export class EditVehicleComponent implements OnInit {
       return;
     }
     this.selectedVehicle = vehicle;
+    if (this.vehicleForm) { 
+      this.resetForm();
+    }
   }
 
   constructor(
@@ -86,13 +89,8 @@ export class EditVehicleComponent implements OnInit {
       location: new FormControl('')
     });
 
-    this.vehicleForm.patchValue({
-      ...this.selectedVehicle,
-      vehicleType: this.selectedVehicle.vehicleType.name,
-      location: this.selectedVehicle.location && this.selectedVehicle.location.name,
-      commissioningDate: this.datePipe.transform(this.selectedVehicle.commissioningDate, 'yyyy-MM-dd'),
-      warrantyEndDate: this.datePipe.transform(this.selectedVehicle.warrantyEndDate, 'yyyy-MM-dd')
-    });
+    this.resetForm();
+
     this.serviceVehicleType.getEntities().subscribe(data =>
       (this.vehicleTypeList = data.sort((a, b) => a.name.localeCompare(b.name))));
     this.serviceLocation.getEntities().subscribe(data => (this.locationList = data));
@@ -128,5 +126,15 @@ export class EditVehicleComponent implements OnInit {
           this.toast.success('Транспорт оновлено');
         }
       );
+  }
+
+  resetForm() {
+    this.vehicleForm.patchValue({
+      ...this.selectedVehicle,
+      vehicleType: this.selectedVehicle.vehicleType.name,
+      location: this.selectedVehicle.location && this.selectedVehicle.location.name,
+      commissioningDate: this.datePipe.transform(this.selectedVehicle.commissioningDate, 'yyyy-MM-dd'),
+      warrantyEndDate: this.datePipe.transform(this.selectedVehicle.warrantyEndDate, 'yyyy-MM-dd')
+    });
   }
 }

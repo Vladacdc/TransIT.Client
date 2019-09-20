@@ -5,15 +5,25 @@
 </ng-template>
 
 <ng-template #actionsTemplate let-data="templateData">
+  <button class="btn" (click)="vehicle=data" data-toggle="modal" data-target="#deleteVehicle">
+    <i class="fas fas fa-trash-alt"></i>
+  </button>
 
-    <app-delete-vehicle [vehicle]="data" (deleteVehicle)="refreshTable()"></app-delete-vehicle>
+  <button class="btn" (click)="vehicle=data"  data-toggle="modal" data-target="#editVehicle">
+    <i class="fas fa-edit"></i>
+  </button>
 
-    <app-edit-vehicle [vehicle]="data" (updateVehicle)="refreshTable()"></app-edit-vehicle>
-
-    <button class="first btn" (click)="infoVehicle(data)"><i class="fas fa-info"></i></button>
-
+  <button class="btn" (click)="infoVehicle(data)"><i class="fas fa-info"></i></button>
 </ng-template>
+
+<ng-container *ngIf="vehicle">
+  <app-delete-vehicle [vehicle]="vehicle" (deleteVehicle)="refreshTable()"></app-delete-vehicle>
+  
+  <app-edit-vehicle [vehicle]="vehicle" (updateVehicle)="refreshTable()"></app-edit-vehicle>
+</ng-container>
+
 <h2 class="text-center py-3 m-0">{{ 'Routing.vehicles' | translate }}</h2>
+
 <div>
     <mat-fsp-table #table 
       [columnDefinitions]="columnDefinitions" 
