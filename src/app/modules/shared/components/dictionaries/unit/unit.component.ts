@@ -11,7 +11,8 @@ import { AuthenticationService } from 'src/app/modules/core/services/authenticat
   styleUrls: ['./unit.component.scss']
 })
 export class UnitComponent implements OnInit {
-  isAdmin: boolean;
+  unit: Unit;
+  
   columnDefinitions: string[] = [
     'name',
     'shortName',
@@ -32,8 +33,8 @@ export class UnitComponent implements OnInit {
 
   ngOnInit() {
     this.dataSource = new EntitiesDataSource<Unit>(this.unitService);
-    this.isAdmin = this.authenticationService.getRole() === 'ADMIN' ? true : false;
-    if (this.isAdmin) {
+    
+    if (this.authenticationService.getRole() === 'ADMIN') {
       this.table.actionContentTemplate = this.actionsTemplate;
       this.table.generalContentTemplate = this.generalTemplate;
     }

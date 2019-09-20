@@ -11,6 +11,7 @@ import { EntitiesDataSource } from '../../../data-sources/entities-data-sourse';
   styleUrls: ['./currency.component.scss']
 })
 export class CurrencyComponent implements OnInit {
+  currency: Currency;
 
   columnDefinitions: string[] = [
     'shortName',
