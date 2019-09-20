@@ -44,6 +44,7 @@ import { SupplierService } from './services/supplier.service';
 import { TransitionService } from './services/transition.service';
 import { CountryService } from './services/country.service';
 import { StatisticsService } from './services/statistics.service';
+import { LocalizationModule } from '../localization/localization.module';
 // Materials
 import { MatDatepickerModule,
          MatNativeDateModule,
@@ -103,14 +104,14 @@ import { MomentDateAdapter, MAT_MOMENT_DATE_FORMATS } from '@angular/material-mo
     MatSortModule,
     MatProgressSpinnerModule,
     MatButtonModule,
-    CommonModule,
     ReactiveFormsModule,
     CommonModule,
     CoreModule,
     ReactiveFormsModule,
     NgSelectModule,
     FormsModule,
-    NgBootstrapFormValidationModule
+    NgBootstrapFormValidationModule,
+    LocalizationModule
   ],
   exports: [
     BreadcrumbComponent,

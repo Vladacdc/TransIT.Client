@@ -1,0 +1,17 @@
+{
+    "Shared": {
+        "Document": {
+            "Name": {
+                "HTML": "Name",
+                "Placeholder": "Enter the name of the document"
+            },
+            "Description": {
+                "HTML": "Description",
+                "Placeholder": "Enter the description of the document"
+            },
+            "Date": {
+                "HTML": "Date"
+            }
+        }
+    }
+}

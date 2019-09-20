@@ -26,4 +26,9 @@
     <mat-error *ngIf="control.hasError('pattern')">
         {{ 'ValidationErrors.pattern' | translate: {field: name} }}
     </mat-error>
+
+    <mat-error *ngIf="control.hasError('PDFFormat')">
+        {{ 'ValidationErrors.PDFFormat' | translate: {field: name} }}
+    </mat-error>
+
 </div>

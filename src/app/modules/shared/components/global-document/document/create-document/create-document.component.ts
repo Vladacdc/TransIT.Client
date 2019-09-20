@@ -5,8 +5,8 @@ import { Document } from 'src/app/modules/shared/models/document';
 import { IssueLog } from 'src/app/modules/shared/models/issuelog';
 import { IssuelogService } from 'src/app/modules/shared/services/issuelog.service';
 import { DocumentService } from 'src/app/modules/shared/services/document.service';
-import { PDF_FILE_ERRORS } from 'src/app/custom-errors';
 import { CustomValidators } from 'src/app/custom-validators';
+
 
 @Component({
   selector: 'app-create-document',
@@ -30,8 +30,6 @@ export class CreateDocumentComponent implements OnInit {
     private toast: ToastrService
   ) {}
 
-  CustomPDFErrorMessages = PDF_FILE_ERRORS;
-
   ngOnInit() {
     $('#createDocument').on('hidden.bs.modal', function() {
       $(this)
@@ -49,7 +47,7 @@ export class CreateDocumentComponent implements OnInit {
     });
   }
 
-  clickSubmit() {
+  onSubmit() {
     if (this.documentForm.invalid) {
       return;
     }

@@ -10,7 +10,8 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
     return new MultiTranslateHttpLoader(httpClient, [
         {prefix: './assets/translate/core/', suffix: '.json'},
         {prefix: './assets/translate/', suffix: '.json'},
-        {prefix: './assets/translate/shared/filter-tab/', suffix: '.json'}       
+        {prefix: './assets/translate/shared/filter-tab/', suffix: '.json'},
+        {prefix: './assets/translate/shared/document/', suffix: '.json'}
     ]);
   }
 

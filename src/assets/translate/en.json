@@ -13,6 +13,7 @@
         "OnlyLettersAndNumbers": "Only letters and numbers allowed",
         "NameFieldFormat": "Only letters (hyphens and apostrophes only inside) are allowed",
         "email": "Incorrect email format",
-        "uniqueViolation": "This value alredy exist {{value}}. Try another"
+        "uniqueViolation": "This value alredy exist {{value}}. Try another",
+        "PDFFormat": "You should choose file of type PDF"
     }
 }

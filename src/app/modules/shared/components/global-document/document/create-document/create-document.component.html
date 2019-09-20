@@ -11,42 +11,62 @@
           <span aria-hidden="true">&times;</span>
         </button>
             </div>
-            <div class="modal-body">
-                <form [formGroup]="documentForm">
-                    <div class="form-group">
-                        <label class="required-field">Назва</label>
-                        <input type="text" class="form-control" formControlName="name" autocomplete="off" placeholder="Введіть назву документа" />
-                    </div>
-                    <button hidden type="submit" #submit></button>
-                </form>
-                <form [formGroup]="documentForm">
-                    <div class="form-group">
-                        <label class="required-field">Опис</label>
-                        <textarea type="text" class="form-control" formControlName="description" autocomplete="off" placeholder="Введіть опис документа"></textarea>
-                    </div>
 
-                    <button hidden type="submit" #submit></button>
-                </form>
-                <form [formGroup]="documentForm">
-                    <div class="form-group">
-                        <label class="required-field">Дата</label>
-                        <input type="date" class="form-control" formControlName="newDate" autocomplete="off" placeholder="Введіть дату документа" />
-                    </div>
-                    <button hidden type="submit" #submit></button>
-                </form>
-                <form [formGroup]="documentForm">
-                    <div class="form-group" [customErrorMessages]="CustomPDFErrorMessages">
-                        <label hidden>Документ</label>
-                        <input #fileInput type="file" formControlName="file" class="btn border" accept="application/pdf" />
-                    </div>
-                    <button hidden type="submit" #submit></button>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button #close type="button" class="btn btn-secondary" data-dismiss="modal">Скасувати</button>
-                <button type="button" class="btn btn-primary" (click)="clickSubmit()" [disabled]="documentForm.invalid">
-          Створити
+            <div class="modal-body">
+                <form [formGroup]="documentForm" (validSubmit)="onSubmit()">
+
+                    <mat-form-field class="w-100 mb-3" appearance="outline">
+
+                        <mat-label translate>Shared.Document.Name.HTML</mat-label>
+                        <input matInput type="text" formControlName="name" autocomplete="off" [attr.placeholder]="'Shared.Document.Name.Placeholder'|translate" />
+
+                        <mat-error>
+                            <app-validator [control]="documentForm.get('name')"></app-validator>
+                        </mat-error>
+
+                    </mat-form-field>
+
+                    <mat-form-field class="w-100 mb-3" appearance="outline">
+
+                        <mat-label translate>Shared.Document.Description.HTML</mat-label>
+                        <textarea matInput type="text" formControlName="description" autocomplete="off" [attr.placeholder]="'Shared.Document.Description.Placeholder'|translate"></textarea>
+
+                        <mat-error>
+                            <app-validator [control]="documentForm.get('description')"></app-validator>
+                        </mat-error>
+
+                    </mat-form-field>
+
+                    <mat-form-field class="w-100 mb-3" appearance="outline">
+
+                        <mat-label translate>Shared.Document.Date.HTML</mat-label>
+                        <!--Use the same date input as date input in filters-->
+                        <input matInput type="date" formControlName="newDate" autocomplete="off" />
+
+                        <mat-error>
+                            <app-validator [control]="documentForm.get('newDate')"></app-validator>
+                        </mat-error>
+
+                    </mat-form-field>
+
+                    <mat-form-field class="w-100 mb-3" appereance="outline">
+                        <input matInput type="text" formControlName="file" autocomplete="off" [value]="fileInput.value" [readonly]="true" />
+                        <mat-error>
+                            <app-validator [control]="documentForm.get('file')"></app-validator>
+                        </mat-error>
+                        <button mat-button (click)="fileInput.click()">Вибрати документ</button>
+                    </mat-form-field>
+
+                    <input #fileInput type="file" hidden accept="application/pdf" />
+
+                    <div class="modal-footer">
+                        <button #close type="button" class="btn btn-secondary" data-dismiss="modal">Скасувати</button>
+                        <button type="submit" class="btn btn-primary" [disabled]="documentForm.invalid">
+            Створити
         </button>
+                    </div>
+                </form>
+
             </div>
         </div>
     </div>

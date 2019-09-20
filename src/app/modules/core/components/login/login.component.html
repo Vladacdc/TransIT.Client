@@ -1,31 +1,31 @@
 <app-navbar></app-navbar>
 <div class="login-page d-flex flex-column">
-  <div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2 col-10 offset-1 my-auto">
-    <form [formGroup]="loginForm" (validSubmit)="onSubmit()" class="clearfix">
+    <div class="col-lg-4 offset-lg-4 col-md-6 offset-md-3 col-sm-8 offset-sm-2 col-10 offset-1 my-auto">
+        <form [formGroup]="loginForm" (validSubmit)="onSubmit()" class="clearfix">
 
-        <mat-form-field class="w-100 mb-3" appearance="outline">
+            <mat-form-field class="w-100 mb-3" appearance="outline">
 
-          <mat-label translate>Core.Login.Login</mat-label>
-          <input matInput type="text" formControlName="login" required/>
+                <mat-label translate>Core.Login.Login</mat-label>
+                <input matInput type="text" formControlName="login" required/>
 
-          <mat-error>
-            <app-validator [control]="loginForm.get('login')"></app-validator>
-          </mat-error>
+                <mat-error>
+                    <app-validator [control]="loginForm.get('login')"></app-validator>
+                </mat-error>
 
-        </mat-form-field>
+            </mat-form-field>
 
-        <mat-form-field class="w-100 mb-3" appearance="outline">
+            <mat-form-field class="w-100 mb-3" appearance="outline">
 
-          <mat-label translate>Core.Login.Password</mat-label>
-          <input matInput type="password" formControlName="password" required/>
+                <mat-label translate>Core.Login.Password</mat-label>
+                <input matInput type="password" formControlName="password" required/>
 
-          <mat-error>
-            <app-validator [control]="loginForm.get('password')"></app-validator>
-          </mat-error>
+                <mat-error>
+                    <app-validator [control]="loginForm.get('password')"></app-validator>
+                </mat-error>
 
-        </mat-form-field>
+            </mat-form-field>
 
-        <button class="btn btn-primary float-right" type="submit" translate>Core.Login.Enter</button>
-    </form>
-  </div>
+            <button class="btn btn-primary float-right" type="submit" translate>Core.Login.Enter</button>
+        </form>
+    </div>
 </div>

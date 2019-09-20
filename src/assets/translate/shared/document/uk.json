@@ -1,0 +1,17 @@
+{
+    "Shared": {
+        "Document": {
+            "Name": {
+                "HTML": "Назва",
+                "Placeholder": "Введіть назву документа"
+            },
+            "Description": {
+                "HTML": "Опис",
+                "Placeholder": "Введіть опис документа"
+            },
+            "Date": {
+                "HTML": "Дата"
+            }
+        }
+    }
+}
