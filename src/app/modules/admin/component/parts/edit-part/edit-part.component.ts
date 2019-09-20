@@ -27,9 +27,12 @@ export class EditPartComponent implements OnInit {
       return;
     }
     this.selectedPart = new Part(part);
+    if (this.partForm) {
+      this.resetForm();
+    }
   }
 
-   constructor(
+  constructor(
     private unitService: UnitService,
     private manufacturerService: ManufacturerService,
     private formBuilder: FormBuilder,
@@ -37,7 +40,7 @@ export class EditPartComponent implements OnInit {
     private toast: ToastrService
   ) {}
 
-   ngOnInit() {
+  ngOnInit() {
     this.partForm = this.formBuilder.group({
       id: [''],
       name: new FormControl('', Validators.compose([Validators.required, Validators.maxLength(30)])),
@@ -55,14 +58,14 @@ export class EditPartComponent implements OnInit {
     });
   }
 
-   get Manufacturers(): string[] {
+  get Manufacturers(): string[] {
     return this.manufacturers.map(e => e.name);
   }
   get Units(): string[] {
     return this.units.map(e => e.name);
   }
 
-   updateData() {
+  updateData() {
     if (this.partForm.invalid) {
       return;
     }
@@ -89,7 +92,7 @@ export class EditPartComponent implements OnInit {
     this.closeDiv.nativeElement.click();
   }
 
-   resetForm() {
+  resetForm() {
     this.partForm.patchValue(this.selectedPart);
   }
 }

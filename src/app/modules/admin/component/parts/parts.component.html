@@ -3,20 +3,24 @@
 </ng-template>
 
 <ng-template #actionsTemplate let-data="templateData">
+  <button class="btn" (click)="part=data" data-toggle="modal" data-target="#deletePart">
+    <i class="fas fas fa-trash-alt"></i>
+  </button>
 
-  <app-delete-part 
-   [part]="data"
-   (deletePart)="refreshTable()" 
- ></app-delete-part>
-
-  <app-edit-part
-   [part]="data"
-   (updatePart)="refreshTable()"
- ></app-edit-part>
-
+  <button class="btn" (click)="part=data" data-toggle="modal" data-target="#editPart">
+    <i class="fas fa-edit"></i>
+  </button>
 </ng-template>
+
 <div class="table-background border">
   <mat-card> 
+    
+    <ng-container *ngIf="part">
+      <app-delete-part [part]="part" (deletePart)="refreshTable()"></app-delete-part>
+
+      <app-edit-part [part]="part" (updatePart)="refreshTable()"></app-edit-part>
+    </ng-container>
+
     <h2 class="text-center py-3 m-0">{{ 'Routing.parts' | translate }}</h2>
   
     <mat-fsp-table #table
