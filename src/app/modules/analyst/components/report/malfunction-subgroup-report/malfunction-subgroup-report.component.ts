@@ -6,6 +6,8 @@ import { VehicleTypeService } from 'src/app/modules/shared/services/vehicle-type
 import { StatisticsService, CreateMatTableRowFromStatistics } from 'src/app/modules/shared/services/statistics.service';
 import { Statistics } from 'src/app/modules/shared/models/statistics';
 import { trigger, style, state, transition, animate } from '@angular/animations';
+import { MatPaginatorIntlCustom } from 'src/app/modules/shared/paginator-extentions/mat-paginator-intl-custom';
+import { TranslateDefaultParser, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'malfunction-subgroup-report',
@@ -34,8 +36,9 @@ export class MalfunctionSubgroupReportComponent implements OnInit {
   @ViewChild(MatSort) sort: MatSort;
 
   constructor(
-      private statisticsService: StatisticsService,
-      private vehicleTypeService: VehicleTypeService
+    private statisticsService: StatisticsService,
+    private vehicleTypeService: VehicleTypeService,
+    private translateService: TranslateService  
   ) {
     this.dataSource = null;
   }
@@ -56,6 +59,7 @@ export class MalfunctionSubgroupReportComponent implements OnInit {
       });
 
       this.dataSource = new MatTableDataSource(rows);
+      this.paginator._intl = new MatPaginatorIntlCustom(this.translateService, new TranslateDefaultParser());
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     });

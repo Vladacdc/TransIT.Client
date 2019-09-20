@@ -5,6 +5,8 @@ import { MatTableDataSource } from '@angular/material/table';
 import { VehicleTypeService } from 'src/app/modules/shared/services/vehicle-type.service';
 import { StatisticsService, CreateMatTableRowFromStatistics } from 'src/app/modules/shared/services/statistics.service';
 import { Statistics } from 'src/app/modules/shared/models/statistics';
+import { MatPaginatorIntlCustom } from 'src/app/modules/shared/paginator-extentions/mat-paginator-intl-custom';
+import { TranslateService, TranslateParser, TranslateDefaultParser } from '@ngx-translate/core';
 
 @Component({
   selector: 'malfunction-report',
@@ -26,8 +28,9 @@ export class MalfunctionReportComponent implements OnInit {
   
 
   constructor(
-      private statisticsService: StatisticsService,
-      private vehicleTypeService: VehicleTypeService
+    private statisticsService: StatisticsService,
+    private vehicleTypeService: VehicleTypeService,
+    private translateService: TranslateService  
   ) {
     this.dataSource = null;
   }
@@ -48,6 +51,7 @@ export class MalfunctionReportComponent implements OnInit {
       });
 
       this.dataSource = new MatTableDataSource(rows);
+      this.paginator._intl = new MatPaginatorIntlCustom(this.translateService, new TranslateDefaultParser());
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort;
     });
