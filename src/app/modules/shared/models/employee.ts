@@ -10,6 +10,8 @@ export class Employee extends TEntity<Employee> {
   boardNumber: number;
   post: Post;
   attachedUser: User;
+  postName: string;
+  attachedUserName: string;
 
   constructor(employee: Partial<Employee>) {
     super(employee);

@@ -48,7 +48,7 @@ export class VehiclesComponent implements OnInit {
     this.dataSource = new EntitiesDataSource<Vehicle>(this.vehicleService);
   }
 
-  refreshTable() { 
+  refreshTable() {
     this.table.loadEntitiesPage();
   }
 

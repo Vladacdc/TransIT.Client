@@ -23,13 +23,21 @@ export class EditEmployeeComponent implements OnInit {
   @Output() editEmployee = new EventEmitter<Employee>();
   @Input()
   set employee(employee: Employee) {
-    this._employee = employee;
-    this.setUpForm();
+    if(!employee)
+    {
+      return;
+    }
+    this.selectedEmployee=new Employee(employee);
+    if(this.employeeForm)
+    {
+      this.setUpForm();
+    }
   }
+
 
   employeeForm: FormGroup;
   posts: Post[] = [];
-  _employee: Employee;
+  selectedEmployee: Employee;
 
   constructor(
     private fb: FormBuilder,
@@ -71,19 +79,19 @@ export class EditEmployeeComponent implements OnInit {
   private setUpForm() {
     this.employeeForm = this.fb.group({
       boardNumber: [
-        this._employee && this._employee.boardNumber,
+        this.selectedEmployee && this.selectedEmployee.boardNumber,
         [Validators.required, Validators.min(1), Validators.max(1000000000)]
       ],
-      lastName: [this._employee && this._employee.lastName, this.stringFieldValidators],
-      firstName: [this._employee && this._employee.firstName, this.stringFieldValidators],
-      middleName: [this._employee && this._employee.middleName, this.stringFieldValidators],
-      shortName: [this._employee && this._employee.shortName, [...this.stringFieldValidators, Validators.required]],
-      post: [this._employee && this._employee.post, Validators.required]
+      lastName: [this.selectedEmployee && this.selectedEmployee.lastName, this.stringFieldValidators],
+      firstName: [this.selectedEmployee && this.selectedEmployee.firstName, this.stringFieldValidators],
+      middleName: [this.selectedEmployee && this.selectedEmployee.middleName, this.stringFieldValidators],
+      shortName: [this.selectedEmployee && this.selectedEmployee.shortName, [...this.stringFieldValidators, Validators.required]],
+      post: [this.selectedEmployee && this.selectedEmployee.post, Validators.required]
     });
   }
 
   private updateEmployee() {
-    const employee = new Employee({ ...this._employee, ...this.formValue });
+    const employee = new Employee({ ...this.selectedEmployee, ...this.formValue });
     this.employeeService
       .updateEntity(employee)
       .subscribe(
