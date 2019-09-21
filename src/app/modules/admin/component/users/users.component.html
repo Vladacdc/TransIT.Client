@@ -5,9 +5,19 @@
   </ng-template>
 
   <ng-template #actionsTemplate let-data="templateData">
-    <app-delete-user [user]="data" (deleteUser)="refreshTable()"></app-delete-user>
-    <app-edit-user [user]="data" (editUser)="refreshTable()"></app-edit-user>
+    <button class="btn" (click)="user=data" data-toggle="modal" data-target="#deleteUser">
+      <i class="fas fa-trash-alt"></i>
+    </button>
+
+    <button class="btn" (click)="user=data" data-toggle="modal" data-target="#editUser">
+      <i class="fas fa-edit"></i>
+    </button>
   </ng-template>
+
+  <ng-container *ngIf="user">
+    <app-delete-user [user]="user" (deleteUser)="refreshTable()"></app-delete-user>
+    <app-edit-user [user]="user" (editUser)="refreshTable()"></app-edit-user>
+  </ng-container>
 
   <h2 class="text-center py-3 m-0">{{ 'Routing.users' | translate }}</h2>
 

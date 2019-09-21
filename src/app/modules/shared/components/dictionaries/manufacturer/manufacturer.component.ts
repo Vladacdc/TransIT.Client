@@ -11,12 +11,13 @@ import { AuthenticationService } from 'src/app/modules/core/services/authenticat
   styleUrls: ['./manufacturer.component.scss']
 })
 export class ManufacturerComponent implements OnInit {
-  isAdmin: boolean;
+  manufacturer: Manufacturer;
+
   columnDefinitions: string[] = [
     'name',
   ];
   columnNames: string[] = [
-      'Manufacturer.name',
+    'Manufacturer.name',
   ];
 
   @ViewChild('actionsTemplate') actionsTemplate: any;
@@ -30,8 +31,8 @@ export class ManufacturerComponent implements OnInit {
 
   ngOnInit() {
     this.dataSource = new EntitiesDataSource<Manufacturer>(this.manufacturerService);
-    this.isAdmin = this.authenticationService.getRole() === 'ADMIN' ? true : false;
-    if (this.isAdmin) {
+    
+    if (this.authenticationService.getRole() === 'ADMIN' ) {
       this.table.actionContentTemplate = this.actionsTemplate;
       this.table.generalContentTemplate = this.generalTemplate;
     }

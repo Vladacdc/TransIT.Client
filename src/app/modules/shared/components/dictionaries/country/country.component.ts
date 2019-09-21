@@ -11,6 +11,7 @@ import { EntitiesDataSource } from '../../../data-sources/entities-data-sourse';
   styleUrls: ['./country.component.scss']
 })
 export class CountryComponent implements OnInit {
+  country: Country;
 
   columnDefinitions: string[] = [
     'name'

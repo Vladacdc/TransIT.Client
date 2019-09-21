@@ -12,37 +12,37 @@ import { ToastrService } from 'ngx-toastr';
 export class EditActionComponent implements OnInit {
   selectedAction: ActionType;
   @ViewChild('close') closeDiv: ElementRef;
-  @Input() action: ActionType;
+  @Input()
+  set action(action: ActionType) {
+    if (!action) {
+      return;
+    }
+    this.selectedAction = new ActionType(action);
+    if (this.actionForm) {
+      this.resetForm();
+    }
+  }
   
   @Output() editAction = new EventEmitter<ActionType>();
 
-  actionFrom: FormGroup;
+  actionForm: FormGroup;
 
   constructor(private formBuilder: FormBuilder, private serviceAction: ActionTypeService,private toast: ToastrService) {}
 
   ngOnInit() {
-    this.actionFrom = this.formBuilder.group({
-      id: '',
-      name: ''
+    this.actionForm = this.formBuilder.group({
+      id: [''],
+      name: ['']
     });
-    this.setAction();
-  }
-
-  setAction() {
-    if (!this.action) {
-      return;
-    }
-    this.selectedAction = this.action;
-    this.action = new ActionType(this.action);
-    this.actionFrom.patchValue(this.action);
+    this.resetForm();
   }
 
   updateData() {
-    if (this.actionFrom.invalid) {
+    if (this.actionForm.invalid) {
       return;
     }
     this.closeDiv.nativeElement.click();
-    const form = this.actionFrom.value;
+    const form = this.actionForm.value;
 
     const action: ActionType = new ActionType({
       id: form.id as number,
@@ -52,6 +52,12 @@ export class EditActionComponent implements OnInit {
       _ => {this.editAction.next(action);
       },
       error => this.toast.error('Даний стан неможливо змінити', 'Помилка')
-      );
+    );
+    
+    this.resetForm();
+  }
+
+  resetForm() { 
+    this.actionForm.patchValue(this.selectedAction);
   }
 }

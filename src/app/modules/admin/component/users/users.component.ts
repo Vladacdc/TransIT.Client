@@ -10,6 +10,7 @@ import { EntitiesDataSource } from 'src/app/modules/shared/data-sources/entities
   styleUrls: ['./users.component.scss']
 })
 export class UsersComponent implements OnInit {
+  user: User;
 
   columnDefinitions: string[] = [
     'lastName',

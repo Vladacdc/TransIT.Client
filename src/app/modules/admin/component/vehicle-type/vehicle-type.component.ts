@@ -13,6 +13,7 @@ import { CFB$EntryType } from 'cfb/types';
   styleUrls: ['./vehicle-type.component.scss']
 })
 export class VehicleTypeComponent implements OnInit {
+  vehicleType: VehicleType;
 
   columnDefinitions: string[] = [
     'name'
