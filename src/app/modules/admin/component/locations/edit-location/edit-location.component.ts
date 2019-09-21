@@ -10,17 +10,21 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./edit-location.component.scss']
 })
 export class EditLocationComponent implements OnInit {
+  selectedLocation: Location;
+  locationForm: FormGroup;
+
   @ViewChild('close') closeDiv: ElementRef;
   @Input()
   set location(location: Location) {
     if (!location) {
       return;
     }
-    this.locationForm.patchValue({ ...location });
+    this.selectedLocation = new Location(location);
+    if (this.locationForm) {
+      this.resetForm();
+    }
   }
   @Output() updateLocation = new EventEmitter<Location>();
-
-  locationForm: FormGroup;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -34,6 +38,7 @@ export class EditLocationComponent implements OnInit {
       name: '',
       description: ''
     });
+    this.locationForm.patchValue(this.selectedLocation);
   }
 
   updateData() {
@@ -47,11 +52,21 @@ export class EditLocationComponent implements OnInit {
       name: form.name as string,
       description: form.description as string
     });
+
     this.serviceLocation
       .updateEntity(location)
       .subscribe(
-        data => this.updateLocation.next(location),
+        data => {
+          this.updateLocation.next(location);
+          this.toast.success('', 'Місцезнаходження оновлено');
+        },
         _ => this.toast.error('Не вдалось редагувати дані про місцезнаходження', 'Помилка редагування даних')
       );
+      
+      this.closeDiv.nativeElement.click();
+  }
+
+  resetForm() {
+    this.locationForm.patchValue(this.selectedLocation);
   }
 }

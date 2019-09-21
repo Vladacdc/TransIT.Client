@@ -1,6 +1,6 @@
 <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#createPost">
-  <i class="fas fa-plus"></i> Створити посаду
+  <i class="fas fa-plus"></i> {{'Admin.Post.Create'| translate}}
 </button>
 
 <!-- Modal -->
@@ -8,7 +8,7 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Створити посади</h5>
+        <h5 class="modal-title" id="exampleModalLongTitle">{{'Admin.Post.Create'| translate}}</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -16,21 +16,20 @@
       <div class="modal-body">
         <form [formGroup]="postForm" (submit)="onSubmit()">
           <div class="form-group" [customErrorMessages]="customFieldErrors">
-            <label>Назва</label>
-            <input type="text" placeholder="Введіть назву" class="form-control" formControlName="name" />
+            <label>{{'Admin.Post.Name'| translate}}</label>
+            <input type="text" placeholder="{{'Admin.Post.EnterName'| translate}}" class="form-control" formControlName="name" />
           </div>
           <button hidden type="submit" #submit></button>
         </form>
       </div>
       <div class="modal-footer">
-        <button
+        <button #close
           type="button"
           class="btn btn-secondary"
-          (click)="closeModal()"
           data-toggle="modal"
           data-target="#createPost"
         >
-          Скасувати
+        {{'Admin.Post.Cancel'| translate}}
         </button>
         <button
           type="button"
@@ -41,7 +40,7 @@
           data-toggle="modal"
           data-target="#createPost"
         >
-          Створити
+        {{'Admin.Post.CreateBtn'| translate}}
         </button>
       </div>
     </div>

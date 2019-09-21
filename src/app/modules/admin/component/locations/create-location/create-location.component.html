@@ -1,5 +1,5 @@
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#createLocation">
-  <i class="fas fa-plus"></i> Створити місцезнаходження
+  <i class="fas fa-plus"></i> {{'Admin.Location.Create'| translate}}
 </button>
 
 <div class="modal fade" id="createLocation" tabindex="-1" location="dialog" aria-labelledby="exampleModalLabel"
@@ -7,7 +7,7 @@
   <div class="modal-dialog" location="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Створити місцезнаходження</h5>
+        <h5 class="modal-title" id="exampleModalLabel">{{'Admin.Location.Create'| translate}}</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -15,21 +15,21 @@
       <div class="modal-body">
         <form [formGroup]=locationForm>
           <div class="form-group">
-            <label>Назва:</label>
-            <input type="text" class="form-control" formControlName="name" placeholder="Введіть місцезнаходження"
+            <label>{{'Admin.Location.Name'| translate}}</label>
+            <input type="text" class="form-control" formControlName="name" placeholder="{{'Admin.Location.EnterName'| translate}}"
               autocomplete="off" />
           </div>
 
           <div class="form-group">
-            <label>Опис:</label>
+            <label>{{'Admin.Location.Description'| translate}}</label>
             <textarea type="text" class="form-control" formControlName="description"
-              placeholder="Введіть місцезнаходження" autocomplete="off"></textarea>
+              placeholder="{{'Admin.Location.EnterDescription'| translate}}" autocomplete="off"></textarea>
           </div>
         </form>
       </div>
       <div class="modal-footer">
-        <button #close type="button" class="btn btn-secondary" data-dismiss="modal">Скасувати</button>
-        <button type="button" class="btn btn-primary" (click)="clickSubmit()">Створити</button>
+        <button #close type="button" class="btn btn-secondary" data-dismiss="modal">{{'Admin.Location.Cancel'| translate}}</button>
+        <button type="button" class="btn btn-primary" (click)="clickSubmit()">{{'Admin.Location.CreateBtn'| translate}}</button>
       </div>
     </div>
   </div>

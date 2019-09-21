@@ -1,10 +1,29 @@
-<div class="border">
-  <app-create-location (createLocation)="addLocation($event)"></app-create-location>
-  <app-edit-location [location]="selectedLocation" (updateLocation)="updateLocation($event)"></app-edit-location>
-  <app-delete-location [location]="selectedLocation" (deleteLocation)="deleteLocation($event)"></app-delete-location>
-  <br />
-  <p> </p>
+<div class="table-background border">
 
-  <table id="locations" class="table table-bordered  table-hover" style="width:100%;" cellspacing="0">
-  </table>
+    <ng-container *ngIf="location">
+        <app-delete-location [location]="location" (deleteLocation)="refreshTable()"></app-delete-location>
+
+        <app-edit-location [location]="location" (updateLocation)="refreshTable()"></app-edit-location>
+    </ng-container>
+
+    <ng-template #generalTemplate>
+        <app-create-location (createLocation)="refreshTable()"></app-create-location>
+    </ng-template>
+
+    <ng-template #actionsTemplate let-data="templateData">
+
+        <button class="btn" (click)="location=data" data-toggle="modal" data-target="#editLocation">
+            <i class="fas fa-edit"></i>
+            </button>
+
+        <button class="btn" (click)="location=data" data-toggle="modal" data-target="#deleteLocation">
+            <i class="fas fas fa-trash-alt"></i>
+        </button>
+
+    </ng-template>
+    <h2 class="text-center py-3 m-0">{{ 'Routing.locations' | translate }}</h2>
+    <div>
+        <mat-fsp-table #table [columnDefinitions]="columnDefinitions" [columnNames]="columnNames" [dataSource]="dataSource" [actionContentTemplate]="actionsTemplate" [generalContentTemplate]="generalTemplate">
+        </mat-fsp-table>
+    </div>
 </div>

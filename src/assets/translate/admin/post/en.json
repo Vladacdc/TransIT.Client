@@ -1,0 +1,18 @@
+{
+    "Admin" : {
+        "Location" : {
+            "Name" : "Name",
+            "Edit" : "Edit part", 
+            "EnterName" : "Enter a Name",
+            "Cancel" : "Cancel",
+            "Save" : "Save",
+            "NotFound" : "Not Found",
+            "Create" : " Create post",
+            "CreateBtn" : "Create",
+            "Delete" : "Delete",
+            "Message" : "Deleted data is non-recoverable!",
+            "Sure" : "Do you really want to remove the post?",
+            "Deleted" : "The post has been deleted"
+        }
+    }
+}

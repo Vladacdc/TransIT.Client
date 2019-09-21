@@ -46,7 +46,10 @@ export class CreateLocationComponent implements OnInit {
     this.serviceLocation
       .addEntity(location)
       .subscribe(
-        newLocation => this.createLocation.next(newLocation),
+        newLocation => {
+          this.createLocation.next(newLocation);
+          this.toast.success('', 'Місцезнаходження створено');
+        },
         _ => this.toast.error('Не вдалось створити місценаходження', 'Помилка створення нового місценаходження')
       );
     this.closeDiv.nativeElement.click();
