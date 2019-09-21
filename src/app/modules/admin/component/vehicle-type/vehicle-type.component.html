@@ -1,7 +1,8 @@
 <div class="table-background border">
 
   <ng-template #generalTemplate>
-    <app-create-vehicle-type (createVehicleType)="refreshTable()"></app-create-vehicle-type>
+  <app-create-modal [message]="messageCreate" (createEntity)="clickSubmit($event)" [generalForm]="vehicleTypeForm"
+    [controls]="controls"></app-create-modal>
   </ng-template>
 
   <ng-template #actionsTemplate let-data="templateData">

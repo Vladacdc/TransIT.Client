@@ -2,7 +2,7 @@
   <h2 class="table-caption">
     Мої Заявки
   </h2>
-  <app-create-modal [generalForm]="issueForm" [controls]="controls"></app-create-modal>
+  <app-create-modal (reloadEntity)="reloadTable()" (createEntity)="issueFormGroup"[generalForm]="issueForm" [controls]="controls"></app-create-modal>
   <app-issue-details [issue]="selectedIssue"></app-issue-details>
   <app-delete-issue [issue]="selectedIssue" (deleteIssue)="reloadTable()"></app-delete-issue>
   <table id="issues" datatable [dtOptions]="options" [dtTrigger]="renderTrigger" class="table table-bordered">
