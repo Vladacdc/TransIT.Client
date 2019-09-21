@@ -1,10 +1,9 @@
-import { Component, EventEmitter, Output, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Component, EventEmitter, Output, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms';
 import { ToastrService } from 'ngx-toastr';
-import { NAME_FIELD_ERRORS } from 'src/app/custom-errors';
 import { Post } from 'src/app/modules/shared/models/post';
 import { PostService } from 'src/app/modules/shared/services/post.service';
-import { UniqueFieldValidator } from 'src/app/modules/shared/validators/unique-field-validator';
+import { NAME_FIELD_ERRORS } from 'src/app/custom-errors';
 
 @Component({
   selector: 'app-create-post',
@@ -12,65 +11,46 @@ import { UniqueFieldValidator } from 'src/app/modules/shared/validators/unique-f
   styleUrls: ['./create-post.component.scss']
 })
 export class CreatePostComponent implements OnInit {
-  private readonly stringFieldValidators: Validators[] = [
-    Validators.required,
-    Validators.minLength(0),
-    Validators.maxLength(30),
-    Validators.pattern(/^[A-Za-zА-Яа-яЄєІіЇїҐґ\-\']+( [A-Za-zА-Яа-яЄєІіЇїҐґ\-\']+)*$$/)
-  ];
-  readonly customFieldErrors = NAME_FIELD_ERRORS;
-
-  @Output() addPost = new EventEmitter<Post>();
   postForm: FormGroup;
+  @ViewChild('close') closeCreateModal: ElementRef;
+  @Output() createPost = new EventEmitter<Post>();
 
-  constructor(private fb: FormBuilder, private postService: PostService, private toast: ToastrService) {}
+  constructor(
+    private service: PostService,
+    private formBuilder: FormBuilder,
+    private toast: ToastrService
+  ) {}
 
   ngOnInit() {
-    this.setUpForm();
-  }
-
-  onSubmit() {
-    if (this.postForm.invalid) {
-      return;
-    }
-
-    this.createPost();
-    this.hideModalWindow();
-    this.setUpForm();
-  }
-
-  clickSubmit(button: HTMLButtonElement) {
-    button.click();
-  }
-
-  closeModal() {
-    this.hideModalWindow();
-    this.setUpForm();
-  }
-
-  private setUpForm() {
-    this.postForm = this.fb.group({
-      name: [undefined, this.stringFieldValidators, UniqueFieldValidator.createValidator(this.postService, 'name')]
+    $('#createPost').on('hidden.bs.modal', function() {
+      $(this)
+        .find('form')
+        .trigger('reset');
+    });
+    this.postForm = this.formBuilder.group({
+      name: new FormControl('', Validators.compose([Validators.required, Validators.minLength(0), Validators.maxLength(30)])),
     });
   }
 
-  private createPost() {
-    const post = new Post(this.formValue);
-    this.postService.addEntity(post).subscribe(
-      newPost => {
-        this.addPost.next(newPost);
+
+  clickSubmit() {
+    if (this.postForm.invalid) {
+      return;
+    }
+    const form = this.postForm.value;
+    const post: Post = {
+      id: 0,
+      name: form.name as string,
+    };
+
+    this.service.addEntity(post).subscribe(
+      newGroup => {
+        this.createPost.next(newGroup);
         this.toast.success('', 'Посаду створено');
-      },
+      })
       _ => this.toast.error('Не вдалось створити посаду', 'Помилка створення посади')
-    );
+    this.closeCreateModal.nativeElement.click();
   }
 
-  private hideModalWindow() {
-    const modalWindow: any = $('#createPost');
-    modalWindow.modal('hide');
-  }
-
-  private get formValue() {
-    return this.postForm.value;
-  }
+  readonly customFieldErrors = NAME_FIELD_ERRORS;
 }

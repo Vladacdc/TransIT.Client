@@ -11,18 +11,22 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="exampleModalLabel">
-          <i class="fas fa-exclamation-triangle color-red"></i> Ви дійсно хочeте видалити це місцезнаходження
+          <i class="fas fa-exclamation-triangle color-red"></i>  {{'Admin.Location.Sure' | translate}}
+          <br />
+          <b>
+            <i>{{ location?.name }} </i>
+          </b>
         </h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        Видалені дані не підлягають відновленню!
+          {{'Admin.Location.Message' | translate}}
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal" #close>Скасувати</button>
-        <button type="button" class="btn btn-danger" (click)="delete()">Видалити</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" #close>{{'Admin.Location.Cancel' | translate}}</button>
+        <button type="button" class="btn btn-danger" (click)="delete()">{{'Admin.Location.Delete' | translate}}</button>
       </div>
     </div>
   </div>

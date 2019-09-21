@@ -1,57 +1,35 @@
-import { Component, ViewChild, AfterViewInit, OnDestroy } from '@angular/core';
-import { Subject } from 'rxjs';
-import { DataTableDirective } from 'angular-datatables';
+import { Component, ViewChild, AfterViewInit, OnDestroy, OnInit } from '@angular/core';
 import { Post } from 'src/app/modules/shared/models/post';
 import { PostService } from 'src/app/modules/shared/services/post.service';
-import { DatatableSettings } from 'src/app/modules/shared/helpers/datatable-settings';
+import { EntitiesDataSource } from 'src/app/modules/shared/data-sources/entities-data-sourse';
+import { MatFspTableComponent } from 'src/app/modules/shared/components/tables/mat-fsp-table/mat-fsp-table.component';
 
 @Component({
   selector: 'app-posts',
   templateUrl: './posts.component.html',
   styleUrls: ['./posts.component.scss']
 })
-export class PostsComponent implements AfterViewInit, OnDestroy {
-  readonly options = new DatatableSettings({
-    ajax: (dataTablesParameters: any, callback) => {
-      this.postService.getFilteredEntities(dataTablesParameters).subscribe(response => {
-        this.posts = response.data;
-        callback({ ...response, data: [] });
-        this.adjustColumns();
-      });
-    },
-    columns: [{ data: 'name' }, { data: null, orderable: false }],
-    language: { url: 'assets/language.json'},
-    serverSide: true,
-    processing: true
-  });
+export class PostsComponent implements OnInit {
+  post:Post;
+  columnDefinitions: string[] = [
+    'name',
+  ];
+  columnNames: string[] = [
+    'Admin.Post.Name',
+  ];
 
-  posts: Post[] = [];
-  selectedPost: Post;
-  renderTrigger: Subject<any> = new Subject();
-  @ViewChild(DataTableDirective) datatableElement: DataTableDirective;
+  @ViewChild('table') table: MatFspTableComponent;
 
-  constructor(private postService: PostService) {}
+  dataSource: EntitiesDataSource<Post>;
 
-  ngAfterViewInit(): void {
-    this.renderTrigger.next();
+  constructor(private postService: PostService) {
   }
 
-  ngOnDestroy(): void {
-    this.renderTrigger.unsubscribe();
+  ngOnInit() {
+    this.dataSource = new EntitiesDataSource<Post>(this.postService);
   }
 
-  reloadTable(): void {
-    this.datatableElement.dtInstance.then((dtInstance: DataTables.Api) => {
-      dtInstance.destroy();
-      this.renderTrigger.next();
-    });
-  }
-
-  selectPost(post: Post) {
-    this.selectedPost = { ...post };
-  }
-
-  private adjustColumns() {
-    setTimeout(() => $(window).trigger('resize'), 0);
+  refreshTable() {
+    this.table.loadEntitiesPage();
   }
 }

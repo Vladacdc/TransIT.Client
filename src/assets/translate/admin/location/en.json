@@ -1,0 +1,20 @@
+{
+    "Admin" : {
+        "Location" : {
+            "Name" : "Name",
+            "Description" : "Description",
+            "Edit" : "Edit location", 
+            "EnterName" : "Enter a name",
+            "EnterDescription" : "Enter a description",
+            "Cancel" : "Cancel",
+            "Save" : "Save",
+            "NotFound" : "Not Found",
+            "Create" : " Create location",
+            "CreateBtn" : "Create",
+            "Delete" : "Delete",
+            "Message" : "Deleted data is non-recoverable!",
+            "Sure" : "Do you really want to remove the location?",
+            "Deleted" : "The location has been deleted"
+        }
+    }
+}

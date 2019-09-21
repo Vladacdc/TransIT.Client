@@ -21,7 +21,9 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
         {prefix: './assets/translate/admin/work-type/', suffix: '.json'},
         {prefix: './assets/translate/shared/components/vehicles/', suffix: '.json'},
         {prefix: './assets/translate/shared/components/vehicles/infovehicle/', suffix: '.json'},
-        {prefix: './assets/translate/admin/employee/', suffix: '.json'}
+        {prefix: './assets/translate/admin/employee/', suffix: '.json'},
+        {prefix: './assets/translate/admin/post/', suffix: '.json'},
+        {prefix: './assets/translate/admin/location/', suffix: '.json'},
     ]);
   }
 
