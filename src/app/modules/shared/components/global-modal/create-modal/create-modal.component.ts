@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, ViewChild, ElementRef, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl, AbstractControl } from '@angular/forms';
 import { malfunctionSelectedValidator } from 'src/app/custom-errors';
 
@@ -9,24 +9,30 @@ import { malfunctionSelectedValidator } from 'src/app/custom-errors';
 })
 export class CreateModalComponent implements OnInit {
 
+  @ViewChild('close') closeDiv: ElementRef;
+
   @Input() controls: any[];
+  @Output() createEntity = new EventEmitter<FormGroup>();
+  @Output() reloadEntity = new EventEmitter<any>();
+  @Input() message: string;
+  @Input() generalForm: FormGroup;
 
-  @Input() set generalForm(form: FormGroup)
-  {
-    if (form == null) {
-      console.log( 'Form empty!' );
-    } else {
-this.myGroup = form;
-    }
-  };
 
-  myGroup: FormGroup;
+ 
 
-  message: 'Створити заявку';
-
-  constructor(private fb: FormBuilder) { }
+  constructor() { }
 
   ngOnInit() {
+    $('#createModal').on('hidden.bs.modal', function () {
+      $(this)
+        .find('form')
+        .trigger('reset');
+    });
 }
+
+save() {
+  this.createEntity.emit(this.generalForm);
+  this.closeDiv.nativeElement.click();
+  }
 }
 
