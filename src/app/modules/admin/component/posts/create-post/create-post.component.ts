@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms'
 import { ToastrService } from 'ngx-toastr';
 import { Post } from 'src/app/modules/shared/models/post';
 import { PostService } from 'src/app/modules/shared/services/post.service';
-
+import { NAME_FIELD_ERRORS } from 'src/app/custom-errors';
 
 @Component({
   selector: 'app-create-post',
@@ -28,7 +28,7 @@ export class CreatePostComponent implements OnInit {
         .trigger('reset');
     });
     this.postForm = this.formBuilder.group({
-      name: new FormControl('', Validators.compose([Validators.required, Validators.maxLength(30)])),
+      name: new FormControl('', Validators.compose([Validators.required, Validators.minLength(0), Validators.maxLength(30)])),
     });
   }
 
@@ -51,4 +51,6 @@ export class CreatePostComponent implements OnInit {
       _ => this.toast.error('Не вдалось створити посаду', 'Помилка створення посади')
     this.closeCreateModal.nativeElement.click();
   }
+
+  readonly customFieldErrors = NAME_FIELD_ERRORS;
 }

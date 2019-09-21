@@ -14,8 +14,8 @@
         </button>
       </div>
       <div class="modal-body">
-        <form [formGroup]="postForm" (submit)="onSubmit()">
-          <div class="form-group" [customErrorMessages]="customFieldErrors">
+        <form [formGroup]="postForm">
+          <div class="form-group">
             <label>{{'Admin.Post.Name'| translate}}</label>
             <input type="text" placeholder="{{'Admin.Post.EnterName'| translate}}" class="form-control" formControlName="name" />
           </div>
@@ -34,7 +34,7 @@
         <button
           type="button"
           class="btn btn-primary"
-          (click)="clickSubmit(submit)"
+          (click)="clickSubmit()"
           form="postForm"
           [disabled]="postForm.invalid"
           data-toggle="modal"

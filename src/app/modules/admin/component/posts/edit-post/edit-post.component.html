@@ -8,8 +8,8 @@
         </button>
       </div>
       <div class="modal-body">
-        <form [formGroup]="postForm" (validSubmit)="onSubmit()">
-          <div class="form-group" [customErrorMessages]="customFieldErrors">
+        <form [formGroup]="postForm">
+          <div class="form-group">
             <label>{{'Admin.Post.Name'| translate}}</label>
             <input type="text" placeholder="{{'Admin.Post.EnterName'| translate}}" class="form-control" formControlName="name" />
           </div>
