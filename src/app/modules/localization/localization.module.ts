@@ -4,7 +4,7 @@ import { MultiTranslateHttpLoader } from 'ngx-translate-multi-http-loader';
 import { HttpClient } from '@angular/common/http';
 import { LanguageSelectComponent } from './language-select/language-select.component';
 import { CommonModule } from '@angular/common';
-import { MatSelectModule, DateAdapter } from '@angular/material';
+import { MatSelectModule, DateAdapter, MatIconModule, MatButtonModule } from '@angular/material';
 
 export function HttpLoaderFactory(httpClient: HttpClient) {
     return new MultiTranslateHttpLoader(httpClient, [
@@ -30,6 +30,8 @@ export function HttpLoaderFactory(httpClient: HttpClient) {
 @NgModule({
     declarations: [LanguageSelectComponent],
     imports: [
+        MatButtonModule,
+        MatIconModule,
         CommonModule,
         MatSelectModule,
         TranslateModule.forChild({

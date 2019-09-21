@@ -1,5 +1,21 @@
-<mat-form-field>
-    <mat-select #langSelect [(value)]="language" (selectionChange)="translate.use(language)">
-        <mat-option *ngFor="let lang of translate.getLangs()" [value]="lang">{{ lang }}</mat-option>
-    </mat-select>
-</mat-form-field>
+<!-- <mat-form-field>
+        <mat-select #langSelect [(value)]="language" (selectionChange)="translate.use(language)">
+            <mat-option *ngFor="let lang of translate.getLangs()" [value]="lang">{{ lang }}</mat-option>
+        </mat-select>
+    </mat-form-field> -->
+
+<!-- 
+<mat-select #langSelect [(value)]="language" (selectionChange)="translate.use(language)">
+        <mat-option class="dropdown-item" [value]="translate.getLangs()[1]"><mat-icon class="flag-icon flag-icon-ua"></mat-icon>Українська</mat-option>
+        <mat-option class="dropdown-item" [value]="translate.getLangs()[0]"><mat-icon class="flag-icon flag-icon-gb"></mat-icon>English</mat-option>
+</mat-select> -->
+
+<div>
+<button class="selected" mat-icon-button color="warn" aria-label="Українська" (click)="translate.use(translate.getLangs()[1])">
+        <mat-icon class="flag-icon flag-icon-ua"></mat-icon>  
+</button>
+<button mat-icon-button color="warn" aria-label="English" (click)="translate.use(translate.getLangs()[0])">
+        <mat-icon class="flag-icon flag-icon-gb"></mat-icon>  
+</button>
+</div>
+
