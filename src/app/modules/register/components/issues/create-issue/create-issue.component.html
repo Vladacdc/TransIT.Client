@@ -17,7 +17,11 @@
         <form [formGroup]="issueForm" (validSubmit)="onSubmit()">
           <div class="form-group">
             <label class="required-field">Дата заявки</label>
-            <input type="date" class="form-control" formControlName="date" placeholder="Дата заявки" />
+            <input [matDatepicker]="pickerStartDate" class="form-control inputdate" formControlName="date" placeholder="Дата заявки" />
+          <div class="picker">
+            <mat-datepicker-toggle matSuffix [for]="pickerStartDate"></mat-datepicker-toggle>
+            <mat-datepicker #pickerStartDate></mat-datepicker>
+          </div>
           </div>
           <div class="form-group">
             <label class="required-field">Вид транспорту</label>
