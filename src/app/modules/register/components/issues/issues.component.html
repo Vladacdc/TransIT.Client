@@ -1,6 +1,6 @@
 <div class="table-background border mt-3">
   <h2 class="table-caption">
-    Мої Заявки
+      {{'Register.MyIssues'| translate}}
   </h2>
   <app-create-issue (addIssue)="reloadTable()"></app-create-issue>
   <app-issue-details [issue]="selectedIssue"></app-issue-details>
@@ -8,13 +8,13 @@
   <table id="issues" datatable [dtOptions]="options" [dtTrigger]="renderTrigger" class="table table-bordered">
     <thead>
       <tr>
-        <th>Номер</th>
-        <th>Транспорт</th>
-        <th>Стан Заявки</th>
-        <th>Несправність</th>
-        <th>Дата</th>
-        <th>Опис</th>
-        <th>Дії</th>
+        <th>{{'Register.Number'| translate}}</th>
+        <th>{{'Register.Transport'| translate}}</th>
+        <th>{{'Register.Status'| translate}}</th>
+        <th>{{'Register.Malfunction'| translate}}</th>
+        <th>{{'Register.Date'| translate}}</th>
+        <th>{{'Register.Description'| translate}}</th>
+        <th>{{'Register.Action'| translate}}</th>
       </tr>
     </thead>
     <tbody *ngIf="issues?.length !== 0">

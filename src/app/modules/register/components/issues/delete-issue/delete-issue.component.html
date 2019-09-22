@@ -3,7 +3,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="deleteIssue">
-          <i class="fas fa-exclamation-triangle text-danger"></i> Ви дійсно хочeте видалити заявку?
+          <i class="fas fa-exclamation-triangle text-danger"></i>{{'Register.Sure'| translate}}
           <br />
           <b>
             <i>#{{ issue?.number }} </i>
@@ -14,11 +14,11 @@
         </button>
       </div>
       <div class="modal-body">
-        Видалені дані не підлягають відновленню!
+          {{'Register.Message'| translate}}
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal" #close>Скасувати</button>
-        <button type="button" class="btn btn-danger" (click)="delete()" data-dismiss="modal" #close>Видалити</button>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" #close>{{'Register.Cancel'| translate}}</button>
+        <button type="button" class="btn btn-danger" (click)="delete()" data-dismiss="modal" #close>{{'Register.Delete'| translate}}</button>
       </div>
     </div>
   </div>

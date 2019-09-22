@@ -1,6 +1,6 @@
 <!-- Button trigger modal -->
 <button type="button" class="btn btn-primary mb-2" data-toggle="modal" data-target="#createIssue">
-  <i class="fas fa-plus"></i> Створити заявку
+  <i class="fas fa-plus"></i> {{'Register.Create'| translate}}
 </button>
 
 <!-- Modal -->
@@ -8,7 +8,7 @@
   <div class="modal-dialog modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Створити заявку</h5>
+        <h5 class="modal-title" id="exampleModalLongTitle">{{'Register.Create'| translate}}</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
@@ -16,66 +16,66 @@
       <div class="modal-body">
         <form [formGroup]="issueForm" (validSubmit)="onSubmit()">
           <div class="form-group">
-            <label class="required-field">Дата заявки</label>
-            <input [matDatepicker]="pickerStartDate" class="form-control inputdate" formControlName="date" placeholder="Дата заявки" />
+            <label class="required-field">{{'Register.Date'| translate}}</label>
+            <input [matDatepicker]="pickerStartDate" class="form-control inputdate" formControlName="date" placeholder="{{'Register.PickDate'| translate}}" />
           <div class="picker">
             <mat-datepicker-toggle matSuffix [for]="pickerStartDate"></mat-datepicker-toggle>
             <mat-datepicker #pickerStartDate></mat-datepicker>
           </div>
           </div>
           <div class="form-group">
-            <label class="required-field">Вид транспорту</label>
+            <label class="required-field">{{'Register.VehicleType'| translate}}</label>
             <ng-select
               [items]="vehicleTypes"
               bindLabel="name"
               formControlName="vehicleType"
-              placeholder="Виберіть вид транспорт"
+              placeholder="{{'Register.SelVehicleType'| translate}}"
               notFoundText="Не знайдено"
               (change)="reload()"
               (clear)="reload()"
             ></ng-select>
           </div>
           <div class="form-group">
-            <label class="required-field">Транспорт</label>
+            <label class="required-field">{{'Register.Transport'| translate}}</label>
             <ng-select
               [items]="vehiclesFilteredByTypes"
               bindLabel="name"
               formControlName="vehicle"
-              placeholder="Виберіть транспорт"
+              placeholder="{{'Register.SelVehicle'| translate}}"
               notFoundText="Не знайдено"
             ></ng-select>
           </div>
           <div class="form-group">
-            <label>Група несправності</label>
+            <label>{{'Register.MalfunctionGroup'| translate}}</label>
             <ng-select
               [items]="malfunctionGroups"
               bindLabel="name"
               formControlName="malfunctionGroup"
-              placeholder="Виберіть групу несправності"
+              placeholder="{{'Register.SelMalfGr'| translate}}"
               notFoundText="не знайдено"
               (change)="reload()"
               (clear)="reload()"
             ></ng-select>
           </div>
           <div class="form-group">
-            <label>Підгрупа несправності</label>
+            <label>{{'Register.MalfunctionSubgroup'| translate}}</label>
             <ng-select
               [items]="malfunctionSubgroupsFilteredByGroup"
               bindLabel="name"
               formControlName="malfunctionSubgroup"
-              placeholder="Виберіть підгрупу несправності"
+              placeholder="{{'Register.SelMalfSgr'| translate}}"
               notFoundText="не знайдено"
               (change)="reload()"
               (clear)="reload()"
             ></ng-select>
           </div>
           <div class="form-group">
-            <label>Несправність</label>
+            <label>{{'Register.Malfunction'| translate}}</label>
             <ng-select
               [items]="malfunctionsFilteredByGroup"
               bindLabel="name"
               formControlName="malfunction"
-              placeholder="Виберіть несправність"
+              placeholder="{{'Register.SelMalf'| translate}}"
               notFoundText="не знайдено"
               (change)="reload()"
               (clear)="reload()"
@@ -83,14 +83,14 @@
           </div>
 
           <div class="form-group">
-            <label class="required-field">Опис несправності</label>
-            <textarea class="form-control" formControlName="summary" placeholder="Опишіть вашу поломку"></textarea>
+            <label class="required-field">{{'Register.Description'| translate}}</label>
+            <textarea class="form-control" formControlName="summary" placeholder="{{'Register.EnterDescription'| translate}}"></textarea>
           </div>
           <button hidden type="submit" #submit data-toggle="modal" data-target="#createIssue"></button>
         </form>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" (click)="closeModal()" data-dismiss="modal">Скасувати</button>
+        <button type="button" class="btn btn-secondary" (click)="closeModal()" data-dismiss="modal">{{'Register.Cancel'| translate}}</button>
         <button
           type="button"
           class="btn btn-primary"
@@ -98,7 +98,7 @@
           form="issueForm"
           [disabled]="issueForm.invalid"
         >
-          Створити
+        {{'Register.CreateBtn'| translate}}
         </button>
       </div>
     </div>
