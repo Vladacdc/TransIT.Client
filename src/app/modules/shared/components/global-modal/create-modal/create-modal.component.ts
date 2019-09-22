@@ -1,6 +1,5 @@
 import { Component, ViewChild, ElementRef, OnInit, Input, Output, EventEmitter} from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl, AbstractControl } from '@angular/forms';
-import { malfunctionSelectedValidator } from 'src/app/custom-errors';
 
 @Component({
   selector: 'app-create-modal',
@@ -12,13 +11,11 @@ export class CreateModalComponent implements OnInit {
   @ViewChild('close') closeDiv: ElementRef;
 
   @Input() controls: any[];
-  @Output() createEntity = new EventEmitter<FormGroup>();
-  @Output() reloadEntity = new EventEmitter<any>();
-  @Input() message: string;
   @Input() generalForm: FormGroup;
 
+  @Output() createEntity = new EventEmitter<FormGroup>();
 
- 
+  @Input() message: string;
 
   constructor() { }
 
@@ -32,7 +29,6 @@ export class CreateModalComponent implements OnInit {
 
 save() {
   this.createEntity.emit(this.generalForm);
-  this.closeDiv.nativeElement.click();
   }
 }
 

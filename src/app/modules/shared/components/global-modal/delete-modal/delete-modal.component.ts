@@ -10,17 +10,15 @@ export class DeleteModalComponent implements OnInit {
 
   @Input() message: string;
 
-  
-  @Output() IsDeletable = new EventEmitter<boolean>();
+  @Output() isDeletable = new EventEmitter<boolean>();
 
   constructor() { }
 
   ngOnInit() {
   }
 
-
 delete(){
-  this.IsDeletable.emit(true);
+  this.isDeletable.emit(true);
   this.closeDiv.nativeElement.click();
 }
 
