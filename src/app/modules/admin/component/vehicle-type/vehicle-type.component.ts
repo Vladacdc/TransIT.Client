@@ -5,7 +5,6 @@ import { VehicleType } from 'src/app/modules/shared/models/vehicleType';
 import { VehicleTypeService } from 'src/app/modules/shared/services/vehicle-type.service';
 import { Component, OnInit, ViewChild, Output, ElementRef, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
-import { CFB$EntryType } from 'cfb/types';
 
 @Component({
   selector: 'app-vehicle-type',
@@ -14,6 +13,7 @@ import { CFB$EntryType } from 'cfb/types';
 })
 export class VehicleTypeComponent implements OnInit {
   vehicleType: VehicleType;
+  vehicleTypeEdit: VehicleType;
 
   columnDefinitions: string[] = [
     'name'
@@ -26,15 +26,21 @@ export class VehicleTypeComponent implements OnInit {
 
   messageCreate: 'Створити тип транспорту';
   messageDelete: 'Ви дійсно хочeте видалити цей тип транспорту';
+  messageEdit: 'Редагувати тип транспорту';
 
   dataSource: EntitiesDataSource<VehicleType>;
+
 
   vehicleTypeForm = this.formBuilder.group({
     name: ''
   });
 
-  vehicleTypeFormValue: FormGroup;
+  vehicleTypeFormEdit = this.formBuilder.group({
+   id: '',
+   name: ''
+  });
 
+  vehicleTypeFormValue: FormGroup;
 
   controls: any[] = [
     {
@@ -45,7 +51,6 @@ export class VehicleTypeComponent implements OnInit {
       required: false
     }
   ];
-
 
   constructor(private vehicleTypeService: VehicleTypeService,
               private formBuilder: FormBuilder,
@@ -77,12 +82,38 @@ export class VehicleTypeComponent implements OnInit {
       );
   }
 
-  delete() {
+  delete(isDeletable: boolean) {
+    if(isDeletable)
+    {
     this.vehicleTypeService
       .deleteEntity(this.vehicleType.id)
       .subscribe(
-        data => this.deleteVehicleType.next(this.vehicleType),
+        deleteVehicleType => this.refreshTable(),
         _ => this.toast.error('Не вдалось видалити тип транспорту', 'Помилка видалення типу транспорту')
       );
+    }
+  }
+
+  updateData(formValue: FormGroup) {
+    if (formValue.invalid) {
+      return;
+    }
+
+    this.vehicleTypeFormEdit=formValue; 
+    const form = formValue.value;
+    const vehicleType: VehicleType = {
+      id: form.id as number,
+      name: form.name as string
+    };
+    this.vehicleTypeService
+      .updateEntity(vehicleType)
+      .subscribe(
+        deleteVehicleType => this.refreshTable(),
+        _ => this.toast.error('Не вдалось редагувати дані про тип транспорту', 'Помилка редагування даних')
+      );
+  }
+
+  resetForm() {
+    this.vehicleTypeFormEdit.patchValue(this.vehicleTypeEdit);
   }
 }

@@ -6,20 +6,21 @@
   </ng-template>
 
   <ng-template #actionsTemplate let-data="templateData">
-    <button class="btn" (click)="vehicleType=data" data-toggle="modal" data-target="#deleteVehicleType">
+    <button class="btn" (click)="vehicleType=data" data-toggle="modal" data-target="#deleteModal">
       <i class="fas fa-trash-alt"></i>
     </button>
 
-    <button class="btn" (click)="vehicleType=data" data-toggle="modal" data-target="#editVehicleType">
+    <button class="btn" (click)="vehicleTypeEdit=data" data-toggle="modal" data-target="#editModal">
       <i class="fas fa-edit"></i>
     </button>
   </ng-template>
 
   <ng-container *ngIf="vehicleType">
-    <app-delete-vehicle-type [vehicleType]="vehicleType" (deleteVehicleType)="refreshTable()">
-    </app-delete-vehicle-type>
-    <app-edit-vehicle-type [vehicleType]="vehicleType" (editVehicleType)="refreshTable()">
-    </app-edit-vehicle-type>
+    <app-delete-modal [message]="messageDelete" (isDeletable)="delete($event)">
+    </app-delete-modal>
+    <app-edit-modal [message]="messageEdit" [generalForm]="vehicleTypeFormEdit" (triggerResetForm)="resetForm()"
+    (updateEntity)="updateData($event)" [controls]="controls" >
+    </app-edit-modal>
   </ng-container>
 
 

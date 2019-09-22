@@ -4,7 +4,8 @@
   </ng-container>
 
   <ng-template #generalTemplate>
-    <app-create-country (createCountry)="refreshTable()"></app-create-country>
+    <app-create-modal [message]="messageForCreate" (createEntity)="clickSubmit($event)" [generalForm]="countryForm"
+      [controls]="controls"></app-create-modal>
   </ng-template>
   
   <ng-template #actionsTemplate let-data="templateData">

@@ -4,7 +4,8 @@
   </ng-container>
 
   <ng-template #generalTemplate>
-    <app-create-currency (createCurrency)="refreshTable()"></app-create-currency>
+    <app-create-modal [message]="messageForCreate" (createEntity)="clickSubmit($event)" [generalForm]="currencyForm"
+  [controls]="controls"></app-create-modal>
   </ng-template>
   
   <ng-template #actionsTemplate let-data="templateData">
