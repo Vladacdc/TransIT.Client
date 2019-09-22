@@ -1,5 +1,5 @@
 import { Component, ViewChild, ElementRef, OnInit, Input, Output, EventEmitter} from '@angular/core';
-import { FormGroup, FormBuilder, Validators, FormControl, AbstractControl } from '@angular/forms';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-create-modal',
@@ -29,6 +29,7 @@ export class CreateModalComponent implements OnInit {
 
 save() {
   this.createEntity.emit(this.generalForm);
+  this.closeDiv.nativeElement.close();
   }
 }
 
