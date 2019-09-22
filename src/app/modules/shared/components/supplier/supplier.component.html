@@ -9,8 +9,8 @@
   </ng-container>
 
   <ng-template #generalTemplate>
-    <app-create-supplier (createSupplier)="refreshTable()">
-    </app-create-supplier>
+<app-create-modal [message]="messageForCreate" (createEntity)="clickSubmit($event)" [generalForm]="supplierForm"
+  [controls]="controls" (trigger) = "loadData()"></app-create-modal>
   </ng-template>
 
   <ng-template #actionsTemplate let-data="templateData">

@@ -1,7 +1,7 @@
 <div class="table-background border">
 
   <ng-template #generalTemplate>
-  <app-create-modal [message]="messageCreate" (createEntity)="clickSubmit($event)" [generalForm]="vehicleTypeForm"
+  <app-create-modal [message]="messageForCreate" (createEntity)="clickSubmit($event)" [generalForm]="vehicleTypeForm"
     [controls]="controls"></app-create-modal>
   </ng-template>
 
@@ -16,9 +16,9 @@
   </ng-template>
 
   <ng-container *ngIf="vehicleType">
-    <app-delete-modal [message]="messageDelete" (isDeletable)="delete($event)">
+    <app-delete-modal [message]="messageForDelete" (isDeletable)="delete($event)">
     </app-delete-modal>
-    <app-edit-modal [message]="messageEdit" [generalForm]="vehicleTypeFormEdit" (triggerResetForm)="resetForm()"
+    <app-edit-modal [message]="messageForEdit" [generalForm]="vehicleTypeFormEdit" (triggerResetForm)="resetForm()"
     (updateEntity)="updateData($event)" [controls]="controls" >
     </app-edit-modal>
   </ng-container>

@@ -14,6 +14,7 @@ export class CreateModalComponent implements OnInit {
   @Input() generalForm: FormGroup;
 
   @Output() createEntity = new EventEmitter<FormGroup>();
+  @Output() trigger = new EventEmitter<FormGroup>();
 
   @Input() message: string;
 
@@ -25,6 +26,7 @@ export class CreateModalComponent implements OnInit {
         .find('form')
         .trigger('reset');
     });
+    this.trigger.emit();
 }
 
 save() {

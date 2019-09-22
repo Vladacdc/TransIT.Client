@@ -24,9 +24,9 @@ export class VehicleTypeComponent implements OnInit {
 
   @ViewChild('table') table: MatFspTableComponent;
 
-  messageCreate: 'Створити тип транспорту';
-  messageDelete: 'Ви дійсно хочeте видалити цей тип транспорту';
-  messageEdit: 'Редагувати тип транспорту';
+  messageForCreate: 'Створити тип транспорту';
+  messageForDelete: 'Ви дійсно хочeте видалити цей тип транспорту';
+  messageForEdit: 'Редагувати тип транспорту';
 
   dataSource: EntitiesDataSource<VehicleType>;
 
