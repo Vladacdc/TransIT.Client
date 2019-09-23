@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder } from '@angular/forms';
 import { LocationService } from 'src/app/modules/shared/services/location.service';
 import { ToastrService } from 'ngx-toastr';
 import { Location } from 'src/app/modules/shared/models/location';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-create-location',
@@ -17,7 +18,8 @@ export class CreateLocationComponent implements OnInit {
   constructor(
     private serviceLocation: LocationService,
     private formBuilder: FormBuilder,
-    private toast: ToastrService
+    private toast: ToastrService,
+    private translate: TranslateService
   ) { }
 
   ngOnInit() {
@@ -48,9 +50,9 @@ export class CreateLocationComponent implements OnInit {
       .subscribe(
         newLocation => {
           this.createLocation.next(newLocation);
-          this.toast.success('', 'Місцезнаходження створено');
+          this.toast.success('', this.translate.instant('Admin.Location.Created'));
         },
-        _ => this.toast.error('Не вдалось створити місценаходження', 'Помилка створення нового місценаходження')
+        _ => this.toast.error(this.translate.instant("Admin.Location.NotCreated")), this.translate.instant("Admin.Location.CreateError")
       );
     this.closeDiv.nativeElement.click();
   }

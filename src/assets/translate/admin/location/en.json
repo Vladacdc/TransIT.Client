@@ -14,7 +14,15 @@
             "Delete" : "Delete",
             "Message" : "Deleted data is non-recoverable!",
             "Sure" : "Do you really want to remove the location?",
-            "Deleted" : "The location has been deleted"
+            "Created":"Location created",
+            "NotCreated":"Failed to create location",
+            "CreateError": "Error creating location",
+            "Deleted": "Location deleted",
+            "NotDeleted":"Failed to delete location",
+            "DeleteError": "Error deleting location",
+            "Edited": "Location edited",
+            "NotEdited":"Failed to edit location",
+            "EdeteError": "Error editing location"
         }
     }
 }
