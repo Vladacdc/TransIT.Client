@@ -12,6 +12,7 @@ import { MalfunctionService } from 'src/app/modules/shared/services/malfunction.
 import { IssueService } from 'src/app/modules/shared/services/issue.service';
 import { VehicleService } from 'src/app/modules/shared/services/vehicle.service';
 import { VehicleType } from 'src/app/modules/shared/models/vehicleType';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-create-issue',
@@ -37,7 +38,8 @@ export class CreateIssueComponent implements OnInit {
     private vehicleService: VehicleService,
     private malfunctionService: MalfunctionService,
     private issueService: IssueService,
-    private toast: ToastrService
+    private toast: ToastrService,
+    private translate: TranslateService
   ) {}
 
   ngOnInit() {
@@ -137,8 +139,11 @@ export class CreateIssueComponent implements OnInit {
     this.issueService
       .addEntity(issue)
       .subscribe(
-        newIssue => this.addIssue.next(newIssue),
-        _ => this.toast.error('Не вдалось створити заявку', 'Помилка створення заявки')
+        newIssue => {
+          this.addIssue.next(newIssue);
+          this.toast.success(this.translate.instant('Register.Created'));
+        },
+        _ => this.toast.error(this.translate.instant('Register.NotCreated'), this.translate.instant('Register.CreateError'))
       );
   }
 

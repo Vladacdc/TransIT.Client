@@ -1,6 +1,6 @@
 {
     "Admin" : {
-        "Location" : {
+        "Post" : {
             "Name" : "Name",
             "Edit" : "Edit part", 
             "EnterName" : "Enter a Name",
@@ -12,7 +12,15 @@
             "Delete" : "Delete",
             "Message" : "Deleted data is non-recoverable!",
             "Sure" : "Do you really want to remove the post?",
-            "Deleted" : "The post has been deleted"
+            "Created":"Post created",
+            "NotCreated":"Failed to create post",
+            "CreateError": "Error creating post",
+            "Deleted": "Post deleted",
+            "NotDeleted":"Failed to delete post",
+            "DeleteError": "Error deleting post",
+            "Edited": "Post edited",
+            "NotEdited":"Failed to edit post",
+            "EdeteError": "Error editing post"
         }
     }
 }

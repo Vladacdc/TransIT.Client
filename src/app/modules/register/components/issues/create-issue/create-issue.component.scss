@@ -15,3 +15,16 @@ textarea.form-control.is-invalid {
 :host ::ng-deep .ng-select .ng-select-container .ng-placeholder {
   color: #495057;
 }
+
+::ng-deep .cdk-overlay-container{
+  z-index:2000;
+}
+
+.picker{
+  display: inline-block;
+}
+
+.inputdate{
+  display: inline-block;
+  width: 91%;
+}

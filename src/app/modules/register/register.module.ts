@@ -14,6 +14,7 @@ import { CreateIssueComponent } from './components/issues/create-issue/create-is
 import { IssueDetailsComponent } from './components/issues/issue-details/issue-details.component';
 import { DeleteIssueComponent } from './components/issues/delete-issue/delete-issue.component';
 import { SharedModule } from '../shared/shared.module';
+import { MatDatepickerModule } from '@angular/material';
 
 @NgModule({
   declarations: [RegisterComponent, IssuesComponent, CreateIssueComponent, IssueDetailsComponent, DeleteIssueComponent],
@@ -26,7 +27,8 @@ import { SharedModule } from '../shared/shared.module';
     DataTablesModule,
     NgSelectModule,
     FormsModule,
-    SharedModule
+    SharedModule,
+    MatDatepickerModule
   ]
 })
 export class RegisterModule {}

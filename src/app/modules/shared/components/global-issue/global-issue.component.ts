@@ -58,7 +58,6 @@ export class GlobalIssueComponent implements OnInit {
     ajax: this.ajaxCallback.bind(this),
     paging: true,
     language: {
-      url: 'assets/language.json',
       buttons: {
         pageLength: {
           _: 'Показати %d записів'

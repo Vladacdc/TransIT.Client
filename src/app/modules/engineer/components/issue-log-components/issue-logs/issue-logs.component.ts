@@ -46,9 +46,6 @@ export class IssueLogsComponent implements OnInit {
     serverSide: true,
     ajax: this.ajaxCallback.bind(this),
     paging: true,
-    language: {
-      url: 'assets/language.json'
-    }
   };
 
   constructor(

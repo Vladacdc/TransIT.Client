@@ -3,7 +3,6 @@
     <img src="../../../../../assets/img/logo.png" width="30" height="30" alt="" />
     TransIT
   </a>
-  <app-language-select></app-language-select>
   <button
     #navbarToggler
     class="navbar-toggler navbar-toggler-right"
@@ -22,6 +21,7 @@
       <div class="d-md-none">
         <ng-content class="d-md-none"></ng-content>
       </div>
+      <app-language-select></app-language-select>
       <ng-container *ngIf="isLoggedIn">
         <span class="nav-item nav-link login">{{ userLogin }}</span>
         <a class="nav-item nav-link" routerLink="logout" (click)="logout()">{{ 'Core.Navbar.SignOut' | translate }}</a>

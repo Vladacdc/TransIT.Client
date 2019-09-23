@@ -61,9 +61,6 @@ export class DocumentComponent implements OnInit {
       }
       // <button class="fourth btn btn-info">Шлях</button>
     ],
-    language: {
-      url: 'assets/language.json'
-    }
   });
 
   ngOnInit() {

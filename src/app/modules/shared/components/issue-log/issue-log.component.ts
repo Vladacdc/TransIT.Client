@@ -45,9 +45,6 @@ export class IssueLogComponent implements OnInit {
         { title: 'Редаговано', data: 'updatedDate', defaultContent: '' }
       ],
       paging: true,
-      language: {
-        url: 'assets/language.json'
-      }
     });
     this.document = this.documentService.selectedItem;
 

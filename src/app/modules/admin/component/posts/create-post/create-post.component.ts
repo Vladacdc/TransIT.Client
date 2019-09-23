@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms'
 import { ToastrService } from 'ngx-toastr';
 import { Post } from 'src/app/modules/shared/models/post';
 import { PostService } from 'src/app/modules/shared/services/post.service';
-import { NAME_FIELD_ERRORS } from 'src/app/custom-errors';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-create-post',
@@ -18,7 +18,8 @@ export class CreatePostComponent implements OnInit {
   constructor(
     private service: PostService,
     private formBuilder: FormBuilder,
-    private toast: ToastrService
+    private toast: ToastrService,
+    private translate : TranslateService
   ) {}
 
   ngOnInit() {
@@ -46,11 +47,9 @@ export class CreatePostComponent implements OnInit {
     this.service.addEntity(post).subscribe(
       newGroup => {
         this.createPost.next(newGroup);
-        this.toast.success('', 'Посаду створено');
-      })
-      _ => this.toast.error('Не вдалось створити посаду', 'Помилка створення посади')
-    this.closeCreateModal.nativeElement.click();
-  }
-
-  readonly customFieldErrors = NAME_FIELD_ERRORS;
+        this.toast.success('', this.translate.instant('Admin.Post.Created'));
+      },
+      _ => this.toast.error(this.translate.instant("Admin.Post.NotCreated")), this.translate.instant("Admin.Post.CreateError")
+    )
+}
 }

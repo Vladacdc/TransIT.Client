@@ -1,22 +1,11 @@
 <div class="table-background border mt-3">
   <h2 class="table-caption">
-    Мої Заявки
+      {{'Register.MyIssues'| translate}}
   </h2>
   <app-create-issue (addIssue)="reloadTable()"></app-create-issue>
   <app-issue-details [issue]="selectedIssue"></app-issue-details>
   <app-delete-issue [issue]="selectedIssue" (deleteIssue)="reloadTable()"></app-delete-issue>
   <table id="issues" datatable [dtOptions]="options" [dtTrigger]="renderTrigger" class="table table-bordered">
-    <thead>
-      <tr>
-        <th>Номер</th>
-        <th>Транспорт</th>
-        <th>Стан Заявки</th>
-        <th>Несправність</th>
-        <th>Дата</th>
-        <th>Опис</th>
-        <th>Дії</th>
-      </tr>
-    </thead>
     <tbody *ngIf="issues?.length !== 0">
       <tr *ngFor="let issue of issues" [ngClass]="getPriorityClass(issue)">
         <td>{{ issue.number }}</td>

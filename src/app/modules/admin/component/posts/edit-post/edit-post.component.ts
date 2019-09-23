@@ -4,6 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { NAME_FIELD_ERRORS } from 'src/app/custom-errors';
 import { Post } from 'src/app/modules/shared/models/post';
 import { PostService } from 'src/app/modules/shared/services/post.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-edit-post',
@@ -31,7 +32,8 @@ export class EditPostComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private service: PostService,
-    private toast: ToastrService
+    private toast: ToastrService,
+    private translate : TranslateService
   ) {}
 
   ngOnInit() {
@@ -54,10 +56,10 @@ export class EditPostComponent implements OnInit {
     
     this.service.updateEntity(post).subscribe(
       _ => {
-        this.toast.success('', 'Поcаду оновлено');
         this.updatePost.next(post);
-      },
-      error => this.toast.error('Помилка редагування')
+        this.toast.success('', this.translate.instant('Admin.Post.Edited'));
+        },
+        _ => this.toast.error(this.translate.instant("Admin.Post.NotEdited")), this.translate.instant("Admin.Post.EditError")
     );
     
     this.closeDiv.nativeElement.click();

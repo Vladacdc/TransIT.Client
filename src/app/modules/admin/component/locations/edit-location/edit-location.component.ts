@@ -3,6 +3,7 @@ import { Location } from 'src/app/modules/shared/models/location';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { LocationService } from 'src/app/modules/shared/services/location.service';
 import { ToastrService } from 'ngx-toastr';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-edit-location',
@@ -29,7 +30,8 @@ export class EditLocationComponent implements OnInit {
   constructor(
     private formBuilder: FormBuilder,
     private serviceLocation: LocationService,
-    private toast: ToastrService
+    private toast: ToastrService,
+    private translate : TranslateService
   ) { }
 
   ngOnInit() {
@@ -58,11 +60,10 @@ export class EditLocationComponent implements OnInit {
       .subscribe(
         data => {
           this.updateLocation.next(location);
-          this.toast.success('', 'Місцезнаходження оновлено');
+          this.toast.success('', this.translate.instant('Admin.Location.Edited'));
         },
-        _ => this.toast.error('Не вдалось редагувати дані про місцезнаходження', 'Помилка редагування даних')
+        _ => this.toast.error(this.translate.instant("Admin.Location.NotEdited")), this.translate.instant("Admin.Location.EditError")
       );
-      
       this.closeDiv.nativeElement.click();
   }
 

@@ -2,12 +2,18 @@ export class DatatableSettings implements DataTables.Settings {
   constructor(settings: Partial<DataTables.Settings>) {
     Object.assign(this, settings);
   }
+  aoColumns: ({ title: string; data: string; orderable?: undefined; } | { title: string; data: any; orderable: boolean; })[];
   responsive = true;
   paging = true;
   pageLength = 10;
   columns = [];
+  currentLang = (localStorage.getItem('language') == "uk") ? "//cdn.datatables.net/plug-ins/505bef35b56/i18n/Ukranian.json" : "//cdn.datatables.net/plug-ins/505bef35b56/i18n/English.json";
   language = {
-    url: '//cdn.datatables.net/plug-ins/1.10.19/i18n/Ukrainian.json'
+    url: this.currentLang
+  };
+  oLanguage = {
+    url: this.currentLang,
+    sUrl :this.currentLang
   };
   scrollX = true;
   drawCallback = function(settings) {
