@@ -64,7 +64,6 @@ export class EditLocationComponent implements OnInit {
         },
         _ => this.toast.error(this.translate.instant("Admin.Location.NotEdited")), this.translate.instant("Admin.Location.EditError")
       );
-
       this.closeDiv.nativeElement.click();
   }
 

@@ -10,6 +10,7 @@ import { WorkTypeService } from '../../../services/work-type.service';
   styleUrls: ['./work-type.component.scss']
 })
 export class WorkTypeComponent implements OnInit {
+  workType: WorkType;
 
   columnDefinitions: string[] = [
     'name',

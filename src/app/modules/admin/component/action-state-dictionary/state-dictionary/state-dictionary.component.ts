@@ -10,6 +10,8 @@ import { MatFspTableComponent } from 'src/app/modules/shared/components/tables/m
   styleUrls: ['./state-dictionary.component.scss']
 })
 export class StateDictionaryComponent implements OnInit {
+  state: State;
+
   columnDefinitions: string[] = [
     'transName'
   ];

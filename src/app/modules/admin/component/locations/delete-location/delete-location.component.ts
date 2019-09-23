@@ -18,6 +18,7 @@ export class DeleteLocationComponent{
     private translate : TranslateService
     ) { }
 
+
   delete() {
     this.closeDiv.nativeElement.click();
     this.service

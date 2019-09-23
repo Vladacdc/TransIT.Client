@@ -22,7 +22,17 @@ export class EditUserComponent implements OnInit, OnDestroy {
 
   @ViewChild('close') closeEditModal: ElementRef;
   @Output() editUser = new EventEmitter<User>();
-  @Input() user: User;
+  @Input()
+  set user(user: User) {
+    if (!user) {
+      return;
+    }
+    this.selectedUser = user;
+    this.attachedEmployee = user.employee;
+    if (this.userForm) { 
+      this.resetForm();
+    }
+  };
 
   
   private subscriptions: Subscription[] = [];
@@ -83,7 +93,7 @@ export class EditUserComponent implements OnInit, OnDestroy {
       isActive: true
     });
 
-    this.setUser();
+    this.resetForm();
 
     this.listenBoardNumberChanges();
     this.listenWholeFormChanges();
@@ -91,22 +101,6 @@ export class EditUserComponent implements OnInit, OnDestroy {
     this.roleService
       .getEntities()
       .subscribe(data => (this.roles = data.sort((a, b) => a.transName.localeCompare(b.transName))));
-  }
-
-  setUser(): void {
-    if (!this.user) {
-      return;
-    }
-    this.selectedUser = this.user;
-    this.attachedEmployee = this.user.employee;
-    this.userForm.patchValue({ ...this.selectedUser, role: this.selectedUser.role.transName });
-    // set original value for board number, as it's not a part of User dto
-    if (this.user.employee) {
-      this.userForm.get('boardNumber')
-        .patchValue(this.user.employee.boardNumber, { emitEvent: false, onlySelf: true });
-    } else {
-      this.userForm.get('boardNumber').reset({ emitEvent: false, onlySelf: true });
-    }
   }
 
   listenWholeFormChanges() {
@@ -230,5 +224,14 @@ export class EditUserComponent implements OnInit, OnDestroy {
       }
     ));
   }
-
+  resetForm() { 
+    this.userForm.patchValue({ ...this.selectedUser, role: this.selectedUser.role.transName });
+    // set original value for board number, as it's not a part of User dto
+    if (this.selectedUser.employee) {
+      this.userForm.get('boardNumber')
+        .patchValue(this.user.employee.boardNumber, { emitEvent: false, onlySelf: true });
+    } else {
+      this.userForm.get('boardNumber').reset({ emitEvent: false, onlySelf: true });
+    }
+  }
 }

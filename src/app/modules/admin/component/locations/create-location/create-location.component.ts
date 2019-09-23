@@ -53,6 +53,7 @@ export class CreateLocationComponent implements OnInit {
           this.toast.success('', this.translate.instant('Admin.Location.Created'));
         },
         _ => this.toast.error(this.translate.instant("Admin.Location.NotCreated")), this.translate.instant("Admin.Location.CreateError")
+
       );
     this.closeDiv.nativeElement.click();
   }

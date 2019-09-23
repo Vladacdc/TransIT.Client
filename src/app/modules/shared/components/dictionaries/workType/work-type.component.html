@@ -1,15 +1,23 @@
 <div class="table-background border">
 
+<ng-container *ngIf="workType">
+  <app-work-type-delete [workType]="workType" (deleteWorkType)="refreshTable()"></app-work-type-delete>
+    
+  <app-work-type-edit [workType]="workType" (updateWorkType)="refreshTable()"></app-work-type-edit>
+</ng-container>
+
 <ng-template #generalTemplate>
-    <app-work-type-create (createWorkType)="refreshTable()"></app-work-type-create>
+  <app-work-type-create (createWorkType)="refreshTable()"></app-work-type-create>
 </ng-template>
 
 <ng-template #actionsTemplate let-data="templateData">
+  <button class="btn" (click)="workType=data" data-toggle="modal" data-target="#deleteWorkType">
+    <i class="fas fas fa-trash-alt"></i>
+  </button>
 
-    <app-work-type-delete [workType]="data" (deleteWorkType)="refreshTable()"></app-work-type-delete>
-
-    <app-work-type-edit [workType]="data" (updateWorkType)="refreshTable()"></app-work-type-edit>
-
+  <button class="btn" (click)="workType=data" data-toggle="modal" data-target="#editWorkType">
+    <i class="fas fa-edit"></i>
+  </button>
 </ng-template>
 
 <h2 class="text-center py-3 m-0">{{ 'Routing.workTypes' | translate }}</h2>

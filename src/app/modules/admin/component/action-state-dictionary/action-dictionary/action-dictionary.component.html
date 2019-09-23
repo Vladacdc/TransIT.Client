@@ -1,12 +1,21 @@
 <div class="table-background border">
+  <ng-container *ngIf="action">
+    <app-delete-action [action]="action" (deleteAction)="refreshTable()"></app-delete-action>
+    <app-edit-action [action]="action" (editAction)="refreshTable()"></app-edit-action>
+  </ng-container>
 
   <ng-template #generalTemplate>
     <app-create-action (createAction)="refreshTable()"></app-create-action>
   </ng-template>
 
   <ng-template #actionsTemplate let-data="templateData">
-    <app-delete-action [action]="data" (deleteAction)="refreshTable()"></app-delete-action>
-    <app-edit-action [action]="data" (editAction)="refreshTable()"></app-edit-action>
+    <button class="btn" (click)="action=data" data-toggle="modal" data-target="#deleteAction">
+      <i class="fas fa-trash-alt"></i>
+    </button>
+
+    <button class="btn" (click)="action=data" data-toggle="modal" data-target="#editAction">
+      <i class="fas fa-edit"></i>
+    </button>
   </ng-template>
 
   <h2 class="text-center py-3 m-0">Переходи</h2>

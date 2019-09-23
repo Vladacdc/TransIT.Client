@@ -12,7 +12,15 @@ import { ToastrService } from 'ngx-toastr';
 export class EditStateComponent implements OnInit {
   selectedState: State;
   @ViewChild('close') closeDiv: ElementRef;
-  @Input() state: State;
+  @Input() set state(state: State) {
+    if (!state) {
+      return;
+    }
+    this.selectedState = new State(state);
+    if (this.stateFrom) {
+      this.resetForm(); 
+    }
+  }
   
   @Output() editState = new EventEmitter<State>();
 
@@ -25,16 +33,7 @@ export class EditStateComponent implements OnInit {
       id: '',
       transName: ''
     });
-    this.setState();
-  }
-
-  setState() {
-    if (!this.state) {
-      return;
-    }
-    this.selectedState = this.state;
-    this.state = new State(this.state);
-    this.stateFrom.patchValue(this.state);
+    this.resetForm();
   }
 
   updateData() {
@@ -55,5 +54,9 @@ export class EditStateComponent implements OnInit {
       },
       error => this.toast.error('Даний стан неможливо змінити', 'Помилка')
     );
+  }
+
+  resetForm() { 
+    this.stateFrom.patchValue(this.selectedState);
   }
 }
