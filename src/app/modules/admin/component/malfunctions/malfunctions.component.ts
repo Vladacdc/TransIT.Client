@@ -53,9 +53,6 @@ export class MalfunctionsComponent implements OnInit {
       },
       columns: [{ data: 'id', bVisible: false }, { title: 'Група', data: 'name', defaultContent: '' }],
       paging: true,
-      language: {
-        url: 'assets/language.json'
-      }
     });
     this.tableSubGroup = $('#subgroup-table').DataTable({
       drawCallback: function(settings) {
@@ -70,9 +67,6 @@ export class MalfunctionsComponent implements OnInit {
       },
       columns: [{ data: 'id', bVisible: false }, { title: 'Підгрупа', data: 'name', defaultContent: '' }],
       paging: true,
-      language: {
-        url: 'assets/language.json'
-      }
     });
     this.tableMalfunction = $('#malfunc-table').DataTable({
       drawCallback: function(settings) {
@@ -87,9 +81,6 @@ export class MalfunctionsComponent implements OnInit {
       },
       columns: [{ data: 'id', bVisible: false }, { title: 'Несправності', data: 'name', defaultContent: '' }],
       paging: true,
-      language: {
-        url: 'assets/language.json'
-      }
     });
     $('.info:contains("записів")').css('background-color', 'red');
 

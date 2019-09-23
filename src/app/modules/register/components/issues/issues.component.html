@@ -6,17 +6,6 @@
   <app-issue-details [issue]="selectedIssue"></app-issue-details>
   <app-delete-issue [issue]="selectedIssue" (deleteIssue)="reloadTable()"></app-delete-issue>
   <table id="issues" datatable [dtOptions]="options" [dtTrigger]="renderTrigger" class="table table-bordered">
-    <thead>
-      <tr>
-        <th>{{'Register.Number'| translate}}</th>
-        <th>{{'Register.Transport'| translate}}</th>
-        <th>{{'Register.Status'| translate}}</th>
-        <th>{{'Register.Malfunction'| translate}}</th>
-        <th>{{'Register.Date'| translate}}</th>
-        <th>{{'Register.Description'| translate}}</th>
-        <th>{{'Register.Action'| translate}}</th>
-      </tr>
-    </thead>
     <tbody *ngIf="issues?.length !== 0">
       <tr *ngFor="let issue of issues" [ngClass]="getPriorityClass(issue)">
         <td>{{ issue.number }}</td>
