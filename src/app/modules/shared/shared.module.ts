@@ -83,6 +83,7 @@ import { EntitiesDataSourceForVehicle } from './data-sources/entities-data-sourc
 import { PartService } from './services/part.service';
 import { ManufacturerService } from './services/manufacturer.service';
 import { MomentDateAdapter, MAT_MOMENT_DATE_FORMATS } from '@angular/material-moment-adapter';
+import { IssueComponent } from './components/issue/issue.component';
 
 @NgModule({
   declarations: [
@@ -120,6 +121,7 @@ import { MomentDateAdapter, MAT_MOMENT_DATE_FORMATS } from '@angular/material-mo
     CreateWorkTypeComponent,
     EditWorkTypeComponent,
     DeleteWorkTypeComponent,
+    IssueComponent,
   ],
   imports: [
     MatCardModule,

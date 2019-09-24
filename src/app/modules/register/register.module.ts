@@ -7,17 +7,16 @@ import { CoreModule } from '../core/core.module';
 import { DataTablesModule } from 'angular-datatables';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { FormsModule } from '@angular/forms';
-
 import { RegisterComponent } from './components/register/register.component';
-import { IssuesComponent } from './components/issues/issues.component';
-import { CreateIssueComponent } from './components/issues/create-issue/create-issue.component';
-import { IssueDetailsComponent } from './components/issues/issue-details/issue-details.component';
-import { DeleteIssueComponent } from './components/issues/delete-issue/delete-issue.component';
+import { CreateIssueComponent } from '../shared/components/issue/create-issue/create-issue.component';
+import { IssueDetailsComponent } from '../shared/components/issue/issue-details/issue-details.component';
+import { DeleteIssueComponent } from '../shared/components/issue/delete-issue/delete-issue.component';
 import { SharedModule } from '../shared/shared.module';
 import { MatDatepickerModule } from '@angular/material';
+import { IssueComponent } from '../shared/components/issue/issue.component';
 
 @NgModule({
-  declarations: [RegisterComponent, IssuesComponent, CreateIssueComponent, IssueDetailsComponent, DeleteIssueComponent],
+  declarations: [RegisterComponent, IssueComponent, CreateIssueComponent, IssueDetailsComponent, DeleteIssueComponent],
   imports: [
     CommonModule,
     RegisterRoutingModule,
