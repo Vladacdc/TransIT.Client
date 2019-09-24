@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { FormsModule } from '@angular/forms';
-import { GlobalIssueComponent } from './components/global-issue/global-issue.component';
 import { CountryComponent } from './components/dictionaries/country/country.component';
 import { DictionaryComponent } from './components/dictionaries/dictionary.component';
 import { CurrencyComponent } from './components/dictionaries/currency/currency.component';
@@ -88,7 +87,6 @@ import { IssueComponent } from './components/issue/issue.component';
 @NgModule({
   declarations: [
     BreadcrumbComponent,
-    GlobalIssueComponent,
     SupplierComponent,
     CreateSupplierComponent,
     EditSupplierComponent,
@@ -153,9 +151,6 @@ import { IssueComponent } from './components/issue/issue.component';
     EditSupplierComponent,
     DeleteSupplierComponent,
     NestedDocumentComponent,
-    GlobalIssueComponent,
-    FiltersTabsComponent,
-    GlobalIssueComponent,
     FiltersTabsComponent,
     CreateDocumentComponent,
     DocumentComponent,

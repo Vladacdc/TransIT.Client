@@ -5,15 +5,15 @@ import { ReportComponent } from './components/report/report.component';
 import { DictionaryComponent } from '../shared/components/dictionaries/dictionary.component';
 import { GlobalDocumentComponent } from '../shared/components/global-document/global-document.component';
 import { SupplierComponent } from '../shared/components/supplier/supplier.component';
-import { GlobalIssueComponent } from '../shared/components/global-issue/global-issue.component';
 import { ChartsComponent } from './components/charts/charts.component';
+import { IssueComponent } from '../shared/components/issue/issue.component';
 
 const routes: Routes = [
   {
     path: '',
     component: AnalystComponent,
     children: [
-      { path: 'issues', component: GlobalIssueComponent },
+      { path: 'issues', component: IssueComponent },
       { path: 'report', component: ReportComponent },
       { path: 'charts', component: ChartsComponent},
       { path: 'dictionary', component: DictionaryComponent },
