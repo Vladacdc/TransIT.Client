@@ -10,93 +10,87 @@
   
   <div class="top-container">
     <mat-form-field>
-      <input matInput [maxLength]="255" placeholder="{{'MatFspTable.search' | translate}}:" #input>
+      <input matInput [maxLength]="255" placeholder="{{'Issue.search' | translate}}:" #input>
     </mat-form-field>
   </div>
   
   <div class="scroll-container">
     <table mat-table [dataSource]="dataSource" matSort>
   
-      <ng-container matColumnDef="">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ | translate}} </th>
-        <td mat-cell *matCellDef="let row"> {{row}} </td>
+      <ng-container matColumnDef="number">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'Issue.Columns.number' | translate}} </th>
+        <td mat-cell *matCellDef="let row"> {{row.number}} </td>
       </ng-container>
   
-      <ng-container matColumnDef="">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ | translate}} </th>
-        <td mat-cell *matCellDef="let row"> {{row}} </td>
+      <ng-container matColumnDef="state">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'Issue.Columns.state' | translate}} </th>
+        <td mat-cell *matCellDef="let row"> {{row.state.transName}} </td>
       </ng-container>
   
-      <ng-container matColumnDef="">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ | translate}} </th>
-        <td mat-cell *matCellDef="let row"> {{row}} </td>
+      <ng-container matColumnDef="malfunctionGroup">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'Issue.Columns.malfunctionGroup' | translate}} </th>
+        <td mat-cell *matCellDef="let row"> {{row.malfunction.malfunctionSubgroup.malfunctionGroup.name}} </td>
       </ng-container>
   
-      <ng-container matColumnDef="">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ | translate}} </th>
-        <td mat-cell *matCellDef="let row"> {{row}} </td>
+      <ng-container matColumnDef="malfunctionSubgroup">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'Issue.Columns.malfunctionSubgroup' | translate}} </th>
+        <td mat-cell *matCellDef="let row"> {{row.malfunction.malfunctionSubgroup.name}} </td>
       </ng-container>
   
-      <ng-container matColumnDef="">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ | translate}} </th>
-        <td mat-cell *matCellDef="let row"> {{row}} </td>
+      <ng-container matColumnDef="malfunction">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'Issue.Columns.malfunction' | translate}} </th>
+        <td mat-cell *matCellDef="let row"> {{row.malfunction.name}} </td>
       </ng-container>
   
-      <ng-container matColumnDef="">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ | translate}} </th>
-        <td mat-cell *matCellDef="let row"> {{row}} </td>
+      <ng-container matColumnDef="priority">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'Issue.Columns.priority' | translate}} </th>
+        <td mat-cell *matCellDef="let row"> {{row.priority}} </td>
       </ng-container>
   
-      <ng-container matColumnDef="">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ | translate}} </th>
-        <td mat-cell *matCellDef="let row"> {{row}} </td>
+      <ng-container matColumnDef="warranty">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'Issue.Columns.warranty' | translate}} </th>
+        <td mat-cell *matCellDef="let row"> {{row.warranty}} </td>
       </ng-container>
   
-      <ng-container matColumnDef="">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ | translate}} </th>
-        <td mat-cell *matCellDef="let row"> {{row}} </td>
+      <ng-container matColumnDef="vehicle">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'Issue.Columns.vehicle' | translate}} </th>
+        <td mat-cell *matCellDef="let row"> {{row.vehicle.name}} </td>
       </ng-container>
   
-      <ng-container matColumnDef="">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ | translate}} </th>
-        <td mat-cell *matCellDef="let row"> {{row}} </td>
+      <ng-container matColumnDef="assignee">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'Issue.Columns.assignee' | translate}} </th>
+        <td mat-cell *matCellDef="let row"> {{row.assignedTo.login}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="deadline">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'Issue.Columns.deadline' | translate}} </th>
+        <td mat-cell *matCellDef="let row"> {{row.deadline}} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="location">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'Issue.Columns.location' | translate}} </th>
+        <td mat-cell *matCellDef="let row"> {{ row }} </td> <!--row.vehicle.location.name-->
       </ng-container>
   
-      <ng-container matColumnDef="">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ | translate}} </th>
-        <td mat-cell *matCellDef="let row"> {{row}} </td>
+      <ng-container matColumnDef="summary">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'Issue.Columns.summary' | translate}} </th>
+        <td mat-cell *matCellDef="let row"> {{row.summary}} </td>
       </ng-container>
   
-      <ng-container matColumnDef="">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ | translate}} </th>
-        <td mat-cell *matCellDef="let row"> {{row}} </td>
+      <ng-container matColumnDef="created">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'Issue.Columns.created' | translate}} </th>
+        <td mat-cell *matCellDef="let row"> {{row.createdDate}} </td>
       </ng-container>
   
-      <ng-container matColumnDef="">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ | translate}} </th>
-        <td mat-cell *matCellDef="let row"> {{row}} </td>
+      <ng-container matColumnDef="updated">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'Issue.Columns.updated' | translate}} </th>
+        <td mat-cell *matCellDef="let row"> {{row.updatedDate}} </td>
       </ng-container>
   
-      <ng-container matColumnDef="">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ | translate}} </th>
-        <td mat-cell *matCellDef="let row"> {{row}} </td>
-      </ng-container>
-  
-      <ng-container matColumnDef="">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> {{ | translate}} </th>
-        <td mat-cell *matCellDef="let row"> {{row}} </td>
-      </ng-container>
-  
-  
-  
-  
-  
-  
-  
-  
-  
+
+      
       <ng-container matColumnDef="buttonsColumn">
-        <th mat-header-cell *matHeaderCellDef> {{'MatFspTable.actions' | translate}} </th>
+        <th mat-header-cell *matHeaderCellDef> {{'Issue.actions' | translate}} </th>
         <td mat-cell *matCellDef="let row">
   
           <ng-container *ngIf="true">
@@ -108,7 +102,7 @@
   
   
       <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
-      <tr mat-row *matRowDef="let row; columns: columnsToDisplay;"></tr>
+      <tr mat-row [ngClass]="{'high-priority': row.priority == 0, 'medium-priority': row.priority == 1, 'low-priority': row.priority == 2}" *matRowDef="let row; columns: columnsToDisplay;"></tr>
     </table>
   </div>
   

@@ -1,0 +1,22 @@
+{
+  "Issue": {
+    "search": "Search",
+    "actions": "Actions",
+    "Columns": {
+      "number": "Number",
+      "state": "State",
+      "malfunctionGroup": "Group",
+      "malfunctionSubgroup": "Subgroup",
+      "malfunction": "Malfunction",
+      "priority": "Priority",
+      "warranty": "Warranty",
+      "vehicle": "Vehicle",
+      "assignee": "Assignee",
+      "deadline": "Deadline",
+      "location": "Location",
+      "summary": "Summary",
+      "created": "Created",
+      "updated": "Updated"
+    }
+  }
+}
