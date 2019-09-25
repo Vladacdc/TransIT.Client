@@ -18,7 +18,10 @@ import { IssueService } from '../../services/issue.service';
   ]
 })
 export class IssueComponent implements OnInit, AfterViewInit {
-  issue: Issue;
+  selectedIssue: Issue;
+  isRegister: boolean;
+  isAnalyst: boolean;
+  isEngineer: boolean;
 
   columnDefinitions: string[] = [
     "number",
@@ -57,9 +60,24 @@ export class IssueComponent implements OnInit, AfterViewInit {
   ngOnInit() {
     this.dataSource = new EntitiesDataSource<Issue>(this.issueService);
     this.columnsToDisplay = this.columnDefinitions;
-    this.columnsToDisplay.push("buttonsColumn");
+    
     this.paginator._intl = new MatPaginatorIntlCustom(this.translate, new TranslateDefaultParser());
     
+
+    const role = this.authenticationService.getRole()
+    if (role == "ENGINEER") {
+      this.isEngineer = true;
+      this.columnsToDisplay.push("actions");
+    }
+    else if (role == "ANALYST") {
+      this.isAnalyst = true;
+      
+    }
+    else if (role == "REGISTER") {
+      this.isRegister = true;
+      this.columnsToDisplay.push("actions");
+    }
+
     this.refreshTable();
   }
 

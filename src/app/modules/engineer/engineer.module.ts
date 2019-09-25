@@ -57,9 +57,11 @@ const routes: Routes = [
     SharedModule,
     NgSelectModule
   ],
-  exports: [RouterModule],
+  exports: [
+    RouterModule,
+    NestedIssueLogsComponent,
+  ],
   declarations: [
-    EditIssueComponent,
     EditIssueLogComponent,
     NestedIssueLogsComponent,
     IssueLogDocumentsComponent,

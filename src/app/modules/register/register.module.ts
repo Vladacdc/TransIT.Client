@@ -8,15 +8,11 @@ import { DataTablesModule } from 'angular-datatables';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { FormsModule } from '@angular/forms';
 import { RegisterComponent } from './components/register/register.component';
-import { CreateIssueComponent } from '../shared/components/issue/create-issue/create-issue.component';
-import { IssueDetailsComponent } from '../shared/components/issue/issue-details/issue-details.component';
-import { DeleteIssueComponent } from '../shared/components/issue/delete-issue/delete-issue.component';
 import { SharedModule } from '../shared/shared.module';
 import { MatDatepickerModule } from '@angular/material';
-import { IssueComponent } from '../shared/components/issue/issue.component';
 
 @NgModule({
-  declarations: [RegisterComponent, IssueComponent, CreateIssueComponent, IssueDetailsComponent, DeleteIssueComponent],
+  declarations: [RegisterComponent],
   imports: [
     CommonModule,
     RegisterRoutingModule,

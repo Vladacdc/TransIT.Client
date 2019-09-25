@@ -83,6 +83,11 @@ import { PartService } from './services/part.service';
 import { ManufacturerService } from './services/manufacturer.service';
 import { MomentDateAdapter, MAT_MOMENT_DATE_FORMATS } from '@angular/material-moment-adapter';
 import { IssueComponent } from './components/issue/issue.component';
+import { IssueDetailsComponent } from './components/issue/issue-details/issue-details.component';
+import { CreateIssueComponent } from './components/issue/create-issue/create-issue.component';
+import { EditIssueComponent } from './components/issue/edit-issue/edit-issue.component';
+import { DeleteIssueComponent } from './components/issue/delete-issue/delete-issue.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -120,6 +125,10 @@ import { IssueComponent } from './components/issue/issue.component';
     EditWorkTypeComponent,
     DeleteWorkTypeComponent,
     IssueComponent,
+    CreateIssueComponent,
+    EditIssueComponent,
+    DeleteIssueComponent,
+    IssueDetailsComponent,
   ],
   imports: [
     MatCardModule,
@@ -142,7 +151,8 @@ import { IssueComponent } from './components/issue/issue.component';
     ReactiveFormsModule,
     NgSelectModule,
     FormsModule,
-    NgBootstrapFormValidationModule
+    NgBootstrapFormValidationModule,
+    RouterModule,
   ],
   exports: [
     BreadcrumbComponent,
@@ -163,7 +173,8 @@ import { IssueComponent } from './components/issue/issue.component';
     CreateManufacturerComponent,
     DeleteManufacturerComponent,
     EditManufacturerComponent,
-    WorkTypeComponent
+    WorkTypeComponent,
+    IssueComponent,
   ],
   providers: [
     ActionTypeService,

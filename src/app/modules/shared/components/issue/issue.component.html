@@ -12,8 +12,22 @@
     <mat-form-field>
       <input matInput [maxLength]="255" placeholder="{{'Issue.search' | translate}}:" #input>
     </mat-form-field>
+
+    <div class="general-content-container">
+      <ng-container *ngIf="isRegister">
+        <app-create-issue (addIssue)="refreshTable()"></app-create-issue>
+        <app-issue-details [issue]="selectedIssue"></app-issue-details>
+        <app-delete-issue [issue]="selectedIssue" (deleteIssue)="refreshTable()"></app-delete-issue>
+      </ng-container>
+      
+      <ng-container *ngIf="isEngineer">
+        Кнопочки
+      </ng-container>
+    </div>
   </div>
   
+  
+
   <div class="scroll-container">
     <table mat-table [dataSource]="dataSource" matSort>
   
@@ -69,7 +83,7 @@
 
       <ng-container matColumnDef="location">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'Issue.Columns.location' | translate}} </th>
-        <td mat-cell *matCellDef="let row"> {{ row }} </td> <!--row.vehicle.location.name-->
+        <td mat-cell *matCellDef="let row"> {{ row.vehicle.location ? row.vehicle.location.name : "  " }} </td> <!--row.vehicle.location.name-->
       </ng-container>
   
       <ng-container matColumnDef="summary">
@@ -89,20 +103,35 @@
   
 
       
-      <ng-container matColumnDef="buttonsColumn">
+      <ng-container matColumnDef="actions">
         <th mat-header-cell *matHeaderCellDef> {{'Issue.actions' | translate}} </th>
         <td mat-cell *matCellDef="let row">
   
-          <ng-container *ngIf="true">
-            Кнопочки
+          <ng-container *ngIf="isRegister">
+            <button (click)="selectedIssue=row" class="btn" data-toggle="modal" data-target="#issueDetails">
+              <i class="fas fa-info-circle"></i>
+            </button>
+
+            <button *ngIf="row.deletable" (click)="selectedIssue=row" class="btn" data-toggle="modal" data-target="#deleteIssue">
+              <i class="fas fa-trash-alt"></i>
+            </button>
           </ng-container>
-  
+
+          <ng-container *ngIf="isEngineer">
+            <button class="btn">
+              <i class="fas fa-info-circle"></i>
+            </button>
+          </ng-container>
+          
         </td>
       </ng-container>
   
   
       <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
-      <tr mat-row [ngClass]="{'high-priority': row.priority == 0, 'medium-priority': row.priority == 1, 'low-priority': row.priority == 2}" *matRowDef="let row; columns: columnsToDisplay;"></tr>
+      <tr mat-row 
+        [ngClass]="{'high-priority': row.priority == 0, 'medium-priority': row.priority == 1, 'low-priority': row.priority == 2}"
+        *matRowDef="let row; columns: columnsToDisplay;">
+      </tr>
     </table>
   </div>
   
