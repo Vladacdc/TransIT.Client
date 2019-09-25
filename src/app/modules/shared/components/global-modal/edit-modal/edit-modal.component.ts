@@ -24,11 +24,12 @@ export class EditModalComponent implements OnInit {
         .find('form')
         .trigger('reset');
     });
+    this.triggerResetForm.emit();
   }
 
 save(){
   this.updateEntity.emit(this.generalForm);
-  this.triggerResetForm.emit();
+
 }
 
 }

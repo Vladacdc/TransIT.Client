@@ -26,13 +26,7 @@
                   <ng-select formControlName="{{item.formControlName}}" placeholder="{{item.placeHolder}}"
                     bindLabel="{{item.bindLabel}}" notFoundText="Не знайдено" [items]="item.items">
                   </ng-select>
-                </div>
-                    <div class="form-group" *ngSwitchCase="'selectWithProperies'">
-                      <label [class.required-field]="item.required">{{item.labelName}}</label>
-                      <ng-select formControlName="{{item.formControlName}}" placeholder="{{item.placeHolder}}"
-                        bindLabel="{{item.bindLabel}}" notFoundText="Не знайдено" [items]="item.items" (clear)="reloadEntity.next($event)" (change)="reloadEntity.next($event)">
-                      </ng-select>
-                    </div>
+                </div>                   
                 <div class="form-group" *ngSwitchCase="'date'">
                   <label [class.required-field]="item.required">{{item.labelName}}</label>
                   <input type="date" class="form-control" formControlName="{{item.formControlName}}"
