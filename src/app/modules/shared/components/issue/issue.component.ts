@@ -8,6 +8,7 @@ import { MatPaginatorIntlCustom } from '../../paginator-extentions/mat-paginator
 import { fromEvent, merge } from 'rxjs';
 import { debounceTime, distinctUntilChanged, tap } from 'rxjs/operators';
 import { IssueService } from '../../services/issue.service';
+import { Priority } from 'src/app/modules/core/models/priority/priority';
 
 @Component({
   selector: 'app-issue',
@@ -18,6 +19,8 @@ import { IssueService } from '../../services/issue.service';
   ]
 })
 export class IssueComponent implements OnInit, AfterViewInit {
+  priority = [Priority.high, Priority.medium, Priority.low];
+  
   selectedIssue: Issue;
   isRegister: boolean;
   isAnalyst: boolean;
@@ -40,6 +43,46 @@ export class IssueComponent implements OnInit, AfterViewInit {
     "updated"
   ];
 
+  analystColumns: string[] = [
+    "vehicle",
+    "state",
+    "malfunctionGroup",
+    "malfunctionSubgroup",
+    "malfunction",
+    "location",
+    "warranty",
+  ];
+
+  engineerColumns: string[] = [
+    "number",
+    "state",
+    "malfunctionGroup",
+    "malfunctionSubgroup",
+    "malfunction",
+    "priority",
+    "warranty",
+    "vehicle",
+    "assignee",
+    "deadline",
+    "location",
+    "summary",
+    "created",
+    "updated",
+    "actions"
+  ];
+
+  registerColumns: string[] = [
+    "vehicle",
+    "state",
+    "malfunctionGroup",
+    "malfunctionSubgroup",
+    "malfunction",
+    "warranty",
+    "summary",
+    "actions"
+  ];
+
+
   columnsToDisplay: string[];
 
   dataSource: EntitiesDataSource<Issue>;
@@ -59,7 +102,7 @@ export class IssueComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     this.dataSource = new EntitiesDataSource<Issue>(this.issueService);
-    this.columnsToDisplay = this.columnDefinitions;
+    //this.columnsToDisplay = this.columnDefinitions;
     
     this.paginator._intl = new MatPaginatorIntlCustom(this.translate, new TranslateDefaultParser());
     
@@ -67,15 +110,15 @@ export class IssueComponent implements OnInit, AfterViewInit {
     const role = this.authenticationService.getRole()
     if (role == "ENGINEER") {
       this.isEngineer = true;
-      this.columnsToDisplay.push("actions");
+      this.columnsToDisplay = this.engineerColumns;
     }
     else if (role == "ANALYST") {
       this.isAnalyst = true;
-      
+      this.columnsToDisplay = this.analystColumns;
     }
     else if (role == "REGISTER") {
       this.isRegister = true;
-      this.columnsToDisplay.push("actions");
+      this.columnsToDisplay = this.registerColumns;
     }
 
     this.refreshTable();
