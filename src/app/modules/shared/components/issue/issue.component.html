@@ -21,7 +21,7 @@
       </ng-container>
       
       <ng-container *ngIf="isEngineer">
-        Кнопочки
+        Кнопочки друку
       </ng-container>
     </div>
   </div>
@@ -122,7 +122,7 @@
 
           <ng-container *ngIf="isEngineer">
             <button class="btn">
-              <i class="fas fa-info-circle"></i>
+              <i class="fas fa-info-circle" (click)="selectIssue(row)"></i>
             </button>
           </ng-container>
           

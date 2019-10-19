@@ -9,6 +9,7 @@ import { fromEvent, merge } from 'rxjs';
 import { debounceTime, distinctUntilChanged, tap } from 'rxjs/operators';
 import { IssueService } from '../../services/issue.service';
 import { Priority } from 'src/app/modules/core/models/priority/priority';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-issue',
@@ -97,15 +98,13 @@ export class IssueComponent implements OnInit, AfterViewInit {
   constructor(
     private authenticationService: AuthenticationService,
     private issueService: IssueService,
+    private router: Router,
     private translate: TranslateService) {
   }
 
   ngOnInit() {
     this.dataSource = new EntitiesDataSource<Issue>(this.issueService);
-    //this.columnsToDisplay = this.columnDefinitions;
-    
     this.paginator._intl = new MatPaginatorIntlCustom(this.translate, new TranslateDefaultParser());
-    
 
     const role = this.authenticationService.getRole()
     if (role == "ENGINEER") {
@@ -141,18 +140,6 @@ export class IssueComponent implements OnInit, AfterViewInit {
     ).subscribe();
   }
 
-  setForAnalyst() {
-
-  }
-
-  setForRegister() {
-
-  }
-
-  setForEngeneer() {
-
-  }
-
   refreshTable() {
     this.dataSource.loadEntities(
       this.input.nativeElement.value,
@@ -161,5 +148,10 @@ export class IssueComponent implements OnInit, AfterViewInit {
       this.paginator.pageSize,
       this.paginator
     );
+  }
+
+  selectIssue(issue: Issue) {
+    this.issueService.selectedItem = issue;
+    this.router.navigate(['/engineer/issues/edit']);
   }
 }

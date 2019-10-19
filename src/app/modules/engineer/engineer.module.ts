@@ -6,7 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { CoreModule } from '../core/core.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DataTablesModule } from 'angular-datatables';
-import { EditIssueComponent } from '../shared/components/issue/edit-issue/edit-issue.component';
+import { EditIssueComponent } from './components/edit-issue/edit-issue.component';
 import { SharedModule } from '../shared/shared.module';
 import { GlobalDocumentComponent } from '../shared/components/global-document/global-document.component';
 import { IssueLogComponent } from '../shared/components/issue-log/issue-log.component';
@@ -67,7 +67,8 @@ const routes: Routes = [
     IssueLogDocumentsComponent,
     CreateDocumentComponent,
     VehiclesComponent,
-    InfoVehicleComponent
+    InfoVehicleComponent,
+    EditIssueComponent
   ]
 })
 export class EngineerRoutingModule {}

@@ -85,7 +85,7 @@ import { MomentDateAdapter, MAT_MOMENT_DATE_FORMATS } from '@angular/material-mo
 import { IssueComponent } from './components/issue/issue.component';
 import { IssueDetailsComponent } from './components/issue/issue-details/issue-details.component';
 import { CreateIssueComponent } from './components/issue/create-issue/create-issue.component';
-import { EditIssueComponent } from './components/issue/edit-issue/edit-issue.component';
+import { EditIssueComponent } from '../engineer/components/edit-issue/edit-issue.component';
 import { DeleteIssueComponent } from './components/issue/delete-issue/delete-issue.component';
 import { RouterModule } from '@angular/router';
 
@@ -126,7 +126,6 @@ import { RouterModule } from '@angular/router';
     DeleteWorkTypeComponent,
     IssueComponent,
     CreateIssueComponent,
-    EditIssueComponent,
     DeleteIssueComponent,
     IssueDetailsComponent,
   ],

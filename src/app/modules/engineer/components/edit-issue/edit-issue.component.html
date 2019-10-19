@@ -1,4 +1,8 @@
-<div class="container-fluid">
+<div class="table-background border">
+  <ng-template #issueNotSelected>
+    Вибери заявку, придурку!!!
+  </ng-template>
+  <ng-container *ngIf="issue.vehicle.inventoryId; else issueNotSelected">
   <div class="row">
     <div class="form-group col-sm-12 col-md-4">
       <label for="vehicleDisInput">Транспорт</label>
@@ -100,13 +104,14 @@
     </div>
   </div>
   <div class="row">
-    <div class="form-group col-sm-12 col-md-12 offset-md-10">
-      <a class="btn btn-primary align-self-end" style="color: white" (click)="editIssue()">Зберегти заявку</a>
+    <div>
+      <a class="btn btn-primary" style="color: white" (click)="editIssue()">Зберегти заявку</a>
     </div>
   </div>
   <div class="table-background">
-    <div style="float: left">
+    <div>
       <a class="btn btn-primary" [routerLink]="['/engineer/issue-logs/edit']" (click)="createHandler()">Обробка</a>
     </div>
   </div>
+  </ng-container>
 </div>
