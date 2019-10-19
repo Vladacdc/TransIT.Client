@@ -20,7 +20,7 @@
         <app-delete-issue [issue]="selectedIssue" (deleteIssue)="refreshTable()"></app-delete-issue>
       </ng-container>
       
-      <ng-container *ngIf="isEngineer">
+      <ng-container *ngIf="isEngineer || isAnalyst">
         <button mat-raised-button (click)="exporter.exportTable('xlsx', {fileName:'Issues'})">Excel</button>
         <button mat-raised-button (click)="exporter.exportTable('csv', {fileName:'Issues'})">Csv</button>
         <button mat-raised-button (click)="exporter.exportTable('json', {fileName:'Issues'})">Json</button>
