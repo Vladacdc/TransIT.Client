@@ -1,6 +1,11 @@
 <div class="table-background border">
   <ng-template #issueNotSelected>
-    Вибери заявку, придурку!!!
+    <div class="alert alert-warning" role="alert">
+      Останнім часом ви не переглядали жодної заявки.
+    </div>
+    <a class="btn btn-primary" [routerLink]="['/engineer/issue']">
+      Переглянути заявки
+    </a>
   </ng-template>
   <ng-container *ngIf="issue.vehicle.inventoryId; else issueNotSelected">
   <div class="row">
@@ -103,15 +108,14 @@
       </div>
     </div>
   </div>
-  <div class="row">
-    <div>
-      <a class="btn btn-primary" style="color: white" (click)="editIssue()">Зберегти заявку</a>
-    </div>
-  </div>
-  <div class="table-background">
-    <div>
-      <a class="btn btn-primary" [routerLink]="['/engineer/issue-logs/edit']" (click)="createHandler()">Обробка</a>
-    </div>
-  </div>
+  <div style="margin-bottom: 12px;">
+    <a class="btn btn-primary" [routerLink]="['/engineer/issue-logs/edit']" (click)="createHandler()">
+      Обробка
+    </a>
+    <a class="btn btn-primary align-self-end" style="color: white;float: right;" (click)="updateIssue()">
+      Зберегти заявку
+    </a>
+  </div>  
+  <app-nested-issue-logs [issue]="issue"></app-nested-issue-logs>
   </ng-container>
 </div>

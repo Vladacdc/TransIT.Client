@@ -62,7 +62,7 @@ export class EditIssueComponent implements OnInit {
     this.isEdited = true;
   }
 
-  editIssue() {
+  updateIssue() {
     if (this.currentMalfunction && this.issue.malfunction.name !== this.currentMalfunction.name) {
       this.issue.malfunction = this.currentMalfunction;
     }
@@ -77,7 +77,7 @@ export class EditIssueComponent implements OnInit {
   createHandler(): void {
     this.issueService.selectedItem = this.issue;
     if (this.isEdited) {
-      this.editIssue();
+      this.updateIssue();
     }
   }
 
