@@ -37,6 +37,7 @@
     "datatables.net-dt": "^1.10.19",
     "file-saver": "^2.0.2",
     "jquery": "^3.4.1",
+    "mat-table-exporter": "^1.2.1",
     "moment": "^2.24.0",
     "ng-bootstrap-form-validation": "^3.0.3",
     "ng2-charts": "2.2.3",

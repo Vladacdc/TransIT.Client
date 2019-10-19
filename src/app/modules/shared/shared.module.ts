@@ -44,6 +44,7 @@ import { TransitionService } from './services/transition.service';
 import { CountryService } from './services/country.service';
 import { StatisticsService } from './services/statistics.service';
 import { UnitService } from './services/unit.service';
+import { MatTableExporterModule } from 'mat-table-exporter';
 // Materials
 import { MatDatepickerModule,
          MatNativeDateModule,
@@ -152,6 +153,7 @@ import { RouterModule } from '@angular/router';
     FormsModule,
     NgBootstrapFormValidationModule,
     RouterModule,
+    MatTableExporterModule
   ],
   exports: [
     BreadcrumbComponent,

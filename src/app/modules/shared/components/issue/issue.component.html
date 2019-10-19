@@ -21,7 +21,10 @@
       </ng-container>
       
       <ng-container *ngIf="isEngineer">
-        Кнопочки друку
+        <button mat-raised-button (click)="exporter.exportTable('xlsx', {fileName:'Issues'})">Excel</button>
+        <button mat-raised-button (click)="exporter.exportTable('csv', {fileName:'Issues'})">Csv</button>
+        <button mat-raised-button (click)="exporter.exportTable('json', {fileName:'Issues'})">Json</button>
+        <button mat-raised-button (click)="exporter.exportTable('txt', {fileName:'Issues'})">Txt</button>
       </ng-container>
     </div>
   </div>
@@ -29,7 +32,8 @@
   
 
   <div class="scroll-container">
-    <table mat-table [dataSource]="dataSource" matSort>
+    <table mat-table [dataSource]="dataSource" matSort
+      matTableExporter #exporter="matTableExporter">
   
       <ng-container matColumnDef="number">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> {{'Issue.Columns.number' | translate}} </th>
