@@ -1,5 +1,5 @@
 <div class="table-background border">
-  <app-filters-tabs 
+  <app-filters-tabs *ngIf="isEngineer || isAnalyst"
     (Filters) = "setFilters($event)"
     (ApplyFilters) = "refreshTable()">
   </app-filters-tabs>

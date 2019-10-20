@@ -11,6 +11,10 @@ import { Priority } from 'src/app/modules/core/models/priority/priority';
 import { Router } from '@angular/router';
 import { IssueDataSource } from '../../data-sources/issue-data-source';
 import { PropertyFilter } from '../../models/property-filter';
+import { HubConnection, HubConnectionBuilder } from '@aspnet/signalr';
+import { environment } from 'src/environments/environment';
+import { TokenStore } from 'src/app/modules/core/helpers/token-store';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-issue',
@@ -96,11 +100,15 @@ export class IssueComponent implements OnInit, AfterViewInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   @ViewChild('input') input: ElementRef;
+  
+  private hubConnection: HubConnection;
 
   constructor(
     private authenticationService: AuthenticationService,
     private issueService: IssueService,
     private router: Router,
+    private tokenStore: TokenStore,
+    private toastr: ToastrService,
     private translate: TranslateService) {
   }
 
@@ -140,6 +148,24 @@ export class IssueComponent implements OnInit, AfterViewInit {
     merge(this.sort.sortChange, this.paginator.page).pipe(
       tap(() => this.refreshTable())
     ).subscribe();
+  }
+
+  private startConnection(): void {
+    this.hubConnection = new HubConnectionBuilder()
+      .withUrl(environment.signalrIssueUrl, {
+        accessTokenFactory: () => this.tokenStore.getToken().accessToken
+      })
+      .build();
+
+    this.hubConnection.on('ReceiveIssues', _ => {
+      this.refreshTable();
+      this.toastr.info('У вас нові заявки!', 'Сповіщення')
+    });
+
+    this.hubConnection
+      .start()
+      .catch(_ =>
+        this.toastr.warning('Ваш браузер ймовірно не підтримує деякий функціонал.', 'Помилка під час з\'єднання!'));
   }
 
   refreshTable() {
