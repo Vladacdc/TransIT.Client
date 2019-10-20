@@ -89,6 +89,7 @@ import { CreateIssueComponent } from './components/issue/create-issue/create-iss
 import { EditIssueComponent } from '../engineer/components/edit-issue/edit-issue.component';
 import { DeleteIssueComponent } from './components/issue/delete-issue/delete-issue.component';
 import { RouterModule } from '@angular/router';
+import { IssueDataSource } from './data-sources/issue-data-source';
 
 @NgModule({
   declarations: [
@@ -129,6 +130,7 @@ import { RouterModule } from '@angular/router';
     CreateIssueComponent,
     DeleteIssueComponent,
     IssueDetailsComponent,
+    IssueDataSource
   ],
   imports: [
     MatCardModule,
