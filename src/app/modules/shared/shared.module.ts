@@ -130,7 +130,6 @@ import { IssueDataSource } from './data-sources/issue-data-source';
     CreateIssueComponent,
     DeleteIssueComponent,
     IssueDetailsComponent,
-    IssueDataSource
   ],
   imports: [
     MatCardModule,

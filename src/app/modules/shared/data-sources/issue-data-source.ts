@@ -3,6 +3,7 @@ import { EntitiesDataSource } from './entities-data-sourse';
 import { Injectable } from '@angular/core';
 import { Issue } from '../models/issue';
 import { IssueService } from '../services/issue.service';
+import { PropertyFilter } from '../models/property-filter';
 
 @Injectable()
 export class IssueDataSource extends EntitiesDataSource<Issue> {
@@ -13,7 +14,7 @@ export class IssueDataSource extends EntitiesDataSource<Issue> {
   
   loadFilteredEntities(
     search: string = '',
-    filters: any, // {entityPropertyPath: string; value: string, operator: string}[]
+    filters: PropertyFilter[],
     sorting: any,
     pageIndex: number = 0,
     pageSize: number = 5,

@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild, AfterViewInit, ElementRef } from '@angular/core';
 import { Issue } from '../../models/issue';
-import { EntitiesDataSource } from '../../data-sources/entities-data-sourse';
 import { AuthenticationService } from 'src/app/modules/core/services/authentication.service';
 import { MatPaginator, MatSort } from '@angular/material';
 import { TranslateService, TranslateDefaultParser } from '@ngx-translate/core';
@@ -10,6 +9,8 @@ import { debounceTime, distinctUntilChanged, tap } from 'rxjs/operators';
 import { IssueService } from '../../services/issue.service';
 import { Priority } from 'src/app/modules/core/models/priority/priority';
 import { Router } from '@angular/router';
+import { IssueDataSource } from '../../data-sources/issue-data-source';
+import { PropertyFilter } from '../../models/property-filter';
 
 @Component({
   selector: 'app-issue',
@@ -23,6 +24,7 @@ export class IssueComponent implements OnInit, AfterViewInit {
   priority = [Priority.high, Priority.medium, Priority.low];
   
   selectedIssue: Issue;
+  filters: PropertyFilter[];
   isRegister: boolean;
   isAnalyst: boolean;
   isEngineer: boolean;
@@ -86,7 +88,7 @@ export class IssueComponent implements OnInit, AfterViewInit {
 
   columnsToDisplay: string[];
 
-  dataSource: EntitiesDataSource<Issue>;
+  dataSource: IssueDataSource;
   
   sortedColumn: string;
 
@@ -103,7 +105,7 @@ export class IssueComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit() {
-    this.dataSource = new EntitiesDataSource<Issue>(this.issueService);
+    this.dataSource = new IssueDataSource(this.issueService);
     this.paginator._intl = new MatPaginatorIntlCustom(this.translate, new TranslateDefaultParser());
 
     const role = this.authenticationService.getRole()
@@ -141,13 +143,18 @@ export class IssueComponent implements OnInit, AfterViewInit {
   }
 
   refreshTable() {
-    this.dataSource.loadEntities(
+    this.dataSource.loadFilteredEntities(
       this.input.nativeElement.value,
+      this.filters,
       { direction: this.sort.direction, columnDef: this.sort.active },
       this.paginator.pageIndex,
       this.paginator.pageSize,
       this.paginator
     );
+  }
+
+  setFilters(filters: PropertyFilter[] ) { 
+    this.filters = filters;
   }
 
   selectIssue(issue: Issue) {

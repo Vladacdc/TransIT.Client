@@ -1,11 +1,7 @@
 <div class="table-background border">
   <app-filters-tabs 
-    (StartDateValue)="setStartDateValue($event)"
-    (EndDateValue)="setEndDateValue($event)"
-    (VechicleTypeValue)="setVechicleTypeValue($event)"
-    (StateValue)="setStateValue($event)"
-    (Filter)="redrawTable()"
-    (PriorityValue)="setPriorityValue($event)">
+    (Filters) = "setFilters($event)"
+    (ApplyFilters) = "refreshTable()">
   </app-filters-tabs>
   
   <div class="top-container">
