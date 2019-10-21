@@ -1,0 +1,22 @@
+{
+  "Issue": {
+    "search": "Пошук",
+    "actions": "Дії",
+    "Columns": {
+      "number": "Номер",
+      "state": "Стан",
+      "malfunctionGroup": "Група",
+      "malfunctionSubgroup": "Підгрупа",
+      "malfunction": "Поломка",
+      "priority": "Пріоритет",
+      "warranty": "Гарантія",
+      "vehicle": "Транспорт",
+      "assignee": "Відповідальний",
+      "deadline": "Виконати до",
+      "location": "Місцезнаходження",
+      "summary": "Опис",
+      "created": "Створено",
+      "updated": "Редаговано"
+    }
+  }
+}

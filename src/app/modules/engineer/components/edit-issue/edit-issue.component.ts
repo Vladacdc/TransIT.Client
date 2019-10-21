@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Issue } from '../../../../shared/models/issue';
-import { IssueService } from '../../../../shared/services/issue.service';
+import { Issue } from '../../../shared/models/issue';
+import { IssueService } from '../../../shared/services/issue.service';
 import { ToastrService } from 'ngx-toastr';
 import { MalfunctionGroup } from 'src/app/modules/shared/models/malfunction-group';
 import { MalfunctionSubgroup } from 'src/app/modules/shared/models/malfunction-subgroup';
@@ -62,7 +62,7 @@ export class EditIssueComponent implements OnInit {
     this.isEdited = true;
   }
 
-  editIssue() {
+  updateIssue() {
     if (this.currentMalfunction && this.issue.malfunction.name !== this.currentMalfunction.name) {
       this.issue.malfunction = this.currentMalfunction;
     }
@@ -77,7 +77,7 @@ export class EditIssueComponent implements OnInit {
   createHandler(): void {
     this.issueService.selectedItem = this.issue;
     if (this.isEdited) {
-      this.editIssue();
+      this.updateIssue();
     }
   }
 

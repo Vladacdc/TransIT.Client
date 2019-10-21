@@ -1,13 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { EngineerComponent } from './components/engineer/engineer.component';
-import { IssuesComponent } from './components/issues/issues.component';
 import { RouterModule, Routes } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { CoreModule } from '../core/core.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DataTablesModule } from 'angular-datatables';
-import { EditIssueComponent } from './components/issues/edit-issue/edit-issue.component';
+import { EditIssueComponent } from './components/edit-issue/edit-issue.component';
 import { SharedModule } from '../shared/shared.module';
 import { GlobalDocumentComponent } from '../shared/components/global-document/global-document.component';
 import { IssueLogComponent } from '../shared/components/issue-log/issue-log.component';
@@ -22,13 +21,14 @@ import { CreateDocumentComponent } from './components/create-document/create-doc
 import { VehiclesComponent } from './components/vehicles/vehicles.component';
 import { MatTableModule, MatInputModule, MatFormFieldModule, MatPaginatorModule, MatSortModule } from '@angular/material';
 import { InfoVehicleComponent } from './components/vehicles/info-vehicle/info-vehicle.component';
+import { IssueComponent } from '../shared/components/issue/issue.component';
 
 const routes: Routes = [
   {
     path: '',
     component: EngineerComponent,
     children: [
-      { path: 'issues', component: IssuesComponent },
+      { path: 'issues', component: IssueComponent },
       { path: 'issues/edit', component: EditIssueComponent },
       { path: 'issue-logs', component: IssueLogsComponent },
       { path: 'issue-logs/edit', component: EditIssueLogComponent },
@@ -57,21 +57,24 @@ const routes: Routes = [
     SharedModule,
     NgSelectModule
   ],
-  exports: [RouterModule],
+  exports: [
+    RouterModule,
+    NestedIssueLogsComponent,
+  ],
   declarations: [
-    EditIssueComponent,
     EditIssueLogComponent,
     NestedIssueLogsComponent,
     IssueLogDocumentsComponent,
     CreateDocumentComponent,
     VehiclesComponent,
-    InfoVehicleComponent
+    InfoVehicleComponent,
+    EditIssueComponent
   ]
 })
 export class EngineerRoutingModule {}
 
 @NgModule({
-  declarations: [EngineerComponent, IssuesComponent, IssueLogsComponent],
+  declarations: [EngineerComponent, IssueLogsComponent],
   imports: [
     CommonModule,
     FormsModule,

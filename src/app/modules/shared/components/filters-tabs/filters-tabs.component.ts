@@ -12,6 +12,7 @@ import { MalfunctionSubgroupService } from '../../services/malfunction-subgroup.
 import { VehicleTypeService } from '../../services/vehicle-type.service';
 import { Location } from '../../models/location';
 import { LocationService } from '../../services/location.service';
+import { PropertyFilter } from '../../models/property-filter';
 
 @Component({
   selector: 'app-filters-tabs',
@@ -32,16 +33,8 @@ export class FiltersTabsComponent implements OnInit {
   currentMalfunction: Malfunction;
   maxDate = new Date();
 
-  @Output() StartDateValue = new EventEmitter<string>();
-  @Output() EndDateValue = new EventEmitter<string>();
-  @Output() VechicleTypeValue = new EventEmitter<string>();
-  @Output() StateValue = new EventEmitter<string>();
-  @Output() Filter = new EventEmitter();
-  @Output() PriorityValue = new EventEmitter<string>();
-  @Output() MalfunctionGroupValue = new EventEmitter<string>();
-  @Output() MalfunctionSubGroupValue = new EventEmitter<string>();
-  @Output() MalfunctionValue = new EventEmitter<string>();
-  @Output() LocationValue = new EventEmitter<string>();
+  @Output() Filters = new EventEmitter<PropertyFilter[]>();
+  @Output() ApplyFilters = new EventEmitter();
 
   selectedMinDate: Date;
   selectedMaxDate: Date;
@@ -150,21 +143,10 @@ export class FiltersTabsComponent implements OnInit {
   }
 
   selectFilter() {
-    this.EndDateValue.emit(
-      this.selectedMaxDate === null || this.selectedMaxDate === undefined ? '' : new Date(this.selectedMaxDate).toDateString()
-    );
-    this.StartDateValue.emit(
-      this.selectedMinDate === null || this.selectedMinDate === undefined ? '' : new Date(this.selectedMinDate).toDateString()
-    );
-    this.VechicleTypeValue.emit(this.selectedType);
-    this.LocationValue.emit(this.selectedLocation);
-    this.StateValue.emit(this.selectedState);
-    this.PriorityValue.emit(this.selectedPriority);
-    this.MalfunctionGroupValue.emit(this.selectedMalfunctionGroup);
-    this.MalfunctionSubGroupValue.emit(this.selectedMalfunctionSubGroup);
-    this.MalfunctionValue.emit(this.selectedMalfunction);
-    this.Filter.emit();
+    this.Filters.emit(this.getFilters());
+    this.ApplyFilters.emit();
   }
+
   clearFilter() {
     this.selectedMinDate = undefined;
     this.selectedMaxDate = undefined;
@@ -182,5 +164,83 @@ export class FiltersTabsComponent implements OnInit {
     this.malfunctionDisabled = true;
     this.malfunctionSubGroupDisabled = true;
     this.selectFilter();
+  }
+
+
+  getFilters(): PropertyFilter[] {
+    let filters = []
+    if (this.selectedState) {
+      filters.push({
+        entityPropertyPath: 'state.transName',
+        value: this.selectedState,
+        operator: '=='
+      });
+    }
+
+    if (this.selectedMalfunctionGroup) {
+      filters.push({
+        entityPropertyPath: 'malfunction.malfunctionSubgroup.malfunctionGroup.name',
+        value: this.selectedMalfunctionGroup,
+        operator: '=='
+      });
+    }
+
+    if (this.selectedMalfunctionSubGroup) {
+      filters.push({
+        entityPropertyPath: 'malfunction.malfunctionSubgroup.name',
+        value: this.selectedMalfunctionSubGroup,
+        operator: '=='
+      });
+    }
+
+    if (this.selectedMalfunction) {
+      filters.push({
+        entityPropertyPath: 'malfunction.name',
+        value: this.selectedMalfunction,
+        operator: '=='
+      });
+    }
+
+    if (this.selectedPriority) {
+      filters.push({
+        entityPropertyPath: 'priority',
+        value: this.selectedPriority,
+        operator: '=='
+      });
+    }
+
+    if (this.selectedMinDate) {
+      filters.push({
+        entityPropertyPath: 'createdDate',
+        value: this.selectedMinDate === null || this.selectedMinDate === undefined ? '' : new Date(this.selectedMinDate).toDateString(),
+        operator: '>='
+      });
+    }
+
+    if (this.selectedMaxDate) {
+      filters.push({
+        entityPropertyPath: 'createdDate',
+        value: this.selectedMaxDate === null || this.selectedMaxDate === undefined ? '' : new Date(this.selectedMaxDate).toDateString(),
+        operator: '<='
+      });
+    }
+
+    if (this.selectedLocation) {
+      filters.push({
+        entityPropertyPath: 'vehicle.location.name',
+        value: this.selectedLocation,
+        operator: '=='
+      });
+    }
+
+    if (this.selectedType) {
+      filters.push({
+        entityPropertyPath: 'vehicle.vehicleType.name',
+        value: this.selectedType,
+        operator: '=='
+      });
+    }
+
+    return filters;
   }
 }

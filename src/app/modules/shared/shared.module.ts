@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { FormsModule } from '@angular/forms';
-import { GlobalIssueComponent } from './components/global-issue/global-issue.component';
 import { CountryComponent } from './components/dictionaries/country/country.component';
 import { DictionaryComponent } from './components/dictionaries/dictionary.component';
 import { CurrencyComponent } from './components/dictionaries/currency/currency.component';
@@ -45,6 +44,7 @@ import { TransitionService } from './services/transition.service';
 import { CountryService } from './services/country.service';
 import { StatisticsService } from './services/statistics.service';
 import { UnitService } from './services/unit.service';
+import { MatTableExporterModule } from 'mat-table-exporter';
 // Materials
 import { MatDatepickerModule,
          MatNativeDateModule,
@@ -83,11 +83,17 @@ import { EntitiesDataSourceForVehicle } from './data-sources/entities-data-sourc
 import { PartService } from './services/part.service';
 import { ManufacturerService } from './services/manufacturer.service';
 import { MomentDateAdapter, MAT_MOMENT_DATE_FORMATS } from '@angular/material-moment-adapter';
+import { IssueComponent } from './components/issue/issue.component';
+import { IssueDetailsComponent } from './components/issue/issue-details/issue-details.component';
+import { CreateIssueComponent } from './components/issue/create-issue/create-issue.component';
+import { EditIssueComponent } from '../engineer/components/edit-issue/edit-issue.component';
+import { DeleteIssueComponent } from './components/issue/delete-issue/delete-issue.component';
+import { RouterModule } from '@angular/router';
+import { IssueDataSource } from './data-sources/issue-data-source';
 
 @NgModule({
   declarations: [
     BreadcrumbComponent,
-    GlobalIssueComponent,
     SupplierComponent,
     CreateSupplierComponent,
     EditSupplierComponent,
@@ -120,6 +126,10 @@ import { MomentDateAdapter, MAT_MOMENT_DATE_FORMATS } from '@angular/material-mo
     CreateWorkTypeComponent,
     EditWorkTypeComponent,
     DeleteWorkTypeComponent,
+    IssueComponent,
+    CreateIssueComponent,
+    DeleteIssueComponent,
+    IssueDetailsComponent,
   ],
   imports: [
     MatCardModule,
@@ -142,7 +152,9 @@ import { MomentDateAdapter, MAT_MOMENT_DATE_FORMATS } from '@angular/material-mo
     ReactiveFormsModule,
     NgSelectModule,
     FormsModule,
-    NgBootstrapFormValidationModule
+    NgBootstrapFormValidationModule,
+    RouterModule,
+    MatTableExporterModule
   ],
   exports: [
     BreadcrumbComponent,
@@ -151,9 +163,6 @@ import { MomentDateAdapter, MAT_MOMENT_DATE_FORMATS } from '@angular/material-mo
     EditSupplierComponent,
     DeleteSupplierComponent,
     NestedDocumentComponent,
-    GlobalIssueComponent,
-    FiltersTabsComponent,
-    GlobalIssueComponent,
     FiltersTabsComponent,
     CreateDocumentComponent,
     DocumentComponent,
@@ -166,7 +175,8 @@ import { MomentDateAdapter, MAT_MOMENT_DATE_FORMATS } from '@angular/material-mo
     CreateManufacturerComponent,
     DeleteManufacturerComponent,
     EditManufacturerComponent,
-    WorkTypeComponent
+    WorkTypeComponent,
+    IssueComponent,
   ],
   providers: [
     ActionTypeService,
